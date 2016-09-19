@@ -9,8 +9,6 @@
         <extension name='solrfacetsearchbackoffice'/>
         <extension name='solrserver'/>
         <extension name='ycommercewebservices'/>
-        <extension name='electronicsstore'/>
-        <extension name='apparelstore'/>
         <extension name='liveeditaddon'/>
         <extension name='acceleratorwebservicesaddon'/>
         <extension name='customersupportbackoffice'/>
