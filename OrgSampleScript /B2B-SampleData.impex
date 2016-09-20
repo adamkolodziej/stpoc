@@ -12,111 +12,59 @@ INSERT_UPDATE B2BCreditLimit;code[unique=true];alertRateType(code,itemtype(code)
 ;Monthly30KAlert3K;CURRENCY:B2BRateType;3000;30000;USD;MONTH:B2BPeriodRange;;
 
 INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);reportingOrganization(uid);Addresses(&addId);&B2BUnitID;accountManager(uid);accountManagerGroups(uid);creditLimit(code);approvalProcessCode;
-;Organization;HSBC;HSBC;HSBC;;HSBC;HSBCAddrID1;HSBCID1;acctmgrd;SuperAccountMangers;Monthly30KAlert3K;accApproval;
-;Unit A;HSBC Branch2;HSBC Branch2;HSBC Branch2;HSBC;HSBC;HSBCAddrID2;HSBCID2;;;;
-;Unit B;HSBC Branch1;HSBC Branch1;HSBC Branch1;HSBC;HSBC;HSBCAddrID3;HSBCID3;;;;
+;Organization;VirtusaUSA;VirtusaUSA;VirtusaUSA;;VirtusaUSA;VirtusaUSAAddrID1;VirtusaUSAID1;acctmgrd;SuperAccountMangers;Monthly30KAlert3K;accApproval;
+;Unit A;VirtusaUSA Branch2;VirtusaUSA Branch2;VirtusaUSA Branch2;VirtusaUSA;VirtusaUSA;VirtusaUSAAddrID2;VirtusaUSAID2;;;;
+;Unit B;VirtusaUSA Branch1;VirtusaUSA Branch1;VirtusaUSA Branch1;VirtusaUSA;VirtusaUSA;VirtusaUSAAddrID3;VirtusaUSAID3;;;;
+;Unit C;VirtusaUSA Branch3;VirtusaUSA Branch3;VirtusaUSA Branch3;VirtusaUSA Branch1;VirtusaUSA Branch1;VirtusaUSAAddrID4;VirtusaUSAID4;;;;
+;Unit D;VirtusaUSA Branch4;VirtusaUSA Branch4;VirtusaUSA Branch4;VirtusaUSA Branch3;VirtusaUSA Branch3;VirtusaUSAAddrID5;VirtusaUSAID5;;;;
+;Unit E;JMC Enterprise;JMC Enterprise;JMC Enterprise;VirtusaUSA;VirtusaUSA;JMCAAddrID1;JMCSAID1;;;;
 
 INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);&addId;owner(&B2BUnitID)[unique=true];
-;3000 Lombard Street;94123;San Francisco;US;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@hsbc.com;mr;HSBCAddrID1;HSBCID1;
-;700 E 50th Street;10022;New York;US;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@hsbc.com;mr;HSBCAddrID2;HSBCID2;
-;11000 Bagby Street Houston;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@hsbc.com;mr;HSBCAddrID3;HSBCID3;
+;3000 Lombard Street;94123;San Francisco;US;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@VirtusaUSA.com;mr;VirtusaUSAAddrID1;VirtusaUSAID1;
+;700 E 50th Street;10022;New York;US;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@VirtusaUSA.com;mr;VirtusaUSAAddrID2;VirtusaUSAID2;
+;11000 Bagby Street Houston;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@VirtusaUSA.com;mr;VirtusaUSAAddrID3;VirtusaUSAID3;
+;14000 Bagby Street Houston;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@VirtusaUSA.com;mr;VirtusaUSAAddrID4;VirtusaUSAID4;
+;16000 Bagby Street Houston;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@VirtusaUSA.com;mr;VirtusaUSAAddrID5;VirtusaUSAID5;
+;16000 Bagby Street Houston;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;James;Bell;james.jmc@JMC.com;mr;JMCAAddrID1;JMCSAID1;
 
 INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit(uid));
-;enhancedPermissions;Enhanced Permissions;HSBC;HSBC 12K USD ORDER:HSBC,HSBC 15K USD MONTH:HSBC;
-;commonPermissions;Common Permissions;HSBC;HSBC 6K USD ORDER:HSBC,HSBC 12K USD MONTH:HSBC;
+;enhancedPermissions;Enhanced Permissions;VirtusaUSA;VirtusaUSA 12K USD ORDER:VirtusaUSA,VirtusaUSA 15K USD MONTH:VirtusaUSA;
+;commonPermissions;Common Permissions;VirtusaUSA;VirtusaUSA 6K USD ORDER:VirtusaUSA,VirtusaUSA 12K USD MONTH:VirtusaUSA;
 
 INSERT_UPDATE B2BCustomer;description;uid[unique=true];email;name;title(code);groups(uid);permissionGroups(uid);sessionCurrency(isocode)[default='USD'];password[default=$defaultPassword];passwordEncoding[default=pbkdf2];
-;Admin A;linda.wolf@hsbc.com;linda.wolf@hsbc.com;Linda Wolf;ms;HSBC, b2badmingroup;
-;Approver A;hanna.schmidt@hsbc.com;hanna.schmidt@hsbc.com;Hanna Schmidt;ms;HSBC, b2bapprovergroup;
-;Approver B;james.bell@hsbc.com;james.bell@hsbc.com;James Bell;mr;HSBC Branch1, b2bapprovergroup;
-;Customer A;mark.rivers@hsbc.com;mark.rivers@hsbc.com;Mark Rivers;mr;HSBC Branch2, b2bcustomergroup,enhancedPermissions;;
-;Customer B;mingmei.wang@hsbc.com;mingmei.wang@hsbc.com;Mingmei Wang;ms;HSBC Branch2, b2bcustomergroup, commonPermissions;;
-;Customer C;william.hunter@hsbc.com;william.hunter@hsbc.com;William Hunter;mr;HSBC Branch1, b2bcustomergroup, enhancedPermissions;
-;Customer D;gi.sun@hsbc.com;gi.sun@hsbc.com;Gi Sun;mr;HSBC Branch1, b2bcustomergroup, commonPermissions;;
-;Manager A;akiro.nakamura@hsbc.com;akiro.nakamura@hsbc.com;Akiro Nakamura;mr;HSBC, b2bmanagergroup;
-;Manager B;anil.gupta@hsbc.com;anil.gupta@hsbc.com;Anil Gupta;mr;HSBC Branch2, b2bmanagergroup;
+;Admin A;linda.wolf@VirtusaUSA.com;linda.wolf@VirtusaUSA.com;Linda Wolf;ms;VirtusaUSA, b2badmingroup;
+;Approver A;hanna.schmidt@VirtusaUSA.com;hanna.schmidt@VirtusaUSA.com;Hanna Schmidt;ms;VirtusaUSA, b2bapprovergroup;
+;Approver B;james.bell@VirtusaUSA.com;james.bell@VirtusaUSA.com;James Bell;mr;VirtusaUSA Branch1, b2bapprovergroup;
+;Customer A;mark.rivers@VirtusaUSA.com;mark.rivers@VirtusaUSA.com;Mark Rivers;mr;VirtusaUSA Branch2, b2bcustomergroup,enhancedPermissions;;
+;Customer B;mingmei.wang@VirtusaUSA.com;mingmei.wang@VirtusaUSA.com;Mingmei Wang;ms;VirtusaUSA Branch2, b2bcustomergroup, commonPermissions;;
+;Customer C;william.hunter@VirtusaUSA.com;william.hunter@VirtusaUSA.com;William Hunter;mr;VirtusaUSA Branch1, b2bcustomergroup, enhancedPermissions;
+;Customer D;gi.sun@VirtusaUSA.com;gi.sun@VirtusaUSA.com;Gi Sun;mr;VirtusaUSA Branch1, b2bcustomergroup, commonPermissions;;
+;Manager A;akiro.nakamura@VirtusaUSA.com;akiro.nakamura@VirtusaUSA.com;Akiro Nakamura;mr;VirtusaUSA, b2bmanagergroup;
+;Manager B;anil.gupta@VirtusaUSA.com;anil.gupta@VirtusaUSA.com;Anil Gupta;mr;VirtusaUSA Branch2, b2bmanagergroup;
 
 INSERT_UPDATE B2BBudget;code[unique=true];Unit(uid);budget;currency(isocode)[allownull=true];dateRange[dateformat=dd.MM.yyyy hh:mm:ss,allownull=true];name[lang=en];
-;30K USD/MONTH;HSBC;30000;USD;01.01.2010 00:00:00,12.31.2021 12:59:59;30K USD/MONTH;
-;20K USD/MONTH;HSBC;20000;USD;01.01.2010 00:00:00,12.31.2021 12:59:59;20K USD/MONTH;
+;30K USD/MONTH;VirtusaUSA;30000;USD;01.01.2010 00:00:00,12.31.2021 12:59:59;30K USD/MONTH;
+;20K USD/MONTH;VirtusaUSA;20000;USD;01.01.2010 00:00:00,12.31.2021 12:59:59;20K USD/MONTH;
 
 INSERT_UPDATE B2BCostCenter;code[unique=true];Unit(uid);currency(isocode);budgets(code);name[lang=en];
-;HSBC Branch2;HSBC Branch2;USD;30K USD/MONTH;HSBC Branch2;
-;HSBC Branch1;HSBC Branch1;USD;20K USD/MONTH;HSBC Branch1;
+;VirtusaUSA Branch2;VirtusaUSA Branch2;USD;30K USD/MONTH;VirtusaUSA Branch2;
+;VirtusaUSA Branch1;VirtusaUSA Branch1;USD;20K USD/MONTH;VirtusaUSA Branch1;
 
 INSERT_UPDATE B2BOrderThresholdPermission;code[unique=true];Unit(uid);threshold;currency(isocode);
-;HSBC 5K USD ORDER;HSBC;5000;USD; -
-;HSBC 6K USD ORDER;HSBC;6000;USD; -
-;HSBC 10K USD ORDER;HSBC;10000;USD; -
-;HSBC 12K USD ORDER;HSBC;12000;USD; -
+;VirtusaUSA 5K USD ORDER;VirtusaUSA;5000;USD; -
+;VirtusaUSA 6K USD ORDER;VirtusaUSA;6000;USD; -
+;VirtusaUSA 10K USD ORDER;VirtusaUSA;10000;USD; -
+;VirtusaUSA 12K USD ORDER;VirtusaUSA;12000;USD; -
 
 INSERT_UPDATE B2BOrderThresholdTimespanPermission;code[unique=true];Unit(uid);threshold;currency(isocode);range(code,itemtype(code));
-;HSBC 15K USD MONTH;HSBC;15000;USD;MONTH:B2BPeriodRange;
-;HSBC 12K USD MONTH;HSBC;12000;USD;MONTH:B2BPeriodRange;
-;HSBC Unlimited Threshold Timespan;HSBC;999999999;USD;MONTH:B2BPeriodRange;
+;VirtusaUSA 15K USD MONTH;VirtusaUSA;15000;USD;MONTH:B2BPeriodRange;
+;VirtusaUSA 12K USD MONTH;VirtusaUSA;12000;USD;MONTH:B2BPeriodRange;
+;VirtusaUSA Unlimited Threshold Timespan;VirtusaUSA;999999999;USD;MONTH:B2BPeriodRange;
 
 UPDATE B2BUnit;uid[unique=true];creditLimit(code);accountManager(uid);approvers(uid)
-;HSBC;Monthly30KAlert3K;acctmgrd;hanna.schmidt@hsbc.com;
-;HSBC Branch1;;;james.bell@hsbc.com;
+;VirtusaUSA;Monthly30KAlert3K;acctmgrd;hanna.schmidt@virtusausa.com;
+;VirtusaUSA Branch1;;;james.bell@virtusausa.com;
 
 UPDATE B2BCustomer;uid[unique=true];permissions(code,unit(uid));
-;hanna.schmidt@hsbc.com;HSBC Unlimited Threshold Timespan:HSBC,HSBC 10K USD ORDER:HSBC;
-;james.bell@hsbc.com;HSBC 5K USD ORDER:HSBC;
-
-###############################
-#  SingPost ORGANIZATION
-
-
-INSERT_UPDATE B2BCreditLimit;code[unique=true];alertRateType(code,itemtype(code));alertThreshold;amount;currency(isocode);dateRange(code,itemtype(code));datePeriod[dateformat=dd.MM.yyyy hh:mm:ss];
-;Monthly30KAlert3K;CURRENCY:B2BRateType;3000;30000;USD;MONTH:B2BPeriodRange;;
-
-INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);reportingOrganization(uid);Addresses(&addId);&B2BUnitID;accountManager(uid);accountManagerGroups(uid);creditLimit(code);approvalProcessCode;
-;Organization;SingPost;SingPost;SingPost;;SingPost;SingPostAddrID1;SingPostID1;acctmgrd;SuperAccountMangers;Monthly30KAlert3K;accApproval;
-;Unit A;SingPost Branch2;SingPost Branch2;SingPost Branch2;SingPost;SingPost;SingPostAddrID2;SingPostID2;;;;
-;Unit B;SingPost Branch1;SingPost Branch1;SingPost Branch1;SingPost;SingPost;SingPostAddrID3;SingPostID3;;;;
-
-INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);&addId;owner(&B2BUnitID)[unique=true];
-;3000 Lombard Street;94123;San Francisco;US;TRUE;TRUE;TRUE;TRUE;customer1;customer1;customer1@SingPost.com;mr;SingPostAddrID1;SingPostID1;
-;700 E 50th Street;10022;New York;US;TRUE;TRUE;TRUE;TRUE;customer1;customer1;customer1@SingPost.com;mr;SingPostAddrID2;SingPostID2;
-;11000 Bagby Street Houston;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;customer1;customer1;customer1@SingPost.com;mr;SingPostAddrID3;SingPostID3;
-
-INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit(uid));
-;enhancedPermissions;Enhanced Permissions;SingPost;SingPost 12K USD ORDER:SingPost,SingPost 15K USD MONTH:SingPost;
-;commonPermissions;Common Permissions;SingPost;SingPost 6K USD ORDER:SingPost,SingPost 12K USD MONTH:SingPost;
-
-INSERT_UPDATE B2BCustomer;description;uid[unique=true];email;name;title(code);groups(uid);permissionGroups(uid);sessionCurrency(isocode)[default='USD'];password[default=$defaultPassword];passwordEncoding[default=pbkdf2];
-;Admin A;admin@SingPost.com;admin@SingPost.com;Admin A;ms;SingPost, b2badmingroup;
-;Approver A;approvera@SingPost.com;approvera@SingPost.com;Approver A;ms;SingPost, b2bapprovergroup;
-;Approver B;approverb@SingPost.com;approverb@SingPost.com;Approver B;mr;SingPost Branch1, b2bapprovergroup;
-;Customer A;customera@SingPost.com;customera@SingPost.com;Customer A;mr;SingPost Branch2, b2bcustomergroup,enhancedPermissions;;
-;Customer B;customerb@SingPost.com;customerb@SingPost.com;Customer B;ms;SingPost Branch2, b2bcustomergroup, commonPermissions;;
-;Customer C;customerc@SingPost.com;customerc@SingPost.com;Customer C;mr;SingPost Branch1, b2bcustomergroup, enhancedPermissions;
-;Customer D;customerd@SingPost.com;customerd@SingPost.com;Customer D;mr;SingPost Branch1, b2bcustomergroup, commonPermissions;;
-
-
-INSERT_UPDATE B2BBudget;code[unique=true];Unit(uid);budget;currency(isocode)[allownull=true];dateRange[dateformat=dd.MM.yyyy hh:mm:ss,allownull=true];name[lang=en];
-;30K USD/MONTH;SingPost;30000;USD;01.01.2010 00:00:00,12.31.2021 12:59:59;30K USD/MONTH;
-;20K USD/MONTH;SingPost;20000;USD;01.01.2010 00:00:00,12.31.2021 12:59:59;20K USD/MONTH;
-
-INSERT_UPDATE B2BCostCenter;code[unique=true];Unit(uid);currency(isocode);budgets(code);name[lang=en];
-;SingPost Branch2;SingPost Branch2;USD;30K USD/MONTH;SingPost Branch2;
-;SingPost Branch1;SingPost Branch1;USD;20K USD/MONTH;SingPost Branch1;
-
-INSERT_UPDATE B2BOrderThresholdPermission;code[unique=true];Unit(uid);threshold;currency(isocode);
-;SingPost 5K USD ORDER;SingPost;5000;USD; -
-;SingPost 6K USD ORDER;SingPost;6000;USD; -
-;SingPost 10K USD ORDER;SingPost;10000;USD; -
-;SingPost 12K USD ORDER;SingPost;12000;USD; -
-
-INSERT_UPDATE B2BOrderThresholdTimespanPermission;code[unique=true];Unit(uid);threshold;currency(isocode);range(code,itemtype(code));
-;SingPost 15K USD MONTH;SingPost;15000;USD;MONTH:B2BPeriodRange;
-;SingPost 12K USD MONTH;SingPost;12000;USD;MONTH:B2BPeriodRange;
-;SingPost Unlimited Threshold Timespan;SingPost;999999999;USD;MONTH:B2BPeriodRange;
-
-UPDATE B2BUnit;uid[unique=true];creditLimit(code);accountManager(uid);approvers(uid)
-;SingPost;Monthly30KAlert3K;acctmgrd;approvera@SingPost.com;
-;SingPost Branch1;;;approverb@SingPost.com;
-
-UPDATE B2BCustomer;uid[unique=true];permissions(code,unit(uid));
-;approvera@SingPost.com;SingPost Unlimited Threshold Timespan:SingPost,SingPost 10K USD ORDER:SingPost;
-;approverb@SingPost.com;SingPost 5K USD ORDER:SingPost;
+;hanna.schmidt@virtusausa.com;VirtusaUSA Unlimited Threshold Timespan:VirtusaUSA,VirtusaUSA 10K USD ORDER:VirtusaUSA;
+;james.bell@virtusausa.com;VirtusaUSA 5K USD ORDER:VirtusaUSA;
