@@ -22,13 +22,21 @@
 
     <context:annotation-config/>
 
-	<!-- System Setup -->
+    <!-- System Setup -->
 
-	<bean id="yAcceleratorInitialDataSystemSetup"
-	      class="com.sptel.initialdata.setup.InitialDataSystemSetup"
-	      parent="abstractCoreSystemSetup">
-		<property name="coreDataImportService" ref="coreDataImportService"/>
-		<property name="sampleDataImportService" ref="sampleDataImportService"/>
-	</bean>
+    <bean id="yAcceleratorInitialDataSystemSetup"
+          class="com.sptel.initialdata.setup.InitialDataSystemSetup"
+          parent="abstractCoreSystemSetup">
+        <property name="coreDataImportService" ref="coreDataImportService"/>
+        <property name="sampleDataImportService" ref="sampleDataImportService"/>
+        <property name="dataImportService" ref="sampleDataImportService"/>
+    </bean>
+
+    <bean id="dataImportService" class="com.sptel.initialdata.setup.SpTelSampleDataImportService"
+          parent="sampleDataImportService">
+        <property name="typeService" ref="typeService"/>
+        <property name="modelService" ref="modelService"/>
+
+    </bean>
 
 </beans>

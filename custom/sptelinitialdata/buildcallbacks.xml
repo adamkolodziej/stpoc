@@ -70,27 +70,40 @@
 		<macrodef name="sptelinitialdata_before_dist_copy"/>
 		<macrodef name="sptelinitialdata_after_dist_copy"/>
 
---><project name="sptelinitialdata_buildcallbacks">
+-->
+<project name="sptelinitialdata_buildcallbacks">
 
-	<import file="${ext.sptelinitialdata.path}/resources/sptelinitialdata/ant/ant-bind-impex-template.xml"/>
+    <import file="${ext.sptelinitialdata.path}/resources/sptelinitialdata/ant/ant-bind-impex-template.xml"/>
+    <bindImpexTemplate
+            addonname="sptelinitialdata"
+            contentCatalog="spTelContentCatalog"
+            productCatalog="spTelProductCatalog"
+            storeName="spTelStore"
+            classificationCatalog="spTelClassification"
+            storeUid="spTelStore"
+            defaultPromoGrp="spTelPromoGroup"
+            contentCatalogName="Sp Tel Content Catalog"
+            productCatalogName="Sp Tel Product Catalog"
+            vendor="Default Vendor"
+            indexedType="spTelProductType"
+            facetSearchConfigName="spTelIndex" />
+    <!--
+        Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
 
-	<!-- 
-		Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+        ${ear.path}: 			path to ear
+    -->
+    <macrodef name="sptelinitialdata_before_ear">
+        <sequential>
 
-		${ear.path}: 			path to ear
-	-->
-	<macrodef name="sptelinitialdata_before_ear">
-		<sequential>
+            <!-- you can do anything before the EAR file is being packed -->
 
-			<!-- you can do anything before the EAR file is being packed -->
+        </sequential>
+    </macrodef>
 
-		</sequential>
-	</macrodef>
-	
-	<!-- exclude impex files from localization --> 
-	<patternset id="sptelinitialdata.localization.pattern">
-		<patternset refid="localization.defaultpattern"/>
-		<exclude name="**/*.impex"/>
-	</patternset>
+    <!-- exclude impex files from localization -->
+    <patternset id="sptelinitialdata.localization.pattern">
+        <patternset refid="localization.defaultpattern"/>
+        <exclude name="**/*.impex"/>
+    </patternset>
 
 </project>

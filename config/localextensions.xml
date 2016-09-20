@@ -48,5 +48,6 @@
         <extension name='sptelfacades'/>
         <extension name='sptelfulfilmentprocess'/>
         <extension name='sptelstorefront'/>
+        <extension name='sptelinitialdata'/>
     </extensions>
 </hybrisconfig>
