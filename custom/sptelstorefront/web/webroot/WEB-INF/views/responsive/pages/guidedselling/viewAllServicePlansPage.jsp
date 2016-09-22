@@ -10,7 +10,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
 <%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb" %>
-<%@ taglib prefix="bundle" tagdir="/WEB-INF/tags/addons/b2ctelcostorefront/desktop/guidedselling" %>
+<%@ taglib prefix="bundle" tagdir="/WEB-INF/tags/desktop/guidedselling" %>
 
 <template:page pageTitle="${pageTitle}">
 
