@@ -106,6 +106,7 @@ INSERT_UPDATE Category;code[unique=true];name[lang=en];allowedPrincipals(uid)[de
 ;Office_E;OFFICE
 ;WirelessRouters;WIRELESS ROUTERS
 ;LocalRecording;LOCAL RECORDING
+;CloudRecording;CLOUD RECORDING
 
 
 # Insert Category Structure
@@ -166,3 +167,49 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 
 ;Units;Installation
 ;Estate;Installation
+
+#Categories <--> Leaf Categories
+;DinRailMounted250V10ARelayUnits;ControlSystem
+;DinRailMounted250V10AChargeoverRelayUnits;ControlSystem
+;DinRailMountedMotorizedBlindcurtainShutterRelayUnit;ControlSystem
+;DinRailMountedSweepFanControlRelay;ControlSystem
+;DinRailMounted250V20ARelayUnits;ControlSystem
+;CBusSingleAndTwoChannel250V20ARelayUnits;ControlSystem
+;CBus8ChannelElvRelayUnits;ControlSystem
+
+;20APerChannel_U;CBusArchitectureDimmerRangeUniversal
+;16APerChannel_U;CBusArchitectureDimmerRangeUniversal
+;10APerChannel_U;CBusArchitectureDimmerRangeUniversal
+;5APerChannel_U;CBusArchitectureDimmerRangeUniversal
+;AccessoriesForCBusArchitectureDimmers_U;CBusArchitectureDimmerRangeUniversal
+
+;20APerChannel_LE;CBusProfessionalDimmerRangeLeadingEdge
+;10APerChannel_LE;CBusProfessionalDimmerRangeLeadingEdge
+;5APerChannel_LE;CBusProfessionalDimmerRangeLeadingEdge
+;3APerChannel_LE;CBusProfessionalDimmerRangeLeadingEdge
+;DinRailMounted250VUniversalDimmerRange;CBusProfessionalDimmerRangeLeadingEdge
+;CBusLightLevelSensors;CBusProfessionalDimmerRangeLeadingEdge
+
+;ZigbeeDimmers;WirelessDimmers
+
+;CBusLightLevelSensors;CBusLightSensors
+;SingleZoneThermostat;CBusThermostats
+;FourZoneThermostatWithProgrammableTimeScheduling;CBusThermostats
+;CBusTemperatureSensor;CBusThermostats
+
+;CBus360DegreeMultiSensor;CBusCombinedSensor
+
+;CBusPassiveInfraredOccupancyDetectors;CBusSensorsAndDetectors
+;CBusOccupancyController;CBusSensorsAndDetectors
+
+;WirelessRouters;ThinCpe
+
+;Survey;SiteSurvey
+;SiteVisit;Maintenance
+;Residential_U;Installation
+;Office_U;Installation
+;Residential_E;Installation
+;Office_E;Installation
+
+;LocalRecording;VideoRecording
+;CloudRecording;VideoRecording
