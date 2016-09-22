@@ -108,7 +108,6 @@ INSERT_UPDATE Category;code[unique=true];name[lang=en];allowedPrincipals(uid)[de
 ;LocalRecording;LOCAL RECORDING
 
 
-
 # Insert Category Structure
 INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 #Product Lines

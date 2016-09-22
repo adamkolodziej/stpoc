@@ -122,22 +122,6 @@ INSERT_UPDATE Device;code[unique=true];name[lang=en];description[lang=en];$super
 ;VCR002;Video Recorder - 1 month;Video Recorder - 1 month;LocalRecording;700,00 USD
 ;VCR003;Video Recorder - 12 months;Video Recorder - 12 months;LocalRecording;5 000,00 USD
 
-
-INSERT_UPDATE Product;code[unique=true];name[lang=en];description[lang=en];$supercategories;$prices;$catalogVersion;$approved;$unit
-#Engineering
-;NetworkCoverageSuvey;Network coverage suvey;Network coverage suvey;Survey;100,00 USD;;;
-;AutomationCompatibilitySurvey;Automation compatibility survey;Automation compatibility survey;Survey;100,00 USD;;;
-;EnergyAudit;Energy audit;Energy audit;Survey;100,00 USD;;;
-;FullSurveyNetwork;Full Survey incl. network, automation and energy;Full Survey incl. network, automation and energy;Survey;150,00 USD;;;
-
-;A003;Contractor site visit for networking issue;Contractor site visit for networking issue;SiteVisit;60,00 USD;;;
-;A004;Contractor site visit for electrical issue;Contractor site visit for electrical issue;SiteVisit;100,00 USD;;;
-
-;Residential_U1;Installation service in a residential unit by contractor;Installation service in a residential unit by contractor;Residential_U;;;;
-;Office_U1;Installation service in a office unit by contractor;Installation service in a office unit by contractor;Office_U;;;;
-;Residential_E1;Installation service in a residential estate by contractor;Installation service in a residential estate by contractor;Residential_E;;;;
-;Office_E1;Installation service in a office estate by contractor;Installation service in a office estate by contractor;Office_E;;;;
-
 INSERT_UPDATE BillingFrequency;code[unique=true];order;cartAware[default=true]
 ;monthly;5
 ;quarterly;6
@@ -171,12 +155,26 @@ INSERT_UPDATE ServicePlan;code[unique=true];name[lang=en];description[lang=en];$
 #Security & Monitoring
 ;TT001;Cloud recording 7 days;Cloud recording 7 days;2,00 USD;VideoRecording;;;;annually_1
 ;TT002;Cloud recording 1 month;Cloud recording 1 month;3,00 USD;VideoRecording;;;;annually_1
-;TT003;Service Activation & Account Creation;Service Activation & Account Creation;5,00 USD;VideoRecording;;;;annually_1
 
 INSERT_UPDATE ServiceAddOn;code[unique=true];name[lang=en];description[lang=en];$prices;$supercategories;$catalogVersion;$approved;$unit;subscriptionTerm(id)
 #All Internet Bundles
-;SecuredVPN;;Secured VPN;5,00 USD;Internet;;;;annually_1
-;StaticIPOption;;Static IP option;0 USD;Internet;;;;none
+;SecuredVPN;Secured VPN;Secured VPN;5,00 USD;Internet;;;;annually_1
+;StaticIPOption;Static IP option;Static IP option;0 USD;Internet;;;;none
+;TT003;Service Activation & Account Creation;Service Activation & Account Creation;5,00 USD;VideoRecording;;;;none
+
+#Engineering
+;NetworkCoverageSuvey;Network coverage suvey;Network coverage suvey;100,00 USD;Survey;;;;none
+;AutomationCompatibilitySurvey;Automation compatibility survey;Automation compatibility survey;100,00 USD;Survey;;;;none
+;EnergyAudit;Energy audit;Energy audit;100,00 USD;Survey;;;;none
+;FullSurveyNetwork;Full Survey incl. network, automation and energy;Full Survey incl. network, automation and energy;150,00 USD;Survey;;;;none
+
+;A003;Contractor site visit for networking issue;Contractor site visit for networking issue;60,00 USD;SiteVisit;;;;none
+;A004;Contractor site visit for electrical issue;Contractor site visit for electrical issue;100,00 USD;SiteVisit;;;;none
+
+;Residential_U1;Installation service in a residential unit by contractor;Installation service in a residential unit by contractor;;Residential_U;;;;
+;Office_U1;Installation service in a office unit by contractor;Installation service in a office unit by contractor;;Office_U;;;;
+;Residential_E1;Installation service in a residential estate by contractor;Installation service in a residential estate by contractor;;Residential_E;;;;
+;Office_E1;Installation service in a office estate by contractor;Installation service in a office estate by contractor;;Office_E;;;;
 
 #Internet child components
 #INSERT_UPDATE BundleTemplate;id[unique=true];name[lang=en];version[default=1.0][unique=true];$catalogVersion;parentTemplate(id);products(code, $catalogVersion)
@@ -185,17 +183,22 @@ INSERT_UPDATE ServiceAddOn;code[unique=true];name[lang=en];description[lang=en];
 #;Internet10GpsPlan;INTERNET 10 GPBS PLAN;;;ConnectivityBundle10;BasicInternetPlan10Gbps
 
 #Internet components
-INSERT_UPDATE BundleTemplate;id[unique=true];name[lang=en];version[default=1.0][unique=true];$catalogVersion;products(code, $catalogVersion)
+INSERT_UPDATE BundleTemplate;id[unique=true];name[lang=en];version[default=1.0][unique=true];$catalogVersion;products(code, $catalogVersion);parentTemplate(id)
+;ControlSystem_B;Control System;;;L5504RVF,L5504RVFP,L5508RVF,L5508RVFP,L5512RVF,L5512RVFP,L5504RVFC,L5504RVFCP,L5501RBCP,5501RE,L5501RFCP,5501FRE,L5504RVF20,L5504RVF20P,5101R,5101RC,5102RVF,L5108RELVP;AVAutomationSystemBundle10
+;LightingControl_B;Lighting Control;;;L5106D20UA,L5103D20UA,L5106D16UA,L5103D16UA,L5112D10UA,L5106D10UA,L5103D10UA,L5112D5UA,L5106D5UA,L5103D5UA,5150DMX,L5112D20LP,L5106D20LP,L5103D20LP,L5112D10LP,L5106D10LP,L5103D10LP,L5112D5LP,L5106D5LP,L5103D5LP,L5112D5LP,L5106D5LP,L5504D2U,L5504D2UP,L5504D2A,L5504D2AP,L5508D1A,L5508D1AP,5031PEWP-GY,U201DST600ZB,U202DST600ZB,U104BD500ZB_WE;AVAutomationSystemBundle10
+;SensorsSwitch_B;Sensors & Switch;;;5031PEWP-GY,5070THBRPG-WE,5070THBR-BK,5070THBRSS,5070THPRPG-WE,5070THPR-BK,5070THPRSS,5031RDTSL-WE,5753PEIRL,5038TX2,5750WPL-GY,5751L-WE,5753L,5754ODPE,5752PP/1R,5752PP/2R,5752PP/2R/2D;AVAutomationSystemBundle10
+
+;Internet_B;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle10
 ;AddOns_B;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle10
 ;WirelessRouters_B;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle10
 
-INSERT_UPDATE PickExactlyNBundleSelectionCriteria;id[unique=true];n;$catalogVersion
-;ConnectivityBundle10;1
-;WirelessRouters_B;1
+;LocalRecording_B;LOCAL RECORDING;;;TT001,TT002,TT003;SecurityMonitoringBundle10
+;CloudRecording_B;CLOUD RECORDING;;;VCR001,VCR002,VCR003;SecurityMonitoringBundle10
 
-INSERT_UPDATE PickNToMBundleSelectionCriteria;id[unique=true];n;m;$catalogVersion
-;AddOns_B;0;2
-;AssistanceBundle10;1;2
+;SiteSurvey_B;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle10
+;Assistance_B;Assistance;;;A001,A002;AssistanceBundle10
+;Maintenance_B;Maintenance;;;A003,A004;AssistanceBundle10
+;Installation_B;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle10
 
 #Main bundles
 INSERT_UPDATE BundleTemplate;id[unique=true];name[lang=en];version[default=1.0][unique=true];$catalogVersion;parentTemplate(id)
@@ -219,6 +222,16 @@ INSERT_UPDATE BundleTemplate;id[unique=true];name[lang=en];version[default=1.0][
 ;EnergyManagementBundle10;Energy Management Bundle;;;;
 ;AVAutomationSystemBundle10;AV & Automation System Bundle;;;;
 
-UPDATE BundleTemplate;id[unique=true];products(code, $catalogVersion)
-;ConnectivityBundle10;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps
-;AssistanceBundle10;A001,A002
+#UPDATE BundleTemplate;id[unique=true];products(code, $catalogVersion)
+
+INSERT_UPDATE PickExactlyNBundleSelectionCriteria;id[unique=true];n;$catalogVersion
+;Internet_B;1;
+;WirelessRouters_B;1;
+;LocalRecording_B;1;
+
+INSERT_UPDATE PickNToMBundleSelectionCriteria;id[unique=true];n;m;$catalogVersion
+;AddOns_B;0;2;
+;Assistance_B;1;2;
+;CloudRecording_B;1;2;
+;SiteSurvey_B;0;4;
+;Maintenance_B;0;2;
