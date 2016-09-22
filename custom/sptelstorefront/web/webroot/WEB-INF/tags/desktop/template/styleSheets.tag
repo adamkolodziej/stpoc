@@ -64,7 +64,15 @@
 		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/changes.css"/>
 		<link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/multi-d.css"/>
 		<link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/futureStock.css"/>
-		
+        <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/telco_carousel.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/telco_cartItems.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/telco_colorBox.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/telco_forms.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/telco_guidedSelling.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/telco_header.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/telco_productDetails.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/telco_productList.css"/>
+
 		<%--  AddOn Common CSS files --%>
 		<c:forEach items="${addOnCommonCssPaths}" var="addOnCommonCss">
 			<link rel="stylesheet" type="text/css" media="all" href="${addOnCommonCss}"/>
