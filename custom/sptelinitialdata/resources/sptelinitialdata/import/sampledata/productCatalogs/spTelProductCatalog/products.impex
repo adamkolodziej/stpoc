@@ -5,9 +5,233 @@ $productCatalog=spTelProductCatalog
 $productCatalogName=Sp Tel Product Catalog
 
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$supercategories=supercategories(code, $catalogVersion)
+$supercategories=supercategories(code,$catalogVersion)
 $baseProduct=baseProduct(code,$catalogVersion)
-$approved=approvalstatus(code)[default='check']
+$approved=approvalstatus(code)[default='approved']
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$baseProduct=baseProduct(code,catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged']))
+$variantType=variantType(code)[default=DeviceVariantProduct]
+$unit=unit(code)[default='pieces']
+$billingFrequency=billingFrequency(code)[default='monthly']
 
 # Insert Products
-INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+INSERT_UPDATE Product;code[unique=true];name[lang=en];$supercategories;manufacturerTypeDescription;$catalogVersion;$approved;$variantType
+#Control System
+;DinRailMounted250V10ARelayUnits;DIN RAIL MOUNTED 250V 10A RELAY UNITS;ControlSystem;Device;;;
+;DinRailMounted250V10AChargeoverRelayUnits;DIN RAIL MOUNTED 250V CHANGEOVER RELAY UNITS;ControlSystem;Device;;;
+;DinRailMountedMotorizedBlindcurtainShutterRelayUnit;DIN RAIL MOUNTED MOTORISED BLIND/CURTAIN/SHUTTER RELAY UNIT;ControlSystem;Device;;;
+;DinRailMountedSweepFanControlRelay;DIN RAIL MOUNTED SWEEP FAN CONTROL RELAY;ControlSystem;Device;;;
+;DinRailMounted250V20ARelayUnits;DIN RAIL MOUNTED 250V 20A RELAY UNITS;ControlSystem;Device;;;
+;CBusSingleAndTwoChannel250V20ARelayUnits;C-BUS SINGLE AND TWO CHANNEL 250V 10A RELAY UNITS;ControlSystem;Device;;;
+;CBus8ChannelElvRelayUnits;C-BUS 8 CHANNEL ELV RELAY UNITS;ControlSystem;Device;;;
+
+#Lighting Control
+;20APerChannel_U;20A PER CHANNEL;CBusArchitectureDimmerRangeUniversal;Device;;;
+;16APerChannel_U;16A PER CHANNEL;CBusArchitectureDimmerRangeUniversal;Device;;;
+;10APerChannel_U;10A PER CHANNEL;CBusArchitectureDimmerRangeUniversal;Device;;;
+;5APerChannel_U;20A PER CHANNEL;CBusArchitectureDimmerRangeUniversal;Device;;;
+;AccessoriesForCBusArchitectureDimmers_U;ACCESSORIES FOR C-BUS ARCHITECTURE DIMMERS;CBusArchitectureDimmerRangeUniversal;Device;;;
+
+;20APerChannel_LE;20A PER CHANNEL;CBusProfessionalDimmerRangeLeadingEdge;Device;;;
+;10APerChannel_LE;10A PER CHANNEL;CBusProfessionalDimmerRangeLeadingEdge;Device;;;
+;5APerChannel_LE;5A PER CHANNEL;CBusProfessionalDimmerRangeLeadingEdge;Device;;;
+;3APerChannel_LE;3A PER CHANNEL;CBusProfessionalDimmerRangeLeadingEdge;Device;;;
+;DinRailMounted250VUniversalDimmerRange;DIN RAIL MOUNTED 250V UNIVERSAL DIMMER RANGE;CBusProfessionalDimmerRangeLeadingEdge;Device;;;
+;CBusLightLevelSensors;C-BUS Light Level Sensors;CBusProfessionalDimmerRangeLeadingEdge;Device;;;
+
+;ZigbeeDimmers;ZIGBEE DIMMERS;WirelessDimmers;Device;;;
+
+#Sensors & Switch
+;CBusLightLevelSensors;C-BUS Light Level Sensors;CBusLightSensors;Device;;;
+
+;SingleZoneThermostat;SINGLE ZONE THERMOSTAT;CBusThermostats;Device;;;
+;FourZoneThermostatWithProgrammableTimeScheduling;FOUR ZONE THERMOSTAT WITH PROGRAMMABLE TIME SCHEDULING;CBusThermostats;Device;;;
+;CBusTemperatureSensor;C-BUS TEMPERATURE SENSOR;CBusThermostats;Device;;;
+
+;CBus360DegreeMultiSensor;C-BUS 360 DEGREE MULTI-SENSOR;CBusCombinedSensor;Device;;;
+
+;CBusPassiveInfraredOccupancyDetectors;C-BUS PASSIVE INFRARED OCCUPANCY DETECTORS;CBusSensorsAndDetectors;Device;;;
+;CBusOccupancyController;C-BUS OCCUPANCY CONTROLLER;CBusSensorsAndDetectors;Device;;;
+
+#Connectivity
+#TODO Internet
+
+;WirelessRouters;WIRELESS ROUTERS;ThinCpe;Device;;;
+
+#Engineering
+;Survey;SURVEY;SiteSurvey;Engineering;;;EngineeringVariantProduct
+
+;SiteVisit;SITE VISIT;Maintenance;Engineering;;;EngineeringVariantProduct
+
+;Residential_U;RESIDENTIAL;Units;Engineering;;;EngineeringVariantProduct
+;Office_U;OFFICE;Units;Engineering;;;EngineeringVariantProduct
+
+;Residential_E;RESIDENTIAL;Estate;Engineering;;;EngineeringVariantProduct
+;Office_E;OFFICE;Estate;Engineering;;;EngineeringVariantProduct
+
+#Security & Monitoring
+;LocalRecording;LOCAL RECORDING;VideoRecording;Device;;;
+
+
+#Insert VariantProducts
+INSERT_UPDATE DeviceVariantProduct;code[unique=true];description[lang=en];$baseProduct;$prices;$catalogVersion;$approved;$unit
+#Control System
+;L5504RVF;4 Channel Relay, 10A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250V10ARelayUnits;10 USD;;;
+;L5504RVFP;4 Channel Relay, 10A per Channel, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250V10ARelayUnits;10,58 USD;;;
+;L5508RVF;8 Channel Relay, 10A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250V10ARelayUnits;11,15 USD;;;
+;L5508RVFP;8 Channel Relay, 10A per Channel, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250V10ARelayUnits;11,73 USD;;;
+;L5512RVF;12 Channel Relay, 10A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250V10ARelayUnits;12,30 USD;;;
+;L5512RVFP;12 Channel Relay, 10A per Channel, 220/240Vac- excludes C-Bus Power Supply;DinRailMounted250V10ARelayUnits;12,88 USD;;;
+
+;L5504RVFC;4 Channel Changeover Relay, 220/240Vac, C-Bus 200mA;DinRailMounted250V10AChargeoverRelayUnits;13,45 USD;;;
+;L5504RVFCP;4 Channel Changeover Relay, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250V10AChargeoverRelayUnits;14,03 USD;;;
+
+;L5501RBCP;1 Channel Motorised Relay, 5A, 220/240Va;DinRailMountedMotorizedBlindcurtainShutterRelayUnit;13,45 USD;;;
+;5501RE;C-Bus Shutter Relay Wall Mounting Enclosure;DinRailMountedMotorizedBlindcurtainShutterRelayUnit;14,03 USD;;;
+
+;L5501RFCP;1 Channel C-Bus Sweep Fan Control Relay, Capacitor control, 3M Modules wide, excludes C-Bus Power Supply;DinRailMountedSweepFanControlRelay;12,88 USD;;;
+;5501FRE;Wall Mounting enclosure to suit L5501RFCP Sweep control relay;DinRailMountedSweepFanControlRelay;13,45 USD;;;
+
+;L5504RVF20;4 Channel Relay, 20A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250V20ARelayUnits;14,03 USD;;;
+;L5504RVF20P;4 Channel Relay, 20A per Channel, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250V20ARelayUnits;14,60 USD;;;
+
+;5101R;1 Channel C-Bus Relay 250V AC 10A Inductive load;CBusSingleAndTwoChannel250V20ARelayUnits;14,03 USD;;;
+;5101RC;1 Channel with cord set;CBusSingleAndTwoChannel250V20ARelayUnits;14,60 USD;;;
+;5102RVF;2 Channel Voltage Free C-Bus Relay 250V AC 10A Inductive load per channel;CBusSingleAndTwoChannel250V20ARelayUnits;11,73 USD;;;
+
+;L5108RELVP;C-Bus 8 Channel Extra Low Voltage (ELV) Relay;CBus8ChannelElvRelayUnits;12,88 USD;;;
+
+#Lighting Control
+;L5106D20UA;6 Channel;20APerChannel_U;14,60 USD;;;
+;L5103D20UA;3 Channel;20APerChannel_U;10,58 USD;;;
+
+;L5106D16UA;6 Channel;16APerChannel_U;11,73 USD;;;
+;L5103D16UA;3 Channel;16APerChannel_U;12,30 USD;;;
+
+;L5112D10UA;12 Channel;10APerChannel_U;13,45 USD;;;
+;L5106D10UA;6 Channel;10APerChannel_U;11,15 USD;;;
+;L5103D10UA;3 Channel;10APerChannel_U;14,03 USD;;;
+
+;L5112D5UA;12 Channel;5APerChannel_U;12,88 USD;;;
+;L5106D5UA;6 Channel;5APerChannel_U;13,45 USD;;;
+;L5103D5UA;3 Channel;5APerChannel_U;14,60 USD;;;
+
+;5150DMX;DMX connector kit, for connection to DMX-512 network;AccessoriesForCBusArchitectureDimmers_U;14,60 USD;;;
+
+;L5112D20LP;12 Channel;20APerChannel_LE;14,60 USD;;;
+;L5106D20LP;6 Channel;20APerChannel_LE;12,88 USD;;;
+;L5103D20LP;3 Channel;20APerChannel_LE;13,45 USD;;;
+
+;L5112D10LP;12 Channel;10APerChannel_LE;13,45 USD;;;
+;L5106D10LP;6 Channel;10APerChannel_LE; 14,60 USD;;;
+;L5103D10LP;3 Channel;10APerChannel_LE; 15,18 USD;;;
+
+;L5112D5LP;12 Channel;5APerChannel_LE;14,60 USD;;;
+;L5106D5LP;6 Channel;5APerChannel_LE;11,73 USD;;;
+;L5103D5LP;3 Channel;5APerChannel_LE;12,30 USD;;;
+
+;L5112D5LP;12 Channel;3APerChannel_LE;13,45 USD;;;
+;L5106D5LP;6 Channel;3APerChannel_LE;14,60 USD;;;
+
+;L5504D2U;4 Channel Universal Dimmer, 2.5A per Channel, C-Bus 200mA;DinRailMounted250VUniversalDimmerRange;13,45 USD;;;
+;L5504D2UP;4 Channel Universal Dimmer, 2.5A per Channel, excludes C-Bus Power Supply;DinRailMounted250VUniversalDimmerRange;14,60 USD;;;
+;L5504D2A;4 Channel Dimmer, 2A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250VUniversalDimmerRange;10,58 USD;;;
+;L5504D2AP;4 Channel Dimmer, 2A per Channel, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250VUniversalDimmerRange;14,03 USD;;;
+;L5508D1A;8 Channel Dimmer, 1A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250VUniversalDimmerRange;11,73 USD;;;
+;L5508D1AP;8 Channel Dimmer, 1A per Channel, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250VUniversalDimmerRange;14,60 USD;;;
+
+;5031PEWP-GY;Light Level Sensor, 40 - 1600lux, Weatherproof - 56 Series;CBusLightLevelSensors;14,60 USD;;;
+
+;U201DST600ZB;1 Gang 550W Zigbee Dimming Switch;ZigbeeDimmers;14,60 USD;;;
+;U202DST600ZB;2 Gang 2x300W Zigbee Dimming Switch;ZigbeeDimmers;11,73 USD;;;
+;U104BD500ZB_WE;500W ZB Type G BS PlugAdaptor Dimmer Wh;ZigbeeDimmers;13,45 USD;;;
+
+#Sensors & Switch
+;5031PEWP-GY;Light Level Sensor, 40 - 1600lux, Weatherproof - 56 Series;CBusLightLevelSensors;14,03 USD;;;
+
+;5070THBRPG-WE;C-Bus Single Zone Thermostat complete with 5 relays for RWG plant control only, White fascia (Saturn Style);SingleZoneThermostat;14,03 USD;;;
+;5070THBR-BK;C-Bus Single Zone Thermostat complete with 5 relays for RWG plant control only, Black fascia;SingleZoneThermostat;14,60 USD;;;
+;5070THBRSS;C-Bus Single Zone Thermostat complete with 5 relays for RWG plant control only, Stainless Steel fascia;SingleZoneThermostat;11,73 USD;;;
+
+;5070THPRPG-WE;C-Bus Programmable 4 Zone Thermostat complete with 5 relays for RWG plant control only, White fascia (Saturn Style);FourZoneThermostatWithProgrammableTimeScheduling;14,03 USD;;;
+;5070THPR-BK;C-Bus Programmable 4 Zone Thermostat complete with 5 relays for RWG plant control only, Black fascia;FourZoneThermostatWithProgrammableTimeScheduling;13,45 USD;;;
+;5070THPRSS;C-Bus Programmable 4 Zone Thermostat complete with 5 relays for RWG plant control only, Stainless Steel fascia;FourZoneThermostatWithProgrammableTimeScheduling;14,60 USD;;;
+
+;5031RDTSL-WE;2000 Series C-BUS Remote Digital Temperature Sensor, White;CBusTemperatureSensor;11,15 USD;;;
+
+;5753PEIRL;Combination Sensor, Motion with Light Level Sensor and IR Receiver, Flush Mount, 360 Degree;CBus360DegreeMultiSensor;12,30 USD;;;
+;5038TX2;Infrared Remote Control Unit, 8 Button;CBus360DegreeMultiSensor;11,73 USD;;;
+
+;5750WPL-GY;110 degree PIR Occupancy Sensor, Outdoor, IP66;CBusPassiveInfraredOccupancyDetectors;13,45 USD;;;
+;5751L-WE;90 degree PIR Cooupancy Sensor, corner mount, indoor;CBusPassiveInfraredOccupancyDetectors;14,03 USD;;;
+;5753L;360 degree PIR Occupancy with light level Sensor, flush mount 8mm;CBusPassiveInfraredOccupancyDetectors;15,18 USD;;;
+;5754ODPE;360 degree PIR Occupancy with light level Sensor, surface mount 33mm;CBusPassiveInfraredOccupancyDetectors;14,60 USD;;;
+
+;5752PP/1R;1 zone C-BUS Occupacny Controller, 1 relay output, 1 detector control input,1 auxillary dry contact, C-BUS connection;CBusOccupancyController;12,30 USD;;;
+;5752PP/2R;2 zone C-BUS Occupacny Controller, 2 relay outputs, 2 detector control inputs, 2 auxillary dry contacta, C-BUS connection;CBusOccupancyController;14,60 USD;;;
+;5752PP/2R/2D;2 zone C-BUS Occupacny Controller, 2 relay outputs, 2 detector control inputs ,2 auxillary dry contacta, 2 DSI/DALI/0-10Vdc ouputs, C-BUS connection;CBusOccupancyController;11,73 USD;;;
+
+;LINK-E1200-AP;Router option 1;WirelessRouters;50,00 USD;;;
+;LINK-E1700-AP;Router option 2;WirelessRouters;100,00 USD;;;
+;LINK-E2500-AP;Router option 3;WirelessRouters;150,00 USD;;;
+
+
+#Security & Monitoring
+;VCR001;Video Recorder - 6 months;LocalRecording;4 000,00 USD;;;
+;VCR002;Video Recorder - 1 month;LocalRecording;700,00 USD;;;
+;VCR003;Video Recorder - 12 months;LocalRecording;5 000,00 USD;;;
+
+INSERT_UPDATE EngineeringVariantProduct;code[unique=true];description[lang=en];$baseProduct;$prices;$catalogVersion;$approved;$unit
+#Engineering
+;n.a.;Network coverage suvey;Survey;100,00 USD;;;
+;n.a.;Automation compatibility survey;Survey;100,00 USD;;;
+;n.a.;Energy audit;Survey;100,00 USD;;;
+;n.a.;Full Survey incl. network, automation and energy;Survey;150,00 USD;;;
+
+;A003;Contractor site visit for networking issue;SiteVisit;60,00 USD;;;
+;A004;Contractor site visit for electrical issue;SiteVisit;100,00 USD;;;
+
+;Residential_U1;Installation service in a residential unit by contractor;Residential_U;;;;
+;Office_U1;Installation service in a office unit by contractor;Office_U;;;;
+;Residential_E1;Installation service in a residential estate by contractor;Residential_E;;;;
+;Office_E1;Installation service in a office estate by contractor;Office_E;;;;
+
+INSERT_UPDATE BillingFrequency;code[unique=true];order;cartAware[default=true]
+;monthly;5
+;quarterly;6
+;yearly;7
+
+INSERT_UPDATE BillingPlan;id[unique=true];billingCycleDay(code);billingCycleType(code);$billingFrequency
+;MonthlyPlan;;subscription_start;monthly
+;AnnuallyPlan;;subscription_start;yearly
+
+INSERT_UPDATE SubscriptionTerm;id[unique=true];name[lang=en];termOfServiceFrequency(code);termOfServiceNumber(code);termOfServiceRenewal(code);billingPlan(id);cancellable
+;none;No contract;none;;auto_renewing;MonthlyPlan;true
+;monthly_1;1 Month contract - monthly billing;monthly;1;auto_renewing;MonthlyPlan;false
+;annually_1;1 Year contract - monthly billing;annually;1;auto_renewing;MonthlyPlan;false
+;annually_2;2 Years contract - monthly billing;annually;2;auto_renewing;MonthlyPlan;false
+;annually_3;3 Years contract - monthly billing;annually;3;auto_renewing;MonthlyPlan;false
+;yearly_2;2 Years contract - yearly billing;annually;2;auto_renewing;AnnuallyPlan;false
+
+INSERT_UPDATE SubscriptionProduct;code[unique=true];name[lang=en];description[lang=en];$prices;$supercategories;$catalogVersion;$approved;$unit;subscriptionTerm(id)
+
+#Connectivity
+#INTERNET 1 GPBS PLAN Bundle
+;BasicInternetPlan1Gbps;INTERNET 1 GPBS PLAN;Basic Internet Plan - 1 gbps;10,00 USD;Internet;;;;annually_1
+#INTERNET 100 MBPS PLAN Bundle
+;Internet100MbpsPlan;INTERNET 100 MBPS PLAN;Internet 100 mbps plan;5,00 USD;Internet;;;;annually_1
+#INTERNET 10 GPBS PLAN Bundle
+;BasicInternetPlan10Gbps;INTERNET 10 GPBS PLAN;Basic Internet Plan - 10 gbps;20,00 USD;Internet;;;;annually_1
+#All Internet Bundles Bundles
+;StaticIPOption;;Static IP option;0 USD;Internet;;;;annually_1
+;SecuredVPN;;Secured VPN;5,00 USD;Internet;;;;annually_1
+
+#Engineering
+#ASSISTANCE SERVICES Bundle
+;A001;Essential Services;Essential Services;2,00 USD;Assistance;;;;annually_1
+;A002;Home services;Home services;5,00 USD;Assistance;;;;annually_1
+
+#Security & Monitoring
+;TT001;Cloud recording 7 days;Cloud recording 7 days;2,00 USD;VideoRecording;;;;annually_1
+;TT002;Cloud recording 1 month;Cloud recording 1 month;3,00 USD;VideoRecording;;;;annually_1
+;TT003;Service Activation & Account Creation;Service Activation & Account Creation;5,00 USD;VideoRecording;;;;annually_1
