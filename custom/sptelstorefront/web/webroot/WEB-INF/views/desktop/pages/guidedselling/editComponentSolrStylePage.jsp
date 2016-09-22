@@ -6,9 +6,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
-<%@ taglib prefix="product" tagdir="/WEB-INF/tags/addons/b2ctelcostorefront/desktop/product" %>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/desktop/product" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="guidedselling" tagdir="/WEB-INF/tags/addons/b2ctelcostorefront/desktop/guidedselling" %>
+<%@ taglib prefix="guidedselling" tagdir="/WEB-INF/tags/desktop/guidedselling" %>
 
 <template:page pageTitle="${pageTitle}">
  	<jsp:body>

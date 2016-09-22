@@ -9,23 +9,6 @@ INSERT_UPDATE ContentCatalog;id[unique=true]
 ;$contentCatalog
 
 # Catalog versions for content catalogs
-INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;languages(isoCode)
-;$contentCatalog;Staged;false;$languages
-;$contentCatalog;Online;true;$languages
-
-$contentCatalog=powertoolsContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-
-
-INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
-;;BundleSelectionAddOnPageTemplate;Extras Page Template;addon:/$addonExtensionName/pages/guidedselling/editComponentAccordeonStylePage;ContentPage;false;
-;;BundleSelectionDevicePageTemplate;Device Page Template;addon:/$addonExtensionName/pages/guidedselling/editComponentSolrStylePage;ContentPage;false;
-;;BundleSelectionPlanPageTemplate;Plans Page Template;;ContentPage;false;
-
-/home/developer/dev/SpTel/hybris/bin/custom/sptelstorefront/web/webroot/WEB-INF/views/addons/b2ctelcostorefront/desktop/pages/guidedselling/viewAllServicePlansPage.jsp
-
-# Functional Content Pages
-INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='ContentPageModel__function_preview']
-;;guidedselling-select-device;Select Device Page;BundleSelectionAddOnPageTemplate;guidedselling-select-device
-;;bundleselection-plan;Select Plans Page;BundleSelectionPlanPageTemplate;bundleselection-plan
-;;bundleselection-extra;Update Extras Page;BundleSelectionAddOnPageTemplate;bundleselection-extra
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;languages(isoCode);writePrincipals(uid)[mode=append];
+;$contentCatalog;Staged;false;$languages;cmsmanagergroup,cmsmanager;
+;$contentCatalog;Online;true;$languages;cmsmanagergroup,cmsmanager;

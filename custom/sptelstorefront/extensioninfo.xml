@@ -24,7 +24,6 @@
         <requires-extension name="acceleratorstorefrontcommons"/>
         <requires-extension name="sptelfacades"/>
         <requires-extension name="b2ctelcofacades"/>
-        <requires-extension name="b2ctelcostorefront"/>
 
         <webmodule jspcompile="false" webroot="/sptelstorefront"/>
 
