@@ -45,17 +45,6 @@
 
 		<!-- TypeGroups are for structure of this file only -->
 
-		<typegroup name="Sptel">
-			<itemtype code="DeviceVariantProduct" extends="VariantProduct"
-					  autocreate="true" generate="true"
-					  jaloclass="com.sptel.core.jalo.DeviceVariantProduct">
-			</itemtype>
-			<itemtype code="EngineeringVariantProduct" extends="VariantProduct"
-					  autocreate="true" generate="true"
-					  jaloclass="com.sptel.core.jalo.DeviceVariantProduct">
-			</itemtype>
-		</typegroup>
-
 		<typegroup name="Apparel">
 			<itemtype code="ApparelProduct" extends="Product"
 			          autocreate="true" generate="true"
