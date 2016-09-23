@@ -1,0 +1,34 @@
+<hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../bin/platform/resources/schemas/extensions.xsd'>
+  <extensions>
+    <path dir='${HYBRIS_BIN_DIR}' autoload='false' />
+    <extension name='acceleratorcms' />
+    <extension name='addonsupport' />
+    <extension name='b2ctelcocheckoutaddon' />
+    <extension name='b2ctelcocockpits' />
+    <extension name='b2ctelcostore' />
+    <extension name='b2ctelcostorefront' />
+	<extension name='b2bcommerce' />
+    <extension name='cissubscription' />
+    <extension name='cissubscriptionatddtests' />
+    <extension name='commercesearchbackoffice' />
+    <extension name='commerceservicesbackoffice' />
+    <extension name='emsclient' />
+    <extension name='emsui' />
+    <extension name='entitlementstorefront' />
+    <extension name='entitlementatddtests' />
+    <extension name='mcc' />
+    <extension name='solrfacetsearchbackoffice' />
+    <extension name='solrserver' />
+    <extension name='configurablebundleatddtests' />
+    <extension name='subscriptionstorefront' />
+    <extension name='subscriptionatddtests' />
+    <extension name='subscriptionbackoffice' />
+    <extension name='sptelstorefront' />
+    <extension name='sptelcockpits' />
+    <extension name='sptelfulfilmentprocess' />
+    <extension name='sptelcore' />
+    <extension name='customersupportbackoffice' />
+    <webapp contextroot='entitlements-web' path='${HYBRIS_BIN_DIR}/../../hybris-ems/binary/entitlements-web.war' />
+    <webapp contextroot='hybris-cis-mock-subscription-web' path='${HYBRIS_BIN_DIR}/../../hybris-sbg/binary/hybris-cis-mock-subscription-web.war' />
+  </extensions>
+</hybrisconfig>
