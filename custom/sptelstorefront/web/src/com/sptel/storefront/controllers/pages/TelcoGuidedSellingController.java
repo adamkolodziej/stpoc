@@ -38,16 +38,16 @@ import de.hybris.platform.configurablebundleservices.model.BundleTemplateModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.platform.servicelayer.session.SessionService;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
@@ -62,6 +62,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/bundle")
+@SessionAttributes("bundlePackageId")
 public class TelcoGuidedSellingController extends AbstractSearchPageController {
     private static final String GUIDEDSELLING_SELECT_ADDONS = "bundleselection-extra";
     private static final String GUIDEDSELLING_SELECT_DEVICE = "guidedselling-select-device";
@@ -80,14 +81,16 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
     private ProductFacade productFacade;
     @Resource(name = "flexibleSearchService")
     private FlexibleSearchService flexibleSearchService;
+    @Resource(name = "sessionService")
+    private SessionService sessionService;
 
-    @RequestMapping(value = "/view-plans/{bundleTemplateId}/step/{step}", method = RequestMethod.GET)
-    public String viewPlans(@PathVariable("bundleTemplateId") final String bundleTemplateId, @PathVariable("step") final int step, final Model model)
+    @RequestMapping(value = "/view-plans/{bundlePackageId}/step/{step}", method = RequestMethod.GET)
+    public ModelAndView viewPlans(@PathVariable("bundlePackageId") final String bundlePackageId, @PathVariable("step") final int step, final Model model)
             throws CMSItemNotFoundException {
         if (step == 0) {
-            return viewPlans(bundleTemplateId, model);
+            return viewPlans(bundlePackageId, model);
         } else {
-            BundlePackageModel bundlePackage = getBundlePackage(bundleTemplateId);
+            BundlePackageModel bundlePackage = getBundlePackage(bundlePackageId);
             List<BundleTemplateModel> bundleTemplates = bundlePackage.getBundleTemplates();
             BundleTemplateModel bundleTemplateModel = bundleTemplates.get(step);
             if (bundleTemplateModel != null) {
@@ -95,14 +98,17 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
             }
         }
         setupErrorPage(model, "No steps left", "Bad steps config");
-        return ControllerConstants.Views.Pages.Error.ErrorNotFoundPage;
+        return new ModelAndView(ControllerConstants.Views.Pages.Error.ErrorNotFoundPage);
     }
 
     @RequestMapping(value = "/view-plans/{bundlePackageId}", method = RequestMethod.GET)
-    public String viewPlans(@PathVariable("bundlePackageId") final String bundlePackageId, final Model model)
+    public ModelAndView viewPlans(@PathVariable("bundlePackageId") final String bundlePackageId, final Model model)
             throws CMSItemNotFoundException {
 
+        ModelAndView modelAndView = new ModelAndView();
+
         BundlePackageModel bundlePackage = getBundlePackage(bundlePackageId);
+        modelAndView.addObject("bundlePackageId", bundlePackageId);
 
         BundleTemplateModel bundleTemplateModel = null;
         try {
@@ -110,14 +116,14 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
         } catch (final ModelNotFoundException e) {
             LOG.error("Specified bundleTemplate does not exist: " + bundlePackageId);
             setupErrorPage(model, GUIDEDSELLING_BUNDLE_PLAN, "guidedselling.viewplans.packagenotavailable");
-            return ControllerConstants.Views.Pages.Error.ErrorNotFoundPage;
+            return returnErrorPage();
         }
         String bundleTemplateId = bundleTemplateModel.getId();
 
         if (!BundleTemplateStatusEnum.APPROVED.equals(bundleTemplateModel.getStatus().getStatus())) {
             LOG.error("Specified bundleTemplate is not currently APPROVED: " + bundlePackageId);
             setupErrorPage(model, GUIDEDSELLING_BUNDLE_PLAN, "guidedselling.viewplans.packagenotavailable");
-            return ControllerConstants.Views.Pages.Error.ErrorNotFoundPage;
+            return returnErrorPage();
         }
 
         final List<BundleTemplateModel> bundleTemplates = bundleTemplateService.getAllComponentsOfType(bundleTemplateModel,
@@ -125,7 +131,7 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
         if (bundleTemplates.isEmpty()) {
             LOG.error("Specified bundleTemplate does not have any active plan " + bundlePackageId);
             setupErrorPage(model, GUIDEDSELLING_BUNDLE_PLAN, "guidedselling.viewplans.packagenotavailable");
-            return ControllerConstants.Views.Pages.Error.ErrorNotFoundPage;
+            return returnErrorPage();
         }
 
         final BundleTemplateModel firstComponentModel = bundleTemplates.get(0);
@@ -133,7 +139,7 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
         if (products.isEmpty()) {
             LOG.error("bundleTemplate does not contain any Product " + bundlePackageId);
             setupErrorPage(model, GUIDEDSELLING_BUNDLE_PLAN, "guidedselling.viewplans.packagenotavailable");
-            return ControllerConstants.Views.Pages.Error.ErrorNotFoundPage;
+            return returnErrorPage();
         }
 
         ServicePlanModel firstPlan = null;
@@ -142,7 +148,7 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
         } catch (final Exception e) {
             LOG.error(e.getMessage(), e);
             setupErrorPage(model, GUIDEDSELLING_BUNDLE_PLAN, "guidedselling.viewplans.packagenotavailable");
-            return ControllerConstants.Views.Pages.Error.ErrorNotFoundPage;
+            return returnErrorPage();
         }
 
         final ProductData productData = productFacade.getProductForOptions(firstPlan,
@@ -161,7 +167,14 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
 
         storeCmsPageInModel(model, getContentPageForLabelOrId(GUIDEDSELLING_BUNDLE_PLAN));
         setUpMetaDataForContentPage(model, getContentPageForLabelOrId(GUIDEDSELLING_BUNDLE_PLAN));
-        return ControllerConstants.Views.Pages.GuidedSelling.ViewAllServicePlansPage;
+
+        modelAndView.addAllObjects(model.asMap());
+        modelAndView.setViewName(ControllerConstants.Views.Pages.GuidedSelling.ViewAllServicePlansPage);
+        return modelAndView;
+    }
+
+    private ModelAndView returnErrorPage() {
+        return new ModelAndView(ControllerConstants.Views.Pages.Error.ErrorNotFoundPage);
     }
 
     private BundlePackageModel getBundlePackage(@PathVariable("bundleTemplateId") String bundleTemplateId) {
@@ -213,6 +226,7 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
      * @param request
      * @param model
      * @param redirectAttributes
+     * @param bundlePackageId
      * @return
      * @throws CMSItemNotFoundException
      */
@@ -223,9 +237,11 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
                                     @RequestParam(value = "page", defaultValue = "0") final int page,
                                     @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
                                     @RequestParam(value = "sort", required = false) final String sortCode, final HttpServletRequest request,
-                                    final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException {
+                                    final Model model,
+                                    final RedirectAttributes redirectAttributes,
+                                    @ModelAttribute("bundlePackageId") String bundlePackageId) throws CMSItemNotFoundException {
         return editPositionalComponent(bundleNo, componentId, searchQuery, page, showMode, sortCode, request, model, 1,
-                redirectAttributes);
+                redirectAttributes, bundlePackageId);
     }
 
     /**
@@ -240,6 +256,7 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
      * @param request
      * @param model
      * @param redirectAttributes
+     * @param bundlePackageId
      * @return
      * @throws CMSItemNotFoundException
      */
@@ -250,9 +267,9 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
                                         @RequestParam(value = "page", defaultValue = "0") final int page,
                                         @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
                                         @RequestParam(value = "sort", required = false) final String sortCode, final HttpServletRequest request,
-                                        final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException {
+                                        final Model model, final RedirectAttributes redirectAttributes, @ModelAttribute("bundlePackageId") String bundlePackageId) throws CMSItemNotFoundException {
         return editPositionalComponent(bundleNo, componentId, searchQuery, page, showMode, sortCode, request, model, -1,
-                redirectAttributes);
+                redirectAttributes, bundlePackageId);
     }
 
     /**
@@ -261,7 +278,7 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
      */
     protected String editPositionalComponent(final String bundleNo, final String componentId, final String searchQuery,
                                              final int page, final ShowMode showMode, final String sortCode, final HttpServletRequest request, final Model model,
-                                             final int relativeposition, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException {
+                                             final int relativeposition, final RedirectAttributes redirectAttributes, String bundlePackageId) throws CMSItemNotFoundException {
         String componentIdToNavigateTo = null;
 
         if (guidedSellingFacade.checkIsComponentSelectionCriteriaMet(bundleNo, componentId)) {
@@ -280,10 +297,31 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
         }
 
         if (componentIdToNavigateTo == null) {
+            String nextStep = navigateToNextParentBundle(componentIdToNavigateTo, bundlePackageId);
+            if (nextStep != null) {
+                return nextStep;
+            }
             return REDIRECT_PREFIX + "/cart";
         }
 
         return internalEditComponent(bundleNo, componentIdToNavigateTo, searchQuery, page, showMode, sortCode, request, model);
+    }
+
+    private String navigateToNextParentBundle(String componentIdToNavigateTo, String bundlePackageId) {
+        BundlePackageModel bundlePackageModel = getBundlePackage(bundlePackageId);
+
+        BundleTemplateModel bundleTemplateForCode = bundleTemplateService.getBundleTemplateForCode(componentIdToNavigateTo);
+
+        List<BundleTemplateModel> childTemplates = bundlePackageModel.getBundleTemplates();
+        if (!CollectionUtils.isEmpty(childTemplates) && childTemplates.contains(bundleTemplateForCode)) {
+            int currentStepIndex = childTemplates.indexOf(bundleTemplateForCode);
+            int nextStepIndex = currentStepIndex + 1;
+            if (nextStepIndex <= childTemplates.size()) {
+                BundleTemplateModel nextStep = childTemplates.get(nextStepIndex);
+                return REDIRECT_PREFIX + "/bundle/view-plans/" + nextStep.getId();
+            }
+        }
+        return null;
     }
 
     /**
@@ -368,20 +406,14 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
             finalBundleNo = bundleNo == null ? 0 : bundleNo.intValue();
         }
 
-        BundleTemplateModel bundleTemplateForCode = bundleTemplateService.getBundleTemplateForCode(bundleTemplateId);
-        BundleTemplateModel parentTemplate = bundleTemplateForCode.getParentTemplate();
-        if (parentTemplate != null) {
-            List<BundleTemplateModel> childTemplates = bundleTemplateForCode.getChildTemplates();
-            int currentStepIndex = childTemplates.indexOf(bundleTemplateForCode);
-            int nextStepIndex = currentStepIndex + 1;
-            if (nextStepIndex <= childTemplates.size()) {
-                BundleTemplateModel nextStep = childTemplates.get(nextStepIndex);
-                return REDIRECT_PREFIX + "/bundle/view-plans/" + nextStep.getId();
-            }
-        }
-
         return REDIRECT_PREFIX + "/bundle/edit-component/" + finalBundleNo + "/" + navigation.code + "component/"
                 + bundleTemplateId;
+    }
+
+    private BundlePackageModel getBundlePackage(BundleTemplateModel bundleTemplateModel) {
+        BundlePackageModel bundlePackageModel = new BundlePackageModel();
+        bundlePackageModel.setBundleTemplates(Arrays.asList(bundleTemplateModel));
+        return flexibleSearchService.getModelByExample(bundlePackageModel);
     }
 
     protected int addProduct(final String code, final Model model, final long qty, final Integer bundleNo,
@@ -425,6 +457,7 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
      * @param componentId
      * @param bindingResult
      * @param redirectModel
+     * @param bundlePackageId
      * @return
      * @throws CMSItemNotFoundException
      */
@@ -432,7 +465,7 @@ public class TelcoGuidedSellingController extends AbstractSearchPageController {
     public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber, final Model model,
                                        @Valid final UpdateQuantityForm form, @RequestParam("bundleNo") final String bundleNo,
                                        @RequestParam("componentId") final String componentId, final BindingResult bindingResult,
-                                       final RedirectAttributes redirectModel) throws CMSItemNotFoundException {
+                                       final RedirectAttributes redirectModel, @ModelAttribute("bundlePackageId") String bundlePackageId) throws CMSItemNotFoundException {
         if (bindingResult.hasErrors()) {
             for (final ObjectError error : bindingResult.getAllErrors()) {
                 if (error.getCode().equals("typeMismatch")) {
