@@ -28,12 +28,12 @@
           class="com.sptel.initialdata.setup.InitialDataSystemSetup"
           parent="abstractCoreSystemSetup">
         <property name="coreDataImportService" ref="coreDataImportService"/>
-        <property name="sampleDataImportService" ref="sampleDataImportService"/>
-        <property name="dataImportService" ref="sampleDataImportService"/>
+        <property name="sampleDataImportService" ref="defaultSpTelSampleDataImportService"/>
+        <property name="dataImportService" ref="defaultSpTelSampleDataImportService"/>
     </bean>
 
-    <bean id="dataImportService" class="com.sptel.initialdata.setup.SpTelSampleDataImportService"
-          parent="sampleDataImportService">
+    <bean id="defaultSpTelSampleDataImportService" class="com.sptel.initialdata.setup.SpTelSampleDataImportService"
+          parent="defaultSampleDataImportService">
         <property name="typeService" ref="typeService"/>
         <property name="modelService" ref="modelService"/>
 
