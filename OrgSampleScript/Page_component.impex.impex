@@ -1,0 +1,55 @@
+
+
+$contentCatalog = powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+
+
+*CMS Page creation
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;ticketSuccess;Ticket Created Successfully;AccountPageTemplate;ticketSuccess
+;;createIncident;Creat Incident;AccountPageTemplate;createIncident
+;;viewIncident;View Incident;AccountPageTemplate;viewIncident
+
+
+
+*Jsp include creation / compoment mapping with cms page slots
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true]
+;;TopContent-createIncident;TopContent;createIncident;TopContent-createIncident;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;cmsComponents(&componentRef)
+;;TopContent-createIncident;Top Content;CreateIncident
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;createIncidentComp;Create Incident Component;/WEB-INF/views/responsive/pages/account/createIncident.jsp;;CreateIncident
+
+
+
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true]
+;;TopContent-ticketSuccess;TopContent;ticketSuccess;TopContent-ticketSuccess;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;cmsComponents(&componentRef)
+;;TopContent-ticketSuccess;Top Content;TicketSuccess
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;ticketSuccessComp;Ticket Success Component;/WEB-INF/views/responsive/pages/account/ticketSuccess.jsp;;TicketSuccess
+
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true]
+;;TopContent-viewIncident;TopContent;viewIncident;TopContent-viewIncident;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;cmsComponents(&componentRef)
+;;TopContent-viewIncident;Top Content;ViewIncident
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;viewIncidentComp;View Incident Component;/WEB-INF/views/responsive/pages/account/viewIncident.jsp;;ViewIncident
+

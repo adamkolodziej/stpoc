@@ -141,6 +141,74 @@
                 </attributes>
             </itemtype>
         </typegroup>
+        
+        
+     <typegroup name="Incident">
+     
+     <itemtype code="CompanyDetails" autocreate="true" generate="true"
+     			jaloclass="com.sptel.core.jalo.CompanyDetails">
+     			<deployment table="CompanyDetails" typecode="10099"/>
+     			<attributes>
+     				<attribute type="java.lang.String" qualifier="companyName">
+     				<persistence type="property"></persistence>
+     				</attribute>
+     				<attribute type="java.lang.String" qualifier="contactName">
+     				<persistence type="property"></persistence>
+     				</attribute>
+     				<attribute type="java.lang.String" qualifier="phoneNumber">
+     				<persistence type="property"></persistence>
+     				</attribute>
+     				<attribute type="java.lang.String" qualifier="emailID">
+     				<persistence type="property"></persistence>
+     				</attribute>
+     			</attributes>
+     </itemtype>
+     
+     <itemtype code="IncidentDetails" autocreate="true" generate="true" 
+                jaloclass="com.sptel.core.jalo.IncidentDetails" >
+                <deployment table="IncidentDetails" typecode="10044"/>
+                <attributes>
+                	<attribute type="java.lang.String" qualifier="ticketType">
+                	<persistence type="property"></persistence>
+                	</attribute>
+                	<attribute type="java.lang.String" qualifier="productsImpacted">
+                	<persistence type="property"></persistence>
+                	</attribute>
+                	<attribute type="java.lang.String" qualifier="symptoms">
+                	<persistence type="property"></persistence>
+                	</attribute>
+                	<attribute type="java.lang.String" qualifier="intrusiveTestPossible">
+                	<persistence type="property"></persistence>
+                	</attribute>
+                	<attribute type="java.lang.String" qualifier="repeatIssue">
+                	<persistence type="property"></persistence>
+                	</attribute>
+                	<attribute type="java.lang.String" qualifier="customerRef">
+                	<persistence type="property"></persistence>
+                	</attribute>
+                	<attribute type="java.lang.String" qualifier="recentChanges">
+                	<persistence type="property"></persistence>
+                	</attribute>
+                	<attribute type="java.lang.String" qualifier="detailDescription">
+                	<persistence type="property"></persistence>
+                	</attribute>
+                </attributes>
+     </itemtype>
+     
+        <itemtype code="CsTicket" autocreate="false" generate="false"
+				jaloclass="com.sptel.core.jalo.CsTicket">
+				<attributes>
+					<attribute qualifier="companyDetails" type="CompanyDetails">
+						<persistence type="property"></persistence>
+						<modifiers />
+				    </attribute>
+				    <attribute qualifier="incidentDetails" type="IncidentDetails">
+						<persistence type="property"></persistence>
+						<modifiers />
+				    </attribute>
+				</attributes>
+		</itemtype>
+	</typegroup>
 
     </itemtypes>
 
