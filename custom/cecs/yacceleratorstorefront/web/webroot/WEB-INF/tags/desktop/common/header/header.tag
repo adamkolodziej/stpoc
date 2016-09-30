@@ -3,6 +3,7 @@
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
         <header>
+            <c:if test="${user.name eq 'Anonymous'}">
             <!-- Login section -->
             <div class="login-section">
                 <div class="container">
@@ -14,6 +15,7 @@
                     </div>
                 </div>
             </div>
+            </c:if>
 
             <!-- Menu section -->
             <div class="menu-section">

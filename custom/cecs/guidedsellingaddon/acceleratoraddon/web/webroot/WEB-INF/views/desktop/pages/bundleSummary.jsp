@@ -210,7 +210,7 @@
 									<input type="hidden" name="sourcePackageCode"
 										value="${offer.sourcePackageCode}" />
 									<button type="submit" ng-disabled="isThereAnyErrors()"
-										class="btn btn-tricast-primary btn-block text-uppercase purchase ${!creditCheckOkay ? 'disabled' : ''}">
+										class="btn btn-sptel-primary btn-block text-uppercase purchase ${!creditCheckOkay ? 'disabled' : ''}">
 										<spring:theme
 											code="guidedselling.guidedsellingtotalscomponent.${offer.changeOrder ? 'updateorder' : 'placeorder'}" />
 									</button>

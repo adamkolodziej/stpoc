@@ -18,7 +18,7 @@
                 <img class="img-responsive" src="${media.url}" alt="${media.altText}"/>
                 <c:if test="${not empty headline}">
                     <div class="banner-info">
-                        <button class="btn btn-tricast-primary">${btnText}</button>
+                        <button class="btn btn-sptel-primary">${btnText}</button>
                         <div class="banner-description">
                                 ${headline}
                         </div>

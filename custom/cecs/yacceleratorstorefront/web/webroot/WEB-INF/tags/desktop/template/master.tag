@@ -19,7 +19,7 @@
 <html lang="${currentLanguage.isocode}">
 <head>
 	<title>
-		${not empty pageTitle ? pageTitle : not empty cmsPage.title ? cmsPage.title : 'Accelerator Title'}
+		SP Telecom site
 	</title>
 
 
@@ -31,11 +31,6 @@
 	<%-- Additional meta tags --%>
 	<htmlmeta:meta items="${metatags}"/>
 
-	<%-- Favourite Icon --%>
-	<spring:theme code="img.favIcon" text="/" var="favIconPath"/>
-	<spring:theme code="img.favIconPng" text="/" var="favIconPngPath"/>
-    <link rel="shortcut icon" type="image/x-icon" media="all" href="${originalContextPath}${favIconPath}" />
-    <link rel="shortcut icon" type="image/png" media="all" href="${originalContextPath}${favIconPngPath}" />
 
 	<%-- CSS Files Are Loaded First as they can be downloaded in parallel --%>
 	<template:styleSheets/>

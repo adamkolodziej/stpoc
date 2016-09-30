@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <ic:instantcheckout product="${product}" showPrice="${false}" cssClass="product-promotion-fragment-btn btn btn-tricast-primary btn-block" responseDiv="promotion-actions-${component.uid}">
+            <ic:instantcheckout product="${product}" showPrice="${false}" cssClass="product-promotion-fragment-btn btn btn-sptel-primary btn-block" responseDiv="promotion-actions-${component.uid}">
                 <jsp:attribute name="linkContent" >
                     <spring:theme code="text.instantcheckoutcomponent.buynow" text="BUY NOW" />
                 </jsp:attribute>

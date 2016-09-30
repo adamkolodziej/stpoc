@@ -70,7 +70,7 @@
             				<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
             					<li>
             						<ycommerce:testId code="header_signOut">
-            							<a class="btn btn-tricast-primary" href="<c:url value='/logout'/>">
+            							<a class="btn btn-sptel-primary" href="<c:url value='/logout'/>">
             								<spring:theme code="header.link.logout"/>
             							</a>
             						</ycommerce:testId>

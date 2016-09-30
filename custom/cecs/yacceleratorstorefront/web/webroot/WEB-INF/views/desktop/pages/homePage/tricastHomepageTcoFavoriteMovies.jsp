@@ -13,7 +13,7 @@
 		<c:url value="/packages/TriCast" var="tricastPack" />
 		<img src="${commonResourcePath}/images/homepage-mock/start-watching-bg.png" alt="" class="img-responsive"/>
 		<a href="${tricastPack}">
-			<button class="btn btn-tricast-primary btn-lg text-uppercase"><spring:theme code="tco.favorite.movies.subscribe.now" /></button>
+			<button class="btn btn-sptel-primary btn-lg text-uppercase"><spring:theme code="tco.favorite.movies.subscribe.now" /></button>
 		</a>
 	</div>
 </div>

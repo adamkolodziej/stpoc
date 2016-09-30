@@ -25,6 +25,6 @@
 </div>
 
 <c:url var="placeOrderUrl" value="/guidedselling/order/summary"></c:url>
-<a href="${placeOrderUrl}" class="btn btn-tricast-primary btn-block text-uppercase purchase">
+<a href="${placeOrderUrl}" class="btn btn-sptel-primary btn-block text-uppercase purchase">
 	<spring:theme code="guidedselling.guidedsellingtotalscomponent.${offer.changeOrder ? 'continue' : 'purchasepackage'}" />
 </a>

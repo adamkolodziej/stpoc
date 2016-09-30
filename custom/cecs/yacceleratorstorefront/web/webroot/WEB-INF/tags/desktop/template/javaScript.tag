@@ -18,9 +18,9 @@
 		<compressible:js/>
 	</c:otherwise>
 </c:choose>
-<script type="text/javascript" src="/yacceleratorstorefront/_ui/desktop/common/js/tricast/bootstrap.js"></script>
-<script type="text/javascript" src="/yacceleratorstorefront/_ui/desktop/common/js/tricast/plugins.js"></script>
-<script type="text/javascript" src="/yacceleratorstorefront/_ui/desktop/common/js/tricast/ygrunt-acc.js"></script>
-<script type="text/javascript" src="/yacceleratorstorefront/_ui/desktop/common/js/tricast/tricast-ng.js"></script>
+<script type="text/javascript" src="/yacceleratorstorefront/_ui/desktop/common/js/sptel/bootstrap.js"></script>
+<script type="text/javascript" src="/yacceleratorstorefront/_ui/desktop/common/js/sptel/plugins.js"></script>
+<script type="text/javascript" src="/yacceleratorstorefront/_ui/desktop/common/js/sptel/ygrunt-acc.js"></script>
+<script type="text/javascript" src="/yacceleratorstorefront/_ui/desktop/common/js/sptel/sptel-ng.js"></script>
 
 <cms:previewJS cmsPageRequestContextData="${cmsPageRequestContextData}" />

@@ -100,7 +100,7 @@
                                        
                                     </div>
                                     <c:url var="guidedSellingURL" value="/guidedselling/${bundleTemplateId}/package/${pack.code}" />
-                                    <a class="purchase btn btn-tricast-primary" href="${guidedSellingURL}">
+                                    <a class="purchase btn btn-sptel-primary" href="${guidedSellingURL}">
                                         <spring:theme code="guidedselling.purchase"/>
                                     </a>
                                 </div>

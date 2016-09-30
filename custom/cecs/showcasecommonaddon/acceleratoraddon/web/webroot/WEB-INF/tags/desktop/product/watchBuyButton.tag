@@ -10,7 +10,7 @@
 
 
 <c:if test="${ not empty episodeProduct }">
-	<a href="<c:url value="${ episodeProduct.viewUrl }" />" class="btn btn-tricast-primary text-uppercase btn-block js-buy-watch-button" style="overflow: hidden" data-code="${episodeProduct.code}" data-state="loading">
+	<a href="<c:url value="${ episodeProduct.viewUrl }" />" class="btn btn-sptel-primary text-uppercase btn-block js-buy-watch-button" style="overflow: hidden" data-code="${episodeProduct.code}" data-state="loading">
 		<span class="js-loading buy-watch-button-loading-text"><spring:theme code="text.TVShowProduct.watchBuyLoading" /></span>
 		<span class="js-watch buy-watch-button-watch-text"><spring:theme code="text.TVSeasonListComponent.watchEpisode" /></span>
 		<span class="js-watch-now buy-watch-now-button-watch-now-text"><spring:theme code="text.TVSeasonListComponent.watchNowEpisode" /></span>
@@ -21,7 +21,7 @@
 </c:if>
 
 <c:if test="${ not empty movieProduct }">
-	<a href="<c:url value="${ movieProduct.viewUrl }" />" class="btn btn-tricast-primary text-uppercase btn-block js-buy-watch-button" data-code="${movieProduct.code}" data-state="loading">
+	<a href="<c:url value="${ movieProduct.viewUrl }" />" class="btn btn-sptel-primary text-uppercase btn-block js-buy-watch-button" data-code="${movieProduct.code}" data-state="loading">
 		<span class="js-loading buy-watch-button-loading-text"><spring:theme code="text.TVShowProduct.watchBuyLoading" /></span>
 		<span class="js-watch buy-watch-button-watch-text"><spring:theme code="text.MovieProductDetailsComponent.watchMovie" /></span>
 		<span class="js-watch-now buy-watch-now-button-watch-now-text"><spring:theme code="text.MovieProductDetailsComponent.watchNowMovie" /></span>
@@ -32,7 +32,7 @@
 </c:if>
 
 <c:if test="${ not empty seasonProduct }">
-	<a href="<c:url value="/video/v/${episodeToWatch}"/>" class="btn btn-tricast-primary text-uppercase js-buy-watch-button" data-code="${seasonProduct.code}" data-state="loading">
+	<a href="<c:url value="/video/v/${episodeToWatch}"/>" class="btn btn-sptel-primary text-uppercase js-buy-watch-button" data-code="${seasonProduct.code}" data-state="loading">
 		<span class="js-loading buy-watch-button-loading-text"><spring:theme code="text.TVShowProduct.watchBuyLoading"/></span>
 		<span class="js-watch buy-watch-button-watch-text"><spring:theme code="text.TVShowProductDetailsComponent.watchSeason" arguments="${seasonProduct.seasonNumber}" htmlEscape="false" /></span>
 		<span class="js-watch-now buy-watch-now-button-watch-now-text"><spring:theme code="text.TVShowProductDetailsComponent.watchNowSeason" arguments="${seasonProduct.seasonNumber}" htmlEscape="false" /></span>

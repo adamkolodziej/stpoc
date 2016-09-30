@@ -12,7 +12,7 @@
 <sec:authorize ifAnyGranted="ROLE_ANONYMOUS">
 	<li class="dropdown yamm-fw">
 		<ycommerce:testId code="header_Login_link">
-			<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-tricast-primary"><spring:theme code="header.link.login"/><b class="caret"></b></a>
+			<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-sptel-primary"><spring:theme code="header.link.login"/><b class="caret"></b></a>
 		</ycommerce:testId>
 		<ul class="dropdown-menu">
 			<li>
@@ -38,7 +38,7 @@
 									</div>
 									<div class="form-actions clearfix row vertical-both">
 										<div class="col-xs-12 col-sm-10">
-											<button type="submit" class="btn btn-tricast-primary btn-block"><spring:theme code="login.signin"/></button>
+											<button type="submit" class="btn btn-sptel-primary btn-block"><spring:theme code="login.signin"/></button>
 										</div>
 									</div>
 								</form:form>
@@ -68,7 +68,7 @@
 								<div class="row">
 									<div class="col-xs-12 col-sm-6">
 										<c:url value="/login" var="loginUrl"/>
-										<a href="${loginUrl}" class="btn btn-tricast-primary btn-block ">
+										<a href="${loginUrl}" class="btn btn-sptel-primary btn-block ">
 											<spring:theme code="login.createaccount"/>
 										</a>
 									</div>

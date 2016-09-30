@@ -24,5 +24,5 @@
 </div>
 
 <div class="col-xs-12 col-sm-3">
-    <a href="#" class="btn btn-tricast-primary text-uppercase"><spring:theme code="text.TVSeasonListComponent.showAllEpisodes" /></a>
+    <a href="#" class="btn btn-sptel-primary text-uppercase"><spring:theme code="text.TVSeasonListComponent.showAllEpisodes" /></a>
 </div>

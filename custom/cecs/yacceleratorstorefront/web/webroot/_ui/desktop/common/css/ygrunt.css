@@ -871,8 +871,8 @@ ng\:form {
 .yamm .dropdown.yamm-fw a {
   text-transform: uppercase;
 }
-.btn-tricast-primary,
-.btn-tricast-primary:active {
+.btn-sptel-primary,
+.btn-sptel-primary:active {
   background: #f4136b;
   background: -moz-linear-gradient(top, #f4136b 0%, #fe0000 100%);
   background: -webkit-linear-gradient(top, #f4136b 0%, #fe0000 100%);
@@ -881,10 +881,10 @@ ng\:form {
   color: #fff;
   border-bottom: 1px solid #b00101;
 }
-.btn-tricast-primary:hover,
-.btn-tricast-primary:active:hover,
-.btn-tricast-primary:focus,
-.btn-tricast-primary:active:focus {
+.btn-sptel-primary:hover,
+.btn-sptel-primary:active:hover,
+.btn-sptel-primary:focus,
+.btn-sptel-primary:active:focus {
   opacity: 0.8;
 }
 .btn-tricast-secondary,
