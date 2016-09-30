@@ -27,10 +27,11 @@
 	<jsp:body>
 
         <header:header hideHeaderLinks="${hideHeaderLinks}"/>
-
+            <%--
 			<cms:pageSlot position="Breadcrumb" var="component">
 				<cms:component component="${component}"/>
 			</cms:pageSlot>
+			--%>
 			<!-- CECS-46 main navigation - END -->
 			<header:bottomHeader />
 			<cart:cartRestoration />

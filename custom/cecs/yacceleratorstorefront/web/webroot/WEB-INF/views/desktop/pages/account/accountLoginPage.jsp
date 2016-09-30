@@ -12,7 +12,7 @@
 		<common:globalMessages/>
 	</div>
     <div class="row">
-        <cms:pageSlot position="LeftContentSlot" var="feature" element="div" class="col-xs-12 col-sm-6 column-separator">
+        <cms:pageSlot position="LeftContentSlot" var="feature" element="div" class="">
             <cms:component component="${feature}"/>
         </cms:pageSlot>
         <cms:pageSlot position="RightContentSlot" var="feature" element="div" class="col-xs-12 col-sm-6">

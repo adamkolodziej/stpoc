@@ -4,7 +4,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%@ attribute name="currentDate" required="false" type="java.lang.Long" %>
-<script>alert(1);</script>
 <div class="form-group date-picker-widget">
     <input class="date-picker" type="text" style="color: #1c94c4;" value="" data-server-time="${currentDate}"/>
     <input class="btn btn-primary btn-sm set-time-button" type="button" value="Set"/>
