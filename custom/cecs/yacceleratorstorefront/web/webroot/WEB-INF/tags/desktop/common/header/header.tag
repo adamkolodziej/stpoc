@@ -3,19 +3,28 @@
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
         <header>
-            <c:if test="${user.name eq 'Anonymous'}">
+            <c:choose>
+            <c:when test="${user.name eq 'Anonymous'}">
+                <c:set var="title" value="Please login"/>
+                <c:set var="action" value="/login"/>
+            </c:when>
+            <c:otherwise>
+                 <c:set var="title" value="Logout"/>
+                <c:set var="action" value="/logout"/>
+            </c:otherwise>
+            </c:choose>
             <!-- Login section -->
             <div class="login-section">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 text-right">
-                            <c:url value="/login" var="login"/>
-                            <a href="${login}" title="Please login" class="font-16">Please login</a>
+                            <c:url value="${action}" var="action"/>
+                            <a href="${action}" title="${title}" class="font-16">${title}</a>
                         </div>
                     </div>
                 </div>
             </div>
-            </c:if>
+
 
             <!-- Menu section -->
             <div class="menu-section">

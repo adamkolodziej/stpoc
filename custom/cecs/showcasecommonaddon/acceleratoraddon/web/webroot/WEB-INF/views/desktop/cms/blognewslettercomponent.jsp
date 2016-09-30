@@ -8,5 +8,5 @@
 	<form class="form-horizontal">
 	    <input type="text" name="name" id="inputID" class="form-control" value="" title="" required="required" placeholder="<spring:theme code="text.BlogNewsletterComponent.placeholder" />" >
 	</form>
-	<a href="#" class="btn btn-tricast-secondary text-uppercase"><spring:theme code="text.BlogNewsletterComponent.singUpButton" /></a>
+	<a href="#" class="btn btn-sptel-secondary text-uppercase"><spring:theme code="text.BlogNewsletterComponent.singUpButton" /></a>
 </div>

@@ -66,7 +66,7 @@
 													<div class="n-category-option js-entitlement-option col-xs-12 col-sm-6 col-md-4" title="${opt.disableMessage}">
 														<div class="box no-padding">
 															<div class="edit-contract">
-																<a class="btn btn-tricast-secondary btn-block" href="${editUrl}"><spring:theme code="guidedselling.add" text="Add Options" /></a>
+																<a class="btn btn-sptel-secondary btn-block" href="${editUrl}"><spring:theme code="guidedselling.add" text="Add Options" /></a>
 															</div>
 															<div class="details js-details">
 																<!-- CECS-95 - ability to show entitlements on the products -->
@@ -94,7 +94,7 @@
 													<div class="n-category-option js-entitlement-option col-xs-12 col-sm-6 col-md-4" title="${opt.disableMessage}">
 														<div class="box no-padding">
 															<div class="edit-contract">
-																<a class="btn btn-tricast-secondary btn-block" href="${editUrl}"><spring:theme code="guidedselling.edit" text="Edit" /></a>
+																<a class="btn btn-sptel-secondary btn-block" href="${editUrl}"><spring:theme code="guidedselling.edit" text="Edit" /></a>
 															</div>
 															<div class="details js-details">
 																<!-- CECS-95 - ability to show entitlements on the products -->

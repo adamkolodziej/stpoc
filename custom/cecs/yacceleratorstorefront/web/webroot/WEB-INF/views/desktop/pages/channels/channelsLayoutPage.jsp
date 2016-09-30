@@ -64,7 +64,7 @@
             </cms:pageSlot>
         </div>
 
-        <div ng-app="tricastApp">
+        <div ng-app="sptelApp">
             <div class="channels-container" ng-controller="ChannelsPageCtrl" >
                 <p ng-show="infoText" class="text-warning ng-hide">{{infoText}}</p>
 

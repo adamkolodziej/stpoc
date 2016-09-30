@@ -8,7 +8,7 @@
     <div id="globalMessages">
         <common:globalMessages/>
     </div>
-    <div ng-app="tricastApp">
+    <div ng-app="sptelApp">
         <div class="row merchandise-page" ng-controller="MerchandisePageCtrl">
             <div class="col-xs-12 col-sm-2">
                 <h3 class="page-title">
@@ -52,7 +52,7 @@
                             {{highlight.title}}
                             <small>{{highlight.subtitle}}</small>
                         </h3>
-                        <a href="#" class="btn btn-tricast-secondary text-uppercase see-all">See all</a>
+                        <a href="#" class="btn btn-sptel-secondary text-uppercase see-all">See all</a>
                         <div class="clearfix"></div>
                         <div class="row merchandise-list">
                             <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="merchandise in highlight.merchandiseList">

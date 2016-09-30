@@ -52,5 +52,5 @@
             </div>
         </li>
     </ul>
-    <a href="#" class="btn btn-tricast-secondary text-uppercase"><spring:theme code="text.BlogRelatedPostsComponent.allPostsButton.${ fn:toLowerCase(displayType) }" /></a>
+    <a href="#" class="btn btn-sptel-secondary text-uppercase"><spring:theme code="text.BlogRelatedPostsComponent.allPostsButton.${ fn:toLowerCase(displayType) }" /></a>
 </div>

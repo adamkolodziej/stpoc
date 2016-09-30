@@ -14,7 +14,7 @@
     <cms:pageSlot position="Section1" var="feature">
             <cms:component component="${feature}" element="div" class="row"/>
      </cms:pageSlot>
-    <div ng-app="tricastApp">
+    <div ng-app="sptelApp">
         <div class="blog-container" ng-controller="BlogPageCtrl" ng-init="loadPageCode('${cmsPage.uid}')">
             <div class="row full-width dark-bg">
                 <div class="col-xs-12">
@@ -66,26 +66,26 @@
                                 <div class="description text-left">
                                     {{post.summary}}
                                 </div>
-                                <button class="btn btn-tricast-secondary read-more text-uppercase" ng-click="loadArticle(post.code)"><spring:theme code="text.BlogArticles.continueReading" /></button>
+                                <button class="btn btn-sptel-secondary read-more text-uppercase" ng-click="loadArticle(post.code)"><spring:theme code="text.BlogArticles.continueReading" /></button>
                             </div>
                         </div>
                     </div>
                     <div class="row pagination-container">
                         <div class="col-xs-12 ">
                             <ul class="pagination-list list-unstyled list-inline pull-left">                          	
-                                <li ng-repeat="n in getPagesRange()"><a ng-click="activatePageNumber($event)" href="#" class="btn btn-tricast-secondary">{{n}}</a></li>                                
+                                <li ng-repeat="n in getPagesRange()"><a ng-click="activatePageNumber($event)" href="#" class="btn btn-sptel-secondary">{{n}}</a></li>
                                 <li class="">
                                     <button ng-disabled="true" class="btn-link">...</button>
                                 </li>
-                                <li><a ng-disabled="currentPageNumber == maxPagesNumber" ng-click="activateLastPage()" href="#" class="btn btn-tricast-secondary">LAST</a></li>
+                                <li><a ng-disabled="currentPageNumber == maxPagesNumber" ng-click="activateLastPage()" href="#" class="btn btn-sptel-secondary">LAST</a></li>
                             </ul>
                             <div class="pull-right">
                                 <div class="count text-uppercase">
                                     page {{currentPageNumber}} of {{maxPagesNumber}}
                                 </div>
                                 <ul class="list-unstyled list-inline text-uppercase nav-buttons">
-                                    <li><a ng-disabled="currentPageNumber == 1" ng-click="activatePrevPage()" href="#" class="btn btn-tricast-secondary">Prev</a></li>
-                                    <li><a ng-disabled="currentPageNumber == maxPagesNumber" ng-click="activateNextPage()" href="#" class="btn btn-tricast-secondary">Next</a></li>
+                                    <li><a ng-disabled="currentPageNumber == 1" ng-click="activatePrevPage()" href="#" class="btn btn-sptel-secondary">Prev</a></li>
+                                    <li><a ng-disabled="currentPageNumber == maxPagesNumber" ng-click="activateNextPage()" href="#" class="btn btn-sptel-secondary">Next</a></li>
                                 </ul>
                             </div>
                             <div class="clearfix"></div>

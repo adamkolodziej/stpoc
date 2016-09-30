@@ -24,7 +24,7 @@
 						</h3>
 						<c:if test="${showSeeAllBtn and not empty componentQuery}">
 							<c:url var="searchUrl" value="${componentQuery}"/>
-							<a class="btn btn-tricast-secondary text-uppercase see-all" href="${searchUrl}">
+							<a class="btn btn-sptel-secondary text-uppercase see-all" href="${searchUrl}">
 								<spring:theme code="slickproductcarouselcomponent.see.all"/>
 							</a>
 						</c:if>

@@ -887,8 +887,8 @@ ng\:form {
 .btn-sptel-primary:active:focus {
   opacity: 0.8;
 }
-.btn-tricast-secondary,
-.btn-tricast-secondary:active {
+.btn-sptel-secondary,
+.btn-sptel-secondary:active {
   background: #546e7a;
   background: -moz-linear-gradient(top, #546e7a 0%, #314047 100%);
   background: -webkit-linear-gradient(top, #546e7a 0%, #314047 100%);
@@ -897,14 +897,14 @@ ng\:form {
   color: #fff;
   border-bottom: 1px solid #1c2529;
 }
-.btn-tricast-secondary:hover,
-.btn-tricast-secondary:active:hover,
-.btn-tricast-secondary:focus,
-.btn-tricast-secondary:active:focus {
+.btn-sptel-secondary:hover,
+.btn-sptel-secondary:active:hover,
+.btn-sptel-secondary:focus,
+.btn-sptel-secondary:active:focus {
   opacity: 0.8;
 }
-.btn-tricast-default,
-.btn-tricast-default:active {
+.btn-sptel-default,
+.btn-sptel-default:active {
   background: #e2e2e2;
   background: -moz-linear-gradient(top, #e2e2e2 0%, #f6f5f5 100%);
   background: -webkit-linear-gradient(top, #e2e2e2 0%, #f6f5f5 100%);
@@ -913,10 +913,10 @@ ng\:form {
   color: #546e7a;
   border-bottom: 1px solid #dedada;
 }
-.btn-tricast-default:hover,
-.btn-tricast-default:active:hover,
-.btn-tricast-default:focus,
-.btn-tricast-default:active:focus {
+.btn-sptel-default:hover,
+.btn-sptel-default:active:hover,
+.btn-sptel-default:focus,
+.btn-sptel-default:active:focus {
   opacity: 0.8;
 }
 .btn .caret {
@@ -6293,11 +6293,11 @@ body.video-fullscreen .product-notification-container-fullscreen {
 .rating-table .rating {
   text-align: right;
 }
-.rating-table .tricast-rating-bar {
+.rating-table .sptel-rating-bar {
   height: 20px;
   margin-bottom: 2px;
 }
-.rating-table .tricast-rating-bar .progress-bar {
+.rating-table .sptel-rating-bar .progress-bar {
   background-color: #ffb400;
   border-radius: 5px;
 }

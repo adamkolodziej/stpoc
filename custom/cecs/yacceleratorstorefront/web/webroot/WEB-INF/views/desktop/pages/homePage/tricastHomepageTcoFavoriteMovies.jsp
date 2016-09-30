@@ -10,9 +10,9 @@
 				<spring:theme code="tco.favorite.movies.h1.small" />
 			</small>
 		</h1>
-		<c:url value="/packages/TriCast" var="tricastPack" />
+		<c:url value="/packages/sptel" var="sptelPack" />
 		<img src="${commonResourcePath}/images/homepage-mock/start-watching-bg.png" alt="" class="img-responsive"/>
-		<a href="${tricastPack}">
+		<a href="${sptelPack}">
 			<button class="btn btn-sptel-primary btn-lg text-uppercase"><spring:theme code="tco.favorite.movies.subscribe.now" /></button>
 		</a>
 	</div>

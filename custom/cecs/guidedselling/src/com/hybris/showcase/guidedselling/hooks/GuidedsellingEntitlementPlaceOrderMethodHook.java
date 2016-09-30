@@ -30,7 +30,12 @@ public class GuidedsellingEntitlementPlaceOrderMethodHook extends EntitlementPla
         }
         else
         {
-            return super.createGrants(commerceOrderResult);
+            try {
+                return super.createGrants(commerceOrderResult);
+            }
+            catch (Exception e){
+                return null;
+            }
         }
     }
 

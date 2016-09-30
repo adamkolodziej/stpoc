@@ -55,7 +55,7 @@
                                     <tr>
                                         <td class="star"><spring:theme code="stars.ordinal" arguments="${star.key}" /></td>
                                         <td class="bar">
-                                            <div class="progress tricast-rating-bar">
+                                            <div class="progress sptel-rating-bar">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="${star.value}"
                                                      aria-valuemin="0" aria-valuemax="100" style="width: ${star.value}%;">
                                                     <span class="sr-only"><spring:theme code="stars.percent.complete" arguments="${star.value}" /></span>
@@ -69,7 +69,7 @@
                         </table>
                     </div>
                     <div class="col-xs-12 col-sm-4">
-                        <a href="#" class="btn btn-tricast-secondary text-uppercase review-write"><spring:theme code="review.write" /></a>
+                        <a href="#" class="btn btn-sptel-secondary text-uppercase review-write"><spring:theme code="review.write" /></a>
                     </div>
                 </div>
             </div>
@@ -119,8 +119,8 @@
                         <div class="review-info">
                             <spring:theme code="review.marked.helpful" arguments="${fn:length(review.usersMarkedReviewHelpful)},${fn:length(review.usersMarkedReviewHelpful) + fn:length(review.usersMarkedReviewUnhelpful)}" />
                         </div>
-                        <a href="#" class="btn btn-tricast-default btn-sm text-uppercase review-helpful-yes" data-helpfull="yes"><spring:theme code="review.mark.helpful.yes" /></a>
-                        <a href="#" class="btn btn-tricast-default btn-sm text-uppercase review-helpful-no" data-helpfull="no"><spring:theme code="review.mark.helpful.no" /></a>
+                        <a href="#" class="btn btn-sptel-default btn-sm text-uppercase review-helpful-yes" data-helpfull="yes"><spring:theme code="review.mark.helpful.yes" /></a>
+                        <a href="#" class="btn btn-sptel-default btn-sm text-uppercase review-helpful-no" data-helpfull="no"><spring:theme code="review.mark.helpful.no" /></a>
                         <div class="message" style="color: grey;"></div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
             </div>
         </c:if>
         <div class="col-xs-12">
-            <a href="#" class="btn btn-tricast-secondary text-uppercase review-write"><spring:theme code="review.write" /></a>
+            <a href="#" class="btn btn-sptel-secondary text-uppercase review-write"><spring:theme code="review.write" /></a>
 
         <div class="row">
             <c:if test="${not empty submitSuccessful}">
@@ -214,10 +214,10 @@
                                     <formElement :formInputBox idKey="CSRFToken" labelKey="CSRFToken" path="CSRFToken" inputCSS="hidden" mandatory="true" />
                                     <input type="hidden" value="${product.code}" name="product" />
                                     <input type="hidden" value="${CSRFToken}" name="CSRFToken" />
-                                    <button type="submit" class="btn btn-tricast-secondary text-uppercase">
+                                    <button type="submit" class="btn btn-sptel-secondary text-uppercase">
                                         <spring:theme code="review.form.submit" />
                                     </button>
-                                    <button type="submit" class="btn btn-tricast-secondary text-uppercase review-cancel">
+                                    <button type="submit" class="btn btn-sptel-secondary text-uppercase review-cancel">
                                         <spring:theme code="review.form.cancel" />
                                     </button>
                                 </td>
