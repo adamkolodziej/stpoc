@@ -17,6 +17,7 @@
 			extensions which are automatically required -->
 		<requires-extension name="acceleratorcms"/>
 		<requires-extension name="solrserver"/>
+		<requires-extension name="configurablebundleservices"/>
 
 		<coremodule generated="true" manager="com.sptel.core.jalo.SptelCoreManager" packageroot="com.sptel.core"/>
 

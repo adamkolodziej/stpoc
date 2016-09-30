@@ -1,0 +1,215 @@
+# ImpEx for Importing Categories
+
+# Macros / Replacement Parameter definitions
+$productCatalog=spTelProductCatalog
+$productCatalogName=SpTel Product Catalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];name[lang=en];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;root;$productCatalogName;;
+
+#Product Lines
+;EstateManagementApplication;Estate Management Application;;
+;Connectivity;Connectivity;;
+;Engineering;Engineering;;
+;AccessControl;Access Control;;
+;SecurityMonitoring;Security & Monitoring;;
+;EnergyManagement;Energy Management;;
+;AVAutomationSystem;AV & Automation System;;
+
+#Categories
+#Estate Management Application
+;ConsumerApplication;Consumer Application;;
+;EmployeeApplication;Employee Application;;
+;FacilityManagerApplication;Facility Manager Application;;
+#Connectivity
+;Internet;Internet;;
+;Networking;Networking;;
+;Infotainment;Infotainment;;
+#Engineering
+;Assistance;Assistance;;
+;SiteSurvey;Site Survey;;
+;Maintenance;Maintenance;;
+;Installation;Installation;;
+#Access Control
+;AccessCardSystem;Access Card System;;
+;FacilityBookingSystem;Facility Booking System;;
+#Security & Monitoring
+;IDS;IDS;;
+;CCTV;CCTV;;
+;VideoRecording;Video Recording;;
+#Energy Management
+;SubMeter;Sub-Meter;;
+;Meter;Meter;;
+;SplitBillingService;Split Billing Service;;
+#AV & Automation System
+;ControlSystem;Control System;;
+;LightingControl;Lighting Control;;
+;CoolingControl;Cooling Control;;
+;SwitchSensor;Switch & Sensor;;
+;MediaControl;Media Control;;
+;AVSystem;AV System;;
+;VideoConferencing;Video-Conferencing;;
+
+#Subcategories
+#Lighting Control
+;CBusArchitectureDimmerRangeUniversal;C-BUS ARCHITECTURE DIMMER RANGE - UNIVERSAL
+;CBusProfessionalDimmerRangeLeadingEdge;C-BUS PROFESSIONAL DIMMER RANGE - LEADING EDGE
+;WirelessDimmers;WIRELESS DIMMERS
+#Switch & Sensor
+;CBusLightSensors;C-BUS LIGHT SENSORS
+;CBusThermostats;C-BUS THERMOSTATS
+;CBusCombinedSensor;C-BUS COMBINED SENSOR
+;CBusSensorsAndDetectors;C-BUS SENSORS AND DETECTORS
+#Networking
+;ThinCpe;THIN CPE
+#Installation
+;Units;UNITS
+;Estate;ESTATE
+
+#Leaf categories
+;DinRailMounted250V10ARelayUnits;DIN RAIL MOUNTED 250V 10A RELAY UNITS
+;DinRailMounted250V10AChargeoverRelayUnits;DIN RAIL MOUNTED 250V CHANGEOVER RELAY UNITS
+;DinRailMountedMotorizedBlindcurtainShutterRelayUnit;DIN RAIL MOUNTED MOTORISED BLIND/CURTAIN/SHUTTER RELAY UNIT
+;DinRailMountedSweepFanControlRelay;DIN RAIL MOUNTED SWEEP FAN CONTROL RELAY
+;DinRailMounted250V20ARelayUnits;DIN RAIL MOUNTED 250V 20A RELAY UNITS
+;CBusSingleAndTwoChannel250V20ARelayUnits;C-BUS SINGLE AND TWO CHANNEL 250V 10A RELAY UNITS
+;CBus8ChannelElvRelayUnits;C-BUS 8 CHANNEL ELV RELAY UNITS
+;20APerChannel_U;20A PER CHANNEL
+;16APerChannel_U;16A PER CHANNEL
+;10APerChannel_U;10A PER CHANNEL
+;5APerChannel_U;20A PER CHANNEL
+;AccessoriesForCBusArchitectureDimmers_U;ACCESSORIES FOR C-BUS ARCHITECTURE DIMMERS
+;20APerChannel_LE;20A PER CHANNEL
+;10APerChannel_LE;10A PER CHANNEL
+;5APerChannel_LE;5A PER CHANNEL
+;3APerChannel_LE;3A PER CHANNEL
+;DinRailMounted250VUniversalDimmerRange;DIN RAIL MOUNTED 250V UNIVERSAL DIMMER RANGE
+;CBusLightLevelSensors;C-BUS Light Level Sensors
+;ZigbeeDimmers;ZIGBEE DIMMERS
+;CBusLightLevelSensors;C-BUS Light Level Sensors
+;SingleZoneThermostat;SINGLE ZONE THERMOSTAT
+;FourZoneThermostatWithProgrammableTimeScheduling;FOUR ZONE THERMOSTAT WITH PROGRAMMABLE TIME SCHEDULING
+;CBusTemperatureSensor;C-BUS TEMPERATURE SENSOR
+;CBus360DegreeMultiSensor;C-BUS 360 DEGREE MULTI-SENSOR
+;CBusPassiveInfraredOccupancyDetectors;C-BUS PASSIVE INFRARED OCCUPANCY DETECTORS
+;CBusOccupancyController;C-BUS OCCUPANCY CONTROLLER
+;Survey;SURVEY
+;SiteVisit;SITE VISIT
+;Residential_U;RESIDENTIAL
+;Office_U;OFFICE
+;Residential_E;RESIDENTIAL
+;Office_E;OFFICE
+;WirelessRouters;WIRELESS ROUTERS
+;LocalRecording;LOCAL RECORDING
+;CloudRecording;CLOUD RECORDING
+
+
+# Insert Category Structure
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+#Product Lines
+;EstateManagementApplication;root
+;Connectivity;root
+;Engineering;root
+;AccessControl;root
+;SecurityMonitoring;root
+;EnergyManagement;root
+;AVAutomationSystem;root
+
+#Product Lines <--> Categories
+;ConsumerApplication;EstateManagementApplication
+;EmployeeApplication;EstateManagementApplication
+;FacilityManagerApplication;EstateManagementApplication
+
+;Internet;Connectivity
+;Networking;Connectivity
+;Infotainment;Connectivity
+
+;Assistance;Engineering
+;SiteSurvey;Engineering
+;Maintenance;Engineering
+;Installation;Engineering
+
+;AccessCardSystem;AccessControl
+;FacilityBookingSystem;AccessControl
+
+;IDS;SecurityMonitoring
+;CCTV;SecurityMonitoring
+;VideoRecording;SecurityMonitoring
+
+;SubMeter;EnergyManagement
+;Meter;EnergyManagement
+;SplitBillingService;EnergyManagement
+
+;ControlSystem;AVAutomationSystem
+;LightingControl;AVAutomationSystem
+;CoolingControl;AVAutomationSystem
+;SwitchSensor;AVAutomationSystem
+;MediaControl;AVAutomationSystem
+;AVSystem;AVAutomationSystem
+;VideoConferencing;AVAutomationSystem
+
+#Categories <--> Subcategories
+;CBusArchitectureDimmerRangeUniversal;LightingControl
+;CBusProfessionalDimmerRangeLeadingEdge;LightingControl
+;WirelessDimmers;LightingControl
+
+;CBusLightSensors;SwitchSensor
+;CBusThermostats;SwitchSensor
+;CBusCombinedSensor;SwitchSensor
+;CBusSensorsAndDetectors;SwitchSensor
+
+;ThinCpe;Networking
+
+;Units;Installation
+;Estate;Installation
+
+#Categories <--> Leaf Categories
+;DinRailMounted250V10ARelayUnits;ControlSystem
+;DinRailMounted250V10AChargeoverRelayUnits;ControlSystem
+;DinRailMountedMotorizedBlindcurtainShutterRelayUnit;ControlSystem
+;DinRailMountedSweepFanControlRelay;ControlSystem
+;DinRailMounted250V20ARelayUnits;ControlSystem
+;CBusSingleAndTwoChannel250V20ARelayUnits;ControlSystem
+;CBus8ChannelElvRelayUnits;ControlSystem
+
+;20APerChannel_U;CBusArchitectureDimmerRangeUniversal
+;16APerChannel_U;CBusArchitectureDimmerRangeUniversal
+;10APerChannel_U;CBusArchitectureDimmerRangeUniversal
+;5APerChannel_U;CBusArchitectureDimmerRangeUniversal
+;AccessoriesForCBusArchitectureDimmers_U;CBusArchitectureDimmerRangeUniversal
+
+;20APerChannel_LE;CBusProfessionalDimmerRangeLeadingEdge
+;10APerChannel_LE;CBusProfessionalDimmerRangeLeadingEdge
+;5APerChannel_LE;CBusProfessionalDimmerRangeLeadingEdge
+;3APerChannel_LE;CBusProfessionalDimmerRangeLeadingEdge
+;DinRailMounted250VUniversalDimmerRange;CBusProfessionalDimmerRangeLeadingEdge
+;CBusLightLevelSensors;CBusProfessionalDimmerRangeLeadingEdge
+
+;ZigbeeDimmers;WirelessDimmers
+
+;CBusLightLevelSensors;CBusLightSensors
+;SingleZoneThermostat;CBusThermostats
+;FourZoneThermostatWithProgrammableTimeScheduling;CBusThermostats
+;CBusTemperatureSensor;CBusThermostats
+
+;CBus360DegreeMultiSensor;CBusCombinedSensor
+
+;CBusPassiveInfraredOccupancyDetectors;CBusSensorsAndDetectors
+;CBusOccupancyController;CBusSensorsAndDetectors
+
+;WirelessRouters;ThinCpe
+
+;Survey;SiteSurvey
+;SiteVisit;Maintenance
+;Residential_U;Installation
+;Office_U;Installation
+;Residential_E;Installation
+;Office_E;Installation
+
+;LocalRecording;VideoRecording
+;CloudRecording;VideoRecording

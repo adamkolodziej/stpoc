@@ -1,0 +1,514 @@
+# ImpEx for Importing Products
+
+# Macros / Replacement Parameter definitions
+$productCatalog=spTelProductCatalog
+$productCatalogName=SpTel Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code,$catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$baseProduct=baseProduct(code,catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged']))
+$unit=unit(code)[default='pieces']
+$termOfServiceRenewal=termOfServiceRenewal(code)[default='auto_renewing']
+$ruleType=ruleType(code)[default='ANY']
+
+
+#Insert Devices
+INSERT_UPDATE Device;code[unique=true];name[lang=en];description[lang=en];$supercategories;$prices;$catalogVersion;$approved;$unit
+#Control System
+;L5504RVF;4 Channel Relay, 10A per Channel, 220/240Vac, C-Bus 200mA;4 Channel Relay, 10A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250V10ARelayUnits;10 USD
+;L5504RVFP;4 Channel Relay, 10A per Channel, 220/240Vac - excludes C-Bus Power Supply;4 Channel Relay, 10A per Channel, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250V10ARelayUnits;10,58 USD
+;L5508RVF;8 Channel Relay, 10A per Channel, 220/240Vac, C-Bus 200mA;8 Channel Relay, 10A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250V10ARelayUnits;11,15 USD
+;L5508RVFP;8 Channel Relay, 10A per Channel, 220/240Vac - excludes C-Bus Power Supply;8 Channel Relay, 10A per Channel, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250V10ARelayUnits;11,73 USD
+;L5512RVF;12 Channel Relay, 10A per Channel, 220/240Vac, C-Bus 200mA;12 Channel Relay, 10A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250V10ARelayUnits;12,30 USD
+;L5512RVFP;12 Channel Relay, 10A per Channel, 220/240Vac- excludes C-Bus Power Supply;12 Channel Relay, 10A per Channel, 220/240Vac- excludes C-Bus Power Supply;DinRailMounted250V10ARelayUnits;12,88 USD
+
+;L5504RVFC;4 Channel Changeover Relay, 220/240Vac, C-Bus 200mA;4 Channel Changeover Relay, 220/240Vac, C-Bus 200mA;DinRailMounted250V10AChargeoverRelayUnits;13,45 USD
+;L5504RVFCP;4 Channel Changeover Relay, 220/240Vac - excludes C-Bus Power Supply;4 Channel Changeover Relay, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250V10AChargeoverRelayUnits;14,03 USD
+
+;L5501RBCP;1 Channel Motorised Relay, 5A, 220/240Va;1 Channel Motorised Relay, 5A, 220/240Va;DinRailMountedMotorizedBlindcurtainShutterRelayUnit;13,45 USD
+;5501RE;C-Bus Shutter Relay Wall Mounting Enclosure;C-Bus Shutter Relay Wall Mounting Enclosure;DinRailMountedMotorizedBlindcurtainShutterRelayUnit;14,03 USD
+
+;L5501RFCP;1 Channel C-Bus Sweep Fan Control Relay, Capacitor control, 3M Modules wide, excludes C-Bus Power Supply;1 Channel C-Bus Sweep Fan Control Relay, Capacitor control, 3M Modules wide, excludes C-Bus Power Supply;DinRailMountedSweepFanControlRelay;12,88 USD
+;5501FRE;Wall Mounting enclosure to suit L5501RFCP Sweep control relay;Wall Mounting enclosure to suit L5501RFCP Sweep control relay;DinRailMountedSweepFanControlRelay;13,45 USD
+
+;L5504RVF20;4 Channel Relay, 20A per Channel, 220/240Vac, C-Bus 200mA;4 Channel Relay, 20A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250V20ARelayUnits;14,03 USD
+;L5504RVF20P;4 Channel Relay, 20A per Channel, 220/240Vac - excludes C-Bus Power Supply;4 Channel Relay, 20A per Channel, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250V20ARelayUnits;14,60 USD
+
+;5101R;1 Channel C-Bus Relay 250V AC 10A Inductive load;1 Channel C-Bus Relay 250V AC 10A Inductive load;CBusSingleAndTwoChannel250V20ARelayUnits;14,03 USD
+;5101RC;1 Channel with cord set;1 Channel with cord set;CBusSingleAndTwoChannel250V20ARelayUnits;14,60 USD
+;5102RVF;2 Channel Voltage Free C-Bus Relay 250V AC 10A Inductive load per channel;2 Channel Voltage Free C-Bus Relay 250V AC 10A Inductive load per channel;CBusSingleAndTwoChannel250V20ARelayUnits;11,73 USD
+
+;L5108RELVP;C-Bus 8 Channel Extra Low Voltage (ELV) Relay;C-Bus 8 Channel Extra Low Voltage (ELV) Relay;CBus8ChannelElvRelayUnits;12,88 USD
+
+#Lighting Control
+;L5106D20UA;6 Channel;6 Channel;20APerChannel_U;14,60 USD
+;L5103D20UA;3 Channel;3 Channel;20APerChannel_U;10,58 USD
+
+;L5106D16UA;6 Channel;6 Channel;16APerChannel_U;11,73 USD
+;L5103D16UA;3 Channel;3 Channel;16APerChannel_U;12,30 USD
+
+;L5112D10UA;12 Channel;12 Channel;10APerChannel_U;13,45 USD
+;L5106D10UA;6 Channel;6 Channel;10APerChannel_U;11,15 USD
+;L5103D10UA;3 Channel;3 Channel;10APerChannel_U;14,03 USD
+
+;L5112D5UA;12 Channel;12 Channel;5APerChannel_U;12,88 USD
+;L5106D5UA;6 Channel;6 Channel;5APerChannel_U;13,45 USD
+;L5103D5UA;3 Channel;3 Channel;5APerChannel_U;14,60 USD
+
+;5150DMX;DMX connector kit, for connection to DMX-512 network;DMX connector kit, for connection to DMX-512 network;AccessoriesForCBusArchitectureDimmers_U;14,60 USD
+
+;L5112D20LP;12 Channel;12 Channel;20APerChannel_LE;14,60 USD
+;L5106D20LP;6 Channel;6 Channel;20APerChannel_LE;12,88 USD
+;L5103D20LP;3 Channel;3 Channel;20APerChannel_LE;13,45 USD
+
+;L5112D10LP;12 Channel;12 Channel;10APerChannel_LE;13,45 USD
+;L5106D10LP;6 Channel;6 Channel;10APerChannel_LE; 14,60 USD
+;L5103D10LP;3 Channel;3 Channel;10APerChannel_LE; 15,18 USD
+
+;L5112D5LP;12 Channel;12 Channel;5APerChannel_LE;14,60 USD
+;L5106D5LP;6 Channel;6 Channel;5APerChannel_LE;11,73 USD
+;L5103D5LP;3 Channel;3 Channel;5APerChannel_LE;12,30 USD
+
+;L5112D5LP;12 Channel;12 Channel;3APerChannel_LE;13,45 USD
+;L5106D5LP;6 Channel;6 Channel;3APerChannel_LE;14,60 USD
+
+;L5504D2U;4 Channel Universal Dimmer, 2.5A per Channel, C-Bus 200mA;4 Channel Universal Dimmer, 2.5A per Channel, C-Bus 200mA;DinRailMounted250VUniversalDimmerRange;13,45 USD
+;L5504D2UP;4 Channel Universal Dimmer, 2.5A per Channel, excludes C-Bus Power Supply;4 Channel Universal Dimmer, 2.5A per Channel, excludes C-Bus Power Supply;DinRailMounted250VUniversalDimmerRange;14,60 USD
+;L5504D2A;4 Channel Dimmer, 2A per Channel, 220/240Vac, C-Bus 200mA;4 Channel Dimmer, 2A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250VUniversalDimmerRange;10,58 USD
+;L5504D2AP;4 Channel Dimmer, 2A per Channel, 220/240Vac - excludes C-Bus Power Supply;4 Channel Dimmer, 2A per Channel, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250VUniversalDimmerRange;14,03 USD
+;L5508D1A;8 Channel Dimmer, 1A per Channel, 220/240Vac, C-Bus 200mA;8 Channel Dimmer, 1A per Channel, 220/240Vac, C-Bus 200mA;DinRailMounted250VUniversalDimmerRange;11,73 USD
+;L5508D1AP;8 Channel Dimmer, 1A per Channel, 220/240Vac - excludes C-Bus Power Supply;8 Channel Dimmer, 1A per Channel, 220/240Vac - excludes C-Bus Power Supply;DinRailMounted250VUniversalDimmerRange;14,60 USD
+
+;5031PEWP-GY;Light Level Sensor, 40 - 1600lux, Weatherproof - 56 Series;Light Level Sensor, 40 - 1600lux, Weatherproof - 56 Series;CBusLightLevelSensors;14,60 USD
+
+;U201DST600ZB;1 Gang 550W Zigbee Dimming Switch;1 Gang 550W Zigbee Dimming Switch;ZigbeeDimmers;14,60 USD
+;U202DST600ZB;2 Gang 2x300W Zigbee Dimming Switch;2 Gang 2x300W Zigbee Dimming Switch;ZigbeeDimmers;11,73 USD
+;U104BD500ZB_WE;500W ZB Type G BS PlugAdaptor Dimmer Wh;500W ZB Type G BS PlugAdaptor Dimmer Wh;ZigbeeDimmers;13,45 USD
+
+#Sensors & Switch
+;5031PEWP-GY;Light Level Sensor, 40 - 1600lux, Weatherproof - 56 Series;Light Level Sensor, 40 - 1600lux, Weatherproof - 56 Series;CBusLightLevelSensors;14,03 USD
+
+;5070THBRPG-WE;C-Bus Single Zone Thermostat complete with 5 relays for RWG plant control only, White fascia (Saturn Style);C-Bus Single Zone Thermostat complete with 5 relays for RWG plant control only, White fascia (Saturn Style);SingleZoneThermostat;14,03 USD
+;5070THBR-BK;C-Bus Single Zone Thermostat complete with 5 relays for RWG plant control only, Black fascia;C-Bus Single Zone Thermostat complete with 5 relays for RWG plant control only, Black fascia;SingleZoneThermostat;14,60 USD
+;5070THBRSS;C-Bus Single Zone Thermostat complete with 5 relays for RWG plant control only, Stainless Steel fascia;C-Bus Single Zone Thermostat complete with 5 relays for RWG plant control only, Stainless Steel fascia;SingleZoneThermostat;11,73 USD
+
+;5070THPRPG-WE;C-Bus Programmable 4 Zone Thermostat complete with 5 relays for RWG plant control only, White fascia (Saturn Style);C-Bus Programmable 4 Zone Thermostat complete with 5 relays for RWG plant control only, White fascia (Saturn Style);FourZoneThermostatWithProgrammableTimeScheduling;14,03 USD
+;5070THPR-BK;C-Bus Programmable 4 Zone Thermostat complete with 5 relays for RWG plant control only, Black fascia;C-Bus Programmable 4 Zone Thermostat complete with 5 relays for RWG plant control only, Black fascia;FourZoneThermostatWithProgrammableTimeScheduling;13,45 USD
+;5070THPRSS;C-Bus Programmable 4 Zone Thermostat complete with 5 relays for RWG plant control only, Stainless Steel fascia;C-Bus Programmable 4 Zone Thermostat complete with 5 relays for RWG plant control only, Stainless Steel fascia;FourZoneThermostatWithProgrammableTimeScheduling;14,60 USD
+
+;5031RDTSL-WE;2000 Series C-BUS Remote Digital Temperature Sensor, White;2000 Series C-BUS Remote Digital Temperature Sensor, White;CBusTemperatureSensor;11,15 USD
+
+;5753PEIRL;Combination Sensor, Motion with Light Level Sensor and IR Receiver, Flush Mount, 360 Degree;Combination Sensor, Motion with Light Level Sensor and IR Receiver, Flush Mount, 360 Degree;CBus360DegreeMultiSensor;12,30 USD
+;5038TX2;Infrared Remote Control Unit, 8 Button;Infrared Remote Control Unit, 8 Button;CBus360DegreeMultiSensor;11,73 USD
+
+;5750WPL-GY;110 degree PIR Occupancy Sensor, Outdoor, IP66;110 degree PIR Occupancy Sensor, Outdoor, IP66;CBusPassiveInfraredOccupancyDetectors;13,45 USD
+;5751L-WE;90 degree PIR Cooupancy Sensor, corner mount, indoor;90 degree PIR Cooupancy Sensor, corner mount, indoor;CBusPassiveInfraredOccupancyDetectors;14,03 USD
+;5753L;360 degree PIR Occupancy with light level Sensor, flush mount 8mm;360 degree PIR Occupancy with light level Sensor, flush mount 8mm;CBusPassiveInfraredOccupancyDetectors;15,18 USD
+;5754ODPE;360 degree PIR Occupancy with light level Sensor, surface mount 33mm;360 degree PIR Occupancy with light level Sensor, surface mount 33mm;CBusPassiveInfraredOccupancyDetectors;14,60 USD
+
+;5752PP/1R;1 zone C-BUS Occupacny Controller, 1 relay output, 1 detector control input,1 auxillary dry contact, C-BUS connection;1 zone C-BUS Occupacny Controller, 1 relay output, 1 detector control input,1 auxillary dry contact, C-BUS connection;CBusOccupancyController;12,30 USD
+;5752PP/2R;2 zone C-BUS Occupacny Controller, 2 relay outputs, 2 detector control inputs, 2 auxillary dry contacta, C-BUS connection;2 zone C-BUS Occupacny Controller, 2 relay outputs, 2 detector control inputs, 2 auxillary dry contacta, C-BUS connection;CBusOccupancyController;14,60 USD
+;5752PP/2R/2D;2 zone C-BUS Occupacny Controller, 2 relay outputs, 2 detector control inputs ,2 auxillary dry contacta, 2 DSI/DALI/0-10Vdc ouputs, C-BUS connection;2 zone C-BUS Occupacny Controller, 2 relay outputs, 2 detector control inputs ,2 auxillary dry contacta, 2 DSI/DALI/0-10Vdc ouputs, C-BUS connection;CBusOccupancyController;11,73 USD
+
+#Connectivity
+;LINK-E1200-AP;Router option 1;Router option 1;WirelessRouters;50,00 USD
+;LINK-E1700-AP;Router option 2;Router option 2;WirelessRouters;100,00 USD
+;LINK-E2500-AP;Router option 3;Router option 3;WirelessRouters;150,00 USD
+
+#Security & Monitoring
+;VCR001;Video Recorder - 6 months;Video Recorder - 6 months;LocalRecording;4 000,00 USD
+;VCR002;Video Recorder - 1 month;Video Recorder - 1 month;LocalRecording;700,00 USD
+;VCR003;Video Recorder - 12 months;Video Recorder - 12 months;LocalRecording;5 000,00 USD
+
+INSERT_UPDATE BillingFrequency;code[unique=true];order;cartAware[default=true]
+;monthly;5
+;quarterly;6
+;yearly;7
+
+INSERT_UPDATE BillingPlan;id[unique=true];billingCycleDay(code);billingCycleType(code);billingFrequency(code)
+;MonthlyPlan;;subscription_start;monthly
+;AnnuallyPlan;;subscription_start;yearly
+
+INSERT_UPDATE SubscriptionTerm;id[unique=true];name[lang=en];termOfServiceFrequency(code);termOfServiceNumber(code);$termOfServiceRenewal;billingPlan(id);cancellable
+;none;No contract;none;;auto_renewing;MonthlyPlan;true
+;monthly_1;1 Month contract - monthly billing;monthly;1;;MonthlyPlan;false
+;annually_1;1 Year contract - monthly billing;annually;1;;MonthlyPlan;false
+;annually_2;2 Years contract - monthly billing;annually;2;;MonthlyPlan;false
+;annually_3;3 Years contract - monthly billing;annually;3;;MonthlyPlan;false
+;yearly_2;2 Years contract - yearly billing;annually;2;;AnnuallyPlan;false
+
+INSERT_UPDATE ServicePlan;code[unique=true];name[lang=en];description[lang=en];$prices;$supercategories;$catalogVersion;$approved;$unit;subscriptionTerm(id)
+#Connectivity
+;BasicInternetPlan1Gbps;Basic Internet Plan - 1 gbps;Basic Internet Plan - 1 gbps;10,00 USD;Internet;;;;annually_1
+;Internet100MbpsPlan;Internet 100 mbps plan;Internet 100 mbps plan;5,00 USD;Internet;;;;annually_1
+;BasicInternetPlan10Gbps;Basic Internet Plan - 10 gbps;Basic Internet Plan - 10 gbps;20,00 USD;Internet;;;;annually_1
+
+#Engineering
+;A001;Essential Services;Essential Services;2,00 USD;Assistance;;;;annually_1
+;A002;Home services;Home services;5,00 USD;Assistance;;;;annually_1
+
+#Security & Monitoring
+;TT001;Cloud recording 7 days;Cloud recording 7 days;2,00 USD;VideoRecording;;;;annually_1
+;TT002;Cloud recording 1 month;Cloud recording 1 month;3,00 USD;VideoRecording;;;;annually_1
+
+INSERT_UPDATE ServiceAddOn;code[unique=true];name[lang=en];description[lang=en];$prices;$supercategories;$catalogVersion;$approved;$unit;subscriptionTerm(id)
+#Internet
+;SecuredVPN;Secured VPN;Secured VPN;5,00 USD;Internet;;;;annually_1
+;StaticIPOption;Static IP option;Static IP option;0 USD;Internet;;;;none
+;TT003;Service Activation & Account Creation;Service Activation & Account Creation;5,00 USD;VideoRecording;;;;none
+
+#Engineering
+;NetworkCoverageSuvey;Network coverage suvey;Network coverage suvey;100,00 USD;Survey;;;;none
+;AutomationCompatibilitySurvey;Automation compatibility survey;Automation compatibility survey;100,00 USD;Survey;;;;none
+;EnergyAudit;Energy audit;Energy audit;100,00 USD;Survey;;;;none
+;FullSurveyNetwork;Full Survey incl. network, automation and energy;Full Survey incl. network, automation and energy;150,00 USD;Survey;;;;none
+
+;A003;Contractor site visit for networking issue;Contractor site visit for networking issue;60,00 USD;SiteVisit;;;;none
+;A004;Contractor site visit for electrical issue;Contractor site visit for electrical issue;100,00 USD;SiteVisit;;;;none
+
+;Residential_U1;Installation service in a residential unit by contractor;Installation service in a residential unit by contractor;;Residential_U;;;;
+;Office_U1;Installation service in a office unit by contractor;Installation service in a office unit by contractor;;Office_U;;;;
+;Residential_E1;Installation service in a residential estate by contractor;Installation service in a residential estate by contractor;;Residential_E;;;;
+;Office_E1;Installation service in a office estate by contractor;Installation service in a office estate by contractor;;Office_E;;;;
+
+#Packages and main bundles
+INSERT_UPDATE BundleTemplate;id[unique=true];name[lang=en];version[default=1.0][unique=true];$catalogVersion;parentTemplate(id)
+;SilverPackage;Silver Package;;;
+;GoldPackage;Gold Package;;;
+;PlatiniumPackage;Platinium Package;;;
+;GreenfieldPackage;Greenfield Package;;;
+;BrownfieldPackage;Brownfield Package;;;
+;SmartLivingConsumerPack1;Smart Living consumer pack 1;;;
+;SmartLivingConsumerPack2;Smart Living consumer pack 2;;;
+;SmartLivingConsumerPack3;Smart Living consumer pack 3;;;
+;BespokePackageForCustomer1;Bespoke package for customer 1 (built based on Gold Package);;;
+;BespokePackageForCustomer2;Bespoke package for customer 2 (built based on Greenfield package);;;
+
+#Silver Package children bundles
+;EstateManagementApplicationBundle1;Estate Management Application Bundle;;;SilverPackage
+;ConnectivityBundle1;Connectivity Bundle;;;SilverPackage
+;AssistanceBundle1;Assistance Bundle;;;SilverPackage
+
+#Gold Package children bundles
+;EstateManagementApplicationBundle2;Estate Management Application Bundle;;;GoldPackage
+;ConnectivityBundle2;Connectivity Bundle;;;GoldPackage
+;AssistanceBundle2;Assistance Bundle;;;GoldPackage
+;AccessControlBundle2;Access Control Bundle;;;GoldPackage
+;SecurityMonitoringBundle2;Security & Monitoring Bundle;;;GoldPackage
+;EnergyManagementBundle2;Energy Management Bundle;;;GoldPackage
+
+#Platinium Package children bundles
+;EstateManagementApplicationBundle3;Estate Management Application Bundle;;;PlatiniumPackage
+;ConnectivityBundle3;Connectivity Bundle;;;PlatiniumPackage
+;AssistanceBundle3;Assistance Bundle;;;PlatiniumPackage
+;AccessControlBundle3;Access Control Bundle;;;PlatiniumPackage
+;SecurityMonitoringBundle3;Security & Monitoring Bundle;;;PlatiniumPackage
+;EnergyManagementBundle3;Energy Management Bundle;;;PlatiniumPackage
+;AVAutomationSystemBundle3;AV & Automation System Bundle;;;PlatiniumPackage
+
+#Greenfield Package children bundles
+;EstateManagementApplicationBundle4;Estate Management Application Bundle;;;GreenfieldPackage
+;ConnectivityBundle4;Connectivity Bundle;;;GreenfieldPackage
+;AssistanceBundle4;Assistance Bundle;;;GreenfieldPackage
+;AccessControlBundle4;Access Control Bundle;;;GreenfieldPackage
+;SecurityMonitoringBundle4;Security & Monitoring Bundle;;;GreenfieldPackage
+;EnergyManagementBundle4;Energy Management Bundle;;;GreenfieldPackage
+;AVAutomationSystemBundle4;AV & Automation System Bundle;;;GreenfieldPackage
+
+#Brownfield Package children bundles
+;EstateManagementApplicationBundle5;Estate Management Application Bundle;;;BrownfieldPackage
+;ConnectivityBundle5;Connectivity Bundle;;;BrownfieldPackage
+;AssistanceBundle5;Assistance Bundle;;;BrownfieldPackage
+
+#Smart Living Consumer Pack 1 children bundles
+;ConnectivityBundle6;Connectivity Bundle;;;SmartLivingConsumerPack1
+;AssistanceBundle6;Assistance Bundle;;;SmartLivingConsumerPack1
+
+#Smart Living Consumer Pack 2 children bundles
+;ConnectivityBundle7;Connectivity Bundle;;;SmartLivingConsumerPack2
+;AssistanceBundle7;Assistance Bundle;;;SmartLivingConsumerPack2
+
+#Smart Living Consumer Pack3  children bundles
+;ConnectivityBundle8;Connectivity Bundle;;;SmartLivingConsumerPack3
+;AssistanceBundle8;Assistance Bundle;;;SmartLivingConsumerPack3
+
+#Bespoke package for customer 1 children bundles
+;EstateManagementApplicationBundle9;Estate Management Application Bundle;;;BespokePackageForCustomer1
+;ConnectivityBundle9;Connectivity Bundle;;;BespokePackageForCustomer1
+;AssistanceBundle9;Assistance Bundle;;;BespokePackageForCustomer1
+;AccessControlBundle9;Access Control Bundle;;;BespokePackageForCustomer1
+;SecurityMonitoringBundle9;Security & Monitoring Bundle;;;BespokePackageForCustomer1
+;EnergyManagementBundle9;Energy Management Bundle;;;BespokePackageForCustomer1
+
+#Bespoke package for customer2 children bundles
+;EstateManagementApplicationBundle10;Estate Management Application Bundle;;;BespokePackageForCustomer2
+;ConnectivityBundle10;Connectivity Bundle;;;BespokePackageForCustomer2
+;AssistanceBundle10;Assistance Bundle;;;BespokePackageForCustomer2
+;AccessControlBundle10;Access Control Bundle;;;BespokePackageForCustomer2
+;SecurityMonitoringBundle10;Security & Monitoring Bundle;;;BespokePackageForCustomer2
+;EnergyManagementBundle10;Energy Management Bundle;;;BespokePackageForCustomer2
+;AVAutomationSystemBundle10;AV & Automation System Bundle;;;BespokePackageForCustomer2
+
+#Leaf bundles
+INSERT_UPDATE BundleTemplate;id[unique=true];name[lang=en];version[default=1.0][unique=true];$catalogVersion;products(code, $catalogVersion);parentTemplate(id)
+#Silver Package
+;Internet_B1;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle1
+;AddOns_B1;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle1
+;WirelessRouters_B1;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle1
+
+;SiteSurvey_B1;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle1
+;Assistance_B1;Assistance;;;A001,A002;AssistanceBundle1
+;Maintenance_B1;Maintenance;;;A003,A004;AssistanceBundle1
+;Installation_B1;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle1
+
+#Gold Package
+;Internet_B2;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle2
+;AddOns_B2;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle2
+;WirelessRouters_B2;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle2
+
+;LocalRecording_B2;LOCAL RECORDING;;;TT001,TT002,TT003;SecurityMonitoringBundle2
+;CloudRecording_B2;CLOUD RECORDING;;;VCR001,VCR002,VCR003;SecurityMonitoringBundle2
+
+;SiteSurvey_B2;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle2
+;Assistance_B2;Assistance;;;A001,A002;AssistanceBundle2
+;Maintenance_B2;Maintenance;;;A003,A004;AssistanceBundle2
+;Installation_B2;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle2
+
+#Platinum Package
+;ControlSystem_B3;Control System;;;L5504RVF,L5504RVFP,L5508RVF,L5508RVFP,L5512RVF,L5512RVFP,L5504RVFC,L5504RVFCP,L5501RBCP,5501RE,L5501RFCP,5501FRE,L5504RVF20,L5504RVF20P,5101R,5101RC,5102RVF,L5108RELVP;AVAutomationSystemBundle3
+;LightingControl_B3;Lighting Control;;;L5106D20UA,L5103D20UA,L5106D16UA,L5103D16UA,L5112D10UA,L5106D10UA,L5103D10UA,L5112D5UA,L5106D5UA,L5103D5UA,5150DMX,L5112D20LP,L5106D20LP,L5103D20LP,L5112D10LP,L5106D10LP,L5103D10LP,L5112D5LP,L5106D5LP,L5103D5LP,L5112D5LP,L5106D5LP,L5504D2U,L5504D2UP,L5504D2A,L5504D2AP,L5508D1A,L5508D1AP,5031PEWP-GY,U201DST600ZB,U202DST600ZB,U104BD500ZB_WE;AVAutomationSystemBundle3
+;SensorsSwitch_B3;Sensors & Switch;;;5031PEWP-GY,5070THBRPG-WE,5070THBR-BK,5070THBRSS,5070THPRPG-WE,5070THPR-BK,5070THPRSS,5031RDTSL-WE,5753PEIRL,5038TX2,5750WPL-GY,5751L-WE,5753L,5754ODPE,5752PP/1R,5752PP/2R,5752PP/2R/2D;AVAutomationSystemBundle3
+
+;Internet_B3;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle3
+;AddOns_B3;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle3
+;WirelessRouters_B3;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle3
+
+;LocalRecording_B3;LOCAL RECORDING;;;TT001,TT002,TT003;SecurityMonitoringBundle3
+;CloudRecording_B3;CLOUD RECORDING;;;VCR001,VCR002,VCR003;SecurityMonitoringBundle3
+
+;SiteSurvey_B3;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle3
+;Assistance_B3;Assistance;;;A001,A002;AssistanceBundle3
+;Maintenance_B3;Maintenance;;;A003,A004;AssistanceBundle3
+;Installation_B3;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle3
+
+#Greenfield Package
+;ControlSystem_B4;Control System;;;L5504RVF,L5504RVFP,L5508RVF,L5508RVFP,L5512RVF,L5512RVFP,L5504RVFC,L5504RVFCP,L5501RBCP,5501RE,L5501RFCP,5501FRE,L5504RVF20,L5504RVF20P,5101R,5101RC,5102RVF,L5108RELVP;AVAutomationSystemBundle4
+;LightingControl_B4;Lighting Control;;;L5106D20UA,L5103D20UA,L5106D16UA,L5103D16UA,L5112D10UA,L5106D10UA,L5103D10UA,L5112D5UA,L5106D5UA,L5103D5UA,5150DMX,L5112D20LP,L5106D20LP,L5103D20LP,L5112D10LP,L5106D10LP,L5103D10LP,L5112D5LP,L5106D5LP,L5103D5LP,L5112D5LP,L5106D5LP,L5504D2U,L5504D2UP,L5504D2A,L5504D2AP,L5508D1A,L5508D1AP,5031PEWP-GY,U201DST600ZB,U202DST600ZB,U104BD500ZB_WE;AVAutomationSystemBundle4
+;SensorsSwitch_B4;Sensors & Switch;;;5031PEWP-GY,5070THBRPG-WE,5070THBR-BK,5070THBRSS,5070THPRPG-WE,5070THPR-BK,5070THPRSS,5031RDTSL-WE,5753PEIRL,5038TX2,5750WPL-GY,5751L-WE,5753L,5754ODPE,5752PP/1R,5752PP/2R,5752PP/2R/2D;AVAutomationSystemBundle4
+
+;Internet_B4;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle4
+;AddOns_B4;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle4
+;WirelessRouters_B4;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle4
+
+;LocalRecording_B4;LOCAL RECORDING;;;TT001,TT002,TT003;SecurityMonitoringBundle4
+;CloudRecording_B4;CLOUD RECORDING;;;VCR001,VCR002,VCR003;SecurityMonitoringBundle4
+
+;SiteSurvey_B4;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle4
+;Assistance_B4;Assistance;;;A001,A002;AssistanceBundle4
+;Maintenance_B4;Maintenance;;;A003,A004;AssistanceBundle4
+;Installation_B4;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle4
+
+#Brownfield Package
+;Internet_B5;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle5
+;AddOns_B5;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle5
+;WirelessRouters_B5;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle5
+
+;SiteSurvey_B5;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle5
+;Assistance_B5;Assistance;;;A001,A002;AssistanceBundle5
+;Maintenance_B5;Maintenance;;;A003,A004;AssistanceBundle5
+;Installation_B5;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle5
+
+#Smart Living Consumer Pack 1
+;Internet_B6;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle6
+;AddOns_B6;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle6
+;WirelessRouters_B6;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle6
+
+;SiteSurvey_B6;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle6
+;Assistance_B6;Assistance;;;A001,A002;AssistanceBundle6
+;Maintenance_B6;Maintenance;;;A003,A004;AssistanceBundle6
+;Installation_B6;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle6
+
+#Smart Living Consumer Pack 2
+;Internet_B7;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle7
+;AddOns_B7;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle7
+;WirelessRouters_B7;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle7
+
+;SiteSurvey_B7;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle7
+;Assistance_B7;Assistance;;;A001,A002;AssistanceBundle7
+;Maintenance_B7;Maintenance;;;A003,A004;AssistanceBundle7
+;Installation_B7;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle7
+
+#Smart Living Consumer Pack 3
+;Internet_B8;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle8
+;AddOns_B8;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle8
+;WirelessRouters_B8;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle8
+
+;SiteSurvey_B8;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle8
+;Assistance_B8;Assistance;;;A001,A002;AssistanceBundle8
+;Maintenance_B8;Maintenance;;;A003,A004;AssistanceBundle8
+;Installation_B8;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle8
+
+#Bespoke package for customer 1
+;Internet_B9;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle9
+;AddOns_B9;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle9
+;WirelessRouters_B9;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle9
+
+;LocalRecording_B9;LOCAL RECORDING;;;TT001,TT002,TT003;SecurityMonitoringBundle9
+;CloudRecording_B9;CLOUD RECORDING;;;VCR001,VCR002,VCR003;SecurityMonitoringBundle9
+
+;SiteSurvey_B9;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle9
+;Assistance_B9;Assistance;;;A001,A002;AssistanceBundle9
+;Maintenance_B9;Maintenance;;;A003,A004;AssistanceBundle9
+;Installation_B9;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle9
+
+#Bespoke package for customer 2
+;ControlSystem_B10;Control System;;;L5504RVF,L5504RVFP,L5508RVF,L5508RVFP,L5512RVF,L5512RVFP,L5504RVFC,L5504RVFCP,L5501RBCP,5501RE,L5501RFCP,5501FRE,L5504RVF20,L5504RVF20P,5101R,5101RC,5102RVF,L5108RELVP;AVAutomationSystemBundle10
+;LightingControl_B10;Lighting Control;;;L5106D20UA,L5103D20UA,L5106D16UA,L5103D16UA,L5112D10UA,L5106D10UA,L5103D10UA,L5112D5UA,L5106D5UA,L5103D5UA,5150DMX,L5112D20LP,L5106D20LP,L5103D20LP,L5112D10LP,L5106D10LP,L5103D10LP,L5112D5LP,L5106D5LP,L5103D5LP,L5112D5LP,L5106D5LP,L5504D2U,L5504D2UP,L5504D2A,L5504D2AP,L5508D1A,L5508D1AP,5031PEWP-GY,U201DST600ZB,U202DST600ZB,U104BD500ZB_WE;AVAutomationSystemBundle10
+;SensorsSwitch_B10;Sensors & Switch;;;5031PEWP-GY,5070THBRPG-WE,5070THBR-BK,5070THBRSS,5070THPRPG-WE,5070THPR-BK,5070THPRSS,5031RDTSL-WE,5753PEIRL,5038TX2,5750WPL-GY,5751L-WE,5753L,5754ODPE,5752PP/1R,5752PP/2R,5752PP/2R/2D;AVAutomationSystemBundle10
+
+;Internet_B10;Internet;;;BasicInternetPlan1Gbps,Internet100MbpsPlan,BasicInternetPlan10Gbps;ConnectivityBundle10
+;AddOns_B10;Add-Ons;;;StaticIPOption,SecuredVPN;ConnectivityBundle10
+;WirelessRouters_B10;WIRELESS ROUTERS;;;LINK-E1200-AP,LINK-E1700-AP,LINK-E2500-AP;ConnectivityBundle10
+
+;LocalRecording_B10;LOCAL RECORDING;;;TT001,TT002,TT003;SecurityMonitoringBundle10
+;CloudRecording_B10;CLOUD RECORDING;;;VCR001,VCR002,VCR003;SecurityMonitoringBundle10
+
+;SiteSurvey_B10;Site Survey;;;NetworkCoverageSuvey,AutomationCompatibilitySurvey,EnergyAudit,FullSurveyNetwork;AssistanceBundle10
+;Assistance_B10;Assistance;;;A001,A002;AssistanceBundle10
+;Maintenance_B10;Maintenance;;;A003,A004;AssistanceBundle10
+;Installation_B10;Installation;;;Residential_U1,Office_U1,Residential_E1,Office_E1;AssistanceBundle10
+
+INSERT_UPDATE PickExactlyNBundleSelectionCriteria;id[unique=true];n;$catalogVersion
+#Silver Package
+;Internet_B1;1;
+;WirelessRouters_B1;1;
+
+#Gold Package
+;Internet_B2;1;
+;WirelessRouters_B2;1;
+
+;LocalRecording_B2;1;
+
+#Platinum Package
+;Internet_B3;1;
+;WirelessRouters_B3;1;
+
+;LocalRecording_B3;1;
+
+#Greenfield Package
+;Internet_B4;1;
+;WirelessRouters_B4;1;
+
+;LocalRecording_B4;1;
+
+#Brownfield Package
+;Internet_B5;1;
+;WirelessRouters_B5;1;
+
+#Smart Living Consumer Pack 1
+;Internet_B6;1;
+;WirelessRouters_B6;1;
+
+#Smart Living Consumer Pack 2
+;Internet_B7;1;
+;WirelessRouters_B7;1;
+
+#Smart Living Consumer Pack 3
+;Internet_B8;1;
+;WirelessRouters_B8;1;
+
+#Bespoke package for customer 1
+;Internet_B9;1;
+;WirelessRouters_B9;1;
+
+#Bespoke package for customer 2
+;Internet_B10;1;
+;WirelessRouters_B10;1;
+
+;LocalRecording_B10;1;
+
+INSERT_UPDATE PickNToMBundleSelectionCriteria;id[unique=true];n;m;$catalogVersion
+#Silver Package
+;AddOns_B1;0;2;
+
+;SiteSurvey_B1;0;4;
+;Assistance_B1;1;2;
+;Maintenance_B1;0;2;
+
+#Gold Package
+;AddOns_B2;0;2;
+
+;CloudRecording_B2;1;2;
+
+;SiteSurvey_B2;0;4;
+;Assistance_B2;1;2;
+;Maintenance_B2;0;2;
+
+#Platinum Package
+;AddOns_B3;0;2;
+
+;CloudRecording_B3;1;2;
+
+;SiteSurvey_B3;0;4;
+;Assistance_B3;1;2;
+;Maintenance_B3;0;2;
+
+#Greenfield Package
+;AddOns_B4;0;2;
+
+;CloudRecording_B4;1;2;
+
+;SiteSurvey_B4;0;4;
+;Assistance_B4;1;2;
+;Maintenance_B4;0;2;
+
+#Brownfield Package
+;AddOns_B5;0;2;
+
+;SiteSurvey_B5;0;4;
+;Assistance_B5;1;2;
+;Maintenance_B5;0;2;
+
+#Smart Living Consumer Pack 1
+;AddOns_B6;0;2;
+
+;SiteSurvey_B6;0;4;
+;Assistance_B6;1;2;
+;Maintenance_B6;0;2;
+
+#Smart Living Consumer Pack 2
+;AddOns_B7;0;2;
+
+;SiteSurvey_B7;0;4;
+;Assistance_B7;1;2;
+;Maintenance_B7;0;2;
+
+#Smart Living Consumer Pack 3
+;AddOns_B8;0;2;
+
+;SiteSurvey_B8;0;4;
+;Assistance_B8;1;2;
+;Maintenance_B8;0;2;
+
+#Bespoke package for customer 1
+;AddOns_B9;0;2;
+
+;CloudRecording_B9;1;2;
+
+;SiteSurvey_B9;0;4;
+;Assistance_B9;1;2;
+;Maintenance_B9;0;2;
+
+#Bespoke package for customer2
+;AddOns_B10;0;2;
+
+;CloudRecording_B10;1;2;
+
+;SiteSurvey_B10;0;4;
+;Assistance_B10;1;2;
+;Maintenance_B10;0;2;
+
+UPDATE BundleTemplateStatus[batchmode=true];itemtype(code)[unique=true];status(code)
+;BundleTemplateStatus;approved

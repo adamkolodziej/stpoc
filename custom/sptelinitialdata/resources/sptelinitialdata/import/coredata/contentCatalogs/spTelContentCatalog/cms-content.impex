@@ -1,0 +1,25 @@
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;BundleSelectionAddOnPageTemplate;Extras Page Template;:/pages/guidedselling/editComponentAccordeonStylePage;ContentPage;false;
+;;BundleSelectionDevicePageTemplate;Device Page Template;:/pages/guidedselling/editComponentSolrStylePage;ContentPage;false;
+;;BundleSelectionPlanPageTemplate;Plans Page Template;;ContentPage;false;
+
+
+# Functional Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;guidedselling-select-device;Select Device Page;BundleSelectionAddOnPageTemplate;guidedselling-select-device
+;;bundleselection-plan;Select Plans Page;BundleSelectionPlanPageTemplate;bundleselection-plan
+;;bundleselection-extra;Update Extras Page;BundleSelectionAddOnPageTemplate;bundleselection-extra
+
+# Guided Selling Content
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='BundleSelectionPlanPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-BundleSelectionPlan;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-BundleSelectionPlan;HomepageNavLink;;HomepageNavLinkSlot;true
+;;MiniCart-BundleSelectionPlan;MiniCart;;MiniCartSlot;true
+;;NavigationBar-BundleSelectionPlan;NavigationBar;;NavigationBarSlot;true
+;;Tabs-BundleSelectionPlan;Tabs;;TabsSlot;true
+;;Footer-BundleSelectionPlan;Footer;;FooterSlot;true
+;;HeaderLinks-BundleSelectionPlan;HeaderLinks;;HeaderLinksSlot;true

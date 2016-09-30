@@ -9,25 +9,27 @@
  ("Confidential Information"). You shall not disclose such Confidential
  Information and shall use it only in accordance with the terms of the
  license agreement you entered into with SAP.
---><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+-->
+<extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
 
-	<extension abstractclassprefix="Generated" classprefix="SptelStorefront" name="sptelstorefront" usemaven="false">		
+    <extension abstractclassprefix="Generated" classprefix="SptelStorefront" name="sptelstorefront" usemaven="false">
         <requires-extension name="secureportaladdon"/>
-<requires-extension name="commerceorgaddon"/>
-<requires-extension name="b2bacceleratoraddon"/>
-<requires-extension name="textfieldconfiguratortemplateaddon"/>
-<requires-extension name="smarteditaddon"/>
-<requires-extension name="promotionenginesamplesaddon"/>
-<requires-extension name="commerceorgsamplesaddon"/>
-<requires-extension name="liveeditaddon"/>
-<requires-extension name="acceleratorstorefrontcommons"/>
-		<requires-extension name="sptelfacades"/>
+        <requires-extension name="commerceorgaddon"/>
+        <requires-extension name="b2bacceleratoraddon"/>
+        <requires-extension name="textfieldconfiguratortemplateaddon"/>
+        <requires-extension name="smarteditaddon"/>
+        <requires-extension name="promotionenginesamplesaddon"/>
+        <requires-extension name="commerceorgsamplesaddon"/>
+        <requires-extension name="liveeditaddon"/>
+        <requires-extension name="acceleratorstorefrontcommons"/>
+        <requires-extension name="sptelfacades"/>
+        <requires-extension name="b2ctelcofacades"/>
 
-		<webmodule jspcompile="false" webroot="/sptelstorefront"/>
+        <webmodule jspcompile="false" webroot="/sptelstorefront"/>
 
-		
-		<meta key="extgen-template-extension" value="true"/>
 
-	</extension>
+        <meta key="extgen-template-extension" value="true"/>
+
+    </extension>
 
 </extensioninfo>

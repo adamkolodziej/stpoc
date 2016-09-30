@@ -3,14 +3,13 @@
     <extensions>
         <path dir='${HYBRIS_BIN_DIR}' autoload='false'/>
         <extension name='mcc'/>
+        <extension name='hmc'/>
         <extension name='backoffice'/>
         <extension name='commercesearchbackoffice'/>
         <extension name='commerceservicesbackoffice'/>
         <extension name='solrfacetsearchbackoffice'/>
         <extension name='solrserver'/>
         <extension name='ycommercewebservices'/>
-        <extension name='electronicsstore'/>
-        <extension name='apparelstore'/>
         <extension name='liveeditaddon'/>
         <extension name='acceleratorwebservicesaddon'/>
         <extension name='customersupportbackoffice'/>
@@ -50,5 +49,6 @@
         <extension name='sptelfacades'/>
         <extension name='sptelfulfilmentprocess'/>
         <extension name='sptelstorefront'/>
+        <extension name='sptelinitialdata'/>
     </extensions>
 </hybrisconfig>
