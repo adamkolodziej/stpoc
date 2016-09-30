@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="base.xsd">
+	<label spring-bean="subscriptionPricePlanLabelProvider"/>
+	<initial-properties source-object-template="SubscriptionProduct">
+		<property-mapping source="src" target="SubscriptionPricePlan.product"/>
+		<property-mapping source="src.catalogVersion" target="SubscriptionPricePlan.catalogVersion"/>
+		<property-mapping source="src.unit" target="SubscriptionPricePlan.unit"/>
+	</initial-properties>
+</base>

@@ -1,0 +1,10 @@
+# these are exemplary export templates for SAP Entities
+
+"#% impex.setTargetFile( ""SAPHTTPDestination.csv"" );"
+INSERT_UPDATE SAPHTTPDestination;&Item;authenticationType(code,itemtype(code));httpDestinationName[unique=true];owner(&Item)[allownull=true];password;targetURL;userid
+"#% impex.exportItems( ""SAPHTTPDestination"" , false );"
+
+# this one is simpler - without owner and reference
+"#% impex.setTargetFile( ""SAPHTTPDestination.csv"" );"
+INSERT_UPDATE SAPHTTPDestination;authenticationType(code,itemtype(code));httpDestinationName[unique=true];password;targetURL;userid
+"#% impex.exportItems( ""SAPHTTPDestination"" , false );"

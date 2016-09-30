@@ -1,0 +1,72 @@
+
+body
+{
+    background: #4b5367 url("../images/bodyBG.gif") repeat-x scroll 0 0;
+    height: 100%;
+    font-family: Arial,Helvetica,sans-serif;
+}
+
+.content
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 910px;
+    background: #ededed none repeat scroll 0 0;
+    padding: 10px;
+}
+
+.content ul
+{
+    padding-left: 0;
+}
+
+.content h2
+{
+    text-align: center;
+}
+
+.alert
+{
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 4px;
+    list-style-type: none;
+}
+
+.INFO
+{
+    text-color: #3e5983;
+    background: #dff0d8;
+}
+
+.ERROR
+{
+    text-color: #a94442;
+    background: #f2dede;
+}
+
+.WARN
+{
+    text-color: #8a6d3b;
+    background: #fcf8e3;
+}
+
+.control-panel-actions
+{
+    margin: 10px;
+}
+
+input
+{
+    width: 300px;
+}
+
+input.ng-dirty
+{
+    border: 2px solid #32CD32;
+}
+
+table h3
+{
+    margin-bottom: 0px;
+}

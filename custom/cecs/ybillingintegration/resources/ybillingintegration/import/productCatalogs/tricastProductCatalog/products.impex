@@ -1,0 +1,114 @@
+$productCatalog = tricastProductCatalog
+$productCatalogName = Tricast Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+
+# TODO: probably should be in bundletemplates.impex, but then AddOnSampleDataImportService needs to be extended to include bundletemplates.impex import
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; yBillingId; $catalogVersion;
+; TriCast                  ; ; TRICAST_PACK
+; TriCast-TV               ; ; TV
+; TriCast-TV-Addons        ; ; TVADD
+; TriCast-Phone            ; ; LINE
+; TriCast-Phone-Addons     ; ; LINEADD
+; TriCast-Phone-Device     ; ; PHONEEQ
+; TriCast-Broadband        ; ; BROADBAND
+; TriCast-Broadband-Addon  ; ; BROADADD
+; TriCast-Broadband-Router ; ; BROADROUT
+; TriCast-Decoders         ; ; BROADDEC
+
+# VARCOND skipped!
+# CURRENCY skipped!
+# LINEINSTALL skipped!
+# BROADINSTALL skipped!
+# BROAD_UNLIMITED skipped!
+# WIFI_UNLIMITED skipped!
+# BROAD_INCLUDED skipped!
+# PACKAGE skipped! handled as BundlePackage
+
+
+UPDATE BundlePackage; code[unique = true]; yBillingId; $catalogVersion
+; superFibrePremium  ; SUPFIBPREM
+; fibreEntertainment ; FIBRENT
+; fibreStarter       ; FIBRESTART
+; standardStarter    ; STANDSTART
+
+UPDATE Product; code[unique = true]; yBillingId; yBillingIdOnRemove;csticName; $catalogVersion
+
+# cstic TV
+; tvStarter                    ; TV_START
+; tvEntertainment              ; TV_ENT
+; tvPremium                    ; TV_PRE
+
+# cstic TVADD - cstic deleted by yBilling
+#; Sport                        ; TV_SPORT
+#; TCO                          ; TV_TCO
+#; foreignLanguagePackage       ; TV_FRGN
+#; allOnDemand                  ; TV_ALLDMD
+#; Sport_trial                  ; TV_SPORT
+
+# cstic TV_ADD_SPORT
+; Sport                        ; SPORTS_Y ; SPORTS_N ;TV_ADD_SPORT
+#; Sport_trial                  ; SPORTS_Y ; SPORTS_N ;TV_ADD_SPORT
+
+# cstic TV_ADD_TCO
+; TCO                          ; TCO_Y    ; TCO_N ; TV_ADD_TCO
+
+# cstic TV_ADD_FRGN
+; foreignLanguagePackage       ; FRGN_Y   ; FRGN_N ; TV_ADD_FRGN
+
+# cstic TV_ADD_ALLDMD
+; allOnDemand                  ; ALLDMD_Y ; ALLDMD_N ; TV_ADD_ALLDMD
+
+
+# cstic LINE
+; phoneUnlimitedWeekend        ; PHONE_UW
+
+# LINEADD
+# NONE is not mapped!
+; phoneUnlimitedWeekendEvening ; PHONE_UWE
+
+# cstic PHONEEQ
+# NONE is not mapped!
+; phone                        ; PHONE_EQ
+
+# cstic BROADBAND
+; standardBroadband            ; BROAD_STD
+; fibreBroadbandLimited        ; BROADFIB_L
+; fibreBroadbandUnlimited      ; BROADFIB_U
+; superFibreUnlimited          ; SUPERFIB_U
+
+# cstic BROADADD
+; tricastWifi                  ; BROAD_WIFI
+# BROAD_WIFI_F is not mapped!
+# NONE is not mapped!
+
+# cstic BROADROUT
+; standardRouter               ; BROAD_STDR
+; fibreRouter                  ; BROAD_FIBR
+# BROAD_FIBR_FU is not mapped!
+
+# cstic BROADDEC
+; standardDecoder              ; BROAD_DECS
+; decoderPlus                  ; BROAD_DECP
+
+# cstic BROAD_UNLIMITED
+#cstic Unlimited Broadband
+# Y is not mapped!
+# N is not mapped!
+
+# cstic WIFI_UNLIMITED
+# Y is not mapped!
+
+INSERT_UPDATE ProductConfigurationTemplate; &ref; code; yBillingId; approvalStatus(code); mappedBundleTemplates(id, version, $catalogVersion); $catalogVersion; unitCode; numberOfUnits; salesOrganization; distributionChannel; contractDuration; periodUnit; configurable;
+; TriCast ; TriCast ; TRICAST_PACK ; approved ; TriCast:1.0 ; ; EA ; 1 ; O 50000608 ; 10 ; 012 ; MONTH ; true ;
+
+INSERT_UPDATE TechnicalAttribute; version[unique = true]; guid; dataId[unique = true]; dataDesc; dataType; configurationTemplate(&ref); $catalogVersion;
+; 0001 ; 0050568502431ED5A5A1941EE45F7292 ; PHONE ; Phone Number ; PN ; TriCast ;
+; 0001 ; 0050568502431ED5A5A1AE45868A7292 ; MAC   ; MAC Address  ; MA ; TriCast ;
+; 0001 ; 0050568502431ED5A5A18A70327F5292 ; TVID  ; TV Id        ; 01 ; TriCast ;
+
+# CECS-717 yBilling enhanced bundle rules
+UPDATE ChangeProductPriceBundleRule; id[unique = true]; $catalogVersion; csticValueOverrides(key, value)[map-delimiter = |]
+; FreeWifiWithFibreAndSuperFibre       ; ; BROADADD->BROAD_WIFI_F
+; CheaperFibreRouterWithFibreUnlimited ; ; BROADROUT->BROAD_FIBR_FU
+; TCOaddonPromotion                    ; ; FREE_MONTHS_TCO->3 | TV_ADD_TCO->TCO_Y
+; SportsAddonPromotion                 ; ; FREE_MONTHS_SPORTS->1 | TV_ADD_SPORT->SPORTS_Y

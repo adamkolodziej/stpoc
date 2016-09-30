@@ -1,0 +1,35 @@
+#
+# Import essential data for the Accelerator
+#
+
+# Language
+$lang=en
+
+
+
+# MediaFormats
+UPDATE MediaFormat;qualifier[unique=true];name[lang=$lang];
+ ;1200Wx1200H;"SuperZoom"
+ ;300Wx300H;"Product"
+ ;30Wx30H;"StyleSwatch"
+ ;365Wx246H;"Store"
+ ;515Wx515H;"Soom"
+ ;65Wx65H;"CartIcon"
+ ;96Wx96H;"Thumbnail"
+ ;original;"Original"
+
+# ConversionMediaFormat
+UPDATE ConversionMediaFormat;qualifier[unique=true];name[lang=$lang];
+ ;300Wx300H;"300W x 300H"
+ ;30Wx30H;"30W x 30H"
+ ;365Wx246H;"365Wx246H"
+ ;515Wx515H;"515W x 515H"
+ ;65Wx65H;"65W x 65H"
+ ;96Wx96H;"96W x 96H"
+
+# MediaFormats
+UPDATE ConversionGroup;code[unique=true];name[lang=$lang]
+ ;ShowcaseConversionGroup;"Showcase Conversion Group"
+
+UPDATE DeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
+ ;digital-delivery;Digital Only;Applicable for digital items

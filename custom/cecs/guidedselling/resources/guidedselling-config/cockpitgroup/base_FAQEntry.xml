@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="FAQEntry.code"/>
+			<property qualifier="FAQEntry.catalogVersion"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="FAQEntry.code"/>
+			<property qualifier="FAQEntry.catalogVersion"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="FAQEntry.code"/>
+        <property qualifier="FAQEntry.question"/>
+	</label>
+</base>

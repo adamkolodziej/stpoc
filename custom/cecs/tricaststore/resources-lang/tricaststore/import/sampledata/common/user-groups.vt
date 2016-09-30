@@ -1,0 +1,10 @@
+$header
+
+# Language
+\$lang=$lang
+
+#set ( $userGroups = $query.load('user-groups', 'UserGroup') )
+UPDATE UserGroup;UID[unique=true];locName[lang=\$lang]
+#foreach( $row in $userGroups )
+;$row.key;"$row.values.locName"
+#end

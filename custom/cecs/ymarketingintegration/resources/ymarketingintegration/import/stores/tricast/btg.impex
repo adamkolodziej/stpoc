@@ -1,0 +1,148 @@
+# ImpEx for Importing BTG configuration into Tricast Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog = tricastProductCatalog
+$contentCatalog = tricastContentCatalog
+$productCatalogName = Tricast Product Catalog
+$productCV = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true]
+$contentCV = catalogVersion(catalog(id[default = $contentCatalog]), version[default = 'Staged'])[unique = true]
+
+
+# CECS-295 fix sapadtreco - match customer by CustomerId
+UPDATE Customer;uid[unique=true];sapConsumerID
+;brown.joe.ny@gmail.com;0000100099
+
+### SCENARIO 1
+# Install on mobile
+
+INSERT_UPDATE BTGSegment; uid[unique = true]; name; sites(uid); defaultResultScope(code); defaultEvaluationMethod(code); active[default = true]; scope(code)[default = OFFLINE]; $contentCV
+; mobileAccessCampaignSegment ; Mobile Access Campaign Segment ; tricast ; PERMANENT ; FULL ;
+
+INSERT_UPDATE BTGRule; uid[unique = true]; code; segment(uid, $contentCV); ruleType(code); $contentCV
+; userBelongsToMobileAccessCampaignInitiativeRule ; User Belongs To Mobile Access Campaign Initiative ; mobileAccessCampaignSegment ; USER
+
+INSERT_UPDATE BTGOperator; uid[unique = true]; code; $contentCV
+; mobileAccessCampaignOperator ; containsAny
+
+INSERT_UPDATE BTGSAPCategoryOperand; uid[unique = true]; $contentCV
+; userInitiativeOperand
+
+# based on category id
+INSERT_UPDATE BTGReferenceSAPCategoryOperand; uid[unique = true]; categories; $contentCV
+; mobileAccessCampaingInitiativesOperand ; Z4
+# based on initiative id
+# 1 stands for CEI Intitative identifier=0000000001 - name of inititative is Unhappy Customers on the go
+# INSERT_UPDATE BTGReferenceSAPInitiativeOperand; uid[unique = true]; initiatives; $contentCV
+#; mobileAccessCampaingInitiativesOperand ; 1
+
+INSERT_UPDATE BTGExpression; uid[unique = true]; leftOperand(uid, $contentCV); rightOperand(uid, $contentCV); operator(uid, $contentCV); rule(uid, $contentCV); $contentCV
+; mobileAccessCampaignExpression ; userInitiativeOperand ; mobileAccessCampaingInitiativesOperand ; mobileAccessCampaignOperator ; userBelongsToMobileAccessCampaignInitiativeRule
+
+INSERT_UPDATE BTGRunBusinessProcessDefinition; uid[unique = true]; code; businessProcessName; segment(uid, $contentCV); $contentCV
+; runSendingMobileAccessCampaignEmailBTGAction ; Run Sending Mobile Access Campaign Email BTG Action ; downloadAppEmailProcess ; mobileAccessCampaignSegment
+
+### SCENARIO 4
+### CECS-293: Send an e-mail for Interested In Sports Campaign
+
+INSERT_UPDATE BTGSegment; uid[unique = true]; name; sites(uid); defaultResultScope(code); defaultEvaluationMethod(code); active[default = true]; scope(code)[default = OFFLINE]; $contentCV
+; sportsEmailCampaignSegment ; Interested In Sports Campaign Segment ; tricast ; PERMANENT ; FULL ;
+
+INSERT_UPDATE BTGRule; uid[unique = true]; code; segment(uid, $contentCV); ruleType(code); $contentCV
+; userBelongsToSportsEmailCampaignInitiativeRule ; User Belongs To Sports Email Campaign Initiative ; sportsEmailCampaignSegment ; USER
+
+INSERT_UPDATE BTGOperator; uid[unique = true]; code; $contentCV
+; sportsEmailCampaignOperator ; containsAny
+
+# based on category id
+INSERT_UPDATE BTGReferenceSAPCategoryOperand; uid[unique = true]; categories; $contentCV
+; sportsEmailCampaignInitiativesOperand ; Z3
+
+# based on initiative id
+#INSERT_UPDATE BTGReferenceSAPInitiativeOperand; uid[unique = true]; initiatives; $contentCV
+#; sportsEmailCampaignInitiativesOperand ; 4
+
+INSERT_UPDATE BTGExpression; uid[unique = true]; leftOperand(uid, $contentCV); rightOperand(uid, $contentCV); operator(uid, $contentCV); rule(uid, $contentCV); $contentCV
+; sportsEmailCampaignExpression ; userInitiativeOperand ; sportsEmailCampaignInitiativesOperand ; sportsEmailCampaignOperator ; userBelongsToSportsEmailCampaignInitiativeRule
+
+INSERT_UPDATE BTGRunBusinessProcessDefinition; uid[unique = true]; code; businessProcessName; segment(uid, $contentCV); $contentCV
+; runSendingSportsCampaignEmailBTGAction ; Run Sending Sports Campaign Email BTG Action ; interestedInSportsEmailProcess ; sportsEmailCampaignSegment
+
+INSERT_UPDATE BTGAssignToGroupDefinition;uid[unique=true];code;target;userGroups(uid);segment(uid, $contentCV);$contentCV
+;assignToInterestedInSportsGroupAction;Assign To interested-in-sports Group BTG Action;assignToGroup;interested-in-sports;sportsEmailCampaignSegment;
+
+### SCENARIO 3
+### Interested in TCO shows
+
+INSERT_UPDATE BTGSegment;uid[unique=true];name;sites(uid);defaultResultScope(code);defaultEvaluationMethod(code);active[default=true];scope(code)[default=OFFLINE];$contentCV
+;readingReviewsOnGoTBlogPageSegment;Interested in TCO shows;tricast;PERMANENT;FULL;
+
+### CECS-294 BTG segment - watching trailers and reading reviews ###
+# DISABLED as it doesn't get evaluated in offline mode
+# YTODO check if it somehow can be evaluated online
+#INSERT_UPDATE BTGRule;uid[unique=true];code;segment(uid, $contentCV);ruleType(code);$contentCV
+#;readingReviewsOnGoTBlogPageRule;Reading GoT Reviews Rule;readingReviewsOnGoTBlogPageSegment;WCMS
+#
+#INSERT_UPDATE BTGOperator;uid[unique=true];code;$contentCV
+#;readingReviewsOnGoTBlogPageOperator;contains
+#
+#INSERT_UPDATE BTGVisitedContentpagesOperand;uid[unique=true];$contentCV
+#;customerVisitedGoTContentPage;
+#
+#INSERT_UPDATE BTGReferenceContentpagesOperand;uid[unique=true];contentpages(uid,$contentCV);$contentCV
+#;customerVisitedGoTBlogPage;gameOfThronesBlogPage;
+# YTODO maybe here is a solution for above offline issue, BTGCondition.evaluationScope == BTGConditionEvaluationScope.OFFLINE
+#INSERT_UPDATE BTGExpression;uid[unique=true];leftOperand(uid, $contentCV);rightOperand(uid, $contentCV);operator(uid, $contentCV);rule(uid, $contentCV);$contentCV
+#;readingReviewsOnGoTBlogPageExpression;customerVisitedGoTContentPage;customerVisitedGoTBlogPage;readingReviewsOnGoTBlogPageOperator;readingReviewsOnGoTBlogPageRule;
+
+INSERT_UPDATE BTGAssignToGroupDefinition;uid[unique=true];code;target;userGroups(uid);segment(uid, $contentCV);$contentCV
+;assignToInterestedInHboGroupAction;Assign To interested-in-tco Group BTG Action;assignToGroup;interested-in-tco;readingReviewsOnGoTBlogPageSegment;
+
+#### CECS-291 Sending e-mail for TCO campaign
+
+INSERT_UPDATE BTGRule;uid[unique=true];code;segment(uid, $contentCV);ruleType(code);$contentCV
+;interestedInTCOShowsRule;Interested in TCO Shows Rule;readingReviewsOnGoTBlogPageSegment;USER
+
+INSERT_UPDATE BTGOperator;uid[unique=true];code;$contentCV
+;interestedInTCOShowsOperator;contains
+
+# based on category id
+INSERT_UPDATE BTGReferenceSAPCategoryOperand; uid[unique = true]; categories(code); $contentCV
+;interestedInTCOShowsOperand ; Z2, Z2i
+
+# based on initiative id
+#INSERT_UPDATE BTGReferenceSAPInitiativeOperand; uid[unique = true]; initiatives; $contentCV
+#;interestedInTCOShowsOperand ; 3, Z2i
+
+INSERT_UPDATE BTGExpression;uid[unique=true];leftOperand(uid, $contentCV);rightOperand(uid, $contentCV);operator(uid, $contentCV);rule(uid, $contentCV);$contentCV
+;interestedInTCOShowsExpression;userInitiativeOperand;interestedInTCOShowsOperand;interestedInTCOShowsOperator;interestedInTCOShowsRule;
+
+INSERT_UPDATE BTGRunBusinessProcessDefinition; uid[unique = true]; code; businessProcessName; segment(uid, $contentCV); $contentCV
+; runSendingTCOPromotionEmailBTGAction ; Run Sending TCO Promotion Email BTG Action ; tcoPromotionEmailProcess ; readingReviewsOnGoTBlogPageSegment
+
+#### CECS-308 BTG Segment - check for 'fans-of-branded-merchandise' initiative and add customer to group
+
+### SCENARIO 2
+### Fans of branded merchandise
+
+INSERT_UPDATE BTGSegment;uid[unique=true];name;sites(uid);defaultResultScope(code);defaultEvaluationMethod(code);active[default=true];scope(code)[default=OFFLINE];$contentCV
+;fansOfBrandedMerchandiseSegment;Fans Of Branded Merchandise Segment;tricast;SESSION;FULL;
+
+INSERT_UPDATE BTGRule;uid[unique=true];code;segment(uid, $contentCV);ruleType(code);$contentCV
+;fansOfBrandedMerchandiseRule;Fans Of Branded Merchandise Rule;fansOfBrandedMerchandiseSegment;USER
+
+INSERT_UPDATE BTGOperator;uid[unique=true];code;$contentCV
+;fansOfBrandedMerchandiseOperator;contains
+
+# based on category id
+INSERT_UPDATE BTGReferenceSAPCategoryOperand; uid[unique = true]; categories; $contentCV
+;fansOfBrandedMerchandiseInitiativesOperand ; Z1, Z1i
+
+# based on initiative id
+#INSERT_UPDATE BTGReferenceSAPInitiativeOperand; uid[unique = true]; initiatives; $contentCV
+#;fansOfBrandedMerchandiseInitiativesOperand ; 2, Z1i
+
+INSERT_UPDATE BTGExpression;uid[unique=true];leftOperand(uid, $contentCV);rightOperand(uid, $contentCV);operator(uid, $contentCV);rule(uid, $contentCV);$contentCV
+;fansOfBrandedMerchandiseExpression;userInitiativeOperand;fansOfBrandedMerchandiseInitiativesOperand;fansOfBrandedMerchandiseOperator;fansOfBrandedMerchandiseRule;
+
+INSERT_UPDATE BTGAssignToGroupDefinition;uid[unique=true];code;target;userGroups(uid);segment(uid, $contentCV);$contentCV
+;assignToFansOfBrandedMerchandiseGroupAction;Assign To fansOfBrandedMerchandise Group BTG Action;assignToGroup;fansOfBrandedMerchandise;fansOfBrandedMerchandiseSegment;

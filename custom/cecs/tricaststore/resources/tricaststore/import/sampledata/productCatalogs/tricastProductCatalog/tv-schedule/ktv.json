@@ -1,0 +1,42 @@
+[
+  {
+    name:'Life of Pause',
+    id:17,
+    time:{
+      start:'11:00',
+      end:'12:00pm'
+    },
+    length:60,
+    play:false
+  },
+  {
+    name:'The Marshall Mathers',
+    id:18,
+    time:{
+      start:'12:00',
+      end:'1:00pm'
+    },
+    length:60,
+    play:true
+  },
+  {
+    name:'Is the Is Are',
+    id:19,
+    time:{
+      start:'1:00',
+      end:'1:30pm'
+    },
+    length:30,
+    play:false
+  },
+  {
+    name:'Lazaretto',
+    id:191,
+    time:{
+      start:'1:30',
+      end:'2:30pm'
+    },
+    length:60,
+    play:false
+  }
+]

@@ -1,0 +1,21 @@
+$header
+# ImpEx for Importing Categories into Tricast Store
+
+# Macros / Replacement Parameter definitions
+\$productCatalog=tricastProductCatalog
+\$productCatalogName=Tricast Product Catalog
+\$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
+
+
+# Language
+\$lang=$lang
+
+#set ( $categoriesRows = $query.load('categories') )
+
+# Create Categories
+UPDATE Category;code[unique=true];\$catalogVersion;name[lang=\$lang]
+#foreach( $row in $categoriesRows )
+ ;$row.key;;$row.values.name;
+#end
+
+

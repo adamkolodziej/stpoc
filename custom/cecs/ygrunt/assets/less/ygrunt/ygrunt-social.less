@@ -1,0 +1,147 @@
+.color-fb{
+    background-color:@facebook-primary;
+    &.btn{
+        color:#fff;
+        &:hover{
+            color:@facebook-primary;
+        }
+    }
+}
+.color-twt{
+    background-color:@twitter-primary;
+    &.btn{
+        color:#fff;
+        &:hover{
+            color:@twitter-primary;
+        }
+    }
+}
+.color-gp{
+    background-color:@google-primary;
+    &.btn{
+        color:#fff;
+        &:hover{
+            color:@google-primary;
+        }
+    }
+}
+.color-li{
+    background-color:@linkedin-primary;
+    &.btn{
+        color:#fff;
+        &:hover{
+            color:@linkedin-primary;
+        }
+    }
+}
+
+
+@icon-path-small: "../images/facebook/facebook_icon_12.png";
+@icon-path-medium: "../images/facebook/facebook_icon_16.png";
+@icon-path-big: "../images/facebook/facebook_icon_20.png";
+
+.nav {
+    div{
+        a.facebook-btn {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}
+.facebook-btn {
+    background-color: #5772a8;
+    border: 1px solid @facebook-primary;
+    box-shadow: 0 1px 1px #829ac6 inset;
+    -webkit-box-shadow: inset 0 1px 1px #829ac6;
+    display: inline-block;
+    text-shadow: none;
+    overflow: hidden;
+    text-decoration: none !important;
+    float: none !important;
+    &:hover{
+        background-color: #4b6393;
+        box-shadow: 0 1px 1px #8098c3 inset;
+        color: #dae3f5;
+        text-decoration: none !important;
+    }
+    .fb-text {
+        color: #FFFFFF;
+        font-size: 1.0em;
+    }
+    .fb-icon {
+        background-image: url(@icon-path-big);
+        background-repeat: no-repeat;
+        display: block;
+    }
+    .fb-text, .fb-icon {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    /* BUTTON SIZES */
+    &.fb-size-TINY {
+        padding: 1px !important;
+        height: 12px;
+        .fb-text, .fb-icon {
+            vertical-align: top;
+        }
+        .fb-text {
+            line-height: 1.3em;
+        }
+        .fb-icon {
+            background-image: url(@icon-path-small);
+            width: 6px;
+            height: 12px;
+        }
+    }
+    &.fb-size-SMALL {
+        padding: 1px !important;
+        .fb-icon {
+            background-image: url(@icon-path-medium);
+            width: 8px;
+            height: 14px;
+        }
+    }
+    &.fb-size-MEDIUM {
+        padding: 2px !important;
+        .fb-icon {
+            background-image: url(@icon-path-big);
+            width: 10px;
+            height: 20px;
+        }
+    }
+    &.fb-size-BIG {
+        padding: 2px !important;
+        .fb-icon {
+            background-image: url(@icon-path-big);
+            width: 40px;
+            height: 40px;
+        }
+    }
+}
+.facebook-user-image {
+    vertical-align: top;
+    display: inline-block;
+    padding: 0px !important;
+    &.fb-size-TINY{
+        height: 16px;
+        width: 16px;
+    }
+    &.fb-size-SMALL,&.fb-size-MEDIUM{
+        height: 26px;
+        width: 26px;
+    }
+    &.fb-size-BIG{
+        height: 75px;
+        width: 75px;
+    }
+}
+
+.social{
+    margin-top: 5px;
+    .btn-group{
+        .btn{
+            margin: 0 5px;
+            padding: 1px 2px;
+        }
+    }
+}

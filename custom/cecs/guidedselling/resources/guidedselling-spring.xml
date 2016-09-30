@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <!-- CECS-30 bundle improvements - START -->
+
+    <alias name="defaultBundleAcceleratorCheckoutFacade" alias="acceleratorCheckoutFacade"/>
+    <bean id="defaultBundleAcceleratorCheckoutFacade" parent="defaultAcceleratorCheckoutFacade" class="com.hybris.showcase.guidedselling.facades.impl.BundleAcceleratorCheckoutFacade" />
+
+    <util:list id="bundleAddToCartMethodHooks" value-type="de.hybris.platform.commerceservices.order.hook.CommerceAddToCartMethodHook" />
+
+    <alias alias="commerceCartService" name="defaultGuidedSellingCartService" />
+    <alias alias="bundleCommerceCartService" name="defaultGuidedSellingCartService"/>
+    <bean id="defaultGuidedSellingCartService" class="com.hybris.showcase.guidedselling.services.impl.DefaultGuidedSellingCartService" parent="defaultBundleCommerceCartService">
+        <property name="orderChangesUnitOfWork" ref="orderChangesUnitOfWork"/>
+        <property name="bundleAddToCartMethodHooks" ref="bundleAddToCartMethodHooks" />
+    </bean>
+
+    <alias alias="guidedSellingFacade" name="defaultFlexibleGuidedSellingFacade"/>
+    <bean id="defaultFlexibleGuidedSellingFacade" parent="defaultGuidedSellingFacade" class="com.hybris.showcase.guidedselling.facades.impl.FlexibleGuidedSellingFacade">
+        <property name="productFacade" ref="productFacade" />
+        <property name="cartFacade" ref="cartFacade"/>
+        <property name="bundlePackageConverter" ref="bundlePackageConverter" />
+        <property name="bundleOfferConverter" ref="bundleOfferConverter"/>
+        <property name="bundlePackageService" ref="bundlePackageService"/>
+        <property name="customerAccountService" ref="customerAccountService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+        <property name="orderChangesUnitOfWork" ref="orderChangesUnitOfWork"/>
+        <property name="loyaltyPointsService" ref="loyaltyPointsService"/>
+    </bean>
+
+    <alias name="flexibleBundleTemplateService" alias="bundleTemplateService" />
+    <bean id="flexibleBundleTemplateService" parent="defaultBundleTemplateService"  class="com.hybris.showcase.guidedselling.services.impl.DefaultFlexibleBundleTemplateService">
+    </bean>
+
+    <alias alias="bundleRuleService" name="defaultMultiCurrencyBundleRuleService"/>
+    <bean id="defaultMultiCurrencyBundleRuleService" parent="defaultBundleRuleService" class="com.hybris.showcase.guidedselling.services.impl.MultiCurrencyBundleRuleService">
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="bundleRulesRestrictionsService" ref="bundleRulesRestrictionsService"/>
+    </bean>
+
+    <bean id="defaultBundleOrderEntryDao" class="com.hybris.showcase.guidedselling.daos.impl.DefaultOrderEntryDao" parent="orderEntryDao"/>
+
+    <alias alias="bundleOrderEntryDao" name="delegatingOrderEntryDao"/>
+    <alias alias="bundleCartEntryDao" name="delegatingOrderEntryDao"/>
+    <bean id="delegatingOrderEntryDao" class="com.hybris.showcase.guidedselling.daos.impl.DelegatingOrderEntryDao" parent="orderEntryDao" >
+        <property name="bundleOrderEntryDao" ref="defaultBundleOrderEntryDao"/>
+        <property name="bundleCartEntryDao" ref="defaultBundleCartEntryDao"/>
+    </bean>
+
+    <!-- CECS-30 bundle improvements - END -->
+
+    <alias name="defaultBundlePackageService" alias="bundlePackageService" />
+    <bean id="defaultBundlePackageService" class="com.hybris.showcase.guidedselling.services.impl.DefaultBundlePackageService">
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <alias name="defaultBundleOfferConverter" alias="bundleOfferConverter" />
+    <bean id="defaultBundleOfferConverter" class="com.hybris.showcase.guidedselling.BundleOfferConverter" parent="abstractPopulatingConverter">
+        <property name="bundleTemplateService" ref="bundleTemplateService"/>
+        <property name="populators">
+            <list>
+                <ref bean="bundleComponentPopulator"/>
+                <ref bean="bundleSelectionPopulator"/>
+                <ref bean="bundleDependenciesPopulator"/>
+                <ref bean="bundleDisableRulesPopulator"/>
+                <ref bean="bundleTotalsPopulator"/>
+            </list>
+        </property>
+        <property name="targetClass" value="com.hybris.showcase.guidedselling.data.BundleOfferData" />
+    </bean>
+
+    <alias name="defaultBundleComponentPopulator" alias="bundleComponentPopulator" />
+    <bean id="defaultBundleComponentPopulator" class="com.hybris.showcase.guidedselling.populators.BundleComponentPopulator">
+        <property name="commercePriceService" ref="subscriptionCommercePriceService"/>
+        <property name="productFacade" ref="productFacade"/>
+        <property name="bundleRuleService" ref="bundleRuleService"/>
+        <property name="percentPriceBundleRuleService" ref="percentPriceBundleRuleService"/>
+        <property name="priceDataFactory" ref="priceDataFactory"/>
+    </bean>
+
+    <alias name="defaultBundleDependenciesPopulator" alias="bundleDependenciesPopulator" />
+    <bean id="defaultBundleDependenciesPopulator" class="com.hybris.showcase.guidedselling.populators.BundleDependenciesPopulator">
+    </bean>
+
+    <alias name="defaultBundleDisableRulesPopulator" alias="bundleDisableRulesPopulator" />
+    <bean id="defaultBundleDisableRulesPopulator" class="com.hybris.showcase.guidedselling.populators.BundleDisableRulesPopulator">
+        <property name="productService" ref="productService" />
+        <property name="disableProductBundleRuleDao" ref="disableProductBundleRuleDao" />
+    </bean>
+
+    <alias name="defaultBundleSelectionPopulator" alias="bundleSelectionPopulator" />
+    <bean id="defaultBundleSelectionPopulator" class="com.hybris.showcase.guidedselling.populators.BundleSelectionPopulator">
+    </bean>
+
+    <alias name="defaultBundleTotalsPopulator" alias="bundleTotalsPopulator" />
+    <bean id="defaultBundleTotalsPopulator" class="com.hybris.showcase.guidedselling.populators.BundleTotalsPopulator">
+        <property name="priceDataFactory" ref="priceDataFactory"/>
+        <property name="billingTimeConverter" ref="billingTimeConverter"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <lookup-method name="getCartFacade" bean="cartFacade" />
+        <lookup-method name="getOrderFacade" bean="orderFacade" />
+    </bean>
+
+    <!-- CECS-148 Packages page - START -->
+    <alias name="defaultBundlePackagePopulator" alias="bundlePackagePopulator" />
+    <bean id="defaultBundlePackagePopulator" class="com.hybris.showcase.guidedselling.populators.BundlePackagePopulator">
+        <property name="productFacade" ref="productFacade" />
+        <property name="imageConverter" ref="imageConverter"/>
+        <property name="priceDataFactory" ref="priceDataFactory"/>
+    </bean>
+
+    <alias name="defaultBundlePackageConverter" alias="bundlePackageConverter" />
+    <bean id="defaultBundlePackageConverter" parent="abstractPopulatingConverter">
+        <property name="populators">
+            <ref bean="bundlePackagePopulator" />
+        </property>
+        <property name="targetClass" value="com.hybris.showcase.guidedselling.data.BundlePackageData" />
+    </bean>
+    <!-- CECS-148 Packages page - END -->
+
+    <!-- CECS-129: Guidedselling - change price - HBO promotion(3 months free) - START -->
+	<alias alias="changeProductPriceBundleRuleDao" name="restrictionFilteringChangeProductPriceBundleRuleDao"/>
+	<bean id="restrictionFilteringChangeProductPriceBundleRuleDao" class="com.hybris.showcase.guidedselling.daos.impl.RestrictionFilteringChangeProductPriceBundleRuleDao" parent="bundleRuleDao" >
+        <property name="bundleRulesRestrictionsService" ref="bundleRulesRestrictionsService"/>
+    </bean>
+	<!-- CECS-129: Guidedselling - change price - HBO promotion(3 months free)- END -->
+
+    <!--CECS-261 Disable rules not being filtered by restrictions-->
+    <alias alias="disableProductBundleRuleDao" name="restrictionFilteringDisableProductBundleRuleDao"/>
+    <bean id="restrictionFilteringDisableProductBundleRuleDao" class="com.hybris.showcase.guidedselling.daos.impl.RestrictionFilteringDisableProductBundleRuleDao" parent="bundleRuleDao" >
+        <property name="bundleRulesRestrictionsService" ref="bundleRulesRestrictionsService"/>
+    </bean>
+    <!--CECS-261 Disable rules not being filtered by restrictions-->
+
+    <!--CECS-216 Guided selling FAQ Component UI - START-->
+    <bean id="bundleTemplateFAQEntryPopulator" class="com.hybris.showcase.guidedselling.populators.BundleTemplateFAQEntryPopulator" />
+
+    <alias name="subBundleTemplatePopulator" alias="bundleTemplatePopulator" />
+    <bean id="subBundleTemplatePopulator" class="com.hybris.showcase.guidedselling.populators.SubBundleTemplatePopulator" parent="defaultBundleTemplatePopulator" >
+        <property name="bundleTemplateConverter" ref="bundleTemplateConverter"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="bundleTemplateConverter"/>
+        <property name="add" ref="bundleTemplateFAQEntryPopulator"/>
+    </bean>
+    <!--CECS-216 Guided selling FAQ Component UI - END-->
+
+    <!-- CECS-194 Packages Page - complete implementation START -->
+    <!-- CECS-194 Packages Page - complete implementation START -->
+    <bean id="bundleRecurringChargeEntryPopulator" class="com.hybris.showcase.guidedselling.populators.BundleRecurringChargeEntryPopulator" parent="abstractChargeEntryPopulator" />
+
+    <alias name="bundleRecurringChargeEntryConverter"	alias="recurringChargeEntryConverter"/>
+    <bean id="bundleRecurringChargeEntryConverter" parent="abstractPopulatingConverter" >
+        <lookup-method name="createTarget" bean="recurringChargeEntryData"/>
+        <property name="populators">
+            <list>
+                <ref bean="recurringChargeEntryPopulator"/>
+                <ref bean="bundleRecurringChargeEntryPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="editContractCartMethodsHook" class="com.hybris.showcase.guidedselling.order.hooks.EditContractCartMethodsHook">
+        <property name="orderChangesUnitOfWork" ref="orderChangesUnitOfWork"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="contractDao" ref="contractDao"/>
+        <property name="userService" ref="userService"/>
+        <property name="bundleTemplateService" ref="bundleTemplateService"/>
+    </bean>
+
+    <bean id="editContractAddToCartMethodHookMergeDirective" depends-on="commerceAddToCartMethodHooks" parent="listMergeDirective">
+        <property name="add" ref="editContractCartMethodsHook"/>
+    </bean>
+
+    <bean id="editContractUpdateCartEntryMethodHookMergeDirective" depends-on="commerceUpdateCartEntryMethodHooks" parent="listMergeDirective">
+        <property name="add" ref="editContractCartMethodsHook"/>
+    </bean>
+
+    <alias name="guidedSellingCartFacade" alias="cartFacade"/>
+    <bean id="guidedSellingCartFacade" class="com.hybris.showcase.guidedselling.facades.impl.GuidedSellingCartFacade" parent="defaultBundleCartFacade">
+        <property name="loyaltyPointsService" ref="loyaltyPointsService"/>
+    </bean>
+
+    <!-- CECS-88 guidedselling: edit existing contract -->
+    <bean id="editContractCreateSubscriptionsAspect" class="com.hybris.showcase.guidedselling.aspects.EditContractCreateSubscriptionsAspect">
+        <property name="userService" ref="userService"/>
+        <property name="customerAccountService" ref="customerAccountService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+    </bean>
+
+    <!-- CECS-88 guidedselling: edit existing contract -->
+   <!--  <bean id="editContractCancelSubscriptionsPlaceOrderMethodHook" class="com.hybris.showcase.guidedselling.order.hooks.EditContractCancelSubscriptionsPlaceOrderMethodHook">
+        <property name="subscriptionFacade" ref="subscriptionFacade"/>
+        <property name="orderChangesUnitOfWork" ref="orderChangesUnitOfWork"/>
+    </bean> -->
+
+    <!-- CECS-88 guidedselling: edit existing contract -->
+ <!--    <bean id="editContractCancelSubscriptionsPlaceOrderMethodHookMergeDirective" depends-on="commercePlaceOrderMethodHooks" parent="listMergeDirective">
+        <property name="add" ref="editContractCancelSubscriptionsPlaceOrderMethodHook"/>
+    </bean> -->
+
+    <bean id="revokeEntitlementsPlaceOrderMethodHook" class="com.hybris.showcase.guidedselling.order.hooks.RevokeEntitlementsPlaceOrderMethodHook">
+        <property name="orderChangesUnitOfWork" ref="orderChangesUnitOfWork"/>
+        <property name="entitlementFacade" ref="entitlementFacade"/>
+        <property name="contractDao" ref="contractDao"/>
+        <property name="userService" ref="userService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+    </bean>
+
+    <bean id="revokeEntitlementsPlaceOrderMethodHookMergeDirective" depends-on="commercePlaceOrderMethodHooks" parent="listMergeDirective">
+        <property name="add" ref="revokeEntitlementsPlaceOrderMethodHook"/>
+    </bean>
+
+    <bean id="modifyContractEntriesPlaceOrderMethodHook" class="com.hybris.showcase.guidedselling.order.hooks.ModifyContractEntriesPlaceOrderMethodHook">
+        <property name="orderChangesUnitOfWork" ref="orderChangesUnitOfWork"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="contractDao" ref="contractDao"/>
+    </bean>
+
+    <!-- CECS-88 guidedselling: edit existing contract -->
+    <bean id="modifyContractEntriesPlaceOrderMethodHookMergeDirective" depends-on="commercePlaceOrderMethodHooks" parent="listMergeDirective">
+        <property name="add" ref="modifyContractEntriesPlaceOrderMethodHook"/>
+        <property name="afterBeanNames">
+            <list value-type="java.lang.String" >
+                <value>revokeEntitlementsPlaceOrderMethodHook</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- CECS-88 guidedselling: edit existing contract -->
+    <alias name="defaultOrderChangesUnitOfWork" alias="orderChangesUnitOfWork" />
+    <bean id="defaultOrderChangesUnitOfWork" class="com.hybris.showcase.guidedselling.services.impl.DefaultOrderChangesUnitOfWork">
+        <property name="modelService" ref="modelService" />
+        <property name="cartService" ref="cartService" />
+    </bean>
+
+    <bean id="guidedSellingOrderEntryPopulator" class="com.hybris.showcase.guidedselling.populators.GuidedsellingOrderEntryPopulator"/>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderEntryConverter"/>
+        <property name="add" ref="guidedSellingOrderEntryPopulator"/>
+    </bean>
+
+    <bean id="guidedSellingOrderPopulator" class="com.hybris.showcase.guidedselling.populators.GuidedsellingOrderPopulator"/>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderConverter"/>
+        <property name="add" ref="guidedSellingOrderPopulator"/>
+    </bean>
+    
+    <bean id="bundleRulePrincipalRestrictionEvaluator" class="com.hybris.showcase.guidedselling.bundlerules.impl.BundleRulePrincipalRestrictionEvaluator">
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean id="recurringChargeRestrictionEvaluator" class="com.hybris.showcase.guidedselling.bundlerules.impl.RecurringChargeRestrictionEvaluator">
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <util:list id="bundleRulesRestrictionEvaluators">
+        <ref bean="bundleRulePrincipalRestrictionEvaluator"/>
+        <ref bean="recurringChargeRestrictionEvaluator"/>
+    </util:list>
+	
+	<alias name="defaultBundleRulesRestrictionsService" alias="bundleRulesRestrictionsService"/>
+    <bean id="defaultBundleRulesRestrictionsService" class="com.hybris.showcase.guidedselling.bundlerules.impl.DefaultBundleRulesRestrictionsService">
+        <property name="restrictionEvaluators" ref="bundleRulesRestrictionEvaluators"/>
+    </bean>
+    
+    <alias name="currentFactoryFindRestrictedBundlePricingStrategy" alias="currentFactoryFindPricingStrategy"/>
+    <bean id="currentFactoryFindRestrictedBundlePricingStrategy" class="com.hybris.showcase.guidedselling.strategy.impl.FindRestrictedBundlePricingWithCurrentPriceFactoryStrategy" parent="currentFactoryFindBundlePricingStrategy">
+        <property name="bundleRulesRestrictionsService" ref="bundleRulesRestrictionsService"/>
+    </bean>
+    
+    <!--CECS-236 handle loyalty points during order calculation - START-->
+    <alias alias="currentFactoryFindPricingStrategy" name="currentFactoryFindLoyaltyPricingStrategy"/>
+    <bean id="currentFactoryFindLoyaltyPricingStrategy" class="com.hybris.showcase.guidedselling.strategy.impl.FindLoyaltyPricingWithCurrentPriceFactoryStrategy" parent="currentFactoryFindRestrictedBundlePricingStrategy">
+        <property name="loyaltyPointsService" ref="loyaltyPointsService" />
+    </bean>
+
+    <bean id="guidedsellingEntitlementPlaceOrderMethodHook"
+          class="com.hybris.showcase.guidedselling.hooks.GuidedsellingEntitlementPlaceOrderMethodHook" parent="entitlementPlaceOrderMethodHook">
+        <property name="orderChangesUnitOfWork" ref="orderChangesUnitOfWork"/>
+    </bean>
+
+    <bean id="entitlementPlaceOrderMethodHooksListMergeDirective" depends-on="commercePlaceOrderMethodHooks" parent="listMergeDirective" >
+        <property name="add" ref="guidedsellingEntitlementPlaceOrderMethodHook"  />
+    </bean>
+    
+    <bean id="userOrderPostInitHook" class="com.hybris.showcase.guidedselling.setup.impl.UserOrderInitHook">
+     	<property name="site" value="tricast"/>
+     	<property name="productCatalog" value="tricastProductCatalog"/>
+     	<property name="customer" value="brown.joe.ny@gmail.com"/>
+     	<property name="packageCode" value="fibreStarter"/>
+     	<property name="months" value="-6"/>
+    </bean>
+    
+    <bean id="userOrderPostInitHookMergeDirective" depends-on="postInitHooks" parent="listMergeDirective" >
+		<property name="add" ref="userOrderPostInitHook" />
+	</bean>
+	
+	<!-- CECS-653 -->
+	<alias name="guidedsellingSubscriptionOrderPopulator" alias="subscriptionOrderPopulator" />
+	<bean id="guidedsellingSubscriptionOrderPopulator" class="com.hybris.showcase.guidedselling.populators.GuidedsellingSubscriptionOrderPopulator" parent="defaultSubscriptionOrderPopulator" />	
+	<!-- CECS-653 -->
+
+    <alias name="defaultGuidedsellingNewOrderPrepareInterceptor" alias="guidedsellingNewOrderPrepareInterceptor"/>
+    <bean id="defaultGuidedsellingNewOrderPrepareInterceptor" class="com.hybris.showcase.guidedselling.order.interceptors.GuidedsellingNewOrderPrepareInterceptor">
+        <property name="timeService" ref="timeService"/>
+    </bean>
+
+    <bean id="guidedsellingNewOrderPrepareMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="guidedsellingNewOrderPrepareInterceptor"/>
+        <property name="typeCode" value="Order"/>
+    </bean>
+
+    <alias name="defaultContractOptionsFacade" alias="contractOptionsFacade"/>
+    <bean id="defaultContractOptionsFacade" class="com.hybris.showcase.guidedselling.facades.impl.DefaultContractOptionsFacade">
+        <property name="timeService" ref="timeService"/>
+        <property name="cartService" ref="cartService"/>
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <!-- CECS-817 -->
+    <alias name="findOrderPercentDiscountValuesStrategy" alias="findPercentDiscountValuesStrategy" />
+    <bean id="findOrderPercentDiscountValuesStrategy"
+          class="com.hybris.showcase.guidedselling.strategy.impl.FindOrderPercentDiscountValuesStrategy"
+          parent="abstractBusinessService"/>
+
+    <bean id="addFindOrderPercentDiscountValuesStrategy" depends-on="calculationService" parent="listMergeDirective" >
+        <property name="add" ref="findPercentDiscountValuesStrategy" />
+        <property name="listPropertyDescriptor" value="findDiscountsStrategies" />
+    </bean>
+    <!-- CECS-817 -->
+    
+    <!-- CECS-837 Percentage Product Price Rule - labels in the storefront - START -->
+    <alias alias="percentPriceBundleRuleService" name="defaultPercentPriceBundleRuleService"/>
+	<bean id="defaultPercentPriceBundleRuleService" class="com.hybris.showcase.guidedselling.bundlerules.impl.DefaultPercentPriceBundleRuleService" >
+		<property name="changeProductPercentPriceBundleRuleDao" ref="changeProductPercentPriceBundleRuleDao" />
+		<property name="cartEntryDao" ref="bundleCartEntryDao" />
+	</bean>
+	
+	<alias alias="changeProductPercentPriceBundleRuleDao" name="defaultChangeProductPercentPriceBundleRuleDao"/>
+	<bean id="defaultChangeProductPercentPriceBundleRuleDao" class="com.hybris.showcase.guidedselling.daos.impl.DefaultChangeProductPercentPriceBundleRuleDao" parent="bundleRuleDao" />
+    <!-- CECS-837 Percentage Product Price Rule - labels in the storefront - END -->
+    
+    <alias alias="bundleTemplateDao" name="guidedSellingBundleTemplateDao"/>
+	<bean id="guidedSellingBundleTemplateDao" class="com.hybris.showcase.guidedselling.daos.impl.GuidedSellingBundleTemplateDao" parent="defaultBundleTemplateDao" />
+    <!-- CECS-837 Percentage Product Price Rule - labels in the storefront - END -->
+    
+
+</beans>

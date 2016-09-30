@@ -1,0 +1,5 @@
+INSERT_UPDATE ComponentTypeGroup;code[unique=true]
+;footer
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;footer;SeewhyFooterComponent

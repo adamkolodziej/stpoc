@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="BundlePackageDescriptionSlot.code"/>
+            <property qualifier="BundlePackageDescriptionSlot.name"/>
+            <property qualifier="BundlePackageDescriptionSlot.catalogVersion"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="BundlePackageDescriptionSlot.code"/>
+            <property qualifier="BundlePackageDescriptionSlot.name"/>
+            <property qualifier="BundlePackageDescriptionSlot.catalogVersion"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="BundlePackageDescriptionSlot.code"/>
+        <property qualifier="BundlePackageDescriptionSlot.name"/>
+	</label>
+</base>

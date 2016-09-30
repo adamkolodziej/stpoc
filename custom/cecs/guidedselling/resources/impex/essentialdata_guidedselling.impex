@@ -1,0 +1,10 @@
+
+# CECS-149 Load up preselection on guidedselling
+INSERT_UPDATE SearchRestriction;code[unique=true];name[lang=en];query;principal(UID);restrictedType(code)[unique=true];active;generate
+;frontend_BundlePackage;BundlePackage on site;"{item:catalogVersion} IN (?session.catalogversions)";customergroup;BundlePackage;true;true
+;frontend_FAQEntry;FAQEntry on site;"{item:catalogVersion} IN (?session.catalogversions)";customergroup;FAQEntry;true;true
+;frontend_BundleTemplatePrincipals;BundleTempalte for principals;"
+NOT EXISTS ({{SELECT {bpr:target} FROM {Bundle2PrincipalRelation as bpr} WHERE {bpr:source} = {item:pk}}})
+OR
+EXISTS ({{ SELECT {bpr:target} FROM {Bundle2PrincipalRelation as bpr} WHERE {bpr:source} = {item:pk} AND ({bpr:target} = ?session.user OR {bpr:target} IN (?session.user.groups)) }})
+";customergroup;BundleTemplate;true;true

@@ -1,0 +1,11 @@
+#Mon, 08 Jul 2013 23:45:07 +0200
+#Ant properties
+#Mon Jul 08 23:45:07 CEST 2013
+builddate=20130708 2342
+description=productlists
+name=productlists
+vendor=hybris
+version=5.0.2.0
+
+revision=20209
+svnurl=https\://partnersvn.hybris.de/hybris/projectaccelerator/tags/5.0.2.0/projectaccelerator/productlists

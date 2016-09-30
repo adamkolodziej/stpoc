@@ -1,0 +1,13 @@
+#
+# Import the Tricast BaseStore
+#
+
+# Language
+\$lang=$lang.toLowerCase()
+
+#set( $baseStoreRows = $query.load('store','BaseStore') )
+# Create Base Store
+UPDATE BaseStore;uid[unique=true];name[lang=\$lang]
+#foreach( $row in $baseStoreRows )
+ ;$row.key;"$row.values.name"
+#end

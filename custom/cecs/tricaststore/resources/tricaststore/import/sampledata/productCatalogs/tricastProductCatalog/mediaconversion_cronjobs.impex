@@ -1,0 +1,12 @@
+# vim:encoding=utf-8
+$productCatalog=tricastProductCatalog
+$productVersion=Staged
+$catalogVersion=catalogVersion(catalog(id[default=$productCatalog]),version[default=$productVersion])[default=$productCatalog:$productVersion]
+
+$maxThreads=3
+
+INSERT_UPDATE MediaConversionCronJob ; code[unique=true]             ; job(code)          ; sessionLanguage(isocode) ; maxThreads[default=$maxThreads] ; $catalogVersion
+                                     ; tricastMediaConversionCronjob ; mediaConversionJob ; en                       ;                                 
+
+INSERT_UPDATE ExtractMediaMetaDataCronJob ; code[unique=true]                  ; job(code)               ; sessionLanguage(isocode) ; maxThreads[default=$maxThreads] ; $catalogVersion
+                                          ; tricastExtractMediaMetaDataCronJob ; extractMediaMetaDataJob ; en                       ;                                 

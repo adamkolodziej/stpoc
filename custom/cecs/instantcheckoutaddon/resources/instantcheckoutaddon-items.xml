@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		
+		<itemtype code="InstantCheckoutComponent" autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.hybris.showcase.instantcheckout.jalo.InstantCheckoutComponent">
+			<description>CMS component - a button for instant purchase of a product</description>
+			<attributes>
+				<attribute type="java.lang.Boolean" qualifier="displayPrice">
+					<description>A boolean property used to determine if the price should be shown.</description>
+		            <persistence type="property" />
+		        </attribute>
+				<attribute qualifier="buttonLabel" type="localized:java.lang.String">
+					<persistence type="property" />
+					<description>Localized instant checkout button label.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+        <itemtype code="InstantLoyaltyCheckoutComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                  jaloclass="com.hybris.showcase.instantcheckout.jalo.InstantLoyaltyCheckoutComponent">
+            <description>CMS component - a button for instant purchase of a product using loyalty points</description>
+            <attributes>
+                <attribute type="java.lang.Boolean" qualifier="displayPrice">
+                    <description>A boolean property used to determine if the price should be shown.</description>
+                    <persistence type="property" />
+                </attribute>
+                <attribute qualifier="buttonLabel" type="localized:java.lang.String">
+                    <persistence type="property" />
+                    <description>Localized instant checkout button label.</description>
+                </attribute>
+            </attributes>
+        </itemtype>
+		
+	</itemtypes>
+</items>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+	<extension abstractclassprefix="Generated" classprefix="Guidedselling" description="guidedselling extension" managername="GuidedsellingManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="guidedselling">
+
+		<!-- you should add all required extensions to this list, except platform extensions which are automatically required -->         
+
+		<requires-extension name="configurablebundlefacades"/>
+		<requires-extension name="b2ctelcofacades"/><!-- BundleTabData -->
+		<requires-extension name="commercefacades"/>
+		<requires-extension name="entitlementservices"/>
+
+		<requires-extension name="loyaltypoints"/>
+		<requires-extension name="backoffice"/>
+		
+		<requires-extension name="showcasecommon"/>
+
+		<coremodule generated="true" manager="com.hybris.showcase.guidedselling.jalo.GuidedsellingManager" packageroot="com.hybris.showcase.guidedselling"/>
+
+		<meta key="backoffice-module" value="true"/>
+	</extension>
+
+</extensioninfo>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+
+	 <bean class="de.hybris.platform.commercefacades.order.data.CCPaymentInfoData">
+		<property name="yBillingCardId" type="String"/>
+		<property name="yBillingBusinessAgreementId" type="String"/>
+	</bean>
+
+    <bean class="com.hybris.showcase.ybillingintegration.data.YBillingCharacteristicData">
+        <property name="bundleTemplate" type="String"/>
+        <property name="productCode" type="String"/>
+        <property name="charCode" type="String"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.ybillingintegration.data.YBillingDetailsMainData">
+        <property name="yBillingOrderId" type="String"/>
+        <property name="processType" type="String"/>
+        <property name="orderType" type="String"/>
+        <property name="orderedProductCode" type="String"/>
+        <property name="orderDate" type="java.util.Date"/>
+        <property name="orderStatus" type="String"/>
+        <property name="changesList" type="java.util.List&lt;com.hybris.showcase.ybillingintegration.data.YBillingCharacteristicData>"/>
+        <property name="contractStartTerm" type="java.util.Date"/>
+        <property name="contractStartTermTimeZone" type="String"/>
+        <property name="providerContractId" type="String"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.ybillingintegration.data.YBillingContractDetailsData" extends="YBillingDetailsMainData">
+        <property name="contractNumber" type="String"/>
+        <property name="contractVersion" type="String"/>
+        <property name="contractStartDate" type="java.util.Date"/>
+        <property name="contractEndDate" type="java.util.Date"/>
+        <property name="contractVersionStartDate" type="java.util.Date"/>
+        <property name="contractVersionEndDate" type="java.util.Date"/>
+        <property name="activationStatus" type="Boolean"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.ybillingintegration.data.YBillingOrderDetailsData" extends="YBillingDetailsMainData">
+        <property name="orderItem" type="String"/>
+        <property name="oneTimeNetValue" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="oneTimeTaxAmount" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="oneTimeGrossValue" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="recurringNetValue" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="recurringTaxAmount" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="recurringGrossValue" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="recurringDuration" type="java.math.BigDecimal"/>
+        <property name="recurringTimeUnit" type="String"/>
+        <property name="soldTo" type="String"/>
+        <property name="soldToAddress" type="String"/>
+        <property name="shipTo" type="String"/>
+        <property name="shipToAddress" type="String"/>
+        <property name="billTo" type="String"/>
+        <property name="billToAddress" type="String"/>
+        <property name="payerTo" type="String"/>
+        <property name="payerToAddress" type="String"/>
+    </bean>
+
+</beans>

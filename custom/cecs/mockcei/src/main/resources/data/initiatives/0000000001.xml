@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry m:etag="W/&quot;datetimeoffset'2015-08-05T12%3A06%3A47Z'&quot;" xml:base="https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/" xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+    <id>https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/Initiatives('0000000001')</id>
+    <title type="text">Unhappy Customers on the go</title>
+    <updated>2015-10-06T12:39:11Z</updated>
+    <category term="CUAN_COMMON_SRV.Initiative" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="Initiatives('0000000001')" rel="edit" title="Initiative"/>
+    <link href="Initiatives('0000000001')/TargetGroup" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/TargetGroup" type="application/atom+xml;type=entry" title="TargetGroup">
+        <m:inline>
+            <entry m:etag="W/&quot;datetimeoffset'2015-08-05T12%3A06%3A36Z'&quot;" xml:base="https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/">
+                <id>https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/TargetGroups('0000000041')</id>
+                <title type="text">unhappy-customers-on-the-go</title>
+                <updated>2015-10-06T12:39:11Z</updated>
+                <category term="CUAN_COMMON_SRV.TargetGroup" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+                <link href="TargetGroups('0000000041')" rel="edit" title="TargetGroup"/>
+                <content type="application/xml">
+                    <m:properties>
+                        <d:CustomerMemberCount>1</d:CustomerMemberCount>
+                    </m:properties>
+                </content>
+            </entry>
+        </m:inline>
+    </link>
+    <content type="application/xml">
+        <m:properties>
+            <d:LifecycleStatus m:type="CUAN_COMMON_SRV.StatusCT">
+                <d:StatusCode>2</d:StatusCode>
+                <d:StatusDescription>Released</d:StatusDescription>
+            </d:LifecycleStatus>
+            <d:Description>scenario 1</d:Description>
+            <d:InitiativeId>0000000001</d:InitiativeId>
+            <d:InitiativeIdExt>1</d:InitiativeIdExt>
+            <d:Category>
+                <d:CategoryCode>Z4</d:CategoryCode>
+            </d:Category>
+            <d:Name>Unhappy Customers on the go</d:Name>
+        </m:properties>
+    </content>
+</entry>
+

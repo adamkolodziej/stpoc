@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+	<extension name="tricaststore"
+	           abstractclassprefix="Generated"
+	           classprefix="Tricaststore"
+	           managername="TricaststoreManager"
+	           managersuperclass="de.hybris.platform.jalo.extension.Extension"
+			>
+
+		<requires-extension name="acceleratorservices"/>
+		<!-- CECS-68 responsive my-account homepage - cms START -->
+		<requires-extension name="showcasecommon"/>
+		<!-- CECS-68 responsive my-account homepage - cms END -->
+
+		<coremodule packageroot="com.hybris.showcase.cecs.tricaststore"
+		            manager="com.hybris.showcase.cecs.tricaststore.jalo.TricaststoreManager"
+		            generated="true"
+				/>
+
+	</extension>
+
+</extensioninfo>

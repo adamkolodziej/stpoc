@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="src" path="/addonsupport"/>
+	<classpathentry exported="true" kind="src" path="/acceleratorstorefrontcommons"/>
+	<classpathentry exported="true" kind="src" path="/ticketsystem"/>
+	<classpathentry exported="true" kind="src" path="/yacceleratorcore"/>
+	<classpathentry exported="true" kind="src" path="/emsextras"/>
+	<classpathentry exported="true" kind="src" path="/showcasecommon"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="testsrc"/>
+	<classpathentry kind="src" path="gensrc"/>
+	<classpathentry exported="true" kind="con" path="net.sf.jasperreports.JR_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="com.jaspersoft.server.JRS_CONTAINER"/>
+	<classpathentry kind="lib" path="classes"/>
+	<classpathentry kind="output" path="eclipsebin/"/>
+</classpath>

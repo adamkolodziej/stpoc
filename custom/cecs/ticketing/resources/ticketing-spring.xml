@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+    <bean id="ticketingCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
+        <property name="supportedChannels">
+            <list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+                <value>B2C</value>
+            </list>
+        </property>
+        <property name="addonExtensionMetadata">
+            <bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+                <property name="suffixChannel" value="false"/>
+                <property name="baseExtensionName" value="ticketing"/>
+            </bean>
+        </property>
+    </bean>
+
+    <alias name="defaultTicketConverter" alias="ticketConverter"/>
+    <bean id="defaultTicketConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.hybris.platform.ticketing.data.TicketData"/>
+        <property name="populators">
+            <list>
+                <ref bean="ticketPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultTicketPopulator" alias="ticketPopulator"/>
+    <bean id="defaultTicketPopulator" class="com.hybris.platform.ticketing.facades.converters.populator.TicketPopulator">
+        <property name="enumerationService" ref="enumerationService"/>
+        <property name="orderPopulator" ref="orderPopulator" />
+    </bean>
+
+    <!-- CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie START -->
+    <alias name="defaultGiftEntitlementPopulator" alias="giftEntitlementPopulator"/>
+    <bean id="defaultGiftEntitlementPopulator"
+          class="com.hybris.platform.ticketing.facades.converters.populator.GiftEntitlementPopulator">
+        <property name="productFacade" ref="productFacade"/>
+        <property name="userService" ref="userService"/>
+        <property name="entitlementFacade" ref="entitlementFacade"/>
+    </bean>
+
+    <alias name="defaultGiftEntitlementConverter" alias="giftEntitlementConverter"/>
+    <bean id="defaultGiftEntitlementConverter" parent="abstractPopulatingConverter">
+        <property name="populators">
+            <ref bean="giftEntitlementPopulator"/>
+        </property>
+        <property name="targetClass" value="com.hybris.platform.ticketing.data.ProductEntitlementData"/>
+    </bean>
+
+    <alias name="defaultTicketFacade" alias="ticketFacade"/>
+    <bean id="defaultTicketFacade" class="com.hybris.platform.ticketing.facades.impl.DefaultTicketFacade">
+        <property name="userService" ref="userService"/>
+        <property name="ticketService" ref="ticketService"/>
+        <property name="ticketConverter" ref="ticketConverter"/>
+        <property name="ticketBusinessService" ref="ticketBusinessService"/>
+        <property name="enumerationService" ref="enumerationService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="customerAccountService" ref="customerAccountService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+    </bean>
+
+    <alias name="dummyExternalManagerTicketFacade" alias="externalManagerTicketFacade"/>
+    <bean id="dummyExternalManagerTicketFacade"
+          class="com.hybris.platform.ticketing.facades.impl.DummyExternalManagerTicketFacade"/>
+
+    <!-- CECS-571 Dispute Expenses -->
+    <bean id="basicExpenseDisputePopulator" class="com.hybris.platform.ticketing.populators.BasicExpenseDisputePopulator"/>
+
+    <alias name="defaultExpenseDisputeConverter" alias="expenseDisputeConverter"/>
+    <bean id="defaultExpenseDisputeConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.hybris.platform.ticketing.data.ExpenseDisputeData"/>
+        <property name="populators">
+            <list>
+                <ref bean="basicExpenseDisputePopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Reverse converter for ExpenseDispute -->
+    <alias name="defaultReverseExpenseDisputeConverter" alias="reverseExpenseDisputeConverter"/>
+    <bean id="defaultReverseExpenseDisputeConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.hybris.platform.ticketing.model.ExpenseDisputeModel"/>
+        <property name="populators">
+            <list>
+                <ref bean="reverseExpenseDisputePopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultReverseExpenseDisputePopulator" alias="reverseExpenseDisputePopulator"/>
+    <bean id="defaultReverseExpenseDisputePopulator" class="com.hybris.platform.ticketing.populators.ReverseExpenseDisputePopulator">
+        <property name="ticketService" ref="ticketService"/>
+        <property name="expenseService" ref="expenseService"/>
+    </bean>
+
+    <alias name="defaultExpenseDisputeFacade" alias="expenseDisputeFacade"/>
+    <bean id="defaultExpenseDisputeFacade" class="com.hybris.platform.ticketing.facades.impl.DefaultExpenseDisputeFacade">
+        <property name="reverseExpenseDisputeConverter" ref="reverseExpenseDisputeConverter"/>
+        <property name="expenseDisputeService" ref="expenseDisputeService"/>
+    </bean>
+
+    <alias name="defaultExpenseDisputeService" alias="expenseDisputeService"/>
+    <bean id="defaultExpenseDisputeService" class="com.hybris.platform.ticketing.services.DefaultExpenseDisputeService">
+        <property name="expenseDisputeDao" ref="expenseDisputeDao"/>
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <alias name="defaultExpenseDisputeDao" alias="expenseDisputeDao"/>
+    <bean id="defaultExpenseDisputeDao" class="com.hybris.platform.ticketing.daos.impl.DefaultExpenseDisputeDao">
+        <property name="modelService" ref="modelService"/>
+        <property name="expenseDisputeCodeGenerator" ref="expenseDisputeCodeGenerator"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+
+    <alias alias="expenseDisputeCodeGenerator" name="defaultExpenseDisputeCodeGenerator"/>
+    <bean id="defaultExpenseDisputeCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+        <property name="key" value="Dispute"/>
+        <property name="digits" value="8"/>
+        <property name="start" value="00000000"/>
+    </bean>
+
+    <!-- CECS-601 once expense disputed is started that could be reflected in UI START -->
+    <bean id="currentExpenseDisputePopulator" class="com.hybris.platform.ticketing.populators.CurrentExpenseDisputePopulator">
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="expenseConverter"/>
+        <property name="add" ref="currentExpenseDisputePopulator"/>
+    </bean>
+    <!-- CECS-601 once expense disputed is started that could be reflected in UI END -->
+</beans>

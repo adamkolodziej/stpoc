@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wizard-config  showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+ <displayed-properties>
+  <group qualifier="Essentials" visible="true" initially-opened="true">
+   <label key="config.general.mandatorydata" />
+   <property qualifier="BundleTemplate.id" />
+   <property qualifier="BundleTemplate.name" />
+   <property qualifier="BundleTemplate.catalogVersion" editorCode="simple"/>
+   <property qualifier="BundleTemplate.version" />
+   <!-- CECS-30 bundle improvements - START -->
+   <property qualifier="BundleTemplate.bundleComponentType"/>
+   <!-- CECS-30 bundle improvements - END -->
+   <property qualifier="BundleTemplate.parentTemplate" />
+   <property qualifier="BundleTemplate.faqEntries"/>
+  </group>
+ </displayed-properties>
+</wizard-config>

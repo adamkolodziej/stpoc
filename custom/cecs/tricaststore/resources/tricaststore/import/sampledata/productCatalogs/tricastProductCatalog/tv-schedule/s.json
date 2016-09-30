@@ -1,0 +1,42 @@
+[
+  {
+    name:'Chasing Yesterday',
+    id:14,
+    time:{
+      start:'11:00',
+      end:'11:30am'
+    },
+    length:30,
+    play:false
+  },
+  {
+    name:'Reflektor',
+    id:141,
+    time:{
+      start:'11:30',
+      end:'12:15pm'
+    },
+    length:45,
+    play:false
+  },
+  {
+    name:'Banff National Park',
+    id:15,
+    time:{
+      start:'12:15',
+      end:'1:30pm'
+    },
+    length:75,
+    play:true
+  },
+  {
+    name:'Need Your Light',
+    id:16,
+    time:{
+      start:'1:30',
+      end:'2:30pm'
+    },
+    length:60,
+    play:false
+  }
+]

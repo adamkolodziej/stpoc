@@ -1,0 +1,46 @@
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+// Base
+//-------------------------
+
+html {
+	min-height: 100%;
+}
+
+input, textarea {
+  outline: none;
+  resize: none;
+}
+
+body {
+	height: 100%;
+	padding-top: 50px;
+	font-family: helvetica, arial, sans-serif;
+	font-size: 12px;
+	line-height: 1.34;
+	background-color: #E9EAED;
+	color: #141823;
+}
+
+a {
+	text-decoration: none;
+  	color: #3b5998;
+}
+
+.container {
+	width: 965px;
+	margin: auto;
+}
+
+.clearfix:after {
+  content: " "; /* Older browser do not support empty content */
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}

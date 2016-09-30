@@ -1,0 +1,1113 @@
+$contentCatalog = tricastContentCatalog
+$contentCatalogName = Tricast Content Catalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+$productCatalog = tricastProductCatalog
+$productCatalogName = Tricast Product Catalog
+$productCV = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$picture = media(code, $contentCV);
+$image = image(code, $contentCV);
+$media = media(code, $contentCV);
+$page = page(uid, $contentCV);
+$contentPage = contentPage(uid, $contentCV);
+$product = product(code, $productCV)
+$category = category(code, $productCV)
+$siteResource = jar:com.hybris.showcase.cecs.tricaststore.constants.TricaststoreConstants&/tricaststore/import/sampledata/contentCatalogs/$contentCatalog
+$productResource = jar:com.hybris.showcase.cecs.tricaststore.constants.TricaststoreConstants&/tricaststore/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms = jar:com.hybris.showcase.cecs.tricaststore.constants.TricaststoreConstants&/tricaststore/import/sampledata/cockpits/cmscockpit
+$servicesjarResourceCms = jar:com.hybris.showcase.showcasecockpits.constants.ShowcasecockpitsConstants&/showcasecockpits/import/cockpits/cmscockpit
+
+
+# Site Logo
+INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/jpeg']; altText; folder(qualifier)[default = 'images']
+; ; /images/theme/logo-hybris.png ; logo-tricast.png ; $siteResource/images/theme/logo-tricast.png ; image/png ; hybris Accelerator ;
+#; ; /images/theme/logo-hybris_zh.png ; logo-hybris_zh.png ; $siteResource/images/theme/logo-hybris_zh.png ; image/png ; hybris Accelerator ;
+
+# Site Logo Component
+INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink; cssClass
+; ; SiteLogoComponent ; Site Logo Component ; SiteLogoComponent ; "/" ; navbar-brand
+
+# Facebook Login Component
+INSERT_UPDATE FacebookOAuth2LoginComponent; $contentCV[unique = true]; uid[unique = true]; name; showImage; showName; &componentRef
+; ; FacebookLoginComponent ; Facebook Login Component ; true ; false ; FacebookLoginComponent
+
+# CECS-448 log in with facebook is missing
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; SocialSignInSlot ; FacebookLoginComponent
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']; $category; $product;
+; ; HomepageNavLink                 ; Home Page Nav Link              ; /                                                                           ; HomepageNavLink                 ; HomepageNavLink                 ;           ; ; ;
+; ; StoreFinderLink                 ; Store Finder Link               ; /store-finder                                                               ; StoreFinderLink                 ; StoreFinderLink                 ;           ; ; ;
+; ; LoginLink                       ; Login Link                      ; /login                                                                      ; LoginLink                       ; LoginLink                       ;           ; ; ;
+# CECS-80: Site navigation - START
+; ; AboutHybrisLink                 ; About Hybris Link               ; "http://www.hybris.com"                                                     ; AboutHybrisLink                 ; AboutHybrisLink                 ; newWindow ; ; ;
+; ; FAQLink                         ; FAQ Link                        ; /faq                                                                        ; FAQLink                         ; FAQLin                          ;           ; ; ;
+; ; TermsAndConditionsLink          ; Terms and Conditions Link       ; /termsAndConditions                                                         ; TermsAndConditionsLink          ; TermsAndConditionsLink          ;           ; ; ;
+; ; AccountHomeLink                 ; Account Home Link               ; /my-account                                                                 ; AccountHomeLink                 ; AccountHomeLink                 ;           ; ; ;
+; ; AccountProfileLink              ; AccountProfileLink              ; /my-account/profile                                                         ; AccountProfileLink              ; AccountProfileLink              ;           ; ; ;
+; ; AccountPersonalDetailsLink      ; AccountPersonalDetailsLink      ; /my-account/profile                                                         ; AccountPersonalDetailsLink      ; AccountPersonalDetailsLink      ;           ; ; ;
+; ; AccountUpdatePasswordLink       ; AccountUpdatePasswordLink       ; /my-account/update-password                                                 ; AccountUpdatePasswordLink       ; AccountUpdatePasswordLink       ;           ; ; ;
+; ; AccountAddressBookLink          ; AccountAddressBookLink          ; /my-account/address-book                                                    ; AccountAddressBookLink          ; AccountAddressBookLink          ;           ; ; ;
+; ; AccountManageAddressLink        ; AccountManageAddressLink        ; /my-account/address-book                                                    ; AccountManageAddressLink        ; AccountManageAddressLink        ;           ; ; ;
+; ; AccountPaymentDetailsLink       ; AccountPaymentDetailsLink       ; /my-account/payment-details                                                 ; AccountPaymentDetailsLink       ; AccountPaymentDetailsLink       ;           ; ; ;
+; ; AccountManagePaymentDetailsLink ; AccountManagePaymentDetailsLink ; /my-account/payment-details                                                 ; AccountManagePaymentDetailsLink ; AccountManagePaymentDetailsLink ;           ; ; ;
+; ; AccountOrderHistoryLink         ; AccountOrderHistoryLink         ; /my-account/orders                                                          ; AccountOrderHistoryLink         ; AccountOrderHistoryLink         ;           ; ; ;
+; ; AccountViewOrderHistoryLink     ; AccountViewOrderHistoryLink     ; /my-account/orders                                                          ; AccountViewOrderHistoryLink     ; AccountViewOrderHistoryLink     ;           ; ; ;
+; ; MyTricastLink                   ; My Tricast Link                 ; /my-account                                                                 ; MyTricastLink                   ; MyTricastLink                   ;           ; ; ;
+; ; WatchTvLink                     ; Watch TV Link                   ; /channels                                                                   ; WatchTvLink                     ; WatchTvLink                     ;           ; ; ;
+; ; WatchTvBrowseAllLink            ; Watch TV Browse All Link        ; /channels                                                                   ; WatchTvBrowseAllLink            ; WatchTvBrowseAllLink            ;           ; ; ;
+; ; VideosLink                      ; Videos Link                     ; /Open-Catalogue/TV-Channels-and-TV-Content/Videos/c/videos                  ; VideosLink                      ; VideosLink                      ;           ; ; ;
+; ; VideosBrowseAllLink             ; Videos Browse All Link          ; /Open-Catalogue/TV-Channels-and-TV-Content/Videos/c/videos                  ; VideosBrowseAllLink             ; VideosBrowseAllLink             ;           ; ; ;
+; ; MoviesLink                      ; Movies Link                     ; /Open-Catalogue/TV-Channels-and-TV-Content/Videos/Movies/c/movies           ; MoviesLink                      ; MoviesLink                      ;           ; ; ;
+; ; TvShowsLink                     ; TvShows Link                    ; /Open-Catalogue/TV-Channels-and-TV-Content/Videos/TV-Shows/c/tvShows        ; TvShowsLink                     ; TvShowsLink                     ;           ; ; ;
+; ; TricastPackagesLink             ; Tricast Packages Link           ; /packages/TriCast                                                           ; TricastPackagesLink             ; TricastPackagesLink             ;           ; ; ;
+; ; ShopLink                        ; Shop Link                       ; /Open-Catalogue/Merchandise/c/merchandise                                   ; ShopLink                        ; ShopLink                        ;           ; ; ;
+; ; ShopBrowseAllLink               ; Shop Browse All Link            ; /Open-Catalogue/Merchandise/c/merchandise                                   ; ShopBrowseAllLink               ; ShopBrowseAllLink               ;           ; ; ;
+; ; T-ShirtsLink                    ; T-Shirts Link                   ; /Open-Catalogue/Merchandise/T-Shirts/c/t-shirts                             ; T-ShirtsLink                    ; T-ShirtsLink                    ;           ; ; ;
+; ; MugsLink                        ; Mugs Link                       ; /Open-Catalogue/Merchandise/Mugs/c/mugs                                     ; MugsLink                        ; MugsLink                        ;           ; ; ;
+; ; HoodiesLink                     ; Hoodies Link                    ; /Open-Catalogue/Merchandise/Hoodies/c/hoodies                               ; HoodiesLink                     ; HoodiesLink                     ;           ; ; ;
+; ; PantsLink                       ; Pants Link                      ; /Open-Catalogue/Merchandise/Pants/c/pants                                   ; PantsLink                       ; PantsLink                       ;           ; ; ;
+; ; CapsLink                        ; Caps Link                       ; /Open-Catalogue/Merchandise/Caps/c/caps                                     ; CapsLink                        ; CapsLink                        ;           ; ; ;
+; ; HeadphonesLink                  ; Headphones Link                 ; /Open-Catalogue/Merchandise/Headphones/c/headphones                         ; HeadphonesLink                  ; HeadphonesLink                  ;           ; ; ;
+; ; ShoesLink                       ; Shoes Link                      ; /Open-Catalogue/Merchandise/Shoes/c/shoes                                   ; ShoesLink                       ; ShoesLink                       ;           ; ; ;
+; ; SunglassesLink                  ; Sunglasses Link                 ; /Open-Catalogue/Merchandise/Sunglasses/c/sunglasses                         ; SunglassesLink                  ; SunglassesLink                  ;           ; ; ;
+; ; WatchesLink                     ; Watches Link                    ; /Open-Catalogue/Merchandise/Watches/c/watches                               ; WatchesLink                     ; WatchesLink                     ;           ; ; ;
+; ; DressesLink                     ; Dresses Link                    ; /Open-Catalogue/Merchandise/Dresses/c/dresses                               ; DressesLink                     ; DressesLink                     ;           ; ; ;
+; ; HandbagsLink                    ; Handbags Link                   ; /Open-Catalogue/Merchandise/Handbags/c/handbags                             ; HandbagsLink                    ; HandbagsLink                    ;           ; ; ;
+# CECS-80: Site navigation - END
+# CECS-230 Additional Videos and Channels with entitlements START
+; ; TvChannelsSportsLink            ; Watch TV Sport Link             ; /channels/SportChannel ; TvChannelsSportsLink            ; TvChannelsSportsLink            ;           ; ; ;
+; ; TvChannelsTCOLink               ; Watch TV TCO Link               ; /channels/TCOChannel   ; TvChannelsTCOLink               ; TvChannelsTCOLink               ;           ; ; ;
+# CECS-230 Additional Videos and Channels with entitlements END
+; ; BlogTcoLink                     ; Blog TCO                        ; /blog/tco                                                                   ; BlogTcoLink                     ; BlogTcoLink                     ;           ; ; ;
+
+# Navigation Bar Component
+INSERT_UPDATE AccountNavigationComponent; $contentCV[unique = true]; uid[unique = true]; name; navigationNode(&nodeRef); styleClass; &componentRef
+; ; AccountLeftNavigationComponent           ; Account Left Navigation Component            ; AccountLeftNavNode           ; ; AccountLeftNavigationComponent
+; ; AccountProfileNavigationComponent        ; Account Profile Navigation Component         ; AccountProfileNavNode        ; ; AccountProfileNavigationComponent
+; ; AccountAddressBookNavigationComponent    ; Account Address Book NavigationComponent     ; AccountAddressBookNavNode    ; ; AccountAddressBookNavigationComponent
+; ; AccountPaymentDetailsNavigationComponent ; Account Payment Details Navigation Component ; AccountPaymentDetailsNavNode ; ; AccountPaymentDetailsNavigationComponent
+; ; AccountOrderHistoryNavigationComponent   ; Account Order History Navigation Component   ; AccountOrderHistoryNavNode   ; ; AccountOrderHistoryNavigationComponent
+
+# Account Navigation Bar Component
+INSERT_UPDATE AccountNavigationCollectionComponent; $contentCV[unique = true]; uid[unique = true]; name; components(uid, $contentCV); &componentRef
+; ; AccountHomepageComponent ; Account Homepage Component ; AccountProfileNavigationComponent, AccountAddressBookNavigationComponent, AccountPaymentDetailsNavigationComponent, AccountOrderHistoryNavigationComponent ; AccountHomepageComponent
+
+# CMS Navigation Nodes #
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; children(uid, $contentCV)[mode = append]
+; root ; ; root ; ;
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
+; SiteRootNode                  ; ; SiteRootNode               ; root           ;                                                                                                ; SiteRootNode
+# CECS-80: Site navigation - START
+; FooterNavNode                 ; ; Footer Node                ; SiteRootNode   ; TermsAndConditionsLink, AboutHybrisLink, FAQLink                                               ; FooterNavNode
+; AccountLeftNavNode            ; ; My Account                 ; SiteRootNode   ; AccountProfileLink, AccountAddressBookLink, AccountPaymentDetailsLink, AccountOrderHistoryLink ; AccountLeftNavNode
+; AccountProfileNavNode         ; ; Profile                    ; SiteRootNode   ; AccountPersonalDetailsLink, AccountUpdatePasswordLink                                          ; AccountProfileNavNode
+; AccountAddressBookNavNode     ; ; Address Book               ; SiteRootNode   ; AccountManageAddressLink                                                                       ; AccountAddressBookNavNode
+; AccountPaymentDetailsNavNode  ; ; Address Book               ; SiteRootNode   ; AccountManagePaymentDetailsLink                                                                ; AccountPaymentDetailsNavNode
+; AccountOrderHistoryNavNode    ; ; Order History              ; SiteRootNode   ; AccountViewOrderHistoryLink                                                                    ; AccountOrderHistoryNavNode
+; WatchTvNavNode                ; ; Watch TV                   ; SiteRootNode   ; WatchTvLink                                                                                    ; WatchTvNavNode
+; TvChannelsNavNode             ; ; TV Channels                ; WatchTvNavNode ; WatchTvBrowseAllLink, TvChannelsSportsLink, TvChannelsTCOLink                                  ; TvChannelsNavNode
+; VideosNavNode                 ; ; Videos                     ; WatchTvNavNode ; VideosBrowseAllLink, MoviesLink, TvShowsLink                                                   ; VideosNavNode
+; BlogNavNode                   ; ; Blog                       ; WatchTvNavNode ; BlogTcoLink                                                                                    ; BlogNavNode
+; TricastPackagesNavNode        ; ; Tricast Packages           ; SiteRootNode   ; TricastPackagesLink                                                                            ; TricastPackagesNavNode
+; ShopNavNode                   ; ; Shop                       ; SiteRootNode   ; ShopLink                                                                                       ; ShopNavNode
+; ShopLinksNavNode              ; ; Shop Links                 ; ShopNavNode    ; ShopBrowseAllLink, T-ShirtsLink, PantsLink, HoodiesLink, DressesLink, WatchesLink              ; ShopLinksNavNode
+; AccountHomeNavNode            ; ; My Tricast                 ; SiteRootNode   ; MyTricastLink                                                                                  ; AccountHomeNavNode
+# CECS-80: Site navigation - END
+
+
+# Navigation Bar Component
+INSERT_UPDATE NavigationBarComponent; $contentCV[unique = true]; uid[unique = true]; name; wrapAfter; link(uid, $contentCV); styleClass; navigationNode(&nodeRef); dropDownLayout(code)[default = AUTO]; &componentRef
+# CECS-80: Site navigation - START
+; ; WatchTvNavComponent         ; Watch TV Bar Component         ; 10 ; WatchTvLink         ; ; WatchTvNavNode         ; ; WatchTvNavComponent
+; ; TricastPackagesNavComponent ; Tricast Packages Bar Component ; 10 ; TricastPackagesLink ; ; TricastPackagesNavNode ; ; TricastPackagesNavComponent
+; ; ShopNavComponent            ; Shop Bar Component             ; 10 ; ShopLink            ; ; ShopNavNode            ; ; ShopNavComponent
+; ; MyTricastNavComponent       ; My Tricast Bar Component       ; 10 ; MyTricastLink       ; ; AccountHomeNavNode     ; ; MyTricastNavComponent
+# CECS-80: Site navigation - END
+
+# Navigation Bar Component
+INSERT_UPDATE NavigationBarCollectionComponent; $contentCV[unique = true]; uid[unique = true]; name; components(uid, $contentCV); &componentRef
+# CECS-80: Site navigation - START
+; ; NavBarComponent ; Navigation Bar Collection Componeent ; WatchTvNavComponent, TricastPackagesNavComponent, ShopNavComponent, MyTricastNavComponent ; NavBarComponent
+# CECS-80: Site navigation - END
+
+# CMS Footer Component
+INSERT_UPDATE FooterComponent; $contentCV[unique = true]; uid[unique = true]; wrapAfter; showLanguageCurrency; &componentRef
+# CECS-80: Site navigation - START
+; ; FooterComponent ; 1 ; true ; FooterComponent
+# CECS-80: Site navigation - END
+
+# Update CMS Footer Component with Nav Nodes
+INSERT_UPDATE FooterComponent; $contentCV[unique = true]; uid[unique = true]; navigationNodes(&nodeRef)
+# CECS-80: Site navigation - START
+; ; FooterComponent ; FooterNavNode
+# CECS-80: Site navigation - END
+
+# CECS-286 enable tricast campaign on seewhy by servicecode
+INSERT_UPDATE SeewhyFooterComponent; $contentCV[unique = true]; uid[unique = true]; cyservicecode; cytargeturl; &componentRef
+; ; DefaultSeeWhyComponent ; AH10969503 ; "http://abandonment14.saas.seewhy.com" ; DefaultSeeWhyComponent
+
+
+# CMS Mini Cart Component
+INSERT_UPDATE MiniCartComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; totalDisplay(code); shownProductCount; lightboxBannerComponent(&componentRef)
+; ; MiniCart ; Mini Cart ; MiniCart ; SUBTOTAL ; 3
+
+# CMS tabs components
+INSERT_UPDATE CMSTabParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; visible; &componentRef
+; ; deliveryTab ; Delivery tab ; true ; deliveryTab
+
+INSERT_UPDATE CMSTabParagraphContainer; $contentCV[unique = true]; uid[unique = true]; name; visible; simpleCMSComponents(uid, $contentCV); &componentRef
+; ; TabPanelContainer ; Tab container ; true ; deliveryTab ; TabPanelContainer
+
+
+# CMS Paragraph Component (Contact information)
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; ContactInfo ; Contact information ; ContactInfo
+
+# CMS ProductAddToCart Components
+INSERT_UPDATE ProductAddToCartComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(&actionRef); &componentRef
+; ; AddToCart ; Product Add To Cart ; PickUpInStoreAction, AddToCartAction, ShareOnSocialNetworkAction ; AddToCart
+
+# CMS AddToCart Action
+INSERT_UPDATE AddToCartAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; AddToCartAction ; /cart/add ; Product Add To Cart Action ; ActionRestriction ; AddToCartAction
+
+INSERT_UPDATE ListAddToCartAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; ListAddToCartAction ; /cart/add ; Product Add To Cart Action ; ActionRestriction ; ListAddToCartAction
+
+INSERT_UPDATE ListPickUpInStoreAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; ListPickUpInStoreAction ; /store-pickup/{productCode}/pointOfServices ; Pickup in Store Action ; ActionRestriction ; ListPickUpInStoreAction
+
+# CMS PickUpInStoreAction Action
+INSERT_UPDATE PickUpInStoreAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; PickUpInStoreAction ; /store-pickup/{productCode}/pointOfServices ; Pickup in Store Action ; ActionRestriction ; PickUpInStoreAction
+
+# CMS ShareOnSocialNetwork Action
+INSERT_UPDATE ShareOnSocialNetworkAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; ShareOnSocialNetworkAction ; / ; Share On Social Network Action ; ActionRestriction ; ShareOnSocialNetworkAction
+
+# CMS Action Restrictions
+INSERT_UPDATE CMSActionRestriction; $contentCV[unique = true]; uid[unique = true]; name;
+; ; ActionRestriction ; A CMSAction restriction ;
+
+# CMS ProductReferences Components
+INSERT_UPDATE ProductReferencesComponent; $contentCV[unique = true]; uid[unique = true]; name; productReferenceTypes(code); maximumNumberProducts; showRates[default=false]; &componentRef
+; ; accessories  ; Accessories   ; ACCESSORIES ; 5 ; 		; accessories
+; ; CrossSelling ; Cross Selling ; CROSSELLING ; 5 ; true 	; CrossSelling
+; ; Others       ; Others        ; OTHERS      ; 5 ; 		; Others
+; ; Similar      ; Similar       ; SIMILAR     ; 5 ; 		; Similar
+
+INSERT_UPDATE TvShowReferencesComponent ; $contentCV[unique = true]; uid[unique = true]; name; productReferenceTypes(code); maximumNumberProducts; &componentRef
+; ; TvShowCrossSelling ; Cross Selling ; CROSSELLING ; 12 ; TvShowCrossSelling
+
+# CECS-727
+INSERT_UPDATE TvShowProductDetailsComponent ; $contentCV[unique = true]; uid[unique = true]; name; actions(&actionRef); &componentRef
+; ; TvShowProductDetails ; TvShowProductDetails ; AddToWatchListAction ; TvShowProductDetails
+
+# CECS-788 MovieProductDetailsComponent - START
+INSERT_UPDATE MovieProductDetailsComponent ; $contentCV[unique = true]; uid[unique = true]; name; actions(&actionRef); &componentRef
+; ; MovieProductDetails ; MovieProductDetails ; AddToWatchListAction ; MovieProductDetails
+# CECS-788 MovieProductDetailsComponent - START
+
+INSERT_UPDATE CMSActionRestriction; $contentCV[unique = true]; uid[unique = true]; name
+; ; AddToWatchListActionRestriction ; Add To Watch List Action Restriction
+
+INSERT_UPDATE AddToWatchListAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; AddToWatchListAction ;; Add To Watch List Action ; AddToWatchListActionRestriction ; AddToWatchListAction
+
+INSERT_UPDATE CMSActionRestriction;$contentCV[unique=true];uid[unique=true];name;
+; ;ActionRestriction;A CMSAction restriction;
+
+# CMS CartSuggestion Components
+INSERT_UPDATE CartSuggestionComponent; $contentCV[unique = true]; uid[unique = true]; name; productReferenceTypes(code); maximumNumberProducts; filterPurchased; &componentRef
+; ; CartSuggestions ; Cart Suggestions ; ACCESSORIES, SIMILAR ; 20 ; true ; CartSuggestions
+
+# CECS-728
+INSERT_UPDATE TVSeasonListComponent ; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; TVSeasonList ; TV Season List ; TVSeasonList
+
+# CMS SearchBox Components
+INSERT_UPDATE SearchBoxComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; SearchBox ; Search Box ; SearchBox
+
+# CMS Language and Currency Component
+INSERT_UPDATE LanguageCurrencyComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; LangCurrencyComponent ; Language and Currency Component ; LangCurrencyComponent
+
+# CMS Time Switcher Component
+INSERT_UPDATE TimeSwitcherComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; TimeSwComponent ; Time Switcher Component ; TimeSwComponent
+
+INSERT_UPDATE ProductRefinementComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; RefinementFacetComponent ; Product Refinement Facet Component ; RefinementFacetComponent
+
+INSERT_UPDATE CMSProductListComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(uid, $contentCV); &componentRef
+; ; ProductListComponent ; Product List Component ; ListPickUpInStoreAction, ListAddToCartAction ; ProductListComponent
+
+INSERT_UPDATE ProductGridComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(uid, $contentCV); &componentRef
+; ; ProductGridComponent ; Product Grid Component ; ListPickUpInStoreAction, ListAddToCartAction ; ProductGridComponent
+
+INSERT_UPDATE ProductGridMerchandiseComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(uid, $contentCV); &componentRef
+; ; ProductGridMerchandiseComponent ; Product Grid Merchandise Component ; ListPickUpInStoreAction, ListAddToCartAction ; ProductGridMerchandiseComponent
+
+INSERT_UPDATE SearchResultsListComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(uid, $contentCV); &componentRef
+; ; SearchResultsList ; Search Result List Component ; ListPickUpInStoreAction, ListAddToCartAction ; SearchResultsList
+
+INSERT_UPDATE SearchResultsListComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(uid, $contentCV); &componentRef
+; ; SearchResultsGrid ; Search Result Grid Component ; ListPickUpInStoreAction, ListAddToCartAction ; SearchResultsGrid
+
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; SiteLogoSlot                    ; SiteLogoComponent
+; ; HomepageNavLinkSlot             ; HomepageNavLink
+; ; MiniCartSlot                    ; MiniCart
+; ; NavigationBarSlot               ; NavBarComponent
+; ; NavigationBarRightSlot          ; RemainingLoyaltyPointsComponent
+# CECS-46 main navigation - START
+; ; BreadcrumbSlot                  ; breadcrumbComponent
+# CECS-46 main navigation - END
+; ; TabsSlot                        ; TabPanelContainer
+; ; FooterSlot                      ; FooterComponent, LangCurrencyComponent, DefaultSeeWhyComponent, TimeSwComponent
+; ; HeaderLinksSlot                 ; ContactInfo
+; ; SearchBoxSlot                   ; SearchBox
+; ; VariantSelectorSlot             ;
+; ; AddToCartSlot                   ; AddToCart
+; ; UpSellingSlot                   ; Similar
+; ; CrossSellingSlot                ; accessories
+; ; ProductLeftRefinements          ; RefinementFacetComponent
+# CECS-68 responsive my-account homepage - cms START
+ 
+
+# Site-wide Homepage
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV); linkComponents(&linkRef)
+; ; homepageTCO ; ; HomepageNavLink
+
+INSERT_UPDATE CMSCategoryRestriction; $contentCV[unique = true]; uid[unique = true]; name; categories(code, $productCV); pages(uid, $contentCV); recursive[default = false]; &rest
+; ; MerchandisePageRestriction ; Restriction for Merchandise Page ; merchandise ; merchandisePage ; false ; rest-merchandise
+; ; VODPageRestriction         ; Restriction for VOD Page         ; videos      ; vodPage         ; true  ; rest-vod
+
+UPDATE CategoryPage; $contentCV[unique = true]; uid[unique = true]; restrictions(&rest)
+; ; merchandisePage ; rest-merchandise
+; ; vodPage      ; rest-vod
+
+# Simple Content Pages
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV); linkComponents(&linkRef)
+; ; faq ; ; FAQLink
+
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV); linkComponents(&linkRef)
+; ; termsAndConditions ; ; TermsAndConditionsLink
+
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; linkComponents(&linkRef);;;;;
+; ; storefinderPage ; StoreFinderLink
+; ; login           ; LoginLink
+
+###### Tricast Search Results Page ######
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; Section2Slot-search ; Section2 Slot for search ; true ;
+; ; Section4Slot-search ; Section4 Slot for search ; true ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'search']; contentSlot(uid, $contentCV)[unique = true]
+; ; Section2-search ; Section2 ; ; Section2Slot-search
+; ; Section4-search ; Section4 ; ; Section4Slot-search
+
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; NoSearchResultsParagraphComponent ; No Search Results Paragraph Component ; NoSearchResultsParagraphComponent
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; TopContent-searchEmpty    ; Top Slot for searchEmpty    ; true ;
+; ; SideContent-searchEmpty   ; Side Slot for searchEmpty   ; true ;
+; ; MiddleContent-searchEmpty ; Middle Slot for searchEmpty ; true ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'searchEmpty']; contentSlot(uid, $contentCV)[unique = true]
+; ; Top-searchEmpty    ; TopContent    ; ; TopContent-searchEmpty
+; ; Side-searchEmpty   ; SideContent   ; ; SideContent-searchEmpty
+; ; Middle-searchEmpty ; MiddleContent ; ; MiddleContent-searchEmpty
+
+###### Tricast Cart Page ######
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; EmptyCartParagraphComponent ; Empty Cart Paragraph Component ; EmptyCartParagraphComponent
+; ; HelpParagraphComponent      ; Help Paragraph Component       ; HelpParagraphComponent
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; TopContent-cartPage             ; Top Slot for Cart Page                  ; true ; CartComponent
+; ; EmptyCartMiddleContent-cartPage ; Empty Cart Middle Slot for Cart Page    ; true ; EmptyCartParagraphComponent
+; ; CenterLeftContentSlot-cartPage  ; Center Left Content Slot for Cart Page  ; true ; PromotionsComponent, PotentialPromotionsComponent
+; ; CenterRightContentSlot-cartPage ; Center Right Content Slot for Cart Page ; true ; CartTotalsComponent
+; ; BottomContentSlot-cartPage      ; Bottom Content Slot for Cart Page       ; true ; CheckoutComponent, CartSuggestions
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'cartPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; TopContentSlotForCartPage         ; TopContent             ; ; TopContent-cartPage
+; ; EmptyCartMiddleForCartPage        ; EmptyCartMiddleContent ; ; EmptyCartMiddleContent-cartPage
+; ; CenterLeftContentSlotForCartPage  ; CenterLeftContentSlot  ; ; CenterLeftContentSlot-cartPage
+; ; CenterRightContentSlotForCartPage ; CenterRightContentSlot ; ; CenterRightContentSlot-cartPage
+; ; BottomContentSlotForCartPage      ; BottomContentSlot      ; ; BottomContentSlot-cartPage
+
+###### Tricast Checkout Login Page ######
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; BottomContent-checkoutLogin ; Bottom Slot for Checkout Login Page ; true ; HelpParagraphComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'checkout-login']; contentSlot(uid, $contentCV)[unique = true]
+; ; Bottom-checkoutLogin ; BottomContent ; ; BottomContent-checkoutLogin
+
+###### Tricast Checkout Summary / Proceed to Checkout Page ######
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; SideContent-multiStepCheckoutSummaryPage ; Side Slot for multiStepCheckoutSummaryPage ; true ; HelpParagraphComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)[unique = true]
+; ; Side-multiStepCheckoutSummaryPage ; SideContent ; multiStepCheckoutSummaryPage ; SideContent-multiStepCheckoutSummaryPage
+
+###### Tricast Store Finder Page ######
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; SideContent-StoreFinderPage   ; Side Slot for Store Finder Page   ; true ;
+; ; MiddleContent-StoreFinderPage ; Middle Slot for Store Finder Page ; true ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'storefinderPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; Side-StoreFinderPage   ; SideContent   ; ; SideContent-StoreFinderPage
+; ; Middle-StoreFinderPage ; MiddleContent ; ; MiddleContent-StoreFinderPage
+
+###### Tricast FAQ Page ######
+
+# CMSParagraphComponent
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
+; ; faqMenuParagraph ; FAQ Paragraph ; FAQMenuParagraph ; ; ; ;
+; ; faqTextParagraph ; FAQ Paragraph ; FAQTextParagraph ; ; ; ;
+
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; Section2ASlot-FAQ ; Section2A Slot for FAQ Page ; true ; FAQMenuParagraph ; ; ;
+; ; Section2BSlot-FAQ ; Section2B Slot for FAQ Page ; true ; FAQTextParagraph ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'faq']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; Section2A-FAQ ; Section2A ; ; Section2ASlot-FAQ ; ; ;
+; ; Section2B-FAQ ; Section2B ; ; Section2BSlot-FAQ ; ; ;
+
+###### Tricast Order Expired Page ######
+
+# CMSParagraphComponent
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
+; ; orderExpiredMenuParagraph ; Order Expired Paragraph ; OrderExpiredMenuParagraph ; ; ; ;
+; ; orderExpiredTextParagraph ; Order Expired Paragraph ; OrderExpiredTextParagraph ; ; ; ;
+
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; Section2ASlot-OrderExpired ; Section2A Slot for Order Expired Page ; true ; OrderExpiredMenuParagraph ; ; ;
+; ; Section2BSlot-OrderExpired ; Section2B Slot for Order Expired Page ; true ; OrderExpiredTextParagraph ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'orderExpired']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; Section2A-OrderExpired ; Section2A ; ; Section2ASlot-OrderExpired ; ; ;
+; ; Section2B-OrderExpired ; Section2B ; ; Section2BSlot-OrderExpired ; ; ;
+
+###### Tricast Terms and Conditions Page
+
+# CMSParagraphComponent
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
+; ; termsAndConditionsMenuParagraph ; Terms and Conditions Paragraph ; TermsAndConditionsMenuParagraph ; ; ; ;
+; ; termsAndConditionsTextParagraph ; Terms and Conditions Paragraph ; TermsAndConditionsTextParagraph ; ; ; ;
+
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; Section2ASlot-TermsAndConditions ; Section2A Slot for Terms and Conditions Page ; true ; TermsAndConditionsMenuParagraph ; ; ;
+; ; Section2BSlot-TermsAndConditions ; Section2B Slot for Terms and Conditions Page ; true ; TermsAndConditionsTextParagraph ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'termsAndConditions']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; Section2A-TermsAndConditions ; Section2A ; ; Section2ASlot-TermsAndConditions ; ; ;
+; ; Section2B-TermsAndConditions ; Section2B ; ; Section2BSlot-TermsAndConditions ; ; ;
+
+$showcasecommonaddonDir = /WEB-INF/views/addons/showcasecommonaddon/desktop/pages/
+$showcasecommonaddonAccountDir = /WEB-INF/views/addons/showcasecommonaddon/desktop/pages/account
+
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
+; ; AccountPaymentDetailsComponent          ; Account Payment Details Component             ; accountPaymentInfoPage.jsp                            ;                 ; AccountPaymentDetailsComponent
+; ; AccountAddEditPaymentDetailsComponent   ; Account Add/Edit Payment Details Component    ; addEditPaymentInfoPage.jsp                            ;                 ; AccountAddEditPaymentDetailsComponent
+; ; AccountOrderDetailsHeadlineComponent    ; Account Order Details Headline Component      ; accountOrderDetailHeadline.jsp                        ;                 ; AccountOrderDetailsHeadlineComponent
+; ; AccountOrderDetailsTotalsComponent      ; Account Order Details Order Totals Component  ; accountOrderDetailOrderTotals.jsp                     ;                 ; AccountOrderDetailsTotalsComponent
+; ; AccountOrderDetailsShippingComponent    ; Account Order Details Shipping Info Component ; accountOrderDetailShippingInfo.jsp                    ;                 ; AccountOrderDetailsShippingComponent
+; ; AccountOrderDetailsItemsComponent       ; Account Order Details Items Info Component    ; accountOrderDetailItems.jsp                           ;                 ; AccountOrderDetailsItemsComponent
+; ; AccountOrderHistoryComponent            ; Account History Component                     ; accountOrderHistoryPage.jsp                           ; ViewOrderAction ; AccountOrderHistoryComponent
+; ; AccountProfileComponent                 ; Account Profile Component                     ; accountProfilePage.jsp                                ;                 ; AccountProfileComponent
+; ; AccountAddressBookComponent             ; Account Address Book Component                ; accountAddressBookPage.jsp                            ;                 ; AccountAddressBookComponent
+; ; AccountAddEditAddressComponent          ; Account Add Edit Address Component            ; accountEditAddressPage.jsp                            ;                 ; AccountAddEditAddressComponent
+; ; UpdatePasswordComponent                 ; Update Password Component                     ; accountChangePasswordPage.jsp                         ;                 ; UpdatePasswordComponent
+; ; UpdateProfileComponent                  ; Update Profile Component                      ; accountProfileEditPage.jsp                            ;                 ; UpdateProfileComponent
+; ; UpdateEmailComponent                    ; Update Email Component                        ; accountProfileEmailEditPage.jsp                       ;                 ; UpdateEmailComponent
+; ; StoreFinderComponent                    ; Store Finder Component                        ; storeFinderContent.jsp                                ; ViewStoreAction ; StoreFinderComponent
+; ; CartComponent                           ; Cart Display Component                        ; cartDisplay.jsp                                       ;                 ; CartComponent
+; ; CartTotalsComponent                     ; Cart Totals Display Component                 ; cartTotalsDisplay.jsp                                 ;                 ; CartTotalsComponent
+; ; PromotionsComponent                     ; Promotions Component                          ; cartPromotionsDisplay.jsp                             ;                 ; PromotionsComponent
+; ; PotentialPromotionsComponent            ; Potential Promotions Component                ; potentialPromotionsDisplay.jsp                        ;                 ; PotentialPromotionsComponent
+; ; CheckoutComponent                       ; Checkout Display Component                    ; checkoutDisplay.jsp                                   ;                 ; CheckoutComponent
+; ; NewCustomerLoginComponent               ; New Customer Login Component                  ; accountNewCustomerLogin.jsp                           ;                 ; NewCustomerLoginComponent
+; ; ReturningCustomerLoginComponent         ; Returning Customer Login Component            ; accountReturningCustomerLogin.jsp                     ;                 ; ReturningCustomerLoginComponent
+; ; NewCustomerCheckoutLoginComponent       ; New Customer Checkout Login Component         ; checkoutNewCustomerLogin.jsp                          ;                 ; NewCustomerCheckoutLoginComponent
+; ; ReturningCustomerCheckoutLoginComponent ; Returning Customer Checkout Login Component   ; checkouReturningCustomerLogin.jsp                     ;                 ; ReturningCustomerCheckoutLoginComponent
+; ; GuestCheckoutLoginComponent             ; Guest Checkout Login Component                ; checkoutGuestLogin.jsp                                ;                 ; GuestCheckoutLoginComponent
+; ; AccountEntitlementsComponent            ; Account Entitlements Component                ; accountEntitlementsPage.jsp                           ;                 ; AccountEntitlementsComponent
+; ; AccountSubscriptionsComponent           ; Account Subscriptions Component               ; accountSubscriptionsPage.jsp                          ;                 ; AccountSubscriptionsComponent
+; ; AccountSubscriptionComponent            ; Account Subscription Component                ; accountSubscriptionPage.jsp                           ;                 ; AccountSubscriptionComponent
+# CECS-267 current expenses page
+#; ; AccountExpensesComponent            	; Account Expenses Component                	; $showcasecommonaddonDir/accountExpensesPage.jsp;                 ; AccountExpensesComponent
+# CECS-568 invoices page
+; ; InvoicesComponent                       ; Invoices Component                            ; $showcasecommonaddonAccountDir/invoicesPage.jsp       ;                 ; InvoicesComponent
+; ; InvoiceDetailsComponent                 ; Invoice Details Component                     ; $showcasecommonaddonAccountDir/invoiceDetailsPage.jsp ;                 ; InvoiceDetailsComponent
+; ; TricastHomepageTCO-FavoriteMovies 		; Tricast Homepage TCO - Favorite Movies 		; /WEB-INF/views/desktop/pages/homePage/tricastHomepageTcoFavoriteMovies.jsp					;				  ; TricastHomepageTCO-FavoriteMovies
+
+
+INSERT_UPDATE AccountExpensesComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; cssClass
+; ; AccountExpensesComponent ; Account Expenses Component ; AccountExpensesComponent ;
+
+
+INSERT_UPDATE BreadcrumbComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; breadcrumbComponent ; Breadcrumb CMS Component ; breadcrumbComponent
+
+# CMS View Order Action
+INSERT_UPDATE ViewOrderAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; ViewOrderAction ; /my-account/order/{orderCode} ; View Order Action ; ActionRestriction ; ViewOrderAction
+
+# CMS View Store Action
+INSERT_UPDATE ViewStoreAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; ViewStoreAction ; ; View Store Action ; ActionRestriction ; ViewStoreAction
+
+###### Account Homepage
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-Account ; Body Content Slot for My Account Homepage ; true ; AccountHomepageComponent ; ; ;
+
+###### Account Profile
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-profile ; Body Content Slot for My Account Profile ; true ; AccountProfileComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'profile']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-profile ; BodyContent ; ; BodyContent-profile ; ; ;
+
+###### Account Address Book
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-address-book ; Body Content Slot for Account Address Book ; true ; AccountAddressBookComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'address-book']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-address-book ; BodyContent ; ; BodyContent-address-book ; ; ;
+
+###### Account Add Edit Address
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-add-edit-address ; Body Content Slot for Add Edit Address ; true ; AccountAddEditAddressComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'add-edit-address']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-add-edit-address ; BodyContent ; ; BodyContent-add-edit-address ; ; ;
+
+######  Account payment detail page
+
+# CECS-69 component to switch billing options - START
+INSERT_UPDATE AccountEditBodyComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef
+; ; accountEditBodyComponent ; accountEditBodyComponent
+
+INSERT_UPDATE AccountEditSideComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef
+; ; accountEditSideComponent ; accountEditSideComponent
+
+INSERT_UPDATE BillingOptionsComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef
+; ; billingOptionsComponent ; billingOptionsComponent
+
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-account-change-billing-options ; Body Content Slot for My Account account-change-billing-options ; true ; billingOptionsComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'account-change-billing-options']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-account-change-billing-options ; BodyContent ; ; BodyContent-account-change-billing-options ; ; ;
+
+
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-payment-details ; Body Content Slot for My Account payment-details ; true ; AccountPaymentDetailsComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'payment-details']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-payment-details ; BodyContent ; ; BodyContent-payment-details ; ; ;
+
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-add-payment-details ; Body Content Slot for My Account add payment-details ; true ; AccountAddEditPaymentDetailsComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'add-payment-details']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-add-payment-details ; BodyContent ; ; BodyContent-add-payment-details ; ; ;
+
+
+###### Account Order History
+
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-orders ; Body Content Slot for My Account Order History ; true ; AccountOrderHistoryComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'orders']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-orders ; BodyContent ; ; BodyContent-orders ; ; ;
+
+
+###### Account Order Details
+
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-orderdetail ; Body Content Slot for My Account Order Details ; true ; AccountOrderDetailsHeadlineComponent, AccountOrderDetailsTotalsComponent, AccountOrderDetailsShippingComponent, AccountOrderDetailsItemsComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'order']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-orderdetail ; BodyContent ; ; BodyContent-orderdetail ; ; ;
+
+###### Account Update Password
+# ContentSlot
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-updatePassword ; Body Content Slot for Update Password ; true ; UpdatePasswordComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'updatePassword']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-updatePassword ; BodyContent ; ; BodyContent-updatePassword ; ; ;
+
+###### Account Update Profile
+# ContentSlot
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-update-profile ; Body Content Slot for Update Profile ; true ; UpdateProfileComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'update-profile']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-update-profile ; BodyContent ; ; BodyContent-update-profile ; ; ;
+
+
+# CECS-218: Entitlements page bug fixes - START
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-entitlements ; Body Content Slot for Entitlements ; true ; AccountEntitlementsComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'entitlements']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-entitlements ; BodyContent ; ; BodyContent-entitlements ; ; ;
+
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-subscriptions ; Body Content Slot for subscriptions ; true ; AccountSubscriptionsComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'subscriptions']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-subscriptions ; BodyContent ; ; BodyContent-subscriptions ; ; ;
+# CECS-218: Entitlements page bug fixes - END
+
+# CECS-568 invoices page START
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-invoices ; Body Content Slot for invoices ; true ; InvoicesComponent ; ; ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'invoices']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-invoices ; BodyContent ; ; BodyContent-invoices ; ; ;
+# CECS-568 invoices page END
+
+# CECS-619 invoices details START
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-invoice-details ; Body Content Slot for invoices ; true ; InvoiceDetailsComponent ; ; ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'invoice-details']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-invoice-details ; BodyContent ; ; BodyContent-invoice-details ; ; ;
+# CECS-619 invoices details END
+
+# CECS-113: Migrate my-account/subscription/{subscriptionId} page from telco - START
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-subscription ; Body Content Slot for subscription ; true ; AccountSubscriptionComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'subscription']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-subscription ; BodyContent ; ; BodyContent-subscription ; ; ;
+# CECS-113: Migrate my-account/subscription/{subscriptionId} page from telco - END
+
+###### Account Update Email
+# ContentSlot
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-update-email ; Body Content Slot for Update Email ; true ; UpdateEmailComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'update-email']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-update-email ; BodyContent ; ; BodyContent-update-email ; ; ;
+
+#### ProductListPage
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; ProductListSlot ; Product List Slot for Product List ; true ; ProductListComponent ; ; ;
+
+#### ProductGridPage
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; ProductGridSlot ; Product Grid Slot for Product List ; true ; ProductGridMerchandiseComponent ; ; ;
+
+#### SearchResultListPage
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; SearchResultsListSlot ; Search Result List Slot for Search List ; true ; SearchResultsList ; ; ;
+
+#### SearchResultGridPage
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; SearchResultsGridSlot ; Search Result Grid Slot for Search List ; true ; SearchResultsGrid ; ; ;
+
+### Customer Login
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; LeftContentSlot-login  ; Left Content Slot for Customer Login  ; true ; ReturningCustomerLoginComponent ; ; ;
+; ; RightContentSlot-login ; Right Content Slot for Customer Login ; true ; NewCustomerLoginComponent       ; ; ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'login']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; LeftContentSlot-login  ; LeftContentSlot  ; ; LeftContentSlot-login  ; ; ;
+; ; RightContentSlot-login ; RightContentSlot ; ; RightContentSlot-login ; ; ;
+
+### Checkout Login
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; LeftContentSlot-checkout-login   ; Left Content Slot for Checkout Login   ; true ; ReturningCustomerCheckoutLoginComponent ; ; ;
+; ; CenterContentSlot-checkout-login ; Center Content Slot for Checkout Login ; true ; NewCustomerCheckoutLoginComponent       ; ; ;
+; ; RightContentSlot-checkout-login  ; Right Content Slot for Checkout Login  ; true ; GuestCheckoutLoginComponent             ; ; ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'checkout-login']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; LeftContentSlot-checkout-login   ; LeftContentSlot   ; ; LeftContentSlot-checkout-login   ; ; ;
+; ; CenterContentSlot-checkout-login ; CenterContentSlot ; ; CenterContentSlot-checkout-login ; ; ;
+; ; RightContentSlot-checkout-login  ; RightContentSlot  ; ; RightContentSlot-checkout-login  ; ; ;
+
+###### TEST Instant checkout button on product details page
+
+INSERT_UPDATE InstantCheckoutComponent; $contentCV[unique = true]; uid[unique = true]; displayPrice; &componentRef
+; ; instantCheckoutComponent ; true ; instantCheckoutComponent
+# CECS-71 - build a promotion fragment - START
+; ; buyNowCheckoutComponent  ; true ; buyNowCheckoutComponent
+# CECS-71 - build a promotion fragment - END
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)[mode = append]
+; ; AddToCartSlot ; instantCheckoutComponent
+
+# CECS-71 - build a promotion fragment - START
+
+INSERT_UPDATE ProductPromotionFragmentComponent; $contentCV[unique = true]; uid[unique = true]; productCode; components(&componentRef); &componentRef
+; ; ProductPromotionFragmentComponentTCO4 ; t-shirt_white    ; buyNowCheckoutComponent ; ProductPromotionFragmentComponentTCO4
+
+# CMS User Group Restrictions
+INSERT_UPDATE CMSUserGroupRestriction; $contentCV[unique = true]; uid[unique = true]; name; userGroups(uid)
+; ; UserGroupRestrictionFansOfBrandedMerchandise ; A user group restriction: fans of branded merchandise ; fansOfBrandedMerchandise
+
+# CECS-71 - build a promotion fragment - END
+
+###### Test video component on the homepage
+$mediaFolderId = tricast
+$mediaFolderPath = video/tricast
+
+INSERT_UPDATE MediaFolder; qualifier[unique = true]; path[unique = true]
+; $mediaFolderId ; $mediaFolderPath
+
+INSERT_UPDATE Html5VideoComponentTimeUpdateEvent; uid[unique = true]; timeStart[unique = true]; timeEnd; contentComponent(&componentRef); $contentCV[unique = true]; &timeUpdateEvent; restrictions(uid, $contentCV)
+; FashionVideoTimeEventTCO4 ; 22 ; 999 ; ProductPromotionFragmentComponentTCO4 ; ; FashionVideoTimeEventTCO4 ; UserGroupRestrictionFansOfBrandedMerchandise
+
+INSERT_UPDATE Html5VideoComponent; $contentCV[unique = true]; uid[unique = true]; video(code, $productCV); timeUpdateEvents(uid, $contentCV) ; showFreeVersion[default=false] 
+; ; FashionHtml5VideoComponentTCO    ; ; FashionVideoTimeEventTCO4
+; ; VideoPlaybackHtml5VideoComponentTrail ; ; ; true
+; ; VideoPlaybackHtml5VideoComponentMovie ; ; ; 
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)[unique = true]
+; ; Section3-homepageTCO ; Section3 ; homepageTCO ; Section3Slot-homepageTCO
+
+### Homepage banners
+# CECS-77 Create new Homepage - cms - START
+
+#CECS-735 - homepage banner - subscribe button
+
+INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];uid[unique=true];name;users(uid);
+;;AnonymousHomeBannerRestriction;Anonymous Home Banner User Restriction;anonymous
+
+INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];uid[unique=true];name;originalRestriction(uid, $contentCV);
+;;RegisteredHomeBannerRestriction;Authenticated User Home Banner Restriction;AnonymousHomeBannerRestriction
+
+
+INSERT_UPDATE BannerWithButtonComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink; cssClass;restrictions(uid,$contentCV);
+; ; TricastHomepageTCO-WideNavigationBanner-anonymous; Tricast HomepageTCO Wide Navigation Banner for anonymous users; TricastHomepageTCO-WideNavigationBanner-anonymous ; "/Open-Catalogue/TV-Channels-and-TV-Content/Videos/TV-Shows/Underworld/p/underworld" ; "banner-12"; AnonymousHomeBannerRestriction
+; ; TricastHomepageTCO-WideNavigationBanner-registered; Tricast HomepageTCO Wide Navigation Banner for registered users; TricastHomepageTCO-WideNavigationBanner-registered ; "/video/v/underworld-s01-e01" ; "banner-12"; RegisteredHomeBannerRestriction
+
+#CECS-735 - END - homepage banner - subscribe button
+
+INSERT_UPDATE SingleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink; cssClass
+; ; TricastHomepageTCO-BannerComponent1 ; TricastHomepageTCO-BannerComponent1 ; TricastHomepageTCO-BannerComponent1 ; "/" ; "someCSSClass"
+; ; TricastHomepageTCO-BannerComponent2 ; TricastHomepageTCO-BannerComponent2 ; TricastHomepageTCO-BannerComponent2 ; "/" ; "someCSSClass"
+; ; TricastHomepageTCO-BannerComponent3 ; TricastHomepageTCO-BannerComponent3 ; TricastHomepageTCO-BannerComponent3 ; "/" ; "someCSSClass"
+
+INSERT_UPDATE BannerCollectionComponent; &componentRef; $contentCV[unique = true]; uid[unique = true]; name; banners(&componentRef); cssClass
+; TricastHomepageTCOBannerCollectionComponent ; ; TricastHomepageTCOBannerCollectionComponent ; Tricast HomepageTCO Banner Collection Component ; TricastHomepageTCO-BannerComponent1, TricastHomepageTCO-BannerComponent2, TricastHomepageTCO-BannerComponent3 ; "someCSSClass"
+
+INSERT_UPDATE FixedProductSetComponent; $contentCV[unique = true]; uid[unique = true]; title; name; searchQuery; categoryCode; &componentRef
+; ; TricastHomepageTCOFixedProductSetComponent ; Latest Releases ; Tricast HomepageTCO Fixed Product Set Component ; ; ; TricastHomepageTCOFixedProductSetComponent
+
+# CECS-532 Improvements on homepage START
+INSERT_UPDATE FixedProductSetComponent; $contentCV[unique = true]; uid[unique = true]; products(code, $productCV)
+; ; TricastHomepageTCOFixedProductSetComponent ; joy-s01-e03, venom-s01-e03, the-boss-s03-e03, underworld-s01-e03
+# CECS-532 Improvements on homepage END
+
+# CECS-731 FeaturedCollectionComponent
+INSERT_UPDATE FeaturedCollectionComponent; $contentCV[unique = true]; uid[unique = true]; name; maximumNumberProducts; bannerUrl; backgroundColor; searchQuery; categoryCode; cssClass; showPrice[default = false]; showSeeAllBtn[default = false]; showRates[default = false]; &componentRef
+; ; TricastHomepageTCOFeaturedCollectionComponentSport ; Tricast HomepageTCO Featured Collection Component    ; 8 ; /yacceleratorstorefront/_ui/desktop/common/images/homepage-mock/sb-bg.jpg                         ; #1565c0 ; :topRated:itemtype:TVEpisodeProduct                                          ; tvChannelsAndTVContent ; super-bowl-highlight      ;       ;      ;       ; TricastHomepageTCOFeaturedCollectionComponentSport
+; ; TricastHomepageTCOFeaturedCollectionComponentMovie ; Tricast HomepageTCO Featured Collection Component    ; 8 ; /yacceleratorstorefront/_ui/desktop/common/images/homepage-mock/science-fiction-highlights-bg.jpg ; #546e7a ; :topRated:itemtype:TVEpisodeProduct                                          ; tvChannelsAndTVContent ; science-fiction-highlight ;       ;      ;       ; TricastHomepageTCOFeaturedCollectionComponentMovie
+; ; MerchandiseUnderworldFeaturedCollectionComponent   ; Merchandise Underworld Featured Collection Component ; 8 ; /yacceleratorstorefront/_ui/desktop/common/images/merchandise/bannerunderwolrdbg.jpg              ; #546e7a ; :topRated:itemtype:MerchandiseProduct:category:underworld-branded                                        ; merchandise            ; science-fiction-highlight ; true  ; true ; true  ; MerchandiseUnderworldFeaturedCollectionComponent
+; ; FeaturedTVShowsComponent                           ; Featured TV-Shows                                    ; 4 ; /yacceleratorstorefront/_ui/desktop/common/images/account-icons/featuredtvshowsbg.jpg             ; #546e7a ; :topRated:itemtype:TVShowProduct                                             ; tvShows                ; science-fiction-highlight ; false ; true ; false ; FeaturedTVShowsComponent
+; ; ScienceFictionMoviesComponent                      ; Science Fiction Movies                               ; 4 ; /yacceleratorstorefront/_ui/desktop/common/images/account-icons/sciencefictionbg.jpg              ; #546e7a ; :topRated:itemtype:MovieProduct:itemtype:TVShowProduct:Genre:Science Fiction ; videos                 ; science-fiction-highlight ; false ; true ; false ; ScienceFictionMoviesComponent
+
+#INSERT_UPDATE FeaturedCollectionComponent; $contentCV[unique = true]; uid[unique = true]; products(code, $productCV)
+#; ; TricastHomepageTCOFeaturedCollectionComponentSport ; t-shirt_white, joy-s01-e03, venom-s01-e03, the-boss-s03-e03, underworld-s01-e03, t-shirt_black, t-shirt_bp
+#; ; TricastHomepageTCOFeaturedCollectionComponentMovie ; t-shirt_white, joy-s01-e03, venom-s01-e03, t-shirt_black, t-shirt_bp
+
+INSERT_UPDATE SlickProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; searchQuery; categoryCode; maximumNumberProducts; cssClass; showPrice[default = true]; showSeeAllBtn[default = true]; showRates[default = true]; classificationValue; classificationCollection; &componentRef
+; ; TricastBestSellingMerchandisePCC       ; Tricast Merchandise Best Selling Product Carousel Component      ; :mostViewed:itemtype:MerchandiseProduct                                        ; merchandise ; 4 ; "row grey-light row-margin-lg" ;       ; ;       ; ;          ; TricastBestSellingMerchandisePCC
+; ; TricastNewArrivalsMerchandisePCC       ; Tricast Merchandise New Arrivals Product Carousel Component      ; :latestReleases_desc:itemtype:MerchandiseProduct                               ; merchandise ; 4 ; "row"                          ;       ; ;       ; ;          ; TricastNewArrivalsMerchandisePCC
+; ; TricastRecommendedForYouMerchandisePCC ; Tricast Merchandise RecommendedForYou Product Carousel Component ; :topRated:itemtype:MerchandiseProduct                                          ; merchandise ; 4 ; "row grey-light"               ;       ; ;       ; ;          ; TricastRecommendedForYouMerchandisePCC
+; ; NewAndNoteworthyMoviesPageComponent    ; New And Noteworthy                                               ; :latestReleases_desc:itemtype:MovieProduct:itemtype:TVShowProduct              ; videos      ; 8 ; "row"                          ; false ; ; false ; ; getGenre ; NewAndNoteworthyMoviesPageComponent
+; ; StandoutHitsMoviesPageComponent        ; Standout Hits                                                    ; :mostViewed:itemtype:MovieProduct                                              ; videos      ; 4 ; "row"                          ; false ; ; false ; ; getGenre ; StandoutHitsMoviesPageComponent
+; ; DramaMoviesPageComponent               ; Drama Movies                                                     ; :latestReleases_desc:itemtype:MovieProduct:itemtype:TVShowProduct:Genre:Drama  ; videos      ; 4 ; "row"                          ; false ; ; false ; ; getGenre ; DramaMoviesPageComponent
+; ; HorrorMoviesPageComponent              ; Horror Movies                                                    ; :latestReleases_desc:itemtype:MovieProduct:itemtype:TVShowProduct:Genre:Horror ; videos      ; 4 ; "row"                          ; false ; ; false ; ; getGenre ; HorrorMoviesPageComponent
+
+INSERT_UPDATE ResponsiveParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; cssClass
+; ; TricastHomepageTCO-WatchAnytimeParagraphComponent ; Tricast HomepageTCO-Watch Anytime Paragraph Component ; TricastHomepageTCO-WatchAnytimeParagraphComponent ; "someCssClass"
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid, $contentCV)
+; ; NavigationBannerSlot-homepageTCO         ; Navigation Banner Slot for Tricast HomepageTCO     ; true ; TricastHomepageTCO-WideNavigationBanner-anonymous,TricastHomepageTCO-WideNavigationBanner-registered, TricastHomepageTCO-WatchAnytimeParagraphComponent
+; ; Section1Slot-homepageTCO                 ; Section 1 Slot for Tricast HomepageTCO             ; true ; TricastHomepageTCOBannerCollectionComponent
+; ; Section3Slot-homepageTCO                 ; Section 3 Slot for Tricast HomepageTCO             ; true ; TricastHomepageTCOFixedProductSetComponent, TricastHomepageTCOFeaturedCollectionComponentSport, TricastHomepageTCOFeaturedCollectionComponentMovie, TricastHomepageTCO-FavoriteMovies
+# CECS-227 Consumption site - watching video on a tablet START
+; ; Section3Slot-videoPlaybackPage           ; Section 3 Slot for Video Playback Page             ; true ; VideoPlaybackHtml5VideoComponentMovie
+; ; Section3Slot-fashionVideoPlaybackPageTCO ; Section 3 Slot for Fashion Video Playback Page TCO ; true ; FashionHtml5VideoComponentTCO
+# CECS-227 Consumption site - watching video on a tablet END
+
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)
+; ; NavigationBanner-homepageTCO         ; NavigationBannerSection ; homepageTCO                 ; NavigationBannerSlot-homepageTCO
+; ; Section1-homepageTCO                 ; Section1                ; homepageTCO                 ; Section1Slot-homepageTCO
+; ; Section3-homepageTCO                 ; Section3                ; homepageTCO                 ; Section3Slot-homepageTCO
+# CECS-227 Consumption site - watching video on a tablet START
+; ; Section3-videoPlaybackPage           ; Section3                ; videoPlaybackPage           ; Section3Slot-videoPlaybackPage
+; ; Section3-fashionVideoPlaybackPageTCO ; Section3                ; fashionVideoPlaybackPageTCO ; Section3Slot-fashionVideoPlaybackPageTCO
+# CECS-227 Consumption site - watching video on a tablet END
+
+# Preview Image for tricast homepage
+INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]
+; ; tricast_homepageTCO-preview        ; image/png ; homepageTCO-preview.png     ; $servicesjarResourceCms/preview-images/homepageTCO-preview.png
+; ; tricast_merchandisePage-preview    ; image/png ; merchandisePage-preview.png ; $servicesjarResourceCms/preview-images/merchandisePage-preview.png
+; ; tricast_productDetailsPage-preview ; image/png ; productDetails-preview.png  ; $servicesjarResourceCms/preview-images/productDetails-preview.png
+
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
+; ; homepageTCO ; tricast_homepageTCO-preview
+
+# CECS-77 Create new Homepage - cms - END
+
+# CECS-97 Merchandise landing page - START
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid, $contentCV)
+; ; Section2Slot-MerchandiseHomepage         ; Section 2 Slot for Merchandise Homepage         ; true ; TricastBestSellingMerchandisePCC, TricastRecommendedForYouMerchandisePCC, MerchandiseUnderworldFeaturedCollectionComponent, TricastNewArrivalsMerchandisePCC
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)
+; ; Section2-MerchandiseHomepage         ; Section2                ; merchandisePage ; Section2Slot-MerchandiseHomepage
+# CECS-97 Merchandise landing page - END
+
+# CECS-775 Create a presonalized CategoryPage for MovieProducts - START
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)
+; ; Section2-VODPage        ; Section2                              ; vodPage ; Section2Slot-VODPage
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid, $contentCV)
+; ; Section2Slot-VODPage    ; Section 2 Slot for VOD Page    ; true       ; NewAndNoteworthyMoviesPageComponent, StandoutHitsMoviesPageComponent, FeaturedTVShowsComponent, DramaMoviesPageComponent, ScienceFictionMoviesComponent, HorrorMoviesPageComponent
+# CECS-775 Create a presonalized CategoryPage for MovieProducts - END
+
+# CECS-68 responsive my-account homepage - cms START
+INSERT_UPDATE SocialAccountBodySubComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef
+; ; socialAccountBodySubComponent ; socialAccountBodySubComponent
+
+INSERT_UPDATE DetailAccountBodySettingsSubComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef
+; ; detailAccountBodySettingsSubComponent ; detailAccountBodySettingsSubComponent
+
+INSERT_UPDATE DetailAccountBodyBillingSubComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef
+; ; detailAccountBodyBillingSubComponent ; detailAccountBodyBillingSubComponent
+
+INSERT_UPDATE HelpAccountBodySubComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef
+; ; helpAccountBodySubComponent ; helpAccountBodySubComponent
+
+INSERT_UPDATE TileAccountBodySubComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef; icon; url; visible[default = true]
+; ; tileAccount1BodySubComponent     ; tileAccount1BodySubComponent     ; subscriptions   ; /my-account/subscriptions
+# CECS-89: Migrate my-account entitlements page - START
+; ; tileAccount2BodySubComponent     ; tileAccount2BodySubComponent     ; entitlements    ; /my-account/entitlements
+# CECS-89: Migrate my-account entitlements page - END
+# CECS-569: Bills tile should point to my-account/expenses
+; ; tileAccount3BodySubComponent     ; tileAccount3BodySubComponent     ; expenses        ; /my-account/expenses
+# CECS-569: END
+; ; tileAccount4BodySubComponent     ; tileAccount4BodySubComponent     ; payment-details ; /my-account/payment-details
+; ; tileAccount5BodySubComponent     ; tileAccount5BodySubComponent     ; tickets         ; /my-account/tickets
+; ; tileAccount6BodySubComponent     ; tileAccount6BodySubComponent     ; profile         ; /my-account/profile ;
+; ; tileAccountAddressesSubComponent ; tileAccountAddressesSubComponent ; address-book    ; /my-account/address-book
+
+INSERT_UPDATE ContractTileAccountBodySubComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef; bundleTemplate(id, version, $productCV)
+; ; contractTileAccountBodySubComponent ; contractTileAccountBodySubComponent ; TriCast:1.0
+
+INSERT_UPDATE ProductListsAccountTileComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef
+; ; productListsAccountTileComponent ; productListsAccountTileComponent
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'AccountPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; BodyContent ; ; SocialAccountBodySubComponent, DetailAccountBodySettingsSubComponent, DetailAccountBodyBillingSubComponent, HelpAccountBodySubComponent, JspIncludeComponent ; wide
+; SideContent ; ; TileAccountBodySubComponent ; wide
+# CECS-132 billing options improvements START
+INSERT_UPDATE ContentSlot; active[default = true]; uid[unique = true]; name; cmsComponents(&componentRef); $contentCV[unique = true]
+; ; BodyContentSlot-AccountPage ; Body Content Slot for Account Page ; socialAccountBodySubComponent, detailAccountBodySettingsSubComponent, detailAccountBodyBillingSubComponent, helpAccountBodySubComponent
+UPDATE ContentSlot; uid[unique = true]; cmsComponents(&componentRef); $contentCV[unique = true]
+; AccountSideContentSlot ; contractTileAccountBodySubComponent, tileAccount2BodySubComponent, tileAccount3BodySubComponent, tileAccount4BodySubComponent, tileAccount5BodySubComponent, tileAccount6BodySubComponent, tileAccountAddressesSubComponent, productListsAccountTileComponent
+# CECS-132 billing options improvements END
+
+INSERT_UPDATE ContentSlotForPage; uid[unique = true]; position; page(uid, $contentCV)[default = 'account']; contentSlot(uid, $contentCV); $contentCV[unique = true]
+; BodyContent-AccountPage ; BodyContent ; ; BodyContentSlot-AccountPage ;
+#                                    ; SideContent-AccountPage       ; SideContent       	;                                                      ; SideContentSlot-AccountPage                ;
+
+# CECS-68 responsive my-account homepage - cms END
+
+# CECS-227 Consumption site - watching video on a tablet START
+INSERT_UPDATE ApplicableCmsActionsTypeForCmsComponent; target(code)[unique = true]; source(code)[unique = true]
+; MultiRowFixedProductSetComponent ; VideoPlaybackAction
+; SlickProductCarouselComponent    ; VideoPlaybackAction
+; FixedProductSetComponent         ; VideoPlaybackAction
+; TvShowProductDetailsComponent	   ; AddToWatchListAction
+; MovieProductDetailsComponent     ; AddToWatchListAction
+
+INSERT_UPDATE CMSActionRestriction; $contentCV[unique = true]; uid[unique = true]; name
+; ; VideoPlaybackActionRestriction ; Video Playback Action Restriction
+
+INSERT_UPDATE VideoPlaybackAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; VideoPlaybackAction ; /Open-Catalogue/TV-Channels-and-TV-Content/Videos/TV-Shows/video/p/{productCode} ; Video Playback Action ; VideoPlaybackActionRestriction ; VideoPlaybackAction
+# CECS-227 Consumption site - watching video on a tablet END
+
+UPDATE CategoryPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
+; ; merchandisePage ; tricast_merchandisePage-preview
+
+INSERT_UPDATE CMSProductRestriction; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); pages(uid, $contentCV); &restr
+; ; FashionVideoPlayback-ContentPageRestrictionTCO ; Restriction for Fashion Video TCO Playback ; underworld-s01-e01, underworld-s01-e02, underworld-s01-e03 ; fashionVideoPlaybackPageTCO ; rest-fashion-video-playback-tco
+
+INSERT_UPDATE CMSProductTypeRestriction; $contentCV[unique = true]; uid[unique = true]; name; productType(code); &restr
+; ; TvShow-ProductPageRestriction        ; Restriction for TV Show product type         ; TVShowProduct    ; rest-tv-show
+; ; TvShowSeason-ProductPageRestriction  ; Restriction for TV Show Season product type  ; TVSeasonProduct  ; rest-tv-season
+; ; TvShowEpisode-ProductPageRestriction ; Restriction for TV Show Episode product type ; TVEpisodeProduct ; rest-tv-episode
+# CECS-762 - create a presonalized ProductPage for MovieProducts
+; ; MovieProduct-ProductPageRestriction  ; Restriction for Movie product type           ; MovieProduct     ; rest-movie
+; ; MerchandiseProduct-ProductPageRestriction ; Restriction for Merchandise product     ; MerchandiseProduct ; rest-merchandise-products
+; ; MerchandiseVariantProduct-ProductPageRestriction ; Restriction for Merchandise variant product     ; MerchandiseVariantProduct ; rest-merchandise-varproducts
+
+# CECS-227 Consumption site - watching video on a tablet START
+INSERT_UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); label; restrictions(&restr); defaultPage[default = 'true']; approvalStatus(code)[default = 'approved']; homepage[default = 'false']; previewImage(code, $contentCV)[default = 'ContentPageModel__function_preview']
+; ; videoPlaybackPage           ; Video Playback Page                           ; VideoPlaybackPageTemplate ; videoPlaybackPage
+; ; fashionVideoPlaybackPageTCO ; Fashion Video Playback Page TCO               ; VideoPlaybackPageTemplate ; videoPlaybackPage ; rest-fashion-video-playback-tco ; false
+# CECS-227 Consumption site - watching video on a tablet END
+
+INSERT_UPDATE ProductPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); defaultPage; approvalStatus(code)[default = 'approved']; restrictions(&restr)
+; ; tvShowProductPage ; TV Show Product Page ; TVShowProductPageTemplate ; false ; ; rest-tv-show, rest-tv-season, rest-tv-episode
+# CECS-762 - create a presonalized ProductPage for MovieProducts
+; ; movieProductPage  ; Movie Product Page   ; TVShowProductPageTemplate ; false ; ; rest-movie
+; ; merchandiseProductPage ; Merchandise Product page ; MerchandiseProductPageLayoutTemplate ; false ; ; rest-merchandise-products, rest-merchandise-varproducts 
+
+# CECS-726 TV Show Product pages - START
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid, $contentCV)
+; ; Section1Slot-tvShowProductPage ; Section 1 Slot for TV Show Product page ; true ; TvShowProductDetails
+; ; Section2Slot-tvShowProductPage ; Section 2 Slot for TV Show Product page ; true ; TVSeasonList
+; ; Section3Slot-tvShowProductPage ; Section 3 Slot for TV Show Product page ; true ; ProductDetailsReviewComponent
+; ; Section4Slot-tvShowProductPage ; Section 4 Slot for TV Show Product page ; true ;
+; ; CrossSellingSlot-tvShowProductPage ; CrossSelling Slot for TV Show Product page ; true ; TvShowCrossSelling
+; ; Section3Slot-merchandiseProduct ; Section 3 Slot for Product Merchandise page ; true ; CrossSelling, ProductDetailsRelatedComponent, ProductDetailsReviewComponent, ProductDetailsFeaturesComponent, productHtml5VideoComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)[unique = true]
+; ; Section1-tvShowProductPage ; Section1 ; tvShowProductPage ; Section1Slot-tvShowProductPage
+; ; Section2-tvShowProductPage ; Section2 ; tvShowProductPage ; Section2Slot-tvShowProductPage
+; ; Section3-tvShowProductPage ; Section3 ; tvShowProductPage ; Section3Slot-tvShowProductPage
+; ; Section4-tvShowProductPage ; Section4 ; tvShowProductPage ; Section4Slot-tvShowProductPage
+; ; CrossSelling-tvShowProductPage ; CrossSelling ; tvShowProductPage ; CrossSellingSlot-tvShowProductPage
+# CECS-726 TV Show Product pages - END
+; ; Section3-merchandiseProductPage ; Section3 ; merchandiseProductPage ; Section3Slot-merchandiseProduct
+
+# CECS-762 - create a presonalized ProductPage for MovieProducts - START
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid, $contentCV)
+; ; Section1Slot-movieProductPage ; Section 1 Slot for Movie Product page ; true ; MovieProductDetails
+; ; Section2Slot-movieProductPage ; Section 2 Slot for Movie Product page ; true ; VideoPlaybackHtml5VideoComponentTrail
+; ; Section3Slot-movieProductPage ; Section 3 Slot for Movie Product page ; true ; ProductDetailsReviewComponent
+; ; Section4Slot-movieProductPage ; Section 4 Slot for Movie Product page ; true ;
+; ; CrossSellingSlot-movieProductPage ; CrossSelling Slot for Movie Product page ; true ; TvShowCrossSelling
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)[unique = true]
+; ; Section1-movieProductPage ; Section1 ; movieProductPage ; Section1Slot-movieProductPage
+; ; Section2-movieProductPage ; Section2 ; movieProductPage ; Section2Slot-movieProductPage
+; ; Section3-movieProductPage ; Section3 ; movieProductPage ; Section3Slot-movieProductPage
+; ; Section4-movieProductPage ; Section4 ; movieProductPage ; Section4Slot-movieProductPage
+; ; CrossSelling-movieProductPage ; CrossSelling ; movieProductPage ; CrossSellingSlot-movieProductPage
+# CECS-762 - create a presonalized ProductPage for MovieProducts - END
+
+#Blog components - START
+INSERT_UPDATE BlogRelatedPostsComponent ; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; blogRelatedPostsDisplayType(code); maxPosts
+; ; BlogRelatedPostsPopular ; Popular posts ; BlogRelatedPostsPopular ;
+; ; BlogRelatedPostsRelated ; Related posts ; BlogRelatedPostsRelated ; RELATED ; 4
+
+INSERT_UPDATE BlogNewsletterComponent ; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; BlogNewsletterComponent ; Newsletter input ; BlogNewsletterComponent
+
+INSERT_UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); label; defaultPage[default = 'true']; approvalStatus(code)[default = 'approved']; homepage[default = 'false']
+; ; blogArticlePage ; Blog Article Page ; BlogArticlePageTemplate ; blogArticleDetailsPage
+
+INSERT_UPDATE BlogPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); label; blogArticles(&componentRef); defaultPage[default = 'true']; approvalStatus(code)[default = 'approved']; homepage[default = 'false'];
+# CECS-198 Blog page - template, banner and paragraph components
+; ; tcoBlogPage ; TCO Blog Page ; BlogPageTemplate ; /blog/tco ; UnderworldTcoBlogPage-BlogArticle1, UnderworldTcoBlogPage-BlogArticle2, UnderworldTcoBlogPage-BlogArticle3, UnderworldTcoBlogPage-BlogArticle4, TheLastJourney-BlogArticle, Documentary-BlogArticle, VenomV-BlogArticle, NewPackage-BlogArticle, SuperFibrePremium-BlogArticle, ESPNWSports-BlogArticle
+
+INSERT_UPDATE BlogArticleDetailsComponent ; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;
+; ; BlogArticleDetails ; Blog article ; BlogArticleDetails ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)[unique = true]
+; ; ComponentsRightBlogArticle-blogArticlePage ; Section2C ; blogArticlePage ; ComponentsRightSlotBlogArticle-blogArticlePage
+; ; ComponentsRightBlog-blogPage ; Section2C ; tcoBlogPage ; ComponentsRightSlotBlog-blogPage
+; ; BlogArticleDetails-blogArticlePage ; Section2A ; blogArticlePage ; BlogArticleDetails-blogArticlePage
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid, $contentCV)
+; ; ComponentsRightSlotBlogArticle-blogArticlePage ; Slot for components on the right side ; true ; BlogRelatedPostsRelated, BlogRelatedPostsPopular, BlogNewsletterComponent
+; ; ComponentsRightSlotBlog-blogPage ; Slot for components on the right side ; true ; BlogRelatedPostsPopular, BlogNewsletterComponent
+; ; BlogArticleDetails-blogArticlePage ; Slot for article ; true ; BlogArticleDetails
+#  Blog components - END
+
+# CECS-172 Product related items component - START
+INSERT_UPDATE ProductDetailsRelatedComponent; $contentCV[unique = true]; uid[unique = true]; name; cssClass
+; ; ProductDetailsRelatedComponent ; Product Details Related Component ; "row grey related-items"
+
+INSERT_UPDATE Html5VideoComponent; $contentCV[unique = true]; uid[unique = true]; name; visible; video(code, $contentCV); timeUpdateEvents(uid, $contentCV)
+; ; productHtml5VideoComponent ; Product HTML5 Video Component ; false ;
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid, $contentCV)
+; ; Section3Slot-productDetails ; Section 3 Slot for Product Details page ; true ; ProductDetailsRelatedComponent, ProductDetailsReviewComponent, ProductDetailsFeaturesComponent, productHtml5VideoComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)[unique = true]
+; ; Section3-productDetails ; Section3 ; productDetails ; Section3Slot-productDetails
+# CECS-172 Product related items component - END
+
+# CECS-173 Product reviews component - START
+INSERT_UPDATE ProductDetailsReviewComponent; $contentCV[unique = true]; uid[unique = true]; name; cssClass
+; ; ProductDetailsReviewComponent ; Product Details Review Component ; ""
+# CECS-173 Product reviews component - END
+
+# CECS-174 Product Features component - START
+INSERT_UPDATE ProductDetailsFeaturesComponent; $contentCV[unique = true]; uid[unique = true]; name; cssClass
+; ; ProductDetailsFeaturesComponent ; Product Details Features Component ; ""
+# CECS-174 Product Features component - END
+
+UPDATE ProductPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
+; ; productDetails ; tricast_productDetailsPage-preview
+
+###   CECS-267 current expenses page START
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-accountExpenses ; Body Content Slot for Expenses ; true ; AccountExpensesComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'accountExpenses']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-accountExpenses ; BodyContent ; ; BodyContent-accountExpenses ; ; ;
+
+###   CECS-267 current expenses page END
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'accountExpenseDisputes']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-accountExpenseDisputes ; BodyContent ; ; BodyContent-accountExpenseDisputes ; ; ;
+### /CECS-571
+
+#### Blog Page ####
+
+# CECS-199 Blog page - Featured component - START
+INSERT_UPDATE BlogArticle; $contentCV[unique = true]; &componentRef; code[unique = true]; publishDate[unique = true, dateformat = dd.MM.yyyy]; $product; itemOfInterest(code)
+; ; UnderworldTcoBlogPage-BlogArticle1 ; UnderworldTcoBlogPage-BlogArticle1 ; 12.03.2015 ; underworld ; UNDERWORLD
+; ; UnderworldTcoBlogPage-BlogArticle2 ; UnderworldTcoBlogPage-BlogArticle2 ; 11.03.2015 ; underworld ; UNDERWORLD
+; ; UnderworldTcoBlogPage-BlogArticle3 ; UnderworldTcoBlogPage-BlogArticle3 ; 10.03.2015 ; underworld ; UNDERWORLD
+; ; UnderworldTcoBlogPage-BlogArticle4 ; UnderworldTcoBlogPage-BlogArticle4 ; 11.04.2016 ; underworld ; UNDERWORLD
+; ; TheLastJourney-BlogArticle         ; TheLastJourney-BlogArticle         ; 12.10.2015 ; the-last-journey ; THE_LAST_JOURNEY
+; ; Documentary-BlogArticle            ; Documentary-BlogArticle            ; 13.11.2015 ; ; DOCUMENTARY
+; ; VenomV-BlogArticle                 ; VenomV-BlogArticle                 ; 1.11.2015  ; venom ; VENOM
+; ; NewPackage-BlogArticle             ; NewPackage-BlogArticle             ; 27.10.2015 ; superFibreUnlimited ;
+; ; SuperFibrePremium-BlogArticle      ; SuperFibrePremium-BlogArticle      ; 15.9.2015  ; ;
+; ; ESPNWSports-BlogArticle            ; ESPNWSports-BlogArticle            ; 8.9.2015   ; SportChannel ; SPORTS
+
+# CECS-194 Packages Page - complete implementation START
+INSERT_UPDATE CMSTabParagraphComponent; uid[unique = true]; &componentRef; name; $contentCV[unique = true]
+; BundlePackageInfoTabComponent1Fibre         ; BundlePackageInfoTabComponent1Fibre         ; Bundle Package Info Tab Component ;
+; BundlePackageInfoTabComponent1Standard      ; BundlePackageInfoTabComponent1Standard      ; Bundle Package Info Tab Component ;
+; BundlePackageInfoTabComponent1Entertainment ; BundlePackageInfoTabComponent1Entertainment ; Bundle Package Info Tab Component ;
+; BundlePackageInfoTabComponent1Premium       ; BundlePackageInfoTabComponent1Premium       ; Bundle Package Info Tab Component ;
+; BundlePackageInfoTabComponent2Fibre         ; BundlePackageInfoTabComponent2Fibre         ; Bundle Package Info Tab Component ;
+; BundlePackageInfoTabComponent2Standard      ; BundlePackageInfoTabComponent2Standard      ; Bundle Package Info Tab Component ;
+; BundlePackageInfoTabComponent2Entertainment ; BundlePackageInfoTabComponent2Entertainment ; Bundle Package Info Tab Component ;
+; BundlePackageInfoTabComponent2Premium       ; BundlePackageInfoTabComponent2Premium       ; Bundle Package Info Tab Component ;
+; BundlePackageInfoTabComponent3Entertainment ; BundlePackageInfoTabComponent3Entertainment ; Bundle Package Info Tab Component ;
+; BundlePackageInfoTabComponent3Premium       ; BundlePackageInfoTabComponent3Premium       ; Bundle Package Info Tab Component ;
+; BundlePackageInfoTabComponent4Premium       ; BundlePackageInfoTabComponent4Premium       ; Bundle Package Info Tab Component ;
+
+INSERT_UPDATE BundlePackageRelatedComponentsContainerComponent; uid[unique = true]; relatedComponents(&componentRef); $contentCV[unique = true]
+; superFibrePremiumRelatedComponentsContainer  ; BundlePackageInfoTabComponent1Premium, BundlePackageInfoTabComponent2Premium, BundlePackageInfoTabComponent3Premium, BundlePackageInfoTabComponent4Premium
+; fibreEntertainmentRelatedComponentsContainer ; BundlePackageInfoTabComponent1Entertainment, BundlePackageInfoTabComponent2Entertainment, BundlePackageInfoTabComponent3Entertainment
+; fibreStarterRelatedComponentsContainer       ; BundlePackageInfoTabComponent1Fibre, BundlePackageInfoTabComponent2Fibre
+; standardStarterRelatedComponentsContainer    ; BundlePackageInfoTabComponent1Standard, BundlePackageInfoTabComponent2Standard
+
+UPDATE BundlePackage; code[unique = true]; relatedComponentsContainers(uid, $contentCV); $productCV
+; superFibrePremium  ; superFibrePremiumRelatedComponentsContainer
+; fibreEntertainment ; fibreEntertainmentRelatedComponentsContainer
+; fibreStarter       ; fibreStarterRelatedComponentsContainer
+; standardStarter    ; standardStarterRelatedComponentsContainer
+
+#CECS-194 Packages Page - complete implementation END
+
+INSERT_UPDATE RemainingLoyaltyPointsComponent; uid[unique = true]; &componentRef; name; $contentCV[unique = true]
+; RemainingLoyaltyPointsComponent ; RemainingLoyaltyPointsComponent ; Remaining Loyalty Points Component ;
+
+INSERT_UPDATE BundlePackageDescriptionSlot; uid[unique = true]; name; $contentCV[unique = true]
+; superFibrePremium_broadband     ; Super Fibre Broadband Slot Description
+; superFibrePremium_monthlyUsage  ; Super Fibre Monthly Usage Slot Description
+; fibreEntertainment_broadband    ; Fibre Entertainment Broadband Slot Description
+; fibreEntertainment_monthlyUsage ; Fibre Entertainment Monthly Usage Slot Description
+; fibreStarter_broadband          ; Fibre Starter Broadband Slot Description
+; fibreStarter_monthlyUsage       ; Fibre Starter Monthly Usage Slot Description
+; standardStarter_broadband       ; Standard Starter Broadband Slot Description
+; standardStarter_monthlyUsage    ; Standard Starter Monthly Usage Slot Description
+
+INSERT_UPDATE BundlePackageDescriptionSlotsContainerComponent; uid[unique = true]; descriptionSlots(uid, $contentCV); $contentCV[unique = true]
+; superFibrePremiumDescriptionSlotsContainer  ; superFibrePremium_broadband, superFibrePremium_monthlyUsage
+; fibreEntertainmentDescriptionSlotsContainer ; fibreEntertainment_broadband, fibreEntertainment_monthlyUsage
+; fibreStarterDescriptionSlotsContainer       ; fibreStarter_broadband, fibreStarter_monthlyUsage
+; standardStarterDescriptionSlotsContainer    ; standardStarter_broadband, standardStarter_monthlyUsage
+
+UPDATE BundlePackage; code[unique = true]; descriptionSlotsContainer(uid, $contentCV); $productCV
+; superFibrePremium  ; superFibrePremiumDescriptionSlotsContainer
+; fibreEntertainment ; fibreEntertainmentDescriptionSlotsContainer
+; fibreStarter       ; fibreStarterDescriptionSlotsContainer
+; standardStarter    ; standardStarterDescriptionSlotsContainer
+
+
+INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]
+; ; tricast_videoPlaybackPage-preview ; image/png ; videoPlaybackPage-preview.png ; $servicesjarResourceCms/preview-images/videoPlaybackPage-preview.png
+; ; tricast_categoryPage-preview      ; image/png ; categoryPage-preview.png      ; $servicesjarResourceCms/preview-images/categoryPage-preview.png
+; ; tricast_accountPage-preview       ; image/png ; accountPage-preview.png       ; $servicesjarResourceCms/preview-images/accountPage-preview.png
+; ; tricast_blogArticlePage-preview   ; image/png ; blogArticlePage-preview.png   ; $servicesjarResourceCms/preview-images/blogArticlePage-preview.png
+; ; tricast_blogTCOPage-preview       ; image/png ; blogTCOPage-preview.png       ; $servicesjarResourceCms/preview-images/blogTCOPage-preview.png
+; ; tricast_tvChannelPage-preview     ; image/png ; tvChannelPage-preview.png     ; $servicesjarResourceCms/preview-images/tvChannelPage-preview.png
+; ; tricast_newMerchandise-preview     ; image/png ; newMerchandise-preview.png     ; $servicesjarResourceCms/preview-images/newMerchandise-preview.png
+
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
+; ; videoPlaybackPage           ; tricast_videoPlaybackPage-preview
+; ; fashionVideoPlaybackPageTCO ; tricast_videoPlaybackPage-preview
+; ; search                      ; tricast_categoryPage-preview
+; ; account                     ; tricast_accountPage-preview
+; ; blogArticlePage             ; tricast_blogArticlePage-preview
+; ; tcoBlogPage                 ; tricast_blogTCOPage-preview
+; ; channelsPage                ; tricast_tvChannelPage-preview
+; ; merchandiseNewPage          ; tricast_newMerchandise-preview
+
+UPDATE CategoryPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
+; ; category ; tricast_categoryPage-preview
+
+
+# CECS-753 Channels Page
+INSERT_UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); label; defaultPage[default = 'true']; approvalStatus(code)[default = 'approved']; homepage[default = 'false']
+; ; channelsPage       ; Channels Page        ; ChannelsPageTemplate    ; /channels
+; ; merchandiseNewPage ; New Merchandise Page ; MerchandisePageTemplate ; /merchandise

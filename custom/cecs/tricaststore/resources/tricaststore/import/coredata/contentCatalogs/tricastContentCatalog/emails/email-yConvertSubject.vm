@@ -1,0 +1,7 @@
+#if ( $ctx.yConvertStep == 1 )
+${ctx.messages.email1Subject}
+#elseif ( $ctx.yConvertStep == 2 )
+${ctx.messages.email2Subject}
+#else
+${ctx.messages.email3Subject}
+#end

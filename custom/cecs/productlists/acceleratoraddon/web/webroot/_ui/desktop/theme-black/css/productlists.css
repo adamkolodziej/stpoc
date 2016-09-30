@@ -1,0 +1,184 @@
+.cart_header_panel.wishlists #cart_header ul li a {
+	min-width: 75px;
+	padding: 5px 10px;
+}
+.view_prodlist button.positive {
+	float: left;
+	clear: both;
+}
+.view_prodlist button.positive span.icon-cart {
+	display: none;
+}
+
+/*
+
+	Wishlist Menu
+************************/
+.wishlistNav .headline{
+	border-bottom:1px solid #a5a5a5;
+	height:30px;
+	line-height:30px;
+	text-transform:uppercase;
+	font-weight:bold;
+	font-size:1.2em;
+	margin:20px 0;
+	
+}
+
+.wishlistNav li.active{
+	font-weight:bold;	
+}
+/*
+
+	Wish Lists
+************************/
+.prodlist_header {
+	position: relative;
+	overflow: hidden;
+}
+
+.prodlist_header ul.nav {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	right: 0;
+}
+
+.prodlist_header ul.nav li:first-child {
+	margin-left: 0;
+	border-left: 0;
+	padding: 0;
+}
+
+.prodlist_header ul.nav li {
+	float: left;
+	margin-left: 5px;
+	padding: 0 0 0 5px;
+	color: #000000;
+	border-left: 1px solid #FFFFFF;
+}
+
+.prodlist_header ul.nav li a {
+	color: #000000;
+}
+
+.prodlist_header ul.nav a {
+	text-decoration: underline;
+}
+
+.prodlist_header ul.nav a:hover {
+	text-decoration: none;
+}
+
+.view_prodlist table tr td {
+	border-top: 1px solid #C0C1C2;
+	padding: 10px;
+	vertical-align: top;
+}
+
+.view_prodlist table.your_cart thead th {
+	padding-left: 9px;
+	font-weight: bold;
+	padding: 4px 10px 4px 5px;
+	vertical-align: top;
+}
+
+.view_prodlist table.your_cart tr td.product_details {
+	min-width: 120px;
+}
+
+.view_prodlist table.your_cart form input.qty {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin: 0 5px 10px 0;
+	-moz-box-shadow: inset 0 0 5px #cccccc;
+	-webkit-box-shadow: inset 0 0 5px #cccccc;
+	box-shadow: inset 0 0 5px #cccccc;
+	border: 1px solid #BBBBBB;
+	text-align: center;
+	float: left;	
+	padding: 2px 5px;
+}
+
+.view_prodlist .prod_refine {
+	border-bottom: 0;
+}
+
+.view_prodlist .prod_refine label {
+	padding: 3px 0;
+}
+
+.view_prodlist .prod_refine .sortOptions {
+	margin-left: 0;
+}
+
+.view_prodlist table tr td.product_image {
+	
+}
+
+.view_prodlist .form_field-input textarea {
+	width: 121px;
+	height: 60px;
+	margin-bottom: 0;
+}
+
+.view_prodlist table.your_cart thead th#header1 {
+	width: 100px;
+}
+
+.view_prodlist table.your_cart thead th#header3 {
+	width: 110px;
+}
+
+.view_prodlist .your_cart td.quantity {
+	min-width: 122px;
+}
+
+.view_prodlist .your_cart p {
+	margin-right: 0;
+	padding-left: 0;
+	margin: 0;
+}
+
+.view_prodlist table.your_cart tr td {
+	border-left: none;
+}
+
+.view_prodlist table.your_cart tr td.product_image {
+	min-width: 96px;
+}
+
+.view_prodlist table.your_cart tr td.product_details h2 {
+	font-size: 1.4em;
+}
+
+.view_prodlist .dragndrop a {
+	background: url('../../common/images/productlists-drag-n-drop.png') no-repeat 0 0 transparent;
+	display: block;
+	width: 32px;
+	height: 32px;
+	cursor: move;
+}
+
+.view_prodlist .dragndrop a:hover,
+.view_prodlist .dragndrop a:visited,
+.view_prodlist .dragndrop a:active {
+	background: url('../../common/images/productlists-drag-n-drop_h.png') no-repeat 0 0 transparent;
+}
+
+a.wishlist {
+	padding-left: 17px;
+	background: inherit;
+		-o-transition:.5s;
+  	-ms-transition:.5s;
+  	-moz-transition:.5s;
+  	-webkit-transition:.5s;
+  	/* ...and now for the proper property */
+  	transition:.5s;
+  	background: url('../../common/images/icon-wishlists-heart-13x13.png') no-repeat 0 3px transparent;
+}
+
+a.wishlist.miniCartWishlistActive {
+	background-image: url('../../common/images/icon-wishlists-heart-active-13x13.png');
+}

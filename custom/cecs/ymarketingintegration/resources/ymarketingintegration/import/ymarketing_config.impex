@@ -1,0 +1,23 @@
+
+INSERT_UPDATE SAPHTTPDestination;authenticationType(code,itemtype(code));httpDestinationName[unique=true];password;targetURL;userid
+;BASIC_AUTHENTICATION:HTTPAuthenticationType;Hybris_CEI;welcome;http://cinat.wdf.sap.corp:50080;cei_std
+;BASIC_AUTHENTICATION:HTTPAuthenticationType;Hybris_CEI_mock;welcome;http://localhost:9500;cei_std
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# sapadtreco_idOrigin:
+# EMAIL - b2c customer (contacts)
+# CUSTOMER_ID - b2b customer (accounts)
+# TW - twitter - final solution, Joe is created as consumer/contact but his origin is Twitter (as it was loaded through python script from twitter).
+#
+# CECS-348 CEI mock by default in yDC
+UPDATE SAPGlobalConfiguration ; sapadtreco_httpdest ; sapadtreco_filterCategory ; sapadtreco_idOrigin
+; $config-adt.http.destination ; ; TW
+
+# CECS-550 Enable productrecommendation addons and perform initial configuration
+INSERT_UPDATE SAPRFCDestination;rfcDestinationName[unique=true];backendType(code);connectionType;targetHost;instance;sid;client;userid;password;pooledConnectionMode;maxConnections;poolSize;maxWaitTime;jcoClientDelta;jcoTraceLevel(code);jcoCPICTrace(code);SAPConfigurations(core_name)
+;Hybris_CEI_RFC;ERP;true;cinat.wdf.sap.corp;00;CEI;200;cei_std;welcome;true;10;5;10000;true;NO_TRACE;GLOBAL_TRACELEVEL;
+
+UPDATE SAPGlobalConfiguration ; sapproductrecommendation_httpdest ; sapproductrecommendation_rfcdest ; sapproductrecommendation_usage(code)
+; $config-pri.http.destination ; Hybris_CEI_RFC; scenario

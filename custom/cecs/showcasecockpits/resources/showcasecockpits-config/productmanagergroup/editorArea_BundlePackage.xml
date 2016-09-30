@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+    <group printable="true" position="1" show-in-create-mode="true" show-if-empty="true" initially-opened="true" tabbed="false" visible="true" qualifier="General">
+        <label key="cockpit.config.label.General" />
+        <property visible="true" qualifier="BundlePackage.code"/>
+        <property visible="true" qualifier="BundlePackage.name"/>
+        <property visible="true" qualifier="BundlePackage.description" editor="wysiwyg"/>
+        <property visible="true" qualifier="BundlePackage.catalogVersion"/>
+        <property visible="true" qualifier="BundlePackage.bundleTemplate"/>
+        <property visible="true" qualifier="BundlePackage.selectedProducts"/>
+        <property visible="true" qualifier="BundlePackage.image" editor="simpleMediaReferenceSelector">
+            <parameter>
+                <name>mimeTypes</name>
+                <value>image/jpeg;image/gif;image/png</value>
+            </parameter>
+            <parameter>
+                <name>celumMediaFormat</name>
+                <value>picture</value>
+            </parameter>
+            <parameter>
+                <name>allowCreate</name>
+                <value>true</value>
+            </parameter>
+            <parameter>
+                <name>imageHeight</name>
+                <value>80px</value>
+            </parameter>
+            <parameter>
+                <name>restrictToCreateTypes</name>
+                <value>Media,CelumAsset+</value>
+            </parameter>
+            <parameter>
+                <name>predefinedValuesStrategy</name>
+                <value>imageMediaPredefinedValuesStrategy</value>
+            </parameter>
+        </property>
+         <property visible="true" qualifier="BundlePackage.thumbnail" editor="simpleMediaReferenceSelector">
+            <parameter>
+                <name>mimeTypes</name>
+                <value>image/jpeg;image/gif;image/png</value>
+            </parameter>
+            <parameter>
+                <name>celumMediaFormat</name>
+                <value>picture</value>
+            </parameter>
+            <parameter>
+                <name>allowCreate</name>
+                <value>true</value>
+            </parameter>
+            <parameter>
+                <name>imageHeight</name>
+                <value>80px</value>
+            </parameter>
+            <parameter>
+                <name>restrictToCreateTypes</name>
+                <value>Media,CelumAsset+</value>
+            </parameter>
+            <parameter>
+                <name>predefinedValuesStrategy</name>
+                <value>imageMediaPredefinedValuesStrategy</value>
+            </parameter>
+        </property>
+        <property visible="true" qualifier="BundlePackage.descriptionSlots"/>
+        <property visible="true" qualifier="BundlePackage.yBillingId"/>
+    </group>
+</editor>

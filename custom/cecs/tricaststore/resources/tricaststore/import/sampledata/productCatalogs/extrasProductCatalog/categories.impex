@@ -1,0 +1,13 @@
+# ImpEx for Importing Categories into Tricast Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog = extrasProductCatalog
+$productCatalogName=Extras Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$supercategories = source(code, $catalogVersion)[unique = true]
+$categories = target(code, $catalogVersion)[unique = true]
+
+# Insert Categories
+INSERT_UPDATE Category; code[unique = true]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion
+
+UPDATE Category; code[unique = true]; supercategories(code, $catalogVersion); $catalogVersion

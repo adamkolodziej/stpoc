@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="CMSItem.uid" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="CMSItem.uid" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="CMSItem.uid" />
+	</label>
+</base>

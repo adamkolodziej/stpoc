@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc.group.ymarketingintegration.ymarketingintegrationSection">
+                <explorer-tree:type-node code="CEIInitiative" id="CEIInitiative"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+   
+    <context merge-by="type" parent="GenericItem" type="CEIInitiative" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="id"/>
+        	<list-view:column qualifier="name"/>
+        	<list-view:column qualifier="categoryId"/>
+        	<list-view:column qualifier="status"/>
+        	<list-view:column qualifier="startDate"/>
+        	<list-view:column qualifier="endDate"/>
+        	<list-view:column qualifier="user"/>
+        	<list-view:column qualifier="local"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="auto" type="CEIInitiative" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.ymarketingintegration.ymarketingintegrationSection.General">
+                <editorArea:section name="hmc.group.ymarketingintegration.ymarketingintegrationSection.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="id"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="creationtime"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="user"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.ymarketingintegration.ymarketingintegrationSection.campaign">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="description"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="startDate"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="endDate"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="status"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="categoryId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="memberCount"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="local"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+</config>				

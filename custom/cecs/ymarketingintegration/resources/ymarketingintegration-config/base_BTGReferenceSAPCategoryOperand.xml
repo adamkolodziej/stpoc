@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="BTGReferenceSAPCategoryOperand.code" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="BTGReferenceSAPCategoryOperand.code" /> 
+		</sort-properties>
+
+	</search>
+	<label spring-bean="defaultBtgReferenceSAPCategoriesOperandLabelProvider" />
+	<default-property-settings>
+		<property qualifier="BTGReferenceSAPCategoryOperand.categories"
+			defaultEditor="categoryCollection">
+			<parameter>
+				<name>singleValueEditorCode</name>
+				<value>category</value>
+			</parameter>
+			</property>
+	</default-property-settings>
+</base>

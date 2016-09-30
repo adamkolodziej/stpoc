@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="TechnicalAttribute.dataId"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="TechnicalAttribute.dataId"/>
+			<property qualifier="TechnicalAttribute.dataType"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="TechnicalAttribute.dataId"/>
+	</label>
+</base>

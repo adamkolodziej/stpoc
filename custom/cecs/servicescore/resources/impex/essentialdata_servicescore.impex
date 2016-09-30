@@ -1,0 +1,10 @@
+INSERT_UPDATE ComponentTypeGroups2ComponentType; source(code)[unique = true]; target(code)[unique = true]
+; wide   ; SingleBannerComponent
+; wide   ; BannerCollectionComponent
+; wide   ; ResponsiveParagraphComponent
+; narrow ; SingleBannerComponent
+; narrow ; BannerCollectionComponent
+; narrow ; ResponsiveParagraphComponent
+
+INSERT_UPDATE SearchRestriction;code[unique=true];name[lang=en];query;principal(UID);restrictedType(code)[unique=true];active;generate
+;frontend_ProductEntitlement;ProductEntitlement on site;"{item:catalogVersion} IN (?session.catalogversions)";customergroup;ProductEntitlement;true;true

@@ -1,0 +1,27 @@
+# ImpEx for Importing Category Classifications into Tricast Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog = extrasProductCatalog
+$productCatalogName=Extras Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$classCatalogVersion=catalogversion(catalog(id[default='TricastClassification']),version[default='1.0'])[unique=true,default='TricastClassification:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='TricastClassification']),version[default='1.0'])[unique=true]
+$class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
+$supercategories=source(code, $classCatalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+$attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
+$unit=unit(code,$classSystemVersion)
+$superClass=superCategories(code,$classCatalogVersion)
+$catVer=catalogVersion(version[default='Staged'],catalog(id[default=$productCatalog]));
+
+# Insert Classifications
+INSERT_UPDATE ClassificationClass; $classCatalogVersion; code[unique=true]; $superClass; allowedPrincipals(uid)[default='customergroup']
+
+# Insert Classification Attributes
+INSERT_UPDATE ClassificationAttribute; $classSystemVersion; code[unique=true]
+
+UPDATE Category; $catVer[virtual=true,unique=true]; code[unique=true]; supercategories(code,$classCatalogVersion)[mode=append];
+
+INSERT_UPDATE ClassificationAttributeValue; code[unique=true]; $classSystemVersion
+
+INSERT_UPDATE ClassAttributeAssignment; $attribute; $class; attributeType(code[default=string]); multiValued[default=false]; $unit; position[default=1]; attributeValues(code,$classSystemVersion); searchable[default=false]; listable[default=true]; comparable[default=true]; range[default=false]; localized[default=true]; $classSystemVersion[virtual=true,unique=true]

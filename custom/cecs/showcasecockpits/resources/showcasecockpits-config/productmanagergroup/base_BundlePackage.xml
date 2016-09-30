@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="BundlePackage.code"/>
+            <property qualifier="BundlePackage.name"/>
+            <property qualifier="BundlePackage.catalogVersion"/>
+            <property qualifier="BundlePackage.bundleTemplate"/>
+            <property qualifier="BundlePackage.selectedProducts"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="BundlePackage.code"/>
+            <property qualifier="BundlePackage.name"/>
+            <property qualifier="BundlePackage.catalogVersion"/>
+            <property qualifier="BundlePackage.bundleTemplate"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="BundlePackage.code"/>
+        <property qualifier="BundlePackage.catalogVersion.mnemonic"/>
+	</label>
+</base>

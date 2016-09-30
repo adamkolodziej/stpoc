@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<bean id="ybillingintegrationCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
+		<property name="supportedChannels">
+			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+				<value>B2C</value>
+			</list>
+		</property>
+		<property name="addonExtensionMetadata">
+			<bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+				<property name="suffixChannel" value="false"/>
+				<property name="baseExtensionName" value="ybillingintegration"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="ybillingintegrationSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
+		<property name="extensionName" value="ybillingintegration" />
+	</bean>
+
+	<bean id="handlerResolver" class="com.hybris.showcase.ybillingintegration.DefaultHandlerResolver">
+		<property name="handlerList">
+			<list>
+				<bean class="com.hybris.showcase.ybillingintegration.LoggingHandler" >
+					<property name="configurationService" ref="configurationService" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="securityHandlerResolver" class="com.hybris.showcase.ybillingintegration.DefaultHandlerResolver">
+		<property name="handlerList">
+			<list>
+				<bean class="com.hybris.showcase.ybillingintegration.SecurityHandler" >
+					<property name="configurationService" ref="configurationService" />
+				</bean>
+				<bean class="com.hybris.showcase.ybillingintegration.LoggingHandler" >
+					<property name="configurationService" ref="configurationService" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="businessPartnerWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+	    <property name="serviceInterface" value="com.sap.document.sap.soap.functions.mc_style.ZBAPIBUPAZCREATEFROMDATA" />
+	    <property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_ZBP_CREATE.WSDL" />
+	     <property name="endpointAddress" value="${ybillingintegration.ws.endpoint.businessPartner.create}" />
+	     <property name="serviceName" value="ZBAPI_BUPA_ZCREATE_FROM_DATA"/>
+    	<property name="portName" value="ZBupaCreateBinding"/>
+    	 <property name="username" value="${ybillingintegration.ws.username}"/>
+        <property name="password" value="${ybillingintegration.ws.password}"/>
+        <property name="handlerResolver" ref="handlerResolver" />
+	</bean>
+
+	<!-- CECS-583 SOAP:change Business Agreement START -->
+	<bean id="businessAgreementChangeWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.sap.document.sap.soap.functions.mc_style.ZCRMWSBUAGCHANGE" />
+		<property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_ZBUAG_CHANGE.WSDL" />
+		<property name="endpointAddress" value="${ybillingintegration.ws.endpoint.businessAgreement.change}" />
+		<property name="serviceName" value="ZCRM_WS_BUAG_CHANGE"/>
+    	<property name="portName" value="ZBuagChangeBinding"/>
+    	<property name="username" value="${ybillingintegration.ws.username}"/>
+		<property name="password" value="${ybillingintegration.ws.password}"/>
+		 <property name="handlerResolver" ref="handlerResolver" />
+	</bean>
+
+
+	<!-- CECS-583 SOAP:change Business Agreement END -->
+
+	<!-- CECS-584 SOAP: add free movie and consume movie START -->
+	<bean id="chargeableItemChargingWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.highdeal.ws.charging.ChargeableItemChargingServices" />
+		<property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_CHARG_ITEM_CHARGING/chargeableItemCharging.wsdl" />
+		<property name="endpointAddress" value="${ybillingintegration.ws.endpoint.chargeable.item.charging}" />
+		<property name="serviceName" value="chargeableItemCharging"/>
+    	<property name="portName" value="chargeableItemChargingPort"/>
+    	<property name="username" value="${ybillingintegration.ws.username}"/>
+		<property name="password" value="${ybillingintegration.ws.password}"/>
+		 <property name="handlerResolver" ref="securityHandlerResolver" />
+	</bean>
+
+	<alias name="defaultChargeableItemChargingFacade" alias="chargeableItemChargingFacade" />
+	<bean id="defaultChargeableItemChargingFacade" class="com.hybris.showcase.ybillingintegration.facades.impl.DefaultChargeableItemChargingFacade">
+		<property name="userService" ref="userService" />
+		<property name="chargeableItemChargingService" ref="chargeableItemChargingService" />
+		<property name="timeService" ref="timeService"/>
+	</bean>
+
+	<alias name="defaultChargeableItemChargingService" alias="chargeableItemChargingService" />
+	<bean id="defaultChargeableItemChargingService" class="com.hybris.showcase.ybillingintegration.services.impl.DefaultChargeableItemChargingService">
+		<property name="chargeableItemChargingWebService" ref="chargeableItemChargingWebService"></property>
+				<property name="productService" ref="productService"/>
+	</bean>
+
+	<!--<alias alias="submitUsageStrategy" name="ybillingSubmitUsageStrategy" />-->
+	<bean id="yBillingSubmitUsageStrategy" class="com.hybris.showcase.ybillingintegration.strategy.impl.YBillingSubmitUsageStrategy" >
+		<property name="chargeableItemChargingFacade" ref="chargeableItemChargingFacade" />
+	</bean>
+	
+	 <bean id="yBillingSubmitStrategyListMergeDirective" depends-on="submitUsageStrategyList" parent="listMergeDirective" >
+		<property name="add" ref="yBillingSubmitUsageStrategy" />
+	</bean>
+
+	<alias name="ybillingGrantingEntitlementsFacade" alias="grantingEntitlementsFacade"/>
+	<bean id="ybillingGrantingEntitlementsFacade" class="com.hybris.showcase.ybillingintegration.facades.impl.YBillingGrantingEntitlementsFacade" parent="defaultGrantingEntitlementsFacade">
+		<property name="chargeableItemChargingFacade" ref="chargeableItemChargingFacade" />
+	</bean>
+	<!-- CECS-584 SOAP: add free movie and consume movie END -->
+
+	<alias name="defaultBusinessPartnerFacade" alias="businessPartnerFacade"/>
+	<bean id="defaultBusinessPartnerFacade" class="com.hybris.showcase.ybillingintegration.facades.impl.DefaultBusinessPartnerFacade">
+		<property name="businessPartnerService" ref="businessPartnerService" />
+	</bean>
+
+	<alias name="defaultBusinessPartnerService" alias="businessPartnerService"/>
+	<bean id="defaultBusinessPartnerService" class="com.hybris.showcase.ybillingintegration.services.impl.DefaultBusinessPartnerService">
+		<property name="businessPartnerWebService" ref="businessPartnerWebService" />
+		<property name="paymentCardAddWebService" ref="businessPartnerPaymentCardAddCreateWebService" />
+		<property name="customerAddBillingDataWebService" ref="customerAddBillingDataWebService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="customerNameStrategy" ref="customerNameStrategy"/>
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="businessAgreementWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+	    <property name="serviceInterface" value="com.sap.document.sap.soap.functions.mc_style.ZCRMWSBUAGCREATE" />
+	    <property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_ZBUAG_CREATE.WSDL" />
+	     <property name="endpointAddress" value="${ybillingintegration.ws.endpoint.businessAgreement.create}" />
+	     <property name="serviceName" value="ZCRM_WS_BUAG_CREATE"/>
+    	<property name="portName" value="ZBuAG_Create_Binding"/>
+    	 <property name="username" value="${ybillingintegration.ws.username}"/>
+        <property name="password" value="${ybillingintegration.ws.password}"/>
+         <property name="handlerResolver" ref="handlerResolver" />
+	</bean>
+
+	<bean id="paymentCardCreateWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+	    <property name="serviceInterface" value="com.sap.document.sap.soap.functions.mc_style.ZCRMWSPCARDMASTERCREATE" />
+	    <property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_ZPCARD_CREATE.WSDL" />
+	     <property name="endpointAddress" value="${ybillingintegration.ws.endpoint.paymentCard.create}" />
+	     <property name="serviceName" value="ZCRM_WS_PCARD_MASTER_CREATE"/>
+    	<property name="portName" value="ZPCardCreateBinding"/>
+    	 <property name="username" value="${ybillingintegration.ws.username}"/>
+        <property name="password" value="${ybillingintegration.ws.password}"/>
+         <property name="handlerResolver" ref="handlerResolver" />
+	</bean>
+
+	<bean id="businessPartnerPaymentCardAddCreateWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+	    <property name="serviceInterface" value="com.sap.document.sap.soap.functions.mc_style.ZCRMWSBUPAPCARDADD" />
+	    <property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_ZBUPA_PCARD_ADD.WSDL" />
+	     <property name="endpointAddress" value="${ybillingintegration.ws.endpoint.businessPartner.addPaymentCard}" />
+	     <property name="serviceName" value="ZCRM_WS_BUPA_PCARD_ADD"/>
+    	<property name="portName" value="ZBupaPCardAddBinding"/>
+    	 <property name="username" value="${ybillingintegration.ws.username}"/>
+        <property name="password" value="${ybillingintegration.ws.password}"/>
+         <property name="handlerResolver" ref="handlerResolver" />
+	</bean>
+
+	<alias name="defaultBusinessAgreementFacade" alias="businessAgreementFacade"/>
+	<bean id="defaultBusinessAgreementFacade" class="com.hybris.showcase.ybillingintegration.facades.impl.DefaultBusinessAgreementFacade">
+		<property name="businessAgreementService" ref="businessAgreementService" />
+		<property name="paymentCardService" ref="paymentCardService" />
+		<property name="businessPartnerService" ref="businessPartnerService" ></property>
+		<property name="userService" ref="userService"></property>
+		<property name="modelService" ref="modelService"></property>
+		<property name="customerAccountService" ref="customerAccountService" />
+	</bean>
+
+	<alias name="defaultBusinessAgreementService" alias="businessAgreementService"/>
+	<bean id="defaultBusinessAgreementService" class="com.hybris.showcase.ybillingintegration.services.impl.DefaultBusinessAgreementService">
+		<property name="businessAgreementWebService" ref="businessAgreementWebService" />
+		<property name="businessAgreementChangeWebService" ref="businessAgreementChangeWebService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultPaymentCardService" alias="paymentCardService"/>
+	<bean id="defaultPaymentCardService" class="com.hybris.showcase.ybillingintegration.services.impl.DefaultPaymentCardService">
+		<property name="paymentCardCreateWebService" ref="paymentCardCreateWebService" />
+		<property name="modelService" ref="modelService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+
+	<bean id="yBillingCustomersPostInitHook" class="com.hybris.showcase.ybillingintegration.setup.impl.YBillingCustomersPostInitHook">
+    	<property name="modelService" ref="modelService"/>
+    	<property name="businessPartnerService" ref="businessPartnerService" />
+    	<property name="businessAgreementFacade" ref="businessAgreementFacade" />
+    	<property name="flexibleSearchService" ref="flexibleSearchService"/>
+    	<property name="customerAccountService" ref="customerAccountService" />
+    </bean>
+
+     <bean id="yBillingPostInitHooksListMergeDirective" depends-on="postInitHooks" parent="listMergeDirective" >
+		<property name="add" ref="yBillingCustomersPostInitHook" />
+		 <property name="beforeBeanNames">
+            <list value-type="java.lang.String" >
+                <value>userOrderPostInitHook</value>
+            </list>
+        </property>
+	</bean>
+
+	 <!-- CECS-567 SOAP: create order - START -->
+	 <bean id="orderCreationWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+	    <property name="serviceInterface" value="com.sap.document.sap.soap.functions.mc_style.ZCRMWSZORDERCREATE" />
+	    <property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_ZORDER_CREATE.WSDL" />
+	     <property name="endpointAddress" value="${ybillingintegration.ws.endpoint.orderCreate.create}" />
+	     <property name="serviceName" value="ZCRM_WS_ZORDER_CREATE"/>
+    	 <property name="portName" value="ZOrderCreateBinding2"/>
+    	 <property name="username" value="${ybillingintegration.ws.username}"/>
+        <property name="password" value="${ybillingintegration.ws.password}"/>
+         <property name="handlerResolver" ref="handlerResolver" />
+	</bean>
+
+	<bean id="customerAddBillingDataWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+	    <property name="serviceInterface" value="com.sap.document.sap.soap.functions.mc_style.ZCRMWSBAPIBUPAFRG0030ADD" />
+	    <property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_ZBP_FRG0030_ADD.WSDL" />
+	     <property name="endpointAddress" value="${ybillingintegration.ws.endpoint.businessPartner.addBillingData}" />
+	     <property name="serviceName" value="ZCRM_WS_BAPI_BUPA_FRG0030_ADD"/>
+    	 <property name="portName" value="ZBupaFRG0030AddBinding"/>
+    	 <property name="username" value="${ybillingintegration.ws.username}"/>
+        <property name="password" value="${ybillingintegration.ws.password}"/>
+         <property name="handlerResolver" ref="handlerResolver" />
+	</bean>
+
+	<alias name="defaultYBillingOrderFacade" alias="yBillingOrderFacade"/>
+	<bean id="defaultYBillingOrderFacade" class="com.hybris.showcase.ybillingintegration.facades.impl.DefaultYBillingOrderFacade">
+		<property name="yBillingOrderService" ref="yBillingOrderService" />
+	</bean>
+
+    <!-- CECS-574 SOAP: change order -->
+    <bean id="changeOrderWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="com.sap.document.sap.soap.functions.mc_style.ZCRMWSCONTRACTCHANGE" />
+        <property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_ZCONTRACT_CHANGE.WSDL" />
+        <property name="endpointAddress" value="${ybillingintegration.ws.endpoint.order.change}" />
+        <property name="serviceName" value="ZCRM_WS_CONTRACT_CHANGE"/>
+        <property name="portName" value="ZContractChangeBinding"/>
+        <property name="username" value="${ybillingintegration.ws.username}"/>
+        <property name="password" value="${ybillingintegration.ws.password}"/>
+         <property name="handlerResolver" ref="handlerResolver" />
+    </bean>
+
+	<alias name="defaultYBillingOrderService" alias="yBillingOrderService"/>
+	<bean id="defaultYBillingOrderService" class="com.hybris.showcase.ybillingintegration.services.impl.DefaultYBillingOrderService">
+		<property name="orderCreationWebService" ref="orderCreationWebService" />
+		<property name="changeOrderWebService" ref="changeOrderWebService" />
+		<property name="orderHistoryWebService" ref="orderHistoryWebService" />
+		<property name="orderDetailsWebService" ref="orderDetailsWebService" />
+		<property name="configurationMappingService" ref="configurationMappingService"/>
+		<property name="yBillingTechAttrStrategyList" ref="yBillingTechAttrStrategyList"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="bundleTemplateService" ref="bundleTemplateService"/>
+        <property name="timeService" ref="timeService" />
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+    <bean id="yBillingOrderCreationPlaceOrderMethodHook" class="com.hybris.showcase.ybillingintegration.order.hooks.YBillingOrderCreationPlaceOrderMethodHook">
+        <property name="yBillingOrderService" ref="yBillingOrderService" />
+        <property name="configurationMappingService" ref="configurationMappingService"/>
+    </bean>
+
+	<!-- CECS-630: toggle yBillingIntegration through a property -->
+	<bean id="nullCommercePlaceOrderMethodHook" class="com.hybris.showcase.order.hooks.NullCommercePlaceOrderMethodHook"/>
+
+	<bean id="delegatedYBillingOrderCreationPlaceOrderMethodHook" class="com.hybris.showcase.order.hooks.DelegatedCommercePlaceOrderMethodHook">
+		<property name="defaultDelegate" ref="nullCommercePlaceOrderMethodHook" />
+		<property name="delegate" ref="yBillingOrderCreationPlaceOrderMethodHook"/>
+		<property name="configurationService" ref="configurationService" />
+		<property name="delegationEnabledPropertyKey" value="showcasecommon.ybillingintegration.enabled" />
+	</bean>
+	<!-- /CECS-630 -->
+
+    <bean id="yBillingOrderCreationPlaceOrderMethodHookMergeDirective"  depends-on="commercePlaceOrderMethodHooks" parent="listMergeDirective">
+        <property name="add" ref="yBillingOrderCreationPlaceOrderMethodHook"/>
+    </bean>
+
+    <!-- CECS-567 SOAP: create order - END -->
+
+	<!-- CECS-576 SOAP: order and contracts history	- START -->
+	<bean id="orderHistoryWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.sap.document.sap.soap.functions.mc_style.ZCRMWSBUPACONTRACTHISTORY" />
+		<property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_ZBUPA_CONT_HISTORY.WSDL" />
+		<property name="endpointAddress" value="${ybillingintegration.ws.endpoint.order.history}" />
+		<property name="serviceName" value="ZCRM_WS_BUPA_CONTRACT_HISTORY"/>
+		<property name="portName" value="ZBupaContHistBinding"/>
+		<property name="username" value="${ybillingintegration.ws.username}"/>
+		<property name="password" value="${ybillingintegration.ws.password}"/>
+		 <property name="handlerResolver" ref="handlerResolver" />
+	</bean>
+	<!-- CECS-576 SOAP: order and contracts history	- END -->
+
+	<!-- CECS-576 SOAP: order and contracts history	- START -->
+	<bean id="orderDetailsWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.sap.document.sap.soap.functions.mc_style.ZCRMWSBUPAORDHISTDETAILS" />
+		<property name="wsdlDocumentUrl" value="classpath:/ybillingintegration/wsdl/WS_ZBUPA_ORD_HIST_DETAILS.WSDL" />
+		<property name="endpointAddress" value="${ybillingintegration.ws.endpoint.order.details}" />
+		<property name="serviceName" value="ZCRM_WS_BUPA_ORD_HIST_DETAILS"/>
+		<property name="portName" value="ZBupaOrdHistBinding"/>
+		<property name="username" value="${ybillingintegration.ws.username}"/>
+		<property name="password" value="${ybillingintegration.ws.password}"/>
+		<property name="handlerResolver" ref="handlerResolver" />
+	</bean>
+	<!-- CECS-576 SOAP: order and contracts history	- END -->
+
+
+	<!-- CECS-381 Testing implementation for SSC -->
+	<alias name="sscProductConfigurationLoader" alias="productConfigurationLoader" />
+	<bean id="sscProductConfigurationLoader" class="com.hybris.showcase.ybillingintegration.ssc.impl.SSCProductConfigurationLoader">
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
+	<!-- CECS-381 Testing implementation for SSC -->
+	<bean id="productConfigurationSyncJob" class="com.hybris.showcase.ybillingintegration.ssc.impl.ProductConfigurationSyncJob" parent="abstractJobPerformable">
+		<property name="configurationMappingService" ref="configurationMappingService"/>
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="searchRestrictionService" ref="searchRestrictionService" />
+		<property name="userService" ref="userService" />
+		<property name="setupImpexAddonService" ref="setupImpexAddonService"/>
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+	<!-- CECS-381 Testing implementation for SSC -->
+	<alias name="sscConfigurationMappingService" alias="configurationMappingService" />
+	<bean id="sscConfigurationMappingService" class="com.hybris.showcase.ybillingintegration.ssc.impl.SSCConfigurationMappingService">
+		<property name="modelService" ref="modelService" />
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="bundleTemplateService" ref="bundleTemplateService"/>
+		<property name="productConfigurationLoader" ref="productConfigurationLoader"/>
+		<property name="unitDao" ref="unitDao"/>
+		<property name="productService" ref="productService" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="productConfigurationService" ref="sapProductConfigDefaultConfigurationService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="userService" ref="userService"/>
+		<property name="bundleSelectionCriteriaIdGenerator" ref="bundleSelectionCriteriaIDGenerator"/>
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+	<!--<alias name="yBillingSubscriptionFacade" alias="subscriptionFacade"/>-->
+	<bean id="yBillingSubscriptionFacade" class="com.hybris.showcase.ybillingintegration.subscription.facades.impl.YBillingSubscriptionFacade" parent="defaultMockSubscriptionFacade">
+		<property name="businessAgreementFacade" ref="businessAgreementFacade" />
+	</bean>
+
+	<!-- CECS-630 -->
+	<alias name="ybillingDelegatedSubscriptionFacade" alias="subscriptionFacade"/>
+	<bean id="ybillingDelegatedSubscriptionFacade" class="com.hybris.showcase.facades.impl.DelegatedSubscriptionFacade" parent="defaultSubscriptionFacade">
+		<property name="delegate" ref="yBillingSubscriptionFacade" />
+		<property name="defaultDelegate" ref="defaultMockSubscriptionFacade" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="delegationEnabledPropertyKey" value="showcasecommon.ybillingintegration.enabled" />
+	</bean>
+	<!-- /CECS-630 -->
+
+	<bean id="yBillingCreditCardPaymentInfoPopulator" class="com.hybris.showcase.ybillingintegration.populators.CreditCardPaymentInfoPopulator"/>
+
+	<alias name="yBillingCreditCardPaymentInfoConverter" alias="creditCardPaymentInfoConverter"/>
+	<bean id="yBillingCreditCardPaymentInfoConverter" parent="defaultCreditCardPaymentInfoConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="yBillingCreditCardPaymentInfoPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- CECS-630: toggle yBillingIntegration through a property -->
+	<alias name="delegatedCustomerAccountService" alias="customerAccountService"/>
+	<bean id="delegatedCustomerAccountService" class="com.hybris.showcase.ybillingintegration.customer.services.impl.DelegatedCustomerAccountService" parent="defaultB2CSapCustomerAccountService">
+		<property name="delegate" ref="yBillingCustomerAccountService" />
+		<property name="defaultDelegate" ref="defaultB2CSapCustomerAccountService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="delegationEnabledPropertyKey" value="showcasecommon.ybillingintegration.enabled" />
+	</bean>
+	<!-- /CECS-630 -->
+
+	<bean id="yBillingCustomerAccountService" class="com.hybris.showcase.ybillingintegration.customer.services.impl.YBillingCustomerAccountService" parent="defaultB2CSapCustomerAccountService">
+		<property name="businessPartnerService" ref="businessPartnerService" />
+	</bean>
+
+	<alias alias="yBillingTechAttrStrategy" name="defaultYBillingTechAttrStrategy" />
+	<bean id="defaultYBillingTechAttrStrategy" class="com.hybris.showcase.ybillingintegration.strategy.impl.DefaultYBillingTechAttrStrategy" />
+
+	<bean id="yBillingKnownTechAttrStrategy" class="com.hybris.showcase.ybillingintegration.strategy.impl.YBillingKnownTechAttrStrategy" />
+
+	<util:list id="yBillingTechAttrStrategyList">
+		<ref bean="yBillingTechAttrStrategy"/>
+		<ref bean="yBillingKnownTechAttrStrategy"/>
+	</util:list>
+
+	<bean id="technicalAttributeProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes" parent="listMergeDirective">
+		<property name="add" value="TechnicalAttribute" />
+	</bean>
+	
+	<!-- 
+	<bean id="wsClientSecurityInterceptor"  
+    class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor">
+        <property name="securementActions" value="UsernameToken"/>
+	    <property name="securementUsername" value="${ybillingintegration.cc.ws.username}"/>
+	    <property name="securementPassword" value="${ybillingintegration.cc.ws.password}"/>
+	    <property name="securementPasswordType" value="PasswordText"/>
+	    <property name="securementUsernameTokenElements" value="Nonce"/>
+    </bean> 
+    -->
+
+	<!--
+	CECS-700 Get rid of yBilling dependency on guideselling
+	CECS-668 evaluate SSC rules during guidedselling
+	-->
+
+	<alias name="defaultSSCConfigurationManager" alias="sscConfigurationManager" />
+	<bean id="defaultSSCConfigurationManager" class="com.hybris.showcase.ybillingintegration.facades.impl.DefaultSSCConfigurationManager">
+		<property name="modelService" ref="modelService"/>
+		<property name="configurationProviderFactory" ref="sapProductConfigConfigurationProviderFactory"/>
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+    <bean id="sscAddToCartMethodHook" class="com.hybris.showcase.ybillingintegration.order.hooks.SSCAddToCartMethodHook">
+        <property name="sscConfigurationManager" ref="sscConfigurationManager"/>
+    </bean>
+
+    <bean id="sscAddToCartMethodHook_ListMergeDirective" depends-on="bundleAddToCartMethodHooks" parent="listMergeDirective">
+        <property name="add" ref="sscAddToCartMethodHook"/>
+    </bean>
+
+    <bean id="sscUpdateCartMethodHook" class="com.hybris.showcase.ybillingintegration.order.hooks.SSCUpdateCartMethodHook">
+        <property name="sscConfigurationManager" ref="sscConfigurationManager"/>
+		<property name="cartService" ref="cartService"/>
+    </bean>
+
+    <bean id="sscUpdateCartMethodHook_ListMergeDirective" depends-on="commerceUpdateCartEntryMethodHooks" parent="listMergeDirective">
+        <property name="add" ref="sscUpdateCartMethodHook"/>
+    </bean>
+
+    <bean id="sscConflictsPopulator" class="com.hybris.showcase.ybillingintegration.populators.SSCConflictsPopulator">
+        <property name="sscConfigurationManager" ref="sscConfigurationManager"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="bundleOfferConverter"/>
+        <property name="add" ref="sscConflictsPopulator"/>
+    </bean>
+
+</beans>

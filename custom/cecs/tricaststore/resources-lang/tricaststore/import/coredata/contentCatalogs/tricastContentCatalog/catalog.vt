@@ -1,0 +1,13 @@
+#
+# Import the Tricast Content Catalog
+#
+
+# Language
+\$lang=$lang.toLowerCase()
+
+#set( $contentCatalogRows = $query.load('catalog') )
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=\$lang]
+#foreach( $row in $contentCatalogRows )
+ ;$row.key;"$row.values.name"
+#end

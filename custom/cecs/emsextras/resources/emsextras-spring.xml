@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--	<bean id="emsextrasCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
+		<property name="supportedChannels">
+			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+				<value>B2C</value>
+			</list>
+		</property>
+		<property name="addonExtensionMetadata">
+			<bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+				<property name="suffixChannel" value="false"/>
+				<property name="baseExtensionName" value="emsextras"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="emsextrasSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
+		<property name="extensionName" value="emsextras" />
+	</bean>-->
+
+	<alias name="defaultGrantingEntitlementsFacade" alias="grantingEntitlementsFacade"/>
+	<bean id="defaultGrantingEntitlementsFacade" class="com.hybris.showcase.emsextras.facades.impl.DefaultGrantingEntitlementsFacade">
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="entitlementFacade" ref="entitlementFacade"/>
+		<property name="productEntitlementEmsGrantConverter" ref="productEntitlementEmsGrantConverter"/>
+		<property name="entitlementFacadeDecorator" ref="entitlementFacadeDecorator"/>
+		<property name="productService" ref="productService"/>
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<!-- CECS-242 entitlement check -->
+	<alias name="defaultEMSFacade" alias="emsFacade" />
+	<bean id="defaultEMSFacade" class="com.hybris.showcase.emsextras.facades.impl.DefaultEMSFacade">
+		<property name="entitlementFacade" ref="entitlementFacade"/>
+		<property name="criteriaConvertersMap" ref="criteriaConvertersMap"/>
+		<property name="productService" ref="productService"/>
+		<property name="timeService" ref="timeService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+	<!-- CECS-242 entitlement check -->
+	<!-- associate required criteria set to specific entitlement types -->
+	<util:map id="criteriaConvertersMap" key-type="java.lang.String" value-type="de.hybris.platform.servicelayer.dto.converter.Converter">
+		<entry key="video_streaming" value-ref="videoStreamingConverter"/>
+		<entry key="video_download" value-ref="videoDownloadConverter"/>
+	</util:map>
+
+	<!-- CECS-242 entitlement check -->
+	<alias name="videoStreamingConverter" alias="videoDownloadConverter" />
+
+	<!-- CECS-242 entitlement check -->
+	<bean id="videoStreamingConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="java.util.ArrayList"/>
+		<property name="populators">
+			<list merge="true">
+				<!-- define how criteria set should be build for specific purpose -->
+				<ref bean="productPathConditionPopulator" />
+				<ref bean="tvEpisodePathCriterionPopulator" />
+				<ref bean="tvSeasonPathCriterionPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- CECS-242 entitlement check -->
+	<bean id="productPathConditionPopulator" class="com.hybris.showcase.emsextras.populators.entitlements.criteria.ProductPathCriterionPopulator">
+		<property name="categoryService" ref="categoryService"/>
+	</bean>
+
+	<!-- CECS-242 entitlement check -->
+	<bean id="tvEpisodePathCriterionPopulator" parent="productPathConditionPopulator" class="com.hybris.showcase.emsextras.populators.entitlements.criteria.TVEpisodePathCriterionPopulator" />
+	<bean id="tvSeasonPathCriterionPopulator" parent="productPathConditionPopulator" class="com.hybris.showcase.emsextras.populators.entitlements.criteria.TVSeasonPathCriterionPopulator" />
+
+	<!-- CECS-193 Notify customer about expiring subscriptions or entitlements -->
+	<alias name="defaultEMSProposalFacade" alias="emsProposalFacade" />
+	<bean id="defaultEMSProposalFacade" class="com.hybris.showcase.emsextras.facades.impl.DefaultEMSProposalFacade">
+		<property name="emsFacade" ref="emsFacade"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="productFacade" ref="productFacade"/>
+		<property name="activationUrlResolver" ref="entitlementProposalActivationUrlResolver"/>
+		<property name="entitlementModelToDataConverter" ref="coreEntitlementConverter"/>
+		<property name="grantEntitlementPopulator" ref="grantEntitlementPopulator"/>
+		<property name="simulateUserId" value="simone"/>
+		<property name="entitlementService" ref="entitlementService"/>
+		<property name="timeService" ref="timeService"/>
+	</bean>
+
+	<alias name="defaultEntitlementProposalActivationUrlResolver" alias="entitlementProposalActivationUrlResolver" />
+	<bean id="defaultEntitlementProposalActivationUrlResolver" class="com.hybris.showcase.emsextras.facades.impl.EntitlementProposalActivationUrlResolver">
+		<property name="productModelUrlResolver" ref="productModelUrlResolver"/>
+		<property name="contractDao" ref="contractDao"/>
+		<property name="userService" ref="userService"/>
+	</bean>
+
+	<!-- CECS-244 cronjob that grants all entitlements to simulate user account -->
+	<bean id="entitlementsSimulationExportJob" class="com.hybris.showcase.emsextras.job.EntitlementsSimulationExportJob" parent="abstractJobPerformable">
+		<property name="grantingEntitlementsFacade" ref="grantingEntitlementsFacade"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="entitlementFacade" ref="entitlementFacade"/>
+	</bean>
+
+    <!-- CECS-243 usage submit (to ems/brim) - charge customer -->
+    <alias name="defaultUsageChargeFacade" alias="usageChargeFacade" />
+	<bean id="defaultUsageChargeFacade" class="com.hybris.showcase.emsextras.facades.impl.DefaultUsageChargeFacade">
+        <property name="emsFacade" ref="emsFacade"/>
+        <property name="productEntitlementDao" ref="productEntitlementDao"/>
+        <property name="usageChargeService" ref="usageChargeService"/>
+        <property name="perUnitUsageChargeConverter" ref="perUnitUsageChargeConverter"/>
+        <property name="volumeUsageChargeConverter" ref="volumeUsageChargeConverter"/>
+        <property name="subscriptionFacade" ref="subscriptionFacade"/>
+        <property name="userService" ref="userService"/>
+        <property name="submitUsageStrategyList" ref="submitUsageStrategyList" />
+    </bean>
+    
+    <util:list id="submitUsageStrategyList">
+    	<ref bean="submitUsageStrategy"/>
+    </util:list>
+
+    <!-- CECS-243 usage submit (to ems/brim) - charge customer -->
+    <alias name="defaultUsageChargeService" alias="usageChargeService" />
+    <bean id="defaultUsageChargeService" class="com.hybris.showcase.emsextras.services.impl.DefaultUsageChargeService">
+        <property name="commercePriceService" ref="subscriptionCommercePriceService"/>
+    </bean>
+
+	<!-- CECS-260 entitlements page improvements -->
+	<alias name="defaultProductEntitlementDao" alias="productEntitlementDao" />
+	<bean id="defaultProductEntitlementDao" parent="abstractItemDao" class="com.hybris.showcase.dao.impl.DefaultProductEntitlementDao"/>
+
+	<!-- CECS-260 entitlements page improvements -->
+	<alias name="servicesEntitlementsPaginationFacade" alias="entitlementsPaginationFacade"/>
+	<bean id="servicesEntitlementsPaginationFacade" class="com.hybris.showcase.emsextras.facades.impl.DefaultEntitlementsPaginationFacade" />
+
+	<!-- CECS-260 entitlements page improvements -->
+	<alias name="grantServicesEntitlementPopulator" alias="grantEntitlementPopulator"/>
+	<bean id="grantServicesEntitlementPopulator" class="com.hybris.showcase.emsextras.populators.entitlements.grants.ServicesGrantEntitlementPopulator" parent="defaultGrantEntitlementPopulator" >
+		<property name="productEntitlementDao" ref="productEntitlementDao"/>
+	</bean>
+
+	<alias name="defaultServicesProductEntitlementEmsGrantPopulator" alias="servicesProductEntitlementEmsGrantPopulator"/>
+	<bean id="defaultServicesProductEntitlementEmsGrantPopulator" class="com.hybris.showcase.emsextras.populators.entitlements.grants.ServicesProductEntitlementEmsGrantPopulator" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productEntitlementEmsGrantConverter"/>
+		<property name="add" ref="servicesProductEntitlementEmsGrantPopulator"/>
+	</bean>
+
+	<alias name="defaultServicesEmsGrantGrantPopulator" alias="servicesEmsGrantGrantPopulator"/>
+	<bean id="defaultServicesEmsGrantGrantPopulator" class="com.hybris.showcase.emsextras.populators.entitlements.grants.ServicesEmsGrantGrantPopulator" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="emsGrantGrantConverter"/>
+		<property name="add" ref="servicesEmsGrantGrantPopulator"/>
+	</bean>
+
+	<!-- CECS-364 Configure your package page needs reworking -->
+	<bean id="entitlementUsageChargePopulator" class="com.hybris.showcase.emsextras.populators.entitlements.EntitlementUsageChargePopulator">
+		<property name="usageChargeFacade" ref="usageChargeFacade"/>
+		<property name="usageUnitConverter" ref="usageUnitConverter"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="defaultEntitlementConverter"/>
+		<property name="add" ref="entitlementUsageChargePopulator"/>
+	</bean>
+
+	<alias name="defaultUsageEntitlementModelToDataPopulator" alias="usageEntitlementModelToDataPopulator"/>
+	<bean id="defaultUsageEntitlementModelToDataPopulator" class="com.hybris.showcase.emsextras.populators.entitlements.UsageEntitlementModelToDataPopulator">
+		<property name="usageUnitConverter" ref="usageUnitConverter"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="coreEntitlementConverter"/>
+		<property name="add" ref="usageEntitlementModelToDataPopulator"/>
+	</bean>
+
+	<!-- CECS-584 SOAP: add free movie and consume movie START -->
+	<alias alias="submitUsageStrategy" name="defaultSubmitUsageStrategy" />
+	<bean id="defaultSubmitUsageStrategy" class="com.hybris.showcase.emsextras.strategy.impl.DefaultSubmitUsageStrategy">
+		<property name="userService" ref="userService" />
+		<property name="expenseService" ref="expenseService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="productService" ref="productService" />
+		<property name="contractDao" ref="contractDao" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+	<!-- CECS-584 SOAP: add free movie and consume movie END -->
+</beans>

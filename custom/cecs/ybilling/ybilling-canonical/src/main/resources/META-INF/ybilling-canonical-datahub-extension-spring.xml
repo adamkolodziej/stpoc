@@ -1,0 +1,37 @@
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2013 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="sampleCompositionHandler" class="com.hybris.showcase.composition.impl.SampleCompositionHandler"
+		  parent="abstractCompositionRuleHandler">
+		<property name="order" value="11" />
+		<property name="dataItemService" ref="dataItemService" />
+	</bean>
+
+	<bean id="sampleGroupingHandler" class="com.hybris.showcase.grouping.impl.SampleGroupingHandler" />
+
+    <!-- CECS-587 create DataHub endpoint to load CRM iDoc XML -->
+    <bean id="idocXmlImportResource" class="com.hybris.showcase.crm.idoc.xml.rest.resources.IdocXmlImportResource">
+        <property name="idocXmlImportFacade" ref="idocXmlImportFacade"/>
+    </bean>
+
+    <!-- CECS-587 create DataHub endpoint to load CRM iDoc XML -->
+    <alias name="defaultIdocXmlImportFacade" alias="idocXmlImportFacade" />
+    <bean id="defaultIdocXmlImportFacade" class="com.hybris.showcase.crm.idoc.xml.impl.DefaultIdocXmlImportFacade">
+        <property name="rawFragmentInputChannel" ref="rawFragmentMessageInputChannel"/>
+    </bean>
+
+</beans>

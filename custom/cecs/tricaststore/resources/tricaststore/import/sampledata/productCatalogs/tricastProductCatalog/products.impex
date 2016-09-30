@@ -1,0 +1,237 @@
+# ImpEx for Importing Products into Tricast Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog = tricastProductCatalog
+$productCatalogName = Tricast Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$supercategories = supercategories(code, $catalogVersion)
+$baseProduct = baseProduct(code, $catalogVersion)
+# let's approve by default
+$approved = approvalstatus(code)[default = 'approved']
+$prices = Europe1prices[translator = de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+
+INSERT_UPDATE Product; code[unique = true]; $supercategories; soldIndividually; manufacturerAID; unit(code)[default = pieces]; $approved; $catalogVersion
+; phone           ; ; true
+; standardRouter  ; ; false
+; fibreRouter     ; ; false
+; standardDecoder ; ; false
+; decoderPlus     ; ; false
+
+INSERT_UPDATE ServicePlan; code[unique = true]; $supercategories; manufacturerAID; subscriptionTerm(id); soldIndividually[default = false]; customOffer[default = false]; unit(code)[default = pieces]; $approved; $catalogVersion
+; phoneUnlimitedWeekend        ; phone           ; ; annually_1 ; true
+; phoneUnlimitedWeekendEvening ; phone           ; ; annually_2
+
+; standardBroadband            ; broadband       ; ; annually_1
+; fibreBroadbandLimited        ; broadband       ; ; annually_1
+; fibreBroadbandUnlimited      ; broadband       ; ; annually_1
+; superFibreUnlimited          ; broadband       ; ; annually_1
+; tricastWifi                  ; broadband       ; ; annually_1
+
+; tvStarter                    ; tvSubscriptions ; ; annually_1
+; tvEntertainment              ; tvSubscriptions ; ; annually_1
+; tvPremium                    ; tvSubscriptions ; ; annually_1
+; Sport                        ; tvSubscriptions ; ; annually_1
+; TCO                          ; tvSubscriptions ; ; annually_1
+; foreignLanguagePackage       ; tvSubscriptions ; ; annually_1
+; allOnDemand                  ; tvSubscriptions ; ; annually_1
+
+INSERT_UPDATE ServicePlan; code[unique = true]; $supercategories; manufacturerAID; subscriptionTerm(id); soldIndividually[default = false]; customOffer[default = false]; eligibleUserGroups(uid); unit(code)[default = pieces]; $approved; $catalogVersion
+; Sport_trial ; tvSubscriptions ; ; monthly_1 ; ; true ; interested-in-sports
+
+INSERT_UPDATE MerchandiseProduct; code[unique = true]; $supercategories; varianttype(code); manufacturerAID; unit(code)[default = pieces]; $approved; $catalogVersion
+; pants_bp       				; pants      		; MerchandiseVariantProduct ;
+; t-shirt_bp     				; t-shirts,underworld-branded; MerchandiseVariantProduct ;
+; hoodie         				; hoodies    		;  ;
+; cap            				; caps       		;  ;
+; headphones     				; headphones 		;  ;
+; shoes_man      				; shoes      		;  ;
+; shoes_woman_bp 				; shoes      		; MerchandiseVariantProduct ;
+; sunglasses     				; sunglasses,underworld-branded;  ;
+; watch          				; watches    		;  ;
+; dress          				; dresses    		;  ;
+; handbag        				; handbags   		;  ;
+
+; armagdedon_book   		  	; books		 		;  ;
+; brother_roses_clas_tshirt   	; t-shirts		 	;  ;
+; hpstrs_eco_bag				; bags				;  ;
+; joy_coffe_mug					; mugs				;  ;
+; rebelion_womans_tshirt		; t-shirts			;  ;
+; underworld_iphone				; iphones,underworld-branded;  ;
+; venom_sweater					; sweaters			;  ;
+; casino_spundtrack				; soundtracks		;  ;
+; land_tote_bag					; bags				;  ;
+; lemariage_collector			; dvds				;  ;
+; plusdk_headphone              ; headphones		;  ;
+; oakey_sunglas              	; sunglasses,underworld-branded;  ;
+; official_clas_vneck_tshirt    ; t-shirts,underworld-branded;  ;
+; nooka_watch              		; watches			;  ;
+; king_pillow              		; pillows			;  ;
+; city_slick_soundtrack         ; soundtracks		;  ;
+; renaissance_hoody             ; hoodies			;  ;
+; hockey_league_mug             ; mugs				;  ;
+; renaissance_tote_bag          ; bags				;  ;
+
+
+INSERT_UPDATE MerchandiseVariantProduct; code[unique = true]; $supercategories; $baseProduct; colour(code); size(code); manufacturerAID; unit(code)[default = pieces]; $approved; $catalogVersion;
+; pants_charcoal   ; pants    ; pants_bp       ; DIMGRAY ; SIZE4 ; ; ; ; ;
+; pants_maroon     ; pants    ; pants_bp       ; MAROON  ; SIZE1 ; ; ; ; ;
+; t-shirt_black    ; t-shirts ; t-shirt_bp     ; BLACK   ; SIZE2 ; ; ; ; ;
+; t-shirt_white    ; t-shirts ; t-shirt_bp     ; WHITE   ; SIZE3 ; ; ; ; ;
+; t-shirt_white2    ; t-shirts ; t-shirt_bp     ; WHITE   ; SIZE2 ; ; ; ; ;
+; shoes_woman_pink ; shoes    ; shoes_woman_bp ; PINK    ; SIZE5 ; ; ; ; ;
+; shoes_woman_blue ; shoes    ; shoes_woman_bp ; BLUE    ; SIZE2 ; ; ; ; ;
+
+INSERT_UPDATE TVShowProduct; code[unique = true]; $supercategories; viewsCount; unit(code)[default = pieces]; $approved; $catalogVersion; deliveryModes(code)[default = digital-delivery]
+; joy        ; tvShows          ;   100 ;
+; the-boss   ; tvShows          ;   200 ;
+; underworld ; tvShows          ; 80000 ;
+; venom      ; premium-tv-shows ;   400 ;
+
+$siteResource = jar:com.hybris.showcase.cecs.tricaststore.constants.TricaststoreConstants&/tricaststore/import/sampledata/productCatalogs/$productCatalog
+$schedule=schedule[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+INSERT_UPDATE ChannelProduct; code[unique = true]; $supercategories; $schedule ; unit(code)[default = pieces]; $approved; $catalogVersion; deliveryModes(code)[default = digital-delivery]
+#CECS-755 New Channels
+; YTV              ; freeChannels ; $siteResource/tv-schedule/ytv.json
+; CubeChannel      ; freeChannels ; $siteResource/tv-schedule/cube.json
+; ANVNetworks      ; extraHDChannels ; $siteResource/tv-schedule/anv.json
+; ChannelS         ; extraHDChannels ; $siteResource/tv-schedule/s.json
+; KTV              ; foreignLanguages ; $siteResource/tv-schedule/ktv.json
+; TRIChannel       ; foreignLanguages ; $siteResource/tv-schedule/tri.json
+; TCOChannel       ; tvChannels ; $siteResource/tv-schedule/tco.json
+; VIVOChannel      ; foreignLanguages ; $siteResource/tv-schedule/vivo.json
+; LightningChannel ; foreignLanguages ; $siteResource/tv-schedule/lightning.json
+; SportChannel     ; tvChannels ; $siteResource/tv-schedule/sport2.json
+
+INSERT_UPDATE TVSeasonProduct; code[unique = true]; $supercategories; season; tvShow(code, $catalogVersion); unit(code)[default = pieces]; $approved; $catalogVersion; deliveryModes(code)[default = digital-delivery]
+; joy-s01        ; tvShows          ; 1 ; joy        ;
+; joy-s02        ; tvShows          ; 2 ; joy        ;
+; joy-s03        ; tvShows          ; 3 ; joy        ;
+
+; the-boss-s01   ; tvShows          ; 1 ; the-boss
+; the-boss-s02   ; tvShows          ; 2 ; the-boss
+; the-boss-s03   ; tvShows          ; 3 ; the-boss
+
+; venom-s01      ; premium-tv-shows ; 1 ; venom
+; venom-s02      ; premium-tv-shows ; 2 ; venom
+; venom-s03      ; premium-tv-shows ; 3 ; venom
+
+; underworld-s01 ; tvShows          ; 1 ; underworld ;
+
+#
+# CECS-918 pilots are free to watch - add it to *free* category (Free To Watch entitlement)
+#
+INSERT_UPDATE TVEpisodeProduct; code[unique = true]; $supercategories; season; episode; tvSeason(code, $catalogVersion); viewsCount; unit(code)[default = pieces]; $approved; $catalogVersion; deliveryModes(code)[default = digital-delivery]
+# CECS-62: Add new products - START
+; joy-s01-e01        ; tvShows,free          ; 1 ; 1 ; joy-s01        ; 45   ;
+; joy-s01-e02        ; tvShows                ; 1 ; 2 ; joy-s01        ; 33   ;
+; joy-s01-e03        ; tvShows                ; 1 ; 3 ; joy-s01        ; 30   ;
+
+; the-boss-s03-e01   ; tvShows,free          ; 1 ; 1 ; the-boss-s03   ; 412  ;
+; the-boss-s03-e02   ; tvShows                ; 1 ; 2 ; the-boss-s03   ; 172  ;
+; the-boss-s03-e03   ; tvShows                ; 1 ; 3 ; the-boss-s03   ; 153  ;
+
+; venom-s01-e01      ; premium-tv-shows,free ; 1 ; 1 ; venom-s01      ; 333  ;
+; venom-s01-e02      ; premium-tv-shows       ; 1 ; 2 ; venom-s01      ; 356  ;
+; venom-s01-e03      ; premium-tv-shows       ; 1 ; 3 ; venom-s01      ; 244  ;
+
+; underworld-s01-e01 ; tvShows,free          ; 1 ; 1 ; underworld-s01 ; 1209 ;
+; underworld-s01-e02 ; tvShows                ; 1 ; 2 ; underworld-s01 ; 342  ;
+; underworld-s01-e03 ; tvShows                ; 1 ; 3 ; underworld-s01 ; 121  ;
+
+UPDATE TVShowProduct; code[unique = true]; seasons(code, $catalogVersion); $approved; $catalogVersion
+; the-boss   ; the-boss-s01, the-boss-s02, the-boss-s03 ;
+; joy        ; joy-s01, joy-s02, joy-s03                ;
+; venom      ; venom-s01, venom-s02, venom-s03          ;
+; underworld ; underworld-s01                           ;
+
+UPDATE TVSeasonProduct; code[unique = true]; episodes(code, $catalogVersion); $approved; $catalogVersion
+; the-boss-s03   ; the-boss-s03-e01, the-boss-s03-e02, the-boss-s03-e03 ;
+; joy-s01        ; joy-s01-e01, joy-s01-e02, joy-s01-e03                ;
+; venom-s01      ; venom-s01-e01, venom-s01-e02, venom-s01-e03          ;
+; underworld-s01 ; underworld-s01-e01, underworld-s01-e02, underworld-s01-e03
+
+
+# CECS-94 Latest releases solr property
+UPDATE Product; code[unique = true]; releaseDate[dateformat = 'dd.MM.yyyy']; $catalogVersion
+; joy                ; 24.9.2007
+; joy-s01            ; 24.9.2007
+; joy-s02            ; 22.9.2008
+; joy-s03            ; 21.9.2009
+; joy-s01-e01        ; 24.9.2007
+; joy-s01-e02        ; 1.10.2007
+; joy-s01-e03        ; 22.10.2007
+
+; the-boss           ; 5.12.2010
+; the-boss-s01       ; 17.4.2011
+; the-boss-s02       ; 1.4.2012
+; the-boss-s03       ; 31.3.2013
+; the-boss-s03-e01   ; 17.4.2011
+; the-boss-s03-e02   ; 24.4.2011
+; the-boss-s03-e03   ; 1.5.2011
+
+; venom              ; 12.1.2014
+; venom-s01          ; 12.1.2014
+; venom-s01-e01      ; 12.1.2014
+; venom-s01-e02      ; 19.1.2014
+; venom-s01-e03      ; 26.1.2014
+
+; underworld         ; 19.7.2007
+; underworld-s01     ; 25.7.2010
+; underworld-s01-e01 ; 25.7.2010
+; underworld-s01-e02 ; 1.8.2010
+; underworld-s01-e03 ; 8.8.2010
+
+; king_pillow        ; 31.05.2016
+; hockey_league_mug  ; 28.05.2016
+; renaissance_hoody  ; 29.05.2016
+; renaissance_tote_bag ; 27.05.2016
+; city_slick_soundtrack ; 30.05.2016
+
+
+# CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie
+INSERT_UPDATE Product; code[unique = true]; $catalogVersion; unit(code); $prices; approvalStatus(code); startLineNumber; $supercategories[default = 'gifts']; customOffer[default = true]; eligibleUserGroups(uid)[default = 'customergroup']
+; premiumMovie1WeekRentalProduct ; ; pieces ; 0 EUR ; approved ; 0 ;
+; anyComedyEpisodeProduct        ; ; pieces ; 0 EUR ; approved ; 0 ;
+; 2DayCinemaChannelAccessProduct ; ; pieces ; 0 EUR ; approved ; 0 ;
+; 1MonthTCOAccessProduct         ; ; pieces ; 0 EUR ; approved ; 0 ;
+; free2watch                     ; ; pieces ; 0 EUR ; approved ; 0 ;
+
+# CECS-436 video for gift entitlement
+INSERT_UPDATE MovieProduct; code[unique = true]; $supercategories; releaseDate[dateformat = 'dd.MM.yyyy']; viewsCount; unit(code)[default = pieces]; $approved; $catalogVersion; deliveryModes(code)[default = digital-delivery]
+; trekking-towards-danger ; premium-movies ; 1.6.2015 ; 1201
+# CECS-764 import some movies from SNK desings - START
+; the-last-journey       ; movies ; 1.6.2015 ; 1212
+; 12-abandoned-voices    ; movies ; 1.6.2015 ; 1212
+; 28-mornings            ; movies ; 1.6.2015 ; 1212
+; a-doctor-on-board      ; movies ; 1.6.2015 ; 1212
+; a-perfect-circle       ; movies ; 1.6.2015 ; 1212
+; about-a-girl           ; movies ; 1.6.2015 ; 1212
+; battle-of-wills        ; movies ; 1.6.2015 ; 1212
+; call-the-nanny         ; movies ; 1.6.2015 ; 1212
+; covered-noise          ; movies ; 1.6.2015 ; 1212
+; croaking               ; movies ; 1.6.2015 ; 1212
+; emmas-chaos-effect     ; movies ; 1.6.2015 ;70000
+; hockey-league          ; movies ; 1.6.2015 ; 1212
+; hunters                ; movies ; 1.6.2015 ; 1212
+; infinite-space         ; movies ; 1.6.2015 ; 1212
+; jane-brennan           ; movies ; 1.6.2015 ; 1212
+; keyon                  ; movies ; 1.6.2015 ;50000
+; megadon                ; movies ; 1.6.2015 ; 1212
+; my-dog-benji           ; movies ; 1.6.2015 ;60000
+; oli                    ; movies ; 1.6.2015 ; 1212
+; rock-on                ; movies ; 1.6.2015 ; 1212
+; the-dutch-girl         ; movies ; 1.6.2015 ;90000
+; the-earthlings-stories ; movies ; 1.6.2015 ; 1212
+; the-ides-of-august     ; movies ; 1.6.2015 ; 1212
+; the-little-temple      ; movies ; 1.6.2015 ; 1212
+; the-performer          ; movies ; 1.6.2015 ; 1212
+; waltz-in-balzac        ; movies ; 1.6.2015 ; 1212
+; zathora                ; movies ; 1.6.2015 ; 1212
+# CECS-764 import some movies from SNK desings - END
+
+UPDATE Product; code[unique = true]; viewsCount; $catalogVersion
+; armagdedon_book         ; 101
+; t-shirt_bp              ; 100
+; hpstrs_eco_bag          ; 99
+; joy_coffe_mug           ; 98
+; rebelion_womans_tshirt  ; 97

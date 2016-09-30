@@ -1,0 +1,91 @@
+// Embeds responsive
+//
+// Credit: Nicolas Gallagher and SUIT CSS.
+
+.embed-responsive {
+  position: relative;
+  display: block;
+  height: 0;
+  padding: 0;
+
+  .embed-responsive-item,
+  iframe,
+  embed,
+  object,
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    border: 0;
+  }
+
+  // Modifier class for 16:9 aspect ratio
+  &.embed-responsive-16by9 {
+    padding-bottom: 56.25%;
+  }
+
+  // Modifier class for 4:3 aspect ratio
+  &.embed-responsive-4by3 {
+    padding-bottom: 75%;
+  }
+
+  >ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    >li {
+      float: left;
+      width: 25%;
+      height: 180px;
+      padding: 0 2%;
+      margin: 0;
+      text-align: center;
+      position: relative;
+      .responsive-img{
+        display:block;
+          width:100%;
+          height:80px;
+          position: relative;
+        img{
+            position:absolute;
+            top:0;
+            right:0;
+            bottom:0;
+            left:0;
+            margin: auto;
+        }
+      }
+      >span {
+        display: block;
+        margin: 0 auto;
+        font-size:1em;
+        line-height:1em;
+        min-height:3em;
+      }
+      >span {
+        padding: 5px 0;
+      }
+      a.btn {
+        // position: absolute;
+        // bottom: 0;
+        // left: 0;
+      }
+      &:nth-child(5), &:first-child {
+        padding-left: 0;
+      }
+      @media(max-width: @screen-xs-max){
+        width:50%;
+      }
+    }
+    &.expired-grants {
+      >li {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

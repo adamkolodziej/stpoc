@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- no sample data in this extension
+	<bean id="c4cintegrationCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
+		<property name="supportedChannels">
+			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+				<value>B2C</value>
+			</list>
+		</property>
+		<property name="addonExtensionMetadata">
+			<bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+				<property name="suffixChannel" value="false"/>
+				<property name="baseExtensionName" value="c4cintegration"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="c4cintegrationSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
+		<property name="extensionName" value="c4cintegration" />
+	</bean>
+	-->
+
+    <bean id="c4cTicketPopulator" class="com.hybris.mb2bshowcase.c4cintegration.converters.populators.C4CTicketPopulator"/>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="ticketConverter"/>
+        <property name="add" ref="c4cTicketPopulator"/>
+    </bean>
+
+    <alias name="defaultC4CWSServicesShowcasePortConfiguration" alias="c4CWSServicesShowcasePortConfiguration"/>
+    <bean id="defaultC4CWSServicesShowcasePortConfiguration" abstract="true">
+        <property name="username" value="${c4c.ws.servicesshowcase.username}"/>
+        <property name="password" value="${c4c.ws.servicesshowcase.password}"/>
+        <property name="namespaceUri" value="${c4c.ws.servicesshowcase.namespaceuri}"/>
+        <property name="serviceName" value="service"/>
+        <property name="portName" value="binding"/>
+    </bean>
+
+    <alias name="defaultC4CTicketFacade" alias="externalManagerTicketFacade"/>
+    <bean id="defaultC4CTicketFacade" class="com.hybris.mb2bshowcase.c4cintegration.facades.impl.DefaultC4CTicketFacade" parent="dummyExternalManagerTicketFacade">
+        <property name="ticketService" ref="ticketService"/>
+        <property name="userService" ref="userService"/>
+        <property name="c4cMappingsDao" ref="c4cMappingsDao" />
+        <property name="categoryService" ref="categoryService" />
+        <property name="giftEntitlementConverter" ref="giftEntitlementConverter" />
+        <property name="modelService" ref="modelService"/>
+        <property name="c4cTicketService" ref="c4cTicketService"/>
+    </bean>
+
+    <alias name="defaultC4CTicketService" alias="c4cTicketService"/>
+    <bean id="defaultC4CTicketService" class="com.hybris.mb2bshowcase.c4cintegration.services.impl.DefaultC4CTicketService">
+        <property name="manageServiceRequestIn" ref="servicesShowcaseTicketWebService"/>
+        <property name="queryServiceRequestIn" ref="servicesShowcaseQueryWebService"/>
+        <property name="ticketsQueryEndpointAddress" value="${c4c.ws.servicesshowcase.endpoint.tickets.query}" />
+        <property name="ticketsManageEndpointAddress" value="${c4c.ws.servicesshowcase.endpoint.tickets.manage}" />
+    </bean>
+
+    <bean id="servicesShowcaseTicketWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean" parent="c4CWSServicesShowcasePortConfiguration">
+        <property name="serviceInterface" value="com.hybris.mb2bshowcase.c4cintegration.ws.servicesshowcase.ManageServiceRequestIn"/>
+        <property name="wsdlDocumentUrl" value="classpath:/c4cintegration/wsdl/ManageTicketIn.wsdl"/>
+    </bean>
+
+    <bean id="servicesShowcaseQueryWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean" parent="c4CWSServicesShowcasePortConfiguration">
+        <property name="serviceInterface" value="com.hybris.mb2bshowcase.c4cintegration.ws.servicesshowcase.QueryServiceRequestIn"/>
+        <property name="wsdlDocumentResource" value="classpath:/c4cintegration/wsdl/QueryTicketIn.wsdl"/>
+    </bean>
+
+	<alias name="defaultC4CMappingsDao" alias="c4cMappingsDao"/>
+	<bean id="defaultC4CMappingsDao" class="com.hybris.mb2bshowcase.c4cintegration.daos.impl.DefaultC4CMappingsDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+</beans>

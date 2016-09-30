@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+--><!--
+ All hybris buildcallbacks.xml macrodefinitions:
+ 
+ Build/Documentation
+ 
+	 before/after ant macro "clean"
+		 <macrodef name="showcasecockpits_before_clean"/>
+		 <macrodef name="showcasecockpits_after_clean"/>
+	 
+	 before/after ant macro "build"
+		 <macrodef name="showcasecockpits_before_build"/>
+		 <macrodef name="showcasecockpits_after_build"/>
+		 
+	 before/after ant macro "compile_core" - the core module of the extension
+		 <macrodef name="showcasecockpits_before_compile_core">
+		 <macrodef name="showcasecockpits_after_compile_core">
+	 
+	 before/after ant macro "compile_web" - the web module of the extension
+		 <macrodef name="showcasecockpits_before_compile_web" />
+		 <macrodef name="showcasecockpits_after_compile_web" />
+	 
+	 before/after ant macro "compile_hmc" - the hmc module of the extension
+		 <macrodef name="showcasecockpits_before_compile_hmc" />
+		 <macrodef name="showcasecockpits_after_compile_hmc" />
+ 
+ Preparing extension
+ 
+	 will be called in the beginning of the ant call and only once (also when using multiple 
+	 ant targets e.g. ant build yunittest)	
+		 <macrodef name="showcasecockpits_only_once_prepare"/>
+ 
+ Creating ear module/production
+ 
+	 before/after ant macro "ear"
+		 <macrodef name="showcasecockpits_before_ear"/>
+		 <macrodef name="showcasecockpits_after_ear"/>
+
+	 before/after ant macro "production" - for hybris server only
+		 <macrodef name="showcasecockpits_before_production" />
+		 <macrodef name="showcasecockpits_after_production" />
+ 
+ JUnit Test
+ 
+	 before/after ant macro "yunitinit" 
+		 <macrodef name="showcasecockpits_before_yunitinit" />
+		 <macrodef name="showcasecockpits_after_yunitinit" />
+	 
+	 before/after ant macro "yunit"
+		 <macrodef name="showcasecockpits_before_yunit" />
+		 <macrodef name="showcasecockpits_after_yunit" /> 
+		 
+ Distribution package
+ 
+ 	 before/after ant macro "dist" - internal target; only for use when platform is available in source code
+		 <macrodef name="showcasecockpits_after_dist"/>
+		 <macrodef name="showcasecockpits_before_dist"/>
+	 
+	 before/after ant macro "dist_copy" - internal target; only for use when platform is available in source code
+		 <macrodef name="showcasecockpits_before_dist_copy"/>
+		 <macrodef name="showcasecockpits_after_dist_copy"/>
+		  
+ 	 With these filters you can override the default extension filters defined in platform/resources/ant/dist/filtersets.xml
+ 	  	 <patternset id="extension.showcasecockpits.binary.filter">
+ 	  	  	 <patternset refid="extension.filter" />
+ 	  	  	 <exclude name="**/*-source.jar" />
+ 	  	 </patternset>
+ 	  	 <patternset id="extension.showcasecockpits.source.filter">
+ 	  	  	 <exclude name="**/bin/**" />
+ 	  	 </patternset>
+ 
+--><project name="showcasecockpits_buildcallbacks">
+
+	<!-- 
+	    Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+	
+	     ${ear.path}: 			path to ear
+	 -->
+	<!-- CECS-529 It is not possible to go from Season to episodes in Product cockpit START -->
+	<macrodef name="showcasecockpits_after_build">
+		<sequential>
+			<if>
+				<isset property="ext.productcockpit.path"/>
+				<then>
+					<echo level="info" message="showcasecockpits - Copying custom image files to productcockpit..."/>
+					<copy todir="${ext.productcockpit.path}/web/webroot/cockpit/images">
+						<fileset dir="${ext.showcasecockpits.path}/resources/showcasecockpits/import/cockpits/productcockpit/images">
+							<include name="**/**.*" />
+						</fileset>
+					</copy>
+				</then>
+			</if>
+			
+			<!-- CECS-690 START -->
+			<if>
+				<isset property="ext.cscockpit.path"/>
+				<then>
+					<echo level="info" message="showcasecockpits - Copying custom templates to cscockpit..."/>
+					<copy todir="${ext.cscockpit.path}/web/webroot/cscockpit/templates/">
+						<fileset dir="${ext.showcasecockpits.path}/web/webroot/cscockpit/templates/">
+							<include name="**/**.*" />
+						</fileset>
+					</copy>
+				</then>
+			</if>
+			
+			<if>
+				<isset property="ext.cscockpit.path"/>
+				<then>
+					<echo level="info" message="showcasecockpits - Copying custom css to cscockpit (content will be appended to existing cscockpit.css file)..."/>
+					<concat destfile="${ext.cscockpit.path}/web/webroot/cscockpit/css/cscockpit.css" append="true">
+				    	<filelist dir="${ext.showcasecockpits.path}/web/webroot/cscockpit/css/" files="cscockpit.css"/>
+				 	</concat>
+				</then>
+			</if>
+			<!-- CECS-690 END -->
+	
+		</sequential>
+	</macrodef>
+	<!-- CECS-529 It is not possible to go from Season to episodes in Product cockpit END -->
+	
+	<macrodef name="showcasecockpits_before_ear">
+		<sequential>
+
+			<!-- you can do anything before the EAR file is being packed -->
+
+		</sequential>
+	</macrodef>
+
+</project>

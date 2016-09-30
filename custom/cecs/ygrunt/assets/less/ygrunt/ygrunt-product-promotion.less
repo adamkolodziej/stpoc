@@ -1,0 +1,44 @@
+.label {
+	&.label-warning {
+		&.promotion {
+			text-decoration: line-through;
+		}
+	}
+}
+
+.bundle {
+	.promotion {
+		font-size: 15px;
+		color: @brand-pink;
+
+		.oldPrice {
+			text-decoration: line-through;
+			color: @brand-light;
+		}
+	}
+}
+
+.product-promotion-fragment-description {
+	.newPrice {
+		font-size: 75%;
+  		font-weight: bold;
+		color: @brand-pink;
+	}
+}
+
+.price-container {
+	.list-inline {
+		&.list-unstyled {
+			&.promotion {
+				.regular {
+					text-decoration: line-through;
+				}
+
+				.discount {
+					color: @brand-pink;
+					display: inline;
+				}
+			}
+		}
+	}
+}

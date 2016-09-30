@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- CECS-885 could be commented -->
+    <import resource="guidedsellingaddon-spring-security.xml" />
+
+    <context:annotation-config/>
+	<context:component-scan base-package="com.hybris.showcase.guidedselling.controllers" />
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultGuidedsellingaddonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="guidedsellingaddon"/>
+	</bean>
+
+	<bean id="defaultGuidedsellingaddonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultGuidedsellingaddonJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getGuidedsellingaddonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultGuidedsellingaddonBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	<bean id="GuidedsellingaddonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getGuidedsellingaddonBeforeViewHandler"/>
+	</bean>
+
+    <!--CECS-213 Page template fix and basic components - START-->
+    <bean id="simplePackageDetailsComponentRenderer"
+          class="com.hybris.showcase.guidedselling.renderers.cms.SimplePackageDetailsComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+        <property name="guidedSellingFacade" ref="guidedSellingFacade"/>
+    </bean>
+    <bean id="simplePackageDetailsComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="SimplePackageDetailsComponent"/>
+        <property name="renderer" ref="simplePackageDetailsComponentRenderer"/>
+    </bean>
+    <!--CECS-213 Page template fix and basic components - END-->
+
+    <!--CECS-216 Guided selling FAQ Component UI - START-->
+    <bean id="guidedSellingFAQComponentRenderer"
+          class="com.hybris.showcase.guidedselling.renderers.cms.GuidedSellingFAQComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+        <property name="bundleTemplateConverter" ref="bundleTemplateConverter" />
+    </bean>
+    <bean id="guidedSellingFAQComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="GuidedSellingFAQComponent"/>
+        <property name="renderer" ref="guidedSellingFAQComponentRenderer"/>
+    </bean>
+    <!--CECS-216 Guided selling FAQ Component UI - END-->
+
+    <!--CECS-215 Guided selling summary(totals) UI - START-->
+    <bean id="guidedSellingTotalsComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="GuidedSellingTotalsComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <!--CECS-215 Guided selling summary(totals) UI - END-->
+
+    <bean id="contractTileAccountBodySubComponentRenderer"
+          class="com.hybris.showcase.guidedselling.renderers.cms.ContractTileAccountBodySubComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+        <property name="contractFacade" ref="contractFacade" />
+    </bean>
+    <bean id="contractTileAccountBodySubComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ContractTileAccountBodySubComponent"/>
+        <property name="renderer" ref="contractTileAccountBodySubComponentRenderer"/>
+    </bean>
+
+    <bean id="guidedSellingBeforeCartControllerHandlerAdaptee" class="com.hybris.showcase.guidedselling.interceptors.GuidedSellingBeforeCartControllerHandlerAdaptee"/>
+
+    <bean id="guidedSellingBeforeCartControllerHandler" parent="beforeControllerHandlerAdapter">
+        <property name="adaptee">
+            <ref bean="guidedSellingBeforeCartControllerHandlerAdaptee"/>
+        </property>
+    </bean>
+
+    <bean id="guidedSellingBeforeCartControllerHandlerListMergeDirective" depends-on="beforeControllerHandlersList" parent="listMergeDirective">
+        <property name="add" ref="guidedSellingBeforeCartControllerHandler"/>
+    </bean>
+
+    <bean id="guidedSellingComponentRenderer"
+          class="com.hybris.showcase.guidedselling.renderers.cms.GuidedSellingComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+    </bean>
+    <bean id="guidedSellingComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="GuidedSellingComponent"/>
+        <property name="renderer" ref="guidedSellingComponentRenderer"/>
+    </bean>
+    
+    <bean id="includedSellingComponentRenderer"
+          class="src.com.hybris.showcase.guidedselling.renderers.cms.IncludedSellingComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+    </bean>
+    <bean id="includedSellingComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="IncludedSellingComponent"/>
+        <property name="renderer" ref="includedSellingComponentRenderer"/>
+    </bean>
+
+    <bean id="bundlePackageDescriptionSlotsContainerComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="BundlePackageDescriptionSlotsContainerComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+
+    <bean id="bundlePackageDescriptionSlotRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="BundlePackageDescriptionSlot"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+
+    <bean id="bundlePackageRelatedComponentsContainerComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="BundlePackageRelatedComponentsContainerComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+
+    <!-- Checkout steps -->
+
+    <alias name="guidedsellingMultiStepCheckout" alias="guidedsellingMultiStepCheckout" />
+    <bean id="guidedsellingMultiStepCheckout" parent="checkoutStep" scope="prototype">
+        <property name="checkoutGroup" ref="guidedsellingCheckoutGroup"/>
+        <property name="checkoutStepValidator" ref="guidedsellingMultiStepCheckoutValidator"/>
+        <property name="transitions">
+            <map>
+                <entry key="previous" value-ref="REDIRECT_TO_HOME"/>
+                <entry key="current" value-ref="REDIRECT_TO_GUIDEDSELLING_MULTI_STEP_CHECKOUT"/>
+                <entry key="next" value-ref="REDIRECT_TO_CONFIGURE_PACKAGES"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="multi"/>
+    </bean>
+
+    <alias name="guidedsellingConfigurePackagesCheckoutStep" alias="configurePackagesCheckoutStep" />
+    <bean id="guidedsellingConfigurePackagesCheckoutStep" parent="checkoutStep">
+        <property name="checkoutGroup" ref="guidedsellingCheckoutGroup"/>
+        <property name="checkoutStepValidator" ref="guidedsellingConfigurePackagesCheckoutValidator"/>
+        <property name="transitions">
+            <map merge="true">
+                <entry key="previous" value-ref="REDIRECT_TO_GUIDEDSELLING_MULTI_STEP_CHECKOUT"/>
+                <entry key="current" value-ref="REDIRECT_TO_CONFIGURE_PACKAGES"/>
+                <entry key="next" value-ref="REDIRECT_TO_SUMMARY"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="configurePackages"/>
+    </bean>
+
+    <alias name="guidedsellingSummaryCheckoutStep" alias="summaryCheckoutStep" />
+    <bean id="guidedsellingSummaryCheckoutStep"  parent="checkoutStep">
+        <property name="checkoutGroup" ref="guidedsellingCheckoutGroup"/>
+        <property name="checkoutStepValidator" ref="summaryCheckoutValidator"/>
+        <property name="transitions">
+            <map merge="true">
+                <entry key="previous" value-ref="REDIRECT_TO_CONFIGURE_PACKAGES"/>
+                <entry key="current" value-ref="REDIRECT_TO_SUMMARY"/>
+                <entry key="next" value-ref="REDIRECT_TO_SHOW_ORDER"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="confirmOrder"/>
+    </bean>
+
+    <alias name="guidedsellingShowOrderCheckoutStep" alias="showOrderCheckoutStep" />
+    <bean id="guidedsellingShowOrderCheckoutStep"  parent="checkoutStep">
+        <property name="checkoutGroup" ref="guidedsellingCheckoutGroup"/>
+        <property name="checkoutStepValidator" ref="showOrderCheckoutValidator"/>
+        <property name="transitions">
+            <map merge="true">
+                <entry key="previous" value-ref="REDIRECT_TO_SUMMARY"/>
+                <entry key="current" value-ref="REDIRECT_TO_SHOW_ORDER"/>
+                <entry key="next" value-ref="REDIRECT_TO_SHOW_ORDER"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="showOrder"/>
+    </bean>
+    <!-- Checkout steps -->
+
+    <!---Guidedselling checkout group-->
+    <alias name="guidedsellingMultiStepCheckoutGroup" alias="guidedsellingCheckoutGroup" />
+    <bean id="guidedsellingMultiStepCheckoutGroup"  class="de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutGroup">
+        <property name="groupId"  value="guidedsellingCheckoutGroup"/>
+        <property name="checkoutStepMap">
+            <map merge="true">
+                <entry key="multi" value-ref="guidedsellingMultiStepCheckout"/>
+                <entry key="configure-packages" value-ref="configurePackagesCheckoutStep"/>
+                <entry key="summary" value-ref="summaryCheckoutStep"/>
+                <entry key="show-order" value-ref="showOrderCheckoutStep"/>
+            </map>
+        </property>
+        <property name="validationResultsMap">
+            <map merge="true">
+                <entry key="FAILED" value-ref="REDIRECT_TO_HOME"/>
+                <entry key="REDIRECT_TO_CONFIGURE_PACKAGES" value-ref="REDIRECT_TO_CONFIGURE_PACKAGES"/>
+                <entry key="REDIRECT_TO_SUMMARY" value-ref="REDIRECT_TO_SUMMARY"/>
+                <entry key="REDIRECT_TO_SHOW_ORDER" value-ref="REDIRECT_TO_SHOW_ORDER"/>
+            </map>
+        </property>
+        <property name="checkoutProgressBar">
+            <map merge="true">
+                <entry key="1" value-ref="guidedsellingMultiStepCheckout"/>
+                <entry key="2" value-ref="configurePackagesCheckoutStep"/>
+                <entry key="3" value-ref="summaryCheckoutStep"/>
+                <entry key="4" value-ref="showOrderCheckoutStep"/>
+            </map>
+        </property>
+    </bean>
+    <!---Guidedselling checkout group-->
+
+    <!--Validation-->
+
+    <alias name="abstractCheckoutStepValidator" alias="abstractCheckoutStepValidator" />
+    <bean id="abstractCheckoutStepValidator" class="de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.validation.AbstractCheckoutStepValidator" abstract="true">
+        <property name="checkoutFlowFacade" ref="checkoutFlowFacade"/>
+        <property name="checkoutFacade" ref="checkoutFacade"/>
+    </bean>
+
+    <bean id="guidedsellingMultiStepCheckoutValidator" class="de.hybris.platform.storefront.checkout.steps.validation.impl.DefaultMultiStepCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
+    <bean id="guidedsellingConfigurePackagesCheckoutValidator" class="de.hybris.platform.storefront.checkout.steps.validation.impl.DefaultMultiStepCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
+    <bean id="summaryCheckoutValidator" class="de.hybris.platform.storefront.checkout.steps.validation.impl.DefaultMultiStepCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
+    <bean id="showOrderCheckoutValidator" class="de.hybris.platform.storefront.checkout.steps.validation.impl.DefaultMultiStepCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
+
+    <!--Validation-->
+
+    <!--Checkout GroupMap -->
+    <bean id="guidedsellingCheckoutFlowGroupMapMergeDirective" parent="mapMergeDirective"  depends-on="checkoutFlowGroupMap">
+        <property name="key" value="guidedsellingCheckoutGroup" />
+        <property name="value" ref="guidedsellingCheckoutGroup" />
+    </bean>
+    <!--Checkout GroupMap-->
+
+    <!-- Redirects -->
+
+    <bean id="REDIRECT_TO_HOME" class="java.lang.String">
+        <constructor-arg value="redirect:/#"/>
+    </bean>
+
+    <bean id="REDIRECT_TO_GUIDEDSELLING_MULTI_STEP_CHECKOUT" class="java.lang.String">
+        <constructor-arg value="redirect:/packages/TriCast"/>
+    </bean>
+
+    <bean id="REDIRECT_TO_CONFIGURE_PACKAGES" class="java.lang.String" scope="prototype">
+        <constructor-arg value="redirect:/#"/>
+    </bean>
+
+    <bean id="REDIRECT_TO_SUMMARY" class="java.lang.String">
+        <constructor-arg value="redirect:/guidedselling/order/summary"/>
+    </bean>
+
+    <bean id="REDIRECT_TO_SHOW_ORDER" class="java.lang.String">
+        <constructor-arg value="redirect:/#"/>
+    </bean>
+
+</beans>

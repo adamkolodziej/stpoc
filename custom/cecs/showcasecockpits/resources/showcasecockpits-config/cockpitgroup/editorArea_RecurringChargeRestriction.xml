@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="General" visible="true" initially-opened="true">
+		   <label key="cockpit.config.label.General" />
+       <property qualifier="AbstractBundleRuleRestriction.id"/>
+	   <property qualifier="AbstractBundleRuleRestriction.catalogVersion" />
+	   <property qualifier="AbstractBundleRuleRestriction.name"/>
+	   <property qualifier="RecurringChargeRestriction.cycleStart"/>
+	   <property qualifier="RecurringChargeRestriction.cycleEnd"/>
+	</group>
+
+</editor>

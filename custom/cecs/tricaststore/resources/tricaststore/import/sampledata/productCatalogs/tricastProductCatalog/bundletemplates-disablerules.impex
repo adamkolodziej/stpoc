@@ -1,0 +1,15 @@
+$productCatalog = tricastProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$ruleType = ruleType(code)[default = 'ANY']
+
+INSERT_UPDATE DisableProductBundleRule ; id[unique = true]                      ; $catalogVersion ; bundleTemplate(id, version[default = 1.0], $catalogVersion) ; conditionalProducts(code, $catalogVersion)                          ; targetProducts(code, $catalogVersion) ; $ruleType
+                                       ; NoWifiWithStandardBroadbandDisableRule ;                 ; TriCast-Broadband-Addon                                     ; standardBroadband                                                   ; tricastWifi                           
+                                       ; DisableStandardRouterRule              ;                 ; TriCast-Broadband-Router                                    ; fibreBroadbandLimited, fibreBroadbandUnlimited, superFibreUnlimited ; standardRouter                        
+                                       ; DisableFirbreRouterRule                ;                 ; TriCast-Broadband-Router                                    ; standardBroadband                                                   ; fibreRouter                           
+                                       ; DisableStandardDecoderRule             ;                 ; TriCast-Decoders                                            ; tvEntertainment, tvPremium                                          ; standardDecoder
+
+INSERT_UPDATE DisableProductBundleRule ; id[unique = true]; bundleRuleRestrictions(id, $catalogVersion) ; $catalogVersion ; bundleTemplate(id, version[default = 1.0], $catalogVersion) ; conditionalProducts(code, $catalogVersion)                          ; targetProducts(code, $catalogVersion) ; $ruleType
+                                        ; SportsTrialDisableRule; disableCustomOffersBundleRuleRestriction ;                 ; TriCast-TV-Addons                                     ; tvStarter, tvEntertainment, tvPremium                 ; Sport_trial
+
+INSERT_UPDATE BundlePrincipalRestriction; id[unique = true]; $catalogVersion; name; principals(UID)
+; disableCustomOffersBundleRuleRestriction ; ; Disable Custom Offers Bundle Rule Restriction ; customers-with-sports-channel-trial

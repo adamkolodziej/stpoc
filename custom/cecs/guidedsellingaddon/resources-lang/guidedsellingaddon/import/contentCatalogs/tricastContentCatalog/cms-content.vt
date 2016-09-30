@@ -1,0 +1,49 @@
+#$header
+
+\$contentCatalog=tricastContentCatalog
+\$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=\$contentCatalog]),CatalogVersion.version[default=Staged])[default=\$contentCatalog:Staged]
+#set( $escContentCV=$esc.java('$contentCV[unique=true]') )
+\$picture=media(code, \$contentCV);
+#set( $escPicture=$esc.java('$picture[lang=$lang]') )
+\$siteResource=jar:com.hybris.showcase.guidedselling.constants.GuidedsellingaddonConstants&/guidedsellingaddon/import/contentCatalogs/\$contentCatalog
+# Language
+\$lang=$lang
+
+# Site Logo Component
+#set ( $logobannercomponent = $query.load('cms-content', 'LogoSimpleBannerComponent') )
+UPDATE SimpleBannerComponent;$escContentCV;uid[unique=true];$escPicture
+#foreach( $row in $logobannercomponent)
+;;$row.key;$row.values.picture
+#end
+
+# CMS Link Components
+#set ( $cmslinkcomponent = $query.load('cms-content', 'CMSLinkComponent') )
+UPDATE CMSLinkComponent;$escContentCV;uid[unique=true];linkName[lang=\$lang]
+#foreach( $row in $cmslinkcomponent )
+;;$row.key;"$row.values.linkName"
+#end
+
+# Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
+#set ( $media = $query.load('cms-content', 'Media') )
+INSERT_UPDATE Media;$escContentCV;code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+#foreach( $row in $media )
+;;$row.key;$row.values.media;$row.values.mime;$row.values.imageRef;;"$row.values.altText"
+#end
+
+#set ( $singlebannercomponent = $query.load('cms-content', 'SingleBannerComponent') )
+UPDATE SingleBannerComponent;$escContentCV;uid[unique=true];headline[lang=\$lang];$escPicture;content[lang=\$lang]
+#foreach( $row in $singlebannercomponent )
+;;$row.key;$row.values.headline;$row.values.picture;"$row.values.content"
+#end
+
+#set ( $simplepackagedetailscomponent = $query.load('cms-content', 'SimplePackageDetailsComponent') )
+UPDATE SimplePackageDetailsComponent;$escContentCV;uid[unique=true];headline
+#foreach( $row in $simplepackagedetailscomponent )
+;;$row.key;$row.values.headline
+#end
+
+#set ( $guidedsellingfaqcomponent = $query.load('cms-content', 'GuidedSellingFAQComponent') )
+UPDATE GuidedSellingFAQComponent;$escContentCV;uid[unique=true];headline
+#foreach( $row in $guidedsellingfaqcomponent )
+;;$row.key;$row.values.headline
+#end

@@ -1,0 +1,140 @@
+@import "../variables";
+
+@icon_path_small: "../images/facebook/facebook_icon_12.png";
+@icon_path_medium: "../images/facebook/facebook_icon_16.png";
+@icon_path_big: "../images/facebook/facebook_icon_20.png";
+
+.nav {
+   div{
+   a.facebook-btn {
+    display: inline-block;    
+    vertical-align: middle;
+     }
+   }
+}
+
+
+.facebook-btn {
+   background-color: #5772a8;
+   border: 1px solid #364b76;
+   box-shadow: 0 1px 1px #829ac6 inset;
+   -webkit-box-shadow: inset 0 1px 1px #829ac6;
+   display: inline-block;
+   text-shadow: none;
+   overflow: hidden;
+   text-decoration: none !important;   
+   float: none !important;
+}
+
+.facebook-btn:hover {
+   background-color: #4b6393;
+   box-shadow: 0 1px 1px #8098c3 inset;
+   color: #dae3f5;
+   text-decoration: none !important;
+}
+
+
+.facebook-btn .fb-icon {
+	background-image: url(@icon_path_big);
+	background-repeat: no-repeat;
+	display: block;	
+}
+
+.facebook-btn .fb-text {
+	color: #FFFFFF;
+}
+
+.facebook-btn .fb-text, .facebook-btn .fb-icon {
+	display: inline-block;
+	vertical-align: middle; 	
+}
+
+.facebook-user-image {
+	vertical-align: top;
+	display: inline-block;
+	padding: 0px !important;
+}
+
+/* BUTTON SIZES */
+
+.facebook-btn.fb-size-TINY {
+	padding: 1px !important;
+	height: 12px;
+}
+
+.facebook-btn.fb-size-TINY .fb-text {
+	font-size: 1.0em;
+	line-height: 1.3em;
+}
+
+.facebook-btn.fb-size-TINY .fb-icon {
+    background-image: url(@icon_path_small);
+    width: 6px;
+    height: 12px;
+}
+
+.facebook-btn.fb-size-TINY .fb-text, .facebook-btn.fb-size-TINY .fb-icon {
+	vertical-align: top; 	
+}
+
+.facebook-user-image.fb-size-TINY{ 
+ 	height: 16px;
+   width: 16px;
+}
+
+.facebook-btn.fb-size-SMALL {
+	padding: 1px !important;
+}
+
+.facebook-btn.fb-size-SMALL .fb-text {
+	font-size: 1.0em;
+}
+
+.facebook-btn.fb-size-SMALL .fb-icon {
+    background-image: url(@icon_path_medium);
+    width: 8px;
+    height: 14px;
+}
+
+.facebook-user-image.fb-size-SMALL{ 
+ 	height: 26px;
+    width: 26px;
+}
+
+.facebook-btn.fb-size-MEDIUM {
+	padding: 2px !important;
+}
+
+.facebook-btn.fb-size-MEDIUM .fb-text {
+	font-size: 1.0em;
+}
+
+.facebook-btn.fb-size-MEDIUM .fb-icon {
+    background-image: url(@icon_path_big);
+    width: 10px;
+    height: 20px;
+}
+
+.facebook-user-image.fb-size-MEDIUM{ 
+ 	height: 26px;
+   width: 26px;
+}
+// CECS-443 link customer profile to twitter and facebook
+.facebook-btn.fb-size-BIG {
+	padding: 2px !important;
+}
+
+.facebook-btn.fb-size-BIG .fb-text {
+	font-size: 1.0em;
+}
+
+.facebook-btn.fb-size-BIG .fb-icon {
+    background-image: url(@icon_path_big);
+    width: 20px;
+    height: 20px;
+}
+
+.facebook-user-image.fb-size-BIG{ 
+ 	height: 40px;
+  	width: 40px;
+}

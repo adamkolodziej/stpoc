@@ -1,0 +1,33 @@
+#
+# Import the Product Catalog and Classification Catalog
+#
+# CECS-86 guidedselling: totals - START
+$header
+
+# Macros / Replacement Parameter definitions
+\$productCatalog=extrasProductCatalog
+\$productCatalogName=Extras Product Catalog
+\$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
+
+# Language
+\$lang=$lang.toLowerCase()
+
+#set ( $catalogRows = $query.load('catalog', 'Catalog') )
+UPDATE Catalog;id[unique=true];name[lang=\$lang]
+#foreach( $row in $catalogRows )
+;$row.key;"$row.values.name"
+#end
+
+#set ( $billingFrequencyRows = $query.load('catalog', 'BillingFrequency') )
+UPDATE BillingFrequency;code[unique=true];nameInCart[lang=\$lang];nameInOrder[lang=\$lang];description[lang=\$lang]
+#foreach( $row in $billingFrequencyRows )
+;$row.key;"$row.values.nameInCart";"$row.values.nameInOrder";"$row.values.description"
+#end
+
+#set ( $billingEventRows = $query.load('catalog', 'BillingEvent') )
+UPDATE BillingEvent;code[unique=true];nameInCart[lang=\$lang];nameInOrder[lang=\$lang];description[lang=\$lang]
+#foreach( $row in $billingEventRows )
+;$row.key;"$row.values.nameInCart";"$row.values.nameInOrder";"$row.values.description"
+#end
+
+# CECS-86 guidedselling: totals - END

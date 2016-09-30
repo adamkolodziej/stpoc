@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+
+	<collectiontypes>
+		<!-- CECS-71 - build a promotion fragment -->
+		<collectiontype code="SimpleCmsComponentList" elementtype="SimpleCmsComponent" autocreate="true" generate="true" type="list"/>
+	</collectiontypes>
+	
+	<enumtypes>
+		<!-- CECS-754 Blog components - START -->
+		<enumtype generate="true" code="BlogRelatedPostsDisplayType"
+			autocreate="true" dynamic="true">
+			<description>This type describe kind of relation of posts that will be shown to user.</description>
+			<value code="RELATED" />
+			<value code="POPULAR" />
+		</enumtype>
+		<!-- CECS-754 Blog components - END -->
+	</enumtypes>
+
+	<relations>
+		<relation code="Html5VideoComponentTimeUpdateEventToHtml5VideoComponentRelation" localized="false">
+			<sourceElement type="Html5VideoComponentTimeUpdateEvent" qualifier="timeUpdateEvents" cardinality="many"/>
+			<targetElement type="Html5VideoComponent" qualifier="html5VideoComponent" cardinality="one"/>
+		</relation>
+
+		<!--CECS-79 ProductCarouselComponent and FixedProductSetComponent -->
+		<relation code="ProductsForAbstractProductCollectionComponent" generate="true" localized="false" autocreate="true">
+			<deployment table="ProdsProdCollCmpRels" typecode="13002"/>
+			<sourceElement qualifier="productCollectionComponents" type="AbstractProductCollectionComponent" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</sourceElement>
+			<targetElement qualifier="products" type="Product" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</targetElement>
+		</relation>
+		<relation code="CategoriesForAbstractProductCollectionComponent" generate="true" localized="false" autocreate="true">
+			<deployment table="CatsProdCollCmpRels" typecode="13003"/>
+			<sourceElement qualifier="productCollectionComponents" type="AbstractProductCollectionComponent" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</sourceElement>
+			<targetElement qualifier="categories" type="Category" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</targetElement>
+		</relation>
+
+		<!-- CECS-154 Content Top Links Component -->
+		<relation code="CmsLinkComponentsForSimpleNavigationBarComponent" generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="simpleNavigationBarComponent" type="SimpleNavigationBarComponent" cardinality="one" />
+			<targetElement qualifier="links" type="CmsLinkComponent" cardinality="many" collectiontype="list" ordered="true" />
+		</relation>
+
+		<relation code="BlogArticlesForPage" localized="false">
+			<sourceElement qualifier="blogArticles" type="BlogArticle" cardinality="many"/>
+			<targetElement  qualifier="blogPage" type="BlogPage" cardinality="one"/>
+		</relation>
+	</relations>
+
+	<itemtypes>
+
+		<itemtype code="TimeSwitcherComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.TimeSwitcherComponent">
+			<description>A component wrapping the Time Swithcher widget in the footer.</description>
+		</itemtype>
+
+		<itemtype code="Html5VideoComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.Html5VideoComponent">
+			<attributes>
+				<attribute qualifier="video" type="Media">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="showFreeVersion" type="boolean">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Html5VideoComponentTimeUpdateEvent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.Html5VideoComponentTimeUpdateEvent">
+			<attributes>
+				<attribute qualifier="timeStart" type="int">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute qualifier="timeEnd" type="int">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute qualifier="contentComponent" type="SimpleCMSComponent">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--  CECS-71 build a promotion fragment -->
+
+		<itemtype code="ProductPromotionFragmentComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+				  jaloclass="com.hybris.showcase.jalo.ProductPromotionFragmentComponent">
+			<attributes>
+				<attribute qualifier="productCode" type="java.lang.String">
+					<description>Promotion Product Code</description>
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="SimpleCmsComponentList" qualifier="components">
+					<persistence type="property"/>
+					<modifiers/>
+					<description>List of included components.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="FixedProductSetComponent" autocreate="true"
+				  generate="true" extends="AbstractProductCollectionComponent"
+				  jaloclass="com.hybris.showcase.jalo.components.FixedProductSetComponent">
+			<description>
+				It is just a simple implementation of AbstractProductCollectionComponent to have a different jsp, which will be responsive
+				and have a fixed set of products.
+			</description>
+		</itemtype>
+		<itemtype code="SlickProductCarouselComponent" autocreate="true"
+				  generate="true" extends="AbstractProductCollectionComponent"
+				  jaloclass="com.hybris.showcase.jalo.components.SlickProductCarouselComponent">
+			<description>
+				It is just a simple implementation of AbstractProductCollectionComponent to have a different jsp, which will be responsive
+				and have a variable number of products.
+			</description>
+			<attributes>
+				<attribute qualifier="classificationValue" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="classificationCollection" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!-- 		CECS-68 responsive my-account homepage - cms  -->
+		<itemtype code="SocialAccountBodySubComponent" autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.hybris.showcase.jalo.SocialAccountBodySubComponent">
+			<description>CMS component - a My-Account page's subcomponent (Body Content Slot)</description>
+			<attributes></attributes>
+		</itemtype>
+
+		<itemtype code="DetailAccountBodySettingsSubComponent" autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.hybris.showcase.jalo.DetailAccountBodySubComponent">
+			<description>CMS component - a My-Account page's subcomponent (Body Content Slot)</description>
+			<attributes></attributes>
+		</itemtype>
+
+		<itemtype code="DetailAccountBodyBillingSubComponent" autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.hybris.showcase.jalo.DetailAccountBodySubComponent">
+			<description>CMS component - a My-Account page's subcomponent (Body Content Slot)</description>
+			<attributes></attributes>
+		</itemtype>
+
+		<itemtype code="HelpAccountBodySubComponent" autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.hybris.showcase.jalo.HelpAccountBodySubComponent">
+			<description>CMS component - a My-Account page's subcomponent (Body Content Slot)</description>
+			<attributes></attributes>
+		</itemtype>
+
+		<itemtype code="TileAccountBodySubComponent" autocreate="true" generate="true" extends="AbstractTileAccountBodySubComponent" jaloclass="com.hybris.showcase.jalo.TileAccountBodySubComponent">
+		</itemtype>
+
+		<!-- CECS-69 component to switch billing options  -->
+		<itemtype code="BillingOptionsComponent" autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.hybris.showcase.jalo.BillingOptionsComponent">
+			<description>Component that allows to switch billing to e-paper and enables email payments reminders</description>
+		</itemtype>
+
+		<itemtype code="AccountEditBodyComponent" autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.hybris.showcase.jalo.AccountEditBodyComponent">
+			<description>CMS component - a My-Account-Edit page's component (Body Content Slot)</description>
+			<attributes></attributes>
+		</itemtype>
+
+		<itemtype code="AccountEditSideComponent" autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.hybris.showcase.jalo.AccountEditSideComponent">
+			<description>CMS component - a My-Account-Edit page's component (Side Content Slot)</description>
+			<attributes></attributes>
+		</itemtype>
+
+		<!-- CECS-154 Content Top Links Component -->
+		<itemtype code="SimpleNavigationBarComponent" autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.hybris.showcase.jalo.SimpleNavigationBarComponent">
+			<attributes>
+			</attributes>
+		</itemtype>
+
+		<!-- CECS-151 Most Viewed Component -->
+		<itemtype code="MultiRowFixedProductSetComponent" autocreate="true" generate="true" extends="AbstractProductCollectionComponent" jaloclass="com.hybris.showcase.jalo.components.MultiRowFixedProductSetComponent">
+			<description>
+				It is just a simple implementation of AbstractProductCollectionComponent to have a different jsp, which will be responsive
+				and have a fixed set of products.
+			</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+
+		<!--  CECS-169 Show ProductGridComponents -->
+		<itemtype code="ProductGridMerchandiseComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+				  jaloclass="com.hybris.showcase.jalo.ProductGridMerchandiseComponent">
+			<description>CMS component - Category Merchandise Product Page (Product Grid Slot)</description>
+			<attributes></attributes>
+		</itemtype>
+
+		<!--CECS-170 Product image component-->
+		<itemtype code="SimpleProductImageCarouselComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.SimpleProductImageCarouselComponent">
+			<description>
+				Responsive and simple product image component with image carousel, for product details page.
+			</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+		<!--CECS-171 Product basic details component-->
+		<itemtype code="ProductDetailsNameComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.ProductDetailsNameComponent">
+			<description>
+				Responsive and simple product name component, for product details page.
+			</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+		<itemtype code="ProductDetailsPriceComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.ProductDetailsPriceComponent">
+			<description>
+				Responsive and simple product price component, for product details page.
+			</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+		<itemtype code="ProductDetailsReviewSummaryComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.ProductDetailsReviewSummaryComponent">
+			<description>
+				Responsive and simple product review summary component, for product details page.
+			</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+		<itemtype code="ProductDetailsVariantSelectorComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.ProductDetailsVariantSelectorComponent">
+			<description>
+				Responsive and simple product variant selector component, for product details page.
+			</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+		<itemtype code="ProductDetailsSocialButtonsComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.ProductDetailsSocialButtonsComponent">
+			<description>
+				Responsive and simple product social buttons component, for product details page.
+			</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+		<itemtype code="ProductDetailsSummaryComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.ProductDetailsSummaryComponent">
+			<description>
+				Responsive and simple product summary component, for product details page.
+			</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+		<!--CECS-172 Product related items component-->
+		<itemtype code="ProductDetailsRelatedComponent" extends="ExtendedCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.ProductDetailsRelatedComponent">
+			<description>
+				Responsive and simple product related items component, for product details page.
+			</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+		<!--CECS-173 Product reviews component-->
+		<itemtype code="ProductDetailsReviewComponent" extends="ExtendedCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.ProductDetailsReviewComponent">
+			<description>
+				Responsive and simple product reviews component, for product details page.
+			</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+		<!--CECS-174 Product Features component-->
+		<itemtype code="ProductDetailsFeaturesComponent" extends="ExtendedCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.ProductDetailsFeaturesComponent">
+			<description>
+				Responsive and simple product features component, for product details page.
+			</description>
+		</itemtype>
+
+		<!-- CECS-227 Consumption site - watching video on a tablet  -->
+		<itemtype code="VideoPlaybackAction" jaloclass="com.hybris.showcase.jalo.actions.VideoPlaybackAction" extends="SimpleCMSAction" autocreate="true" generate="true">
+		</itemtype>
+
+		<itemtype code="BlogArticleDetailsComponent" extends="ExtendedCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.BlogArticleDetailsComponent">
+			<description>Component displaying details about certain blog article.</description>
+			<attributes>
+			</attributes>
+		</itemtype>
+
+		<!-- CECS-601 once expense disputed is started that could be reflected in UI START -->
+		<itemtype code="AccountExpensesComponent" extends="SimpleCMSComponent" generate="true" autocreate="true"
+				  jaloclass="com.hybris.showcase.cecs.tricaststore.jalo.components.AccountExpensesComponent">
+			<description>Represents account expenses component</description>
+		</itemtype>
+		<!-- CECS-601 once expense disputed is started that could be reflected in UI END -->
+		
+		<!-- CECS-731 FeaturedCollectionComponent -->
+		<itemtype code="FeaturedCollectionComponent" extends="AbstractProductCollectionComponent" generate="true" autocreate="true"
+				  jaloclass="com.hybris.showcase.cecs.tricaststore.jalo.components.FeaturedCollectionComponent">
+		   <description>Represents new components on the homepage - SPORT EVENTS and FICTION HIGHLIGHTS</description>
+		   <attributes>
+			  <attribute qualifier="bannerUrl" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers />
+					<description>Banner for background of component.</description>
+				</attribute>
+				<attribute qualifier="backgroundColor" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers />
+					<description>Color for background of component.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+			<itemtype code="TvShowProductDetailsComponent" extends="SimpleCMSComponent" generate="true" autocreate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.TvShowProductDetailsComponent">
+			<attributes>
+			</attributes>
+		</itemtype>
+		<itemtype code="AddToWatchListAction" jaloclass="com.hybris.showcase.jalo.actions.AddToWatchListAction" extends="SimpleCMSAction" autocreate="true" generate="true">
+		</itemtype>
+
+
+		<itemtype code="TvShowReferencesComponent" extends="ProductReferencesComponent"
+				  autocreate="true" generate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.TvShowReferencesComponent">
+			<description>It represents product references component, that is the component that displays configured references to the specified product.</description>
+		</itemtype>
+		
+		<!-- CECS-728 TVSeasonListComponent -->
+		<itemtype code="TVSeasonListComponent" extends="ExtendedCMSComponent" autocreate="true" generate="true" jaloclass="com.hybris.showcase.jalo.components.TVSeasonListComponent">
+			<description>Compleate episodes list for show, grouped by seasons.</description>
+			<attributes></attributes>
+		</itemtype>
+		
+		<!-- CECS-754 Blog components - START -->
+		<itemtype code="BlogRelatedPostsComponent" extends="ExtendedCMSComponent" autocreate="true" generate="true" jaloclass="com.hybris.showcase.jalo.components.BlogRelatedPostsComponent">
+			<description>Related or popular blog posts.</description>
+			<attributes>
+				<attribute type="BlogRelatedPostsDisplayType" qualifier="blogRelatedPostsDisplayType">
+					<persistence type="property" />
+					<defaultvalue>em().getEnumerationValue("BlogRelatedPostsDisplayType", "POPULAR")</defaultvalue>
+					<modifiers />
+					<description>Describe kind of relation of posts that will be shown to user.</description>
+				</attribute>
+				<attribute qualifier="maxPosts" type="java.lang.Integer">
+					<persistence type="property" />
+					<defaultvalue>Integer.valueOf(3)</defaultvalue>
+					<description>Maximum number of the related posts that will be displayed in the component.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="BlogNewsletterComponent" extends="ExtendedCMSComponent" autocreate="true" generate="true" jaloclass="com.hybris.showcase.jalo.components.BlogNewsletterComponent" >
+			<description>Newsletter sing up component for blog pages</description>
+		</itemtype>
+		<!-- CECS-754 Blog components - END -->
+		
+		<!-- CECS-788 MovieProductDetailsComponent - START -->
+		<itemtype code="MovieProductDetailsComponent" extends="SimpleCMSComponent" generate="true" autocreate="true"
+				  jaloclass="com.hybris.showcase.jalo.components.MovieProductDetailsComponentComponent">
+			<attributes>
+			</attributes>
+		</itemtype>
+		<!-- CECS-788 MovieProductDetailsComponent - END -->
+		<itemtype code="BlogPage" jaloclass="com.hybris.showcase.jalo.pages.BlogPage" extends="ContentPage"
+				  autocreate="true" generate="true">
+		</itemtype>
+	</itemtypes>
+
+</items>

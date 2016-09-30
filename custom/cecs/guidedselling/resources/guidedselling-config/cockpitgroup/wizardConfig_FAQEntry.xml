@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wizard-config  showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+ <displayed-properties>
+  <group qualifier="Essentials" visible="true" initially-opened="true">
+      <label key="cockpit.config.label.General" />
+      <property qualifier="FAQEntry.code"/>
+      <property qualifier="FAQEntry.catalogVersion"/>
+      <property qualifier="FAQEntry.question"/>
+      <property qualifier="FAQEntry.answer"/>
+      <property qualifier="FAQEntry.bundleTemplate"/>
+  </group>
+ </displayed-properties>
+</wizard-config>

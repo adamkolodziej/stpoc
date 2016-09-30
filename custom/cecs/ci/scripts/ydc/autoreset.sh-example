@@ -1,0 +1,10 @@
+#!/bin/sh
+
+tmpl_name=56cecs_daily
+zip_basename=56cecs_daily
+ftp_url=/data/Custom_instances/2015
+
+cd ~/instncecontroller/
+./installshowcase.sh \
+ --platform_path ${ftp_url}/${tmpl_name}/${zip_basename}_platform.zip \
+ --mysql_path ${ftp_url}/${tmpl_name}/${zip_basename}_data_sql.zip

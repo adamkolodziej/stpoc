@@ -1,0 +1,82 @@
+## messageSource=classpath:/tricaststore/messages/email-customerRegistration_$lang.properties
+#macro(genHtmlLinkStartTag $url)
+<a href="$url"><font color="#666666">
+#end
+#macro(genHtmlLinkEndTag)
+</font></a>
+#end
+#macro(genHtmlLink $url $textColor $bodyContent)
+<a href="$url"><font color="$textColor">$bodyContent</font></a>
+#end
+
+<html>
+<head>
+</head>
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="800" border="0" cellpadding="0" cellspacing="0" align="center">
+    <tr bgcolor="">
+        <!--Left Margin-->
+       <td width="70" height="76" bgcolor="#36464e">&nbsp; </td>
+        <!--Start Body-->
+        <td width="660" height="76"  bgcolor="#36464e">
+            ${ctx.cmsSlotContents.SiteLogo}
+            <img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/logo.png" alt=""/>
+        </td>
+        <!--Right Margin-->
+       <td width="70" height="76" bgcolor="#36464e">&nbsp; </td>
+    </tr>
+    <tr>
+        <td width="70" bgcolor="#EDEEF2">&nbsp; </td>
+        <td align="left" valign="top"  bgcolor="#EDEEF2">
+            #set ($secureAccountUrl = "${ctx.secureBaseUrl}/my-account")
+            #set ($securePswdResetUrl = "${ctx.secureBaseUrl}/login/pw/request/external")
+            #set ($mailToUrl = "mailto:${ctx.messages.contactUsEmailAddress}")
+            #if(${ctx.baseSite.Uid} == "electronics")
+                #set ( $instructionsContactUs = ${ctx.messages.getMessage('instructionsContactUs_electronics', "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlLinkEndTag()", "#genHtmlLink($mailToUrl '#666666' ${ctx.messages.contactUsEmailAddress})")} )
+            #else
+                #set ($faqPage = "${ctx.baseUrl}/faq")
+                #set ( $instructionsContactUs = ${ctx.messages.getMessage('instructionsContactUs', "#genHtmlLinkStartTag($faqPage)", "#genHtmlLinkEndTag()", "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlLinkEndTag()", "#genHtmlLink($mailToUrl '#666666' ${ctx.messages.contactUsEmailAddress})")} )
+            #end
+            <h1 style="display: block;font-family: arial, helvetica, sans-serif;color: #FF186F;font-size: 1.5em;font-weight: 100;margin-bottom: 30px;margin-top:30px;">${ctx.messages.getMessage('salutation', ${ctx.title},${ctx.displayName})},</h1>
+            <p style="font-family: arial, helvetica, sans-serif;color: #78909c;font-size:1.1em;line-height:1.2em;">${ctx.messages.thankYouForRegistering}</p>
+            <p style="font-family: arial, helvetica, sans-serif;color: #78909c;font-size:1.1em;line-height:1.2em;">${ctx.messages.registeredEmailInfo}: ${ctx.email}.</p>
+            <p style="font-family: arial, helvetica, sans-serif;color: #78909c;font-size:1.1em;line-height:1.2em;">${ctx.messages.instructionsShoppingUrl}: <a href="${ctx.baseUrl}" style="color:616060;">${ctx.baseUrl}</a></p>
+            <p style="font-family: arial, helvetica, sans-serif;color: #78909c;font-size:1.1em;line-height:1.2em;">${ctx.messages.getMessage('instructionsAccountUrl', "#genHtmlLinkStartTag($secureAccountUrl)", "#genHtmlLinkEndTag()")}</p>
+            <p style="font-family: arial, helvetica, sans-serif;color: #78909c;font-size:1.1em;line-height:1.2em;">${ctx.messages.getMessage('instructionsForgottenPswdUrl', "#genHtmlLinkStartTag($securePswdResetUrl)", "#genHtmlLinkEndTag()")}</p>
+            <p style="font-family: arial, helvetica, sans-serif;color: #78909c;font-size:1.1em;line-height:1.2em;">$instructionsContactUs</p>
+            <p style="font-family: arial, helvetica, sans-serif;color: #78909c;font-size:1.1em;line-height:1.2em;">${ctx.messages.complimentaryClosing}</p>
+            <p style="font-family: arial, helvetica, sans-serif;color: #78909c;font-size:1.1em;line-height:1.2em;">${ctx.messages.signature}</p>
+            <p style="display:block;margin-bottom:30px;">&nbsp;</p>
+        </td>
+        <td width="70" bgcolor="#EDEEF2">&nbsp; </td>
+    </tr>
+    <tr>
+        <!--Left Margin-->
+        <td width="70" height="100" bgcolor="#263238">&nbsp; </td>
+        <!--Start Body-->
+        <td width="660" height="100"  bgcolor="#263238" style="vertical-align: top;color:#ffffff;">
+            ${ctx.cmsSlotContents.BottomContent}
+            <table style="text-align: center;font-family: arial, helvetica, sans-serif;width: 100%;">
+                <tr>
+                    <td>
+                        <p style="display: inline-block;text-transform: uppercase;font-weight: 100;color:#ffffff;">
+                            Powered by Triast &copy; 2016   |
+                        </p>
+                        <a href="#" style="display: inline-block;margin: 0 15px;font-weight: bold;text-transform: uppercase;color:#ffffff;text-decoration: none">Terms</a>
+                        <a href="#" style="display: inline-block;margin: 0 15px;font-weight: bold;text-transform: uppercase;color:#ffffff;text-decoration: none">privacy policy</a>
+                        <a href="#" style="display: inline-block;margin: 0 15px;font-weight: bold;text-transform: uppercase;color:#ffffff;text-decoration: none">help</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="font-size: 0.8em;margin-top: 5px;color:#ffffff;">If you don't want to receive updates. please <a href="#" style="text-decoration: none;color:#53b8de">unsubscribe</a></p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <!--Right Margin-->
+        <td width="70" height="100" bgcolor="#263238">&nbsp; </td>
+    </tr>
+</table>
+</body>
+</html>

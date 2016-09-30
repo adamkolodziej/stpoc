@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.General" />
+
+			<property qualifier="CMSItem.name"/>
+			<property qualifier="CMSItem.catalogVersion"/>
+			<property qualifier="AbstractCMSComponent.visible"/>
+		</group>
+	
+		<group qualifier="editorial" visible="true" initially-opened="true">
+			<label key="config.general.editorial" />
+			<property qualifier="AbstractProductCollectionComponent.title"/>
+			<property qualifier="AbstractProductCollectionComponent.products"/>
+			<property qualifier="AbstractProductCollectionComponent.categories"/>
+			<property qualifier="AbstractProductCollectionComponent.searchQuery"/>
+			<property qualifier="AbstractProductCollectionComponent.categoryCode"/>
+			<property qualifier="AbstractProductCollectionComponent.maximumNumberProducts"/>
+			<property qualifier="AbstractProductCollectionComponent.cssClass"/>
+			<property qualifier="AbstractProductCollectionComponent.displayProductName"/>
+		</group>
+		
+	</displayed-properties>
+</wizard-config>

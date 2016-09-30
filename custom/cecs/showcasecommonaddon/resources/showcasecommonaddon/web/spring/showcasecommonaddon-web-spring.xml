@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.hybris.showcase.controllers"/>
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultShowcasecommonaddonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="showcasecommonaddon"/>
+	</bean>
+
+	<bean id="defaultShowcasecommonaddonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultShowcasecommonaddonJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getShowcasecommonaddonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultShowcasecommonaddonBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	<bean id="ShowcasecommonaddonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getShowcasecommonaddonBeforeViewHandler"/>
+	</bean>
+
+    <!--CECS-170 Product image component - START-->
+    <bean id="simpleProductImageCarouselComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="SimpleProductImageCarouselComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <!--CECS-170 Product image component - END-->
+
+    <!--CECS-171 Product basic details component - START-->
+    <bean id="productDetailsNameComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductDetailsNameComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <bean id="productDetailsPriceComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductDetailsPriceComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <bean id="productDetailsVariantSelectorComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductDetailsVariantSelectorComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <bean id="productDetailsSocialButtonsComponentRenderer"
+          class="com.hybris.showcase.renderers.cms.ProductDetailsSocialButtonsComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+        <property name="sharedPageUrlStrategy" ref="sharedPageUrlStrategy"/>
+    </bean>
+    <bean id="productDetailsSocialButtonsComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductDetailsSocialButtonsComponent"/>
+        <property name="renderer" ref="productDetailsSocialButtonsComponentRenderer"/>
+    </bean>
+    <bean id="productDetailsSummaryComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductDetailsSummaryComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <!--CECS-171 Product basic details component - END-->
+    <!--CECS-172 Product related items component - START-->
+    <bean id="productDetailsRelatedComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductDetailsRelatedComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <!--CECS-172 Product related items component - END-->
+    <!--CECS-173 Product reviews component - START-->
+    <bean id="productDetailsReviewComponentRenderer"
+          class="com.hybris.showcase.renderers.cms.ProductDetailsReviewComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+    </bean>
+    <bean id="productDetailsReviewComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductDetailsReviewComponent"/>
+        <property name="renderer" ref="productDetailsReviewComponentRenderer"/>
+    </bean>
+    <!--CECS-173 Product reviews component - END-->
+    <!--CECS-183 Product variant selector component - START-->
+    <bean id="productDetailsVariantSelectorComponentRenderer"
+          class="com.hybris.showcase.renderers.cms.ProductDetailsVariantSelectorComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+        <property name="productFacade" ref="accProductFacade" />
+    </bean>
+    <bean id="productVariantSelectorComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductDetailsVariantSelectorComponent"/>
+        <property name="renderer" ref="productDetailsVariantSelectorComponentRenderer"/>
+    </bean>
+    <!--CECS-183 Product variant selector component - END-->
+    <!--CECS-174 Product Features component - START-->
+    <bean id="productDetailsFeaturesComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductDetailsFeaturesComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <!--CECS-174 Product Features component - END-->
+
+    <!-- CECS-68 responsive my-account homepage - cms START -->
+
+    <bean id="socialAccountBodySubComponentRenderer"
+          class="com.hybris.showcase.renderers.cms.SocialAccountBodySubComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+        <property name="facebookAuthenticationService" ref="facebookAuthenticationService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+    <bean id="socialAccountBodySubComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="SocialAccountBodySubComponent"/>
+        <property name="renderer" ref="socialAccountBodySubComponentRenderer"/>
+    </bean>
+
+    <bean id="detailAccountBodySettingsSubComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="DetailAccountBodySettingsSubComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <bean id="helpAccountBodySubComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="HelpAccountBodySubComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <bean id="tileAccountBodySubComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="TileAccountBodySubComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+
+    <!-- CECS-68 responsive my-account homepage - cms END -->
+
+
+    <!-- CECS-69 component to switch billing options START -->
+    <bean id="billingOptionComponentRenderer" class="com.hybris.showcase.renderers.cms.BillingOptionComponentRenderer" parent="genericAddOnCMSComponentRenderer" >
+        <property name="userService" ref="userService" />
+    </bean>
+
+    <bean id="billingOptionsComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="BillingOptionsComponent"/>
+        <property name="renderer" ref="billingOptionComponentRenderer"/>
+    </bean>
+
+    <bean id="accountEditBodyComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="AccountEditBodyComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+
+    <bean id="accountEditSideComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="AccountEditSideComponent"/>
+        <property name="renderer" ref="genericAddOnCMSComponentRenderer"/>
+    </bean>
+    <!-- CECS-69 component to switch billing options END -->
+
+    <!-- CECS-650 component to switch time using TimeService START -->
+    <bean id="timeSwitcherComponentRenderer" class="com.hybris.showcase.renderers.cms.TimeSwitcherComponentRenderer" parent="genericAddOnCMSComponentRenderer" >
+        <property name="timeService" ref="timeService" />
+    </bean>
+
+    <bean id="timeSwitcherComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="TimeSwitcherComponent"/>
+        <property name="renderer" ref="timeSwitcherComponentRenderer"/>
+    </bean>
+    <!-- CECS-650 component to switch time using TimeService END -->
+    
+    <!-- CECS-111: Migrate my-account subscriptions page from telco - START -->
+    <util:list id="registrationCallbacks" />
+
+    <bean id="subscriptionRegistrationCallback" class="com.hybris.showcase.callbacks.SubscriptionRegistrationCallback">
+        <property name="subscriptionFacade" ref="subscriptionFacade"/>
+    </bean>
+
+    <bean id="subscription_registrationCallbacks_ListMergeDirective" depends-on="registrationCallbacks" parent="listMergeDirective" >
+        <property name="add" ref="subscriptionRegistrationCallback" />
+    </bean>
+    <!-- CECS-111: Migrate my-account subscriptions page from telco - END -->
+
+    <!-- CECS-730 reviews component rework START-->
+    <bean id="productDetailsReviewSummaryComponentRenderer"
+          class="com.hybris.showcase.renderers.cms.ProductDetailsReviewSummaryComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+    </bean>
+    <bean id="productDetailsReviewSummaryComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductDetailsReviewSummaryComponent"/>
+        <property name="renderer" ref="productDetailsReviewSummaryComponentRenderer"/>
+    </bean>
+
+    <bean id="customerReviewFormToCustomerReviewPopulator" class="com.hybris.showcase.converter.populator.CustomerReviewFormToCustomerReviewPopulator">
+        <property name="productService" ref="productService" />
+        <property name="userService" ref="userService" />
+    </bean>
+    <!-- CECS-730 reviews component rework END-->
+
+    <bean id="blogArticleDetailsComponentRenderer" class="com.hybris.showcase.renderers.cms.BlogArticleDetailsComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+        <property name="enumerationService" ref="enumerationService"/>
+        <property name="blogArticlePopulator" ref="blogArticlePopulator"/>
+    </bean>
+    <bean id="blogArticleDetailsComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="BlogArticleDetailsComponent"/>
+        <property name="renderer" ref="blogArticleDetailsComponentRenderer"/>
+        <!--CECS-200 Blog page - Conversation component - END-->
+    </bean>
+
+    <!-- CECS-601 once expense disputed is started that could be reflected in UI START -->
+    <bean id="accountExpensesComponentRenderer" class="com.hybris.showcase.renderers.cms.AccountExpensesComponentRenderer" parent="genericAddOnCMSComponentRenderer" />
+
+    <bean id="accountExpensesComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="AccountExpensesComponent" />
+        <property name="renderer" ref="accountExpensesComponentRenderer" />
+    </bean>
+    
+    <!-- CECS-728 TVSeasonListComponent -->
+    <bean id="tVSeasonListComponentRenderer"
+          class="com.hybris.showcase.renderers.cms.TVSeasonListComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+        <property name="tVSeriesFacade" ref="tVSeriesFacade" />
+    </bean>
+    <bean id="tVSeasonListComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="TVSeasonListComponent" />
+        <property name="renderer" ref="tVSeasonListComponentRenderer"/>
+    </bean>
+    <!-- CECS-728 TVSeasonListComponent END -->
+    	
+	<!-- CECS-754 Blog components - START -->
+	<bean id="blogRelatedPostsComponentRenderer"
+          class="com.hybris.showcase.renderers.cms.BlogRelatedPostsComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+    </bean>
+    <bean id="blogRelatedPostsComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="BlogRelatedPostsComponent" />
+        <property name="renderer" ref="blogRelatedPostsComponentRenderer"/>
+    </bean>
+    
+	<bean id="blogNewsletterComponentRenderer"
+          class="com.hybris.showcase.renderers.cms.BlogNewsletterComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer">
+    </bean>
+    <bean id="blogNewsletterComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="BlogNewsletterComponent" />
+        <property name="renderer" ref="blogNewsletterComponentRenderer"/>
+    </bean>
+	<!-- CECS-754 Blog components - END -->
+    
+    <!-- CECS-601 once expense disputed is started that could be reflected in UI END -->
+
+	<!-- CECS-727 Featured component - START -->
+	<bean id="tvShowProductDetailsComponentRenderer"
+		class="com.hybris.showcase.renderers.cms.TvShowProductDetailsComponentRenderer"
+		parent="genericAddOnCMSComponentRenderer">
+		<property name="TVSeriesFacade" ref="tVSeriesFacade" />
+        <property name="blogArticleFacade" ref="blogArticleFacade" />
+	</bean>
+
+	<bean id="tvShowProductDetailsComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+		<property name="typeCode" value="TvShowProductDetailsComponent" />
+		<property name="renderer" ref="tvShowProductDetailsComponentRenderer" />
+	</bean>
+
+	<bean id="addToWatchListActionMapping" parent="addonCmsComponentRendererMapping">
+		<property name="typeCode" value="AddToWatchListAction" />
+		<property name="renderer" ref="genericAddOnCMSComponentRenderer" />
+	</bean>
+	<!-- CECS-727 Featured component - END -->
+	
+	<!-- CECS-788 MovieProductDetailsComponent - START -->
+	<bean id="movieProductDetailsComponentRenderer" class="com.hybris.showcase.renderers.cms.MovieProductDetailsComponentRenderer" parent="genericAddOnCMSComponentRenderer">
+        <property name="productFacade" ref="accProductFacade" />
+        <property name="blogArticleFacade" ref="blogArticleFacade" />
+	</bean>
+	
+	<bean id="movieProductDetailsComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+		<property name="typeCode" value="MovieProductDetailsComponent" />
+		<property name="renderer" ref="movieProductDetailsComponentRenderer" />
+	</bean>
+	<!-- CECS-788 MovieProductDetailsComponent - END -->
+	
+	<bean id="beforeViewJSShowcasePropsHandlerAdaptee" class="com.hybris.showcase.config.javascript.BeforeViewJSShowcasePropsHandlerAdaptee">
+	</bean>
+	
+	<bean id="beforeViewJSShowcaseBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="beforeViewJSShowcasePropsHandlerAdaptee" />
+		</property>	
+	</bean>
+	
+	<bean id="beforeViewJSShowcaseBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="beforeViewJSShowcaseBeforeViewHandler"/>
+	</bean>
+	
+</beans>

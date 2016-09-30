@@ -1,0 +1,100 @@
+.btn-tricast{
+    &-primary,&-primary:active{
+        background: @brand-pink;
+        background: -moz-linear-gradient(top, @brand-pink 0%, @brand-red 100%);
+        background: -webkit-linear-gradient(top, @brand-pink 0%,@brand-red 100%);
+        background: linear-gradient(to bottom, @brand-pink 0%,@brand-red 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@brand-pink', endColorstr='@brand-red',GradientType=0 );
+        color: #fff;
+        border-bottom:1px solid @brand-red-dark;
+        &:hover,&:focus{
+            opacity: 0.8;
+        }
+    }
+    &-secondary,&-secondary:active{
+        background: @brand-lighter;
+        background: -moz-linear-gradient(top, @brand-lighter 0%, @brand-primary-light 100%);
+        background: -webkit-linear-gradient(top, @brand-lighter 0%,@brand-primary-light 100%);
+        background: linear-gradient(to bottom, @brand-lighter 0%,@brand-primary-light 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@brand-lighter', endColorstr='@brand-primary-light',GradientType=0 );
+        color: #fff;
+        border-bottom:1px solid darken(@brand-primary-light,10%);
+
+        &:hover,&:focus{
+            opacity: 0.8;
+        }
+    }
+    &-default,&-default:active{
+        background: #e2e2e2;
+        background: -moz-linear-gradient(top, #e2e2e2 0%, #f6f5f5 100%);
+        background: -webkit-linear-gradient(top, #e2e2e2 0%,#f6f5f5 100%);
+        background: linear-gradient(to bottom, #e2e2e2 0%,#f6f5f5 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#f6f5f5',GradientType=0 );
+        color: #546e7a;
+        border-bottom:1px solid darken(#f6f5f5,10%);
+
+        &:hover,&:focus{
+            opacity: 0.8;
+        }
+    }
+
+}
+
+.btn{
+    .caret{
+        margin-left: 5px;
+    }
+}
+
+.buy-watch-button-watch-text,.buy-watch-button-buy-text, .buy-watch-button-buy-price, .buy-watch-now-button-watch-now-text {
+	display: none;
+}
+
+.buy-watch-button-error-text {
+	color: #fff;
+	padding: 10px 0 0 0;
+	display: block;
+	width: 100%;
+	text-align: center;
+	
+	a {
+		color: #fff;
+		&:hover {
+			color: @brand-pink;
+		}
+	}
+}
+
+.buy-watch-button-price {
+	position: relative;
+	
+	span {
+		@trasition: 0.6s;
+		-webkit-transition: @trasition;
+		-moz-transition: @trasition;
+		-ms-transition: @trasition;
+		-o-transition: @trasition;
+		transition: @trasition;
+		opacity: 1;
+		filter: alpha(opacity=1);
+		
+		&.buy-watch-button-buy-price {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+    		opacity: 0;
+    		filter: alpha(opacity=0);
+		}
+	}
+	
+	&:hover span {
+		opacity: 0;
+		filter: alpha(opacity=0);
+		
+		&.buy-watch-button-buy-price {
+    		opacity: 1;
+    		filter: alpha(opacity=1);
+		}
+	}
+}

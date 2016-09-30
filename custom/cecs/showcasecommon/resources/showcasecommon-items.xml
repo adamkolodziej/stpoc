@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2014 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<!-- CECS-183 - Product details variant selector -->
+	<enumtypes>
+		<enumtype code="VariantSelectorEnum" autocreate="true"
+			generate="true" dynamic="true">
+			<value code="RED" />
+			<value code="BLACK" />
+			<value code="WHITE" />
+			<value code="DIMGRAY" />
+			<value code="MAROON" />
+			<value code="PINK" />
+			<value code="BLUE" />
+			<value code="SIZE1" />
+			<value code="SIZE2" />
+			<value code="SIZE3" />
+			<value code="SIZE4" />
+			<value code="SIZE5" />
+		</enumtype>
+		<enumtype code="PaymentStatus" autocreate="false" generate="false" dynamic="true">
+            <value code="TO_PAY"/>
+            <value code="CANCELED"/>
+            <value code="DELAYED"/>
+        </enumtype>
+
+		<enumtype code="ItemOfInterest" autocreate="true" generate="true" dynamic="true">
+			<value code="UNDERWORLD" />
+			<value code="CREEP" />
+			<value code="BRANDED_MERCHANDISE" />
+			<value code="SPORTS" />
+			<value code="VENOM" />
+			<value code="THE_LAST_JOURNEY" />
+			<value code="DOCUMENTARY" />
+		</enumtype>
+	</enumtypes>
+
+
+	<relations>
+		<relation code="CustomerExpenses" generate="true" localized="false"
+			autocreate="true">
+			<sourceElement qualifier="customer" type="Customer"
+				cardinality="one" />
+			<targetElement qualifier="expenses" type="Expense"
+				cardinality="many" collectiontype="list" />
+		</relation>
+
+		<relation code="CustomerInvoices" generate="true" localized="false"
+			autocreate="true">
+			<sourceElement qualifier="customer" type="Customer"
+				cardinality="one" />
+			<targetElement qualifier="invoices" type="Invoice"
+				cardinality="many" collectiontype="list" />
+		</relation>
+
+		<relation code="InvoiceExpenses" generate="true" localized="false"
+			autocreate="true">
+			<sourceElement qualifier="invoice" type="Invoice"
+				cardinality="one" />
+			<targetElement qualifier="expenses" type="Expense"
+				cardinality="many" collectiontype="list" />
+		</relation>
+
+		<!--CECS-192 promotion campaign for sports channel-->
+		<relation generate="true" localized="false" code="BTGRemoveFromGroupDefUsrGrpRel" autocreate="true">
+			<deployment table="removeGrActionGrRel" typecode="13133"/>
+			<sourceElement type="BTGRemoveFromGroupDefinition" qualifier="btgRemoveFromGroupActions" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</sourceElement>
+			<targetElement type="UserGroup" qualifier="userGroups" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="false"/>
+			</targetElement>
+		</relation>
+
+		<!--CECS-199 Blog page - Featured component-->
+		<relation code="BlogArticlesForProduct" generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="blogArticles" type="BlogArticle" cardinality="many" collectiontype="list"/>
+			<targetElement qualifier="product" type="Product" cardinality="one"/>
+		</relation>
+
+		<relation code="CustomerReview2UsersMarkedReviewHelpfulRelation" autocreate="true" generate="true" localized="false">
+			<deployment table="RevToUserHelpRel" typecode="32650"/>
+			<sourceElement qualifier="usersMarkedReviewHelpful" type="User" cardinality="many" collectiontype="set" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="customerReviewHelpful" type="CustomerReview" cardinality="many" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="CustomerReview2UsersMarkedReviewUnhelpfulRelation" autocreate="true" generate="true" localized="false">
+			<deployment table="RevToUserUnRel" typecode="32651"/>
+			<sourceElement qualifier="usersMarkedReviewUnhelpful" type="User" cardinality="many" collectiontype="set" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="customerReviewUnhelpful" type="CustomerReview" cardinality="many" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+
+	<itemtypes>
+
+		<typegroup name="Blog">
+			<itemtype code="BlogArticle" autocreate="true" generate="true" jaloclass="com.hybris.showcase.jalo.components.BlogArticle">
+				<deployment table="blogarticle" typecode="32654"/>
+				<custom-properties>
+					<property name="catalogItemType">
+						<value>java.lang.Boolean.TRUE</value>
+					</property>
+					<property name="catalogVersionAttributeQualifier">
+						<value>"catalogVersion"</value>
+					</property>
+					<property name="uniqueKeyAttributeQualifier">
+						<value>"code"</value>
+					</property>
+				</custom-properties>
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<persistence type="property"/>
+						<modifiers optional="false" unique="true"/>
+					</attribute>
+					<attribute autocreate="true" qualifier="itemOfInterest" type="ItemOfInterest" generate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" optional="true"/>
+					</attribute>
+					<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
+						<persistence type="property"/>
+						<modifiers optional="true"/>
+					</attribute>
+					<attribute qualifier="summary" generate="true" autocreate="true" type="localized:java.lang.String">
+						<persistence type="property"/>
+						<modifiers optional="true"/>
+					</attribute>
+					<attribute qualifier="content" generate="true" autocreate="true" type="localized:java.lang.String">
+						<modifiers optional="true" search="false"/>
+						<persistence type="property">
+							<columntype database="oracle">
+								<value>varchar2(4000)</value>
+							</columntype>
+							<columntype database="mysql">
+								<value>text</value>
+							</columntype>
+							<columntype database="sqlserver">
+								<value>nvarchar(max)</value>
+							</columntype>
+							<columntype database="hsqldb">
+								<value>LONGVARCHAR</value>
+							</columntype>
+							<columntype>
+								<value>varchar</value>
+							</columntype>
+						</persistence>
+					</attribute>
+					<attribute qualifier="blogImage" generate="true" autocreate="true" type="localized:Media">
+						<persistence type="property"/>
+						<modifiers optional="true"/>
+					</attribute>
+					<attribute qualifier="publishDate" type="java.util.Date">
+						<modifiers optional="false"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="CatalogVersion" qualifier="catalogVersion">
+						<persistence type="property"/>
+						<modifiers read="true" write="false" search="true" initial="true" optional="false" unique="true"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="CMS">
+			<itemtype code="ProductReferencesComponent" extends="SimpleCMSComponent"
+				autocreate="false" generate="false"
+				jaloclass="de.hybris.platform.acceleratorcms.jalo.components.ProductReferencesComponent">
+				<attributes>
+					<attribute type="java.lang.Boolean" qualifier="showRates">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<!-- CECS-349 cssClass and headline should be moved to SimpleCMSComponent 
+				type -->
+			<itemtype code="SimpleCMSComponent"
+				jaloclass="de.hybris.platform.cms2.jalo.contents.components.SimpleCMSComponent"
+				extends="AbstractCMSComponent" autocreate="false" generate="false"
+				abstract="true">
+				<attributes>
+					<attribute qualifier="cssClass" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers optional="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="ExtendedCMSComponent"
+				jaloclass="de.hybris.platform.cms2.jalo.contents.components.ExtendedCMSComponent"
+				extends="SimpleCMSComponent" autocreate="true" generate="true"
+				abstract="true">
+				<attributes>
+					<attribute qualifier="headline" type="localized:java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<!--CECS-79 ProductCarouselComponent and FixedProductSetComponent -->
+			<itemtype code="AbstractProductCollectionComponent"
+				abstract="true" autocreate="true" generate="true" extends="SimpleCMSComponent"
+				jaloclass="com.hybris.showcase.jalo.components.AbstractProductCollectionComponent">
+				<description>
+                    It is just a simple addon version of ProductCarouselComponent to have a different jsp, which will be
+                    used for extending for other Product Collection Components.
+                </description>
+				<attributes>
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>Localized title of the component.</description>
+					</attribute>
+					<attribute qualifier="subtitle" type="localized:java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>Localized subtitle of the component.</description>
+					</attribute>
+					<attribute qualifier="showSeeAllBtn" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers />
+						<description>Button showing all products of the component.</description>
+					</attribute>
+					<attribute qualifier="showPrice" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers />
+						<description>Attribute based on it there is displayed price.</description>
+					</attribute>
+					<attribute qualifier="showRates" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers />
+						<description>Attribute based on it there are displayed rates.</description>
+					</attribute>					
+					<attribute qualifier="searchQuery" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>A solr query string</description>
+					</attribute>
+					<attribute qualifier="categoryCode" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>A code for a category for a solr search</description>
+					</attribute>
+					<attribute qualifier="maximumNumberProducts" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Integer.valueOf(4)</defaultvalue>
+						<description>Maximum number of the products that are displayed in the component.</description>
+					</attribute>
+					<attribute qualifier="displayProductName" generate="true"
+						autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="true" />
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AbstractTileAccountBodySubComponent"
+				abstract="true" autocreate="true" generate="true" extends="SimpleCMSComponent"
+				jaloclass="com.hybris.showcase.jalo.AbstractTileAccountBodySubComponent">
+				<description>CMS component - a My-Account page's subcomponent (Body Content Slot)</description>
+				<attributes>
+					<attribute type="java.lang.String" qualifier="url">
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="icon">
+						<description>A gryphicon icon code (http://getbootstrap.com/components/)</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="title">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<!-- CECS-726 TV Show Product Pages - CMS restriction by type -->
+			<itemtype code="CMSProductTypeRestriction" jaloclass="com.hybris.showcase.jalo.restrictions.CMSProductTypeRestriction"
+				extends="AbstractRestriction" autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="description" redeclare="true" type="java.lang.String">
+						<persistence type="dynamic" attributeHandler="productTypeRestrictionDynamicDescription" />
+						<modifiers write="false" />
+					</attribute>
+					<attribute qualifier="productType" type="ComposedType">
+						<persistence type="property" />
+						<modifiers optional="false"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="Commerce">
+
+			<!--CECS-66 Product and AbstractOrder digital-delivery -->
+			<itemtype code="Product" generate="false" autocreate="false">
+				<attributes>
+					<attribute type="java.lang.Boolean" qualifier="digitalDelivery">
+						<modifiers write="false" />
+						<persistence type="dynamic" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AbstractOrder" generate="false" autocreate="false">
+				<attributes>
+					<attribute type="java.lang.Boolean" qualifier="downloadOnly">
+						<modifiers write="false" />
+						<persistence type="dynamic" />
+					</attribute>
+					<attribute type="java.lang.Boolean" qualifier="shipOnly">
+						<modifiers write="false" />
+						<persistence type="dynamic" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="Customer" autocreate="false" generate="false">
+				<attributes>
+					<attribute type="java.lang.Boolean" qualifier="isBillingEpaperEnabled">
+						<defaultvalue>Boolean.valueOf(false)</defaultvalue>
+						<modifiers initial="true" read="true" write="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Boolean" qualifier="isEmailPaymentRemindersEnabled">
+						<defaultvalue>Boolean.valueOf(false)</defaultvalue>
+						<modifiers initial="true" read="true" write="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<!-- CECS-443 link customer profile to twitter and facebook -->
+					<attribute type="java.lang.String" qualifier="twitterUserProfileId">
+						<persistence type="property" />
+					</attribute>
+
+					<!-- CECS-497 payment step should be improved - credit check implementation -->
+					<attribute qualifier="wallet" type="java.lang.Double"
+						generate="true">
+						<description>The amount of money the customer currently has.</description>
+						<persistence type="property">
+							<columntype>
+								<value>java.math.BigDecimal</value>
+							</columntype>
+						</persistence>
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
+						<defaultvalue>Double.valueOf(10000.0d)</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="Contract" autocreate="true" generate="true">
+				<deployment table="contract" typecode="24005" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<description>Updated with each new placed order's code!!!</description>
+						<persistence type="property" />
+						<modifiers unique="true" optional="false" />
+					</attribute>
+					<attribute qualifier="user" type="User">
+						<description>User assigned to a contract.</description>
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="Expense" autocreate="true" generate="true"
+				jaloclass="com.hybris.showcase.jalo.Expense">
+				<deployment table="expense" typecode="24099" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers unique="true" optional="false" />
+					</attribute>
+					<attribute qualifier="name" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="type" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="amount" type="java.lang.Double">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="expenseDate" type="java.util.Date">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="currencyIso" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="sourceProduct" type="Product">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="contract" type="Contract">
+						<description>Expense assigned to a contract.</description>
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="Invoice" autocreate="true" generate="true">
+				<deployment table="invoice" typecode="24103" />
+				<attributes>
+					<attribute qualifier="invoiceNumber" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers unique="true" optional="false" />
+					</attribute>
+					<attribute qualifier="amountDue" type="java.lang.Double">
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+					<attribute qualifier="amountPaid" type="java.lang.Double">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="amountRemaining" type="java.lang.Double">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="invoiceDate" type="java.util.Date">
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+					<attribute qualifier="billingPeriodStart" type="java.util.Date">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="billingPeriodEnd" type="java.util.Date">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="dueDate" type="java.util.Date">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="currency" type="Currency">
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+					<attribute qualifier="pdfUrl" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="invoiceStatus" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="InvoicingCronJob" autocreate="true"
+				generate="true" extends="CronJob" jaloclass="com.hybris.showcase.jalo.InvoicingCronJob">
+				<description>CronJob creating invoices for billing data</description>
+				<attributes>
+					<attribute qualifier="baseStore" type="BaseStore">
+						<description>The base store to run against</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" />
+					</attribute>
+					<attribute qualifier="invoiceDate" type="java.util.Date">
+						<persistence type="property" />
+						<modifiers read="true" write="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+
+		</typegroup>
+		<typegroup name="BTG">
+			<!--CECS-192 promotion campaign for sports channel -->
+			<itemtype code="BTGRemoveFromGroupDefinition" autocreate="true"
+				generate="true"
+				jaloclass="com.hybris.showcase.cecs.servicesshowcase.jalo.BTGRemoveFromGroupDefinition"
+				extends="BTGOutputActionDefinition" />
+
+			<itemtype code="BTGRunBusinessProcessDefinition" autocreate="true"
+				generate="true" jaloclass="com.hybris.showcase.jalo.BTGRunBusinessProcessDefinition"
+				extends="BTGOutputActionDefinition">
+				<attributes>
+					<attribute qualifier="businessProcessName" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+					<attribute qualifier="target" type="java.lang.String"
+						redeclare="true">
+						<modifiers read="true" write="false" optional="false"
+							initial="true" />
+						<persistence type="property" />
+						<defaultvalue>"runBusinessProcess"</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="Commerce">
+			<itemtype code="CustomerReview" generate="false" autocreate="false">
+				<attributes>
+					<attribute type="java.lang.String" qualifier="commentatorName">
+						<description>Name of commentator</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+	</itemtypes>
+</items>

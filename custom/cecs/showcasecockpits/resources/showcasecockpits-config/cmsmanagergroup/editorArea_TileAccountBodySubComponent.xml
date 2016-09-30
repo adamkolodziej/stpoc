@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="editor.xsd">
+	
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="CMSItem.name"/>
+		<property qualifier="CMSItem.catalogVersion" editor="shortListEditor"/>
+		<property qualifier="AbstractCMSComponent.visible"/>
+
+		<property qualifier="TileAccountBodySubComponent.uid"/>
+		<property qualifier="TileAccountBodySubComponent.icon"/>
+		<property qualifier="TileAccountBodySubComponent.url"/>
+	</group>
+</editor>

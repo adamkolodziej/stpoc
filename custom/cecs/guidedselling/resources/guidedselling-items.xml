@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <enumtypes>
+
+        <enumtype code="BundleComponentType">
+            <value code="Other"/>
+            <value code="Target"/>
+            <value code="Conditional"/>
+            <value code="AddOn"/>
+        </enumtype>
+
+    </enumtypes>
+
+    <!-- CECS-144 Preselection Data model START -->
+    <relations>
+        <relation code="ProductsForBundlePackage" generate="true" localized="false" autocreate="true">
+            <deployment table="prod2bundlepackages" typecode="31500"/>
+            <sourceElement qualifier="selectedProducts" type="Product" cardinality="many" collectiontype="list"/>
+            <targetElement qualifier="packages" type="BundlePackage" cardinality="many"/>
+        </relation>
+        <relation code="BundlePackagesForBundleTemplates" generate="true" localized="false" autocreate="true">
+            <sourceElement qualifier="packages" type="BundlePackage" cardinality="many" collectiontype="list"/>
+            <targetElement qualifier="bundleTemplate" type="BundleTemplate" cardinality="one"/>
+        </relation>
+
+        <relation code="FAQEntriesForBundleTemplates" generate="true" localized="false" autocreate="true">
+            <sourceElement qualifier="faqEntries" type="FAQEntry" cardinality="many" collectiontype="list"/>
+            <targetElement qualifier="bundleTemplate" type="BundleTemplate" cardinality="one"/>
+        </relation>
+
+        <!-- CECS-129: Guidedselling - change price - HBO promotion(3 months free) - START -->
+        <relation code="BundleRuleRestriction2AbstractBundleRuleRel" generate="true" localized="false" autocreate="true">
+            <deployment table="rulerestrict2bundle" typecode="29500"/>
+            <sourceElement qualifier="bundleRuleRestrictions" type="AbstractBundleRuleRestriction" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="bundleRules" type="AbstractBundleRule" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+
+        <relation code="BundlePrincipalRestriction2PrincipalsRel" generate="true" localized="false" autocreate="true">
+            <deployment table="bundlerule2principal" typecode="29501"/>
+            <sourceElement qualifier="bundlePrincipalRestrictions" type="BundlePrincipalRestriction" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="principals" type="Principal" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="false"/>
+            </targetElement>
+        </relation>
+        <!-- CECS-129: Guidedselling - change price - HBO promotion(3 months free) - END -->
+
+        <relation code="AbstractOrderEntry2RestrictedDiscounts" localized="false">
+            <deployment table="orderentry2restrdisc" typecode="29502"/>
+            <sourceElement type="AbstractOrderEntry" qualifier="orderEntries" cardinality="many"> <!-- it has to be many-to-many or we would have to adjust cloning order strategy to handle it -->
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement type="RestrictedDiscount" qualifier="restrictedDiscounts" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+
+        <relation code="Contract2OrderEntries" localized="false">
+            <sourceElement type="Contract" qualifier="contract" cardinality="one"/>
+            <targetElement type="AbstractOrderEntry" qualifier="orderEntries" cardinality="many"/>
+        </relation>
+
+        <relation code="Bundle2PrincipalRelation" generate="true" localized="false" autocreate="true">
+            <deployment table="Bundle2PrincipalRel" typecode="29503"/>
+            <sourceElement type="BundleTemplate" qualifier="restrictedBundleTemplates" cardinality="many" collectiontype="list" ordered="false">
+                <modifiers read="true" write="true" search="true" optional="true" />
+            </sourceElement>
+            <targetElement type="Principal" qualifier="visibleForPrincipals" cardinality="many" collectiontype="list" ordered="false">
+                <modifiers read="true" write="true" search="true" optional="true" />
+            </targetElement>
+        </relation>
+
+        <!-- CECS-817: Create percentage of price changing rules The 1-to-many relationship between BundleTemplate and ChangeProductPercentPriceBundleRule -->
+        <relation
+                generate="true"
+                localized="false"
+                code="BundleTemplatePercentPriceRulesRelation"
+                autocreate="true">
+            <sourceElement type="BundleTemplate" qualifier="bundleTemplate" cardinality="one"/>
+            <targetElement type="ChangeProductPercentPriceBundleRule" qualifier="changeProductPercentPriceBundleRules" cardinality="many">
+                <modifiers partof="true"></modifiers>
+            </targetElement>
+        </relation>
+
+        <!-- CECS-817: 1:n relation between BillingEvent and ChangeProductPercentPriceBundleRule -->
+        <relation
+                generate="true"
+                localized="false"
+                code="BillingEvent2ChangeProductPercentPriceBundleRule"
+                autocreate="true">
+            <sourceElement type="BillingEvent" qualifier="billingEvent" cardinality="one"/>
+            <targetElement type="ChangeProductPercentPriceBundleRule" qualifier="changeProductPercentPriceBundleRules" cardinality="many"/>
+        </relation>
+
+    </relations>
+    <!-- CECS-144 Preselection Data model END -->
+
+    <itemtypes>
+
+        <itemtype code="BundleTemplate" generate="false" autocreate="false">
+            <attributes>
+                <attribute type="BundleComponentType" qualifier="bundleComponentType">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="BundlePackage" generate="true" autocreate="true">
+            <deployment table="bundlepackage" typecode="24006"/>
+            <custom-properties>
+                <property name="catalogItemType">
+                    <value>java.lang.Boolean.TRUE</value>
+                </property>
+                <property name="catalogVersionAttributeQualifier">
+                    <value>"catalogVersion"</value>
+                </property>
+                <property name="uniqueKeyAttributeQualifier">
+                    <value>"code"</value>
+                </property>
+            </custom-properties>
+            <attributes>
+                <attribute type="java.lang.String" qualifier="code">
+                    <persistence type="property"/>
+                    <modifiers optional="false" unique="true"/>
+                </attribute>
+                <attribute type="localized:java.lang.String" qualifier="name">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute type="localized:java.lang.String" qualifier="description">
+                    <modifiers optional="true" search="false"/>
+                    <persistence type="property">
+                        <columntype database="oracle">
+                            <value>varchar2(4000)</value>
+                        </columntype>
+                        <columntype database="mysql">
+                            <value>text</value>
+                        </columntype>
+                        <columntype database="sqlserver">
+                            <value>nvarchar(max)</value>
+                        </columntype>
+                        <columntype database="hsqldb">
+                            <value>LONGVARCHAR</value>
+                        </columntype>
+                        <columntype>
+                            <value>varchar</value>
+                        </columntype>
+                    </persistence>
+                </attribute>
+                <attribute qualifier="image" type="Media">
+                    <persistence type="property"/>
+                </attribute>
+                 <attribute qualifier="thumbnail" type="Media">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute type="CatalogVersion" qualifier="catalogVersion">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="false" search="true" initial="true" optional="false" unique="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="AbstractOrderEntry" generate="false" autocreate="false">
+            <attributes>
+                <attribute qualifier="package" type="BundlePackage">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="addedToExistingContract" type="boolean">
+                    <persistence type="property"/>
+                </attribute>
+                <!-- CECS-717 yBilling enhanced bundle rules -->
+                <attribute qualifier="priceRule" type="ChangeProductPriceBundleRule">
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="AbstractBundleRule" generate="false" autocreate="false">
+            <attributes>
+                <attribute qualifier="label" type="localized:java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers optional="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="RecurringChargeEntry" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="label" type="localized:java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers optional="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="AbstractBundleRuleRestriction" autocreate="true" generate="true" abstract="true">
+            <custom-properties>
+                <property name="catalogItemType">
+                    <value>java.lang.Boolean.TRUE</value>
+                </property>
+                <property name="catalogVersionAttributeQualifier">
+                    <value>"catalogVersion"</value>
+                </property>
+                <property name="uniqueKeyAttributeQualifier">
+                    <value>"id"</value>
+                </property>
+            </custom-properties>
+            <attributes>
+                <attribute qualifier="id" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true" optional="false"/>
+                </attribute>
+                <attribute qualifier="catalogVersion" type="CatalogVersion">
+                    <modifiers unique="true" optional="false"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="name" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="BundlePrincipalRestriction" extends="AbstractBundleRuleRestriction" autocreate="true" generate="true" />
+
+        <itemtype code="RecurringChargeRestriction" extends="AbstractBundleRuleRestriction" autocreate="true" generate="true">
+            <attributes>
+                <attribute qualifier="cycleStart" type="int">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+                <attribute qualifier="cycleEnd" type="int">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="RestrictedDiscount" autocreate="true" generate="true">
+            <deployment table="restricteddiscount" typecode="24008"/>
+            <attributes>
+                <attribute qualifier="discount" type="de.hybris.platform.util.DiscountValue">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+                <attribute qualifier="restriction" type="AbstractBundleRuleRestriction">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="AbstractOrder" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="orderChanges" type="OrderChanges">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="contractStartDate" type="java.util.Date">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <!-- CECS-88 guidedselling: edit existing contract -->
+        <itemtype code="OrderChanges" autocreate="true" generate="true">
+            <deployment table="orderchanges" typecode="24009"/>
+            <attributes>
+                <attribute qualifier="order" type="Order">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="productsAdded" type="ProductCollection">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="productsRemoved" type="ProductCollection">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="FAQEntry" autocreate="true"
+                  generate="true" jaloclass="com.hybris.showcase.guidedselling.jalo.FAQEntry">
+            <description>
+                Component for Guided Selling page which displays FAQ for the BundleTemplate from the context.
+            </description>
+            <deployment table="faqentry" typecode="24007"/>
+            <custom-properties>
+                <property name="catalogItemType">
+                    <value>java.lang.Boolean.TRUE</value>
+                </property>
+                <property name="catalogVersionAttributeQualifier">
+                    <value>"catalogVersion"</value>
+                </property>
+                <property name="uniqueKeyAttributeQualifier">
+                    <value>"code"</value>
+                </property>
+            </custom-properties>
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers optional="false" unique="true"/>
+                </attribute>
+                <attribute qualifier="catalogVersion" type="CatalogVersion">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="false" search="true" initial="true" optional="false" unique="true"/>
+                </attribute>
+                <attribute qualifier="question" generate="true" autocreate="true" type="localized:java.lang.String">
+                    <persistence type="property">
+                        <columntype database="oracle">
+                            <value>varchar2(4000)</value>
+                        </columntype>
+                        <columntype database="mysql">
+                            <value>text</value>
+                        </columntype>
+                        <columntype database="sqlserver">
+                            <value>nvarchar(max)</value>
+                        </columntype>
+                        <columntype database="hsqldb">
+                            <value>LONGVARCHAR</value>
+                        </columntype>
+                        <columntype>
+                            <value>varchar</value>
+                        </columntype>
+                    </persistence>
+                    <modifiers optional="true"/>
+                </attribute>
+                <attribute qualifier="answer" generate="true" autocreate="true" type="localized:java.lang.String">
+                    <persistence type="property">
+                        <columntype database="oracle">
+                            <value>varchar2(4000)</value>
+                        </columntype>
+                        <columntype database="mysql">
+                            <value>text</value>
+                        </columntype>
+                        <columntype database="sqlserver">
+                            <value>nvarchar(max)</value>
+                        </columntype>
+                        <columntype database="hsqldb">
+                            <value>LONGVARCHAR</value>
+                        </columntype>
+                        <columntype>
+                            <value>varchar</value>
+                        </columntype>
+                    </persistence>
+                    <modifiers optional="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <!-- CECS-817: Create percentage of price changing rules -->
+        <itemtype code="ChangeProductPercentPriceBundleRule" generate="true"
+                  extends="AbstractBundleRule" autocreate="true" jaloclass="com.hybris.showcase.guidedselling.jalo.ChangeProductPercentPriceBundleRule">
+            <custom-properties>
+                <property name="catalogItemType"><value>java.lang.Boolean.TRUE</value></property>
+                <property name="catalogVersionAttributeQualifier"><value>"catalogVersion"</value></property>
+                <property name="uniqueKeyAttributeQualifier"><value>"bundleTemplate,id"</value></property>
+            </custom-properties>
+            <attributes>
+
+                <attribute qualifier="percentageDiscount" type="java.lang.Double">
+                    <description>Percentage discount</description>
+                    <modifiers optional="false"/>
+                    <persistence type="property"/>
+                </attribute>
+
+            </attributes>
+        </itemtype>
+
+    </itemtypes>
+</items>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry m:etag="W/&quot;datetimeoffset'2015-08-05T12%3A17%3A58Z'&quot;" xml:base="https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/" xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+    <id>https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/Initiatives('0000000003')</id>
+    <title type="text">Interested in TV shows</title>
+    <updated>2015-10-06T12:40:45Z</updated>
+    <category term="CUAN_COMMON_SRV.Initiative" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="Initiatives('0000000003')" rel="edit" title="Initiative"/>
+    <link href="Initiatives('0000000003')/TargetGroup" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/TargetGroup" type="application/atom+xml;type=entry" title="TargetGroup">
+        <m:inline>
+            <entry m:etag="W/&quot;datetimeoffset'2015-08-05T12%3A13%3A06Z'&quot;" xml:base="https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/">
+                <id>https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/TargetGroups('0000000043')</id>
+                <title type="text">interested-in-tv-shows</title>
+                <updated>2015-10-06T12:40:45Z</updated>
+                <category term="CUAN_COMMON_SRV.TargetGroup" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+                <link href="TargetGroups('0000000043')" rel="edit" title="TargetGroup"/>
+                <content type="application/xml">
+                    <m:properties>
+                        <d:CustomerMemberCount>1</d:CustomerMemberCount>
+                    </m:properties>
+                </content>
+            </entry>
+        </m:inline>
+    </link>
+    <content type="application/xml">
+        <m:properties>
+            <d:LifecycleStatus m:type="CUAN_COMMON_SRV.StatusCT">
+                <d:StatusCode>2</d:StatusCode>
+                <d:StatusDescription>Released</d:StatusDescription>
+            </d:LifecycleStatus>
+            <d:Description>scenario 3</d:Description>
+            <d:InitiativeId>0000000003</d:InitiativeId>
+            <d:InitiativeIdExt>3</d:InitiativeIdExt>
+            <d:Category>
+                <d:CategoryCode>Z2</d:CategoryCode>
+            </d:Category>
+            <d:Name>Interested in TV shows</d:Name>
+        </m:properties>
+    </content>
+</entry>

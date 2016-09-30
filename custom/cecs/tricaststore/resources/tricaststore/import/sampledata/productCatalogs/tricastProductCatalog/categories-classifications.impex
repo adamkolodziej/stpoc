@@ -1,0 +1,135 @@
+# ImpEx for Importing Category Classifications into Tricast Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=tricastProductCatalog
+$productCatalogName=Tricast Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$classCatalogVersion=catalogversion(catalog(id[default='TricastClassification']),version[default='1.0'])[unique=true,default='TricastClassification:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='TricastClassification']),version[default='1.0'])[unique=true]
+$class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
+$supercategories=source(code, $classCatalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+$attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
+$unit=unit(code,$classSystemVersion)
+$superClass=superCategories(code,$classCatalogVersion)
+$catVer=catalogVersion(version[default='Staged'],catalog(id[default=$productCatalog]));
+
+# Insert Classifications
+INSERT_UPDATE ClassificationClass; $classCatalogVersion; code[unique=true]; $superClass; allowedPrincipals(uid)[default='customergroup']
+# CECS-63: Include classifications for new products - START
+; ; VideoClass
+; ; MovieClass ; VideoClass
+; ; TVClass    ; VideoClass
+# CECS-63: Include classifications for new products - END
+
+# Insert Classification Attributes
+INSERT_UPDATE ClassificationAttribute; $classSystemVersion; code[unique=true]
+# CECS-63: Include classifications for new products - START
+; ; starring
+; ; writing
+; ; supporting-actors
+; ; director
+; ; genre
+; ; language
+; ; running-time
+; ; release-year
+; ; studio
+; ; production-companies
+; ; www
+; ; MPAA-rating
+; ; HD
+; ; original-air-date
+; ; network
+; ; season
+; ; episod
+# CECS-63: Include classifications for new products - END
+
+UPDATE Category; $catVer[virtual=true,unique=true]; code[unique=true]; supercategories(code,$classCatalogVersion)[mode=append];
+# CECS-63: Include classifications for new products - START
+; movies     ; MovieClass ;
+; tvShows    ; TVClass    ;
+; tvChannels ; TVClass	  ;
+# CECS-63: Include classifications for new products - END
+# CECS-877
+; premium-movies     ; MovieClass ;
+
+INSERT_UPDATE ClassificationAttributeValue; code[unique=true]; $classSystemVersion
+# CECS-63: Include classifications for new products - START
+# Languages
+; en
+; fr
+; it
+; de
+; ru
+# Genres
+; Action
+; Adventure
+; Animation
+; Comedy
+; Crime
+; Disaster
+; Documentary
+; Drama
+; Eastern
+; Erotic
+; Family
+; Fan_Film
+; Fantasy
+; Film_Noir
+; Foreign
+; History
+; Holiday
+; Horror
+; Indie
+; Music
+; Musical
+; Mystery
+; Neo-noir
+; Road_Movie
+; Romance
+; Science_Fiction
+; Short
+; Sport
+; Sporting_Event
+; Sports_Film
+; Suspense
+; TV_movie
+; Thriller
+; War
+; Western
+; Comedy-drama
+; Tragedy
+; Sitcom
+; Period drama
+; Black comedy
+; Mockumentary
+; Medical drama
+; Spy thriller
+; Crime drama
+; Contemporary western
+; Romantic comedy
+; Political thriller
+; Crime drama
+; Psychological thriller
+# CECS-63: Include classifications for new products - END
+
+INSERT_UPDATE ClassAttributeAssignment; $attribute; $class; attributeType(code[default=string]); multiValued[default=false]; $unit; position[default=1]; attributeValues(code,$classSystemVersion); searchable[default=false]; listable[default=true]; comparable[default=true]; range[default=false]; localized[default=true]; $classSystemVersion[virtual=true,unique=true]
+# CECS-63: Include classifications for new products - START
+; starring             ; VideoClass ;        ; true ;        ; 1  ;;true
+; supporting-actors    ; VideoClass ;        ; true ;        ; 5  ;;true
+; director             ; VideoClass ;        ; true ;        ; 2  ;;true
+; release-year         ; VideoClass ; number ;      ;        ; 3  ;;
+; running-time         ; VideoClass ; number ;      ; minute ; 8  ;;
+; HD                   ; VideoClass ;        ;      ;        ; 13 ;;
+; genre                ; VideoClass ; enum   ; true ;        ; 6  ; Action, Adventure, Animation, Comedy, Crime, Disaster, Documentary, Drama, Eastern, Erotic, Family, Fan_Film, Fantasy, Film_Noir, Foreign, History, Holiday, Horror, Indie, Music, Musical, Mystery, Neo-noir, Road_Movie, Romance, Science_Fiction, Short, Sport, Sporting_Event, Sports_Film, Suspense, TV_movie, Thriller, War, Western, Comedy-drama, Tragedy, Sitcom, Period drama, Black comedy, Mockumentary, Medical drama, Spy thriller, Crime drama, Contemporary western, Romantic comedy, Political thriller, Crime drama, Psychological thriller;true
+; writing              ; MovieClass ;        ; true ;        ; 4  ;;
+; language             ; MovieClass ; enum   ; true ;        ; 7  ; en, fr, it, de, ru;
+; studio               ; MovieClass ;        ; true ;        ; 9  ;;
+; production-companies ; MovieClass ;        ; true ;        ; 10 ;;
+; www                  ; MovieClass ;        ;      ;        ; 11 ;;
+; MPAA-rating          ; MovieClass ;        ;      ;        ; 12 ;;
+; original-air-date    ; TVClass    ;        ;      ;        ; 1  ;;
+; network              ; TVClass    ;        ;      ;        ; 2  ;;true
+; season               ; TVClass    ; number ;      ;        ; 3  ;;
+; episod               ; TVClass    ; number ;      ;        ; 4  ;;
+# CECS-63: Include classifications for new products - END

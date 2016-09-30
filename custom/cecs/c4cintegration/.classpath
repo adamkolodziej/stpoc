@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+				
+				
+				
+				
+	<classpathentry exported="false" kind="src" path="/platform" />
+	<classpathentry exported="true" kind="src" path="/acceleratorservices" />
+	<classpathentry exported="true" kind="src" path="/ticketing" />
+	<classpathentry exported="true" kind="lib" path="lib/FastInoset.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/gmbal-api-only.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/ha-api.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/javax.annotation.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jaxb-api.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jaxb-impl.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jaxb-xjc.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jaxws-api.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jaxws-rt.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jaxws-tools.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jsr181-api.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/mail.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/management-api.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/mimepull.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/policy.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/saaj-api.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/saaj-impl.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/stax-ex.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/stax2-api.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/streambuffer.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/woodstox-core-asl.jar" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
+				
+</classpath>
+				

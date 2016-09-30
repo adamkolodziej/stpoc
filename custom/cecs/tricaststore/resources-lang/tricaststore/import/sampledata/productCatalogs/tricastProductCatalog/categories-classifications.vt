@@ -1,0 +1,35 @@
+$header
+# ImpEx for Importing Classification Categories into Tricast Store
+
+# Macros / Replacement Parameter definitions
+\$productCatalog=tricastProductCatalog
+\$productCatalogName=Tricast Product Catalog
+\$classCatalogVersion=catalogversion(catalog(id[default='TricastClassification']),version[default='1.0'])[unique=true,default='TricastClassification:1.0']
+\$classSystemVersion=systemVersion(catalog(id[default='TricastClassification']),version[default='1.0'])[unique=true]
+
+# Language
+\$lang=$lang
+
+#set ( $categoriesRows = $query.load('categories-classifications', 'ClassificationClass') )
+
+# Create Categories
+UPDATE ClassificationClass;code[unique=true];\$classCatalogVersion;name[lang=\$lang]
+#foreach( $row in $categoriesRows )
+ ;$row.key;;"$row.values.name";
+#end
+
+
+#set ( $categoriesRows = $query.load('categories-classifications', 'ClassificationAttribute') )
+
+# Create Categories
+UPDATE ClassificationAttribute;code[unique=true];\$classSystemVersion;name[lang=\$lang]
+#foreach( $row in $categoriesRows )
+ ;$row.key;;"$row.values.name";
+#end
+
+#set( $attributeValueRows = $query.load('categories-classifications', 'ClassificationAttributeValue') )
+ 
+UPDATE ClassificationAttributeValue;code[unique=true];name[lang=\$lang];\$classSystemVersion
+#foreach( $row in $attributeValueRows )
+ ;$row.key;"$row.values.name";
+#end

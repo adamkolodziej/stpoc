@@ -1,0 +1,380 @@
+<?xml version='1.0' encoding='UTF-8'?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schema.ws.highdeal.com/" targetNamespace="http://schema.ws.highdeal.com/" version="1.0">
+
+  <xs:complexType name="MassResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:Response">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="failures" type="tns:Integer">
+		    <xs:annotation>
+              <xs:documentation>
+                The number of erroneous single operations due to a business error. Check the error stack (category, message, cause).
+              </xs:documentation>
+			</xs:annotation>
+		  </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Response">
+    <xs:sequence>
+      <xs:element name="status" type="tns:ResponseStatus"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+      <xs:element minOccurs="0" name="error" type="tns:Failure"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="ResponseStatus">
+    <xs:restriction base="tns:String256">
+      <xs:enumeration value="return"/>
+      <xs:enumeration value="error"/>
+      <xs:enumeration value="inProgress"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Failure">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="category" type="tns:FailureCategory"/> <!-- should be minOccurs="1" -->
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+      <xs:element minOccurs="0" name="cause" type="tns:FailureCause">
+        <xs:annotation>
+          <xs:documentation>
+            Consult the SAP CC Error Code Reference documentation for more information. Consider also the causedBy element.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="causedBy" type="tns:FailureCause"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="FailureCategory">
+    <xs:restriction base="tns:String256">
+      <xs:enumeration value="alreadyExists"/>
+      <xs:enumeration value="doesNotExist"/>
+      <xs:enumeration value="invalid"/>
+      <xs:enumeration value="prerequisiteMissing"/>
+      <xs:enumeration value="incompatibleConfiguration"/>
+      <xs:enumeration value="illegalState"/>
+      <xs:enumeration value="temporaryIllegalState"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="FailureCause">
+    <xs:sequence>
+      <xs:element name="module" type="xs:string"/>
+      <xs:element name="code" type="xs:int"/>
+      <xs:element name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="NullableDate">
+    <xs:complexContent>
+      <xs:extension base="tns:NullableFlag">
+        <xs:sequence>
+          <xs:element name="value" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="NullableString">
+    <xs:complexContent>
+      <xs:extension base="tns:NullableFlag">
+        <xs:sequence>
+          <xs:element name="value" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="NullableFlag">
+    <xs:attribute name="undef" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="AdditionalInfo">
+    <xs:sequence>
+      <xs:element name="name" type="tns:String256"/>
+      <xs:element minOccurs="0" name="description" type="tns:String2000"/>
+      <xs:choice>
+        <xs:element name="string" type="tns:String2000"/>
+        <xs:element name="date" type="tns:Date"/>
+        <xs:element name="number" type="tns:Decimal28_6"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Search Filter -->
+  <xs:complexType name="SearchFilter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="searchWindow" type="tns:SearchFilterWindow"/>
+      <xs:element default="false" minOccurs="0" name="totalCountRequired" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SearchFilterWindow">
+  	    <xs:annotation>
+          <xs:documentation>
+            The settings to enable reference-based pagination of search results in response. Several operation requests are necessary to retrieve the complete results.
+          </xs:documentation>
+        </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="windowSize" type="xs:int">
+	     <xs:annotation>
+          <xs:documentation>
+            The maximum number of results expected in the operation response. The SAP CC system returns a subset of the matching result set.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fromUniqueId" type="tns:String256">
+	  	  <xs:annotation>
+          <xs:documentation>
+            The reference to start pagination from. When omitted in the first search operation request, the beginning of the result set is returned
+			by the SAP CC system.
+			When set in an operation request, it must be equal to the lastUniqueId element in the previous operation response.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SearchResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="totalCount" type="xs:int">
+		        <xs:annotation>
+              <xs:documentation>
+                The number of remaining objects in the set after the current page found by the SAP CC system. This includes the number of objects in the current set.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="lastUniqueId" type="tns:String256">
+		        <xs:annotation>
+              <xs:documentation>
+                The reference of the last element in case of pagination. Set up the fromUniqueId element in the next search operation request with this reference value.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="StringAttributeDescription">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="enumeration" type="tns:StringEnumeration"/>
+        <xs:element name="pattern" type="tns:String256"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DateAttributeDescription">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="enumeration" type="tns:DateEnumeration"/>
+        <xs:element name="range" type="tns:DateRange"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="NumberAttributeDescription">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="enumeration" type="tns:NumberEnumeration"/>
+        <xs:element name="range" type="tns:NumberRange"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AdditionalAttributeDescription">
+    <xs:sequence>
+      <xs:element name="name" type="tns:String256"/>
+      <xs:choice>
+        <xs:element name="pattern" type="tns:String256"/>
+        <xs:element name="stringEnumeration" type="tns:StringEnumeration"/>
+        <xs:element name="numberEnumeration" type="tns:NumberEnumeration"/>
+        <xs:element name="dateEnumeration" type="tns:DateEnumeration"/>
+        <xs:element name="numberRange" type="tns:NumberRange"/>
+        <xs:element name="dateRange" type="tns:DateRange"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StringEnumeration">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="value" type="tns:String2000"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DateEnumeration">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="value" type="tns:Date"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="NumberEnumeration">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="value" type="tns:Decimal28_6"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DateRange">
+    <xs:sequence>
+      <xs:element maxOccurs="1" name="min" type="tns:DateBoundary"/>
+      <xs:element maxOccurs="1" name="max" type="tns:DateBoundary"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DateBoundary">
+    <xs:simpleContent>
+      <xs:extension base="tns:Date">
+        <xs:attribute default="true" name="included" type="xs:boolean"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="NumberRange">
+    <xs:sequence>
+      <xs:element maxOccurs="1" name="min" type="tns:NumberBoundary"/>
+      <xs:element maxOccurs="1" name="max" type="tns:NumberBoundary"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="NumberBoundary">
+    <xs:simpleContent>
+      <xs:extension base="tns:Decimal28_6">
+        <xs:attribute default="true" name="included" type="xs:boolean"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="IntegerRange">
+    <xs:sequence>
+      <xs:element maxOccurs="1" name="min" type="tns:IntegerBoundary"/>
+      <xs:element maxOccurs="1" name="max" type="tns:IntegerBoundary"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="IntegerBoundary">
+    <xs:simpleContent>
+      <xs:extension base="tns:Integer22">
+        <xs:attribute default="true" name="included" type="xs:boolean"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="SearchOrderType">
+    <xs:restriction base="tns:String256">
+      <xs:enumeration value="asc"/>
+      <xs:enumeration value="desc"/>
+      <xs:enumeration value="noOrder"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="SearchFilterType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boolean"/>
+      <xs:enumeration value="number"/>
+      <xs:enumeration value="string"/>
+      <xs:enumeration value="date"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- SAP CC base types -->
+  <xs:simpleType name="Decimal28_6">
+    <xs:restriction base="xs:decimal">
+      <xs:maxInclusive value="9999999999999999999999.999999"/>
+      <xs:minInclusive value="-9999999999999999999999.999999"/>
+      <xs:totalDigits value="28"/>
+      <xs:fractionDigits value="6"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Long">
+    <xs:restriction base="xs:long">
+      <xs:maxInclusive value="9223372036854775807"/>
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Integer">
+    <xs:restriction base="xs:int">
+      <xs:maxInclusive value="2147483647"/>
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Integer22">
+    <xs:restriction base="xs:decimal">
+      <xs:totalDigits value="22"/>
+      <xs:fractionDigits value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PositiveDecimal28_6">
+    <xs:restriction base="tns:Decimal28_6">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CurrencyCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="5"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Amount">
+    <xs:simpleContent>
+      <xs:extension base="tns:Decimal28_6">
+        <xs:attribute name="currencyCode" type="tns:CurrencyCode"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="PositiveAmount">
+    <xs:simpleContent>
+      <xs:extension base="tns:PositiveDecimal28_6">
+        <xs:attribute name="currencyCode" type="tns:CurrencyCode"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="String256">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="256"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="NotEmptyString256">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="256"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="String2000">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Date">
+    <xs:restriction base="xs:dateTime">
+      <xs:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CountryCode">
+    <xs:restriction base="xs:string">
+      <xs:length value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Empty">
+    <xs:restriction base="xs:string">
+      <xs:length value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

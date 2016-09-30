@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+
+<!-- 
+  WARNING: This is the Spring WEB configuration file. If you want to replace
+  items or managers you have to do this from the extensions core configuration 
+  file (ticketing/resources/ticketing-spring.xml) 
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<context:component-scan base-package="com.hybris.platform.ticketing.controllers.pages" />
+	
+
+
+	<!-- 
+	 Registering the hybris "tenant" scope 
+	 This is the custom hybris scope that manages the lifetime of a "tenant". 
+	 If you do not deal with tenants ("multimandantenfähigkeit"), then there 
+	 is no need to understand what this is for.  
+	 -->
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="tenant" value="de.hybris.platform.spring.TenantScope"/>
+            </map>
+        </property>
+    </bean>
+    
+	<!--  Configure the class to use for jalo session creation -->
+	<!-- <bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
+		<property name="targetClassName" value="com.hybris.platform.ticketing.jalo.TicketingJaloSession"/>
+	</bean>-->
+
+	<!-- Spring managed FilterChain for hybris Filter stack -->
+	<bean id="ticketingPlatformFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
+		<constructor-arg>
+			<list>
+				<ref bean="log4jFilter"/>
+				<ref bean="dynamicTenantActivationFilter"/>
+				<ref bean="sessionFilter"/>
+            <ref bean="ticketingSecureMediaFilter"/>				
+			</list>
+		</constructor-arg>
+	</bean>
+ 
+   <bean id="ticketingSecureMediaFilter" class="de.hybris.platform.servicelayer.web.SecureMediaFilter">
+       <property name="mediaPermissionService" ref="mediaPermissionService"/>
+       <property name="modelService" ref="modelService"/>
+       <property name="userService" ref="userService"/>
+       <property name="mediaService" ref="mediaService"/>
+      <!-- <property name="secureMediaToken" value="securemedias"/>  securemedias is default but you may overwrite it -->
+       <aop:scoped-proxy/>
+     </bean>	
+
+	<!-- 
+	 WARNING: 
+	 Do NOT override hybris managers or items within the web module!
+	 Use always the core spring configuration file (ticketing-spring.xml) in
+	 the extensions resources/ directory.
+	 -->
+
+	<bean id="ticketingBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
+		<property name="i18nService" ref="i18nService" />
+		<property name="parentBreadcrumbLinkPath" value="/my-account/tickets"/>
+		<property name="parentBreadcrumbResourceKey" value="text.account.ticketHistory"/>
+	</bean>
+
+	<!-- CECS-601 once expense disputed is started that could be reflected in UI START -->
+
+	<bean id="disputeExpenseLinkActionRenderer" class="com.hybris.platform.ticketing.component.renderer.DisputeExpenseLinkActionRenderer" parent="genericAddOnCMSComponentRenderer" >
+		<property name="expenseService" ref="expenseService" />
+	</bean>
+
+	<bean id="disputeExpenseLinkActionRendererMapping" parent="addonCmsComponentRendererMapping">
+		<property name="typeCode" value="DisputeExpenseLinkAction" />
+		<property name="renderer" ref="disputeExpenseLinkActionRenderer" />
+	</bean>
+	<!-- CECS-601 once expense disputed is started that could be reflected in UI END -->
+</beans>

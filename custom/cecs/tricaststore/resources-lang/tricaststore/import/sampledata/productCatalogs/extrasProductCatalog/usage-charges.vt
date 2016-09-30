@@ -1,0 +1,25 @@
+# CECS-26 include telco additions in tricaststore extension
+$header
+
+# Macros / Replacement Parameter definitions
+\$productCatalog=extrasProductCatalog
+\$productCatalogName=Extras Product Catalog
+\$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
+
+# Language
+\$lang=$lang
+
+#set ( $volumeUsageChargeRows = $query.load('usage-charges', 'VolumeUsageCharge') )
+UPDATE VolumeUsageCharge;id[unique=true];name[lang=\$lang];\$catalogVersion
+#foreach( $row in $volumeUsageChargeRows )
+;$row.key;$row.values.name
+#end
+
+#set ( $perUnitUsageRows = $query.load('usage-charges', 'PerUnitUsageCharge') )
+UPDATE PerUnitUsageCharge;id[unique=true];name[lang=\$lang];\$catalogVersion
+#foreach( $row in $perUnitUsageRows )
+;$row.key;$row.values.name
+#end
+
+
+

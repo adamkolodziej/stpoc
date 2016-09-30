@@ -1,0 +1,893 @@
+<!doctype html>
+<html lang="en">
+include "head.html"
+    <body class="homepage-body">
+        include "navigation.html"
+        <div class="img-responsive big-banner">
+            <a class="banner-description description-bottom hidden-xs" href="#">Subscribe now and see the shows everyone is talking about</a>
+        </div>
+        <a class="banner-description-mobile visible-xs-block" href="#">Subscribe now and see the shows everyone is talking
+            about</a>
+
+        <div id="page" data-currency-iso-code="USD" class="container-fluid">
+        <div id="content">
+        <a id="skip-to-content"></a>
+        <div id="globalMessages">
+        </div>
+
+        <div class="ng-scope" ng-app="guidedselling">
+        <div class="ng-scope" ng-controller="GuidedSellingController">
+
+        <!-- CECS-93: Conditional product selection section -->
+        <div class="ng-hide" ng-show="showBundleTabs">
+            <div class="panel panel-default col-md-4">
+                <div class="panel-body">
+                    <h3>
+                        TV Starter</h3>
+                    <button class="btn btn-lg btn-success" ng-click="chooseSubscription('TriCast-TV', 'tvStarter', -1)">
+                        *Select</button>
+                </div>
+            </div>
+            <div class="panel panel-default col-md-4">
+                <div class="panel-body">
+                    <h3>
+                        TV Entertainment</h3>
+                    <button class="btn btn-lg btn-success" ng-click="chooseSubscription('TriCast-TV', 'tvEntertainment', -1)">
+                        *Select</button>
+                </div>
+            </div>
+            <div class="panel panel-default col-md-4">
+                <div class="panel-body">
+                    <h3>
+                        TV Premium</h3>
+                    <button class="btn btn-lg btn-success" ng-click="chooseSubscription('TriCast-TV', 'tvPremium', -1)">
+                        *Select</button>
+                </div>
+            </div>
+        </div>
+
+        <ul>
+            <!-- ngRepeat: msg in offer.messages -->
+        </ul>
+
+        <div class="components" style="clear: both">
+        <!-- ngRepeat: comp in offer.components --><div class="ng-scope" ng-repeat="comp in offer.components">
+        <div class="collapse ng-binding" ng-class="{in:comp.selectionMode === 'DISABLED'}"></div>
+        <div class="collapse in" ng-class="{in:comp.selectionMode !== 'DISABLED'}">
+            <h3 class="ng-binding" id="TriCast-TV" ng-bind="comp.name">TV</h3>
+            <ul>
+                <!-- ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                <label>
+                    <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                    <!-- CECS-92: Show product images on guidedselling - START -->
+                    <!-- ngRepeat: image in opt.product.images -->
+                    <!-- CECS-92: Show product images on guidedselling - END -->
+                    <span class="ng-binding" ng-bind="opt.product.name">TV Starter</span>
+
+                    <!-- CECS-82: Guidedselling: price change rules - START -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                    <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                    <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$10.00</span>
+                    <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                    <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                    <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                    <!-- CECS-95 - ability to show entitlements on the products - START -->
+                    <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                    <a class="ng-binding" data-toggle="collapse" href="#tvStarter">
+                        Entitlements(6):
+                    </a>
+
+                    <div id="tvStarter" class="collapse">
+                        <ul>
+                            <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to Freeview Channels
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to catch-up TV
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to Video on Demand
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access via Mobile - Geo
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Location condition applied
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Concurrent mobile devices
+                            <!-- ngIf: ent.quantity != 0 --><div ng-if="ent.quantity != 0" class="guidedselling-inline ng-binding ng-scope">
+                            : 1
+                            <!-- ngIf: ent.quantity > 1 -->
+                            <!-- ngIf: ent.quantity == 1 --><div ng-if="ent.quantity == 1" class="guidedselling-inline ng-binding ng-scope">
+                            Device</div><!-- end ngIf: ent.quantity == 1 -->
+                        </div><!-- end ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                        </ul>
+                    </div>
+                </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                    <!-- CECS-95 - ability to show entitlements on the products - END -->
+                </label>
+            </li><!-- end ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                <label>
+                    <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                    <!-- CECS-92: Show product images on guidedselling - START -->
+                    <!-- ngRepeat: image in opt.product.images -->
+                    <!-- CECS-92: Show product images on guidedselling - END -->
+                    <span class="ng-binding" ng-bind="opt.product.name">TV Entertainment</span>
+
+                    <!-- CECS-82: Guidedselling: price change rules - START -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                    <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                    <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$12.00</span>
+                    <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                    <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                    <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                    <!-- CECS-95 - ability to show entitlements on the products - START -->
+                    <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                    <a class="ng-binding" data-toggle="collapse" href="#tvEntertainment">
+                        Entitlements(8):
+                    </a>
+
+                    <div id="tvEntertainment" class="collapse">
+                        <ul>
+                            <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to Freeview Channels
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to catch-up TV
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to Video on Demand
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access via Mobile - Geo
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Location condition applied
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Extra HD Channels
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Concurrent mobile devices
+                            <!-- ngIf: ent.quantity != 0 --><div ng-if="ent.quantity != 0" class="guidedselling-inline ng-binding ng-scope">
+                            : 2
+                            <!-- ngIf: ent.quantity > 1 --><div ng-if="ent.quantity > 1" class="guidedselling-inline ng-binding ng-scope">
+                            Devices</div><!-- end ngIf: ent.quantity > 1 -->
+                            <!-- ngIf: ent.quantity == 1 -->
+                        </div><!-- end ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Recording hours
+                            <!-- ngIf: ent.quantity != 0 --><div ng-if="ent.quantity != 0" class="guidedselling-inline ng-binding ng-scope">
+                            : 300
+                            <!-- ngIf: ent.quantity > 1 --><div ng-if="ent.quantity > 1" class="guidedselling-inline ng-binding ng-scope">
+                            h</div><!-- end ngIf: ent.quantity > 1 -->
+                            <!-- ngIf: ent.quantity == 1 -->
+                        </div><!-- end ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                        </ul>
+                    </div>
+                </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                    <!-- CECS-95 - ability to show entitlements on the products - END -->
+                </label>
+            </li><!-- end ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                <label>
+                    <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                    <!-- CECS-92: Show product images on guidedselling - START -->
+                    <!-- ngRepeat: image in opt.product.images -->
+                    <!-- CECS-92: Show product images on guidedselling - END -->
+                    <span class="ng-binding" ng-bind="opt.product.name">TV Premium</span>
+
+                    <!-- CECS-82: Guidedselling: price change rules - START -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                    <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                    <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$12.00</span>
+                    <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                    <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                    <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                    <!-- CECS-95 - ability to show entitlements on the products - START -->
+                    <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                    <a class="ng-binding" data-toggle="collapse" href="#tvPremium">
+                        Entitlements(8):
+                    </a>
+
+                    <div id="tvPremium" class="collapse">
+                        <ul>
+                            <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to Freeview Channels
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to catch-up TV
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to Video on Demand
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access via Mobile - Geo
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Location condition applied
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Extra HD Channels
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Concurrent mobile devices
+                            <!-- ngIf: ent.quantity != 0 --><div ng-if="ent.quantity != 0" class="guidedselling-inline ng-binding ng-scope">
+                            : 3
+                            <!-- ngIf: ent.quantity > 1 --><div ng-if="ent.quantity > 1" class="guidedselling-inline ng-binding ng-scope">
+                            Devices</div><!-- end ngIf: ent.quantity > 1 -->
+                            <!-- ngIf: ent.quantity == 1 -->
+                        </div><!-- end ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Recording hours
+                            <!-- ngIf: ent.quantity != 0 --><div ng-if="ent.quantity != 0" class="guidedselling-inline ng-binding ng-scope">
+                            : 400
+                            <!-- ngIf: ent.quantity > 1 --><div ng-if="ent.quantity > 1" class="guidedselling-inline ng-binding ng-scope">
+                            h</div><!-- end ngIf: ent.quantity > 1 -->
+                            <!-- ngIf: ent.quantity == 1 -->
+                        </div><!-- end ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                        </ul>
+                    </div>
+                </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                    <!-- CECS-95 - ability to show entitlements on the products - END -->
+                </label>
+            </li><!-- end ngRepeat: opt in comp.options -->
+            </ul>
+        </div>
+        </div><!-- end ngRepeat: comp in offer.components --><div class="ng-scope" ng-repeat="comp in offer.components">
+            <div class="collapse ng-binding" ng-class="{in:comp.selectionMode === 'DISABLED'}"></div>
+            <div class="collapse in" ng-class="{in:comp.selectionMode !== 'DISABLED'}">
+                <h3 class="ng-binding" id="TriCast-TV-Addons" ng-bind="comp.name">TV Add-ons</h3>
+                <ul>
+                    <!-- ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">Sports Channels</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$5.00</span>
+                        <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                    </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                        <a class="ng-binding" data-toggle="collapse" href="#Sport">
+                            Entitlements(3):
+                        </a>
+
+                        <div id="Sport" class="collapse">
+                            <ul>
+                                <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                                Access to Sports Channels
+                                <!-- ngIf: ent.quantity != 0 -->
+                            </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                                Access via Mobile - Geo
+                                <!-- ngIf: ent.quantity != 0 -->
+                            </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                                Location condition applied
+                                <!-- ngIf: ent.quantity != 0 -->
+                            </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                            </ul>
+                        </div>
+                    </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">HBO Channels</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$7.00</span>
+                        <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                    </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                        <a class="ng-binding" data-toggle="collapse" href="#HBO">
+                            Entitlements(3):
+                        </a>
+
+                        <div id="HBO" class="collapse">
+                            <ul>
+                                <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                                Access to HBO Channels
+                                <!-- ngIf: ent.quantity != 0 -->
+                            </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                                Access via Mobile - Geo
+                                <!-- ngIf: ent.quantity != 0 -->
+                            </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                                Location condition applied
+                                <!-- ngIf: ent.quantity != 0 -->
+                            </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                            </ul>
+                        </div>
+                    </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">Foreign Language Package</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$3.00</span>
+                        <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                    </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                        <a class="ng-binding" data-toggle="collapse" href="#foreignLanguagePackage">
+                            Entitlements(3):
+                        </a>
+
+                        <div id="foreignLanguagePackage" class="collapse">
+                            <ul>
+                                <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                                Access to Foreign Language Channels
+                                <!-- ngIf: ent.quantity != 0 -->
+                            </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                                Access via Mobile - Geo
+                                <!-- ngIf: ent.quantity != 0 -->
+                            </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                                Location condition applied
+                                <!-- ngIf: ent.quantity != 0 -->
+                            </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                            </ul>
+                        </div>
+                    </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">All On-Demand</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$5.00</span>
+                        <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                    </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options -->
+                </ul>
+            </div>
+        </div><!-- end ngRepeat: comp in offer.components --><div class="ng-scope" ng-repeat="comp in offer.components">
+            <div class="collapse ng-binding" ng-class="{in:comp.selectionMode === 'DISABLED'}"></div>
+            <div class="collapse in" ng-class="{in:comp.selectionMode !== 'DISABLED'}">
+                <h3 class="ng-binding" id="TriCast-Phone" ng-bind="comp.name">Phone</h3>
+                <ul>
+                    <!-- ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">Unlimited Weekend</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$16.99</span>
+                        <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                    </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options -->
+                </ul>
+            </div>
+        </div><!-- end ngRepeat: comp in offer.components --><div class="ng-scope" ng-repeat="comp in offer.components">
+            <div class="collapse ng-binding" ng-class="{in:comp.selectionMode === 'DISABLED'}"></div>
+            <div class="collapse in" ng-class="{in:comp.selectionMode !== 'DISABLED'}">
+                <h3 class="ng-binding" id="TriCast-Phone-Addons" ng-bind="comp.name">Phone Add-ons</h3>
+                <ul>
+                    <!-- ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">Unlimited Weekend and Evening</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$3.00</span>
+                        <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                    </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options -->
+                </ul>
+            </div>
+        </div><!-- end ngRepeat: comp in offer.components --><div class="ng-scope" ng-repeat="comp in offer.components">
+            <div class="collapse ng-binding" ng-class="{in:comp.selectionMode === 'DISABLED'}"></div>
+            <div class="collapse in" ng-class="{in:comp.selectionMode !== 'DISABLED'}">
+                <h3 class="ng-binding" id="TriCast-Phone-Device" ng-bind="comp.name">Phone Device</h3>
+                <ul>
+                    <!-- ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">Phone</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) --><div ng-if="isProduct(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.formattedValue">$483.70</span>
+                    </div><!-- end ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options -->
+                </ul>
+            </div>
+        </div><!-- end ngRepeat: comp in offer.components --><div class="ng-scope" ng-repeat="comp in offer.components">
+        <div class="collapse ng-binding" ng-class="{in:comp.selectionMode === 'DISABLED'}"></div>
+        <div class="collapse in" ng-class="{in:comp.selectionMode !== 'DISABLED'}">
+            <h3 class="ng-binding" id="TriCast-Broadband" ng-bind="comp.name">Broadband</h3>
+            <ul>
+                <!-- ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                <label>
+                    <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                    <!-- CECS-92: Show product images on guidedselling - START -->
+                    <!-- ngRepeat: image in opt.product.images -->
+                    <!-- CECS-92: Show product images on guidedselling - END -->
+                    <span class="ng-binding" ng-bind="opt.product.name">Standard Broadband</span>
+
+                    <!-- CECS-82: Guidedselling: price change rules - START -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                    <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                    <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$4.75</span>
+                    <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                    <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                    <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                    <!-- CECS-95 - ability to show entitlements on the products - START -->
+                    <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                    <a class="ng-binding" data-toggle="collapse" href="#standardBroadband">
+                        Entitlements(2):
+                    </a>
+
+                    <div id="standardBroadband" class="collapse">
+                        <ul>
+                            <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to 17 Mb/s speed
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Cloud Storage
+                            <!-- ngIf: ent.quantity != 0 --><div ng-if="ent.quantity != 0" class="guidedselling-inline ng-binding ng-scope">
+                            : 5
+                            <!-- ngIf: ent.quantity > 1 --><div ng-if="ent.quantity > 1" class="guidedselling-inline ng-binding ng-scope">
+                            GB</div><!-- end ngIf: ent.quantity > 1 -->
+                            <!-- ngIf: ent.quantity == 1 -->
+                        </div><!-- end ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                        </ul>
+                    </div>
+                </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                    <!-- CECS-95 - ability to show entitlements on the products - END -->
+                </label>
+            </li><!-- end ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                <label>
+                    <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                    <!-- CECS-92: Show product images on guidedselling - START -->
+                    <!-- ngRepeat: image in opt.product.images -->
+                    <!-- CECS-92: Show product images on guidedselling - END -->
+                    <span class="ng-binding" ng-bind="opt.product.name">Fibre Broadband, limited</span>
+
+                    <!-- CECS-82: Guidedselling: price change rules - START -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                    <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                    <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$6.50</span>
+                    <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                    <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                    <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                    <!-- CECS-95 - ability to show entitlements on the products - START -->
+                    <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                    <a class="ng-binding" data-toggle="collapse" href="#fibreBroadbandLimited">
+                        Entitlements(3):
+                    </a>
+
+                    <div id="fibreBroadbandLimited" class="collapse">
+                        <ul>
+                            <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to 38 Mb/s speed
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Usage
+                            <!-- ngIf: ent.quantity != 0 --><div ng-if="ent.quantity != 0" class="guidedselling-inline ng-binding ng-scope">
+                            : 40
+                            <!-- ngIf: ent.quantity > 1 --><div ng-if="ent.quantity > 1" class="guidedselling-inline ng-binding ng-scope">
+                            GB/month</div><!-- end ngIf: ent.quantity > 1 -->
+                            <!-- ngIf: ent.quantity == 1 -->
+                        </div><!-- end ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Cloud Storage
+                            <!-- ngIf: ent.quantity != 0 --><div ng-if="ent.quantity != 0" class="guidedselling-inline ng-binding ng-scope">
+                            : 5
+                            <!-- ngIf: ent.quantity > 1 --><div ng-if="ent.quantity > 1" class="guidedselling-inline ng-binding ng-scope">
+                            GB</div><!-- end ngIf: ent.quantity > 1 -->
+                            <!-- ngIf: ent.quantity == 1 -->
+                        </div><!-- end ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                        </ul>
+                    </div>
+                </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                    <!-- CECS-95 - ability to show entitlements on the products - END -->
+                </label>
+            </li><!-- end ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                <label>
+                    <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                    <!-- CECS-92: Show product images on guidedselling - START -->
+                    <!-- ngRepeat: image in opt.product.images -->
+                    <!-- CECS-92: Show product images on guidedselling - END -->
+                    <span class="ng-binding" ng-bind="opt.product.name">Fibre Broadband, Unlimited</span>
+
+                    <!-- CECS-82: Guidedselling: price change rules - START -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                    <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                    <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$15.00</span>
+                    <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                    <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                    <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                    <!-- CECS-95 - ability to show entitlements on the products - START -->
+                    <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                    <a class="ng-binding" data-toggle="collapse" href="#fibreBroadbandUnlimited">
+                        Entitlements(3):
+                    </a>
+
+                    <div id="fibreBroadbandUnlimited" class="collapse">
+                        <ul>
+                            <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to 38 Mb/s speed
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Unlimited Usage
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Cloud Storage
+                            <!-- ngIf: ent.quantity != 0 --><div ng-if="ent.quantity != 0" class="guidedselling-inline ng-binding ng-scope">
+                            : 5
+                            <!-- ngIf: ent.quantity > 1 --><div ng-if="ent.quantity > 1" class="guidedselling-inline ng-binding ng-scope">
+                            GB</div><!-- end ngIf: ent.quantity > 1 -->
+                            <!-- ngIf: ent.quantity == 1 -->
+                        </div><!-- end ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                        </ul>
+                    </div>
+                </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                    <!-- CECS-95 - ability to show entitlements on the products - END -->
+                </label>
+            </li><!-- end ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                <label>
+                    <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                    <!-- CECS-92: Show product images on guidedselling - START -->
+                    <!-- ngRepeat: image in opt.product.images -->
+                    <!-- CECS-92: Show product images on guidedselling - END -->
+                    <span class="ng-binding" ng-bind="opt.product.name">Super Fibre, unlimited</span>
+
+                    <!-- CECS-82: Guidedselling: price change rules - START -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                    <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                    <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                    <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$25.00</span>
+                    <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                    <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                    <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                    <!-- CECS-95 - ability to show entitlements on the products - START -->
+                    <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                    <a class="ng-binding" data-toggle="collapse" href="#superFibreUnlimited">
+                        Entitlements(3):
+                    </a>
+
+                    <div id="superFibreUnlimited" class="collapse">
+                        <ul>
+                            <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Access to 100 Mb/s speed
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Unlimited Usage
+                            <!-- ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                            Cloud Storage
+                            <!-- ngIf: ent.quantity != 0 --><div ng-if="ent.quantity != 0" class="guidedselling-inline ng-binding ng-scope">
+                            : 5
+                            <!-- ngIf: ent.quantity > 1 --><div ng-if="ent.quantity > 1" class="guidedselling-inline ng-binding ng-scope">
+                            GB</div><!-- end ngIf: ent.quantity > 1 -->
+                            <!-- ngIf: ent.quantity == 1 -->
+                        </div><!-- end ngIf: ent.quantity != 0 -->
+                        </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                        </ul>
+                    </div>
+                </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                    <!-- CECS-95 - ability to show entitlements on the products - END -->
+                </label>
+            </li><!-- end ngRepeat: opt in comp.options -->
+            </ul>
+        </div>
+        </div><!-- end ngRepeat: comp in offer.components --><div class="ng-scope" ng-repeat="comp in offer.components">
+            <div class="collapse ng-binding in" ng-class="{in:comp.selectionMode === 'DISABLED'}">Broadband Add-on offer is disabled due to currently checked configuration.</div>
+            <div class="collapse" ng-class="{in:comp.selectionMode !== 'DISABLED'}">
+                <h3 class="ng-binding" id="TriCast-Broadband-Addon" ng-bind="comp.name">Broadband Add-on</h3>
+                <ul>
+                    <!-- ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">TriCast Wi-fi</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) --><div ng-if="isServicePlan(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.recurringChargeEntries[0].price.formattedValue">$2.00</span>
+                        <span class="ng-binding" ng-bind="opt.product.subscriptionTerm.billingPlan.billingTime.name">Monthly</span>
+                    </div><!-- end ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 --><div class="ng-scope" ng-if="opt.product.entitlements.length > 0">
+                        <a class="ng-binding" data-toggle="collapse" href="#tricastWifi">
+                            Entitlements(1):
+                        </a>
+
+                        <div id="tricastWifi" class="collapse">
+                            <ul>
+                                <!-- ngRepeat: ent in opt.product.entitlements --><li class="ng-binding ng-scope" ng-repeat="ent in opt.product.entitlements">
+                                Unlimited Access to TriCast Wi-fi
+                                <!-- ngIf: ent.quantity != 0 -->
+                            </li><!-- end ngRepeat: ent in opt.product.entitlements -->
+                            </ul>
+                        </div>
+                    </div><!-- end ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options -->
+                </ul>
+            </div>
+        </div><!-- end ngRepeat: comp in offer.components --><div class="ng-scope" ng-repeat="comp in offer.components">
+            <div class="collapse ng-binding in" ng-class="{in:comp.selectionMode === 'DISABLED'}">Broadband Router offer is disabled due to currently checked configuration.</div>
+            <div class="collapse" ng-class="{in:comp.selectionMode !== 'DISABLED'}">
+                <h3 class="ng-binding" id="TriCast-Broadband-Router" ng-bind="comp.name">Broadband Router</h3>
+                <ul>
+                    <!-- ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">Standard Router</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) --><div ng-if="isProduct(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.formattedValue">$139.86</span>
+                    </div><!-- end ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">Fibre Router</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) --><div ng-if="isProduct(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.formattedValue">$223.86</span>
+                    </div><!-- end ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options -->
+                </ul>
+            </div>
+        </div><!-- end ngRepeat: comp in offer.components --><div class="ng-scope" ng-repeat="comp in offer.components">
+            <div class="collapse ng-binding" ng-class="{in:comp.selectionMode === 'DISABLED'}"></div>
+            <div class="collapse in" ng-class="{in:comp.selectionMode !== 'DISABLED'}">
+                <h3 class="ng-binding" id="TriCast-Decoders" ng-bind="comp.name">Decoders</h3>
+                <ul>
+                    <!-- ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">Standard Decoder</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) --><div ng-if="isProduct(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.formattedValue">$839.86</span>
+                    </div><!-- end ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options --><li class="ng-scope" ng-repeat="opt in comp.options">
+                    <label>
+                        <input class="ng-pristine ng-untouched ng-valid" ng-disabled="false" ng-model="opt.selected" ng-change="selectionChanged(comp, opt)" type="checkbox">
+                        <!-- CECS-92: Show product images on guidedselling - START -->
+                        <!-- ngRepeat: image in opt.product.images -->
+                        <!-- CECS-92: Show product images on guidedselling - END -->
+                        <span class="ng-binding" ng-bind="opt.product.name">Decoder Plus</span>
+
+                        <!-- CECS-82: Guidedselling: price change rules - START -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice != null -->
+                        <!-- ngIf: opt.bundleRuleChangedPrice == null --><div ng-if="opt.bundleRuleChangedPrice == null" class="guidedselling-container-price ng-scope">
+                        <!-- ngIf: isServicePlan(opt.product.itemType) -->
+                        <!-- ngIf: isProduct(opt.product.itemType) --><div ng-if="isProduct(opt.product.itemType)" class="guidedselling-price ng-scope">
+                        <span class="ng-binding" ng-bind="opt.product.price.formattedValue">$1,119.86</span>
+                    </div><!-- end ngIf: isProduct(opt.product.itemType) -->
+
+                    </div><!-- end ngIf: opt.bundleRuleChangedPrice == null -->
+                        <!-- CECS-82: Guidedselling: price change rules - END -->
+
+                        <!-- CECS-95 - ability to show entitlements on the products - START -->
+                        <!-- ngIf: opt.product.entitlements.length > 0 -->
+                        <!-- CECS-95 - ability to show entitlements on the products - END -->
+                    </label>
+                </li><!-- end ngRepeat: opt in comp.options -->
+                </ul>
+            </div>
+        </div><!-- end ngRepeat: comp in offer.components -->
+        <!-- ngIf: offer.cartData.orderPrices != null --><div ng-if="offer.cartData.orderPrices != null" class="totals ng-scope">
+            <h3>TOTALS:</h3>
+            <!-- ngRepeat: orderPrice in offer.cartData.orderPrices --><div class="ng-scope" ng-repeat="orderPrice in offer.cartData.orderPrices">
+            <!-- ngIf: orderPrice.totalPrice.value != 0 -->
+        </div><!-- end ngRepeat: orderPrice in offer.cartData.orderPrices --><div class="ng-scope" ng-repeat="orderPrice in offer.cartData.orderPrices">
+            <!-- ngIf: orderPrice.totalPrice.value != 0 --><div ng-if="orderPrice.totalPrice.value != 0" class="col-md-1 ng-scope">
+            <span class="ng-binding" ng-bind="orderPrice.totalPrice.formattedValue">$26.99</span>
+            <h4 class="ng-binding" ng-bind="orderPrice.billingTime.name">Monthly</h4>
+        </div><!-- end ngIf: orderPrice.totalPrice.value != 0 -->
+        </div><!-- end ngRepeat: orderPrice in offer.cartData.orderPrices --><div class="ng-scope" ng-repeat="orderPrice in offer.cartData.orderPrices">
+            <!-- ngIf: orderPrice.totalPrice.value != 0 --><div ng-if="orderPrice.totalPrice.value != 0" class="col-md-1 ng-scope">
+            <span class="ng-binding" ng-bind="orderPrice.totalPrice.formattedValue">$100.00</span>
+            <h4 class="ng-binding" ng-bind="orderPrice.billingTime.name">On First Bill</h4>
+        </div><!-- end ngIf: orderPrice.totalPrice.value != 0 -->
+        </div><!-- end ngRepeat: orderPrice in offer.cartData.orderPrices -->
+        </div><!-- end ngIf: offer.cartData.orderPrices != null -->
+
+        </div>
+        </div>
+
+
+        </div>
+        </div>
+        </div>
+        include "footer.html"
+    </body>
+</html>

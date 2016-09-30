@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+	<context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc.group.emsextras.emsextrasSection">
+                <explorer-tree:type-node code="ProductEntitlement" id="ProductEntitlement"/>
+                <explorer-tree:type-node code="Entitlement" id="Entitlement"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+    
+     <context merge-by="type" parent="GenericItem" type="ProductEntitlement" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="id"/>
+            <list-view:column qualifier="billingUsageUnit!=null ? billingUsageUnit.id : '-'" label="hmc.group.emsextras.ProductEntitlement.billingUsageUnit"/>
+            <list-view:column qualifier="subscriptionProduct" position="5"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="Entitlement" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="id"/>
+            <list-view:column qualifier="defaultUsageUnit"/>
+        </list-view:list-view>
+    </context>
+    
+    
+    
+     <context type="Entitlement" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>id</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    
+    
+    <context type="UsageUnit" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>id</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    
+    
+     <context merge-by="type" parent="auto" type="ProductEntitlement" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.emsextras.tab.ProductEntitlement.General">
+                <editorArea:section name="hmc.group.emsextras.tab.ProductEntitlement.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="id"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="catalogVersion"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="entitlement"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="description"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="billingUsageUnit"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="giftValue"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="subscriptionProduct"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.emsextras.tab.ProductEntitlement.Conditions">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="quantity"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="conditionString"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="conditionPath"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="timeUnit"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="timeUnitStart"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="timeUnitDuration"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.emsextras.tab.ProductEntitlement.geo.condition">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="conditionGeo"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="auto" type="Entitlement" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.emsextras.emsextrasSection.General">
+                <editorArea:section name="hmc.group.emsextras.emsextrasSection.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="id"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="description"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="defaultUsageUnit"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.emsextras.tab.ProductEntitlement.entitlements">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="productEntitlements"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+</config>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <relations>
+        <relation code="BundlePackagetoBundlePackageDescriptionSlots" localized="false" autocreate="true"
+                  generate="true">
+            <deployment table="container2descslots" typecode="31503"/>
+            <sourceElement type="BundlePackageDescriptionSlotsContainerComponent" qualifier="bundlePackageContainer"
+                           cardinality="many"/>
+            <targetElement type="BundlePackageDescriptionSlot" qualifier="descriptionSlots" cardinality="many"
+                           collectiontype="list"/>
+        </relation>
+        <relation code="BundlePackage2BundlePackageDescriptionSlotsContainerComponentRelation" localized="false">
+            <deployment table="package2container" typecode="31504"/>
+            <sourceElement type="BundlePackage" qualifier="bundlePackage" cardinality="many"/>
+            <targetElement type="BundlePackageDescriptionSlotsContainerComponent" qualifier="descriptionSlotsContainer"
+                           cardinality="many"/>
+        </relation>
+        <relation code="BundlePackageToInfoTabComponent" localized="false" autocreate="true" generate="true">
+            <deployment table="package2relcont" typecode="31505"/>
+            <sourceElement type="BundlePackage" qualifier="bundlePackages" cardinality="many"/>
+            <targetElement type="BundlePackageRelatedComponentsContainerComponent"
+                           qualifier="relatedComponentsContainers" cardinality="many" collectiontype="list"/>
+        </relation>
+        <relation code="BundlePackageContainerToInfoTabComponent" localized="false" autocreate="true" generate="true">
+            <deployment table="cont2infotabcomp" typecode="31506"/>
+            <sourceElement type="BundlePackageRelatedComponentsContainerComponent" qualifier="bundlePackageContainers"
+                           cardinality="many"/>
+            <targetElement type="SimpleCMSComponent" qualifier="relatedComponents" cardinality="many"
+                           collectiontype="list"/>
+        </relation>
+    </relations>
+
+    <itemtypes>
+        <itemtype code="BundlePackageRelatedComponentsContainerComponent"
+                  extends="SimpleCMSComponent"
+                  autocreate="true"
+                  generate="true"
+                  jaloclass="com.hybris.showcase.guidedselling.jalo.components.BundlePackageDescriptionSlotsContainerComponent"/>
+
+        <itemtype code="BundlePackageDescriptionSlotsContainerComponent"
+                  extends="SimpleCMSComponent"
+                  autocreate="true"
+                  generate="true"
+                  jaloclass="com.hybris.showcase.guidedselling.jalo.components.BundlePackageDescriptionSlotsContainerComponent"/>
+
+        <itemtype code="BundlePackageDescriptionSlot"
+                  extends="SimpleCMSComponent"
+                  autocreate="true"
+                  generate="true"
+                  jaloclass="com.hybris.showcase.guidedselling.jalo.components.BundlePackageDescriptionSlot">
+            <attributes>
+                <attribute qualifier="title" type="localized:java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="content" type="localized:java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+
+        <itemtype code="SimplePackageDetailsComponent" autocreate="true"
+                  generate="true" extends="ExtendedCMSComponent"
+                  jaloclass="com.hybris.showcase.guidedselling.jalo.components.SimplePackageDetailsComponent">
+            <description>
+                Simple package details component with custom css class and headline.
+            </description>
+            <attributes>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="GuidedSellingFAQComponent" autocreate="true"
+                  generate="true" extends="ExtendedCMSComponent"
+                  jaloclass="com.hybris.showcase.guidedselling.jalo.components.GuidedSellingFAQComponent">
+            <description>
+                Component for Guided Selling page which displays FAQ for the BundleTemplate from the context.
+            </description>
+            <attributes>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="GuidedSellingTotalsComponent"
+                  extends="ExtendedCMSComponent"
+                  autocreate="true"
+                  generate="true"
+                  jaloclass="com.hybris.showcase.guidedselling.jalo.components.GuidedSellingTotalsComponent">
+            <description>
+                Component for Guided Selling page which displays totals.
+            </description>
+            <attributes>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="GuidedSellingComponent" autocreate="true"
+                  generate="true" extends="ExtendedCMSComponent"
+                  jaloclass="com.hybris.showcase.guidedselling.jalo.components.GuidedSellingComponent">
+            <description>
+                The guidedselling component.
+            </description>
+            <attributes>
+                <attribute qualifier="hidePreselectedProducts" type="boolean">
+                    <persistence type="property"/>
+                    <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+                </attribute>
+                <attribute qualifier="hideDisabledProducts" type="boolean">
+                    <persistence type="property"/>
+                    <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+                </attribute>
+            </attributes>
+        </itemtype>
+        
+          <itemtype code="IncludedSellingComponent" autocreate="true"
+                  generate="true" extends="ExtendedCMSComponent"
+                  jaloclass="com.hybris.showcase.guidedselling.jalo.components.IncludedSellingComponent">
+            <description>
+                The included selling component.
+            </description>
+            <attributes>
+            </attributes>
+        </itemtype>
+
+        <!--<itemtype code="PackagesListComponent" autocreate="true" generate="true" jaloclass="com.hybris.showcase.guidedselling.jalo.components.PackagesListComponent">-->
+        <!--<description>Component for displaying list of preselected guidedselling packages.</description>-->
+        <!--<attributes>-->
+        <!--<attribute qualifier="" type=""-->
+        <!--</attributes>-->
+        <!--</itemtype>-->
+
+
+        <itemtype code="ContractTileAccountBodySubComponent" autocreate="true" generate="true"
+                  extends="SimpleCMSComponent"
+                  jaloclass="com.hybris.showcase.guidedselling.jalo.components.ContractTileAccountBodySubComponent">
+            <attributes>
+                <attribute qualifier="title" type="localized:java.lang.String">
+                    <description>Title of the component</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="noContractMessage" type="localized:java.lang.String">
+                    <description>Message displayed when there's no active contract</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="bundleTemplate" type="BundleTemplate">
+                    <description>Bundle template whose packages are displayed when there's no active contract
+                    </description>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+    </itemtypes>
+</items>

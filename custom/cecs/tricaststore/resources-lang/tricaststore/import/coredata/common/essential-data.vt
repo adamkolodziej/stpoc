@@ -1,0 +1,87 @@
+#
+# Import essential data for the Accelerator
+#
+
+# Language
+\$lang=$lang.toLowerCase()
+
+#set( $languageRows = $query.load('essential-data', 'Language') )
+# Languages
+UPDATE Language;isocode[unique=true];name[lang=\$lang]
+#foreach( $row in $languageRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $currencyRows = $query.load('essential-data', 'Currency') )
+# Currencies
+UPDATE Currency;isocode[unique=true];name[lang=\$lang]
+#foreach( $row in $currencyRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $titleRows = $query.load('essential-data', 'Title') )
+# Titles
+#if($lang == "ja")
+# Titles are untranslatable into Japanese - there is no logical equivalent.
+# Ideally we would not display the title option for Japanese.
+#end
+UPDATE Title;code[unique=true];name[lang=\$lang]
+#foreach( $row in $titleRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $creditCardTypeRows = $query.load('essential-data', 'CreditCardType') )
+# Credit / Debit Cards
+UPDATE CreditCardType;code[unique=true];name[lang=\$lang]
+#foreach( $row in $creditCardTypeRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $distanceUnitRows = $query.load('essential-data', 'DistanceUnit') )
+# DistanceUnits for Storelocator 
+UPDATE DistanceUnit;code[unique=true];name[lang=\$lang]
+#foreach( $row in $distanceUnitRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $mediaFormatRows = $query.load('essential-data', 'MediaFormat') )
+# MediaFormats
+UPDATE MediaFormat;qualifier[unique=true];name[lang=\$lang];
+#foreach( $row in $mediaFormatRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $productTaxGroupRows = $query.load('essential-data', 'ProductTaxGroup') )
+# Product Tax Groups
+UPDATE ProductTaxGroup;code[unique=true];name[lang=\$lang]
+#foreach( $row in $productTaxGroupRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $userTaxGroupRows = $query.load('essential-data', 'UserTaxGroup') )
+# User Tax Groups
+UPDATE UserTaxGroup;code[unique=true];name[lang=\$lang]
+#foreach( $row in $userTaxGroupRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $taxRows = $query.load('essential-data', 'Tax') )
+# Tax
+UPDATE Tax;code[unique=true];name[lang=\$lang]
+#foreach( $row in $taxRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $consignmentStatuses = $query.load('essential-data', 'ConsignmentStatus') )
+# Consginment statuses
+UPDATE ConsignmentStatus;code[unique=true];name[lang=\$lang]
+#foreach( $row in $consignmentStatuses )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $regionRows = $query.load('store','Region') )
+# Create Regions
+UPDATE Region;isocode[unique=true];name[lang=\$lang]
+#foreach( $row in $regionRows )
+ ;$row.key;"$row.values.name"
+#end

@@ -1,0 +1,74 @@
+INSERT_UPDATE ComponentTypeGroups2ComponentType; source(code)[unique = true]; target(code)[unique = true]
+; wide   ; Html5VideoComponent
+; narrow ; Html5VideoComponent
+
+# Download Delivery mode
+INSERT_UPDATE DeliveryMode;code[unique=true];active[default=true];
+;digital-delivery;
+
+##############################
+# Insert DeliveryMode taxes
+##############################
+
+# this is based on telco and it looks wrong - productCode == digital-delivery???
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+;digital-delivery;FR000000;GB
+;digital-delivery;FR000000;US
+;digital-delivery;FR000000;DE
+;digital-delivery;FR000000;FR
+;digital-delivery;FR000000;CA
+;digital-delivery;FR000000;PL
+;digital-delivery;FR000000;JP
+;digital-delivery;FR000000;CN
+
+# Media formats
+$defaultConversionStrategy=imageMagickMediaConversionStrategy
+$defaultMime=image/jpeg
+
+# CECS-28 integrate mediaconversion
+
+# to solve race condition
+INSERT_UPDATE MediaFormat;qualifier[unique=true]
+#;1200Wx1200H
+;515Wx515H
+;365Wx246H
+;300Wx300H
+;96Wx96H
+;65Wx65H
+;30Wx30H
+
+# remove original MediaFormat during essentialdata phase
+REMOVE MediaFormat ; qualifier[unique=true] ; itemType(code)[unique=true]
+#                   ; 1200Wx1200H            ; MediaFormat
+; 515Wx515H              ; MediaFormat
+; 365Wx246H              ; MediaFormat
+; 300Wx300H              ; MediaFormat
+; 96Wx96H                ; MediaFormat
+; 65Wx65H                ; MediaFormat
+; 30Wx30H                ; MediaFormat
+
+# CECS-28 integrate mediaconversion
+# replace MediaFormat with ConversionMediaFormat
+INSERT_UPDATE ConversionMediaFormat; qualifier[unique = true]; conversionStrategy[default = $defaultConversionStrategy]; conversion; inputFormat(qualifier); mediaAddOns(code, catalogVersion(catalog(id), version)); mimeType[default = $defaultMime];
+; original    ; showcasecommonImageMagickConversionStrategy ;                   ;
+#; 1200Wx1200H ; showcasecommonImageMagickConversionStrategy ; -resize 1200x1200 ; original
+; 515Wx515H   ; showcasecommonImageMagickConversionStrategy ; -resize 515x515   ; original
+; 365Wx246H   ; showcasecommonImageMagickConversionStrategy ; -resize 365x246   ; original
+; 300Wx300H   ; showcasecommonImageMagickConversionStrategy ; -resize 300x300   ; original
+; 96Wx96H     ; showcasecommonImageMagickConversionStrategy ; -resize 96x96     ; original
+; 65Wx65H     ; showcasecommonImageMagickConversionStrategy ; -resize 65x65     ; original
+; 30Wx30H     ; showcasecommonImageMagickConversionStrategy ; -resize 30x30     ; original
+
+# CECS-28 integrate mediaconversion
+INSERT_UPDATE ConversionGroup ; code[unique=true]                   ; supportedFormats(qualifier)                          ;
+; ShowcaseConversionGroup  ; 515Wx515H,365Wx246H,300Wx300H,96Wx96H,65Wx65H,30Wx30H
+
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;cockpitgroup;;;;;;;;
+;;;;Html5VideoComponent;+;+;+;+;+;
+;;;;Html5VideoComponentTimeUpdateEvent;+;+;+;+;+;
+$END_USERRIGHTS;;;;;
+
+INSERT_UPDATE SearchRestriction;code[unique=true];name[lang=en];query;principal(UID);restrictedType(code)[unique=true];active;generate
+;frontend_BlogArticle;BlogArticle on site;"{item:catalogVersion} IN (?session.catalogversions)";customergroup;BlogArticle;true;true

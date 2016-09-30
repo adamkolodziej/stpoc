@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+	<extension abstractclassprefix="Generated" classprefix="Showcasecommon" description="showcasecommon extension" managername="ShowcasecommonManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="showcasecommon">
+
+		<!-- you should add all required extensions to this list, except platform extensions which are automatically required -->         
+		<requires-extension name="mediaconversion"/>
+
+		<!--CECS-66 Product and AbstractOrder digital-delivery - START-->
+		<requires-extension name="yacceleratorfulfilmentprocess"/>
+		<!--CECS-66 Product and AbstractOrder digital-delivery - END-->
+
+				<!-- CECS-68 responsive my-account homepage - cms START -->
+		<requires-extension name="cms2"/>
+		<requires-extension name="addoncommon"/>
+		<!-- CECS-68 responsive my-account homepage - cms END -->
+		
+		<requires-extension name="subscriptionfacades"/>
+
+		<!-- CECS-129: Guidedselling - change price - HBO promotion(3 months free) - START -->
+		<requires-extension name="configurablebundleservices"/>
+		<!-- CECS-129: Guidedselling - change price - HBO promotion(3 months free) - END -->
+
+		<!--CECS-192 promotion campaign for sports channel-->
+		<requires-extension name="btg"/>
+		<!--CECS-192 promotion campaign for sports channel-->
+		
+		<!-- CECS-443 link customer profile to twitter and facebook  START -->
+		<requires-extension name="opengraphmine"/>
+		<!-- CECS-443 link customer profile to twitter and facebook  END -->
+		<requires-extension name="backoffice"/>
+	
+		<coremodule generated="true" manager="com.hybris.showcase.jalo.ShowcasecommonManager" packageroot="com.hybris.showcase"/>
+
+		<meta key="backoffice-module" value="true"/>
+	</extension>
+
+</extensioninfo>

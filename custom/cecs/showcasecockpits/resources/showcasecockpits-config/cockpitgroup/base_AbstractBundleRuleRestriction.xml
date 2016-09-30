@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+    <search>
+        <search-properties>
+            <property qualifier="AbstractBundleRuleRestriction.id"/>
+            <property qualifier="AbstractBundleRuleRestriction.name"/>
+            <property qualifier="AbstractBundleRuleRestriction.catalogVersion"/>
+        </search-properties>
+        <sort-properties>
+            <property qualifier="AbstractBundleRuleRestriction.id"/>
+            <property qualifier="AbstractBundleRuleRestriction.name"/>
+            <property qualifier="AbstractBundleRuleRestriction.catalogVersion"/>
+        </sort-properties>
+    </search>
+    <label>
+        <property qualifier="AbstractBundleRuleRestriction.name"/>
+    </label>
+    <initial-properties source-object-template="AbstractBundleRule">
+		<property-mapping source="src.catalogVersion" target="AbstractBundleRuleRestriction.catalogVersion"/>
+ 	</initial-properties>
+</base>

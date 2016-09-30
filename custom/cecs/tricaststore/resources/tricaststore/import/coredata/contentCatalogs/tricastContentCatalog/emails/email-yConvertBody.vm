@@ -1,0 +1,151 @@
+## messageSource=classpath:/tricaststore/messages/email-yConvert_$lang.properties
+<!DOCTYPE html "-//w3c//dtd xhtml 1.0 transitional //en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-transitional.dtd">
+#macro(genHtmlLinkStartTag $url)
+<a href="$url"><font color="#666666">
+#end
+#macro(genHtmlLinkEndTag)
+</font></a>
+#end
+#macro(genHtmlLink $url $textColor $bodyContent)
+<a href="$url"><font color="$textColor">$bodyContent</font></a>
+#end
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!--[if gte mso 9]>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:AllowPNG/>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml><![endif]-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    </head>
+    <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+        <table width="800" border="0" cellpadding="0" cellspacing="0" align="center">
+            <tr bgcolor="">
+                <!--Left Margin-->
+                <td width="70" height="76" bgcolor="#36464e">&nbsp; </td>
+                <!--Start Body-->
+                <td width="660" height="76"  bgcolor="#36464e">
+                	${ctx.cmsSlotContents.SiteLogo}
+                    <img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/logo.png" alt=""/>
+                </td>
+                <!--Right Margin-->
+                <td width="70" height="76" bgcolor="#36464e">&nbsp; </td>
+            </tr>
+            <tr>
+                <td width="70" bgcolor="#eceff1">&nbsp; </td>
+                <!--Start Body-->
+                <td width="660"  bgcolor="#eceff1">
+                    <p style="color:#000000;font-size: 2em;text-transform: uppercase;margin-bottom: 0">Dear ${ctx.displayName},</p>
+#if ( $ctx.yConvertStep == 1 )
+                    <p style="color:#78909c;font-size: 2em;text-transform: uppercase;margin-top: 0;">You Have Something In Your Cart</p>
+#else
+                    <p style="color:#78909c;font-size: 2em;text-transform: uppercase;margin-top: 0;">You Still Have Something In Your Cart</p>
+#end
+
+#if ( $ctx.yConvertStep == 1 )
+                    <p style="color:#455a64;">We noticed that you added one or more items to your Shopping Cart, but didn't continue to Checkout. When you're ready to buy, simply visit your Shopping Cart to complete your order.</p>
+#elseif ( $ctx.yConvertStep == 2 )
+                    <p style="color:#455a64;">We noticed that you added one or more items to your Shopping Cart yesterday, but didn't continue to Checkout. When you're ready to buy, simply visit your Shopping Cart to complete your order. The promotion you selected is still valid!</p>
+#else
+                    <p style="color:#455a64;">We noticed that you added one or more items to your Shopping Cart a few days ago, but didn't continue to Checkout. When you're ready to buy, simply visit your Shopping Cart to complete your order. Your promotion is still valid, but it will <strong>expire on ${ctx.yConvertExpiryDate}</strong></p>
+#end
+                </td>
+                <!--Right Margin-->
+                <td width="70" bgcolor="#eceff1">&nbsp; </td>
+            </tr>
+            <tr>
+                <td width="70" bgcolor="#eceff1">&nbsp; </td>
+                <!--Start Body-->
+                <td width="400"  bgcolor="#eceff1" style="text-align: center">
+                    <a href="${ctx.baseUrl}/cart" style="display: block;margin: 20px auto;width:264px;"><img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/continue.jpg" alt="Continue shopping"/></a>
+                    <h2 style="color:#35464e;text-transform: uppercase;display: block;margin-top: 20px;">need help ?</h2>
+                    <p>Feel free to contact our customer service. They will be more than happy to guide through our offers, answer your questions and solve your doubts!</p>
+                    <a href="${ctx.baseUrl}/faq" style="margin-bottom: 40px;display: block;"><img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/gethelp.jpg" alt="FAQ"/></a>
+                    <span style="display: block;margin:10px 0;">or</span>
+                    <p>Call us:</p>
+                    <p>US: +1 888 342-9457</p>
+                    <p>EU: +49 (0) 89 890 650</p>
+                </td>
+                <!--Right Margin-->
+                <td width="70" bgcolor="#eceff1">&nbsp; </td>
+            </tr>
+#*
+            <tr>
+                <td width="70" height="" bgcolor="#eceff1">&nbsp; </td>
+                <!--Start Body-->
+                <td width="400" height=""  bgcolor="#eceff1">
+                    <table>
+                        <tr>
+                            <td colspan="3"><span style="margin-top: 40px">&nbsp;</span></td>
+                        </tr>
+                        <tr>
+                            <td width="187" style="text-align: center">
+                                <img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/btn1.jpg" alt=""/>
+                                <h3 style="display: block;text-transform: uppercase;margin-top: 20px;font-family: arial, helvetica, sans-serif;font-size: 1em;color:#616060">Lorem ipsum dolor </h3>
+                                <hr style="margin: 20px auto;width: 80px;border-style: solid;color: #b0afaf;"/>
+                                <p style="text-align: center;font-family: arial, helvetica, sans-serif;color: #616060;font-weight: 200;display: block;margin-bottom: 40px;font-size: 0.9em;line-height: 1.7em;">Phasellus congue quis ipsum quis condimentum. Interdum  malesuada fames ac ante ipsum primis in faucibus.</p>
+                                <a href="#" style="display: block;"><img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/readmore.jpg" alt=""/></a>
+
+                            </td>
+                            <td width="20"></td>
+                            <td width="187" style="text-align: center">
+                                <img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/btn2.jpg" alt=""/>
+                                <h3 style="display: block;text-transform: uppercase;margin-top: 20px;font-family: arial, helvetica, sans-serif;font-size: 1em;color:#616060">Lorem ipsum dolor </h3>
+                                <hr style="margin: 20px auto;width: 80px;border-style: solid;color: #b0afaf;"/>
+                                <p style="text-align: center;font-family: arial, helvetica, sans-serif;color: #616060;font-weight: 200;display: block;margin-bottom: 40px;font-size: 0.9em;line-height: 1.7em;">Phasellus congue quis ipsum quis condimentum. Interdum  malesuada fames ac ante ipsum primis in faucibus.</p>
+                                <a href="#" style="display: block;"><img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/readmore.jpg" alt=""/></a>
+                            </td>
+                            <td width="20"></td>
+                            <td width="186" style="text-align: center">
+                                <img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/btn3.jpg" alt=""/>
+                                <h3 style="display: block;text-transform: uppercase;margin-top: 20px;font-family: arial, helvetica, sans-serif;font-size: 1em;color:#616060">Lorem ipsum dolor </h3>
+                                <hr style="margin: 20px auto;width: 80px;border-style: solid;color: #b0afaf;"/>
+                                <p style="text-align: center;font-family: arial, helvetica, sans-serif;color: #616060;font-weight: 200;display: block;margin-bottom: 40px;font-size: 0.9em;line-height: 1.7em;">Phasellus congue quis ipsum quis condimentum. Interdum  malesuada fames ac ante ipsum primis in faucibus.</p>
+                                <a href="#" style="display: block;"><img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/readmore.jpg" alt=""/></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5"><span style="margin-bottom: 100px;display: block;">&nbsp;</span></td>
+                        </tr>
+                    </table>
+                </td>
+                <!--Right Margin-->
+                <td width="70" height="" bgcolor="#eceff1">&nbsp; </td>
+            </tr>
+*#
+            <tr>
+                <!--Left Margin-->
+                <td width="70" height="100" bgcolor="#263238">&nbsp; </td>
+                <!--Start Body-->
+                <td width="660" height="100"  bgcolor="#263238" style="vertical-align: top;color:#ffffff;">
+                    ${ctx.cmsSlotContents.BottomContent}
+                    <table style="text-align: center;font-family: arial, helvetica, sans-serif;width: 100%;">
+                        <tr>
+                            <td>
+                                <p style="display: inline-block;text-transform: uppercase;font-weight: 100;color:#ffffff;">
+                                    Powered by Triast &copy; 2016   |
+                                </p>
+                                <a href="#" style="display: inline-block;margin: 0 15px;font-weight: bold;text-transform: uppercase;color:#ffffff;text-decoration: none">Terms</a>
+                                <a href="#" style="display: inline-block;margin: 0 15px;font-weight: bold;text-transform: uppercase;color:#ffffff;text-decoration: none">privacy policy</a>
+                                <a href="#" style="display: inline-block;margin: 0 15px;font-weight: bold;text-transform: uppercase;color:#ffffff;text-decoration: none">help</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="font-size: 0.8em;margin-top: 5px;color:#ffffff;">If you don't want to receive updates. please <a href="#" style="text-decoration: none;color:#53b8de">unsubscribe</a></p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <!--Right Margin-->
+                <td width="70" height="100" bgcolor="#263238">&nbsp; </td>
+            </tr>
+        </table>
+    </body>
+</html>
+

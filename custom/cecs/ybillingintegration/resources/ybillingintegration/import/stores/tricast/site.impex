@@ -1,0 +1,6 @@
+$productCatalog=tricastProductCatalog
+$siteUid=tricast
+
+# CECS-381 Testing implementation for SSC
+INSERT_UPDATE ProductConfigurationSyncCronJob; code[unique = true]; job(code); site(uid); catalogVersion(catalog(id), version); singleExecutable; sessionLanguage(isocode)
+; $siteUid-productConfigurationSyncCronJob ; productConfigurationSyncJob ; $siteUid ; $productCatalog:Staged ; false ; en

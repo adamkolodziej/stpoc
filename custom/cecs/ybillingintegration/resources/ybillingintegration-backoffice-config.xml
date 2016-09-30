@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc.group.ybillingintegration.ybillingintegrationSection">
+                <explorer-tree:type-node code="CreditCardPaymentInfo" id="CreditCardPaymentInfo"/>
+                <explorer-tree:type-node code="TechnicalAttribute" id="TechnicalAttribute"/>
+                <explorer-tree:type-node code="ProductConfigurationTemplate" id="ProductConfigurationTemplate"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+   
+    <context merge-by="type" parent="User" type="Customer" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="yBillingCustomerId"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="PaymentInfo" type="CreditCardPaymentInfo" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="number"/>
+            <list-view:column qualifier="validToYear"/>
+            <list-view:column qualifier="validToMonth"/>
+            <list-view:column qualifier="ccOwner"/>
+            <list-view:column qualifier="billingAddress"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="AbstractOrder" type="Order" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="yBillingOrderId"/>
+        </list-view:list-view>
+    </context>
+	<context merge-by="type" parent="auto" type="Product" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="yBillingId"/>
+            <list-view:column qualifier="yBillingIdOnRemove"/>
+            <list-view:column qualifier="csticName"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="BundleTemplate" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="yBillingId"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="BundlePackage" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="yBillingId"/>
+        </list-view:list-view>
+    </context>
+
+
+    <context merge-by="type" parent="GenericItem" type="TechnicalAttribute" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="version"/>
+            <list-view:column qualifier="guid"/>
+            <list-view:column qualifier="dataId"/>
+            <list-view:column qualifier="dataDesc"/>
+            <list-view:column qualifier="dataType"/>
+        </list-view:list-view>
+    </context>
+
+    <context merge-by="type" parent="GenericItem" type="ProductConfigurationTemplate" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="configurable"/>
+            <list-view:column qualifier="unitCode"/>
+            <list-view:column qualifier="unitCode"/>
+            <list-view:column qualifier="numberOfUnits"/>
+            <list-view:column qualifier="salesOrganization"/>
+            <list-view:column qualifier="distributionChannel"/>
+            <list-view:column qualifier="distributionChannel"/>
+            <list-view:column qualifier="contractDuration"/>
+            <list-view:column qualifier="periodUnit"/>
+            <list-view:column qualifier="periodUnit" merge-mode="remove"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="auto" type="CreditCardPaymentInfo" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.ybillingintegration.ybillingintegrationSection.General">
+                <editorArea:section name="hmc.group.ybillingintegration.ybillingintegrationSection.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="creationtime"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="number"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ccOwner"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="validToYear"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="validToMonth"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="type"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="duplicate"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="saved"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="cartToOrderCronJob"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.group.ybillingintegration.ybillingintegrationSection.payment.info">
+                <editorArea:section name="hmc.group.ybillingintegration.ybillingintegrationSection.payment.info">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="original"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="user"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="yBillingCardId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="subscriptionServiceId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="subscriptionValidated"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.ybillingintegration.ybillingintegrationSection.billing.details">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="yBillingBusinessAgreementId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="subscriptionId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="issueNumber"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="billingAddress"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.ybillingintegration.ybillingintegrationSection.credit.card.details">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="validFromMonth"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="validFromYear"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="auto" type="TechnicalAttribute" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.ybillingintegration.ybillingintegrationSection.General">
+                <editorArea:section name="hmc.group.ybillingintegration.ybillingintegrationSection.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="pk"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="creationtime"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="configurationTemplate"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="dataId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="catalogVersion"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="version"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.ybillingintegration.ybillingintegrationSection.attr">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="dataDesc"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="dataType"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="guid"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context type="ProductConfigurationTemplate" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>catalogVersion.mnemonic + " " +code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+</config>

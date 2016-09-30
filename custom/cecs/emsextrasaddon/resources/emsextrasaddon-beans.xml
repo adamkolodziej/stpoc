@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="com.hybris.showcase.emsextras.BatchProductResult">
+		<property name="productCode" type="java.lang.String" />
+		<property name="granted" type="java.lang.Boolean" />
+		<property name="withUsageCharges" type="java.lang.Boolean" />
+		<property name="formatedPrice" type="java.lang.String" />
+	</bean>
+</beans>

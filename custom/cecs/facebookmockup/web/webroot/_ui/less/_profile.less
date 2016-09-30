@@ -1,0 +1,136 @@
+.profile-container{
+  aside.sidebar{
+    width:323px ;
+    float: left;
+    min-height: 150px;
+    image{
+      width: 100%;
+    }
+  }
+}
+.profile-information{
+  position: relative;
+  margin-bottom: 5px;
+  display: block;
+
+  .profile-background{
+    position: relative;
+    width: 828px;
+    padding-bottom: 45px;
+    background-color: #fff;
+    border-radius: 4px;
+    img{
+      width: 100%;
+    }
+    .gradient{
+      background: linear-gradient(to top, rgba(0, 0, 0, .8), rgba(0, 0, 0, 0) 40%);
+      bottom: 0;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin-bottom: 45px;
+    }
+  }
+  .profile-info-container{
+    position: absolute;
+    bottom: -3px;
+    padding:0 15px;
+    .profile-avatar{
+      background: rgba(0, 0, 0, .3);
+      border-radius: 3px;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .07);
+      padding: 1px;
+      display: inline-block;
+      height: 162px;
+      width: 162px;
+      vertical-align: top;
+      img{
+        height: 160px;
+        width: 160px;
+        background-color: #fff;
+        border: 4px solid #fff;
+        border-radius: 2px;
+      }
+    }
+    .profile-right-info{
+      display: inline-block;
+      width: 636px;
+      .profile-name{
+        color: #fff;
+        font-size: 24px;
+        padding-top: 45px;
+        padding-left: 10px;
+        font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, .8);
+        word-break: break-word;
+        font-weight: bold;
+        float: left;
+        small{
+          font-size: 18px;
+          font-weight: normal;
+          font-family: helvetica, arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          text-shadow: 0 1px 4px rgba(0, 0, 0, .8);
+          word-break: break-word;
+        }
+      }
+      .buttons{
+        float: right;
+        padding-top: 102px;
+        .btn-like{
+          width: 62px;
+          display: inline-block;
+          img{
+            width: 100%;
+          }
+          .liked{
+            display: none;
+          }
+          &.js-liked{
+            width: 85px;
+            .not-liked{
+              display: none;
+            }
+            .liked{
+              display: block;
+            }
+          }
+        }
+        .btn-msg{
+          width: 130px;
+          display: inline-block;
+          margin-left:10px ;
+          img{
+            width: 100%;
+          }
+        }
+      }
+      .btn-profile-links{
+        display: block;
+        width: 383px;
+        padding-top: 10px;
+        img{
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.js-like{
+  .liked{
+    display: none;
+  }
+  &.js-liked{
+    width: 85px;
+    .not-liked{
+      display: none;
+    }
+    .liked{
+      display: block;
+    }
+  }
+}

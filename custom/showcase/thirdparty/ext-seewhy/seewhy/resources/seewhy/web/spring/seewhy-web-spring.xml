@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultSeewhyJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="seewhy"/>
+	</bean>
+
+	<bean id="defaultSeewhyBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultSeewhyJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getSeewhyBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultSeewhyBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	<bean id="SeewhyBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getSeewhyBeforeViewHandler"/>
+	</bean>
+
+	<bean id="seewhyFooterComponentRenderer"
+          class="com.seewhy.addon.component.renderer.SeewhyFooterComponentRenderer"
+          parent="addOnJspIncludeCMSComponentRenderer" />
+     
+	<bean id="seewhyFooterComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="SeewhyFooterComponent" />
+        <property name="renderer" ref="seewhyFooterComponentRenderer" />
+	</bean>
+
+
+	<bean id="seewhyBeforeControllerHandlerAdaptee" class="com.seewhy.addon.interceptors.SeewhyBeforeControllerHandlerAdaptee">
+		<property name="seewhyInMemoryRepository" ref="seewhyInMemoryRepository"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>	
+	
+	<bean id="seewhyBeforeControllerHandler" parent="beforeControllerHandlerAdapter"> 
+		<property name="adaptee">
+			<ref bean="seewhyBeforeControllerHandlerAdaptee"/>
+		</property>
+	</bean>
+	
+	<bean id="seewhyBeforeControllerHandlerListMergeDirective" depends-on="beforeControllerHandlersList" parent="listMergeDirective">
+		<property name="add" ref="seewhyBeforeControllerHandler"/>
+	</bean>
+	
+	
+	
+	<bean id="seewhyBeforeViewHandlerAdaptee" class="com.seewhy.addon.interceptors.SeewhyBeforeViewHandlerAdaptee">	
+		<property name="seewhyInMemoryRepository" ref="seewhyInMemoryRepository"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="userService" ref="userService"/>
+		<property name="productService" ref="productService"/>
+		<property name="customerNameStrategy" ref="customerNameStrategy"/>
+		<property name="productPricePopulator" ref="productPricePopulator"/>
+		<property name="productPopulator" ref="productPopulator"/>
+		<property name="productCategoriesPopulator" ref="productCategoriesPopulator"/>
+	</bean>	
+	
+	<bean id="seewhyBeforeViewHandler" parent="beforeViewHandlerAdapter"> 
+		<property name="adaptee">
+			<ref bean="seewhyBeforeViewHandlerAdaptee"/>
+		</property>
+	</bean>
+	
+	<bean id="seewhyBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="seewhyBeforeViewHandler"/>
+	</bean>		
+	
+		
+
+	<bean id="seewhyCommerceAddToCartMethodHook" class="com.seewhy.addon.hook.SeewhyCommerceAddToCartMethodHook">	
+		<property name="seewhyInMemoryRepository" ref="seewhyInMemoryRepository"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>			
+	
+	<bean id="seewhyCommerceAddToCartMethodHookMergeDirective" depends-on="commerceAddToCartMethodHooks" parent="listMergeDirective">
+		<property name="add" ref="seewhyCommerceAddToCartMethodHook"/>
+	</bean>	
+	
+	
+	<bean id="seewhyCommercePlaceOrderMethodHook" class="com.seewhy.addon.hook.SeewhyCommercePlaceOrderMethodHook">	
+		<property name="seewhyInMemoryRepository" ref="seewhyInMemoryRepository"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="orderPopulator" ref="orderPopulator"/>
+	</bean>			
+	
+	<bean id="seewhyCommercePlaceOrderMethodHookMergeDirective" depends-on="commercePlaceOrderMethodHooks" parent="listMergeDirective">
+		<property name="add" ref="seewhyCommercePlaceOrderMethodHook"/>
+	</bean>	
+
+</beans>

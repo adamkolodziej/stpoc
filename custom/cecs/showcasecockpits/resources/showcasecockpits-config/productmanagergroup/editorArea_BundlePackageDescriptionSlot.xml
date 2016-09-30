@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+    <group printable="true" position="1" show-in-create-mode="true" show-if-empty="true" initially-opened="true" tabbed="false" visible="true" qualifier="General">
+        <label key="cockpit.config.label.General" />
+        <property visible="true" qualifier="BundlePackageDescriptionSlot.code"/>
+        <property visible="true" qualifier="BundlePackageDescriptionSlot.name"/>
+        <property visible="true" qualifier="BundlePackageDescriptionSlot.content" editor="wysiwyg"/>
+        <property visible="true" qualifier="BundlePackageDescriptionSlot.catalogVersion"/>
+    </group>
+</editor>

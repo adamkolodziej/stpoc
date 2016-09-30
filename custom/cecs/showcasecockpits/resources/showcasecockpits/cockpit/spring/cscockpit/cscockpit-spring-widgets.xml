@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<!-- Ticket Browser Widgets -->
+
+	<!-- ticket Expense Dispute details widget -->
+	<alias alias="csTicketExpenseDisputeWidgetConfig" name="defaultCsTicketExpenseDisputeWidgetConfig"/>
+	<bean id="defaultCsTicketExpenseDisputeWidgetConfig" parent="csBaseWidgetConfig">
+		<property name="widgetTitle" value="cscockpit.widget.ticket.expense.dispute"/>
+		<property name="widgetRenderer" ref="csTicketExpenseDisputeWidgetRenderer"/>
+		<property name="widgetController" ref="csExpenseDisputeController"/>
+		<property name="widgetModel">
+			<bean class="de.hybris.platform.cockpit.widgets.models.impl.DefaultItemWidgetModel"/>
+		</property>
+		<property name="widgetAdapter">
+			<bean class="com.hybris.showcase.showcasecockpits.cscockpit.widgets.adapters.TicketExpenseDisputeWidgetAdapter">
+				<property name="expenseDisputeService" ref="expenseDisputeService"/>
+				<property name="cockpitTypeService" ref="cockpitTypeService"/>
+			</bean>
+		</property>
+	</bean>
+
+	<alias alias="csTicketExpenseDisputeWidgetRenderer" name="defaultCsTicketExpenseDisputeWidgetRenderer"/>
+	<bean id="defaultCsTicketExpenseDisputeWidgetRenderer" parent="abstractWidgetRenderer" class="com.hybris.showcase.showcasecockpits.cscockpit.widgets.renderers.impl.TicketExpenseDisputeWidgetRenderer">
+		<property name="configurationCode" value="listViewContentBrowser"/>
+		<property name="popupWidgetHelper" ref="popupWidgetHelper"/>
+	</bean>
+	
+	<alias alias="csExpenseDisputeController" name="defaultCsExpenseDisputeController"/>
+    <bean id="defaultCsExpenseDisputeController" parent="csBaseWidgetController" class="com.hybris.showcase.showcasecockpits.cscockpit.widgets.controllers.impl.DefaultCsExpenseDisputeController" scope="session">
+    	<property name="expenseDisputeService" ref="expenseDisputeService"/>
+    	<property name="ticketBusinessService" ref="ticketBusinessService"/>
+    </bean>
+ 
+
+</beans>

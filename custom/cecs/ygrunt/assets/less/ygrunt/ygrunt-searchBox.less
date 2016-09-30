@@ -1,0 +1,58 @@
+.siteSearch{
+  @media(max-width: @screen-xs-max) {
+    padding: 0px;
+    form{
+      margin: 0;
+    }
+  }
+  padding-right: 20px;
+  padding-top: 5px;
+  .form-group{
+    position: relative;
+    float: right;
+    @media(max-width: @screen-xs-max){
+      float: none;
+    }
+    &:hover{
+      .siteSearchInput{
+        width: 80%;
+        border-color: #fff;
+      }
+
+    }
+    .siteSearchSubmit{
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 10;
+    }
+    .siteSearchInput{
+      @media(max-width: @screen-xs-max){
+        width: 100% !important;
+        border: none;
+        margin-right: 0;
+      }
+      width: 0;
+      margin-right: 41px;
+      float: right;
+      background: none;
+      border: none;
+      border-bottom: 1px solid transparent;
+      border-radius: 0;
+      color: #fff;
+      -webkit-transition: width 250ms ease;
+      -moz-transition: width 250ms ease;
+      -ms-transition: width 250ms ease;
+      -o-transition: width 250ms ease;
+      transition: width 250ms ease;
+      &:focus{
+        width: 80%;
+        border-bottom: 1px solid;
+        border-radius: 0;
+      }
+
+      .placeholder(#fff);
+    }
+  }
+
+}

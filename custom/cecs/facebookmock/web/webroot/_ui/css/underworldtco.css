@@ -1,0 +1,296 @@
+
+body
+{
+    background-color: #E9EAED;
+}
+
+.top-bar
+{
+    height: 40px;
+    background-color: #3a5795;
+    background-position: 0 0;
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);
+    min-width: 981px;
+    position: fixed;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: -4px;
+    z-index: 301;
+    border-color: -moz-use-text-color -moz-use-text-color #133783;
+    border-image: none;
+    border-style: none none solid;
+    border-width: 0 0 1px;
+    line-height: 1.34;
+}
+
+.search-bar
+{
+    background-image: url("../images/hy_searchBarUTco.png");
+    text-align: center;
+    width: 910px;
+    height: 37px;
+    background-size: 910px 32px;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+
+.top-banner
+{
+    background-image: url("../images/fb_topBannerUTco.png");
+    width: 910px;
+    height: 331px;
+    background-size: 910px 331px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.top-bannerLiked
+{
+    background-image: url("../images/fb_topBannerUTcoLiked.png");
+    width: 910px;
+    height: 331px;
+    background-size: 910px 331px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 910px;
+}
+
+.left-column
+{
+	background-image: url("../images/fb_leftColumnUTco.png");
+	width: 320px;
+	height: 1140px;
+    background-size: 320px 1140px;
+	display: inline-block;
+	margin-left: 0px;
+    vertical-align: top;
+    margin-top: 5px;
+}
+
+.right-column
+{
+    width: 510px;
+    height: 1300px;
+	display: inline-block;
+	margin-left: 0px;
+    vertical-align: top;
+    margin-top: 5px;
+}
+
+/******* POSTS ********/
+
+.post0UTco
+{
+	background-image: url("../images/post0UTco.png");
+	width: 465px;
+	height: 143px;
+    background-size: 465px 143px;
+    position: relative;
+}
+
+.post1UTco
+{
+	background-image: url("../images/post1UTco.png");
+	width: 465px;
+	height: 430px;
+    background-size: 465px 430px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.post1UTcoLiked
+{
+	background-image: url("../images/post1UTcoLiked.png");
+	width: 465px;
+	height: 521px;
+    background-size: 465px 521px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.post2UTco
+{
+	background-image: url("../images/post2UTco.png");
+	width: 465px;
+	height: 580px;
+    background-size: 465px 580px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.post2UTcoLiked
+{
+	background-image: url("../images/post2UTcoLiked.png");
+	width: 465px;
+	height: 580px;
+    background-size: 465px 580px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.post3UTco
+{
+	background-image: url("../images/post3UTco.png");
+	width: 465px;
+	height: 194px;
+    background-size: 465px 194px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.post3UTcoLiked
+{
+	background-image: url("../images/post3UTcoLiked.png");
+	width: 465px;
+	height: 286px;
+    background-size: 465px 286px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.post4UTco
+{
+	background-image: url("../images/post4UTco.png");
+	width: 465px;
+	height: 262px;
+    background-size: 465px 262px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.post4UTcoLiked
+{
+	background-image: url("../images/post4UTcoLiked.png");
+	width: 465px;
+	height: 352px;
+    background-size: 465px 352px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.post5UTco
+{
+	background-image: url("../images/post5UTco.png");
+	width: 465px;
+	height: 296px;
+    background-size: 465px 296px;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 60px;
+}
+
+.post5UTcoLiked
+{
+	background-image: url("../images/post5UTcoLiked.png");
+	width: 465px;
+	height: 388px;
+    background-size: 465px 388px;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 60px;
+}
+
+/******* LIKE links ********/
+
+#top-banner-like-link
+{
+    position: absolute;
+    top: 252px;
+    left: 591px;
+    width: 57px;
+    height: 25px;
+    background-color: transparent;
+}
+
+#top-banner-like-link:hover
+{
+    cursor:pointer;
+}
+
+#fb_post1UTco-like-link
+{
+    background-color: transparent;
+    height: 15px;
+    left: 10px;
+    position: absolute;
+    top: 405px;
+    width: 22px;
+}
+
+#fb_post1UTco-like-link:hover
+{
+    cursor:pointer;
+}
+
+#fb_post2UTco-like-link
+{
+    background-color: transparent;
+    height: 15px;
+    left: 10px;
+    position: absolute;
+    top: 465px;
+    width: 22px;
+}
+
+#fb_post2UTco-like-link:hover
+{
+    cursor:pointer;
+}
+
+#fb_post3UTco-like-link
+{
+    background-color: transparent;
+    height: 15px;
+    left: 13px;
+    position: absolute;
+    top: 170px;
+    width: 22px;
+}
+
+#fb_post3UTco-like-link:hover
+{
+    cursor:pointer;
+}
+
+#fb_post4UTco-like-link
+{
+    background-color: transparent;
+    height: 15px;
+    left: 10px;
+    position: absolute;
+    top: 235px;
+    width: 22px;
+}
+
+#fb_post4UTco-like-link:hover
+{
+    cursor:pointer;
+}
+
+#fb_post5UTco-like-link
+{
+    background-color: transparent;
+    height: 15px;
+    left: 10px;
+    position: absolute;
+    top: 245px;
+    width: 22px;
+}
+
+#fb_post5UTco-like-link:hover
+{
+    cursor:pointer;
+}

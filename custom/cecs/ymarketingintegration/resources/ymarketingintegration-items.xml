@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+
+	<collectiontypes>
+		<collectiontype code="SAPCategoryCollection" elementtype="java.lang.String" autocreate="true" />
+	</collectiontypes>
+	
+	<enumtypes>
+		<enumtype code="SAPCategory" generate="true"
+			autocreate="true" dynamic="true">
+			<description>This enumeration denotes Categories</description>
+			<value code="Z1" />
+			<value code="Z2" />
+			<value code="Z3" />
+			<value code="Z4" />
+		</enumtype>
+	</enumtypes>
+
+	<itemtypes>
+		<itemtype code="CEIInitiative" autocreate="true" generate="true">
+			<deployment table="ceiinitiative" typecode="24010"/>
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="categoryId" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="description" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="status" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="memberCount" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="startDate" type="java.util.Date">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="endDate" type="java.util.Date">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="user" type="User">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute qualifier="local" type="boolean">
+					<persistence type="property"/>
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+					<modifiers optional="true"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="BTGReferenceSAPCategoryOperand" extends="BTGAbstractReferenceOperand" autocreate="true" generate="true"
+			jaloclass="com.hybris.showcase.cecs.ymarketingintegration.btg.jalo.BTGReferenceSAPCategoryOperand">
+			<attributes>
+				<attribute type="SAPCategoryCollection" qualifier="categories">
+					<persistence type="property" />
+					<modifiers optional="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<typegroup name="BTG">
+			<itemtype code="BTGSAPCategoryOperand" extends="BTGAbstractCustomerOperand" autocreate="true" generate="true"
+				jaloclass="com.hybris.showcase.cecs.ymarketingintegration.btg.jalo.BTGSAPCategoryOperand">
+			</itemtype>
+		</typegroup>
+	</itemtypes>
+</items>

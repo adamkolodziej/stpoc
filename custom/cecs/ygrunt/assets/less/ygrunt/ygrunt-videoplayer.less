@@ -1,0 +1,134 @@
+.html5-video-player{
+    .html5-main-video{
+        z-index: 1;
+    }
+    .html5-video-content{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 70%;
+        .popup-container{
+            position: absolute;
+            top: 2%;
+            right: 2%;
+            width: 260px;
+        }
+    }
+    .video-title{
+        color: #fff;
+    }
+}
+body.video-fullscreen {
+    .product-notification{
+        top: 0;
+        z-index: 2147483647;
+        position: fixed;
+        right: 0;
+    }
+    
+    .product-notification-container-normal {
+    	display: none;
+    }
+    
+    .product-notification-container-fullscreen {
+		display: block
+	}
+}
+
+.product-notification-container-normal {
+	position: absolute;
+}
+
+.product-notification-container-fullscreen {
+	display: none
+}
+
+.product-notification{
+    z-index: 2147483647;
+    display: none;
+    position: relative;
+    border-radius: 0;
+    border:none;
+
+    .panel-close{
+        position: absolute;
+        top:5px;
+        right: 7px;
+    }
+
+
+
+    .panel-heading{
+        border-radius: 0;
+    }
+
+    .product-promotion-fragment-description{
+        font-size: 1.2em;
+        margin-top:10px;
+        .label{
+            display: inline-block;
+
+        }
+    }
+    .panel-footer{
+        padding: 0;
+        &.block-buttons{
+            .row,.col-xs-6{
+                padding: 0;
+                margin:0;
+            }
+        }
+        .order-response{
+            padding: 10px;
+            color: @brand-dark;
+
+        }
+    }
+    .instantcheckout-container{
+        margin: 0;
+        width: 100%;
+    }
+}
+
+// CECS-610 Video playback page improvements START
+.html5-main-video.video-component-relative {
+    position: relative;
+}
+
+.usage-charge-fit {
+    margin-top: 18px;
+   .title{
+        color: #fff;
+       margin-top: 0;
+   }
+    .usage-charges{
+        .price{
+            font-size: 16px;
+            color: @brand-warning;
+            display: block;
+            padding-bottom: 5px;
+        }
+        .name{
+            color: #fff;
+        }
+    }
+}
+// CECS-610 Video playback page improvements END
+
+
+.html5-video-player{
+    .not-entitled-container{
+        .description{
+            color: #fff;
+        }
+    }
+}
+
+
+.pageLabel-videoPlaybackPage{
+    background-color: @brand-dark;
+    .footer{
+        border-top: 1px solid @brand-primary;
+    }
+}

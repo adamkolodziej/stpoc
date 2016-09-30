@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<!--CECS-66 Product and AbstractOrder digital-delivery - START-->
+	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="downloadOnly" type="boolean"/>
+		<property name="shipOnly" type="boolean"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="digitalDelivery" type="boolean"/>
+		<property name="loyaltyPayment" type="boolean"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="digitalDelivery" type="java.lang.Boolean" />
+		<!-- properties for TVEpisodeProduct types -->
+		<property name="tvShowName" type="java.lang.String"/>
+		<property name="seasonNumber" type="java.lang.Integer"/>
+		<property name="episodeNumber" type="java.lang.Integer"/>
+		<property name="channelSchedule" type="java.lang.String"/>
+		<property name="fullVersionMedia" type="com.hybris.social.common.data.VideoMediaData" />
+		<property name="freePreviewMedia" type="com.hybris.social.common.data.VideoMediaData" />
+	</bean>
+	<!--CECS-66 Product and AbstractOrder digital-delivery - END-->
+
+	<bean class="de.hybris.platform.commercefacades.product.data.PromotionData">
+		<property name="name" type="java.lang.String"/>
+		<property name="percentageDiscount" type="java.lang.Double"/>
+		<!-- CECS-824 fix calculation of new price after promotion -->
+		<property name="newPrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+	</bean>
+	
+	<!-- CECS-260 entitlements page improvements START -->
+	<bean class="de.hybris.platform.entitlementfacades.data.EntitlementData">
+		<property name="remainingQuantity" type="int"/>
+	</bean>
+	<!-- CECS-260 entitlements page improvements END -->
+	
+	<bean class="com.hybris.showcase.data.ContractData">
+		<property name="code" type="String"/>
+		<property name="userUid" type="String"/>
+		<property name="noOfServices" type="int"/>
+	</bean>
+	
+
+    <bean class="de.hybris.platform.acceleratorservices.data.RequestContextData">
+        <property name="blogArticle" type="com.hybris.showcase.model.components.BlogArticleModel" />
+    </bean>
+    
+    <bean class="com.hybris.showcase.enums.data.VariantSelectorEnumData">
+		<property name="sizeEnumCode" type="java.lang.String"/>
+		<property name="sizeEnumName" type="java.lang.String"/>
+	</bean> 
+	
+	<bean class="com.hybris.showcase.data.CurrentExpensesData">
+		<property name="code" type="java.lang.String"/>
+		<property name="name" type="java.lang.String"/>
+		<property name="type" type="java.lang.String"/>
+		<property name="amount" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="expenseDate" type="java.util.Date"/>
+	</bean>
+
+	<enum class="com.hybris.showcase.data.PaymentStatus">
+		<value>TO_PAY</value>
+		<value>PAID</value>
+		<value>CANCELED</value>
+		<value>DELAYED</value>
+	</enum>
+
+	<bean class="com.hybris.showcase.data.InvoiceData">
+		<property name="invoiceNumber" type="java.lang.String" />
+		<property name="billingPeriodStart" type="java.util.Date"/>
+		<property name="billingPeriodEnd" type="java.util.Date"/>
+		<property name="invoiceDate" type="java.util.Date"/>
+		<property name="dueDate" type="java.util.Date"/>
+		<property name="amountDue" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="amountRemaining" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="amountPaid" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="paymentStatus" type="de.hybris.platform.core.enums.PaymentStatus"/>
+		<property name="docURL" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<!--  CECS-728 -->
+		<property name="running" type="String" />
+		<property name="releaseDate" type="java.util.Date" />
+		<property name="starring" type="java.util.Collection&lt;String>" />
+		<property name="viewUrl" type="String" />
+		<!--  CECS-728 END -->
+		<!-- CECS-788 MovieProductDetailsComponent - START -->
+		<property name="productionCompanies" type="java.util.Collection&lt;String>" />
+		<property name="director" type="java.util.Collection&lt;String>" />
+		<property name="genre" type="java.util.Collection&lt;String>" />
+		<property name="releaseYear" type="Integer" />
+		<!-- CECS-788 MovieProductDetailsComponent - END -->
+		<property name="videoPoster" type="de.hybris.platform.commercefacades.product.data.ImageData" />
+	</bean>
+
+	<enum class="de.hybris.platform.commercefacades.product.ProductOption">
+		<value>DIGITAL_MEDIA</value>
+		<value>TV_SERIES</value>
+		<value>TV_CHANNELS</value>
+	</enum>
+
+	<!-- CCECS-748 -->
+	<bean class="com.hybris.showcase.data.BlogArticleData">
+		<property name="code" type="String" />
+		<property name="title" type="String" />
+		<property name="summary" type="String" />
+		<property name="content" type="String" />
+		<property name="imageURL" type="String" />
+		<property name="date" type="java.util.Date"/>
+		<property name="categoryName" type="String"/>
+		<property name="categoryCode" type="String"/>
+	</bean>
+	<!-- CECS-748 -->
+</beans>

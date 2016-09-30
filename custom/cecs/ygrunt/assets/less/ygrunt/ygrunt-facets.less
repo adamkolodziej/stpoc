@@ -1,0 +1,111 @@
+.refinements-container{
+    margin-bottom: 10px;
+    margin-top: 50px;
+
+    .show-filters{
+        .fa{
+            padding-top: 2px;
+            &:before{
+                content: "\f0d8";
+            }
+        }
+        &.collapsed{
+            .fa:before{
+                content: "\f0d7";
+            }
+        }
+    }
+}
+.refinements{
+    &.collapse{
+        @media(min-width: @screen-sm-min){
+            display: block;
+            visibility: visible;
+        }
+    }
+    .panel,.panel-body{
+        border:none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+    .panel{
+        .box;
+        padding: 0;
+    }
+    .panel-heading{
+        border-radius: 0;
+        a{
+            display: block;
+            color:@brand-info;
+            text-transform: uppercase;
+            .fa{
+                font-size: 25px;
+                line-height: 18px;
+                &:before{
+                    content: "\f0d8";
+                }
+            }
+            &.collapsed{
+                .fa:before{
+                    content: "\f0d7";
+                }
+            }
+        }
+    }
+    .panel-body{
+        background-color: #fff;
+        border-top: none!important;
+        .form-group{
+            margin-bottom: 0;
+            .checkbox{
+                padding-top: 0;
+                label{
+                    color: @brand-info;
+                    font-family: @font-family-thin;
+                    font-size: 1.2em;
+                    &:hover{
+                        color: @brand-pink;
+                        cursor: pointer;
+                        input{
+                            cursor: pointer;
+                        }
+                        .product-rating{
+                            li{
+                                color: @brand-pink;
+                            }
+                        }
+                    }
+                }
+                .product-rating{
+                    padding:0 10px;
+                    display: inline-block;
+                }
+            }
+        }
+        li{
+            color: @brand-info;
+            margin-bottom: 11px;
+            a{
+                color: @brand-info;
+                font-family: @font-family-thin;
+                font-size: 1.2em;
+
+            }
+            &:hover{
+                color: @brand-pink;
+                a{
+                    color: @brand-pink
+                }
+            }
+        }
+    }
+    .remove_item{
+        padding-bottom: 5px;
+        .remove_item_name{
+            padding-right: 5px;
+
+        }
+
+    }
+}

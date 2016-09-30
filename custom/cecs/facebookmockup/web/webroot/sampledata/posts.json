@@ -1,0 +1,52 @@
+{
+    "name": "Joe",
+    "surname": "Brown",
+    "avatar": "sampledata/avatar.jpg",
+
+    "posts": [
+        {
+            "author": "TCO's Underworld",
+            "avatar": "profile-avatar.jpg",
+            "date": "March 11 at 3:39pm",
+            "content": "Why does Jill look so worried? Does she actually trust Jack? You will know in the exciting Season 2 Premiere, only on TCO Channel!",
+            "image": "photo-1.jpg",
+            "image_amount": null,
+            "comments": false,
+            "advert": null,
+            "interest": "BRANDED_MERCHANDISE"
+        },
+        {
+            "author": "TCO's Underworld",
+            "avatar": "profile-avatar.jpg",
+            "date": "March 8 at 11:55am",
+            "content": "What are Jack and Jill looking at? What is coming up from the Underworld? Don't miss the Season 2 Premiere, only on TCO Channel!",
+            "image": "photo-2.jpg",
+            "image_amount": null,
+            "comments": false,
+            "advert": null,
+            "interest": "BRANDED_MERCHANDISE"
+        },
+        {
+            "author": "TCO's Underworld",
+            "avatar": "profile-avatar.jpg",
+            "date": "January 12, 2015 at 1:30pm",
+            "content": "",
+            "image": "photo-3.jpg",
+            "image_amount": null,
+            "comments": false,
+            "advert": null,
+            "interest": "UNDERWORLD"
+        },
+        {
+            "author": "TCO's Underworld",
+            "avatar": "profile-avatar.jpg",
+            "date": "January 12, 2015 at 1:30pm",
+            "content": "",
+            "image": "profile-bg.jpg",
+            "image_amount": null,
+            "comments": false,
+            "advert": null,
+            "interest": "UNDERWORLD"
+        }
+    ]
+}

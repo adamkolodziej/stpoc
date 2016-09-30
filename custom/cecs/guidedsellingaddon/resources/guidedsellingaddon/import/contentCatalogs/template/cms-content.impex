@@ -1,0 +1,56 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * addonExtensionName - extension name of the ui addon
+#######
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCmsCockpit=jar:com.hybris.showcase.guidedselling.constants.GuidedsellingaddonConstants&/guidedsellingaddon/import/cockpits/cmscockpit
+$siteResource=jar:com.hybris.showcase.guidedselling.constants.GuidedsellingaddonConstants&/guidedsellingaddonaddon/import/contentCatalogs/template
+
+##### PAGE TEMPLATES #####
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;GuidedSellingPage1Template;Guided Selling Page 1 Template;addon:/guidedsellingaddon/pages/layout/guidedSellingLayout1Page;ContentPage
+
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;GuidedSellingPage1Template;$jarResourceCmsCockpit/structure-view/structure_guidedSellingPage1Template.vm
+
+# Simple Content Page Templates
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='GuidedSellingPage1Template'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;NavigationBarRight;;;wide
+# CECS-46 main navigation - START
+;Breadcrumb;;;navigation
+# CECS-46 main navigation - END
+;NavigationBannerSection;;;wide
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;wide
+;Section3;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='GuidedSellingPage1Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-GuidedSellingPage1;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-GuidedSellingPage1;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-GuidedSellingPage1;NavigationBar;;NavigationBarSlot;true
+;;NavigationBarRight-GuidedSellingPage1;NavigationBarRight;;NavigationBarRightSlot;true
+# CECS-46 main navigation - START
+;;Breadcrumb-GuidedSellingPage1;Breadcrumb;;BreadcrumbSlot;true
+# CECS-46 main navigation - END
+;;MiniCart-GuidedSellingPage1;MiniCart;;MiniCartSlot;true
+;;Footer-GuidedSellingPage1;Footer;;FooterSlot;true
+;;HeaderLinks-GuidedSellingPage1;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-GuidedSellingPage1;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-GuidedSellingPage1;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-GuidedSellingPage1;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-GuidedSellingPage1;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+############

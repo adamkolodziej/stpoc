@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="src" path="/addonsupport"/>
+	<classpathentry exported="true" kind="src" path="/showcasecommon"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="gensrc"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/emsextras"/>
+	<classpathentry kind="src" path="/basecommerce"/>
+	<classpathentry kind="src" path="/commerceservices"/>
+	<classpathentry kind="output" path="bin/custom/cecs/servicescore/eclipsebin/notused"/>
+</classpath>

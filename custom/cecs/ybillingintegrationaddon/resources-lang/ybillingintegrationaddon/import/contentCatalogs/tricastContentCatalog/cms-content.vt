@@ -1,0 +1,18 @@
+#$header
+
+\$contentCatalog=tricastContentCatalog
+\$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=\$contentCatalog]),CatalogVersion.version[default=Staged])[default=\$contentCatalog:Staged]
+#set( $escContentCV=$esc.java('$contentCV[unique=true]') )
+\$picture=media(code, \$contentCV);
+#set( $escPicture=$esc.java('$picture[lang=$lang]') )
+\$siteResource=jar:com.hybris.showcase.ybillingintegrationaddon.constants.YbillingintegrationaddonConstants&/ybillingintegrationaddon/import/contentCatalogs/\$contentCatalog
+
+# Language
+\$lang=$lang
+
+#set( $mediaFormatRows = $query.load('cms-content', 'TileAccountBodySubComponent') )
+# MediaFormats
+UPDATE TileAccountBodySubComponent;uid[unique=true];name;title;$escContentCV
+#foreach( $row in $mediaFormatRows )
+ ;$row.key;"$row.values.name";"$row.values.title"
+#end

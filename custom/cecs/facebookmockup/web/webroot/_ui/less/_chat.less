@@ -1,0 +1,52 @@
+.contacts {
+	width: 205px;
+	position: fixed;
+	top: 42px;
+	right: 0;
+	bottom: 0;
+	padding-top: 6px;
+	border-left: 1px solid #CCC;
+	background: url('../images/bg-contacts.png') bottom right no-repeat;
+}
+
+.contact {
+	width: 100%;
+	float: left;
+	padding: 4px 12px 4px 8px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #dcdee3;
+	}
+
+	&-image {
+		width: 32px;
+		height: 32px;
+		float: left;
+
+	}
+
+	&-name {
+		float: left;
+		margin-left: 10px;
+		line-height: 32px;
+	}
+
+	&-status {
+		height: 32px;
+		min-width: 7px;
+		float: right;
+		font-size: 11px;
+		line-height: 32px;
+		color: #9197a3;
+
+		&.online {
+			background: url('../images/ico-status-online.png') center center no-repeat;
+		}
+
+		&.offline {
+			padding-right: 14px;
+			background: url('../images/ico-status-offline.png') right center no-repeat;
+		}
+	}
+}

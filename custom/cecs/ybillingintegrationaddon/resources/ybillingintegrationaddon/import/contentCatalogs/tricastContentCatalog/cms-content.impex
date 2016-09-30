@@ -1,0 +1,35 @@
+#
+# Import the CMS content for the Tricast site
+#
+$contentCatalog=tricastContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+### CECS-577 - SOAP: order details START
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;accountYBillingOrderDetails;Account YBilling Order Details Page;AccountPageTemplate;/ybillingOrderDetails
+;;accountYBillingContractDetails;Account YBilling Contract Details Page;AccountPageTemplate;/ybillingContractDetails
+
+$ybillingIntegrationaddonDir=/WEB-INF/views/addons/ybillingintegrationaddon/desktop/pages
+
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
+; ; AccountYBillingOrderDetailsComponent     	; YBilling Order Details Component 			; $ybillingIntegrationaddonDir/accountYBillingOrderDetailsPage.jsp;       ; AccountYBillingOrderDetailsComponent
+; ; AccountYBillingContractDetailsComponent   	; YBilling Contract Details Component 		; $ybillingIntegrationaddonDir/accountYBillingContractDetailsPage.jsp;    ; AccountYBillingContractDetailsComponent
+
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-accountYBillingOrderDetails ; Body Content Slot for YBilling Order Details ; true ; AccountYBillingOrderDetailsComponent ; ; ;
+; ; BodyContent-accountYBillingContractDetails ; Body Content Slot for YBilling Contract Details ; true ; AccountYBillingContractDetailsComponent ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'accountYBillingOrderDetails']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContentForPage-accountYBillingOrderDetails ; BodyContent ; ; BodyContent-accountYBillingOrderDetails ; ; ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'accountYBillingContractDetails']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContentForPage-accountYBillingContractDetails ; BodyContent ; ; BodyContent-accountYBillingContractDetails ; ; ;
+###   CECS-577 - SOAP: order details
+
+INSERT_UPDATE TileAccountBodySubComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef; icon; url; visible[default = true]
+; ; tileAccountYBillBodySubComponent     ; tileAccountYBillBodySubComponent     ; no-icon; /my-account/ybillingContractDetails
+
+UPDATE ContentSlot; uid[unique = true]; cmsComponents(&componentRef)[mode = append]; $contentCV[unique = true]
+; AccountSideContentSlot ; tileAccountYBillBodySubComponent

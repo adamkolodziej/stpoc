@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<!-- <bean id="converterTargetClassMapForProductlistsMapMergeDirective" depends-on="converterTargetClassMap" parent="mapMergeDirective">
+		<property name="sourceMap">
+			<map merge="true">
+				<entry key="productListData" value="com.hybris.productlists.data.ProductListData"/>
+				<entry key="productListEntryData" value="com.hybris.productlists.data.ProductListEntryData"/>
+				<entry key="productListModel" value="com.hybris.productlists.model.ProductListModel"/>
+				<entry key="listToCartModification" value="com.hybris.productlists.data.ListToCartModification"/>
+				<entry key="listToCartModificationData" value="com.hybris.productlists.data.ListToCartModificationData"/>
+			</map>
+		</property>
+	</bean> -->
+
+	<!-- Internal Services -->
+	<bean id="productListsDAO" class="com.hybris.productlists.daos.impl.DefaultProductListsDAO" >
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	
+	<alias alias="productListsService" name="defaultProductListsService" />
+	<bean id="defaultProductListsService" class="com.hybris.productlists.service.impl.DefaultProductListsService">
+		<property name="productListsDAO" ref="productListsDAO" />
+		<property name="modelService" ref="modelService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="productListsSecurityService" ref="productListsSecurityService" />
+	</bean>
+
+	<alias alias="productListsSessionService" name="defaultProductListsSessionService" />
+	<bean id="defaultProductListsSessionService"
+		class="com.hybris.productlists.service.impl.DefaultProductListsSessionService">
+		<property name="productListsDAO" ref="productListsDAO" />
+		<property name="modelService" ref="modelService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="userService" ref="userService" />
+		<property name="productListsService" ref="productListsService" />
+	</bean>
+
+	<!-- Facade Services Convertors and Populators -->
+
+	<alias name="defaultProductListsFacade" alias="productListsFacade" />
+	<bean id="defaultProductListsFacade" class="com.hybris.productlists.facades.impl.DefaultProductListsFacade">
+		<property name="productListsService" ref="productListsService" />
+		<property name="productListsSessionService" ref="productListsSessionService" />
+		<property name="productListsCartService" ref="productListsCartService" />		
+		<property name="productListsSecurityService" ref="productListsSecurityService" />		
+		<property name="productService" ref="productService" />
+		<property name="userService" ref="userService" />
+		<property name="cartService" ref="cartService" />
+		<property name="commerceCartService" ref="commerceCartService" />
+		<property name="productListDataConverter" ref="productListsConverter" />
+		<property name="productListModelConverter" ref="productListsModelConverter" />
+		<property name="productListEntryDataConverter" ref="productListsEntryConverter" />
+		<property name="listToCartModificationDataConverter" ref="listToCartModificationDataConverter" />
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+	
+	<alias alias="productListsCartService" name="defaultProductListsCartService" />
+	<bean id="defaultProductListsCartService" class="com.hybris.productlists.service.impl.DefaultProductListsCartService" >
+		<property name="productListsService" ref="productListsService"/>
+		<property name="commerceCartService" ref="commerceCartService"	 />
+		<property name="listToCartModificationConverter" ref="listToCartModificationConverter" />
+		<property name="productListModifiableStrategy" ref="productListModifiableStrategy" />
+	</bean>
+	
+	<alias alias="productListModifiableStrategy" name="defaultProductListModifiableStrategy" />
+	<bean id="defaultProductListModifiableStrategy" class="com.hybris.productlists.service.strategy.impl.DefaultProductListModifiableStrategy" >
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<alias alias="productListsSecurityService" name="defaultProductListsSecurityService" />
+	<bean id="defaultProductListsSecurityService" class="com.hybris.productlists.service.impl.DefaultProductListsSecurityService" >
+		<property name="keyGenerator" ref="guidKeyGenerator" />
+		<property name="userService" ref="userService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultProductListsConverter" alias="productListsConverter" />
+	<bean id="defaultProductListsConverter" parent="abstractConfigurablePopulatingConverter">
+		<lookup-method name="createTarget" bean="productListData" />
+		<!-- <property name="targetClass" value="#{converterTargetClassMap['productListData']}"/> -->
+		<property name="populators">
+			<list>
+				<ref bean="productListsPopulator" />
+				<bean parent="configurablePopulatorAdapter">
+					<property name="populator"  ref="productListPrincipalPopulator" />
+				</bean>
+				<bean parent="configurablePopulatorAdapter">
+					<property name="populator"  ref="productListCanModifyPopulator" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultProductListsEntryConverter" alias="productListsEntryConverter" />
+	<bean id="defaultProductListsEntryConverter" parent="abstractConfigurablePopulatingConverter">
+		<lookup-method name="createTarget" bean="productListEntryData" /> 
+		<!-- <property name="targetClass" value="#{converterTargetClassMap['productListEntryData']}"/> -->
+		<property name="populators">
+			<list>
+				<ref bean="productListsEntryPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultProductListsModelConverter" alias="productListsModelConverter" />
+	<bean id="defaultProductListsModelConverter" parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="productListModel" /> -->
+		<property name="targetClass" value="com.hybris.productlists.model.ProductListModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="productListsModelPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultListToCartModificationConverter" alias="listToCartModificationConverter" />
+	<bean id="defaultListToCartModificationConverter" parent="abstractPopulatingConverter" >
+		<!-- <lookup-method name="createTarget" bean="listToCartModification" /> -->
+		<property name="targetClass" value="com.hybris.productlists.data.ListToCartModification"/>
+		<property name="populators">
+			<list>
+				<ref bean="listToCartModificationPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias name="defaultListToCartModificationDataConverter" alias="listToCartModificationDataConverter" />
+	<bean id="defaultListToCartModificationDataConverter" parent="abstractPopulatingConverter" >
+		<!-- <lookup-method name="createTarget" bean="listToCartModificationData" /> -->
+		<property name="targetClass" value="com.hybris.productlists.data.ListToCartModificationData"/>
+		<property name="populators">
+			<list>
+				<ref bean="listToCartModificationDataPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultListToCartModificationPopulator" alias="listToCartModificationPopulator" />
+	<bean id="defaultListToCartModificationPopulator" parent="abstractConfigurablePopulatingConverter" class="com.hybris.productlists.populators.ListToCartModificationPopulator" />
+	<alias name="defaultListToCartModificationDataPopulator" alias="listToCartModificationDataPopulator" />
+	<bean id="defaultListToCartModificationDataPopulator" parent="abstractConfigurablePopulatingConverter" class="com.hybris.productlists.populators.ListToCartModificationDataPopulator" >
+		<property name="cartModificationConverter" ref="cartModificationConverter" />
+	</bean>
+
+		
+	<alias name="defaultProductListsPopulator" alias="productListsPopulator" />
+	<bean id="defaultProductListsPopulator" parent="abstractConfigurablePopulatingConverter" class="com.hybris.productlists.populators.ProductListsPopulator">
+		<property name="productListEntryConverter" ref="productListsEntryConverter" />
+		<property name="productService" ref="productService" />
+	</bean>
+	
+	<alias name="defaultProductListPrincipalPopulator" alias="productListPrincipalPopulator" />
+<!-- 	<bean id="defaultProductListPrincipalPopulator" parent="abstractPopulatingConverter" class="com.hybris.productlists.populators.ProductListPrincipalPopulator"> -->
+	<bean id="defaultProductListPrincipalPopulator" class="com.hybris.productlists.populators.ProductListPrincipalPopulator">
+		<property name="principalConverter" ref="principalConverter" />
+	</bean>
+	<alias name="defaultProductListCanModifyPopulator" alias="productListCanModifyPopulator" />
+	<!-- <bean id="defaultProductListCanModifyPopulator" parent="abstractPopulatingConverter" class="com.hybris.productlists.populators.ProductListCanModifyPopulator"> -->
+	<bean id="defaultProductListCanModifyPopulator" class="com.hybris.productlists.populators.ProductListCanModifyPopulator">
+		<property name="productListModifiableStrategy" ref="productListModifiableStrategy" />
+	</bean>
+
+	<alias name="defaultProductListsEntryPopulator" alias="productListsEntryPopulator" />
+	<bean id="defaultProductListsEntryPopulator"
+		class="com.hybris.productlists.populators.ProductListsEntryPopulator">
+		<property name="productFacade" ref="productFacade" />
+	</bean>
+	
+	<alias name="defaultProductListsModelPopulator" alias="productListsModelPopulator" />
+	<bean id="defaultProductListsModelPopulator" class="com.hybris.productlists.populators.ProductListsModelPopulator"/>
+	
+	<bean id="productlistsCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener"  >
+		<property name="supportedChannels">
+			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+				<value>B2C</value>
+				<value>B2B</value>
+			</list>
+		</property>
+		<property name="addonExtensionMetadata">
+			<bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+				<property name="suffixChannel" value="false" />
+				<property name="baseExtensionName" value="productlists" />
+			</bean>
+		</property>
+	</bean>
+	
+	
+	<aop:config proxy-target-class="true" expose-proxy="true">
+		<aop:aspect id="afterProductListOnLoginAspect" ref="productListOnLoginAspect">
+			<aop:around method="onLogin"
+			            pointcut="execution(* de.hybris.platform.commercefacades.customer.CustomerFacade.loginSuccess(..))"/>
+		</aop:aspect>
+	</aop:config>
+	<alias name="defaultProductListOnLoginAspect" alias="productListOnLoginAspect"/>
+	<bean name="defaultProductListOnLoginAspect" class="com.hybris.productlists.security.aspect.ProductListOnLoginAspect">
+		<property name="productListsFacade" ref="productListsFacade"/>
+	</bean>
+
+
+	<bean id="productListData" class="com.hybris.productlists.data.ProductListData" scope="prototype" />
+	<bean id="productListEntryData" class="com.hybris.productlists.data.ProductListEntryData" scope="prototype" />
+
+	<bean id="listToCartModification"  class="com.hybris.productlists.data.ListToCartModification" scope="prototype" />
+	<bean id="listToCartModificationData"  class="com.hybris.productlists.data.ListToCartModificationData" scope="prototype" />
+
+	<bean id="productListModel" class="com.hybris.productlists.model.ProductListModel" scope="prototype" />
+
+</beans>

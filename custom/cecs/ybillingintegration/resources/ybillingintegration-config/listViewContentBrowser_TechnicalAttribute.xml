@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view header-popup-bean="listViewMenuPopupBuilder" allow-create-inline-items="false">
+    <group name="General">
+    	<property selectable="true" qualifier="TechnicalAttribute.dataId" position="1" name="TechnicalAttribute.dataId" editable="false" sortable="false" visible="true"/>
+        <property selectable="true" qualifier="TechnicalAttribute.dataType" position="2" name="TechnicalAttribute.dataType" editable="false" sortable="false" visible="true"/>
+    </group>
+</list-view>

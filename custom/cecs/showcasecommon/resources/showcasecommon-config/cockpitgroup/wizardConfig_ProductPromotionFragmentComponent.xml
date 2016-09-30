@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+		<group qualifier="editorial" visible="true" initially-opened="true">
+			<label key="config.general.editorial" />
+			<property qualifier="CMSItem.name" visible="true" />
+			<property qualifier="ProductPromotionFragmentComponent.productCode" visible="true" />
+		</group>
+	</displayed-properties>
+</wizard-config>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wizard-config  showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+ <displayed-properties>
+  <group qualifier="Essentials" visible="true" initially-opened="true">
+      <label key="config.general.mandatorydata" />
+      <property qualifier="BundlePackage.code"/>
+      <property qualifier="BundlePackage.name"/>
+      <property qualifier="BundlePackage.description"/>
+      <property qualifier="BundlePackage.catalogVersion"/>
+      <property qualifier="BundlePackage.bundleTemplate"/>
+      <property qualifier="BundlePackage.selectedProducts"/>
+      <property qualifier="BundlePackage.image"/>
+      <property qualifier="BundlePackage.thumbnail"/>
+      <property qualifier="BundlePackage.descriptionSlots"/>
+  </group>
+ </displayed-properties>
+</wizard-config>

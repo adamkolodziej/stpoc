@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view header-popup-bean="listViewMenuPopupBuilder" allow-create-inline-items="false">
+    <group name="General">
+    	<property selectable="true" qualifier="ChangeProductPercentPriceBundleRule.id" position="1" name="ChangeProductPercentPriceBundleRule.id" editable="false" sortable="false" visible="true"/>
+        <property selectable="true" qualifier="ChangeProductPercentPriceBundleRule.name" position="2" name="ChangeProductPercentPriceBundleRule.name" editable="false" sortable="false" visible="true"/>
+        <property selectable="true" qualifier="ChangeProductPercentPriceBundleRule.label" position="3" name="ChangeProductPercentPriceBundleRule.label" editable="false" sortable="false" visible="true"/>
+        <property selectable="true" qualifier="ChangeProductPercentPriceBundleRule.ruleType" position="4" name="ChangeProductPercentPriceBundleRule.ruleType" editable="false" sortable="false" visible="true"/>
+        <property selectable="true" qualifier="ChangeProductPercentPriceBundleRule.billingEvent" position="5" name="ChangeProductPercentPriceBundleRule.billingEvent" editable="false" sortable="false" visible="true"/>
+        <property selectable="true" qualifier="ChangeProductPercentPriceBundleRule.conditionalProducts" position="6" name="ChangeProductPercentPriceBundleRule.conditionalProducts" editable="false" sortable="false" visible="true"/>
+        <property selectable="true" qualifier="ChangeProductPercentPriceBundleRule.targetProducts" position="7" name="ChangeProductPercentPriceBundleRule.targetProducts" editable="false" sortable="false" visible="true"/>
+        <property selectable="true" qualifier="ChangeProductPercentPriceBundleRule.percentageDiscount" position="8" name="ChangeProductPercentPriceBundleRule.percentageDiscount" editable="false" sortable="false" visible="true"/>
+        <property selectable="true" qualifier="ChangeProductPercentPriceBundleRule.principals" position="9" name="ChangeProductPercentPriceBundleRule.principals" editable="false" sortable="false" visible="true"/>
+    </group>
+</list-view>

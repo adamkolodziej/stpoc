@@ -1,0 +1,136 @@
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+<extension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hybris.com/schema/"
+		   xsi:schemaLocation="http://www.hybris.com/schema/ http://www.hybris.com/schema/datahub-metadata-schema-1.2.0.xsd"
+		   name="ybilling-canonical">
+
+	<canonicalItems>
+		<item>
+			<type>ConfigurableProduct</type>
+			<description>Configurable product in yBilling. In yCommerce it can be BundleTemplate or BundlePackage - TBC</description>
+			<status>ACTIVE</status>
+			<attributes>
+				<attribute>
+					<name>identifier</name>
+					<model>
+						<localizable>false</localizable>
+						<collection>false</collection>
+						<type>String</type>
+						<primaryKey>true</primaryKey>
+					</model>
+				</attribute>
+				<attribute>
+					<name>name</name>
+					<model>
+						<localizable>true</localizable>
+						<type>String</type>
+					</model>
+				</attribute>
+				<attribute>
+					<name>configurable</name>
+					<model>
+						<type>Boolean</type>
+					</model>
+				</attribute>
+				<attribute>
+					<name>unit</name>
+					<model>
+						<type>String</type>
+					</model>
+				</attribute>
+				<attribute>
+					<name>numberOfUnits</name>
+					<model>
+						<type>Integer</type>
+					</model>
+				</attribute>
+				<attribute>
+					<name>salesOrganization</name>
+					<model>
+						<type>String</type>
+					</model>
+				</attribute>
+				<attribute>
+					<name>distributionChannel</name>
+					<model>
+						<type>String</type>
+					</model>
+				</attribute>
+				<attribute>
+					<name>contractDuration</name>
+					<model>
+						<type>String</type>
+					</model>
+				</attribute>
+				<attribute>
+					<name>periodUnit</name>
+					<model>
+						<type>String</type>
+					</model>
+				</attribute>
+				<attribute>
+					<name>technicalAttributes</name>
+					<model>
+						<collection>true</collection>
+						<type>TechnicalAttribute</type>
+					</model>
+				</attribute>
+			</attributes>
+		</item>
+
+		<item>
+			<type>TechnicalAttribute</type>
+			<attributes>
+				<attribute>
+					<name>product</name>
+					<model>
+						<type>String</type>
+						<primaryKey>true</primaryKey>
+					</model>
+				</attribute>
+				<attribute>
+					<name>version</name>
+					<model>
+						<type>String</type>
+						<primaryKey>true</primaryKey>
+					</model>
+				</attribute>
+				<attribute>
+					<name>guid</name>
+					<model>
+						<type>String</type>
+					</model>
+				</attribute>
+				<attribute>
+					<name>dataId</name>
+					<model>
+						<type>String</type>
+						<primaryKey>true</primaryKey>
+					</model>
+				</attribute>
+				<attribute>
+					<name>dataDesc</name>
+					<model>
+						<type>String</type>
+					</model>
+				</attribute>
+				<attribute>
+					<name>dataType</name>
+					<model>
+						<type>String</type>
+					</model>
+				</attribute>
+			</attributes>
+		</item>
+	</canonicalItems>
+
+</extension>

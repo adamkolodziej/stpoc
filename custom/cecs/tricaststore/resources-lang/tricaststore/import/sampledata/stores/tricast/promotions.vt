@@ -1,0 +1,51 @@
+# ImpEx for Promotions for Tricast Store
+
+# Language
+\$lang=$lang
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# Load the storefront context root config param
+\$storefrontContextRoot=\$config-storefrontContextRoot
+
+
+#set ( $percentPromotions = $query.load('promotions','ProductPercentageDiscountPromotion') )
+
+UPDATE ProductPercentageDiscountPromotion;code[unique=true];enabled[default=true][unique=true];messageFired[lang=\$lang];name[lang=\$lang]
+#foreach( $row in $percentPromotions )
+ ;$row.key;;"$row.values.messageFired";"$row.values.name"
+#end
+
+
+#set ( $multiBuyPromotions = $query.load('promotions','AcceleratorProductMultiBuyPromotion') )
+
+UPDATE AcceleratorProductMultiBuyPromotion;code[unique=true];enabled[default=true][unique=true];messageCouldHaveFired[lang=\$lang];messageFired[lang=\$lang];name[lang=\$lang];
+#foreach( $row in $multiBuyPromotions )
+ ;$row.key;;"$row.values.messageCouldHaveFired";"$row.values.messageFired";"$row.values.name";
+#end
+
+
+#set ( $bogofPromotions = $query.load('promotions','AcceleratorProductBOGOFPromotion') )
+
+UPDATE AcceleratorProductBOGOFPromotion;code[unique=true];enabled[default=true][unique=true];messageCouldHaveFired[lang=\$lang];messageFired[lang=\$lang];name[lang=\$lang];
+#foreach( $row in $bogofPromotions )
+ ;$row.key;;"$row.values.messageCouldHaveFired";"$row.values.messageFired";"$row.values.name";
+#end
+
+
+#set ( $partnerPromotions = $query.load('promotions','ProductPerfectPartnerPromotion') )
+
+UPDATE ProductPerfectPartnerPromotion;code[unique=true];enabled[default=true][unique=true];messageCouldHaveFired[lang=\$lang];messageFired[lang=\$lang];name[lang=\$lang];
+#foreach( $row in $partnerPromotions )
+ ;$row.key;;"$row.values.messageCouldHaveFired";"$row.values.messageFired";"$row.values.name";
+#end
+
+
+#set ( $partnerPromotions = $query.load('promotions','ProductBundlePromotion') )
+
+UPDATE ProductBundlePromotion;code[unique=true];enabled[default=true][unique=true];messageCouldHaveFired[lang=\$lang];messageFired[lang=\$lang];name[lang=\$lang];
+#foreach( $row in $partnerPromotions )
+ ;$row.key;;"$row.values.messageCouldHaveFired";"$row.values.messageFired";"$row.values.name";
+#end
+

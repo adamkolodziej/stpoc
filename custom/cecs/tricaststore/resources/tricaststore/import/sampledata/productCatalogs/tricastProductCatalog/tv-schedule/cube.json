@@ -1,0 +1,42 @@
+[
+  {
+    name:'FastCast News',
+    id:7,
+    time:{
+      start:'11:00',
+      end:'12:00pm'
+    },
+    length:60,
+    play:false
+  },
+  {
+    name:'Daily Politics',
+    id:8,
+    time:{
+      start:'12:00',
+      end:'1:00pm'
+    },
+    length:60,
+    play:true
+  },
+  {
+    name:'The Chef\'s Secrets',
+    id:80,
+    time:{
+      start:'1:00',
+      end:'1:30pm'
+    },
+    length:30,
+    play:false
+  },
+  {
+    name:'Meet The Humans',
+    id:9,
+    time:{
+      start:'1:30',
+      end:'2:30pm'
+    },
+    length:60,
+    play:false
+  }
+]

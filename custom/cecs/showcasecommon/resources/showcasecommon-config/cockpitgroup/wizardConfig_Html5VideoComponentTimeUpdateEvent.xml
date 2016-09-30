@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+		<group qualifier="editorial" visible="true" initially-opened="true">
+			<label key="config.general.editorial" />
+            <property qualifier="CMSItem.uid" visible="true"/>
+            <property qualifier="CMSItem.name" visible="true"/>
+            <property qualifier="Html5VideoComponentTimeUpdateEvent.contentComponent" visible="true"/>
+            <property qualifier="Html5VideoComponentTimeUpdateEvent.timeStart" visible="true"/>
+            <property qualifier="Html5VideoComponentTimeUpdateEvent.timeEnd" visible="true"/>
+		</group>
+	</displayed-properties>
+</wizard-config>

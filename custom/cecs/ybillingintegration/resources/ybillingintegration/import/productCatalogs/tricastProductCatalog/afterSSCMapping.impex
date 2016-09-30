@@ -1,0 +1,20 @@
+$productCatalog = tricastProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$ruleType = ruleType(code)[default = 'ANY']
+$billingEvent = billingEvent(code)[default = 'onfirstbill']
+
+UPDATE BundleTemplate; id[unique = true]; version[default = $bundleTemplateVersion][unique = true]; products(code, $catalogVersion)[mode=append]; $catalogVersion
+; $bundleTemplateId        ; ;  Sport_trial
+
+
+INSERT_UPDATE DisableProductBundleRule ; id[unique = true]; bundleRuleRestrictions(id, $catalogVersion) ; $catalogVersion ; bundleTemplate(id, version[default = $bundleTemplateVersion], $catalogVersion) ; conditionalProducts(code, $catalogVersion)                          ; targetProducts(code, $catalogVersion) ; $ruleType
+                                        ; SportsTrialDisableRuleSCC; disableCustomOffersBundleRuleRestriction ;                 ; $bundleTemplateId                                     ; tvStarter, tvEntertainment, tvPremium                 ; Sport_trial
+
+INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; $catalogVersion; bundleTemplate(id, version[default = $bundleTemplateVersion], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); name; $ruleType; price; currency(isocode)[default = USD, unique = true]; bundleRuleRestrictions(id, $catalogVersion)
+; TCOaddonPromotionSSC    ; ; $bundleTemplateId ; ; TCO         ; TCO addon Promotion Change Rule ; ; 0 ; ; interestedInTcoBundleRuleRestriction, first3monthsrestriction
+; SportsAddonPromotionSSC ; ; $bundleTemplateId ; ; Sport_trial ; Dummy sports trial Change Rule  ; ; 0 ; ;
+# CECS-129: Guidedselling - change price - TCO promotion(3 months free) - END
+
+UPDATE ChangeProductPriceBundleRule; id[unique = true]; $catalogVersion; csticValueOverrides(key, value)[map-delimiter = |]
+; TCOaddonPromotionSSC                    ; ; FREE_MONTHS_TCO->3 | TV_ADD_TCO->TCO_Y
+; SportsAddonPromotionSSC                 ; ; FREE_MONTHS_SPORTS->1 | TV_ADD_SPORT->SPORTS_Y

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<project name="servicesshowcase_buildcallbacks">
+
+	<target name="install.servicesshowcase" description="Installing the Services Showcase extensions">
+		<servicesshowcase_install />
+	</target>
+
+	<target name="uninstall.servicesshowcase" description="Uninstalling the Services Showcase extensions">
+		<servicesshowcase_uninstall />
+	</target>
+
+	<macrodef name="servicesshowcase_install">
+		<sequential>
+			<property file="${HYBRIS_CONFIG_DIR}/addons.properties" />
+			<property file="${ext.servicesshowcase.path}/addons.properties"  />
+			<property name="services.addons" value="${enabled.b2c.addons},${enabled.services.addons}" />
+            <property name="occ.addons" value="${enabled.occ.addons}" />
+            <echo level="info" message="Installing Services AddOns : ${services.addons}" />
+            <antcall target="addoninstall" >
+                <param name="addonnames" value="${services.addons}" />
+                <param name="addonStorefront.yacceleratorstorefront" value="yacceleratorstorefront" />
+            </antcall>
+            <echo level="info" message="installing OCC AddOns : ${occ.addons}" />
+            <antcall target="addoninstall" >
+                <param name="addonnames" value="${occ.addons}" />
+                <param name="addonStorefront.ycommercewebservices" value="ycommercewebservices" />
+            </antcall>
+			<servicesshowcase_patch_extensions/>
+			<format_extensioninfo/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="servicesshowcase_uninstall">
+		<sequential>
+			<property file="${HYBRIS_CONFIG_DIR}/addons.properties" />
+			<property file="${ext.servicesshowcase.path}/addons.properties"  />
+			<property name="services.addons" value="${enabled.b2c.addons},${enabled.services.addons}" />
+			<echo level="info" message="Uninstalling Services AddOns : ${services.addons}" />
+			<antcall target="addonuninstall" >
+				<param name="addonnames" value="${services.addons}" />
+				<param name="addonStorefront.yacceleratorstorefront" value="yacceleratorstorefront" />
+			</antcall>
+			<format_extensioninfo/>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="servicesshowcase_patch_extensions">
+		<sequential>
+			<dirset dir="${ext.servicesshowcase.path}/patch" includes="*" id="extnames"/>
+			<property name="prop.extnames" refid="extnames"/>
+			<for list="${prop.extnames}" param="extensionname" delimiter=";">
+				<sequential>
+					<foreachext>
+					  	<do>
+						  	<if>
+						  		<and>
+							  		<equals arg1="@{extname}" arg2="@{extensionname}"/>
+							  		<available file="${ext.servicesshowcase.path}/patch/@{extname}" type="dir"/>
+						  		</and>
+							  	<then>
+									<echo level="info" message="patching servicesshowcase to extension @{extname}..."/>
+					  				<copy todir="${ext.@{extname}.path}" overwrite="true" verbose="true">
+					  					<fileset dir="${ext.servicesshowcase.path}/patch/@{extname}">
+					  						<include name="**/**.*"/>
+					  					</fileset>
+					  				</copy>
+							  	</then>
+						  	</if>
+					  	</do>
+				  	</foreachext>
+				</sequential>
+			</for>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="format_extensioninfo">
+		<sequential>
+			<property name="format.extensioninfo.xml" value="${ext.yacceleratorstorefront.path}/extensioninfo.xml"/>
+			<property name="format.extensioninfo.tmp" value="${format.extensioninfo.xml}.tmp"/>
+			<property name="format.extensioninfo.style" value="${ext.servicesshowcase.path}/indent.xsl"/>
+
+			<xslt in="${format.extensioninfo.xml}" out="${format.extensioninfo.tmp}" style="${format.extensioninfo.style}" force="true">
+				<outputproperty name="indent" value="yes"/>
+				<outputproperty name="{http://xml.apache.org/xslt}indent-amount" value="4"/>
+			</xslt>
+			<move file="${format.extensioninfo.tmp}" tofile="${format.extensioninfo.xml}"/>
+		</sequential>
+	</macrodef>
+		
+</project>

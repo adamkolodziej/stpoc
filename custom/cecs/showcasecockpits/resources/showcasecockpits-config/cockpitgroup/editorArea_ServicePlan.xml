@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+    <group qualifier="General" visible="true" tabbed="false" initially-opened="true" show-if-empty="true" show-in-create-mode="true" position="1" printable="true">
+        <label lang="zh">基本</label>
+        <label lang="ru">Базовая</label>
+        <label lang="pt">Básico</label>
+        <label lang="en">Basic</label>
+        <label lang="de">Stammdaten</label>
+        <label lang="es_CO">Básica</label>
+        <label lang="ja">基本</label>
+        <label lang="zh_TW">基本</label>
+        <label lang="it">Base</label>
+        <label lang="es">Básica</label>
+        <label lang="ko">기본</label>
+        <label lang="fr">Données de base</label>
+        <property qualifier="Product.code" visible="true"/>
+        <property qualifier="Product.name" visible="true"/>
+        <property qualifier="Product.catalogVersion" visible="true" editor="shortListEditor"/>
+        <property qualifier="Product.approvalStatus" visible="true"/>
+        <property qualifier="Product.onlineDate" visible="true"/>
+        <property qualifier="Product.offlineDate" visible="true"/>
+        <property qualifier="Product.unit" visible="true"/>
+        <property qualifier="Product.ean" visible="true"/>
+        <property qualifier="Product.description" visible="true" editor="wysiwyg"/>
+        <property qualifier="Product.summary" visible="true"/>
+        <!--CECS-103 Additional properties in editorArea on product types - START-->
+        <property qualifier="product.digitalDelivery" />
+        <property qualifier="product.deliveryModes" />
+        <!--CECS-103 Additional properties in editorArea on product types - END-->
+        <property qualifier="product.customOffer" />
+        <property qualifier="product.eligibleUserGroups" />
+        <property qualifier="product.yBillingId"/>
+        <property qualifier="product.yBillingIdOnRemove"/>
+        <property qualifier="product.csticName"/>
+    </group>
+    <group qualifier="SubscriptionConditions" visible="true" tabbed="false" initially-opened="false" show-if-empty="true" show-in-create-mode="true" position="2" printable="true">
+        <label lang="zh">订阅条款与条件</label>
+        <label lang="ru">Условия и сроки подписки</label>
+        <label lang="pt">Termos e condições da assinatura</label>
+        <label lang="en">Subscription Terms &amp; Conditions</label>
+        <label lang="de">Abonnement – Allgemeine Geschäftsbedingungen</label>
+        <label lang="es_CO">Términos y condiciones de suscripción</label>
+        <label lang="ja">購読利用条件</label>
+        <label lang="zh_TW">订阅条款与条件</label>
+        <label lang="it">Termini e condizioni sottoscrizione</label>
+        <label lang="es">Términos y condiciones de suscripción</label>
+        <label lang="ko">구독 조건</label>
+        <label lang="fr">Conditions générales de l'abonnement</label>
+        <property qualifier="SubscriptionProduct.subscriptionTerm" visible="true">
+            <parameter>
+                <name>showEditButton</name>
+                <value>true</value>
+            </parameter>
+        </property>
+    </group>
+    <custom-group qualifier="classification" visible="true" class="de.hybris.platform.cockpit.services.config.impl.ClassAttrEditorSectionConfiguration" initially-opened="false" show-if-empty="false" printable="true">
+        <label lang="zh">属性</label>
+        <label lang="ru">Атрибуты</label>
+        <label lang="pt">Atributos</label>
+        <label lang="en">Attributes</label>
+        <label lang="de">Attribute</label>
+        <label lang="es_CO">Atributos</label>
+        <label lang="ja">属性</label>
+        <label lang="zh_TW">属性</label>
+        <label lang="it">Attributi</label>
+        <label lang="es">Atributos</label>
+        <label lang="ko">특성</label>
+        <label lang="fr">Attributs</label>
+    </custom-group>
+    <group qualifier="Bundling" visible="true" tabbed="false" initially-opened="true" show-if-empty="true" show-in-create-mode="true" position="4" printable="true">
+        <label lang="zh">捆绑</label>
+        <label lang="ru">Комплектация</label>
+        <label lang="pt">Colocar no conjunto</label>
+        <label lang="en">Bundling</label>
+        <label lang="de">Bundling</label>
+        <label lang="es_CO">Creación de paquetes</label>
+        <label lang="ja">バンドル作成</label>
+        <label lang="zh_TW">捆绑</label>
+        <label lang="it">Creazione di pacchetto</label>
+        <label lang="es">Creación de paquetes</label>
+        <label lang="ko">번들로 묶음</label>
+        <label lang="fr">Création d'offres groupées</label>
+        <property qualifier="Product.soldIndividually" visible="true"/>
+        <property qualifier="Product.bundleTemplates" visible="true"/>
+    </group>
+    <group qualifier="Category" visible="true" tabbed="false" initially-opened="false" show-if-empty="true" show-in-create-mode="true" position="5" printable="true">
+        <label lang="zh">类别系统</label>
+        <label lang="ru">Система категории</label>
+        <label lang="pt">Sistema de categorias</label>
+        <label lang="en">Category System</label>
+        <label lang="de">Kategoriesystem</label>
+        <label lang="es_CO">Sistema de categorías</label>
+        <label lang="ja">カテゴリ システム</label>
+        <label lang="zh_TW">类别系统</label>
+        <label lang="it">Sistema di categoria</label>
+        <label lang="es">Sistema de categorías</label>
+        <label lang="ko">범주 시스템</label>
+        <label lang="fr">Système de catégories</label>
+        <property qualifier="Product.supercategories" visible="true"/>
+        <property qualifier="Product.productReferences" visible="true" editor="browserContextEditor"/>
+    </group>
+    <group qualifier="SubscriptionPricePlan" visible="true" tabbed="false" initially-opened="false" show-if-empty="true" show-in-create-mode="true" position="6" printable="true">
+        <label lang="zh">订阅价格套餐</label>
+        <label lang="ru">Тарифные планы подписки</label>
+        <label lang="pt">Planos de preços de assinatura</label>
+        <label lang="en">Subscription Price Plans</label>
+        <label lang="de">Abonnementkostenpläne</label>
+        <label lang="es_CO">Planes de precios de suscripción</label>
+        <label lang="ja">購読価格計画</label>
+        <label lang="zh_TW">订阅价格套餐</label>
+        <label lang="it">Piani di prezzo sottoscrizione</label>
+        <label lang="es">Planes de precios de suscripción</label>
+        <label lang="ko">구독 가격 계획</label>
+        <label lang="fr">Plans de tarification d'abonnement</label>
+        <property qualifier="Product.europe1Prices" visible="true">
+            <parameter>
+                <name>allowSelect</name>
+                <value>false</value>
+            </parameter>
+            <parameter>
+                <name>allowAutocompletion</name>
+                <value>false</value>
+            </parameter>
+            <parameter>
+                <name>restrictToCreateTypes</name>
+                <value>SubscriptionPricePlan+</value>
+            </parameter>
+        </property>
+    </group>
+    <group qualifier="Entitlements" visible="true" tabbed="false" initially-opened="false" show-if-empty="true" show-in-create-mode="true" position="7" printable="true">
+        <label lang="zh">包含的权益</label>
+        <label lang="ru">Включенные права</label>
+        <label lang="pt">Direitos incluídos</label>
+        <label lang="en">Included Entitlements</label>
+        <label lang="de">Enthaltene Berechtigungen</label>
+        <label lang="es_CO">Derechos incluidos</label>
+        <label lang="ja">含まれた資格</label>
+        <label lang="zh_TW">包含的权益</label>
+        <label lang="it">Diritti inclusi</label>
+        <label lang="es">Derechos incluidos</label>
+        <label lang="ko">포함된 자격</label>
+        <label lang="fr">Droits inclus</label>
+        <property qualifier="Product.productEntitlements" visible="true">
+            <parameter>
+                <name>allowSelect</name>
+                <value>false</value>
+            </parameter>
+            <parameter>
+                <name>allowAutocompletion</name>
+                <value>false</value>
+            </parameter>
+            <parameter>
+                <name>restrictToCreateTypes</name>
+                <value>ProductEntitlement+
+				</value>
+            </parameter>
+        </property>
+    </group>
+    <group qualifier="Multimedia" visible="true" tabbed="false" initially-opened="false" show-if-empty="true" show-in-create-mode="true" position="8" printable="true">
+        <label lang="zh">多媒体</label>
+        <label lang="ru">Мультимедиа</label>
+        <label lang="pt">Multimídia</label>
+        <label lang="en">Multimedia</label>
+        <label lang="de">Multimedia</label>
+        <label lang="es_CO">Multimedia</label>
+        <label lang="ja">マルチメディア</label>
+        <label lang="zh_TW">多媒体</label>
+        <label lang="it">Elementi multimediali</label>
+        <label lang="es">Multimedia</label>
+        <label lang="ko">멀티미디어</label>
+        <label lang="fr">Multimédia</label>
+        <property qualifier="Product.galleryImages" visible="true"/>
+        <property qualifier="Product.picture" visible="true" editor="simpleMediaReferenceSelector">
+            <parameter>
+                <name>imageHeight</name>
+                <value>80px</value>
+            </parameter>
+            <parameter>
+                <name>allowCreate</name>
+                <value>true</value>
+            </parameter>
+            <parameter>
+                <name>celumMediaFormat</name>
+                <value>picture</value>
+            </parameter>
+            <parameter>
+                <name>predefinedValuesStrategy</name>
+                <value>imageMediaPredefinedValuesStrategy</value>
+            </parameter>
+            <parameter>
+                <name>restrictToCreateTypes</name>
+                <value>Media,CelumAsset+</value>
+            </parameter>
+            <parameter>
+                <name>mimeTypes</name>
+                <value>image/jpeg;image/gif;image/png</value>
+            </parameter>
+        </property>
+        <property qualifier="Product.thumbnail" visible="true" editor="simpleMediaReferenceSelector">
+            <parameter>
+                <name>allowCreate</name>
+                <value>true</value>
+            </parameter>
+            <parameter>
+                <name>celumMediaFormat</name>
+                <value>thumbnail</value>
+            </parameter>
+            <parameter>
+                <name>predefinedValuesStrategy</name>
+                <value>imageMediaPredefinedValuesStrategy</value>
+            </parameter>
+            <parameter>
+                <name>restrictToCreateTypes</name>
+                <value>Media,CelumAsset+</value>
+            </parameter>
+            <parameter>
+                <name>mimeTypes</name>
+                <value>image/jpeg;image/gif;image/png</value>
+            </parameter>
+        </property>
+        <property qualifier="Product.data_sheet" visible="true" editor="celumMediaReferenceCollectionSelector">
+            <parameter>
+                <name>celumMediaFormat</name>
+                <value>picture</value>
+            </parameter>
+            <parameter>
+                <name>allowCreate</name>
+                <value>true</value>
+            </parameter>
+        </property>
+        <property qualifier="Product.detail" visible="true" editor="celumMediaReferenceCollectionSelector">
+            <parameter>
+                <name>celumMediaFormat</name>
+                <value>picture</value>
+            </parameter>
+            <parameter>
+                <name>allowCreate</name>
+                <value>true</value>
+            </parameter>
+            <parameter>
+                <name>restrictToCreateTypes</name>
+                <value>Media,CelumAsset+</value>
+            </parameter>
+        </property>
+        <property qualifier="Product.logo" visible="true" editor="celumMediaReferenceCollectionSelector">
+            <parameter>
+                <name>celumMediaFormat</name>
+                <value>picture</value>
+            </parameter>
+            <parameter>
+                <name>allowCreate</name>
+                <value>true</value>
+            </parameter>
+            <parameter>
+                <name>restrictToCreateTypes</name>
+                <value>Media,CelumAsset+</value>
+            </parameter>
+        </property>
+        <property qualifier="Product.normal" visible="true" editor="celumMediaReferenceCollectionSelector">
+            <parameter>
+                <name>celumMediaFormat</name>
+                <value>picture</value>
+            </parameter>
+            <parameter>
+                <name>allowCreate</name>
+                <value>true</value>
+            </parameter>
+            <parameter>
+                <name>restrictToCreateTypes</name>
+                <value>Media,CelumAsset+</value>
+            </parameter>
+        </property>
+        <property qualifier="Product.others" visible="true" editor="celumMediaReferenceCollectionSelector">
+            <parameter>
+                <name>celumMediaFormat</name>
+                <value>picture</value>
+            </parameter>
+            <parameter>
+                <name>allowCreate</name>
+                <value>true</value>
+            </parameter>
+        </property>
+        <property qualifier="Product.thumbnails" visible="true" editor="celumMediaReferenceCollectionSelector">
+            <parameter>
+                <name>celumMediaFormat</name>
+                <value>thumbnail</value>
+            </parameter>
+            <parameter>
+                <name>allowCreate</name>
+                <value>true</value>
+            </parameter>
+            <parameter>
+                <name>restrictToCreateTypes</name>
+                <value>Media,CelumAsset+</value>
+            </parameter>
+        </property>
+    </group>
+    <group qualifier="variants" visible="false" tabbed="false" initially-opened="false" show-if-empty="true" show-in-create-mode="true" position="9" printable="true">
+        <label lang="zh">变量</label>
+        <label lang="ru">Варианты</label>
+        <label lang="pt">Variantes</label>
+        <label lang="en">Variants</label>
+        <label lang="de">Varianten</label>
+        <label lang="es_CO">Variantes</label>
+        <label lang="ja">バリアント</label>
+        <label lang="zh_TW">变量</label>
+        <label lang="it">Varianti</label>
+        <label lang="es">Variantes</label>
+        <label lang="ko">변형</label>
+        <label lang="fr">Variantes</label>
+        <property qualifier="Product.variantType" visible="true">
+            <parameter>
+                <name>allowCreate</name>
+                <value>false</value>
+            </parameter>
+        </property>
+        <property qualifier="Product.variants" visible="true" editor="browserContextEditor"/>
+    </group>
+    <group qualifier="additional" visible="true" tabbed="false" initially-opened="false" show-if-empty="true" show-in-create-mode="true" position="10" printable="true">
+        <label lang="zh">已扩展</label>
+        <label lang="ru">Расширенная</label>
+        <label lang="pt">Extended</label>
+        <label lang="en">Extended</label>
+        <label lang="de">Erweitert</label>
+        <label lang="es_CO">Extendida</label>
+        <label lang="ja">拡張</label>
+        <label lang="zh_TW">已扩展</label>
+        <label lang="it">Esteso</label>
+        <label lang="es">Extendida</label>
+        <label lang="ko">확장됨</label>
+        <label lang="fr">Etendu</label>
+        <property qualifier="Product.manufacturerAID" visible="true"/>
+        <property qualifier="Product.manufacturerName" visible="true"/>
+        <property qualifier="Product.deliveryTime" visible="false"/>
+        <property qualifier="Product.contentUnit" visible="true"/>
+        <property qualifier="Product.numberContentUnits" visible="false"/>
+        <property qualifier="Product.remarks" visible="true"/>
+        <property qualifier="Product.keywords" visible="true" editor="multi"/>
+    </group>
+    <group qualifier="bmecat" visible="true" tabbed="false" initially-opened="false" show-if-empty="true" show-in-create-mode="true" position="11" printable="true">
+        <label lang="zh">BMEcat</label>
+        <label lang="ru">BMEcat</label>
+        <label lang="pt">BMEcat</label>
+        <label lang="en">BMEcat</label>
+        <label lang="de">BMEcat</label>
+        <label lang="es_CO">BMEcat</label>
+        <label lang="ja">BMEcat</label>
+        <label lang="zh_TW">BMEcat</label>
+        <label lang="it">BMEcat</label>
+        <label lang="es">BMEcat</label>
+        <label lang="ko">BMEcat</label>
+        <label lang="fr">BMEcat</label>
+        <property qualifier="Product.manufacturerTypeDescription" visible="true"/>
+        <property qualifier="Product.supplierAlternativeAID" visible="true"/>
+        <property qualifier="Product.erpGroupBuyer" visible="true"/>
+        <property qualifier="Product.erpGroupSupplier" visible="true"/>
+        <property qualifier="Product.segment" visible="true"/>
+        <property qualifier="Product.order" visible="true"/>
+        <property qualifier="Product.orderQuantityInterval" visible="true"/>
+    </group>
+    <custom-group qualifier="comments" visible="true" spring-bean="CommentsSection" initially-opened="false" show-if-empty="true" printable="true">
+        <label lang="zh">注释</label>
+        <label lang="ru">Комментарии</label>
+        <label lang="pt">Comentários</label>
+        <label lang="en">Comments</label>
+        <label lang="de">Kommentare</label>
+        <label lang="es_CO">Comentarios</label>
+        <label lang="ja">コメント</label>
+        <label lang="zh_TW">注释</label>
+        <label lang="it">Commenti</label>
+        <label lang="es">Comentarios</label>
+        <label lang="ko">주석</label>
+        <label lang="fr">Commentaires</label>
+    </custom-group>
+    <group qualifier="admin" visible="true" tabbed="false" initially-opened="false" show-if-empty="true" show-in-create-mode="true" position="13" printable="true">
+        <label lang="zh">管理</label>
+        <label lang="ru">Администрирование</label>
+        <label lang="pt">Administração</label>
+        <label lang="en">Administration</label>
+        <label lang="de">Verwaltung</label>
+        <label lang="es_CO">Administración</label>
+        <label lang="ja">管理</label>
+        <label lang="zh_TW">管理</label>
+        <label lang="it">Amministrazione</label>
+        <label lang="es">Administración</label>
+        <label lang="ko">관리</label>
+        <label lang="fr">Administration</label>
+        <property qualifier="Item.pk" visible="true"/>
+        <property qualifier="Item.creationtime" visible="true"/>
+        <property qualifier="Item.modifiedtime" visible="true"/>
+        <property qualifier="Item.assignedCockpitItemTemplates" visible="true"/>
+    </group>
+    <custom-group qualifier="unassigned" visible="false" class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" initially-opened="false" show-if-empty="true" printable="true">
+        <label lang="zh">其他</label>
+        <label lang="ru">Другая</label>
+        <label lang="pt">Outro</label>
+        <label lang="en">Other</label>
+        <label lang="de">Andere</label>
+        <label lang="es_CO">Otros</label>
+        <label lang="ja">その他</label>
+        <label lang="zh_TW">其他</label>
+        <label lang="it">Altro</label>
+        <label lang="es">Otros</label>
+        <label lang="ko">기타</label>
+        <label lang="fr">Autre</label>
+    </custom-group>
+</editor>

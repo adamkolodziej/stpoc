@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <parent>
+        <groupId>com.hybris.showcase</groupId>
+        <artifactId>ybilling</artifactId>
+        <version>1.0</version>
+    </parent>
+    
+	<modelVersion>4.0.0</modelVersion>
+    
+	<artifactId>ybilling-canonical</artifactId>
+
+    <dependencies>
+        <!-- CECS-587 create DataHub endpoint to load CRM iDoc XML -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-bundle</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-core</artifactId>
+        </dependency>
+        <!-- END: CECS-587 create DataHub endpoint to load CRM iDoc XML -->
+    </dependencies>
+    <build>
+            <plugins>                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.7</version>
+                    <executions>
+                        <execution>
+                            <id>copy</id>
+                            <phase>install</phase>
+                            <configuration>
+                                    <target name="copy build files to coreplus datahub">
+                                        <copy file="target/ybilling-canonical-1.0.jar" todir="../../../../../coreplus/apache-tomcat/datahub/extensions/" />
+                                    </target>
+                            </configuration>
+                            <goals>
+                                <goal>run</goal> <!-- means antrun:run -->
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+</project>

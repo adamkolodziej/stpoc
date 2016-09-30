@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+
+<content-element type="AddProductToProductListComponent" name="type.addproducttoproductlistcomponent.name"
+							description="type.addproducttoproductlistcomponent.description"
+							image="cmscockpit/images/icon-prodlists-heart-34x34.png"
+							refImage="cmscockpit/images/icon-prodlists-heart-34x34.png"
+							imageSmall="cmscockpit/images/icon-prodlists-heart-20x20.png"/>
+</content-elements>

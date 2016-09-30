@@ -1,0 +1,39 @@
+# CECS-381 integrate SSC
+$sap_config=cecs
+$rfcdest=SPACE
+$order_type=TA
+$dist_channel=10
+$sales_org=O 50000608
+$division=10
+$conditions=30
+$customer=
+
+INSERT_UPDATE SAPRFCDestination ; rfcDestinationName[unique=true] ; client      ; userid ; password ; targetHost ; instance ; sid
+; $rfcdest                        ; 200 ; HYBRISUSER  ; welcome    ; cicr3.wdf.sap.corp  ; 00 ; CR3
+
+INSERT_UPDATE SAPConfiguration ; core_name[unique=true] ; SAPRFCDestination(rfcDestinationName) ; sapproductconfig_sapRFCDestination ; sapproductconfig_sapServer(rfcDestinationName)
+; $sap_config            ; $rfcdest                              ; $rfcdest                           ; $rfcdest
+
+UPDATE SAPConfiguration ; core_name[unique=true] ; sapcommon_distributionChannel ; sapcommon_salesOrganization ; sapcommon_division ; sapcommon_transactionType ; sapcommon_referenceCustomer
+; $sap_config            ; $dist_channel                 ; $sales_org                  ; $division          ; $order_type               ; $customer
+
+$pricing_enabled=false
+UPDATE SAPConfiguration ; core_name[unique=true] ; sapproductconfig_enable_pricing ; sapproductconfig_condfunc_selectedoptions ; sapproductconfig_condfunc_baseprice ; sapproductconfig_pricingprocedure
+; $sap_config            ; $pricing_enabled                ;                                    ;                           ;
+
+INSERT_UPDATE ReferenceDistributionChannelMapping ; salesOrganization[unique=true] ; distChannel[unique=true] ; distChannelName[lang=en]  ; refDistChannelConditions ; refDistChannelConditionsName[lang=en] ; refDistChannelCustMat ; refDistChannelCustMatName[lang=en] ;
+; $sales_org                     ; $dist_channel            ; "Distribution Channel $dist_channel" ; $dist_channel                       ; "Distribution Channel $dist_channel"             ; $dist_channel                    ; "Distribution Channel $dist_channel"
+
+INSERT_UPDATE ReferenceDivisionMapping ; salesOrganization[unique=true] ; division[unique=true] ; divisionName[lang=en] ; refDivisionConditions ; refDivisionConditionsName[lang=en] ; refDivisionCustomer ; refDivisionCustomerName[lang=en]
+; $sales_org                     ; $division             ; "Productdivision $division"  ; $division                    ; "Productdivision $division"               ; $division                  ; "Product Division $division"
+
+INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
+;GB;GB-LND;LND;"London"
+;GB;GB-MAN;MAN;"Manchester"
+;GB;GB-MDB;MDB;"Middlesbrough"
+;GB;GB-LCE;LCE;"Leicester"
+;DE;DE-BW;BW;"Baden-Württemberg"
+;DE;DE-BY;BY;"Bayern"
+;DE;DE-BE;BE;"Berlin"
+;DE;DE-HH;HH;"Hamburg"
+;DE;DE-HB;HB;"Bremen"

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <enum class="com.hybris.showcase.servicesshowcase.data.Severity">
+        <value>Info</value>
+        <value>Warn</value>
+        <value>Error</value>
+    </enum>
+
+    <bean class="com.hybris.showcase.servicesshowcase.data.ControlPanelData">
+        <property name="messages" type="java.util.List&lt;ControlPanelMessage>" />
+        <property name="controlPanelProperties" type="java.util.List&lt;ControlPanelPropertyData>"/>
+        <property name="controlPanelUrls" type="java.util.List&lt;ControlPanelUrlData>"/>
+    </bean>
+    <bean class="com.hybris.showcase.servicesshowcase.data.ControlPanelPropertyData">
+        <property name="key" type="java.lang.String"/>
+        <property name="value" type="java.lang.String"/>
+        <property name="possibleValues" type="java.util.List&lt;java.lang.String>"/>
+    </bean>
+    <bean class="com.hybris.showcase.servicesshowcase.data.ControlPanelUrlData">
+        <property name="label" type="java.lang.String"/>
+        <property name="url" type="java.lang.String"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.servicesshowcase.data.ControlPanelMessage">
+        <property name="severity" type="Severity" />
+        <property name="content" type="java.lang.String" />
+    </bean>
+
+</beans>

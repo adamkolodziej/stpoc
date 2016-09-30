@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+
+        <itemtype code="AbstractOrderEntry" generate="false" autocreate="false">
+            <attributes>
+                <!--CECS-14 loyalty points step - START-->
+                <attribute autocreate="true" qualifier="loyaltyPoints" type="java.lang.Double" generate="true">
+                    <persistence type="property" qualifier="LoyaltyPts">
+                        <columntype>
+                            <value>java.math.BigDecimal</value>
+                        </columntype>
+                    </persistence>
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                    <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+                </attribute>
+                <!--CECS-14 loyalty points step - END-->
+                <attribute qualifier="loyaltyPayment" type="boolean">
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <!--CECS-14 loyalty points step - START-->
+        <itemtype code="AbstractOrder"
+                  autocreate="false"
+                  generate="false">
+            <attributes>
+                <attribute autocreate="true" qualifier="totalLoyaltyPoints" type="java.lang.Double" generate="true">
+                    <persistence type="property" qualifier="TotalLoyaltyPts">
+                        <columntype>
+                            <value>java.math.BigDecimal</value>
+                        </columntype>
+                    </persistence>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+                </attribute>
+
+            </attributes>
+        </itemtype>
+        <!--CECS-14 loyalty points step - END-->
+
+
+	</itemtypes>
+</items>

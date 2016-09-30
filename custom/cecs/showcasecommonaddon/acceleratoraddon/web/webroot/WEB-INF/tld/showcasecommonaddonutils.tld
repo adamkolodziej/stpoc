@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+
+	<tlib-version>1.0</tlib-version>
+	<short-name>showcasecommonaddonutils</short-name>
+	<uri>http://hybris.com/tld/showcasecommonaddonutils</uri>
+
+	<function>
+		<description>
+			Function invoke method for given name on given object and returns value
+		</description>
+		<name>getCustomFieldStringValue</name>
+		<function-class>com.hybris.showcase.tags.ShowcaseCommonAddonUtilsFunctions</function-class>
+		<function-signature>java.lang.String getCustomFieldStringValue(java.lang.Object,java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<description>
+			Function invoke method for given name on given object and returns value
+		</description>
+		<name>getCustomFieldCollectionValue</name>
+		<function-class>com.hybris.showcase.tags.ShowcaseCommonAddonUtilsFunctions</function-class>
+		<function-signature>java.lang.Collection getCustomFieldCollectionValue(java.lang.Object,java.lang.String)</function-signature>
+	</function>
+
+</taglib>

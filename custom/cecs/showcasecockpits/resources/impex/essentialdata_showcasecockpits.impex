@@ -1,0 +1,34 @@
+INSERT_UPDATE ComponentTypeGroups2ComponentType; source(code)[unique = true]; target(code)[unique = true]
+; wide   ; FixedProductSetComponent
+; wide   ; SlickProductCarouselComponent
+; narrow ; FixedProductSetComponent
+; narrow ; SlickProductCarouselComponent
+
+# CECS-68 responsive my-account homepage - cms START
+; wide   ; SocialAccountBodySubComponent
+; wide   ; DetailAccountBodySettingsSubComponent
+; wide   ; DetailAccountBodyBillingSubComponent
+; wide   ; HelpAccountBodySubComponent
+; wide   ; TileAccountBodySubComponent
+
+# CECS-69 component to switch billing options START
+; wide	; BillingOptionsComponent
+; wide	; AccountEditBodyComponent
+; wide	; AccountEditSideComponent
+
+# CECS-171 Product basic details component - START
+; wide	; SimpleProductImageCarouselComponent
+; wide	; ProductDetailsNameComponent
+; wide	; ProductDetailsPriceComponent
+; wide	; ProductDetailsReviewSummaryComponent
+; wide	; ProductDetailsVariantSelectorComponent
+; wide	; ProductDetailsSocialButtonsComponent
+; wide	; ProductDetailsSummaryComponent
+# CECS-172 Product related items component - START
+; wide	; ProductDetailsRelatedComponent
+# CECS-172 Product related items component - END
+# CECS-173 Product reviews component - START
+; wide	; ProductDetailsReviewComponent
+# CECS-173 Product reviews component - END
+; wide	; BlogArticleDetailsComponent
+; wide	; RemainingLoyaltyPointsComponent

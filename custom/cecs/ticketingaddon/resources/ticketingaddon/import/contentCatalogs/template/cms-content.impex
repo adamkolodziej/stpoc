@@ -1,0 +1,68 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * addonExtensionName - extension name of the ui addon 
+#######
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$lang=en
+
+# Functional Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;title[lang=en];defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;tickets;Ticket History Page;AccountPageTemplate;ticket;Requests History Page
+;;add-edit-ticket;Edit Ticket Page;AccountPageTemplate;add-edit-ticket;Edit Request Page
+;;ticket-details;Ticket Details Page;AccountPageTemplate;ticket-details;Request Details Page
+;;ticket-details;Ticket Details Page;AccountPageTemplate;ticket-details;Request Details Page
+# CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie
+;;entitlement-console;Entitlement Console Page;AccountPageTemplate;entitlement-console;Entitlement Console Page
+
+# CECS-226 Customer access the customer service portal and files a complaint saying complaint saying "service not working, very urgent"
+INSERT_UPDATE ContentSlot	; $contentCV[unique = true]; uid[unique = true]         ; name                                      ; active  ; cmsComponents(&componentRef) ; ; ;
+							;                          ; BodyContent-tickets 		; Body Content Slot for Ticket History Page ; true    ; TicketsComponent             ; ; ;
+							;                          ; BodyContent-add-edit-ticket; Body Content Slot for Edit Ticket Page 	; true 	  ; AddEditTicketComponent       ; ; ;
+							;                          ; BodyContent-ticket-details ; Body Content Slot for Ticket Details Page ; true 	  ; TicketDetailsComponent       ; ; ;
+# CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie
+							;                          ; BodyContent-entitlement-console ; Body Content Slot for Entitlement Console Page ; true 	  ; EntitlementConsoleComponent       ; ; ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]          ; position[unique = true] ; page(uid, $contentCV)[unique = true][default = 'tickets']; contentSlot(uid, $contentCV)[unique = true] ; ; ;
+								;                          ; BodyContent-tickets         ; BodyContent             ; tickets                                                  ; BodyContent-tickets 						; ; ;
+								;                          ; BodyContent-add-edit-ticket ; BodyContent             ; add-edit-ticket                                          ; BodyContent-add-edit-ticket 				; ; ;
+								;                          ; BodyContent-ticket-details  ; BodyContent             ; ticket-details                                           ; BodyContent-ticket-details 					; ; ;
+# CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie
+								;						   ; BodyContent-entitlement-console ; BodyContent		   ; entitlement-console									  ; BodyContent-entitlement-console				; ; ;
+
+$ticketingAddonDir=/WEB-INF/views/addons/ticketingaddon/desktop/pages/account
+INSERT_UPDATE JspIncludeComponent	; $contentCV[unique = true]	; uid[unique = true]	; name						; page												; actions(uid, $contentCV)	; &componentRef
+									; 							; TicketsComponent		; Ticket History Component	; $ticketingAddonDir/accountTicketHistoryPage.jsp	; 							; TicketsComponent
+									; 							; AddEditTicketComponent; Ticket Edit Component		; $ticketingAddonDir/accountEditTicketPage.jsp		; 							; AddEditTicketComponent
+									; 							; TicketDetailsComponent; Ticket Details Component	; $ticketingAddonDir/accountTicketDetailsPage.jsp	; 							; TicketDetailsComponent
+# CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie
+									;							; EntitlementConsoleComponent; Entitlement Console Component ; $ticketingAddonDir/../entitlementConsole.jsp;						; EntitlementConsoleComponent
+
+# Content Pages
+UPDATE ContentPage	;$contentCV[unique=true]; uid[unique=true]	; title[lang=$lang]
+ 					;						; tickets			; "Support Request History"
+
+
+INSERT_UPDATE AccountExpensesComponent	; $contentCV[unique = true]	; uid[unique = true]		; actions(uid, $contentCV)
+										; 						; AccountExpensesComponent	; DisputeExpenseLinkAction
+
+
+INSERT_UPDATE ApplicableCmsActionsTypeForCmsComponent	; target(code)[unique = true]	; source(code)[unique = true]
+														; AccountExpensesComponent 		; DisputeExpenseLinkAction
+
+INSERT_UPDATE CMSActionRestriction	; $contentCV[unique = true]; uid[unique = true]							; name
+									; 					; DisputeExpenseLinkActionRestriction 	; Dispute Expense Link Action Restriction
+
+
+INSERT_UPDATE DisputeExpenseLinkAction	; $contentCV[unique = true]	; uid[unique = true]		; url					; name							; restrictions(uid, $contentCV)			; &actionRef
+										; 						; DisputeExpenseLinkAction 	; /my-account/expenses 	; Dispute Expense Link Action 	; DisputeExpenseLinkActionRestriction 	; DisputeExpenseLinkAction
+
+$ticketingaddonDir = /WEB-INF/views/addons/ticketingaddon/desktop/pages/
+# CECS-571 expense dispute page
+INSERT_UPDATE JspIncludeComponent	; $contentCV[unique = true]	; uid[unique = true]				; name						; page												; actions(uid, $contentCV)	; &componentRef
+									; 							; AccountExpenseDisputesComponent   ; Expense Disputes Component; $ticketingaddonDir/accountExpenseDisputesPage.jsp ;    						; AccountExpenseDisputesComponent
+
+### CECS-571 expense dispute page
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-accountExpenseDisputes ; Body Content Slot for Expense Disputes ; true ; AccountExpenseDisputesComponent ; ; ;

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/mvc
+	       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+           http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<context:component-scan base-package="com.hybris.productlists.controllers" />
+
+	<bean id="addProductToProductListComponentRenderer" parent="addOnJspIncludeCMSComponentRenderer"
+		class="com.hybris.productlists.component.renderer.AddProductToProductListComponentRenderer" >
+	
+	</bean>
+
+	<bean id="AddProductToProductListComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+		<property name="typeCode" value="AddProductToProductListComponent" />
+		<property name="renderer" ref="addProductToProductListComponentRenderer" />
+	</bean>
+	
+	 	<!--  Adds to the servlet filter chain a filter the determines the Facebook Application thats configured to support the current site -->
+	<bean id="productListsFilterListMergeDirective" depends-on="storefrontTenantDefaultFilterChainList" parent="listMergeDirective" >
+		<property name="add" ref="productListsRestorationFilter" />
+		<property name="afterBeanNames">
+			<list value-type="java.lang.String" >
+				<value>cmsSiteFilter</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="productListsRestorationFilter" class="com.hybris.productlists.filters.ProductListsRestorationFilter" >
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="productListsFacade" ref="productListsFacade"/>
+		<property name="productListRestoreCookieGenerator" ref="productListsRestoreCookieGenerator"/>
+		<property name="userService" ref="userService"/>
+		<property name="sessionService" ref="sessionService"/>	
+	</bean>
+
+	<bean id="productListCookieNameMethodReplacer" class="com.hybris.productlists.security.cookie.ProductListCookieNameMethodReplacer" >
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="listType" value="WISHLIST" />
+	</bean>
+
+	<bean id="defaultProductListsJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="productlists"/>
+	</bean>
+
+	<bean id="defaultProductListsBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultProductListsJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getProductListsBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultProductListsBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	<bean id="productListsBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getProductListsBeforeViewHandler"/>
+	</bean>
+
+	<bean id="productListsAccountTileComponentRenderer" parent="genericAddOnCMSComponentRenderer"
+		  class="com.hybris.productlists.component.renderer.ProductListsAccountTileComponentRenderer" >
+		<property name="productListsFacade" ref="productListsFacade"/>
+	</bean>
+	<bean id="productListsAccountTileComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+		<property name="typeCode" value="ProductListsAccountTileComponent" />
+		<property name="renderer" ref="productListsAccountTileComponentRenderer" />
+	</bean>
+
+</beans>

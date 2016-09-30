@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8'?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schema.charging.ws.highdeal.com/" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:core="http://schema.ws.highdeal.com/" jaxb:version="2.0" targetNamespace="http://schema.charging.ws.highdeal.com/" version="1.0">
+
+  <xs:import namespace="http://schema.ws.highdeal.com/" schemaLocation="core_schema.xsd"/>
+
+  <xs:element name="chargeableItemChargeRequest" type="tns:ChargeableItemChargeRequest"/>
+  <xs:element name="chargeableItemChargeResponse" type="tns:ChargeableItemChargeResponse"/>
+  <xs:element name="chargeableItemChargeMassRequest" type="tns:ChargeableItemChargeMassRequest"/>
+  <xs:element name="chargeableItemChargeMassResponse" type="tns:ChargeableItemChargeMassResponse"/>
+  <xs:element name="chargeableItemChargeBundleRequest" type="tns:ChargeableItemChargeBundleRequest"/>
+  <xs:element name="chargeableItemChargeBundleResponse" type="tns:ChargeableItemChargeBundleResponse"/>
+  <xs:element name="chargeableItemCheckChargeRequest" type="tns:ChargeableItemCheckChargeRequest"/>
+  <xs:element name="chargeableItemCheckChargeResponse" type="tns:ChargeableItemCheckChargeResponse"/>
+
+  <!-- Operation Message: Chargeable Item Charge -->
+
+  <xs:complexType name="ChargeableItemChargeRequest">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="context" type="tns:ChargeableItemChargeContext"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="chargeableItem" type="tns:ChargeableItem"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargeableItemChargeResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:ChargingResponse"/>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Operation Message: Chargeable Item Charge Mass -->
+
+  <xs:complexType name="ChargeableItemChargeMassRequest">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="context" type="tns:ChargeableItemChargeContext"/>
+      <xs:element maxOccurs="1000" minOccurs="0" name="chargeableItemChargeRequest" type="tns:ChargeableItemChargeRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargeableItemChargeMassResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:Response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="chargeableItemChargeResponse" type="tns:ChargeableItemChargeResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Operation Message: Chargeable Item Charge Bundle -->
+
+  <xs:complexType name="ChargeableItemChargeBundleRequest">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="context" type="tns:ChargeableItemChargeContext"/>
+      <xs:element maxOccurs="1000" minOccurs="0" name="chargeableItemChargeRequest" type="tns:ChargeableItemChargeRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargeableItemChargeBundleResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:Response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="chargeableItemChargeResponse" type="tns:ChargeableItemChargeResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Operation Message: Chargeable Item Check Charge -->
+
+  <xs:complexType name="ChargeableItemCheckChargeRequest">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="context" type="tns:ChargeableItemChargeContext"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="chargeableItem" type="tns:ChargeableItem"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargeableItemCheckChargeResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:ChargingResponse"/>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Charging Operation Context -->
+
+  <xs:complexType name="ChargeableItemChargeContext">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="senderInfo" type="tns:SenderContext"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="chargingOutputContext" type="tns:ChargingOutputContext"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="chargingResultContext" type="tns:ChargingResultContext"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SenderContext">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="jobId" type="core:Integer22"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargingOutputContext">
+    <xs:sequence>
+      <xs:element default="true" maxOccurs="1" minOccurs="0" name="chargeableItemExported" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargingResultContext">
+    <xs:sequence>
+      <xs:element default="false" maxOccurs="1" minOccurs="0" name="chargingProcessInfoReturned" type="xs:boolean"/>
+      <xs:element default="false" maxOccurs="1" minOccurs="0" name="chargingContractInfoReturned" type="xs:boolean"/>
+      <xs:element default="false" maxOccurs="1" minOccurs="0" name="chargeableItemInfoReturned" type="xs:boolean"/>
+      <xs:element default="false" maxOccurs="1" minOccurs="0" name="accountOperationReturned" type="xs:boolean"/>
+      <xs:element default="false" maxOccurs="1" minOccurs="0" name="accountInfoReturned" type="xs:boolean"/>
+      <xs:element default="false" maxOccurs="1" minOccurs="0" name="chargedItemReturned" type="xs:boolean"/>
+      <xs:element default="false" maxOccurs="1" minOccurs="0" name="notificationReturned" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="ChargingResultOnErrorContext">
+    <xs:sequence>
+      <xs:element default="false" maxOccurs="1" minOccurs="0" name="notificationReturned" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Business Object: Chargeable Item -->
+
+  <xs:complexType name="ChargeableItem">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="name" type="core:NotEmptyString256"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="uid" type="tns:StringUniqueIdentifier"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="userTechnicalId" type="core:NotEmptyString256"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="serviceId" type="core:NotEmptyString256"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="consumptionDate" type="core:Date"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="userProperties" type="tns:ChargeableItemUserProperties"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargeableItemUserProperties">
+    <xs:sequence>
+      <xs:element maxOccurs="1000" minOccurs="0" name="property" type="tns:ChargeableItemProperty"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargeableItemProperty">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="name" type="core:String256"/>
+      <xs:choice>
+        <xs:element maxOccurs="1" minOccurs="1" name="stringValue" type="xs:string"/>
+        <xs:element maxOccurs="1" minOccurs="1" name="numberValue" type="core:Decimal28_6"/>
+        <xs:element maxOccurs="1" minOccurs="1" name="dateValue" type="core:Date"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StringUniqueIdentifier">
+    <xs:simpleContent>
+      <xs:extension base="core:NotEmptyString256">
+        <xs:attribute name="type" type="core:NotEmptyString256" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <!-- Operation Result -->
+
+  <xs:complexType name="BaseResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="status" type="tns:ResponseStatus"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="ResponseStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="return"/>
+      <xs:enumeration value="error"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Response">
+    <xs:complexContent>
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="error" type="tns:Failure"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Charging Operation Result -->
+
+  <xs:complexType name="ChargingResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="result" type="tns:ChargingResult"/>
+          <xs:element minOccurs="0" name="error" type="tns:ChargingFailure"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ChargingResult">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="chargingProcessInfo" type="tns:ChargingProcessInfo"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="chargingContractInfo" type="tns:ChargingContractInfo"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="chargeableItemInfo" type="tns:ChargeableItemInfo"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="accountOperation" type="tns:AccountOperation"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="externalAccountInfo" type="tns:ExternalAccountInfo"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="prepaidAccountInfo" type="tns:PrepaidAccountInfo"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="chargedItem" type="tns:ChargedItem"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="notification" type="tns:Notification"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargingProcessInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="chargedItemSetUniqueId" type="tns:IntegerUniqueIdentifier"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="eventProcessingDate" type="core:Date"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargingContractInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="subscriberAccountId" type="core:NotEmptyString256"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="chargingContractId" type="core:NotEmptyString256"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="chargingContractItemId" type="core:String256"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChargeableItemInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="uid" type="tns:StringUniqueIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccountOperation">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="type" type="tns:AccountOperationType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="amount" type="core:Amount"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="netAmount" type="core:Amount"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="taxAmount" type="core:Amount"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="mainAccountReference" type="tns:AccountReference"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="amountAssignment" type="tns:AmountAssignment"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="key" type="xs:int"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="dependentAccountOperationKey" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="AccountOperationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="debit"/>
+      <xs:enumeration value="credit"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AmountAssignment">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="amount" type="core:Amount"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="accountReference" type="tns:AccountReference"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="chargedItemKey" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccountReference">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="type" type="tns:AccountReferenceType"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="id" type="core:String256"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="AccountReferenceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="external"/>
+      <xs:enumeration value="prepaid"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="ExternalAccountInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="id" type="core:String256"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="externalSystemCode" type="core:String256"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="additionalId" type="core:String256"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PrepaidAccountInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="id" type="core:String256"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="balance" type="core:Amount"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="stateSchedule" type="tns:StateSchedule"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StateSchedule">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:StateScheduleItem"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StateScheduleItem">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="stateCode" type="tns:StateScheduleItemCode"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="fromDate" type="core:Date"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="StateScheduleItemCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="blocked"/>
+      <xs:enumeration value="locked"/>
+      <xs:enumeration value="closed"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="ChargedItem">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="chargedItemClassId" type="core:String256"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="key" type="xs:int"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="tns:Field"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Notification">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="id" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="message" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="creationDate" type="core:Date"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="accountOperationKey" type="xs:int"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="tns:Field"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Field">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="name" type="core:String256"/>
+      <xs:choice>
+        <xs:element maxOccurs="1" minOccurs="1" name="stringValue" type="xs:string"/>
+        <xs:element maxOccurs="1" minOccurs="1" name="numberValue" type="core:Decimal28_6"/>
+        <xs:element maxOccurs="1" minOccurs="1" name="dateValue" type="core:Date"/>
+        <xs:element maxOccurs="1" minOccurs="1" name="booleanValue" type="xs:boolean"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="IntegerUniqueIdentifier">
+    <xs:simpleContent>
+      <xs:extension base="core:Integer22">
+        <xs:attribute name="type" type="core:NotEmptyString256" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <!-- Failure -->
+
+  <xs:complexType name="Failure">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="category" type="tns:FailureCategory"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="message" type="xs:string"/>
+      <xs:element minOccurs="0" name="cause" type="core:FailureCause">
+        <xs:annotation>
+          <xs:documentation>
+            Consult the SAP CC Error Code Reference documentation for more information. Consider also the causedBy element.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="causedBy" type="core:FailureCause"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="FailureCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="illegalState"/>
+      <xs:enumeration value="invalid"/>
+      <xs:enumeration value="invalidConfiguration"/>
+      <xs:enumeration value="prerequisiteMissing"/>
+      <xs:enumeration value="temporaryIllegalSystemState"/>
+      <xs:enumeration value="illegalSystemState"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Charging Failure -->
+
+  <xs:complexType name="ChargingFailure">
+    <xs:complexContent>
+      <xs:extension base="tns:Failure">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="reason" type="tns:ChargingFailureReason"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="chargeableItem" type="tns:ChargeableItem"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="ChargingFailureReason">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="outOfValidityPeriod"/>
+      <xs:enumeration value="notAuthorized"/>
+      <xs:enumeration value="accountBlocked"/>
+      <xs:enumeration value="accountLocked"/>
+      <xs:enumeration value="accountClosed"/>
+      <xs:enumeration value="cannotChargeAccount"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

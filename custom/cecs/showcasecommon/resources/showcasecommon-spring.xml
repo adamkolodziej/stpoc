@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!--
+	<bean id="showcasecommonCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
+		<property name="supportedChannels">
+			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+				<value>B2C</value>
+			</list>
+		</property>
+		<property name="addonExtensionMetadata">
+			<bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+				<property name="suffixChannel" value="false"/>
+				<property name="baseExtensionName" value="showcasecommon"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="showcasecommonSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
+		<property name="extensionName" value="showcasecommon" />
+	</bean>
+	-->
+
+	<bean id="showcasecommonImageMagickConversionStrategy"
+		  parent="imageMagickMediaConversionStrategy"
+		  class="com.hybris.showcase.conversion.ShowcasecommonImageMagickConversionStrategy"/>
+
+	<!-- CECS-29 local media storage improvements for videos - START -->
+    <bean id="customLocalDirectoryMediaStorageStrategy" class="com.hybris.showcase.media.storage.impl.CustomLocalDirectoryMediaStorageStrategy">
+        <property name="locationHashService" ref="mediaLocationHashService" />
+        <property name="storageConfigService" ref="mediaStorageConfigService" />
+        <property name="mimeService" ref="mimeService" />
+        <property name="configurationService" ref="configurationService" />
+    </bean>
+	<!-- CECS-29 local media storage improvements for videos - END -->
+
+	<!--CECS-66 Product and AbstractOrder digital-delivery - START-->
+	<bean id="Product_digitalDeliveryAttributeHandler" class="com.hybris.showcase.model.ProductDigitalDeliveryAttribute">
+		<property name="digitalDeliveryService" ref="digitalDeliveryService"/>
+	</bean>
+
+	<bean id="AbstractOrder_downloadOnlyAttributeHandler" class="com.hybris.showcase.model.AbstractOrderDigitalOnlyAttribute">
+		<property name="digitalDeliveryService" ref="digitalDeliveryService"/>
+	</bean>
+
+	<bean id="AbstractOrder_shipOnlyAttributeHandler" class="com.hybris.showcase.model.AbstractOrderShipOnlyAttribute">
+		<property name="digitalDeliveryService" ref="digitalDeliveryService"/>
+	</bean>
+
+	<bean id="digitalDeliveryService" class="com.hybris.showcase.services.impl.DefaultDigitalDeliveryService">
+		<property name="digitalDeliveryStrategies">
+			<list>
+				<ref bean="subscriptionDigitalDeliveryStrategy" />
+				<ref bean="defaultDigitalDeliveryStrategy" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="subscriptionDigitalDeliveryStrategy" class="com.hybris.showcase.strategy.impl.SubscriptionDigitalDeliveryStrategy" />
+
+	<bean id="defaultDigitalDeliveryStrategy" class="com.hybris.showcase.strategy.impl.DefaultDigitalDeliveryStrategy" />
+
+	<alias name="defaultDigitalCommerceStockService" alias="commerceStockService" />
+	<bean id="defaultDigitalCommerceStockService" parent="defaultCommerceStockService"
+		  class="com.hybris.showcase.stock.impl.DefaultDigitalCommerceStockService"/>
+
+	<alias name="defaultDigitalCheckOrderService" alias="checkOrderService" />
+	<bean id="defaultDigitalCheckOrderService" parent="defaultCheckOrderService"
+		  class="com.hybris.showcase.fulfilment.impl.DefaultDigitalCheckOrderService" />
+
+	<alias name="defaultDigitalOrderEntryPopulator" alias="digitalOrderEntryPopulator"/>
+	<bean id="defaultDigitalOrderEntryPopulator"
+		  class="com.hybris.showcase.order.converters.populator.DigitalOrderEntryPopulator" >
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderEntryConverter"/>
+		<property name="add" ref="digitalOrderEntryPopulator"/>
+	</bean>
+
+	<alias name="defaultDigitalProductBasicPopulator" alias="digitalProductBasicPopulator" />
+	<bean id="defaultDigitalProductBasicPopulator" class="com.hybris.showcase.order.converters.populator.DigitalProductBasicPopulator"
+		  parent="baseProductPopulator"/>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productBasicPopulatorList"/>
+		<property name="add" ref="digitalProductBasicPopulator"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderEntryProductConverter"/>
+		<property name="add" ref="digitalProductBasicPopulator"/>
+	</bean>
+
+	<alias name="defaultDigitalOrderPopulator" alias="digitalOrderPopulator" />
+	<bean id="defaultDigitalOrderPopulator" class="com.hybris.showcase.order.converters.populator.DigitalOrderPopulator"/>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderConverter"/>
+		<property name="add" ref="digitalOrderPopulator"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="cartConverter"/>
+		<property name="add" ref="digitalOrderPopulator"/>
+	</bean>
+
+	<alias name="defaultDigitalDeliveryOrderEntryGroupPopulator" alias="deliveryOrderEntryGroupPopulator" />
+	<bean id="defaultDigitalDeliveryOrderEntryGroupPopulator" parent="defaultDeliveryOrderEntryGroupPopulator"
+		  class="com.hybris.showcase.order.populators.DeliveryDigitalOrderEntryGroupPopulator" />
+
+	<alias name="defaultDigitalOrderSplittingService" alias="orderSplittingService"/>
+	<bean id="defaultDigitalOrderSplittingService" parent="yacceleratorfulfilmentprocessOrderSplittingService"
+		  class="com.hybris.showcase.ordersplitting.impl.DefaultDigitalOrderSplittingService" />
+
+	<alias name="defaultDigitalDeliveryModeLookupStrategy" alias="deliveryModeLookupStrategy" />
+	<bean id="defaultDigitalDeliveryModeLookupStrategy" parent="defaultDeliveryModeLookupStrategy" class="com.hybris.showcase.strategies.impl.DigitalDeliveryModeLookupStrategy" >
+		<property name="deliveryModeService" ref="deliveryModeService" />
+	</bean>
+
+	<!--CECS-66 Product and AbstractOrder digital-delivery - END-->
+	
+	<bean id="promotionDetailsPopulator" class="com.hybris.showcase.facades.populators.PromotionDetailsPopulator"/>
+	
+	<bean parent="modifyPopulatorList">
+        <property name="list" ref="promotionsConverter"/>
+        <property name="add"  ref="promotionDetailsPopulator"/>
+    </bean>
+    
+    <alias alias="productPriceEvaluationFacade" name="defaultProductPriceEvaluationFacade"/>
+	<bean id="defaultProductPriceEvaluationFacade" class="com.hybris.showcase.facades.impl.DefaultProductPriceEvaluationFacade" >		
+		<property name="priceDataFactory" ref="priceDataFactory"/>	 			
+	</bean>
+	
+	<!--  CECS-728 -->
+	<bean id="productReleaseDatePopulator" class="com.hybris.showcase.product.populators.ProductReleaseDatePopulator" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productBasicPopulatorList"/>
+		<property name="add" ref="productReleaseDatePopulator"/>
+	</bean>
+
+    <alias name="defaultProductModelViewUrlResolver" alias="productModelViewUrlResolver"/>
+    <bean id="defaultProductModelViewUrlResolver" parent="productModelUrlResolver">
+        <property name="defaultPattern" value="/{category-path}/{product-name}/video/v/{product-code}"/>
+    </bean>
+    
+    <alias name="defaultProductViewUrlPopulator" alias="productViewUrlPopulator"/>
+	<bean id="defaultProductViewUrlPopulator"
+			class="com.hybris.showcase.product.populators.ProductViewUrlPopulator">
+		<property name="productModelUrlResolver" ref="productModelViewUrlResolver"/>
+	</bean>
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productBasicPopulatorList"/>
+		<property name="add" ref="defaultProductViewUrlPopulator"/>
+	</bean>
+	<!--  CECS-728 END -->
+
+	<!--CECS-192 promotion campaign for sports channel-->
+	<bean id="removeFromGroup" class="com.hybris.showcase.btg.outputaction.impl.RemoveFromGroup">
+		<property name="modelService" ref="modelService"/>
+		<property name="userService" ref="userService"/>
+	</bean>
+	<!--CECS-192 promotion campaign for sports channel-->
+
+	<bean id="runBusinessProcess" class="com.hybris.showcase.btg.outputaction.impl.RunBusinessProcess">
+		<property name="eventService" ref="eventService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+
+	<bean id="runBusinessProcessEventListener" class="com.hybris.showcase.events.listeners.RunBusinessProcessEventListener" parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<alias name="mappedEmailAddressFetchStrategy" alias="emailAddressFetchStrategy"/>
+	<bean id="mappedEmailAddressFetchStrategy" class="com.hybris.showcase.email.strategy.impl.MappedEmailAddressFetchStrategy" parent="defaultEmailAddressFetchStrategy">
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+	<alias name="ignoringRemovedResultBTGDaoDecorator" alias="btgDao"/>
+	<bean id="ignoringRemovedResultBTGDaoDecorator" class="com.hybris.showcase.btg.dao.impl.IgnoringRemovedResultBTGDaoDecorator" parent="resultCachingBTGDaoDecorator">
+
+	</bean>
+
+	<alias name="defaultContractDao" alias="contractDao"/>
+	<bean id="defaultContractDao" class="com.hybris.showcase.dao.impl.DefaultContractDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	
+	
+
+	<bean id="basicContractPopulator" class="com.hybris.showcase.populators.BasicContractPopulator"/>
+
+	<alias name="defaultContractConverter" alias="contractConverter"/>
+	<bean id="defaultContractConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.showcase.data.ContractData"/>
+		<property name="populators">
+			<list>
+				<ref bean="basicContractPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultContractFacade" alias="contractFacade"/>
+	<bean id="defaultContractFacade" class="com.hybris.showcase.facades.impl.DefaultContractFacade">
+		<property name="contractDao" ref="contractDao"/>
+		<property name="userService" ref="userService"/>
+		<property name="contractConverter" ref="contractConverter"/>
+	</bean>
+	
+	<bean id="servicesSystemSetup" class="com.hybris.showcase.setup.ServicesSystemSetup" parent="abstractCoreSystemSetup">
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+    <bean id="blogArticleDao" class="com.hybris.showcase.dao.impl.DefaultBlogArticleDao">
+    	<constructor-arg value="BlogArticle"/>
+    </bean>
+
+    <alias name="defaultRestrictedContentPagesCMSPageService" alias="restrictedContentPagesCMSPageService"/>
+    <bean id="defaultRestrictedContentPagesCMSPageService" class="com.hybris.showcase.services.impl.DefaultRestrictedContentPagesCMSPageService" parent="defaultCMSPageService"/>
+    
+    <alias name="defaultOfflineBTGEvaluationService" alias="offlineBTGEvaluationService" />
+	<bean id="defaultOfflineBTGEvaluationService" class="com.hybris.showcase.services.impl.DefaultOfflineBTGEvaluationService">
+ 		<property name="catalogVersionService" ref="catalogVersionService" />
+ 		<property name="cmsSiteService" ref="cmsSiteService" />
+ 		<property name="segmentService" ref="segmentService" />
+ 		<property name="btgResultService" ref="btgResultService" />
+	  	<property name="btgEvaluationService" ref="btgEvaluationService" />
+	  	<property name="flexibleSearchService" ref="flexibleSearchService" />
+	  	<property name="sessionService" ref="sessionService" />
+	  	<property name="baseSiteService" ref="baseSiteService" />
+		<property name="modelService" ref="modelService"/>
+		<property name="searchRestrictionService" ref="searchRestrictionService"/>
+	</bean>
+
+	<!-- CECS-477 CSA: clicking segment re-evaluation evaluated other segments -->
+	<bean id="btgExpressionEvaluator" class="com.hybris.showcase.btg.condition.impl.OfflineBTGExpressionEvaluator">
+		<property name="operandValueProviderRegistry" ref="operandValueProviderRegistry"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="btgDao" ref="btgDao"/>
+		<property name="expressionEvaluatorRegistry" ref="expressionEvaluatorRegistry"/>
+		<property name="btgInvalidationDataContainer" ref="btgInvalidationDataContainer" />
+	</bean>
+
+    <bean id="creditCheckFacade" class="com.hybris.showcase.facades.impl.DefaultCreditCheckFacade">
+        <property name="cartFacade" ref="cartFacade" />
+        <property name="userService" ref="userService" />
+    </bean>
+
+	<!-- CECS-530 Series name and episode -->
+	<bean id="tvEpisodeProductTypePopulator" class="com.hybris.showcase.product.populators.TVEpisodeProductTypePopulator" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productBasicPopulatorList"/>
+		<property name="add" ref="tvEpisodeProductTypePopulator"/>
+	</bean>
+
+	<bean id="tvSeasonProductTypePopulator" class="com.hybris.showcase.product.populators.TVSeasonProductTypePopulator" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productBasicPopulatorList"/>
+		<property name="add" ref="tvSeasonProductTypePopulator"/>
+	</bean>
+
+	<bean id="searchResultTvEpisodeProductPopulator" class="com.hybris.showcase.search.converters.populator.SearchResultTvEpisodeProductPopulator"/>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add" ref="searchResultTvEpisodeProductPopulator"/>
+	</bean>
+
+	<!-- CECS-630 -->
+	<alias name="defaultDelegatedSubscriptionFacade" alias="subscriptionFacade"/>
+	<bean id="defaultDelegatedSubscriptionFacade" class="com.hybris.showcase.facades.impl.DelegatedSubscriptionFacade" parent="defaultSubscriptionFacade">
+		<property name="delegate" ref="defaultMockSubscriptionFacade" />
+		<property name="defaultDelegate" ref="defaultMockSubscriptionFacade" />
+
+		<property name="configurationService" ref="configurationService" />
+		<property name="delegationEnabledPropertyKey" value="showcasecommon.ybillingintegration.enabled" />
+	</bean>
+	<!-- /CECS-630 -->
+
+	<!-- CECS-586 START -->
+	<!--<alias name="defaultMockSubscriptionFacade" alias="subscriptionFacade"/>-->
+	<bean id="defaultMockSubscriptionFacade" class="com.hybris.showcase.facades.impl.DefaultMockSubscriptionFacade" parent="defaultSubscriptionFacade">
+		<property name="userService" ref="userService" />
+		<property name="ccPaymentInfoDataConverter" ref="ccPaymentInfoDataConverter" />
+		<property name="cardPaymentInfoReversePopulator" ref="cardPaymentInfoReversePopulator" />
+	</bean>
+	
+	<alias name="defaultCcPaymentInfoDataConverter" alias="ccPaymentInfoDataConverter" />
+	<bean id="defaultCcPaymentInfoDataConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="ccPaymentInfoData" />
+		<property name="populators">
+			<list>
+				<ref bean="ccPaymentInfoDataPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultCcPaymentInfoDataPopulator" alias="ccPaymentInfoDataPopulator" />
+	<bean name="defaultCcPaymentInfoDataPopulator"
+		class="com.hybris.showcase.populators.DefaultCCPaymentInfoDataPopulator" />
+		
+		<!-- CECS-586 END -->
+
+	<bean id="basicExpensePopulator" class="com.hybris.showcase.populators.BasicExpensePopulator">
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+		
+	</bean>	
+
+	<alias name="defaultExpenseConverter" alias="expenseConverter"/>
+	<bean id="defaultExpenseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.showcase.data.CurrentExpensesData"/>
+		<property name="populators">
+			<list>
+				<ref bean="basicExpensePopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="defaultInvoicePopulator" class="com.hybris.showcase.populators.DefaultInvoicePopulator">
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+		
+	</bean>	
+	
+	<alias name="defaultInvoiceConverter" alias="invoiceConverter"/>
+	<bean id="defaultInvoiceConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.showcase.data.InvoiceData"/>
+		<property name="populators">
+			<list>
+				<ref bean="defaultInvoicePopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<util:list id="postInitHooks" value-type="com.hybris.showcase.setup.PostInitHook" />
+	
+	<alias name="defaultExpenseFacade" alias="expenseFacade"/>
+	<bean id="defaultExpenseFacade" class="com.hybris.showcase.facades.impl.DefaultExpenseFacade">
+	</bean>
+
+	<alias name="defaultExpenseService" alias="expenseService"/>
+	<bean id="defaultExpenseService" class="com.hybris.showcase.services.impl.DefaultExpenseService">
+		<property name="timeService" ref="timeService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<alias name="defaultExpenseDao" alias="expenseDao"/>
+	<bean id="defaultExpenseDao" class="com.hybris.showcase.dao.impl.DefaultExpenseDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService" />
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+
+	<alias alias="expenseCodeGenerator" name="defaultExpenseCodeGenerator"/>
+	<bean id="defaultExpenseCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+		<property name="key" value="Expense"/>
+		<property name="digits" value="8"/>
+		<property name="start" value="00000000"/>
+	</bean>
+	
+	  <!-- CECS-599 -->
+    <bean id="createExpensesPlaceOrderMethodHook" class="com.hybris.showcase.order.hooks.CreateExpensesPlaceOrderMethodHook" >
+        <property name="expenseService" ref="expenseService" />
+        <property name="userService" ref="userService" />
+        <property name="contractDao" ref="contractDao" />
+        <property name="timeService" ref="timeService" />
+    </bean>
+
+    <!-- CECS-599 -->
+    <bean id="createExpensesPlaceOrderMethodHookMergeDirective" depends-on="commercePlaceOrderMethodHooks"  parent="listMergeDirective">
+        <property name="add" ref="createExpensesPlaceOrderMethodHook" />
+        <property name="afterBeanNames">
+            <list value-type="java.lang.String" >
+                <value>modifyContractEntriesPlaceOrderMethodHook</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- CECS-600 START -->
+    <alias alias="invoiceNumberGenerator" name="defaultInvoiceNumberGenerator"/>
+	<bean id="defaultInvoiceNumberGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+		<property name="key" value="Invoice"/>
+		<property name="digits" value="8"/>
+		<property name="start" value="00000000"/>
+	</bean>
+    
+    <alias name="defaultInvoiceDao" alias="invoiceDao"/>
+	<bean id="defaultInvoiceDao" class="com.hybris.showcase.dao.impl.DefaultInvoiceDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService"/>
+	</bean>
+	
+    <alias name="defaultInvoiceService" alias="invoiceService"/>
+	<bean id="defaultInvoiceService" class="com.hybris.showcase.services.impl.DefaultInvoiceService">
+		<property name="invoiceDao" ref="invoiceDao" />
+		<property name="modelService" ref="modelService" />
+		<property name="expenseService" ref="expenseService" />
+		<property name="invoiceNumberGenerator" ref="invoiceNumberGenerator" />
+		<property name="timeService" ref="timeService" />
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	
+	<alias name="defaultInvoiceFacade" alias="invoiceFacade"/>
+	<bean id="defaultInvoiceFacade" class="com.hybris.showcase.facades.impl.DefaultInvoiceFacade">
+		<property name="invoiceConverter" ref="invoiceConverter"></property>
+		<property name="invoiceService" ref="invoiceService"></property>
+		<property name="userService" ref="userService"></property>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	
+	<bean id="invoicingJob" class="com.hybris.showcase.jobs.InvoicingJob" parent="abstractJobPerformable">
+		<property name="invoiceService" ref="invoiceService"></property>
+		<property name="contractService" ref="contractService"></property>
+		<property name="expenseService" ref="expenseService"></property>
+		<property name="customerAccountService" ref="customerAccountService"></property>
+		<property name="customerService" ref="customerService"></property>
+	</bean>
+	
+	<alias name="defaultCustomerDao" alias="customerDao"/>
+	<bean id="defaultCustomerDao" class="com.hybris.showcase.dao.impl.DefaultCustomerDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	
+    <alias name="defaultCustomerService" alias="customerService"/>
+	<bean id="defaultCustomerService" class="com.hybris.showcase.services.impl.DefaultCustomerService">
+		<property name="customerDao" ref="customerDao" />
+	</bean>
+	
+	<!-- CECS-600  END-->
+	
+		<!-- CECS-653 -->
+	<alias name="defaultShowcasecommonCalculationService" alias="showcasecommonCalculationService"/>
+	<bean id="defaultShowcasecommonCalculationService" class="com.hybris.showcase.services.impl.DefaultShowcasecommonCalculationService"/>
+	<!-- CECS-653 -->
+	
+	<bean id="invoiceExportDataConverter" class="com.hybris.showcase.reports.InvoiceExportDataConverter"/>
+	
+	<bean id="expenseExportDataConverter" class="com.hybris.showcase.reports.ExpenseExportDataConverter"/>
+	
+	<alias name="defaultContractService" alias="contractService"/>
+	<bean id="defaultContractService" class="com.hybris.showcase.services.impl.DefaultContractService">
+		<property name="contractDao" ref="contractDao" />
+	</bean>
+
+	<alias alias="addressVerificationService" name="DefaultAdditionalFieldsVerificationService"/>
+	<bean id="DefaultAdditionalFieldsVerificationService" class="com.hybris.showcase.services.impl.DefaultAdditionalFieldsVerificationService" parent="mockAddressVerificationService"/>
+
+	<bean id="cmsProductTypeRestrictionEvaluator" class="com.hybris.showcase.evaluator.CMSProductTypeRestrictionEvaluator"/>
+	<bean id="cmsProductTypeRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping" >
+		<property name="restrictionTypeCode" value="CMSProductTypeRestriction" />
+		<property name="restrictionEvaluator" ref="cmsProductTypeRestrictionEvaluator" />
+	</bean>
+	
+	<!-- PRODUCT PAGE RESTRICTION -->
+	<bean id="productTypeRestrictionDynamicDescription" class="com.hybris.showcase.model.ProductTypeRestrictionDynamicDescription" >
+		<property name="typeService" ref="typeService"/>
+	</bean>
+
+	<!-- DIGITAL MEDIA PRODUCTS -->
+	<bean id="digitalMediaProductPopulator" parent="baseProductPopulator" class="com.hybris.showcase.product.populators.DigitalMediaProductPopulator">
+		<property name="imageConverter" ref="imageConverter"/>
+	</bean>
+
+	<bean id="mediaProductPopulatorList" parent="abstractPopulatorList">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="digitalMediaProductPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="DIGITAL_MEDIA" />
+		<property name="add" ref="mediaProductPopulatorList" />
+	</bean>
+
+
+	<!-- TV SERIES -->
+	<bean id="videoClassificationPopulator" parent="baseProductPopulator" class="com.hybris.showcase.facades.populators.VideoClassificationPopulator" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productClassificationPopulatorList"/>
+		<property name="add" ref="videoClassificationPopulator"/>
+	</bean>
+
+	<alias name="defaultTVSeriesFacade" alias="tVSeriesFacade"/>
+	<bean id="defaultTVSeriesFacade" class="com.hybris.showcase.facades.impl.DefaultTVSeriesFacade">
+		<property name="productService" ref="productService"/>
+		<property name="productFacade" ref="accProductFacade"/>
+	</bean>
+	
+	<bean id="tVSeriesPopulatorList" parent="abstractPopulatorList">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="videoClassificationPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean parent="configurablePopulatorModification">
+	    <property name="target" ref="defaultProductConfiguredPopulator" />
+	    <property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+	    <property name="key" value="TV_SERIES" />
+	    <property name="add" ref="tVSeriesPopulatorList" />
+	</bean>
+
+	<!-- TV channels -->
+	<alias name="defaultChannelsFacade" alias="channelsFacade" />
+	<bean id="defaultChannelsFacade" class="com.hybris.showcase.facades.impl.DefaultChannelsFacade">
+		<property name="productFacade" ref="productFacade" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<bean id="tvChannelSchedulePopulator" class="com.hybris.showcase.product.populators.TVChannelSchedulePopulator" parent="baseProductPopulator"/>
+
+	<bean id="tvChannelPopulatorList" parent="abstractPopulatorList">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="tvChannelSchedulePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="TV_CHANNELS" />
+		<property name="add" ref="tvChannelPopulatorList" />
+	</bean>
+
+	<!-- BLOGS -->
+
+	<!-- CECS-748 START -->
+	<bean id="blogArticlePopulator" class="com.hybris.showcase.populators.BlogArticlePopulator">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<alias name="defaultArticleBlogConverter" alias="articleBlogConverter" />
+	<bean id="defaultArticleBlogConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.hybris.showcase.data.BlogArticleData" />
+		<property name="populators">
+			<list>
+				<ref bean="blogArticlePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultBlogArticleService" alias="blogArticleService" />
+	<bean id="defaultBlogArticleService"
+		class="com.hybris.showcase.services.impl.DefaultBlogArticleService">
+		<property name="blogArticleDao" ref="blogArticleDao" />
+	</bean>
+	<alias name="defaultBlogArticleFacade" alias="blogArticleFacade" />
+	<bean id="defaultBlogArticleFacade"
+		class="com.hybris.showcase.facades.impl.DefaultBlogArticleFacade">
+		<property name="blogArticleConverter" ref="articleBlogConverter" />
+		<property name="blogArticleService" ref="blogArticleService" />
+	</bean>
+	<!-- CECS-748 END -->
+
+	<!-- CECS-824 fix calculation of new price after promotion START -->
+	<bean id="servicesProductsPromotionsPopulator" class="com.hybris.showcase.populators.ServicesProductsPromotionsPopulator">
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commercePriceService" ref="commercePriceService" />
+		<property name="promotionsConverter" ref="promotionsConverter" />
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productPromotionsPopulatorList"/>
+		<property name="add" ref="servicesProductsPromotionsPopulator"/>
+	</bean>
+	<!-- CECS-824 fix calculation of new price after promotion END -->
+</beans>

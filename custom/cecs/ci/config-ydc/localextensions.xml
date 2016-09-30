@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hybrisconfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="resources/schemas/extensions.xsd">
+    <extensions>
+        <!--
+                All extensions located in ${HYBRIS_BIN_DIR}/platform/ext are automatically loaded.
+                More information about how to configure available extensions can be found here : https://wiki.hybris.com/x/nZVzC
+        -->
+
+        <path dir="${HYBRIS_BIN_DIR}/custom/cecs/" depth="4" />
+        <!-- CECS-20 social media integration - showcase -->
+        <path dir="${HYBRIS_BIN_DIR}/custom/showcase/" depth="4" />
+        <path dir="${HYBRIS_BIN_DIR}" />
+
+        <!-- ymarketing integration: start -->
+		<!-- SAP specific extensions -->
+		<path autoload="false" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/core/" depth="1" /> <!-- core extensions -->
+		<path autoload="false" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/testsupport/" depth="1" /> <!-- test support -->
+		<path autoload="false" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/masterdata/" /> <!-- master data replication-->
+		<path autoload="false" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/synchronouspricing/" depth="1" /> <!-- synchronous pricing -->
+		<!-- <path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/synchronousOM/" depth="1" />  SAP Synchronous Order Management -->
+		<path autoload="false" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/asynchronousOM/" depth="1" /> <!-- SAP Asynchronous Order Management -->
+        <!-- CECS-381 integrate SSC for yBilling -->
+		<path autoload="false" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/productconfig/" depth="1" /> <!-- SAP Product Configuration -->
+		<path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/adtreco/" depth="1" /> <!-- SAP Audience Discovery & Targeting -->
+		<path autoload="false" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/sapprodreco/" depth="1" /> <!-- SAP PRI -->
+		<!--path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/pointofsale/" depth="1" /--> <!-- SAP point-of-sale -->
+		<path autoload="false" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/testsupport/" depth="1" /> <!-- SAP point-of-sale -->
+
+        <!-- ext-integration -->
+        <extension name="saporderexchange" />
+        <extension name="ysaporderfulfillment" />
+        <extension name="sapproducthmc" />
+        <extension name="sapcoreconfigurationbackoffice" />
+        <extension name="sapprodrecoaddon" />
+        <!-- ymarketing integration: end -->
+
+        <!-- ext-platform -->
+        <extension name="admincockpit" />
+        <extension name="backoffice" />
+        <extension name="cockpit" />
+        <extension name="hmc" />
+        <extension name="mcc" />
+        <extension name="platformhmc" />
+
+
+        <!-- ext-commerce -->
+        <extension name="assistedservicefacades" />
+        <extension name="btg" />
+        <extension name="btgcockpit" />
+        <extension name="commercesearch" />
+        <extension name="commercesearchbackoffice" />
+        <extension name="commercesearchhmc" />
+        <extension name="commerceservices" />
+        <extension name="basecommerce" />
+        <extension name="payment" />
+        <extension name="promotions" />
+        <extension name="voucher" />
+        <extension name="customerreview" />
+        <extension name="ticketsystem" />
+        <extension name="solrfacetsearch" />
+        <extension name="solrfacetsearchhmc" />
+        <extension name="commercefacades" />
+
+        <!-- ext-data -->
+        <extension name="commercesearchsampledata" />
+        <!-- ext-content -->
+        <extension name="productcockpit" />
+        <extension name="cms2" />
+        <extension name="cms2lib" />
+        <extension name="cmscockpit" />
+
+        <!-- ext-addon -->
+        <extension name="addonsupport" />
+        <extension name="b2ccheckoutaddon" />
+        <extension name="assistedservicestorefront" />
+
+        <!-- ext-template -->
+        <extension name="ycommercewebservices" />
+        <extension name="ycommercewebserviceshmc" />
+        <extension name="yacceleratorfulfilmentprocess" />
+        <extension name="yaddon" />
+        <extension name="yacceleratorstorefront" />
+        <extension name="yacceleratorfacades" />
+        <extension name="yacceleratorcore" />
+        <extension name="yacceleratorinitialdata" />
+        <extension name="yacceleratorcockpits" />
+
+        <!-- ext-accelerator -->
+        <extension name="acceleratorservices" />
+        <extension name="acceleratorfacades" />
+        <extension name="acceleratorcms" />
+        <extension name="acceleratorstorefrontcommons" />
+
+        <!-- TELCO -->
+        <extension name="configurablebundleservices" />
+        <extension name="configurablebundlecockpits" />
+        <extension name="subscriptionservices" />
+        <extension name="subscriptionfacades" />
+        <extension name="subscriptioncockpits" />
+        <extension name="subscriptionserviceshmc" />
+        <extension name="entitlementservices" />
+        <extension name="entitlementfacades" />
+        <extension name="entitlementcockpits" />
+        <extension name="emsclient" />
+        <extension name="emsui" />
+
+        <extension name="emsextras" />
+        <extension name="emsextrasaddon" />
+
+        <extension name="loyaltypoints" />
+        <extension name="loyaltypointsaddon" />
+
+        <extension name="guidedselling" />
+        <extension name="guidedsellingaddon" />
+
+        <extension name="instantcheckout" />
+        <extension name="instantcheckoutaddon" />
+
+        <extension name="tricastextrasampledata" />
+        <extension name="tricaststore" />
+
+        <extension name="showcasecommon" />
+        <extension name="showcasecommonaddon" />
+
+        <!-- CECS-20 social media integration - showcase -->
+        <extension name="facebookcommon" />
+        <extension name="facebooksocialplugins" />
+        <extension name="opengraphmine" />
+        <extension name="twitter" />
+
+        <extension name="showcasecockpits" />
+        <extension name="servicescore" />
+        <extension name="servicesshowcase"/>
+        <extension name="mobiletricast"/>
+        <extension name="seewhy"/>
+
+		<!-- CECS-226 Customer access the customer service portal and files a complaint saying complaint saying “service not working, very urgent” START -->
+		<extension name="ticketing" />
+        <extension name="ticketingaddon" />
+		<extension name="c4cintegration" />
+        <!-- Added new Facebook and replaced old one -->
+        <extension name="facebookmockup"/>
+        <extension name="ymarketingintegration"/>
+        
+        <!-- CECS-380 ybillingintegration extension -->
+        <extension name="ybillingintegration" />
+        <extension name="ybillingintegrationaddon"/>
+
+       <!-- LiveEdit -->
+        <extension name="addoncommon" />
+        <extension name="addoncockpits" />
+        <extension name="liveeditaddon" />
+        <extension name="mediaconversionimageresizeplugin" />
+        <extension name="wildwords" />
+        <extension name="wildwordscockpit" />
+        <extension name="mediaperspective" />
+        <extension name="mediatags" />
+        <extension name="turbocmspages" />
+        <extension name="turbocmspagescockpit" />
+        <extension name="searchandizing" />
+        <extension name="searchandizingcockpit" />
+        <extension name="promotioncockpit" />
+
+        <extension name="mediaserver" />
+        <extension name="productlists"/>
+
+        <!-- OCC -->
+        <extension name="guidedsellingoccaddon" />
+        <extension name="servicesoccaddon" />
+
+        <!-- ext-datahub -->
+        <extension name="datahubbackoffice" />
+        <extension dir="${HYBRIS_BIN_DIR}/ext-integration/datahubadapter" />
+
+        <!-- CECS-381 integrate SSC for yBilling -->
+        <extension name="sapproductconfigfacades" />
+        <extension name="sapcustdevsolutionconfigfacades" />
+        <extension name="sapproductconfighmc" />
+        <extension name="sapproductconfigbackoffice" />
+
+        <!-- ems web application -->
+        <webapp contextroot="entitlements-web" path="${HYBRIS_BIN_DIR}/../coreplus/hybris-ems/binary/entitlements-web.war"/>
+
+    </extensions>
+</hybrisconfig>

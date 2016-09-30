@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>
+        
+        <!-- CECS-61: Create data model - START -->
+        <relation code="TVShow2TVSeasonRelation" localized="false">
+			<sourceElement type="TVShowProduct" qualifier="tvShow" cardinality="one"/>
+			<targetElement type="TVSeasonProduct" qualifier="seasons" cardinality="many"/>
+		</relation>
+		
+		<relation code="TVSeason2TVEpisodeRelation" localized="false">
+			<sourceElement type="TVSeasonProduct" qualifier="tvSeason" cardinality="one"/>
+			<targetElement type="TVEpisodeProduct" qualifier="episodes" cardinality="many"/>
+		</relation>
+        <!-- CECS-61: Create data model - END -->
+
+		<relation code="Product2EligibleUserGroupRelation" generate="true" localized="false" autocreate="true">
+			<deployment table="ProdEligUsrGrpRels" typecode="13333"/>
+			<sourceElement type="Product" qualifier="customOffers" cardinality="many" collectiontype="list" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement type="UserGroup" qualifier="eligibleUserGroups" cardinality="many" collectiontype="list" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+        
+    </relations>
+    
+	<itemtypes>
+	
+		<typegroup name="Products">
+        
+			<!-- CECS-61: Create data model - START -->
+			<itemtype code="VideoProduct" extends="Product" autocreate="true" generate="true"
+				jaloclass="com.hybris.showcase.cecs.servicesshowcase.jalo.VideoProduct">
+				<attributes>
+					<attribute type="Media" qualifier="fullVersionMedia">
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="Media" qualifier="freePreviewMedia">
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="Media" qualifier="backgroundImage">
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="Media" qualifier="videoPoster">
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="TVShowProduct" extends="VideoProduct" autocreate="true" generate="true"
+				jaloclass="com.hybris.showcase.cecs.servicesshowcase.jalo.TVShowProduct">
+			</itemtype>
+			
+			<itemtype code="TVSeasonProduct" extends="VideoProduct" autocreate="true" generate="true"
+				jaloclass="com.hybris.showcase.cecs.servicesshowcase.jalo.TVSeasonProduct">
+				<attributes>
+					<attribute type="java.lang.Integer" qualifier="season">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="TVEpisodeProduct" extends="VideoProduct" autocreate="true" generate="true"
+				jaloclass="com.hybris.showcase.cecs.servicesshowcase.jalo.TVEpisodeProduct">
+				<attributes>
+					<attribute type="java.lang.Integer" qualifier="season">
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="episode">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="MovieProduct" extends="VideoProduct" autocreate="true" generate="true"
+				jaloclass="com.hybris.showcase.cecs.servicesshowcase.jalo.MovieProduct">
+			</itemtype>
+			
+			<itemtype code="MerchandiseProduct" extends="Product" autocreate="true" generate="true" 
+				jaloclass="com.hybris.showcase.cecs.servicesshowcase.jalo.MerchandiseProduct">
+			</itemtype>
+			
+			<itemtype code="MerchandiseVariantProduct" extends="VariantProduct" autocreate="true" generate="true"
+				jaloclass="com.hybris.showcase.cecs.servicesshowcase.jalo.MerchandiseVariantProduct">
+				<attributes>
+					<attribute qualifier="size" type="VariantSelectorEnum" metatype="VariantAttributeDescriptor">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="colour" type="VariantSelectorEnum" metatype="VariantAttributeDescriptor">
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<!-- CECS-61: Create data model - END -->
+
+			<!--CECS-94 Latest releases solr property - START-->
+
+			<itemtype code="Product" generate="false" autocreate="false">
+				<attributes>
+					<attribute type="java.util.Date" qualifier="releaseDate">
+						<persistence type="property"/>
+						<modifiers optional="true" />
+					</attribute>
+					<attribute qualifier="customOffer" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="true" />
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="viewsCount">
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<!--CECS-94 Latest releases solr property - END-->
+
+			<!-- CECS-230 Additional Videos and Channels with entitlements START -->
+			<itemtype code="ChannelProduct" extends="VideoProduct" autocreate="true" generate="true"
+				jaloclass="com.hybris.showcase.cecs.servicesshowcase.jalo.ChannelProduct">
+				<attributes>
+					<attribute qualifier="schedule" type="java.lang.String">
+						<persistence type="property">
+							<columntype database="oracle">
+								<value>varchar2(4000)</value>
+							</columntype>
+							<columntype database="mysql">
+								<value>text</value>
+							</columntype>
+							<columntype database="sqlserver">
+								<value>nvarchar(max)</value>
+							</columntype>
+							<columntype database="hsqldb">
+								<value>LONGVARCHAR</value>
+							</columntype>
+							<columntype>
+								<value>varchar</value>
+							</columntype>
+						</persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<!-- CECS-230 Additional Videos and Channels with entitlements END -->
+
+        </typegroup>
+        
+	</itemtypes>
+</items>

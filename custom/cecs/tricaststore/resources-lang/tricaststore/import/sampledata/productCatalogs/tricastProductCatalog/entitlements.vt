@@ -1,0 +1,22 @@
+# CECS-26 include telco additions in tricaststore extension
+$header
+
+# Macros / Replacement Parameter definitions
+\$productCatalog=tricastProductCatalog
+\$productCatalogName=Tricast Product Catalog
+\$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
+
+# Language
+\$lang=$lang
+
+#set ( $usageUnitRows = $query.load('entitlements', 'UsageUnit') )
+UPDATE UsageUnit;id[unique=true];name[lang=\$lang];namePlural[lang=\$lang]
+#foreach( $row in $usageUnitRows )
+;$row.key;$row.values.name;$row.values.namePlural
+#end
+
+#set ( $entitlementRows = $query.load('entitlements', 'Entitlement') )
+UPDATE Entitlement;id[unique=true];name[lang=\$lang];description[lang=\$lang]
+#foreach( $row in $entitlementRows )
+;$row.key;$row.values.name;$row.values.description
+#end

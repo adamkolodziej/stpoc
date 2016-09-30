@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="BlogArticle.code"/>
+			<property qualifier="BlogArticle.catalogVersion"/>
+			<property qualifier="BlogArticle.title"/>
+            <property qualifier="BlogArticle.publishDate"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="BlogArticle.code"/>
+			<property qualifier="BlogArticle.catalogVersion"/>
+			<property qualifier="BlogArticle.title"/>
+			<property qualifier="BlogArticle.publishDate"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="BlogArticle.title"/>
+	</label>
+</base>

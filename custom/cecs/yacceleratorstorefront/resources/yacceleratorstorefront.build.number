@@ -1,0 +1,9 @@
+#Ant properties
+#Wed May 13 19:16:43 CEST 2015
+builddate=20150513 1916
+description=yacceleratorstorefront
+name=yacceleratorstorefront
+releasedate=20150512 1510
+vendor=hybris
+version=5.6.0.0
+version.api=5.6.0

@@ -1,0 +1,11 @@
+# CECS-26 include telco additions in tricaststore extension
+$header
+
+# Language
+\$lang=$lang
+
+#set ( $billingPlanRows = $query.load('billingPlans', 'BillingPlan') )
+UPDATE BillingPlan;id[unique=true];name[lang=\$lang]
+#foreach( $row in $billingPlanRows )
+;$row.key;$row.values.name;
+#end

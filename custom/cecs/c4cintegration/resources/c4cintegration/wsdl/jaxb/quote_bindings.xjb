@@ -1,0 +1,25 @@
+<!--SEMBB-182 Implement integration-->
+<!--File with custom bindings used to generate JAX-WS classes for quote web service-->
+<jxb:bindings
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+        version="2.1">
+
+    <!-- Unfortunately schemas are in WSDL file (not in a separated file), so we have to define access to them. They are 4th and 5th schema in the file (inside types element) -->
+    <jxb:bindings
+            schemaLocation="file:/c:/hybris/imc/bin/custom/mbb/c4cintegration/resources/c4cintegration/wsdl/ManageQuoteIn.wsdl#types?schema4">
+        <jxb:bindings
+                node="//*/xsd:complexType[@name='LOCALNORMALISED_DateTime']">
+            <jxb:class name="CommonLOCALNORMALISEDDateTime"/>
+        </jxb:bindings>
+    </jxb:bindings>
+
+    <jxb:bindings
+            schemaLocation="file:/c:/hybris/imc/bin/custom/mbb/c4cintegration/resources/c4cintegration/wsdl/ManageQuoteIn.wsdl#types?schema5">
+        <jxb:bindings
+                node="//*/xsd:complexType[@name='LOCALNORMALISED_DateTime']">
+            <jxb:class name="BASISLOCALNORMALISEDDateTime"/>
+        </jxb:bindings>
+    </jxb:bindings>
+
+</jxb:bindings>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="false" selectable="true" width="70px"/>
+        <property qualifier="CMSItem.uid" visible="true" editable="false"/>
+		<property qualifier="Html5VideoComponentTimeUpdateEvent.contentComponent" visible="true" editable="true"/>
+		<property qualifier="Html5VideoComponentTimeUpdateEvent.timeStart" visible="true" editable="true"/>
+		<property qualifier="Html5VideoComponentTimeUpdateEvent.timeEnd" visible="true" editable="true"/>
+	</group>
+</list-view>

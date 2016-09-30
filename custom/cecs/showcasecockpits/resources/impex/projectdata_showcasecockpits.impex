@@ -1,0 +1,63 @@
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;cockpitgroup;;;;;;;;
+;;;;Html5VideoComponent;+;+;+;+;+;
+;;;;Html5VideoComponentTimeUpdateEvent;+;+;+;+;+;
+;;;;FixedProductSetComponent;+;+;+;+;+;
+;;;;SlickProductCarouselComponent;+;+;+;+;+;
+
+# CECS-68 responsive my-account homepage - cms START
+;;;;SocialAccountBodySubComponent;+;+;+;+;+;
+;;;;DetailAccountBodySettingsSubComponent;+;+;+;+;+;
+;;;;DetailAccountBodyBillingSubComponent;+;+;+;+;+;
+;;;;HelpAccountBodySubComponent;+;+;+;+;+;
+;;;;TileAccountBodySubComponent;+;+;+;+;+;
+
+# CECS-69 component to switch billing options START
+;;;;BillingOptionsComponent;+;+;+;+;+;
+;;;;AccountEditBodyComponent;+;+;+;+;+;
+;;;;AccountEditSideComponent;+;+;+;+;+;
+
+# CECS-103 Additional properties in editorArea on product types - START
+;;;;DeliveryMode;+;+;+;+;+;
+
+# CECS-171 Product basic details component - START
+;;;;SimpleProductImageCarouselComponent;+;+;+;+;+;
+;;;;ProductDetailsNameComponent;+;+;+;+;+;
+;;;;ProductDetailsPriceComponent;+;+;+;+;+;
+;;;;ProductDetailsReviewSummaryComponent;+;+;+;+;+;
+;;;;ProductDetailsVariantSelectorComponent;+;+;+;+;+;
+;;;;ProductDetailsSocialButtonsComponent;+;+;+;+;+;
+;;;;ProductDetailsSummaryComponent;+;+;+;+;+;
+# CECS-172 Product related items component - START
+;;;;ProductDetailsRelatedComponent;+;+;+;+;+;
+# CECS-173 Product reviews component - START
+;;;;ProductDetailsRelatedComponent;+;+;+;+;+;
+# CECS-173 Product reviews component - END
+;;;;RemainingLoyaltyPointsComponent;+;+;+;+;+;
+;;;;BlogArticle;+;+;+;+;+;
+;;;;BlogArticleDetailsComponent;+;+;+;+;+;
+;;;;Entitlement;+;+;+;+;+;
+# CECS-194 Packages Page - complete implementation START
+;;;;OneTimeChargeEntry;+;+;+;+;+;
+;;;;RecurringChargeEntry;+;+;+;+;+;
+# CECS-194 Packages Page - complete implementation END
+# CECS-597 create editorArea configuration for ProductConfigurationTemplate START
+;;;;ProductConfigurationTemplate;+;+;+;+;+;
+;;;;TechnicalAttribute;+;+;+;+;+;
+# CECS-597 create editorArea configuration for ProductConfigurationTemplate END
+
+$END_USERRIGHTS;;;;;
+
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;productmanagergroup;;;;;;;;
+;;;;Entitlement;+;+;+;+;+;
+$END_USERRIGHTS;;;;;
+
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;productmanagergroup;cockpitgroup;;;;;;;
+;;;;BundleTemplate.status;+;-;-;-;-;
+;;;;UserGroup;+;-;-;-;-;
+$END_USERRIGHTS;;;;;

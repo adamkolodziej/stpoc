@@ -1,0 +1,209 @@
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+<extension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hybris.com/schema/"
+		   xsi:schemaLocation="http://www.hybris.com/schema/ http://www.hybris.com/schema/datahub-metadata-schema-1.2.0.xsd"
+		   name="ybilling-target">
+
+	<dependencies>
+		<dependency>
+			<extension>ybilling-canonical</extension>
+		</dependency>
+	</dependencies>
+
+	<targetSystems>
+		<targetSystem>
+			<name>HybrisCommerceInstallation</name>
+			<type>HybrisCore</type>
+			<exportURL>${datahub.extension.exportURL}</exportURL>
+			<userName>${datahub.extension.userName}</userName>
+			<password>${datahub.extension.password}</password>
+			<exportCodes>
+				<exportCode>
+					$catalogVersion=catalogversion(catalog(id[default=tricastProductCatalog]),version[default='Staged'])[unique=true,default=tricastProductCatalog:Staged]
+				</exportCode>
+			</exportCodes>
+			<targetItems>
+				<item>
+					<type>ConfigurableProductItem</type>
+					<exportCode>ProductConfigurationTemplate</exportCode>
+					<description>Hybris Platform representation of Configurable Product</description>
+					<updatable>true</updatable>
+					<canonicalItemSource>ConfigurableProduct</canonicalItemSource>
+					<status>ACTIVE</status>
+					<attributes>
+						<attribute>
+							<name>identifier</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>identifier</transformationExpression>
+							<exportCode>code[unique=true]</exportCode>
+							<mandatoryInHeader>true</mandatoryInHeader>
+						</attribute>
+
+						<attribute>
+							<name>name</name>
+							<localizable>true</localizable>
+							<collection>false</collection>
+							<transformationExpression>name</transformationExpression>
+							<exportCode>name</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+
+						<attribute>
+							<name>configurable</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>configurable</transformationExpression>
+							<exportCode>configurable</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>unitCode</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>unit</transformationExpression>
+							<exportCode>unitCode</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>numberOfUnits</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>numberOfUnits</transformationExpression>
+							<exportCode>numberOfUnits</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>salesOrganization</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>salesOrganization</transformationExpression>
+							<exportCode>salesOrganization</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>distributionChannel</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>distributionChannel</transformationExpression>
+							<exportCode>distributionChannel</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>contractDuration</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>contractDuration</transformationExpression>
+							<exportCode>contractDuration</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>periodUnit</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>periodUnit</transformationExpression>
+							<exportCode>periodUnit</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+
+						<attribute>
+							<name>approvalStatus</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>""</transformationExpression>
+							<exportCode>approvalStatus(code)[default='approved']</exportCode>
+							<mandatoryInHeader>true</mandatoryInHeader>
+						</attribute>
+
+						<attribute>
+							<name>catalogVersion</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>""</transformationExpression>
+							<exportCode>$catalogVersion</exportCode>
+							<mandatoryInHeader>true</mandatoryInHeader>
+						</attribute>
+					</attributes>
+				</item>
+
+				<item>
+					<type>TechnicalAttributeItem</type>
+					<exportCode>TechnicalAttribute</exportCode>
+					<description>Hybris Platform representation of Technical Attribute</description>
+					<updatable>true</updatable>
+					<canonicalItemSource>TechnicalAttribute</canonicalItemSource>
+					<status>ACTIVE</status>
+					<attributes>
+						<attribute>
+							<name>product</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>product</transformationExpression>
+							<exportCode>configurationTemplate(code, $catalogVersion)[unique=true]</exportCode>
+							<mandatoryInHeader>true</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>version</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>version</transformationExpression>
+							<exportCode>version[unique=true]</exportCode>
+							<mandatoryInHeader>true</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>guid</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>guid</transformationExpression>
+							<exportCode>guid</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>dataId</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>dataId</transformationExpression>
+							<exportCode>dataId[unique=true]</exportCode>
+							<mandatoryInHeader>true</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>dataDesc</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>dataDesc</transformationExpression>
+							<exportCode>dataDesc</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+						<attribute>
+							<name>dataType</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>dataType</transformationExpression>
+							<exportCode>dataType</exportCode>
+							<mandatoryInHeader>false</mandatoryInHeader>
+						</attribute>
+
+						<attribute>
+							<name>catalogVersion</name>
+							<localizable>false</localizable>
+							<collection>false</collection>
+							<transformationExpression>""</transformationExpression>
+							<exportCode>$catalogVersion</exportCode>
+							<mandatoryInHeader>true</mandatoryInHeader>
+						</attribute>
+					</attributes>
+				</item>
+			</targetItems>
+		</targetSystem>
+	</targetSystems>
+
+</extension>

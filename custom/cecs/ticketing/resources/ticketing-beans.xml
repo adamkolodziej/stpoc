@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="com.hybris.platform.ticketing.data.TicketData">
+		<property name="reason" type="TicketReasonData"/>
+		<property name="ticketID" type="String"/>
+		<property name="headline" type="String"/>
+		<property name="order" type="de.hybris.platform.commercefacades.order.data.OrderData"/>
+		<property name="note" type="String"/>
+		<property name="area" type="TicketAreaData"/>
+		<property name="c4cAttemptTicketId" type="String"/>
+		<property name="c4cAttemptTicketStatusCode" type="String"/>
+		<property name="dateCreated" type="java.util.Date"/>
+	</bean>
+
+	<bean class="com.hybris.platform.ticketing.data.TicketReasonData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+
+	<bean class="com.hybris.platform.ticketing.data.TicketAreaData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+
+	<!-- CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie START -->
+	<bean class="com.hybris.platform.ticketing.data.ProductEntitlementData">
+		<property name="id" type="String"/>
+		<property name="name" type="String"/>
+		<property name="description" type="String"/>
+		<property name="giftValue" type="Integer"/>
+		<property name="quantity" type="Integer" />
+		<property name="product" type="de.hybris.platform.commercefacades.product.data.ProductData" />
+		<property name="granted" type="Boolean" />
+	</bean>
+	<!-- CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie END -->
+
+	<!-- CECS-571 Dispute expenses -->
+	<bean class="com.hybris.platform.ticketing.data.ExpenseDisputeData">
+		<property name="code" type="java.lang.String"/>
+		<property name="description" type="java.lang.String"/>
+		<property name="expenseCode" type="java.lang.String"/>
+		<property name="csTicketId" type="java.lang.String"/>
+		<property name="csTicket" type="com.hybris.platform.ticketing.data.TicketData"/>
+	</bean>
+	<!-- /CECS-571 -->
+
+	<!-- CECS-601 once expense disputed is started that could be reflected in UI START -->
+	<bean class="com.hybris.showcase.data.CurrentExpensesData">
+		<property name="disputeExpenseCode" type="java.lang.String" />
+	</bean>
+	<!-- CECS-601 once expense disputed is started that could be reflected in UI END -->
+</beans>

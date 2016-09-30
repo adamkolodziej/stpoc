@@ -1,0 +1,73 @@
+$contentCatalog=tricastContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCmsCockpit=jar:com.hybris.showcase.guidedselling.constants.GuidedsellingaddonConstants&/guidedsellingaddon/import/cockpits/cmscockpit
+$siteResource=jar:com.hybris.showcase.guidedselling.constants.GuidedsellingaddonConstants&/guidedsellingaddon/import/contentCatalogs/template
+$picture = media(code, $contentCV)
+$lang=en
+
+
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCms=$config-jarResourceCmsValue
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;ContentPageModel__function_preview;text/gif;ContentPageModel__function_preview.gif;$jarResourceCms/preview-images/ContentPageModel__function_preview.gif
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='ContentPageModel__function_preview']
+;;guidedsellingPage;Guided Selling Page;GuidedSellingPage1Template;subscriptionBundle
+;;packagesPage;Packages;ContentPage1Template;packagesPage
+;;orderRecap;Order Recap Page;ContentPage1Template;order-recap
+;;guidedsellingSummary;Guidedselling summary Page;ContentPage1Template;guidedselling-summary
+
+INSERT_UPDATE SingleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;cssClass
+;;Guidedselling-WideNavigationBanner;Guidedselling Wide Navigation Banner;Guidedselling-WideNavigationBanner;"/";"banner-12"
+
+#INSERT_UPDATE SimpleNavigationBarComponent; $contentCV[unique=true]; uid[unique=true]; links(uid,$contentCV); cssClass; &componentRef
+#; ; guidedsellingPageContentTopLinksComponent ; CinemaTopLink, TvSeriesTopLink, SportsTopLink, NewsTopLink, RecommendedTopLink ; ; guidedsellingPageContentTopLinksComponent
+
+INSERT_UPDATE SimplePackageDetailsComponent;$contentCV[unique=true];uid[unique=true];headline[lang=$lang];cssClass
+;;Guidedselling-SimplePackageDetailsComponent;"Configure your package";""
+
+INSERT_UPDATE GuidedsellingComponent;uid[unique=true];name;$contentCV[unique=true];hidePreselectedProducts;hideDisabledProducts
+;GuidedsellingComponent;Guidedselling Component;;true;true
+
+INSERT_UPDATE IncludedsellingComponent;uid[unique=true];name;$contentCV[unique=true]
+;IncludedsellingComponent;Includedselling Component;
+
+INSERT_UPDATE GuidedSellingFAQComponent;uid[unique=true];name;$contentCV[unique=true];headline[lang=$lang];cssClass
+;GuidedSelling-FAQComponent;Guided Selling FAQ Component;;"Frequently asked questions";""
+
+INSERT_UPDATE GuidedSellingTotalsComponent;uid[unique=true];name;$contentCV[unique=true];headline[lang=$lang];cssClass
+;GuidedSelling-TotalsComponent;Guided Selling Totals Component;;"Summary";""
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid, $contentCV)
+; ; NavigationBannerSlot-guidedselling ; Navigation Banner Slot for Guidedselling ; false ; Guidedselling-WideNavigationBanner
+; ; Section1Slot-guidedselling ; Section 1 Slot for Guidedselling ; true ;
+; ; Section2ASlot-guidedselling ; Section 2A Slot for Guidedselling ; true ;Guidedselling-SimplePackageDetailsComponent,IncludedsellingComponent,GuidedsellingComponent,GuidedSelling-FAQComponent
+; ; Section2BSlot-guidedselling ; Section 2B Slot for Guidedselling ; true ;GuidedSelling-TotalsComponent
+; ; Section3Slot-guidedselling ; Section 3 Slot for Guidedselling ; true ;
+; ; Section2ASlot-guidedsellingSummary ; Section 2A Slot for Guidedselling Summary; true ;
+
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)
+; ; NavigationBanner-guidedselling ; NavigationBannerSection ; guidedsellingPage ; NavigationBannerSlot-guidedselling
+; ; Section1-guidedselling ; Section1 ; guidedsellingPage ; Section1Slot-guidedselling
+; ; Section2A-guidedselling ; Section2A ; guidedsellingPage ; Section2ASlot-guidedselling
+; ; Section2B-guidedselling ; Section2B ; guidedsellingPage ; Section2BSlot-guidedselling
+; ; Section3-guidedselling ; Section3 ; guidedsellingPage ; Section3Slot-guidedselling
+; ; Section2A-guidedsellingSummary ; Section2A ; guidedsellingSummary ; Section2ASlot-guidedsellingSummary
+
+
+$servicesjarResourceCms = jar:com.hybris.showcase.showcasecockpits.constants.ShowcasecockpitsConstants&/showcasecockpits/import/cockpits/cmscockpit
+
+INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]
+; ; tricast_packagesPage-preview         ; image/png ; packagesPage-preview.png         ; $servicesjarResourceCms/preview-images/packagesPage-preview.png
+; ; tricast_guidedsellingPage-preview    ; image/png ; guidedsellingPage-preview.png    ; $servicesjarResourceCms/preview-images/guidedsellingPage-preview.png
+; ; tricast_guidedsellingSummary-preview ; image/png ; guidedsellingSummary-preview.png ; $servicesjarResourceCms/preview-images/guidedsellingSummary-preview.png
+; ; tricast_orderRecap-preview           ; image/png ; orderRecap-preview.png           ; $servicesjarResourceCms/preview-images/orderRecap-preview.png
+
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
+; ; packagesPage         ; tricast_packagesPage-preview
+; ; guidedsellingPage    ; tricast_guidedsellingPage-preview
+; ; guidedsellingSummary ; tricast_guidedsellingSummary-preview
+; ; orderRecap           ; tricast_orderRecap-preview

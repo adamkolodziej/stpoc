@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+    <extension abstractclassprefix="Generated" classprefix="YAcceleratorStorefront" name="yacceleratorstorefront">
+        <requires-extension name="ybillingintegrationaddon"/>
+        <requires-extension name="loyaltypointsaddon"/>
+        <requires-extension name="emsextrasaddon"/>
+        <requires-extension name="ticketingaddon"/>
+        <requires-extension name="mobiletricast"/>
+        <requires-extension name="showcasecommonaddon"/>
+        <requires-extension name="servicescore"/>
+        <requires-extension name="instantcheckoutaddon"/>
+        <requires-extension name="guidedsellingaddon"/>
+        <requires-extension name="b2ccheckoutaddon"/>
+        <requires-extension name="assistedservicestorefront"/>
+        <requires-extension name="sapprodrecoaddon"/>
+        <requires-extension name="liveeditaddon"/>
+        <requires-extension name="productlists"/>
+        <requires-extension name="wildwords"/>
+        <requires-extension name="turbocmspages"/>
+        <requires-extension name="searchandizing"/>
+        <requires-extension name="seewhy"/>
+        <requires-extension name="twitter"/>
+        <requires-extension name="opengraphmine"/>
+        <requires-extension name="facebooksocialplugins"/>
+        <requires-extension name="facebookcommon"/>
+        <requires-extension name="addoncommon"/>
+        <!-- hidden dependency YTODO to be reworked -->
+        <!-- it wasnt required in 5.4 and now some dependencies has changed -->
+        <requires-extension name="servicesshowcase"/>
+        <requires-extension name="btg"/>
+        <requires-extension name="acceleratorstorefrontcommons"/>
+        <requires-extension name="yacceleratorfacades"/>
+        <webmodule jspcompile="false" webroot="/yacceleratorstorefront"/>
+        <meta key="modulegen-name" value="accelerator"/>
+    </extension>
+</extensioninfo>

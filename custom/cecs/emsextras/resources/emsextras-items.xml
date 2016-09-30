@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+	
+	<itemtypes>
+		<!-- CECS-244 cronjob that grants all entitlements to simulate user account -->
+		<itemtype code="EntitlementsSimulationExportCronJob" extends="CronJob" autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="simulateUserId" type="java.lang.String">
+					<persistence type="property" />
+					<defaultvalue>"simone"</defaultvalue>
+				</attribute>
+				<attribute qualifier="site" type="BaseSite">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!-- CECS-243 usage submit (to ems/brim) - charge customer -->
+		<itemtype code="ProductEntitlement" generate="false" autocreate="false">
+			<attributes>
+				<!-- https://jira.hybris.com/browse/BIT-1514
+					UsageUnit has been removed from Entitlement type but not added anywhere beside UsageCharge.
+					This breaks metered entitlement without usage charges.
+				-->
+				<attribute type="UsageUnit" qualifier="billingUsageUnit">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!-- https://jira.hybris.com/browse/BIT-1514
+			UsageUnit has been removed from Entitlement type but not added anywhere beside UsageCharge.
+			This breaks metered entitlement without usage charges.
+		-->
+		<itemtype code="Entitlement" generate="false" autocreate="false">
+			<attributes>
+				<attribute type="UsageUnit" qualifier="defaultUsageUnit">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+	</itemtypes>
+</items>

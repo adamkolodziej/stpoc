@@ -1,0 +1,9 @@
+#Ant properties
+#Fri Sep 18 13:43:15 CEST 2015
+builddate=20150918 1342
+description=sapprodrecoaddon
+name=sapprodrecoaddon
+releasedate=20150611 1249
+vendor=hybris
+version=5.6.0.2
+version.api=5.6.0

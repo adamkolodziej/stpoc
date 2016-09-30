@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
+	default-autowire="byName">
+
+	<!-- CECS-690 Start -->
+	<alias alias="cockpitHotKeyHandler" name="defaultCsWidgetHotKeyHandler"/>
+	<bean id="defaultCsWidgetHotKeyHandler" class="de.hybris.platform.cscockpit.session.impl.DefaultCsWidgetHotKeyHandler"
+	      scope="session">
+
+		<!-- browser (tab) specific hot keys -->
+		<property name="browserCommandMap">
+			<map>
+
+				<entry key="cscockpit.browser.ticketpool">
+					<bean class="de.hybris.platform.cscockpit.widgets.hotkeys.impl.BrowserHotKeyCommand"
+					      parent="csTemplateBrowserHotKeyCommand">
+						<property name="widgetFocusMap">
+							<map>
+								<!--<entry key="key_o" value="orderDetailsWidget"/>-->
+							</map>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="cscockpit.browser.basket">
+					<bean class="de.hybris.platform.cscockpit.widgets.hotkeys.impl.BasketBrowserHotKeyCommand"
+					      parent="csTemplateBrowserHotKeyCommand">
+						<property name="widgetFocusMap">
+							<map>
+								<entry key="key_s" value="basketSearchWidget"/>
+								<entry key="key_r" value="basketResultWidget"/>
+								<entry key="key_c" value="basketCartWidget"/>
+							</map>
+						</property>
+						<property name="globalHotKeysMap">
+							<map merge="true">
+								<!-- Custom handler for the BasketBrowserHotKeyCommand -->
+								<entry key="key_o" value="triggerCheckout"/>
+							</map>
+						</property>
+						<property name="basketController" ref="csBasketController"/>
+					</bean>
+				</entry>
+
+				<entry key="cscockpit.browser.customer">
+					<bean class="de.hybris.platform.cscockpit.widgets.hotkeys.impl.BrowserHotKeyCommand"
+					      parent="csTemplateBrowserHotKeyCommand">
+						<property name="widgetFocusMap">
+							<map>
+								<entry key="key_d" value="customerEditWidget"/>
+								<entry key="key_e" value="customerEditWidget"/>
+								<entry key="key_o" value="customerOrderHistoryWidget"/>
+								<entry key="key_a" value="customerEditAddressesWidget"/>
+							</map>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="cscockpit.browser.checkout">
+					<bean class="de.hybris.platform.cscockpit.widgets.hotkeys.impl.CheckoutHotKeyCommand"
+					      parent="csTemplateBrowserHotKeyCommand">
+						<property name="widgetFocusMap">
+							<map>
+								<entry key="key_c" value="checkoutCartWidget"/>
+								<entry key="key_d" value="shippingAddressWidget"/>
+								<entry key="key_p" value="paymentAddressWidget"/>
+								<entry key="key_o" value="placeOrderWidget"/>
+								<entry key="key_s" value="checkoutPaymentWidget"/>
+								<entry key="key_t" value="checkoutCartTotalsWidget"/>
+								<entry key="key_i" value="cartPaymentTransactionsWidget"/>
+							</map>
+						</property>
+						<property name="globalHotKeysMap">
+							<map merge="true">
+								<!-- Custom handler for the BasketBrowserHotKeyCommand -->
+								<entry key="key_b" value="triggerPlaceOrder"/>
+							</map>
+						</property>
+						<property name="checkoutController" ref="csCheckoutController"/>
+						<property name="callContextController" ref="csCallContextController"/>
+						<property name="basketController" ref="csBasketController"/>
+					</bean>
+				</entry>
+
+				<entry key="cscockpit.browser.order">
+					<bean class="de.hybris.platform.cscockpit.widgets.hotkeys.impl.BrowserHotKeyCommand"
+					      parent="csTemplateBrowserHotKeyCommand">
+						<property name="widgetFocusMap">
+							<map>
+								<entry key="key_o" value="orderDetailsWidget"/>
+							</map>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="cscockpit.browser.ticket">
+					<bean class="de.hybris.platform.cscockpit.widgets.hotkeys.impl.BrowserHotKeyCommand"
+					      parent="csTemplateBrowserHotKeyCommand">
+						<property name="widgetFocusMap">
+							<map>
+								<entry key="key_d" value="ticketHeaderDetailsWidget"/>
+								<entry key="key_x" value="ticketExpenseDisputeDetailsWidget"/>
+								<entry key="key_e" value="ticketEventsList"/>
+							</map>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="cscockpit.browser.endCall">
+					<bean class="de.hybris.platform.cscockpit.widgets.hotkeys.impl.BrowserHotKeyCommand"
+					      parent="csTemplateBrowserHotKeyCommand">
+						<property name="widgetFocusMap">
+							<map>
+								<entry key="key_e" value="endCallWidget"/>
+							</map>
+						</property>
+					</bean>
+				</entry>
+
+			</map>
+		</property>
+
+		<!-- widget specific hot keys -->
+		<property name="commandMap">
+			<map>
+				<entry key="basketCartWidget">
+					<!-- Custom hot key handler for the basketCartWidget -->
+					<bean class="de.hybris.platform.cscockpit.widgets.hotkeys.impl.WidgetHotKeyCommand">
+						<property name="widgetConfig" ref="csBasketCartWidgetConfig"/>
+						<property name="keyCommandMap">
+							<map>
+								<!-- Give focus to the quantity field of the selected row -->
+								<entry key="key_q" value="focusQuantity"/>
+							</map>
+						</property>
+					</bean>
+				</entry>
+				<entry key="basketResultWidget">
+					<!-- Custom hot key handler for the basketResultWidget -->
+					<bean class="de.hybris.platform.cscockpit.widgets.hotkeys.impl.WidgetHotKeyCommand">
+						<property name="widgetConfig" ref="csBasketResultWidgetConfig"/>
+						<property name="keyCommandMap">
+							<map>
+								<!-- Give focus to the quantity field of the selected row -->
+								<entry key="key_q" value="focusQuantity"/>
+							</map>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- Cscockpit - Ticket information tab -->
+	
+	<!-- 
+	<alias alias="csTicketBrowser" name="showcasecockpitsCsTicketBrowser"/>
+	<bean id="showcasecockpitsCsTicketBrowser" class="de.hybris.platform.cscockpit.widgets.models.impl.CsWidgetBrowserModel" 
+			scope="prototype" parent="defaultCsTicketBrowser">
+		
+		<property name="viewTemplateURI" value="/cscockpit/templates/showcasecockpitsTicketLayout.zul"/>
+		<property name="widgets">
+			
+			<list>
+				<bean class="de.hybris.platform.cscockpit.widgets.models.impl.CsWidgetBrowserModel$WidgetMapKey">
+					<property name="widgetCode" value="ticketHeaderDetailsWidget"/>
+					<property name="widgetConfig" ref="csTicketHeaderWidgetConfig"/>
+				</bean>
+				<bean class="de.hybris.platform.cscockpit.widgets.models.impl.CsWidgetBrowserModel$WidgetMapKey">
+					<property name="widgetCode" value="ticketExpenseDisputeDetailsWidget"/>
+					<property name="widgetConfig" ref="csTicketExpenseDisputeWidgetConfig"/>
+				</bean>
+				<bean class="de.hybris.platform.cscockpit.widgets.models.impl.CsWidgetBrowserModel$WidgetMapKey">
+					<property name="widgetCode" value="ticketEventsList"/>
+					<property name="widgetConfig" ref="csTicketEventsWidgetConfig"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	 -->
+	
+	<alias alias="csTicketBrowser" name="defaultCsTicketBrowser"/>
+	<bean id="defaultCsTicketBrowser" class="de.hybris.platform.cscockpit.widgets.models.impl.CsWidgetBrowserModel" scope="prototype">
+		<property name="browserSortOrder" value="6000"/>
+		<property name="browserCode" value="cscockpit.browser.ticket"/>
+		<property name="initiallyOpen" value="false"/>
+		<property name="label" value="cscockpit.browser.ticket"/>
+		<property name="extendedLabel" value="cscockpit.browser.ticket.ext"/>
+		<property name="viewClass" value="de.hybris.platform.cockpit.widgets.impl.DefaultWidgetContentBrowser"/>
+		<property name="viewTemplateURI" value="/cscockpit/templates/defaultTicketLayout.zul"/>
+		<property name="widgets">
+			<!-- The tab specific widgets in keyboard focus order -->
+			<list>
+				<bean class="de.hybris.platform.cscockpit.widgets.models.impl.CsWidgetBrowserModel$WidgetMapKey">
+					<property name="widgetCode" value="ticketHeaderDetailsWidget"/>
+					<property name="widgetConfig" ref="csTicketHeaderWidgetConfig"/>
+				</bean>
+				<bean class="de.hybris.platform.cscockpit.widgets.models.impl.CsWidgetBrowserModel$WidgetMapKey">
+					<property name="widgetCode" value="ticketExpenseDisputeDetailsWidget"/>
+					<property name="widgetConfig" ref="csTicketExpenseDisputeWidgetConfig"/>
+				</bean>
+				<bean class="de.hybris.platform.cscockpit.widgets.models.impl.CsWidgetBrowserModel$WidgetMapKey">
+					<property name="widgetCode" value="ticketEventsList"/>
+					<property name="widgetConfig" ref="csTicketEventsWidgetConfig"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- CECS-690 End-->
+	
+</beans>

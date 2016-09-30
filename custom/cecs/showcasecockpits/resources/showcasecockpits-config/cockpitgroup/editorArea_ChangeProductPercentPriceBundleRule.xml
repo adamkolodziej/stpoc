@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="General" visible="true" initially-opened="true">
+		   <label key="cockpit.config.label.General" />
+       <property qualifier="ChangeProductPercentPriceBundleRule.bundleTemplate"/>
+	   <property qualifier="ChangeProductPercentPriceBundleRule.name" />
+	   <property qualifier="ChangeProductPercentPriceBundleRule.label"/>
+	   <property qualifier="AbstractBundleRule.bundleRuleRestrictions"/>
+	</group>
+	<group qualifier="Condition" visible="true" initially-opened="true">
+		<label key="configurablebundlecockpits.product.rules.condition" />
+		<property qualifier="ChangeProductPercentPriceBundleRule.ruleType" />
+		<property qualifier="ChangeProductPercentPriceBundleRule.billingEvent" editor="simple" />
+		<property qualifier="ChangeProductPercentPriceBundleRule.conditionalProducts">
+			<parameter>
+	   			<name>allowCreate</name>
+ 				<value>false</value>
+			</parameter>
+ 			<parameter>
+    			<name>allowSelect</name>
+    			<value>true</value>
+ 			</parameter>
+		</property>
+    </group>
+	<group qualifier="Action" visible="true" initially-opened="true">
+		<label key="configurablebundlecockpits.product.rules.action" />
+		<property qualifier="ChangeProductPercentPriceBundleRule.targetProducts">
+			<parameter>
+	   			<name>allowCreate</name>
+ 				<value>false</value>
+			</parameter>
+ 			<parameter>
+    			<name>allowSelect</name>
+    			<value>true</value>
+ 			</parameter>
+		</property>
+		<property qualifier="ChangeProductPercentPriceBundleRule.percentageDiscount" />
+	</group>
+	
+</editor>

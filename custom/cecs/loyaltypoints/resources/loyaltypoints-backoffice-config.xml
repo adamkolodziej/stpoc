@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+     <context merge-by="type" parent="AbstractOrderEntry" type="OrderEntry" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="loyaltyPoints"/>
+        </list-view:list-view>
+    </context>
+      <context merge-by="type" parent="AbstractOrder" type="Order" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="totalLoyaltyPoints"/>
+        </list-view:list-view>
+    </context>
+</config>

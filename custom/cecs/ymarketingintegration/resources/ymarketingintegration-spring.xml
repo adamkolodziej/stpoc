@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<bean id="YmktIntSystemSetup" class="com.hybris.ymarketingintegration.setup.YMktIntSetup" parent="abstractCoreSystemSetup">
+		<property name="btgConfigurationService" ref="btgConfigurationService" />
+		<property name="typeService" ref="typeService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="ymarketingintegrationLabelLocator" class="de.hybris.platform.cockpit.util.ConfigurableCockpitLabelLocator">
+		<property name="resourceFolder" value="/ymarketingintegration/cockpits/localization/"/>
+	</bean>
+
+    <bean id="yMarketingIntegrationSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
+        <property name="extensionName" value="ymarketingintegration" />
+    </bean>
+
+	<!-- CECS-186 Sending E-mails for Mobile Access Campaign START -->
+	<bean id="downloadAppEmailContext" class="com.hybris.showcase.cecs.ymarketingintegration.process.email.context.DownloadAppEmailContext" parent="abstractEmailContext" scope="prototype" />
+
+	<bean id="downloadAppEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/ymarketingintegration/processes/downloadAppEmailProcess.xml"/>
+	</bean>
+
+	<bean id="generateAppTokenForEmail" class="com.hybris.showcase.cecs.ymarketingintegration.process.email.actions.GenerateAppTokenAction"  parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="mobileEntitlementsFacade" ref="mobileEntitlementsFacade"/>
+	</bean>
+	
+	<bean id="generateDownloadAppEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="frontendTemplateName" value="DownloadAppEmailTemplate"/>
+		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
+		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+	<!-- CECS-186 Sending E-mails for Mobile Access Campaign END -->
+
+	<!-- CECS-295 fix sapadtreco - match customer by CustomerId -->
+	<alias alias="sapInitiativeReader" name="servicesSapInitiativeReader" />
+	<bean id="servicesSapInitiativeReader" parent="defaultSapInitiativeReader" class="com.hybris.showcase.cecs.ymarketingintegration.ServicesSAPInitiativeReaderImpl">
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<!-- CECS-293: Send an e-mail for Interested In Sports Campaign - START -->
+	<bean id="interestedInSportsEmailContext" class="com.hybris.showcase.cecs.ymarketingintegration.process.email.context.InterestedInSportsEmailContext" parent="abstractEmailContext" scope="prototype" />
+	
+	<bean id="interestedInSportsEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/ymarketingintegration/processes/interestedInSportsEmailProcess.xml"/>
+	</bean>
+	
+	<bean id="generateInterestedInSportsEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="frontendTemplateName" value="InterestedInSportsEmailTemplate"/>
+		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
+		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+	<!-- CECS-293: Send an e-mail for Interested In Sports Campaign - END -->
+
+	<!--CECS-458 Change HBO -> TCO START
+	Sending e-mail for TCO campaign -->
+
+	<bean id="generateTcoPromotionEmailContext" class="com.hybris.showcase.cecs.ymarketingintegration.process.email.context.TcoPromotionEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="sessionService" ref="sessionService"/>
+		<property name="contractFacade" ref="contractFacade"/>
+	</bean>
+
+	<bean id="generateTcoPromotionEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="frontendTemplateName" value="TcoPromotionEmailTemplate"/>
+		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
+		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+
+	<bean id="tcoPromotionEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/ymarketingintegration/processes/tcoPromotionEmailProcess.xml"/>
+	</bean>
+
+	<!-- CECS-548 migrate seewhy e-mails into hybris e-mail process -->
+	<bean id="generateYConvertEmailContext" class="com.hybris.showcase.cecs.ymarketingintegration.process.email.context.YConvertEmailContext" parent="abstractEmailContext" scope="prototype">
+	</bean>
+
+	<!-- CECS-548 migrate seewhy e-mails into hybris e-mail process -->
+	<bean id="initYConvertAction" class="com.hybris.showcase.cecs.ymarketingintegration.process.email.actions.yConvertInitAction" parent="abstractAction">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+	<!-- CECS-548 migrate seewhy e-mails into hybris e-mail process -->
+	<bean id="generateYConvertEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction" parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="frontendTemplateName" value="yConvertEmailTemplate"/>
+		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
+		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+
+	<!-- CECS-548 migrate seewhy e-mails into hybris e-mail process -->
+	<bean id="yConvertEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/ymarketingintegration/processes/yConvertEmailProcess.xml"/>
+	</bean>
+
+	<!-- CECS-549 start mocked seewhy campaign -->
+	<alias name="defaultYConvertMockservice" alias="yConvertMockService" />
+	<bean id="defaultYConvertMockservice" class="com.hybris.showcase.cecs.ymarketingintegration.services.impl.DefaultYConvertMockService">
+		<property name="configurationService" ref="configurationService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="emailProcessId" value="yConvertEmailProcess"/>
+		<property name="eventService" ref="eventService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="userService" ref="userService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<bean id="yConvertMockAddToCartMethodHook" class="com.hybris.showcase.cecs.ymarketingintegration.order.hooks.YConvertMockAddToCartMethodHook">
+		<property name="yConvertMockService" ref="yConvertMockService"/>
+	</bean>
+
+	<!-- CECS-549 start mocked seewhy campaign -->
+	<bean id="yConvertMockAddToCartMethodHook_MergeDirective" depends-on="commerceAddToCartMethodHooks" parent="listMergeDirective">
+		<property name="add" ref="yConvertMockAddToCartMethodHook"/>
+	</bean>
+
+	<bean id="cartUserChangeInterceptor" class="com.hybris.showcase.cecs.ymarketingintegration.order.hooks.CartUserChangeInterceptor">
+		<property name="yConvertMockService" ref="yConvertMockService"/>
+	</bean>
+
+	<bean id="cartUserChangeInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="cartUserChangeInterceptor"/>
+		<property name="typeCode" value="Cart"/>
+	</bean>
+
+	<alias name="defaultCEIInitiativeDAO" alias="ceiInitiativeDAO"/>
+	<bean id="defaultCEIInitiativeDAO" class="com.hybris.showcase.cecs.ymarketingintegration.dao.impl.DefaultCEIInitiativeDAO">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+	<bean id="basicCEIInitiativePopulator" class="com.hybris.showcase.cecs.ymarketingintegration.converters.populators.BasicCEIInitiativePopulator"/>
+
+	<alias name="defaultCeiInitiativeConverter" alias="ceiInitiativeConverter"/>
+	<bean id="defaultCeiInitiativeConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.showcase.cecs.ymarketingintegration.model.CEIInitiativeModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="basicCEIInitiativePopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="retrieveInitiativesJob" class="com.hybris.showcase.cecs.ymarketingintegration.jobs.RetrieveInitiativesJob" parent="abstractJobPerformable">
+		<property name="offlineBTGEvaluationService" ref="offlineBTGEvaluationService"/>
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+		<property name="initiativesService" ref="initiativesService"/>
+		<property name="customerService" ref="customerService"/>
+	</bean>
+	
+	<alias name="defaultInitiativesService" alias="initiativesService" />
+	<bean id="defaultInitiativesService" class="com.hybris.showcase.cecs.ymarketingintegration.services.impl.DefaultInitiativesService">
+ 		<property name="sapInitiativeReader" ref= "sapInitiativeReader"/>
+ 		<property name="userIdProvider" ref= "adtUserIdProvider"/>
+ 		<property name="ceiInitiativeDAO" ref="ceiInitiativeDAO"/>
+ 		<property name="ceiInitiativeConverter" ref="ceiInitiativeConverter"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="oDataClientService" ref="oAdtDataClientService" />
+		<property name="configuration" ref="adtHmcConfigurationReader" />
+	</bean>
+
+	<!-- id is sapInitiativeValueProvider, because we don't want to instantiate com.sap.wec.adtreco.btg.SAPInitiativeValueProvider-->
+	<bean id="sapInitiativeValueProvider" class="com.hybris.showcase.cecs.ymarketingintegration.btg.LocalSAPInitiativeValueProvider">
+		<property name="ceiInitiativeDAO" ref="ceiInitiativeDAO"/>
+	</bean>
+
+	<!--<alias name="defaultSapCategoryValueProvider" alias="sapCategoryValueProvider" />
+	<bean id="defaultSapCategoryValueProvider" class="com.hybris.platform.wec.btg.SAPCategoryValueProvider">
+		<property name="userIdProvider" ref="adtUserIdProvider" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="sapInitiativeReader" ref="sapInitiativeReader" />
+	</bean>-->
+
+	<alias name="localSapCategoryValueProvider" alias="sapCategoryValueProvider" />
+	<bean id="localSapCategoryValueProvider" class="com.hybris.showcase.cecs.ymarketingintegration.btg.LocalSAPCategoryValueProvider">
+		<property name="ceiInitiativeDAO" ref="ceiInitiativeDAO"/>
+	</bean>
+
+	<bean id="referenceSAPCategoryOperandValueProvider" class="com.hybris.platform.wec.btg.ReferenceSAPCategoryOperandValueProvider"
+		scope="tenant">
+	</bean>
+
+	<bean id="categoriesCollectionExpressionEvaluator" class="com.hybris.platform.wec.btg.condition.impl.SAPCategoriesExpressionEvaluator"
+		scope="tenant">
+	</bean>
+
+	<bean id="sapymarketingExpressionEvalutorInitializingBean" class="com.sap.wec.adtreco.btg.config.ExpressionEvaluatorInitializingBean">
+		<property name="registry" ref="expressionEvaluatorRegistry" />
+		<property name="expressionEvaluators">
+			<list>
+				<ref bean="initiativesCollectionExpressionEvaluator" />
+				<ref bean="categoriesCollectionExpressionEvaluator" />
+			</list>
+		</property>
+	</bean>
+
+	<!--  This code is added here to switch back to the primary customer registration email sending process after sapcustomerb2c changes  - START -->
+    <alias alias="customerRegistrationEventListener" name="defaultCustomerRegistrationEventListener" />
+	<bean id="defaultCustomerRegistrationEventListener"
+	      class="com.hybris.showcase.cecs.ymarketingintegration.event.YmarketingintegrationRegistrationEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<!--  This code is added here to switch back to the primary customer registration email sending process after sapcustomerb2c changes  - END -->
+	
+
+	<!-- CECS-426 proxy issue in SDC -->
+	<bean id="oAdtDataClientService" class="com.sap.wec.adtreco.be.CustomODataClientService">
+		<property name="skipDefaultProxy" value="true" />
+	</bean>
+
+	<!-- CECS-505 yMarketing - retrieve initiatives over category and email -->
+	<alias alias="adtUserIdProvider" name="twitterADTUserIdProvider" />
+	<bean id="twitterADTUserIdProvider" class="com.hybris.showcase.cecs.ymarketingintegration.services.TwitterADTUserIdProvider" parent="defaultADTUserIdProvider" />
+
+	<alias alias="btgReferenceSAPCategoriesOperandLabelProvider" name="defaultBtgReferenceSAPCategoriesOperandLabelProvider" />
+	<bean id="defaultBtgReferenceSAPCategoriesOperandLabelProvider" class="com.hybris.platform.wec.btg.cockpit.BTGReferencePrincipalGroupsOperandCategoriesLabelProvider" />
+	
+	<alias alias="sapModuleConfigurationAccess" name="sapDefaultModuleConfigurationAccess" />
+	<bean id="sapDefaultModuleConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="ymarketingintegration" />
+	</bean>
+	
+	<bean id="hmcyConfigurationReader" class="com.hybris.showcase.cecs.ymarketingintegration.interaction.HMCConfigurationReader">
+	 	<property name="globalConfigurationService"  ref="sapCoreSAPGlobalConfigurationService" />
+	 </bean>
+	
+	<bean id="interactionManager" class="com.hybris.showcase.cecs.ymarketingintegration.interaction.InteractionManager" parent="sapCoreBackendObjectJCo" scope="sapSession">
+		<property name="configuration" ref="hmcyConfigurationReader" />
+		<property name="adtUserIdProvider" ref="adtUserIdProvider"/>
+		<property name="timeService" ref="timeService"/>
+		<property name="userService" ref="userService"/>
+	</bean>
+	
+	<bean id="initiativeEventListener" class="com.hybris.showcase.cecs.ymarketingintegration.event.InitiativeEventListener" parent="abstractEventListener" />
+
+    <bean id="interactionEventListener" class="com.hybris.showcase.cecs.ymarketingintegration.event.InteractionEventListener" parent="abstractEventListener">
+		<lookup-method name="getInteractionManager" bean="interactionManager" />
+    </bean> 
+   
+</beans>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wizard-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="wizard-config.xsd"
+               showPrefilledValues="false" selectMode="true" createMode="false" activateAfterCreate="true" createWithinPopup="false" createWithinEditor="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="product.code" />
+			<property qualifier="product.name" />
+			<property qualifier="product.catalogversion"  editorCode="shortListEditor"/>
+			<property qualifier="product.approvalStatus" />
+			<property qualifier="product.onlineDate" />
+			<property qualifier="product.offlineDate" />
+			<property qualifier="product.releaseDate" />
+			<property qualifier="product.unit" />
+			<property qualifier="ProductConfigurationTemplate.yBillingId" />
+		</group>
+
+		<group qualifier="Configuration" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.Configuration" />
+			<property qualifier="ProductConfigurationTemplate.configurable" />
+			<property qualifier="ProductConfigurationTemplate.unitCode" />
+			<property qualifier="ProductConfigurationTemplate.numberOfUnits" />
+			<property qualifier="ProductConfigurationTemplate.periodUnit" />
+			<property qualifier="ProductConfigurationTemplate.contractDuration" />
+			<property qualifier="ProductConfigurationTemplate.technicalAttributes" />
+			<property qualifier="ProductConfigurationTemplate.salesOrganization" />
+			<property qualifier="ProductConfigurationTemplate.distributionChannel" />
+		</group>
+	</displayed-properties>
+
+</wizard-config>
+
+
+	 

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd
+		">
+
+    <security:http disable-url-rewriting="true" pattern="/loyalty-points/**" use-expressions="true">
+        <security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
+        <security:access-denied-handler error-page="/login"/>
+        <security:session-management session-authentication-strategy-ref="fixation" />
+        <security:intercept-url pattern="/events" requires-channel="https" />
+
+        <security:intercept-url pattern="/loyalty-points/**" requires-channel="any" />
+
+        <security:form-login
+                login-processing-url="/j_spring_security_check"
+                login-page="/login"
+                authentication-failure-handler-ref="loginGuidedSellingAuthenticationFailureHandler"
+                authentication-success-handler-ref="loginGuidedSellingGuidAuthenticationSuccessHandler" />
+
+        <security:logout logout-url="/logout" success-handler-ref="logoutSuccessHandler" />
+
+        <security:port-mappings>
+            <security:port-mapping http="#{configurationService.configuration.getProperty('tomcat.http.port')}"
+                                   https="#{configurationService.configuration.getProperty('tomcat.ssl.port')}" />
+            <security:port-mapping http="80" https="443" />
+        </security:port-mappings>
+
+        <security:request-cache ref="httpSessionRequestCache" />
+    </security:http>
+
+    <!--Security config for checkout - it has its own login page-->
+    <security:http disable-url-rewriting="true" pattern="/guidedselling/**" use-expressions="true">
+        <security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
+        <security:access-denied-handler error-page="/login"/>
+
+        <security:session-management session-authentication-strategy-ref="fixation" />
+        <security:intercept-url pattern="/events" requires-channel="https" />
+
+        <!-- SSL / AUTHENTICATED pages -->
+
+        <security:intercept-url pattern="/j_spring_security_check" requires-channel="https" />
+        <security:intercept-url pattern="/guidedselling/**" requires-channel="https" access="hasRole('ROLE_CUSTOMERGROUP')"/>
+
+
+        <!-- maybe better to have
+        <security:intercept-url pattern="/guidedselling/j_spring_security_check" requires-channel="https" />
+                login-page="/login/guidedselling"
+                login-processing-url="/guidedselling/j_spring_security_check"
+        -->
+        <security:form-login
+                login-processing-url="/j_spring_security_check"
+                login-page="/login"
+                authentication-failure-handler-ref="loginGuidedSellingAuthenticationFailureHandler"
+                authentication-success-handler-ref="loginGuidedSellingGuidAuthenticationSuccessHandler" />
+
+        <security:logout logout-url="/logout" success-handler-ref="logoutSuccessHandler" />
+
+        <security:port-mappings>
+            <security:port-mapping http="#{configurationService.configuration.getProperty('tomcat.http.port')}"
+                                   https="#{configurationService.configuration.getProperty('tomcat.ssl.port')}" />
+            <security:port-mapping http="80" https="443" />
+            <!--security:port-mapping http="#{configurationService.configuration.getProperty('proxy.http.port')}"
+                https="#{configurationService.configuration.getProperty('proxy.ssl.port')}" /-->
+        </security:port-mappings>
+
+        <security:request-cache ref="httpSessionRequestCache" />
+
+    </security:http>
+
+    <bean id="loginGuidedSellingGuidAuthenticationSuccessHandler" class="de.hybris.platform.yacceleratorstorefront.security.GUIDAuthenticationSuccessHandler" >
+        <property name="authenticationSuccessHandler" ref="loginGuidedSellingAuthenticationSuccessHandler" />
+        <property name="guidCookieStrategy" ref="guidCookieStrategy" />
+    </bean>
+
+    <bean id="loginGuidedSellingAuthenticationSuccessHandler" class="de.hybris.platform.yacceleratorstorefront.security.StorefrontAuthenticationSuccessHandler" >
+        <property name="customerFacade" ref="customerFacade" />
+        <property name="defaultTargetUrl" value="/guidedselling/edit/current/contract"/>
+        <property name="uiExperienceService" ref="uiExperienceService"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="cartFacade" ref="cartFacade"/>
+        <property name="forceDefaultTargetForUiExperienceLevel">
+            <map key-type="de.hybris.platform.commerceservices.enums.UiExperienceLevel" value-type="java.lang.Boolean">
+                <entry key="DESKTOP" value="true"/>
+            </map>
+        </property>
+        <property name="bruteForceAttackCounter" ref="bruteForceAttackCounter" />
+        <property name="redirectStrategy" ref="commerceRedirectStrategy"/>
+        <property name="restrictedPages">
+            <list>
+                <value>/login</value>
+                <!-- maybe better to have
+                <value>/login/guidedselling</value>
+                -->
+            </list>
+        </property>
+        <property name="loyaltyPointsService" ref="loyaltyPointsService" />
+    </bean>
+
+    <bean id="loginGuidedSellingAuthenticationFailureHandler" class="de.hybris.platform.yacceleratorstorefront.security.LoginAuthenticationFailureHandler" >
+        <property name="bruteForceAttackCounter" ref="bruteForceAttackCounter" />
+        <property name="defaultFailureUrl" value="/login?error=true"/>
+        <!-- maybe better to have
+        <property name="defaultFailureUrl" value="/login/guidedselling?error=true"/>
+        -->
+    </bean>
+
+    <!--
+        Exclude following pattern from default security group except /guidedselling/*/package/ because of CECS-885
+    -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="excludeUrlSet"/>
+        <property name="targetMethod" value="add"/>
+        <property name="arguments" value="/guidedselling/**,!/guidedselling/*/package/*"/>
+    </bean>
+
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="excludeUrlSet"/>
+        <property name="targetMethod" value="add"/>
+        <property name="arguments" value="/loyalty-points/**"/>
+    </bean>
+
+</beans>

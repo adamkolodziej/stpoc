@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <alias name="loyaltyPaymentCalculationService" alias="calculationService"/>
+    <bean id="loyaltyPaymentCalculationService" class="com.hybris.showcase.loyaltypoints.services.impl.LoyaltyPaymentCalculationService"
+          parent="defaultCalculationService" />
+
+    <alias name="defaultLoyaltyPointsService" alias="loyaltyPointsService" />
+    <bean id="defaultLoyaltyPointsService" class="com.hybris.showcase.loyaltypoints.services.impl.DefaultLoyaltyPointsService">
+        <property name="modelService" ref="modelService" />
+        <property name="calculationService" ref="calculationService" />
+        <property name="cartService" ref="cartService" />
+        <property name="productService" ref="productService" />
+        <property name="userService" ref="userService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+        <property name="entitlementFacade" ref="entitlementFacade" />
+        <property name="sessionService" ref="sessionService" />
+        <property name="commercePriceService" ref="subscriptionCommercePriceService" />
+    </bean>
+
+    <!--CECS-234 payment step - START-->
+    <bean id="productLoyaltyPricePopulator" parent="baseProductPopulator"
+          class="com.hybris.showcase.loyaltypoints.populators.ProductLoyaltyPricePopulator">
+        <property name="priceDataFactory" ref="priceDataFactory"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="pricePlanUsageChargeConverter" ref="subscriptionPricePlanUsageChargeConverter"/>
+        <property name="pricePlanRecurringChargePopulator" ref="subscriptionPricePlanRecurringChargePopulator"/>
+        <property name="pricePlanOneTimeChargePopulator" ref="subscriptionPricePlanOneTimeChargePopulator"/>
+        <property name="commercePriceService" ref="subscriptionCommercePriceService"/>
+    </bean>
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="productPricePopulatorList"/>
+        <property name="add" ref="productLoyaltyPricePopulator"/>
+    </bean>
+    <!--CECS-234 payment step - END-->
+
+    <bean id="loyaltyPaymentPlaceOrderMethodHook" class="com.hybris.showcase.loyaltypoints.order.hooks.LoyaltyPaymentPlaceOrderMethodHook">
+        <property name="loyaltyPointsService" ref="loyaltyPointsService" />
+    </bean>
+
+    <bean id="loyaltyPaymentPlaceOrderMethodHookMergeDirective" depends-on="commercePlaceOrderMethodHooks" parent="listMergeDirective">
+        <property name="add" ref="loyaltyPaymentPlaceOrderMethodHook"/>
+    </bean>
+    <!--CECS-236 handle loyalty points during order calculation - END-->
+
+    <alias name="creditsAwarePriceDataFactory" alias="priceDataFactory"/>
+    <bean id="creditsAwarePriceDataFactory" class="com.hybris.showcase.loyaltypoints.prices.CreditsAwarePriceDataFactory" parent="defaultPriceDataFactory"/>
+
+    <alias name="defaultLoyaltyPaymentOrderEntryPopulator" alias="loyaltyPaymentOrderEntryPopulator"/>
+    <bean id="defaultLoyaltyPaymentOrderEntryPopulator" class="com.hybris.showcase.loyaltypoints.order.converters.populator.LoyaltyPaymentOrderEntryPopulator" >
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderEntryConverter"/>
+        <property name="add" ref="loyaltyPaymentOrderEntryPopulator"/>
+    </bean>
+
+    <!-- CECS-538 if product can be paid with credits block possibility for one-click order -->
+    <alias name="loyaltyAwareEntitlementProposalActivationUrlResolver" alias="entitlementProposalActivationUrlResolver" />
+    <bean id="loyaltyAwareEntitlementProposalActivationUrlResolver" parent="defaultEntitlementProposalActivationUrlResolver" class="com.hybris.showcase.loyaltypoints.facades.impl.LoyaltyAwareEntitlementProposalActivationUrlResolver">
+        <property name="loyaltyPointsService" ref="loyaltyPointsService" />
+    </bean>
+
+</beans>

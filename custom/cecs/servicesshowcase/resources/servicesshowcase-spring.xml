@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="modifyPopulatorListBeanPostProcessor" class="com.hybris.servicesshowcase.ServicesModifyPopulatorListBeanPostProcessor" />
+
+    <alias name="servicesShowcaseDeviceDetectionFacade" alias="deviceDetectionFacade"/>
+    <bean id="servicesShowcaseDeviceDetectionFacade" class="com.hybris.servicesshowcase.device.impl.ServicesShowcaseDeviceDetectionFacade" parent="defaultDeviceDetectionFacade"/>
+
+    <bean id="controlPanelFacade" class="com.hybris.servicesshowcase.facades.impl.DefaultControlPanelFacade" >
+        <property name="btgSegmentEvaluationService" ref="btgSegmentEvaluationService"/>
+        <property name="cmsSiteService" ref="cmsSiteService"/>
+    </bean>
+
+    <bean id="btgSegmentEvaluationService" class="com.hybris.servicesshowcase.services.impl.DefaultBTGSegmentEvaluationService">
+        <property name="segmentService" ref="segmentService"/>
+        <property name="initiativesService" ref="initiativesService"/>
+        <property name="offlineBTGEvaluationService" ref="offlineBTGEvaluationService"/>
+        <property name="cmsSiteService" ref="cmsSiteService"/>
+        <property name="customerService" ref="customerService"/>
+    </bean>
+
+</beans>

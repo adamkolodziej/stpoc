@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+ <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc.group.guidedselling.guidedsellingSection">
+                <explorer-tree:type-node code="BundleTemplate" id="BundleTemplate"/>
+                <explorer-tree:type-node code="BundlePackage" id="BundlePackage"/>
+                <explorer-tree:type-node code="AbstractBundleRule" id="AbstractBundleRule"/>
+                <explorer-tree:type-node code="RecurringChargeEntry" id="RecurringChargeEntry"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+     <context merge-by="type" parent="GenericItem" type="BundleTemplate" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="id"/>
+            <list-view:column qualifier="bundleComponentType"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="AbstractBundleRule" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="id"/>
+            <list-view:column qualifier="label"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="RecurringChargeEntry" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="id"/>
+            <list-view:column qualifier="label"/>
+        </list-view:list-view>
+    </context>
+    
+    <context merge-by="type" parent="AbstractOrder" type="Order" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="orderChanges"/>
+        </list-view:list-view>
+    </context>
+      <context merge-by="type" parent="AbstractOrderEntry" type="OrderEntry" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="package"/>
+            <list-view:column qualifier="addedToExistingContract"/>
+        </list-view:list-view>
+    </context>
+
+ 	<context merge-by="type" parent="GenericItem" type="BundlePackage" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="code"/>
+        	<list-view:column qualifier="name"/>
+        	<list-view:column qualifier="description"/>
+        	<list-view:column qualifier="image"/>
+        	<list-view:column qualifier="thumbnail"/>
+        	<list-view:column qualifier="catalogVersion"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="auto" type="BundleTemplate" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.General">
+                <editorArea:section columns="2" name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.basic.settings">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="id"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="description"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="version"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bundleComponentType"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="parentTemplate"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="status"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="catalogVersion"/>
+                </editorArea:section>
+                <editorArea:section columns="2" name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.settings">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="yBillingId" />
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="packages" />
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="mappingTemplate" />
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="faqEntries" />
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="visibleForPrincipals" />
+                </editorArea:section>
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.Components">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="childTemplates"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="dependentBundleTemplates" position="0"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.Products">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="products"/>
+                </editorArea:section>
+            </editorArea:tab>
+
+            <editorArea:tab name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.CriteriaAndDepends">
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.CriteriaAndDepends" columns="1" >
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bundleSelectionCriteria"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="requiredBundleTemplates"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.Rules">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="changeProductPriceBundleRules"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="disableProductBundleRules"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="auto" type="BundlePackage" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.General">
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="description"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="catalogVersion"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.settings">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="descriptionSlotsContainer"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="yBillingId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="relatedComponentsContainers"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundlePackage.bundle.package">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bundleTemplate"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="selectedProducts"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundlePackage.bundle.package.media">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="image"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="thumbnail"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="auto" type="AbstractBundleRule" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.General">
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="id"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="catalogVersion"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bundleTemplate"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.settings">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bundleRuleRestrictions" />
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="label"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.AbstractBundleRule.Condition">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ruleType"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="conditionalProducts"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.AbstractBundleRule.Action">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="targetProducts"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="auto" type="RecurringChargeEntry" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.General">
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="id"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="catalogVersion"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="label"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.guidedselling.guidedsellingSection.BundleTemplate.settings">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="cycleStart"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="cycleEnd"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="price"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="currency"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="billingTime"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="promotion"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="subscriptionPricePlanRecurring"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+
+    <context type="BundleTemplateStatus" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>status</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="BundleTemplate" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>catalogVersion.mnemonic + " " +id</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="BundlePackage" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>catalogVersion.mnemonic + " " + code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="FAQEntry" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>catalogVersion.mnemonic + " " +code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="ChangeProductPriceBundleRule" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>catalogVersion.mnemonic + " " +id</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="BundleSelectionCriteria" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>catalogVersion.mnemonic + " " +id</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="DisableProductBundleRule" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>catalogVersion.mnemonic + " " +id</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="Product" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code + " (" + catalogVersion.mnemonic + ")"</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+</config>

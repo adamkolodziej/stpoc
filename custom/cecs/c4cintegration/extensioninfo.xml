@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+	<extension abstractclassprefix="Generated" classprefix="C4cintegration" description="c4cintegration extension" managername="C4cintegrationManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="c4cintegration">
+
+        <!--SEMBB-322 Rework C4C communication implementation to not use OrderModel-->
+        <requires-extension name="acceleratorservices"/>
+        <!-- CECS-226 Customer access the customer service portal and files a complaint saying complaint saying “service not working, very urgent” -->
+		<requires-extension name="ticketing"/>
+		<requires-extension name="backoffice"/>
+		<coremodule generated="true" manager="com.hybris.mb2bshowcase.c4cintegration.jalo.C4cintegrationManager" packageroot="com.hybris.mb2bshowcase.c4cintegration"/>
+
+		<meta key="backoffice-module" value="true"/>
+	</extension>
+
+</extensioninfo>

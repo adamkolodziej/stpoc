@@ -1,0 +1,10 @@
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+
+# Language
+$lang=en
+
+UPDATE UserGroup;UID[unique=true];locName[lang=$lang]
+;customers-with-sports-channel-trial;"Customers with sports channel trial"
+;fansOfBrandedMerchandise;"Fans of branded merchandise"
+;interested-in-sports;"Interested in sports"
+;interested-in-tco;"Customers with an interest in TCO shows"

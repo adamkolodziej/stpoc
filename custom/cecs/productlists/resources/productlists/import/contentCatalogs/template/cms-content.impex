@@ -1,0 +1,82 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * addonExtensionName - extension name of the ui addon 
+#######
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCmsCockpit=jar:com.hybris.productlists.constants.ProductlistsConstants&/productlists/import/cockpit/cmscockpit
+
+#Functional Template Pages
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=false]
+;;ProductListsCommonCreateTemplate;ProductLists Create Page Template;;ContentPage
+;;ProductListsListTemplate;ProductLists List Page Template;;ContentPage
+
+#Velocity Templates
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;ProductListsCommonCreateTemplate;$jarResourceCmsCockpit/structure-view/structure_productlistsCommonPageTemplate.vm
+;;ProductListsListTemplate;$jarResourceCmsCockpit/structure-view/structure_productlistsListPageTemplate.vm
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;narrow;ProductListsNavigationComponent
+
+INSERT_UPDATE ProductListsNavigationComponent;$contentCV[unique=true];uid[unique=true];name;visible
+;;ProductListsNavigationComponent;Product Lists Navigation;false
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV)
+;;Section1ContentSlot;Section1 Content Slot;true;ProductListsNavigationComponent
+	
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductListsCommonCreateTemplate'];compTypeGroup(code)
+;SiteLogo;;logo
+;HeaderLinks;;headerlinks
+;MiniCart;;minicart
+;SearchBox;;searchbox
+;NavigationBar;;navigation
+;Section1;;narrow
+;TopContent;;wide
+;SideContent;;narrow
+;Footer;;footer
+
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV;uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductListsCommonCreateTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ProductListsCommonCreateTemplate;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-ProductListsCommonCreateTemplate;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-ProductListsCommonCreateTemplate;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-ProductListsCommonCreateTemplate;MiniCart;;MiniCartSlot;true
+;;SearchBox-ProductListsCommonCreateTemplate;SearchBox;;SearchBoxSlot;true
+;;Footer-ProductListsCommonCreateTemplate;Footer;;FooterSlot;true
+;;HeaderLinks-ProductListsCommonCreateTemplate;HeaderLinks;;HeaderLinksSlot;true	
+;;ProductListsNav-ProductListsCommonCreateTemplate;Section1;;Section1ContentSlot;true
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductListsListTemplate'];compTypeGroup(code)
+;SiteLogo;;logo
+;HeaderLinks;;headerlinks
+;MiniCart;;minicart
+;SearchBox;;searchbox
+;NavigationBar;;navigation
+;Section1;;narrow
+;TopContent;;wide
+;SideContent;;narrow
+;Footer;;footer
+
+
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV;uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductListsListTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ProductListsListTemplate;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-ProductListsListTemplate;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-ProductListsListTemplate;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-ProductListsListTemplate;MiniCart;;MiniCartSlot;true
+;;SearchBox-ProductListsListTemplate;SearchBox;;SearchBoxSlot;true
+;;Footer-ProductListsListTemplate;Footer;;FooterSlot;true
+;;HeaderLinks-ProductListsListTemplate;HeaderLinks;;HeaderLinksSlot;true	
+;;ProductListsNav-ProductListsListTemplate;Section1;;Section1ContentSlot;true
+	
+	
+# Functional Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;createProductListPage;Create Product List Page;ProductListsCommonCreateTemplate;createpl
+;;editProductListPage;Edit Product List Page;ProductListsCommonCreateTemplate;editpl
+;;findProductListPage;Find Product List Page;ProductListsCommonCreateTemplate;findpl
+;;viewProductListPage;View Product List Page;ProductListsCommonCreateTemplate;viewpl
+;;listProductListPage;List Product List Page;ProductListsListTemplate;listpl

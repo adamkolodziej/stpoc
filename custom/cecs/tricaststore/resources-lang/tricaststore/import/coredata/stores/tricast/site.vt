@@ -1,0 +1,14 @@
+#
+# Import the CMS Site configuration for the Tricast store
+#
+
+# Language
+\$lang=$lang.toLowerCase()
+
+#set( $localeMap = {"en" : "en_GB", "de" : "de_DE", "ja" : "ja_JP", "zh" : "zh_CN"})
+#set( $cmsSiteRows = $query.load('site') )
+# Create CMS Site
+UPDATE CMSSite;uid[unique=true];name[lang=\$lang];locale[lang=\$lang]
+#foreach( $row in $cmsSiteRows )
+ ;$row.key;"$row.values.name";$localeMap.get("$lang.toLowerCase()")
+#end

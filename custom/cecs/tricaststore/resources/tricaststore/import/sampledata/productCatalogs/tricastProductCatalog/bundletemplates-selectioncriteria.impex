@@ -1,0 +1,23 @@
+$productCatalog = tricastProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+
+INSERT_UPDATE AutoPickBundleSelectionCriteria; id; $catalogVersion
+; AutoPick
+
+INSERT_UPDATE PickExactlyNBundleSelectionCriteria; id[unique = true];n; $catalogVersion
+; PickExactly1 ; 1
+
+INSERT_UPDATE PickNToMBundleSelectionCriteria; id[unique = true];n; m; $catalogVersion
+; Pick0Or1 ; 0 ; 1
+; PickAny  ; 0 ; 1000
+
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; bundleSelectionCriteria(id, $catalogVersion); $catalogVersion
+; TriCast-Phone            ; ; AutoPick
+; TriCast-Phone-Addons     ; ; Pick0Or1
+; TriCast-Phone-Device     ; ; Pick0Or1
+; TriCast-Broadband        ; ; Pick0Or1
+; TriCast-Broadband-Addon  ; ; Pick0Or1
+; TriCast-Broadband-Router ; ; PickExactly1
+; TriCast-TV               ; ; Pick0Or1
+; TriCast-TV-Addons        ; ; PickAny
+; TriCast-Decoders         ; ; Pick0Or1

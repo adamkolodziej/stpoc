@@ -1,0 +1,13 @@
+{
+  "name": "tricast",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.2",
+    "fontawesome": "~4.3.0",
+    "videogular": "^1.4.3",
+    "videogular-controls": "^1.4.3",
+    "videogular-poster": "^1.4.3",
+    "videogular-themes-default": "^1.4.3",
+    "angular-bootstrap": "^1.2.5"
+  }
+}

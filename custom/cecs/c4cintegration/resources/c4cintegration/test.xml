@@ -1,0 +1,96 @@
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap-env:Header />
+	<soap-env:Body>
+		<n0:ServiceRequestByElementsResponse_sync
+			xmlns:n0="http://sap.com/xi/SAPGlobal20/Global" xmlns:prx="urn:sap.com:proxy:KGU:/1SAI/TAEEA9F5370E7ED2743545C:804">
+			<ServiceRequest>
+				<ChangeStateID> 20150327083331.4481290</ChangeStateID>
+				<ID>5182</ID>
+				<UUID>00163e09-46e6-1ee4-b58b-7e
+					375a52e89f</UUID>
+				<SystemAdministrativeData>
+					<CreationDateTime>2015-03-27T08:33:31.448129Z</CreationDateTime>
+					<CreationIdentityUUID>00163e03-a070-1ee2-88b6-f539a6b028f3</CreationIdentityUUID>
+					<LastChangeD ateTime>
+						2015-03-27T08:33:31.448129Z
+					</LastChangeDateTime>
+						<LastChangeIdentityUUID>00163e03-a070-1ee2-88b6-f539a6b028f3</LastChangeIdentityUUID>
+				</SystemAdministrativeData>
+				<MainBusinessProcessVariantTypeC ode>
+					133
+				</MainBusinessProcessVariantTypeCode>
+					<ProcessingTypeCode>SRRQ</ProcessingTypeCode>
+					<Name>Ticket From Hybris Order</Name>
+					<DataOriginTypeCode>4</DataOriginTypeCode>
+					<LifeCycleStatusCode>
+						1
+					</LifeCycl
+eStatusCode>
+						<EscalationStatusCode>1</EscalationStatusCode>
+						<ItemListServiceRequestExecutionLifeCycleStatusCode>1</ItemListServiceRequestExecutionLifeCycleStatusCode>
+						<ItemListExecutionReleaseStatusCode>
+							1</ItemListExecutionReleaseStatusCode>
+						<ItemListFulfilmentProcessingStatusCode>1</ItemListFulfilmentProcessingStatusCode>
+						<BuyerParty>
+							<BusinessPartnerInternalID>1002430</BusinessPartnerInternalID>
+						</Buye
+rParty>
+							<ProcessorParty>
+								<BusinessPartnerInternalID>8000000650</BusinessPartnerInternalID>
+							</ProcessorParty>
+							<ServicePerformerParty>
+								<BusinessPartnerInternalID>8000000280</BusinessPartnerInternalID>
+							</Servi
+cePerformerParty>
+								<ReporterParty>
+									<BusinessPartnerInternalID>1002430</BusinessPartnerInternalID>
+								</ReporterParty>
+								<ServiceSupportTeamParty>
+									<OrganisationalCentreID>KB1211</OrganisationalCentreID>
+								</ServiceS
+upportTeamParty>
+									<TimePointTerms>
+										<RequestInitialReceiptTimePoint
+											timeZoneCode="UTC">2015-03-27T08:33:29Z</RequestInitialReceiptTimePoint>
+										<FirstReactionDueTimePoint
+											timeZoneCode="UTC">2015-03-27T15:30:0
+											0Z</FirstReactionDueTimePoint>
+										<CompletionDueTimePoint timeZoneCode="UTC">2015-03-28T03:00:00Z</CompletionDueTimePoint>
+									</TimePointTerms>
+									<DurationTerms>
+										<MaximumFirstReactionDuration>
+											PT30M
+										</MaximumFirstR
+eactionDuration>
+											<MaximumCompletionDuration>PT12H</MaximumCompletionDuration>
+									</DurationTerms>
+									<RequestedFulfilmentPeriod>
+										<StartDateTime timeZoneCode="UTC">2015-03-29T00:00:00Z</StartDateTime>
+										<EndDateTim e timeZoneCode="UTC">
+											2015-03-30T00:00:00Z
+										</EndDateTime>
+									</RequestedFulfilmentPeriod>
+									<ServicePointLocation>
+										<CountryCode>DE</CountryCode>
+									</ServicePointLocation>
+									<ServiceTerms>
+										<ServicePriorityCode>
+											3
+										</Servi
+cePriorityCode>
+											<UserLifeCycleStatusCode>1</UserLifeCycleStatusCode>
+									</ServiceTerms>
+			</ServiceRequest>
+			<ProcessingConditions>
+				<ReturnedQueryHitsNumberValue>1</ReturnedQueryHitsNumberValue>
+				<MoreHitsAvailabl eIndicator>
+					false
+				</MoreHitsAvailableIndicator>
+					<LastReturnedObjectID>00163E0946E61EE4B58B7E375A52E89F</LastReturnedObjectID>
+			</ProcessingConditions>
+		</n0:ServiceRequestByElementsResponse_sync>
+	</soap-env:B
+ody>
+</soap-env:Envelope>
+--ejjeeffe0--
+--------------------

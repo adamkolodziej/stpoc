@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	 <collectiontypes>
+		 <collectiontype  code="StringValueList"  elementtype="java.lang.String"     type="list" />
+	 </collectiontypes>
+
+    <maptypes>
+        <maptype code="BundleNoToConfigIdMap" argumenttype="java.lang.Integer" returntype="java.lang.String" autocreate="true" generate="false" />
+        <!-- CECS-717 yBilling enhanced bundle rules -->
+        <maptype code="CsticValueOverrideMapping" argumenttype="java.lang.String" returntype="java.lang.String" autocreate="true" generate="false" />
+    </maptypes>
+
+    <relations>
+        <relation code="BundleTemplateTechAttrRealation" localized="false">
+            <sourceElement type="ProductConfigurationTemplate" cardinality="one" qualifier="configurationTemplate">
+                <modifiers unique="true" optional="false"/>
+            </sourceElement>
+            <targetElement type="TechnicalAttribute" cardinality="many" qualifier="technicalAttributes">
+                <modifiers />
+            </targetElement>
+        </relation>
+        <relation code="Bundle2ConfigMappingRelation" localized="false">
+            <sourceElement type="BundleTemplate" cardinality="many" qualifier="mappedBundleTemplates">
+                <modifiers />
+            </sourceElement>
+            <targetElement type="ProductConfigurationTemplate" cardinality="one" qualifier="mappingTemplate">
+                <modifiers />
+            </targetElement>
+        </relation>
+    </relations>
+
+
+    <itemtypes>
+     
+        <itemtype code="ProductConfigurationTemplate" extends="Product" autocreate="true" generate="true">
+            <attributes>
+                <attribute qualifier="configurable" type="java.lang.Boolean">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="unitCode" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="numberOfUnits" type="java.lang.Integer">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="salesOrganization" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="distributionChannel" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="contractDuration" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="periodUnit" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+
+            </attributes>
+        </itemtype>
+
+        <itemtype code="TechnicalAttribute" autocreate="true" generate="true">
+            <deployment table="techattrs" typecode="24011"/>
+            <custom-properties>
+                <property name="catalogItemType"><value>java.lang.Boolean.TRUE</value></property>
+                <property name="catalogVersionAttributeQualifier"><value>"catalogVersion"</value></property>
+                <property name="uniqueKeyAttributeQualifier"><value>"version,dataId,configurationTemplate"</value></property>
+            </custom-properties>
+            <attributes>
+                <attribute qualifier="version" type="java.lang.String">
+                    <persistence type="property" />
+                    <modifiers optional="false" unique="true"/>
+                </attribute>
+                <attribute qualifier="guid" type="java.lang.String">
+                    <persistence type="property" />
+                </attribute>
+                <attribute qualifier="dataId" type="java.lang.String">
+                    <persistence type="property" />
+                    <modifiers optional="false" unique="true"/>
+                </attribute>
+                <attribute qualifier="dataDesc" type="java.lang.String">
+                    <persistence type="property" />
+                </attribute>
+                <attribute qualifier="dataType" type="java.lang.String">
+                    <persistence type="property" />
+                </attribute>
+                <attribute qualifier="catalogVersion" type="CatalogVersion">
+                    <persistence type="property"/>
+                    <modifiers optional="false" unique="true" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+		<itemtype code="Customer" autocreate="false" generate="false">
+			<attributes>
+				<attribute qualifier="yBillingCustomerId" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true"/>
+				</attribute>
+				
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="CreditCardPaymentInfo" autocreate="false" generate="false">
+			<attributes>
+				<attribute qualifier="yBillingCardId" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="yBillingBusinessAgreementId" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+        <!-- CECS-381 Testing implementation for SSC -->
+        <itemtype code="ProductConfigurationSyncCronJob" extends="CronJob" generate="true" autocreate="true">
+            <attributes>
+                <attribute qualifier="catalogVersion" type="CatalogVersion">
+                    <persistence type="property"/>
+                    <modifiers optional="true" />
+                </attribute>
+                <attribute qualifier="site" type="CMSSite">
+                    <persistence type="property"/>
+                    <modifiers optional="false" />
+                </attribute>
+                <attribute qualifier="template" type="ProductConfigurationTemplate">
+                    <persistence type="property"/>
+                    <modifiers optional="true" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="AbstractOrder" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="yBillingOrderId" type="java.lang.String">
+                    <persistence type="property" />
+                    <modifiers optional="true"/>
+                </attribute>
+                <attribute qualifier="yBillingContractId" type="java.lang.String">
+                    <persistence type="property" />
+                    <modifiers optional="true"/>
+                </attribute>
+                <attribute qualifier="bundleNoToConfigId" type="BundleNoToConfigIdMap">
+                    <persistence type="property" />
+                    <modifiers optional="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+
+        <itemtype code="Product" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="yBillingId" type="java.lang.String">
+                    <persistence type="property" />
+                </attribute>
+                <attribute qualifier="yBillingIdOnRemove" type="java.lang.String">
+                    <persistence type="property" />
+                </attribute>
+                 <attribute qualifier="csticName" type="java.lang.String">
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="BundleTemplate" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="yBillingId" type="java.lang.String">
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="BundlePackage" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="yBillingId" type="java.lang.String">
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <!-- CECS-717 yBilling enhanced bundle rules -->
+        <itemtype code="AbstractBundleRule" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="csticValueOverrides" type="CsticValueOverrideMapping">
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+    </itemtypes>
+</items>

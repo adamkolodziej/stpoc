@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+	<context merge-by="module" parent="auto" component="explorer-tree">
+		<explorer-tree:explorer-tree
+			xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node
+				id="hmc.group.showcasecommon.showcasecommonSection">
+				<explorer-tree:type-node code="Invoice" id="Invoice" />
+				<explorer-tree:type-node code="Expense" id="Expense" />
+				<explorer-tree:type-node code="Contract" id="Contract" />
+				<explorer-tree:type-node code="ExpenseDispute" id="ExpenseDispute" />
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+
+
+	<context merge-by="type" parent="User" type="Customer"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="expenses" />
+			<list-view:column qualifier="invoices" />
+			<list-view:column qualifier="isBillingEpaperEnabled" />
+			<list-view:column qualifier="isEmailPaymentRemindersEnabled" />
+			<list-view:column qualifier="twitterUserProfileId" />
+			<list-view:column qualifier="wallet" />
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="AbstractOrder" type="Order"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="downloadOnly" />
+			<list-view:column qualifier="shipOnly" />
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="auto" type="Product"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="digitalDelivery" />
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="auto" type="Invoice" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="invoiceNumber" />
+			<list-view:column qualifier="amountDue" />
+			<list-view:column qualifier="amountPaid" />
+			<list-view:column qualifier="amountRemaining" />
+            <list-view:column qualifier="currency" />
+            <list-view:column qualifier="invoiceDate" />
+            <list-view:column qualifier="billingPeriodStart" />
+            <list-view:column qualifier="billingPeriodEnd" />
+            <list-view:column qualifier="dueDate" />
+			<list-view:column qualifier="pdfUrl" />
+			<list-view:column qualifier="invoiceStatus" />
+		</list-view:list-view>
+	</context>
+
+
+    <context merge-by="type" parent="auto" type="Expense" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code" />
+			<list-view:column qualifier="name" />
+			<list-view:column qualifier="type" />
+			<list-view:column qualifier="amount" />
+            <list-view:column qualifier="currencyIso" />
+            <list-view:column qualifier="expenseDate" />
+			<list-view:column qualifier="sourceProduct" />
+			<list-view:column qualifier="contract" />
+		</list-view:list-view>
+    </context>
+
+    <context merge-by="type" parent="auto" type="Contract" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code" />
+			<list-view:column qualifier="user" />
+		</list-view:list-view>
+    </context>
+
+    <context type="Contract" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+        </context>
+
+    <context type="Expense" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code + " " + name</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+
+    <context type="ExpenseDispute" component="base" merge-by="type" parent="auto">
+         <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+     </context>
+
+    <context type="Invoice" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>invoiceNumber</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+
+    <context type="ProductEntitlement" component="base" merge-by="type" parent="auto">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>subscriptionProduct.code + " - " + catalogVersion.mnemonic</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+
+    <context merge-by="type" parent="auto" type="Invoice" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.emsextras.tab.General">
+                <editorArea:section name="hmc.group.emsextras.tab.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="creationtime"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="invoiceDate"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="invoiceNumber"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="customer"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.emsextras.tab.invoice.details">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="amountDue"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="amountPaid"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="amountRemaining"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="currency"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="invoiceStatus"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="billingPeriodEnd"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="billingPeriodStart"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="dueDate"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="pdfUrl"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.emsextras.tab.expenses">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="expenses"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+
+	 <context merge-by="type" parent="auto" type="Expense" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.emsextras.tab.General">
+              <editorArea:section name="hmc.group.emsextras.tab.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="creationtime"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="contract"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="sourceProduct" />
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="invoice"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="customer"/>
+              </editorArea:section>
+                <editorArea:section name="hmc.group.emsextras.tab.expense.details">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="type"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="amount"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="currencyIso"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="expenseDate"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.emsextras.tab.expense.disputes">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="expenseDisputes"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    
+    
+    <context merge-by="type" parent="auto" type="Contract" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.emsextras.tab.General">
+              <editorArea:section name="hmc.group.emsextras.tab.General">
+                  <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                  <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="creationtime"/>
+                  <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="user"/>
+              </editorArea:section>
+                <editorArea:section name="hmc.group.emsextras.tab.orders">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="orderEntries"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    
+    <context merge-by="type" parent="auto" type="ExpenseDispute" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.group.emsextras.tab.General">
+                <editorArea:section name="hmc.group.emsextras.tab.General">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="creationtime"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="expense"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.group.emsextras.tab.cs.ticket">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="csTicketId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="csTicket"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="description">
+                        <editor-parameter>
+                            <name>rows</name>
+                            <value>4</value>
+                        </editor-parameter>
+                    </editorArea:attribute>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    
+     <context merge-by="module" type="Product" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+     
+            <editorArea:tab name="hmc.tab.product.properties" position="1">
+                 <editorArea:section name="hmc.product.descriptions.custom" merge-mode="append">
+                    <editorArea:attribute qualifier="customOffer"/>
+                    <editorArea:attribute qualifier="digitalDelivery"/>
+                    <editorArea:attribute qualifier="yBillingId"/>
+                </editorArea:section> 
+            </editorArea:tab>
+        </editorArea:editorArea>
+     </context>
+    
+      <context merge-by="type" parent="Product" type="VideoProduct" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+     
+            <editorArea:tab name="hmc.tab.product.properties" position="1" merge-mode="append">
+                 <editorArea:section name="hmc.product.descriptions.custom" merge-mode="append">
+                    <editorArea:attribute qualifier="releaseDate"/>
+                    <editorArea:attribute qualifier="customOffer"/>
+                    <editorArea:attribute qualifier="digitalDelivery"/>
+                    <editorArea:attribute qualifier="yBillingId"/>
+                    <editorArea:attribute qualifier="summary"/>
+                     <editorArea:attribute qualifier="viewsCount"/>
+                </editorArea:section> 
+            </editorArea:tab>
+            
+             <editorArea:tab name="hmc.tab.attribute" position="2"/>
+             
+             <editorArea:tab name="hmc.tab.product.categorysystem" position="3"/>
+               
+             <editorArea:tab name="hmc.tab.product.prices" position="4"/>
+			
+			<editorArea:tab name="hmc.section.product.includedEntitlements" position="5">
+				<editorArea:section name="hmc.section.product.includedEntitlements">
+					<editorArea:panel name="" colspan="1">
+						<editorArea:attribute qualifier="productEntitlements"/>
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+			
+			<editorArea:tab name="hmc.tab.product.multimedia" position="6" merge-mode="append">
+				<editorArea:section name="hmc.section.product.pictures.custom">
+					<editorArea:attribute qualifier="galleryImages"/>
+				</editorArea:section>
+             </editorArea:tab>
+             
+          	
+           
+             
+             
+             <editorArea:tab name="hmc.tab.product.bmecat" position="8">
+				<editorArea:section name="hmc.section.product.additional_properties">
+					<editorArea:attribute qualifier="manufacturerTypeDescription"/>
+					<editorArea:attribute qualifier="supplierAlternativeAID"/>
+					<editorArea:attribute qualifier="erpGroupBuyer"/>
+					<editorArea:attribute qualifier="erpGroupSupplier"/>
+					<editorArea:attribute qualifier="segment"/>
+					<editorArea:attribute qualifier="order"/>
+					<editorArea:attribute qualifier="orderQuantityInterval"/>
+				</editorArea:section>
+             </editorArea:tab>
+             
+            
+        </editorArea:editorArea>
+      </context>
+      
+      <context merge-by="type" parent="VideoProduct" type="TVShowProduct" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">     
+            <editorArea:tab name="hmc.tab.product.properties" position="1">
+             	<editorArea:section name="hmc.product.descriptions.custom">
+             	     <editorArea:attribute qualifier="releaseDate"/>
+                     <editorArea:attribute qualifier="customOffer"/>
+                     <editorArea:attribute qualifier="eligibleUserGroups"/>
+                     <editorArea:attribute qualifier="summary"/>
+                     <editorArea:attribute qualifier="downloadFreeMedia"/>
+                     <editorArea:attribute qualifier="downloadFullMedia"/>
+                     <editorArea:panel name="" colspan="1"> 
+                		<editorArea:attribute qualifier="seasons"/> 
+                	  </editorArea:panel>
+              	 </editorArea:section>
+            </editorArea:tab>
+            </editorArea:editorArea>
+         </context>
+       <context merge-by="module" type="TVSeasonProduct" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">     
+           	<editorArea:section name="hmc.product.descriptions.custom">
+             	     <editorArea:attribute qualifier="releaseDate"/>
+                     <editorArea:attribute qualifier="customOffer"/>
+                     <editorArea:attribute qualifier="eligibleUserGroups"/>
+                     <editorArea:attribute qualifier="digitalDelivery"/>
+                     <editorArea:attribute qualifier="yBillingId"/>
+             	 	 <editorArea:attribute qualifier="ean"/>
+                     <editorArea:attribute qualifier="summary"/>
+                     <editorArea:attribute qualifier="downloadFreeMedia"/>
+                     <editorArea:attribute qualifier="downloadFullMedia"/>
+                	 <editorArea:panel name="" colspan="1" merge-mode="append"> 
+                		<editorArea:attribute qualifier="episodes"/> 
+                	  </editorArea:panel>
+              	 </editorArea:section>
+            </editorArea:editorArea>
+         </context>
+
+</config>

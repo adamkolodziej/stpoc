@@ -1,0 +1,1 @@
+sc.exe create MongoDB binPath= "\"D:\hybris\coreplus\mongo-windows\bin\mongod.exe\" --service --config=\"D:\hybris\coreplus\mongo-windows\mongod.cfg\"" DisplayName= "MongoDB" start= "auto"

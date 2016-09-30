@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <enum class="com.hybris.showcase.guidedselling.data.SelectionMode">
+        <value>OneOptional</value>
+        <value>One</value>
+        <value>Multiple</value>
+        <value>AutoPick</value>
+    </enum>
+
+    <enum class="com.hybris.showcase.guidedselling.data.Severity">
+        <value>Info</value>
+        <value>Warn</value>
+        <value>Error</value>
+    </enum>
+
+    <bean class="com.hybris.showcase.guidedselling.data.ConfigMessage">
+        <property name="severity" type="Severity"/>
+        <property name="content" type="java.lang.String"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.BundleOfferData">
+        <property name="components" type="java.util.List&lt;BundleComponentData>"/>
+        <property name="bundleNo" type="int"/>
+        <property name="orderCode" type="java.lang.String"/>
+        <property name="changeOrder" type="boolean"/>
+        <property name="messages" type="java.util.List&lt;ConfigMessage>"/>
+        <property name="orderPrices" type="java.util.List&lt;de.hybris.platform.subscriptionfacades.data.OrderPriceData>"/>
+        <property name="sourcePackageCode" type="java.lang.String"/>
+        <property name="sourceProductCode" type="java.lang.String"/>
+        <property name="rootBundleTemplateId" type="java.lang.String"/>
+        <property name="focusedComponentId" type="java.lang.String"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.ComponentData">
+        <property name="id" type="java.lang.String"/>
+        <property name="name" type="java.lang.String"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.BundleComponentData" extends="ComponentData">
+        <property name="options" type="java.util.List&lt;BundleComponentOptionData>"/>
+        <property name="singleSelection" type="java.lang.String"/>
+        <property name="anythingSelected" type="boolean"/>
+        <property name="selectionMode" type="SelectionMode"/>
+        <property name="disabled" type="java.lang.Boolean"/>
+        <property name="disabledByDependencyMessage" type="java.lang.String"/>
+        <property name="requiredComponents" type="java.util.List&lt;ComponentData>"/>
+        <property name="messages" type="java.util.List&lt;ConfigMessage>"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.BundleComponentOptionData">
+        <property name="product" type="de.hybris.platform.commercefacades.product.data.ProductData"/>
+        <property name="selected" type="boolean"/>
+        <property name="loyaltyPayment" type="boolean"/>
+        <property name="orderEntryNumber" type="int"/>
+        <property name="price" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="disabled" type="boolean"/>
+        <property name="disableMessage" type="java.lang.String"/>
+        <property name="bundleRuleChangedPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="label" type="java.lang.String"/>
+        <!-- CECS-88 editing contract -->
+        <property name="addedToExistingContract" type="boolean"/>
+        <property name="removedFromExistingContract" type="boolean"/>
+        <property name="usageCharges" type="java.util.Collection&lt;de.hybris.platform.subscriptionfacades.data.UsageChargeEntryData&gt;"/>
+        <property name="lockedByPackage" type="boolean"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.BundlePackageData">
+        <property name="code" type="java.lang.String"/>
+        <property name="name" type="java.lang.String"/>
+        <property name="description" type="java.lang.String"/>
+        <property name="selectedProducts" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ProductData>"/>
+        <property name="subscription" type="de.hybris.platform.commercefacades.product.data.ProductData"/>
+        <property name="bundleTemplateId" type="java.lang.String"/>
+        <property name="bundleTemplateName" type="java.lang.String"/>
+        <property name="image" type="de.hybris.platform.commercefacades.product.data.ImageData"/>
+        <property name="thumbnail" type="de.hybris.platform.commercefacades.product.data.ImageData"/>
+        <!-- CECS-194 Packages Page - complete implementation START -->
+        <property name="oneTimeChargeEntryFormattedList" type="java.util.List&lt;de.hybris.platform.subscriptionfacades.data.OneTimeChargeEntryData&gt;"/>
+        <property name="recurringChargeEntryFormattedList" type="java.util.List&lt;de.hybris.platform.subscriptionfacades.data.RecurringChargeEntryData&gt;"/>
+        <!-- CECS-194 Packages Page - complete implementation END-->
+        <property name="usageCharges" type="java.util.Collection&lt;de.hybris.platform.subscriptionfacades.data.UsageChargeData&gt;"/>
+        <property name="recurringChargeEntryTotalPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="onInstallationTotalPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+    </bean>
+
+    <!-- CECS-194 Packages Page - complete implementation START -->
+    <bean class="de.hybris.platform.subscriptionfacades.data.RecurringChargeEntryData">
+        <property name="label" type="java.lang.String"/>
+        <property name="discounted" type="boolean"/>
+    </bean>
+    <bean class="de.hybris.platform.subscriptionfacades.data.ChargeEntryData">
+        <property name="packageName" type="java.lang.String"/>
+        <property name="usageUnit" type="de.hybris.platform.subscriptionfacades.data.UsageUnitData"/>
+    </bean>
+    <!-- CECS-194 Packages Page - complete implementation END -->
+
+    <bean class="com.hybris.showcase.guidedselling.data.BundlePackageDescriptionSlotData">
+        <property name="name" type="java.lang.String"/>
+        <property name="content" type="java.lang.String"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.BundleOfferPopulatorParameters">
+        <property name="bundleTemplate" type="de.hybris.platform.configurablebundleservices.model.BundleTemplateModel"/>
+        <property name="bundleNo" type="int"/>
+        <property name="order" type="de.hybris.platform.core.model.order.AbstractOrderModel"/>
+        <property name="bundleEntries" type="java.util.List&lt;de.hybris.platform.core.model.order.AbstractOrderEntryModel>"/>
+    </bean>
+
+    <!--CECS-216 Guided selling FAQ Component UI - START-->
+    <bean class="com.hybris.showcase.guidedselling.data.FAQEntryData">
+        <property name="code" type="java.lang.String"/>
+        <property name="question" type="java.lang.String"/>
+        <property name="answer" type="java.lang.String"/>
+    </bean>
+    <bean class="de.hybris.platform.configurablebundlefacades.data.BundleTemplateData">
+        <property name="faqEntries" type="java.util.List&lt;com.hybris.showcase.guidedselling.data.FAQEntryData>"/>
+    </bean>
+    <bean class="de.hybris.platform.acceleratorservices.data.RequestContextData">
+        <property name="bundleTemplate" type="de.hybris.platform.configurablebundleservices.model.BundleTemplateModel"/>
+    </bean>
+    <!--CECS-216 Guided selling FAQ Component UI - END-->
+
+    <bean class="com.hybris.showcase.guidedselling.data.GuidedSellingTotalsEntry">
+        <property name="productCode" type="java.lang.String"/>
+        <property name="productName" type="java.lang.String"/>
+        <property name="totalPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <!-- CECS-88 editing contract -->
+        <property name="addedToExistingContract" type="boolean"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+        <!-- CECS-88 editing contract -->
+        <property name="addedToExistingContract" type="boolean"/>
+    </bean>
+
+    <bean class="de.hybris.platform.subscriptionfacades.data.OrderPriceData">
+        <property name="totalsEntries" type="java.util.List&lt;com.hybris.showcase.guidedselling.data.GuidedSellingTotalsEntry>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+        <property name="originalOrderCode" type="java.lang.String"/>
+    </bean>
+    <bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+        <property name="loyaltyPointsPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.PaymentSelectionData">
+        <property name="bundleNo" type="int"/>
+        <property name="orderEntryNumber" type="int"/>
+        <property name="productCode" type="java.lang.String"/>
+        <property name="isLoyaltyPayment" type="boolean"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.CustomerInfo">
+        <property name="firstName" type="java.lang.String"/>
+        <property name="lastName" type="java.lang.String"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.CustomerPaymentInfos" extends="CustomerInfo">
+        <property name="cartPaymentInfo" type="de.hybris.platform.commercefacades.order.data.CCPaymentInfoData"/>
+        <property name="allPaymentInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CCPaymentInfoData>"/>
+        <property name="cardTypes" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CardTypeData>"/>
+        <property name="months" type="java.util.List&lt;GuidedsellingSelectOption>"/>
+        <property name="expiryYears" type="java.util.List&lt;GuidedsellingSelectOption>"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.GuidedsellingSelectOption">
+        <property name="code" type="String"/>
+        <property name="name" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.platform.entitlementfacades.data.EntitlementData">
+        <property name="usageCharge" type="de.hybris.platform.subscriptionfacades.data.UsageChargeData"/>
+    </bean>
+
+    <bean class="com.hybris.showcase.guidedselling.data.CustomerDeliveryInfo" extends="CustomerInfo">
+        <property name="countries" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CountryData>"/>
+        <property name="titles" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.TitleData>"/>
+        <property name="deliveryAddress" type="de.hybris.platform.commercefacades.user.data.AddressData"/>
+        <property name="allDeliveryAddresses" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
+        <property name="allDeliveryModes" type="java.util.List&lt;GuidedsellingSelectOption>"/>
+        <property name="cartDeliveryModeCode" type="String"/>
+    </bean>
+
+</beans>

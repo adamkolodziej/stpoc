@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<!--
+  WARNING: This is the Spring WEB configuration file. If you want to replace
+  items or managers you have to do this from the extensions core configuration
+  file (btgcockpit/resources/btgcockpit-spring.xml)
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-autowire="byName">
+
+    <!-- ubfortunately that won't work, because sections isn't a property in a JavaBean way(there's no get) -->
+    <!--
+    <bean id="ymarketingintegrationBtgcockpitNavigationAreaListMergeDirective" parent="listMergeDirective" depends-on="BtgcockpitNavigationArea">
+        <property name="add" ref="CEISyncInitiativesSection"/>
+        <property name="fieldName" value="sections"/>
+        <property name="afterBeanNames">
+            <list>
+                <value>BtgcockpitUndoSection</value>
+            </list>
+        </property>
+    </bean>
+    -->
+
+    <alias alias="BtgcockpitNavigationArea" name="ymarketingintegrationBtgcockpitNavigationArea" />
+    <bean id="ymarketingintegrationBtgcockpitNavigationArea" class="de.hybris.platform.btgcockpit.session.impl.BtgcockpitNavigationArea" scope="session" parent="BaseNavigationArea">
+        <property name="sectionModel">
+            <ref bean="BtgcockpitNavigationAreaModel"/>
+        </property>
+        <property name="infoSlotRenderer">
+            <bean class="de.hybris.platform.cockpit.components.navigationarea.renderer.InfoBoxRenderer"/>
+        </property>
+        <property name="sections">
+            <list>
+                <ref bean="BtgSpecialCollectionsSection" />
+                <ref bean="BTGSiteSelectorSection" />
+                <ref bean="BtgcockpitUndoSection" />
+
+                <!-- added by ymarketingintegration -->
+                <ref bean="CEISyncInitiativesSection"/>
+            </list>
+        </property>
+        <property name="cockpitTypeService" ref="cockpitTypeService"/>
+    </bean>
+
+    <alias alias="CEISyncInitiativesSection" name="defaultCEISyncInitiativesSection" />
+    <bean id="defaultCEISyncInitiativesSection" class="de.hybris.platform.cockpit.components.navigationarea.NavigationPanelSection" scope="prototype">
+        <property name="localizedLabel" value="cei.initiatives.sync" />
+        <property name="visible" value="true" />
+        <property name="renderer" ref="syncCEIInitiativesRenderer"/>
+    </bean>
+
+    <bean id="syncCEIInitiativesRenderer" class="com.hybris.showcase.cecs.ymarketingintegration.cockpit.components.navigationarea.renderer.SyncCEIInitiativesRenderer">
+        <property name="cronJobDao" ref="cronJobDao"/>
+        <property name="cronJobService" ref="cronJobService"/>
+    </bean>
+    
+   	<alias alias="BTGSegmentEvaluateAction" name="defaultBTGSegmentEvaluateAction" />
+	<bean id="defaultBTGSegmentEvaluateAction" class="com.hybris.showcase.cecs.ymarketingintegration.cockpit.components.browserarea.actions.BTGSegmentEvaluateAction" scope="prototype">
+		<property name="initiativesService" ref="initiativesService"/>
+		<property name="offlineBTGEvaluationService" ref="offlineBTGEvaluationService"/>
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+        <property name="jasperReportCache" ref="jasperReportCache"/>
+	</bean>
+    
+    <alias alias="BTGSegmentActionColumnGrid" name="ymarketingintegrationBTGSegmentActionColumnGrid" />
+	<bean id="ymarketingintegrationBTGSegmentActionColumnGrid" parent="defaultBTGSegmentActionColumnGrid">
+		<property name="actions">
+			<list merge="true">
+                <ref bean="BTGSegmentEvaluateAction"/>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

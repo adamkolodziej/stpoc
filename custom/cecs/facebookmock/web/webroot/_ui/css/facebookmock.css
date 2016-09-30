@@ -1,0 +1,172 @@
+
+body
+{
+    background-color: #E9EAED;
+}
+
+.top-bar
+{
+    height: 40px;
+    background-color: #3a5795;
+    background-position: 0 0;
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);
+    min-width: 981px;
+    position: fixed;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: -4px;
+    z-index: 301;
+    border-color: -moz-use-text-color -moz-use-text-color #133783;
+    border-image: none;
+    border-style: none none solid;
+    border-width: 0 0 1px;
+    line-height: 1.34;
+}
+
+.search-bar
+{
+    background-image: url("../images/hy_searchBar.png");
+    text-align: center;
+    width: 910px;
+    height: 37px;
+    background-size: 910px 32px;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+
+.top-banner
+{
+    background-image: url("../images/fb_topBanner.PNG");
+    width: 910px;
+    height: 331px;
+    background-size: 910px 331px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.top-bannerLiked
+{
+    background-image: url("../images/fb_topBannerLiked.PNG");
+    width: 910px;
+    height: 331px;
+    background-size: 910px 331px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 910px;
+}
+
+.left-column
+{
+	background-image: url("../images/fb_leftColumn.png");
+	width: 320px;
+	height: 1300px;
+    background-size: 320px 1300px;
+	display: inline-block;
+	margin-left: 0px;
+    vertical-align: top;
+    margin-top: 5px;
+}
+
+.right-column
+{
+    width: 510px;
+    height: 1300px;
+	display: inline-block;
+	margin-left: 0px;
+    vertical-align: top;
+    margin-top: 5px;
+}
+
+.fb_merchandisePost
+{
+	background-image: url("../images/fb_merchandisePost.PNG");
+	width: 465px;
+	height: 738px;
+    background-size: 465px 738px;
+    position: relative;
+}
+
+.fb_bigBangPost
+{
+	background-image: url("../images/fb_bigBangPost.PNG");
+	width: 465px;
+	height: 738px;
+    background-size: 465px 738px;
+    position: relative;
+}
+
+.fb_merchandisePostLiked
+{
+	background-image: url("../images/fb_merchandisePostLiked.PNG");
+	width: 465px;
+	height: 738px;
+    background-size: 465px 738px;
+    position: relative;
+}
+
+.fb_bigBangPostLiked
+{
+	background-image: url("../images/fb_bigBangPostLiked.PNG");
+	width: 465px;
+	height: 738px;
+    background-size: 465px 738px;
+    position: relative;
+}
+
+#top-banner-like-link
+{
+    position: absolute;
+    top: 252px;
+    left: 535px;
+    width: 57px;
+    height: 25px;
+    background-color: transparent;
+}
+
+#top-banner-like-link:hover
+{
+    cursor:pointer;
+}
+
+#fb_merchandisePost-like-link
+{
+    background-color: transparent;
+    height: 15px;
+    left: 15px;
+    position: absolute;
+    top: 425px;
+    width: 22px;
+}
+
+#fb_merchandisePost-like-link:hover
+{
+    cursor:pointer;
+}
+
+#fb_bigBangPost-like-link
+{
+    background-color: transparent;
+    height: 15px;
+    left: 15px;
+    position: absolute;
+    top: 392px;
+    width: 22px;
+}
+
+#fb_bigBangPost-like-link:hover
+{
+    cursor:pointer;
+}

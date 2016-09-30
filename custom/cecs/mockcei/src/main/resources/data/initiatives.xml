@@ -1,0 +1,85 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/">
+    <id>https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/Initiatives/</id>
+    <title type="text">Initiatives</title>
+    <updated>2015-08-05T12:18:36Z</updated>
+    <author>
+        <name/>
+    </author>
+    <link href="Initiatives/" rel="self" title="Initiatives"/>
+    <entry m:etag="W/&quot;datetimeoffset'2015-08-05T12%3A18%3A26Z'&quot;">
+        <id>https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/Initiatives('0000000002')</id>
+        <title type="text">Fans of Branded Merchandise</title>
+        <updated>2015-08-05T12:18:36Z</updated>
+        <category term="CUAN_COMMON_SRV.Initiative" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Initiatives('0000000002')" rel="edit" title="Initiative"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:Description>
+                </d:Description>
+                <d:InitiativeId>0000000002</d:InitiativeId>
+                <d:InitiativeIdExt>2</d:InitiativeIdExt>
+                <d:Category>
+                    <d:CategoryCode>Z1</d:CategoryCode>
+                </d:Category>
+                <d:Name>Fans of Branded Merchandise</d:Name>
+            </m:properties>
+        </content>
+    </entry>
+    <entry m:etag="W/&quot;datetimeoffset'2015-08-05T12%3A17%3A11Z'&quot;">
+        <id>https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/Initiatives('0000000004')</id>
+        <title type="text">Interested in Sports</title>
+        <updated>2015-08-05T12:18:36Z</updated>
+        <category term="CUAN_COMMON_SRV.Initiative" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Initiatives('0000000004')" rel="edit" title="Initiative"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:Description>
+                </d:Description>
+                <d:InitiativeId>0000000004</d:InitiativeId>
+                <d:InitiativeIdExt>4</d:InitiativeIdExt>
+                               <d:Category>
+                    <d:CategoryCode>Z2</d:CategoryCode>
+                </d:Category>
+                <d:Name>Interested in Sports</d:Name>
+            </m:properties>
+        </content>
+    </entry>
+    <entry m:etag="W/&quot;datetimeoffset'2015-08-05T12%3A17%3A58Z'&quot;">
+        <id>https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/Initiatives('0000000003')</id>
+        <title type="text">Interested in TV shows</title>
+        <updated>2015-08-05T12:18:36Z</updated>
+        <category term="CUAN_COMMON_SRV.Initiative" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Initiatives('0000000003')" rel="edit" title="Initiative"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:Description>
+                </d:Description>
+                <d:InitiativeId>0000000003</d:InitiativeId>
+                <d:InitiativeIdExt>3</d:InitiativeIdExt>
+                               <d:Category>
+                    <d:CategoryCode>Z3</d:CategoryCode>
+                </d:Category>
+                <d:Name>Interested in TV shows</d:Name>
+            </m:properties>
+        </content>
+    </entry>
+    <entry m:etag="W/&quot;datetimeoffset'2015-08-05T12%3A06%3A47Z'&quot;">
+        <id>https://cinat.wdf.sap.corp:50081/sap/opu/odata/sap/CUAN_COMMON_SRV/Initiatives('0000000001')</id>
+        <title type="text">Unhappy Customers on the go</title>
+        <updated>2015-08-05T12:18:36Z</updated>
+        <category term="CUAN_COMMON_SRV.Initiative" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Initiatives('0000000001')" rel="edit" title="Initiative"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:Description>
+                </d:Description>
+                <d:InitiativeId>0000000001</d:InitiativeId>
+                <d:InitiativeIdExt>1</d:InitiativeIdExt>
+                               <d:Category>
+                    <d:CategoryCode>Z4</d:CategoryCode>
+                </d:Category>
+                <d:Name>Unhappy Customers on the go</d:Name>
+            </m:properties>
+        </content>
+    </entry>
+</feed>

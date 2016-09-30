@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="resources" scope="COMPILE">
+		<relative-module-cls project-related="file://$PROJECT_DIR$/custom/showcase/thirdparty/ext-seewhy/seewhy/resources"/>
+	</lib>
+</component>

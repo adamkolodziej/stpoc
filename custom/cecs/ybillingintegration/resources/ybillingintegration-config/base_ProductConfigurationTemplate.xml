@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="ProductConfigurationTemplate.code"/>
+			<property qualifier="ProductConfigurationTemplate.name"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="ProductConfigurationTemplate.code"/>
+			<property qualifier="ProductConfigurationTemplate.name"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="ProductConfigurationTemplate.code"/>
+	</label>
+</base>

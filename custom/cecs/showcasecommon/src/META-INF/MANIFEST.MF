@@ -1,0 +1,151 @@
+Manifest-Version: 1.0
+Class-Path: productcockpithmc.jar jstl-api-1.2.jar jstl-impl-1.2.jar s
+ pring-webmvc-4.1.4.RELEASE.jar paymenthmc.jar platformhmcserver.jar v
+ alidationserver.jar cscockpitserver.jar jstl-impl-1.2.jar deliveryzon
+ eserver.jar wrapper.jar acceleratorcmshmc.jar paymentstandardserver.j
+ ar svntask.jar ecj-4.4.1.jar pmd-5.0.5.jar xmltask-1.16.jar jaxb-2.2.
+ 4-api.jar jaxb-2.2.4-xjc.jar jsr173_1.0_api.jar jaxb-2.2.4-impl.jar y
+ -ant-utils-1.3.jar jaxb1-2.2.4-impl.jar antlr-runtime-3.4.jar notrani
+ sitives-1.0.jar maven-ant-tasks-2.1.1.jar sequence-library-1.0.2.jar 
+ fileanalyzer-maven-plugin-1.6.18.jar HybrisCustomPMDRules_1.0.0.20131
+ 0071111.jar processingserver.jar hmcserver.jar btghmc.jar cms2hmc.jar
+  yaddonhmc.jar paymenthmc.jar voucherhmc.jar cmscockpithmc.jar promot
+ ionshmc.jar sapadtrecohmc.jar b2bcommercehmc.jar platformhmchmc.jar s
+ apmodelhmchmc.jar basecommercehmc.jar ticketsystemhmc.jar sapproducth
+ mchmc.jar acceleratorcmshmc.jar customerreviewhmc.jar ondemandcommonh
+ mc.jar productcockpithmc.jar mediaconversionhmc.jar b2ccheckoutaddonh
+ mc.jar commerceserviceshmc.jar saporderexchangehmc.jar yacceleratorco
+ rehmc.jar commercesearchhmchmc.jar solrfacetsearchhmchmc.jar accelera
+ torserviceshmc.jar sapproductconfighmchmc.jar sapcoreconfigurationhmc
+ hmc.jar subscriptionserviceshmchmc.jar ycommercewebserviceshmchmc.jar
+  sapproductrecommendationhmc.jar solrfacetsearchhmcserver.jar el-api.
+ jar jasper.jar ecj-4.4.jar jsp-api.jar wrapper.jar ytomcat.jar catali
+ na.jar jasper-el.jar tomcat-api.jar catalina-ha.jar servlet-api.jar t
+ omcat-dbcp.jar tomcat-jdbc.jar tomcat-util.jar catalina-ant.jar tomca
+ t-coyote.jar websocket-api.jar tomcat-i18n-es.jar tomcat-i18n-fr.jar 
+ tomcat-i18n-ja.jar annotations-api.jar catalina-tribes.jar tomcat7-we
+ bsocket.jar catalina-jmx-remote.jar tomcat-juli-adapters.jar mysql-co
+ nnector-java-5.1.23-bin.jar jstl-impl-1.2.jar displaytag-1.2.jar site
+ mesh-3.0-alpha-2.jar cms2server.jar mediaconversionserver.jar promoti
+ onshmc.jar commonsserver.jar mediaconversionhmc.jar productcockpitser
+ ver.jar scriptingserver.jar btgserver.jar admincockpitserver.jar cmsc
+ ockpitserver.jar catalogserver.jar paymentserver.jar promotionsserver
+ .jar virtualjdbcserver.jar platformhmchmc.jar configurablebundleservi
+ cesserver.jar yant.jar models.jar ytomcat.jar ybootstrap.jar vouchers
+ erver.jar basecommercehmc.jar commentsserver.jar spring-mobile-device
+ -1.0.1.RELEASE.jar jacocoant.jar yimpexgenerator.jar commons-net-3.0.
+ 1.jar velocity-tools-2.0.jar reactor-core-1.1.5.RELEASE.jar dom4j-1.6
+ .1.jar geodesy-1.0.jar dumbster-1.6.jar groboutils-core-5.jar mail.ja
+ r ha-api.jar policy.jar stax-ex.jar jaxb-api.jar jaxb-xjc.jar jaxws-r
+ t.jar mimepull.jar saaj-api.jar jaxb-impl.jar jaxws-api.jar saaj-impl
+ .jar stax2-api.jar FastInoset.jar jsr181-api.jar jaxws-tools.jar stre
+ ambuffer.jar gmbal-api-only.jar management-api.jar javax.annotation.j
+ ar woodstox-core-asl.jar zk-3.6.4.jar zml-3.6.4.jar zul-3.6.4.jar zke
+ x-3.6.4.jar zweb-3.6.4.jar itext-2.1.7.jar zhtml-3.6.4.jar zkmax-3.6.
+ 4.jar canvas-1.0-y.jar zkplus-3.6.4.jar fckez-2.6.1_2.jar zcommon-3.6
+ .4.jar displaytag-1.2.jar jai_core-1.1.3.jar jcommon-1.0.16.jar jgrap
+ h-5.8.3.1.jar zkspring-1.1.0.jar jai-codec-1.1.3.jar jgraphx-1.10.2.1
+ .jar jfreechart-1.0.13.jar zcommons-el-1.0.2.jar jasperreports-4.0.2.
+ jar jgrapht-jdk1.6-0.8.2.jar TGGraphLayout-jre11-1.22.jar jasperrepor
+ ts-fonts-4.0.2.jar xstream-1.4.2.jar paranamer-2.6.jar orika-core-1.4
+ .5.jar java-sizeof-0.0.4.jar fop-1.0.jar batik-all-1.7.jar jai_core-1
+ .1.3.jar jai-codec-1.1.3.jar xml-apis-1.3.04.jar xml-apis-ext-1.3.04.
+ jar avalon-framework-4.2.0.jar xmlgraphics-commons-1.4.jar asm-3.3.1.
+ jar bsh-2.0b5.jar oro-2.0.8.jar pmd-5.0.5.jar guava-18.0.jar junit-4.
+ 12.jar mail-1.4.4.jar jaxen-1.1.3.jar wss4j-1.6.4.jar xmlenc-0.52.jar
+  ddlutils-1.0.jar easymock-3.1.jar httpunit-1.7.jar jsr305-2.0.0.jar 
+ jstl-api-1.2.jar log4j-1.2.17.jar velocity-1.7.jar xmlsec-1.4.6.jar c
+ loning-1.9.0.jar ehcache-2.9.0.jar hybriskey-1.0.jar joda-time-2.7.ja
+ r objenesis-1.4.jar commons-el-1.0.jar commons-io-2.4.jar fastutil-6.
+ 5.6.jar aopalliance-1.0.jar fest-assert-1.4.jar fest-util-1.1.6.jar m
+ ime-util-2.1.3.jar commons-dbcp-1.4.jar commons-jexl-1.1.jar commons-
+ lang-2.6.jar commons-pool-1.6.jar groovy-all-2.3.9.jar hamcrest-all-1
+ .3.jar javolution-5.5.1.jar slf4j-api-1.7.10.jar slf4j-jcl-1.7.10.jar
+  annotations-2.0.0.jar bcprov-jdk15-1.46.jar cglib-nodep-2.2.2.jar co
+ mmons-codec-1.7.jar commons-email-1.2.jar commons-pool2-2.2.jar rxjav
+ a-1.0.0-rc.7.jar hybris-xalan-2.7.0.jar jackson-core-2.4.2.jar mockit
+ o-core-1.9.5.jar aspectjweaver-1.8.4.jar btc-ascii-table-1.0.jar comm
+ ons-logging-1.2.jar jgroups-3.4.1.Final.jar likey-no-iaik-1.0.3.jar c
+ ommons-digester-2.1.jar jcip-annotations-1.0.jar ant-commons-net-1.6.
+ 5.jar commons-discovery-0.5.jar hybris-encryption-1.1.jar reflections
+ -0.9.9-RC2.jar commons-httpclient-3.1.jar jackson-databind-2.4.2.jar 
+ commons-beanutils-1.8.3.jar commons-validator-1.4.0.jar jackson-core-
+ asl-1.9.11.jar spring-tx-4.1.4.RELEASE.jar commons-fileupload-1.3.1.j
+ ar spring-aop-4.1.4.RELEASE.jar spring-jms-4.1.4.RELEASE.jar spring-o
+ rm-4.1.4.RELEASE.jar spring-oxm-4.1.4.RELEASE.jar spring-web-4.1.4.RE
+ LEASE.jar spring-xml-2.2.0.RELEASE.jar commons-collections-3.2.1.jar 
+ commons-configuration-1.7.jar jackson-annotations-2.4.2.jar jackson-m
+ apper-asl-1.9.11.jar spring-core-4.1.4.RELEASE.jar spring-jdbc-4.1.4.
+ RELEASE.jar spring-test-4.1.4.RELEASE.jar easymockclassextension-3.1.
+ jar spring-beans-4.1.4.RELEASE.jar spring-webmvc-4.1.4.RELEASE.jar sp
+ ring-aspects-4.1.4.RELEASE.jar spring-context-4.1.4.RELEASE.jar hybri
+ s-simple-statistics-1.0.1.jar spring-messaging-4.1.4.RELEASE.jar conc
+ urrentlinkedhashmap-lru-1.4.jar spring-expression-4.1.4.RELEASE.jar s
+ pring-instrument-4.1.4.RELEASE.jar spring-security-web-3.2.5.RELEASE.
+ jar spring-security-core-3.2.5.RELEASE.jar spring-context-support-4.1
+ .4.RELEASE.jar spring-security-config-3.2.5.RELEASE.jar spring-integr
+ ation-core-4.1.2.RELEASE.jar spring-security-taglibs-3.2.5.RELEASE.ja
+ r spring-instrument-tomcat-4.1.4.RELEASE.jar com.sap.security.core.se
+ rver.csi-1.00.8.jar oro-2.0.8.jar kxml2-2.1.8.jar xpp3-1.1.4c.jar jer
+ sey-core-1.18.jar jersey-client-1.18.jar jersey-server-1.18.jar jerse
+ y-spring-1.18.jar hybris-commons-conversion.jar entitlements-api.jar 
+ hybris-commons-dto.jar powermock-mockito-1.6.1-full.jar restfb-1.9.0.
+ jar poi-3.7.jar hsqldb-2.2.9.jar ngdbc-0.95.0.jar sqljdbc-4.0.2206.10
+ 0.jar mysql-connector-java-5.1.23-bin.jar ant-contrib-1.0b3.jar mvel2
+ -2.0.19.jar quartz-2.1.2.jar core4j-0.5.jar httpcore-4.3.jar cxf-api-
+ 2.6.0.jar httpmime-4.3.1.jar httpclient-4.3.1.jar cxf-rt-core-2.6.0.j
+ ar httpclient-cache-4.3.1.jar javax.ws.rs-api-2.0-m10.jar cxf-rt-bind
+ ings-xml-2.6.0.jar cxf-rt-frontend-jaxrs-2.6.0.jar cxf-rt-transports-
+ http-2.6.0.jar sapjco3.jar com.google.code.gson-gson-2.2.2.jar common
+ s-codec-commons-codec-1.6.jar javax.ws.rs-javax.ws.rs-api-2.0-m10.jar
+  org.apache.olingo-olingo-odata2-api-1.2.0.jar org.apache.olingo-olin
+ go-odata2-core-1.2.0.jar org.apache.olingo-olingo-odata2-api-annotati
+ on-1.2.0.jar com.sap.custdev.projects.fbs.slc.common-2.3.3.jar com.sa
+ p.custdev.projects.fbs.slc.engine-2.3.3.jar com.sap.custdev.projects.
+ fbs.slc.database-2.3.3.jar spring-social-web-1.0.3.RELEASE.jar spring
+ -social-core-1.0.3.RELEASE.jar spring-social-test-1.0.3.RELEASE.jar h
+ ppc-0.5.2.jar noggit-0.5.jar dom4j-1.6.1.jar joda-time-2.2.jar parana
+ mer-2.6.jar perf4j-0.9.16.jar spatial4j-0.3.jar commons-io-2.4.jar ht
+ tpcore-4.3.2.jar httpmime-4.3.3.jar wstx-asl-3.2.7.jar commons-cli-1.
+ 2.jar solr-cell-4.6.1.jar solr-core-4.6.1.jar solr-uima-4.6.1.jar zoo
+ keeper-3.4.5.jar commons-lang-2.6.jar httpclient-4.3.4.jar orika-core
+ -1.4.5.jar solr-solrj-4.6.1.jar commons-codec-1.7.jar hadoop-auth-2.2
+ .0.jar hadoop-hdfs-2.2.0.jar java-sizeof-0.0.4.jar lucene-core-4.6.1.
+ jar lucene-join-4.6.1.jar lucene-misc-4.6.1.jar org.restlet-2.1.1.jar
+  solr-langid-4.6.1.jar hadoop-common-2.2.0.jar lucene-codecs-4.6.1.ja
+ r lucene-memory-4.6.1.jar protobuf-java-2.5.0.jar solr-velocity-4.6.1
+ .jar lucene-queries-4.6.1.jar lucene-spatial-4.6.1.jar lucene-suggest
+ -4.6.1.jar lucene-grouping-4.6.1.jar solr-clustering-4.6.1.jar common
+ s-fileupload-1.2.1.jar hadoop-annotations-2.2.0.jar lucene-highlighte
+ r-4.6.1.jar lucene-queryparser-4.6.1.jar commons-configuration-1.6.ja
+ r solr-analysis-extras-4.6.1.jar solr-dataimporthandler-4.6.1.jar luc
+ ene-analyzers-common-4.6.1.jar org.restlet.ext.servlet-2.1.1.jar conc
+ urrentlinkedhashmap-lru-1.2.jar lucene-analyzers-kuromoji-4.6.1.jar l
+ ucene-analyzers-phonetic-4.6.1.jar solr-dataimporthandler-extras-4.6.
+ 1.jar spring-integration-ip-4.1.2.RELEASE.jar spring-integration-ws-4
+ .1.2.RELEASE.jar spring-integration-ftp-4.1.2.RELEASE.jar spring-inte
+ gration-jms-4.1.2.RELEASE.jar spring-integration-jmx-4.1.2.RELEASE.ja
+ r spring-integration-rmi-4.1.2.RELEASE.jar spring-integration-xml-4.1
+ .2.RELEASE.jar spring-integration-feed-4.1.2.RELEASE.jar spring-integ
+ ration-file-4.1.2.RELEASE.jar spring-integration-http-4.1.2.RELEASE.j
+ ar spring-integration-jdbc-4.1.2.RELEASE.jar spring-integration-mail-
+ 4.1.2.RELEASE.jar spring-integration-sftp-4.1.2.RELEASE.jar spring-in
+ tegration-test-4.1.2.RELEASE.jar spring-integration-xmpp-4.1.2.RELEAS
+ E.jar spring-integration-event-4.1.2.RELEASE.jar spring-integration-g
+ roovy-4.1.2.RELEASE.jar spring-integration-stream-4.1.2.RELEASE.jar s
+ pring-integration-twitter-4.1.2.RELEASE.jar spring-integration-securi
+ ty-4.1.2.RELEASE.jar kxml2-2.1.8.jar bitlyj-2.0.0.jar javassist-3.19.
+ 0-GA.jar validation-api-1.0.0.GA.jar jboss-logging-3.2.1.Final.jar hi
+ bernate-validator-4.3.2.Final.jar vjdbc.jar oro-2.0.8.jar vjdbc_serve
+ r.jar commons-dbcp-1.4.jar jackson-core-asl-1.9.11.jar jackson-mapper
+ -asl-1.9.11.jar hybrislicence.jar showcasecommonhmc.jar btghmc.jar so
+ lrfacetsearchserver.jar cockpitserver.jar voucherhmc.jar cmscockpithm
+ c.jar basecommerceserver.jar reportcockpitserver.jar europe1server.ja
+ r advancedsavedqueryserver.jar mediawebserver.jar subscriptionservice
+ sserver.jar acceleratorserviceshmc.jar cms2libserver.jar bootstrap.ja
+ r tomcat-juli.jar commons-daemon.jar coreserver.jar customerreviewhmc
+ .jar cms2hmc.jar impexserver.jar ticketsystemhmc.jar customerreviewse
+ rver.jar solrfacetsearchhmchmc.jar jstl-impl-1.2.jar sitemesh-3.0-alp
+ ha-2.jar ticketsystemserver.jar workflowserver.jar commerceserviceshm
+ c.jar ldapserver.jar
+

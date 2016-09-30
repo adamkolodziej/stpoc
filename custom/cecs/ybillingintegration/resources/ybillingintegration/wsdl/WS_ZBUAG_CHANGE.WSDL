@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wsdl:definitions targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:n1="urn:sap-com:document:sap:rfc:functions">
+	<wsdl:documentation>
+		<sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl" />
+	</wsdl:documentation>
+	<wsp:UsingPolicy wsdl:required="true" />
+	<wsp:Policy wsu:Id="BN__ZBuagChangeBinding">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false
+				</sapattahnd:Enabled>
+				<saptrnbnd:OptimizedMimeSerialization
+					xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"
+					wsp:Optional="true" />
+				<wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+					wsp:Optional="true" />
+				<wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+					<sp:TransportBinding
+						xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+						xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+						xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+						xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+						xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+						<wsp:Policy>
+							<sp:TransportToken>
+								<wsp:Policy>
+									<sp:HttpsToken>
+										<wsp:Policy>
+											<sp:HttpBasicAuthentication />
+										</wsp:Policy>
+									</sp:HttpsToken>
+								</wsp:Policy>
+							</sp:TransportToken>
+							<sp:AlgorithmSuite>
+								<wsp:Policy>
+									<sp:Basic128Rsa15 />
+								</wsp:Policy>
+							</sp:AlgorithmSuite>
+							<sp:Layout>
+								<wsp:Policy>
+									<sp:Strict />
+								</wsp:Policy>
+							</sp:Layout>
+						</wsp:Policy>
+					</sp:TransportBinding>
+				</wsp:All>
+			</wsp:All>
+			<wsp:All>
+				<sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false
+				</sapattahnd:Enabled>
+				<saptrnbnd:OptimizedXMLTransfer
+					uri="http://xml.sap.com/2006/11/esi/esp/binxml" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"
+					wsp:Optional="true" />
+				<wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+					wsp:Optional="true" />
+				<wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+					<sp:TransportBinding
+						xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+						xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+						xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+						xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+						xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+						<wsp:Policy>
+							<sp:TransportToken>
+								<wsp:Policy>
+									<sp:HttpsToken>
+										<wsp:Policy>
+											<sp:HttpBasicAuthentication />
+										</wsp:Policy>
+									</sp:HttpsToken>
+								</wsp:Policy>
+							</sp:TransportToken>
+							<sp:AlgorithmSuite>
+								<wsp:Policy>
+									<sp:Basic128Rsa15 />
+								</wsp:Policy>
+							</sp:AlgorithmSuite>
+							<sp:Layout>
+								<wsp:Policy>
+									<sp:Strict />
+								</wsp:Policy>
+							</sp:Layout>
+						</wsp:Policy>
+					</sp:TransportBinding>
+				</wsp:All>
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+	<wsp:Policy wsu:Id="BN__ZBuagChangeBinding_soap12">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false
+				</sapattahnd:Enabled>
+				<saptrnbnd:OptimizedMimeSerialization
+					xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"
+					wsp:Optional="true" />
+				<wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+					wsp:Optional="true" />
+				<wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+					<sp:TransportBinding
+						xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+						xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+						xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+						xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+						xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+						<wsp:Policy>
+							<sp:TransportToken>
+								<wsp:Policy>
+									<sp:HttpsToken>
+										<wsp:Policy>
+											<sp:HttpBasicAuthentication />
+										</wsp:Policy>
+									</sp:HttpsToken>
+								</wsp:Policy>
+							</sp:TransportToken>
+							<sp:AlgorithmSuite>
+								<wsp:Policy>
+									<sp:Basic128Rsa15 />
+								</wsp:Policy>
+							</sp:AlgorithmSuite>
+							<sp:Layout>
+								<wsp:Policy>
+									<sp:Strict />
+								</wsp:Policy>
+							</sp:Layout>
+						</wsp:Policy>
+					</sp:TransportBinding>
+				</wsp:All>
+			</wsp:All>
+			<wsp:All>
+				<sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false
+				</sapattahnd:Enabled>
+				<saptrnbnd:OptimizedXMLTransfer
+					uri="http://xml.sap.com/2006/11/esi/esp/binxml" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"
+					wsp:Optional="true" />
+				<wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+					wsp:Optional="true" />
+				<wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+					<sp:TransportBinding
+						xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+						xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+						xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+						xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+						xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+						<wsp:Policy>
+							<sp:TransportToken>
+								<wsp:Policy>
+									<sp:HttpsToken>
+										<wsp:Policy>
+											<sp:HttpBasicAuthentication />
+										</wsp:Policy>
+									</sp:HttpsToken>
+								</wsp:Policy>
+							</sp:TransportToken>
+							<sp:AlgorithmSuite>
+								<wsp:Policy>
+									<sp:Basic128Rsa15 />
+								</wsp:Policy>
+							</sp:AlgorithmSuite>
+							<sp:Layout>
+								<wsp:Policy>
+									<sp:Strict />
+								</wsp:Policy>
+							</sp:Layout>
+						</wsp:Policy>
+					</sp:TransportBinding>
+				</wsp:All>
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+	<wsp:Policy wsu:Id="IF__ZCRM_WS_BUAG_CHANGE">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<sapsession:Session
+					xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
+					<sapsession:enableSession>false</sapsession:enableSession>
+				</sapsession:Session>
+				<sapcentraladmin:CentralAdministration
+					xmlns:sapcentraladmin="http://www.sap.com/webas/700/soap/features/CentralAdministration/"
+					wsp:Optional="true">
+					<sapcentraladmin:BusinessApplicationID>0050568502431ED1B0B63AE1E24D675F
+					</sapcentraladmin:BusinessApplicationID>
+				</sapcentraladmin:CentralAdministration>
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+	<wsp:Policy wsu:Id="OP__ZcrmBuagChange">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<saptrhnw05:required
+					xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+				<sapcomhnd:enableCommit
+					xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+				<sapblock:enableBlocking
+					xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+				<saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false
+				</saprmnw05:enableWSRM>
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+	<wsdl:types>
+		<xsd:schema attributeFormDefault="qualified"
+			targetNamespace="urn:sap-com:document:sap:rfc:functions">
+			<xsd:simpleType name="char1">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="1" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char10">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="10" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char12">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="12" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char2">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="2" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char20">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="20" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char220">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="220" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char25">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="25" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char3">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="3" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char30">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="30" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char32">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="32" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char35">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="35" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char4">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="4" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char5">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="5" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char50">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="50" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char6">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="6" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="char8">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="8" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="cuky5">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="5" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="date10">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="10" />
+					<xsd:pattern value="\d\d\d\d-\d\d-\d\d" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="decimal23.4">
+				<xsd:restriction base="xsd:decimal">
+					<xsd:totalDigits value="23" />
+					<xsd:fractionDigits value="4" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="numeric2">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="2" />
+					<xsd:pattern value="\d*" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="numeric3">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="3" />
+					<xsd:pattern value="\d*" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="numeric6">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="6" />
+					<xsd:pattern value="\d*" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:schema>
+		<xsd:schema attributeFormDefault="qualified"
+			targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style"
+			xmlns:n0="urn:sap-com:document:sap:rfc:functions">
+			<xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
+			<xsd:complexType name="Bapibus1006130GnrlData">
+				<xsd:sequence>
+					<xsd:element name="BabrText" type="n0:char30" />
+					<xsd:element name="MethodInc" type="n0:char1" />
+					<xsd:element name="MethodOutg" type="n0:char5" />
+					<xsd:element name="SendcontrolDr" type="n0:char4" />
+					<xsd:element name="Tofpaym" type="n0:char4" />
+					<xsd:element name="SendcontrolBr" type="n0:char4" />
+					<xsd:element name="CorrespVariant" type="n0:char5" />
+					<xsd:element name="SendcontrolBp" type="n0:char4" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Bapibus1006130GnrlDataX">
+				<xsd:sequence>
+					<xsd:element name="BabrText" type="n0:char1" />
+					<xsd:element name="MethodInc" type="n0:char1" />
+					<xsd:element name="MethodOutg" type="n0:char1" />
+					<xsd:element name="SendcontrolDr" type="n0:char1" />
+					<xsd:element name="Tofpaym" type="n0:char1" />
+					<xsd:element name="SendcontrolBr" type="n0:char1" />
+					<xsd:element name="CorrespVariant" type="n0:char1" />
+					<xsd:element name="SendcontrolBp" type="n0:char1" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Bapibus1006130SpecData">
+				<xsd:sequence>
+					<xsd:element name="BuagText" type="n0:char30" />
+					<xsd:element name="BuagDefault" type="n0:char1" />
+					<xsd:element name="BuagClass" type="n0:char10" />
+					<xsd:element name="AddrNo" type="n0:char10" />
+					<xsd:element name="RefNumber" type="n0:char25" />
+					<xsd:element name="BankInc" type="n0:char4" />
+					<xsd:element name="BankOutg" type="n0:char4" />
+					<xsd:element name="CreditCardInc" type="n0:char6" />
+					<xsd:element name="CreditCardOutg" type="n0:char6" />
+					<xsd:element name="PayerBuagId" type="n0:char12" />
+					<xsd:element name="AddrDr" type="n0:char10" />
+					<xsd:element name="AddrPy" type="n0:char10" />
+					<xsd:element name="AddrPr" type="n0:char10" />
+					<xsd:element name="AddrIr" type="n0:char10" />
+					<xsd:element name="AddrTax" type="n0:char10" />
+					<xsd:element name="TaxCategory" type="n0:char2" />
+					<xsd:element name="TaxCode" type="n0:char2" />
+					<xsd:element name="DirectDebitAmount" type="n0:decimal23.4" />
+					<xsd:element name="DirectDebitCurrency" type="n0:cuky5" />
+					<xsd:element name="DirectDebitCurrencyIso" type="n0:char3" />
+					<xsd:element name="DirectDebitMonths" type="n0:numeric2" />
+					<xsd:element name="DirectDebitRolling" type="n0:char1" />
+					<xsd:element name="BuagDeletionFlag" type="n0:char1" />
+					<xsd:element name="BuagText35" type="n0:char35" />
+					<xsd:element name="BuagIsCollBill" type="n0:char1" />
+					<xsd:element name="CollBillBuagId" type="n0:char12" />
+					<xsd:element name="PpaccRelation" type="n0:char1" />
+					<xsd:element name="SepaMndid" type="n0:char35" />
+					<xsd:element name="BuagIdLegacy" type="n0:char20" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Bapibus1006130SpecDataX">
+				<xsd:sequence>
+					<xsd:element name="BuagText" type="n0:char1" />
+					<xsd:element name="BuagDefault" type="n0:char1" />
+					<xsd:element name="BuagClass" type="n0:char1" />
+					<xsd:element name="AddrNo" type="n0:char1" />
+					<xsd:element name="RefNumber" type="n0:char1" />
+					<xsd:element name="BankInc" type="n0:char1" />
+					<xsd:element name="BankOutg" type="n0:char1" />
+					<xsd:element name="CreditCardInc" type="n0:char1" />
+					<xsd:element name="CreditCardOutg" type="n0:char1" />
+					<xsd:element name="PayerBuagId" type="n0:char1" />
+					<xsd:element name="AddrDr" type="n0:char1" />
+					<xsd:element name="AddrPy" type="n0:char1" />
+					<xsd:element name="AddrPr" type="n0:char1" />
+					<xsd:element name="AddrIr" type="n0:char1" />
+					<xsd:element name="AddrTax" type="n0:char1" />
+					<xsd:element name="TaxCategory" type="n0:char1" />
+					<xsd:element name="TaxCode" type="n0:char1" />
+					<xsd:element name="DirectDebitAmount" type="n0:char1" />
+					<xsd:element name="DirectDebitCurrency" type="n0:char1" />
+					<xsd:element name="DirectDebitCurrencyIso" type="n0:char1" />
+					<xsd:element name="DirectDebitMonths" type="n0:char1" />
+					<xsd:element name="DirectDebitRolling" type="n0:char1" />
+					<xsd:element name="BuagDeletionFlag" type="n0:char1" />
+					<xsd:element name="BuagText35" type="n0:char1" />
+					<xsd:element name="BuagIsCollBill" type="n0:char1" />
+					<xsd:element name="CollBillBuagId" type="n0:char1" />
+					<xsd:element name="PpaccRelation" type="n0:char1" />
+					<xsd:element name="SepaMndid" type="n0:char1" />
+					<xsd:element name="BuagIdLegacy" type="n0:char1" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Bapiret2">
+				<xsd:sequence>
+					<xsd:element name="Type" type="n0:char1" />
+					<xsd:element name="Id" type="n0:char20" />
+					<xsd:element name="Number" type="n0:numeric3" />
+					<xsd:element name="Message" type="n0:char220" />
+					<xsd:element name="LogNo" type="n0:char20" />
+					<xsd:element name="LogMsgNo" type="n0:numeric6" />
+					<xsd:element name="MessageV1" type="n0:char50" />
+					<xsd:element name="MessageV2" type="n0:char50" />
+					<xsd:element name="MessageV3" type="n0:char50" />
+					<xsd:element name="MessageV4" type="n0:char50" />
+					<xsd:element name="Parameter" type="n0:char32" />
+					<xsd:element name="Row" type="xsd:int" />
+					<xsd:element name="Field" type="n0:char30" />
+					<xsd:element name="System" type="n0:char10" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Bapibus1006130PpaccData">
+				<xsd:sequence>
+					<xsd:element name="PpaccGuid" type="n0:char32" />
+					<xsd:element name="PpaccId" type="n0:char12" />
+					<xsd:element name="PrepaidSchema" type="n0:char4" />
+					<xsd:element name="Currency" type="n0:cuky5" />
+					<xsd:element name="CurrencyIso" type="n0:char3" />
+					<xsd:element name="MinBalance" type="n0:decimal23.4" />
+					<xsd:element name="PayerAlternat" type="n0:char10" />
+					<xsd:element name="PaymentBy" type="n0:char1" />
+					<xsd:element name="BdidIn" type="n0:char4" />
+					<xsd:element name="CcardIn" type="n0:char6" />
+					<xsd:element name="NotifLimit1" type="n0:decimal23.4" />
+					<xsd:element name="LimitActive1" type="n0:char1" />
+					<xsd:element name="NotifLimit2" type="n0:decimal23.4" />
+					<xsd:element name="LimitActive2" type="n0:char1" />
+					<xsd:element name="NotifLimit3" type="n0:decimal23.4" />
+					<xsd:element name="LimitActive3" type="n0:char1" />
+					<xsd:element name="ProvCloseDate" type="n0:date10" />
+					<xsd:element name="ClosedDate" type="n0:date10" />
+					<xsd:element name="SepaMndid" type="n0:char35" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Bapibus1006130PpaccDataX">
+				<xsd:sequence>
+					<xsd:element name="PpaccGuid" type="n0:char1" />
+					<xsd:element name="PpaccId" type="n0:char1" />
+					<xsd:element name="PrepaidSchema" type="n0:char1" />
+					<xsd:element name="Currency" type="n0:char1" />
+					<xsd:element name="CurrencyIso" type="n0:char1" />
+					<xsd:element name="MinBalance" type="n0:char1" />
+					<xsd:element name="PayerAlternat" type="n0:char1" />
+					<xsd:element name="PaymentBy" type="n0:char1" />
+					<xsd:element name="BdidIn" type="n0:char1" />
+					<xsd:element name="CcardIn" type="n0:char1" />
+					<xsd:element name="NotifLimit1" type="n0:char1" />
+					<xsd:element name="LimitActive1" type="n0:char1" />
+					<xsd:element name="NotifLimit2" type="n0:char1" />
+					<xsd:element name="LimitActive2" type="n0:char1" />
+					<xsd:element name="NotifLimit3" type="n0:char1" />
+					<xsd:element name="LimitActive3" type="n0:char1" />
+					<xsd:element name="ProvCloseDate" type="n0:char1" />
+					<xsd:element name="ClosedDate" type="n0:char1" />
+					<xsd:element name="SepaMndid" type="n0:char1" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Bapibus1006130RelData">
+				<xsd:sequence>
+					<xsd:element name="PartnerPft" type="n0:char4" />
+					<xsd:element name="Partner1" type="n0:char10" />
+					<xsd:element name="Partner2" type="n0:char10" />
+					<xsd:element name="PartnerFct" type="n0:char8" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Bapibus1006130RelDataX">
+				<xsd:sequence>
+					<xsd:element name="PartnerPft" type="n0:char1" />
+					<xsd:element name="Partner1" type="n0:char1" />
+					<xsd:element name="Partner2" type="n0:char1" />
+					<xsd:element name="PartnerFct" type="n0:char1" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TableOfBapiret2">
+				<xsd:sequence>
+					<xsd:element name="item" type="tns:Bapiret2" minOccurs="0"
+						maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TableOfBapibus1006130PpaccData">
+				<xsd:sequence>
+					<xsd:element name="item" type="tns:Bapibus1006130PpaccData"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TableOfBapibus1006130PpaccDataX">
+				<xsd:sequence>
+					<xsd:element name="item" type="tns:Bapibus1006130PpaccDataX"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TableOfBapibus1006130RelData">
+				<xsd:sequence>
+					<xsd:element name="item" type="tns:Bapibus1006130RelData"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TableOfBapibus1006130RelDataX">
+				<xsd:sequence>
+					<xsd:element name="item" type="tns:Bapibus1006130RelDataX"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="ZcrmBuagChange">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Buagguid" type="n0:char32"
+							minOccurs="0" />
+						<xsd:element name="Businessagreement" type="n0:char12"
+							minOccurs="0" />
+						<xsd:element name="Businesspartner" type="n0:char10"
+							minOccurs="0" />
+						<xsd:element name="Datagnrl" type="tns:Bapibus1006130GnrlData"
+							minOccurs="0" />
+						<xsd:element name="Datagnrlx" type="tns:Bapibus1006130GnrlDataX"
+							minOccurs="0" />
+						<xsd:element name="Dataspec" type="tns:Bapibus1006130SpecData"
+							minOccurs="0" />
+						<xsd:element name="Dataspecx" type="tns:Bapibus1006130SpecDataX"
+							minOccurs="0" />
+						<xsd:element name="Return" type="tns:TableOfBapiret2" />
+						<xsd:element name="Testrun" type="n0:char1" minOccurs="0" />
+						<xsd:element name="Tppaccdata" type="tns:TableOfBapibus1006130PpaccData"
+							minOccurs="0" />
+						<xsd:element name="Tppaccdatax"
+							type="tns:TableOfBapibus1006130PpaccDataX" minOccurs="0" />
+						<xsd:element name="Treldata" type="tns:TableOfBapibus1006130RelData"
+							minOccurs="0" />
+						<xsd:element name="Treldatax" type="tns:TableOfBapibus1006130RelDataX"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ZcrmBuagChangeResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Return" type="tns:TableOfBapiret2" />
+						<xsd:element name="Tppaccdata" type="tns:TableOfBapibus1006130PpaccData"
+							minOccurs="0" />
+						<xsd:element name="Tppaccdatax"
+							type="tns:TableOfBapibus1006130PpaccDataX" minOccurs="0" />
+						<xsd:element name="Treldata" type="tns:TableOfBapibus1006130RelData"
+							minOccurs="0" />
+						<xsd:element name="Treldatax" type="tns:TableOfBapibus1006130RelDataX"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="ZcrmBuagChange">
+		<wsdl:part name="parameters" element="tns:ZcrmBuagChange" />
+	</wsdl:message>
+	<wsdl:message name="ZcrmBuagChangeResponse">
+		<wsdl:part name="parameter" element="tns:ZcrmBuagChangeResponse" />
+	</wsdl:message>
+	<wsdl:portType name="ZCRM_WS_BUAG_CHANGE">
+		<jaxws:bindings xmlns:jaxws="http://java.sun.com/xml/ns/jaxws">
+			<jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
+		</jaxws:bindings>
+		<wsdl:documentation>
+			<sapdoc:sapdoc xmlns:sapdoc="urn:sap:esi:documentation">
+				<sapdoc:docitem applicationComponent="CRM-IT" />
+			</sapdoc:sapdoc>
+		</wsdl:documentation>
+		<wsp:Policy>
+			<wsp:PolicyReference URI="#IF__ZCRM_WS_BUAG_CHANGE" />
+		</wsp:Policy>
+		<wsdl:operation name="ZcrmBuagChange">
+			<wsp:Policy>
+				<wsp:PolicyReference URI="#OP__ZcrmBuagChange" />
+			</wsp:Policy>
+			<wsdl:input message="tns:ZcrmBuagChange" />
+			<wsdl:output message="tns:ZcrmBuagChangeResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ZBuagChangeBinding" type="tns:ZCRM_WS_BUAG_CHANGE">
+		<wsp:Policy>
+			<wsp:PolicyReference URI="#BN__ZBuagChangeBinding" />
+		</wsp:Policy>
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<wsdl:operation name="ZcrmBuagChange">
+			<soap:operation
+				soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCRM_WS_BUAG_CHANGE:ZcrmBuagChangeRequest"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="ZBuagChangeBinding_soap12" type="tns:ZCRM_WS_BUAG_CHANGE">
+		<wsp:Policy>
+			<wsp:PolicyReference URI="#BN__ZBuagChangeBinding_soap12" />
+		</wsp:Policy>
+		<wsoap12:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<wsdl:operation name="ZcrmBuagChange">
+			<wsoap12:operation
+				soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCRM_WS_BUAG_CHANGE:ZcrmBuagChangeRequest"
+				style="document" />
+			<wsdl:input>
+				<wsoap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsoap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ZCRM_WS_BUAG_CHANGE">
+		<wsdl:port name="ZBuagChangeBinding" binding="tns:ZBuagChangeBinding">
+			<soap:address
+				location="http://cicr3.wdf.sap.corp:50080/sap/bc/srt/rfc/sap/zcrm_ws_buag_change/200/zcrm_ws_buag_change/zbuagchangebinding" />
+		</wsdl:port>
+		<wsdl:port name="ZBuagChangeBinding_soap12" binding="tns:ZBuagChangeBinding_soap12">
+			<wsoap12:address
+				location="http://cicr3.wdf.sap.corp:50080/sap/bc/srt/rfc/sap/zcrm_ws_buag_change/200/zcrm_ws_buag_change/zbuagchangebinding" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

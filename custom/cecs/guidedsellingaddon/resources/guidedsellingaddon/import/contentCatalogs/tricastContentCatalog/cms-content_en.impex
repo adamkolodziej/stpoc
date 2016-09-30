@@ -1,0 +1,28 @@
+##******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+
+$contentCatalog=tricastContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$picture=media(code, $contentCV);
+$siteResource=jar:com.hybris.showcase.guidedselling.constants.GuidedsellingaddonConstants&/guidedsellingaddon/import/contentCatalogs/$contentCatalog
+
+# Language
+$lang=en
+
+# Site Logo Component
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+
+# Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;Guidedselling-packages.jpg;$siteResource/images/banners/packages.jpg;image/jpeg;packages.jpg;;"packages.jpg"
+
+UPDATE SingleBannerComponent;$contentCV[unique=true];uid[unique=true];headline[lang=$lang];$picture[lang=$lang];content[lang=$lang]
+;;Guidedselling-WideNavigationBanner;;Guidedselling-packages.jpg;""
+
+UPDATE SimplePackageDetailsComponent;$contentCV[unique=true];uid[unique=true];headline
+;;Guidedselling-SimplePackageDetailsComponent;Configure your package
+
+UPDATE GuidedSellingFAQComponent;$contentCV[unique=true];uid[unique=true];headline
+;;GuidedSelling-FAQComponent;Frequently asked questions

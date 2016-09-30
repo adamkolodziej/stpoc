@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other" allow-create-inline-items="true">
+	<group name="General">
+		<property qualifier="TechnicalAttribute.dataId" visible="true" editable="true"/>
+		<property qualifier="TechnicalAttribute.version" visible="true" editable="true"/>
+		<property qualifier="TechnicalAttribute.guid" visible="true" editable="true"/>
+		<property qualifier="TechnicalAttribute.dataDesc" visible="true" editable="true"/>
+		<property qualifier="TechnicalAttribute.dataType" visible="true" editable="true"/>
+	</group>
+	
+</list-view>	

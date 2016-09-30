@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+ <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc.group.servicesshowcase.showcaseProducts">
+                <explorer-tree:type-node code="VideoProduct" id="VideoProduct"/>
+                <explorer-tree:type-node code="TVShowProduct" id="TVShowProduct"/>
+                <explorer-tree:type-node code="TVSeasonProduct" id="TVSeasonProduct"/>
+                <explorer-tree:type-node code="TVEpisodeProduct" id="TVEpisodeProduct"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+    
+
+    
+     <context merge-by="type" parent="GenericItem" type="Product" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="customOffer"/>
+        </list-view:list-view>
+    </context>
+
+
+ 	<context merge-by="type" parent="Product" type="VideoProduct" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="fullVersionMedia"/>
+            <list-view:column qualifier="freePreviewMedia"/>
+        </list-view:list-view>
+    </context>
+    
+    <context merge-by="type" parent="Product" type="TVShowProduct" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="seasons"/>
+        </list-view:list-view>
+    </context>
+
+   <context merge-by="type" parent="Product" type="TVSeasonProduct" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="episodes"/>
+            <list-view:column qualifier="season"/>
+        </list-view:list-view>
+    </context>
+    
+   <context merge-by="type" parent="Product" type="TVEpisodeProduct" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="season"/>
+            <list-view:column qualifier="episode"/>
+        </list-view:list-view>
+    </context>
+   
+</config>
