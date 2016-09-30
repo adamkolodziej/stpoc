@@ -8,6 +8,7 @@
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/desktop/cart" %>
+<script type="text/javascript" src="${commonResourcePath}/js/jquery-1.11.2.min.js"></script>
 <div id="content">
     <div class="container">
                 <div class="row">
@@ -27,15 +28,15 @@
 
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
-                        <form class="margin-top-30 margin-bottom-30">
+                        <form class="margin-top-30 margin-bottom-30" action="${action}" method="post" id="loginForm">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Username</label>
-                                <input type="text" class="form-control" id="exampleInputText1" placeholder="">
+                                <input type="text" class="form-control" id="j_username" name="j_username" placeholder="">
                                 <p class="margin-top-10 margin-bottom-30 color-light-gray">Usually your email address</p>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                                <input type="password" class="form-control" id="j_password" name="j_password" placeholder="">
                             </div>
                             <div class="row">
                                 <div class="col-xs-6">
@@ -45,7 +46,7 @@
                                 </div>
 
                                 <div class="col-xs-6 text-right">
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <button id="login" type="submit" class="btn btn-primary">Login</button>
                                 </div>
                             </div>
                         </form>
@@ -53,3 +54,5 @@
                 </div>
             </div>
         </div>
+
+       

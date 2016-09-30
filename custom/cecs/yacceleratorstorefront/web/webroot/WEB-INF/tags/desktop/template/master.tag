@@ -69,7 +69,7 @@
 
 	<addonScripts:addonScripts/>
 
-	<template:jira/>
+
 
 </body>
 
