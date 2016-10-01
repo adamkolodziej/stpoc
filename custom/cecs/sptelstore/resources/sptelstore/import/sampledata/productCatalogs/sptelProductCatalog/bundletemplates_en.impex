@@ -1,0 +1,31 @@
+# CECS-26 include telco additions in sptelstore extension
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+
+# Macros / Replacement Parameter definitions
+$productCatalog=tricastProductCatalog
+$productCatalogName=Tricast Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$bundleTemplateVersion=1.0
+
+# Language
+$lang=en
+
+UPDATE BundleTemplate;id[unique=true];$catalogVersion;name[lang=$lang];version[default=$bundleTemplateVersion]
+;TriCast;;TriCast Bundle;
+;TriCast-Broadband;;Broadband;
+;TriCast-Broadband-Addon;;Broadband Add-on;
+;TriCast-Broadband-Router;;Broadband Router;
+;TriCast-Decoders;;Decoders;
+;TriCast-Phone;;Line Rental;
+;TriCast-Phone-Addons;;Phone Add-ons;
+;TriCast-Phone-Device;;Phone Device;
+;TriCast-TV;;TV;
+;TriCast-TV-Addons;;TV Add-ons;
+
+UPDATE BundlePackage;code[unique=true];$catalogVersion;name[lang=$lang];description[lang=$lang]
+;fibreEntertainment;;Fiber Entertainment;<li>Amazing</li><li>Great</li>
+;fibreStarter;;Fiber Starter;<li>Tv includes up to <strong>70 Freeview TV</strong> and radio channels.</li><li>Plus <strong>20 Extra Channels</strong></li>
+;standardStarter;;Standard Starter;<li>Amazing</li><li>Great</li>
+;superFibrePremium;;Super Fiber Premium;<li>Amazing</li><li>Great</li>
+

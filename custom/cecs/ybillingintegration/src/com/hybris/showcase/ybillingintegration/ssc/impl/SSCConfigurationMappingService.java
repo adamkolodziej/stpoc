@@ -82,7 +82,7 @@ public class SSCConfigurationMappingService implements ConfigurationMappingServi
 	public static final String CONF_TARGET_KEY = "ybillingintegration.cstic.target";
 	public static final String CONF_VARCOND_KEY = "ybillingintegration.cstic.varcond";
 
-	public static final String CONF_TRICAST_BUNDLE_TEMPLATE_ID = "ybillingintegration.bundletemplate.tricast.id";
+	public static final String CONF_TRICAST_BUNDLE_TEMPLATE_ID = "ybillingintegration.bundletemplate.sptel.id";
 
 	// category where new ServicePlan's should be assigned
 	public static final String CONF_PLANS_CATEGORY_KEY = "ybillingintegration.category.plans";
@@ -146,7 +146,7 @@ public class SSCConfigurationMappingService implements ConfigurationMappingServi
 		return configurationService.getConfiguration().getBoolean(CONF_YBILLING_ENABLED, false);
 	}
 
-	public String getTricastBundleTemplateId()
+	public String getSptelBundleTemplateId()
 	{
 		return configurationService.getConfiguration().getString(CONF_TRICAST_BUNDLE_TEMPLATE_ID, "TRICAST_PACK");
 	}
@@ -177,7 +177,7 @@ public class SSCConfigurationMappingService implements ConfigurationMappingServi
 		rootBundleTemplate.setMappingTemplate(template);
 
 		rootBundleTemplate.setName(configModel.getRootInstance().getLanguageDependentName());
-		rootBundleTemplate.setId(getTricastBundleTemplateId());
+		rootBundleTemplate.setId(getSptelBundleTemplateId());
 
 		final UnitModel unitModel = getUnitByCode("pieces");
 

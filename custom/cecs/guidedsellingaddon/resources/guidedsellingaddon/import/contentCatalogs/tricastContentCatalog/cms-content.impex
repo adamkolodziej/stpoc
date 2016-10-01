@@ -1,4 +1,4 @@
-$contentCatalog=tricastContentCatalog
+$contentCatalog=sptelContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $jarResourceCmsCockpit=jar:com.hybris.showcase.guidedselling.constants.GuidedsellingaddonConstants&/guidedsellingaddon/import/cockpits/cmscockpit
 $siteResource=jar:com.hybris.showcase.guidedselling.constants.GuidedsellingaddonConstants&/guidedsellingaddon/import/contentCatalogs/template
@@ -61,13 +61,13 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 $servicesjarResourceCms = jar:com.hybris.showcase.showcasecockpits.constants.ShowcasecockpitsConstants&/showcasecockpits/import/cockpits/cmscockpit
 
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]
-; ; tricast_packagesPage-preview         ; image/png ; packagesPage-preview.png         ; $servicesjarResourceCms/preview-images/packagesPage-preview.png
-; ; tricast_guidedsellingPage-preview    ; image/png ; guidedsellingPage-preview.png    ; $servicesjarResourceCms/preview-images/guidedsellingPage-preview.png
-; ; tricast_guidedsellingSummary-preview ; image/png ; guidedsellingSummary-preview.png ; $servicesjarResourceCms/preview-images/guidedsellingSummary-preview.png
-; ; tricast_orderRecap-preview           ; image/png ; orderRecap-preview.png           ; $servicesjarResourceCms/preview-images/orderRecap-preview.png
+; ; sptel_packagesPage-preview         ; image/png ; packagesPage-preview.png         ; $servicesjarResourceCms/preview-images/packagesPage-preview.png
+; ; sptel_guidedsellingPage-preview    ; image/png ; guidedsellingPage-preview.png    ; $servicesjarResourceCms/preview-images/guidedsellingPage-preview.png
+; ; sptel_guidedsellingSummary-preview ; image/png ; guidedsellingSummary-preview.png ; $servicesjarResourceCms/preview-images/guidedsellingSummary-preview.png
+; ; sptel_orderRecap-preview           ; image/png ; orderRecap-preview.png           ; $servicesjarResourceCms/preview-images/orderRecap-preview.png
 
 UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
-; ; packagesPage         ; tricast_packagesPage-preview
-; ; guidedsellingPage    ; tricast_guidedsellingPage-preview
-; ; guidedsellingSummary ; tricast_guidedsellingSummary-preview
-; ; orderRecap           ; tricast_orderRecap-preview
+; ; packagesPage         ; sptel_packagesPage-preview
+; ; guidedsellingPage    ; sptel_guidedsellingPage-preview
+; ; guidedsellingSummary ; sptel_guidedsellingSummary-preview
+; ; orderRecap           ; sptel_orderRecap-preview

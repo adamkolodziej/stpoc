@@ -1,9 +1,0 @@
-# CECS-26 include telco additions in tricaststore extension
-#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
-
-# Language
-$lang=en
-
-UPDATE BillingPlan;id[unique=true];name[lang=$lang]
-;AnnuallyPlan;Annually Plan;
-;MonthlyPlan;Monthly Plan;

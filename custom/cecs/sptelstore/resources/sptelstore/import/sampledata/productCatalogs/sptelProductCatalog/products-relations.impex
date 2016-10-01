@@ -1,0 +1,38 @@
+# ImpEx for Related Products into Sptel Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog = sptelProductCatalog
+$productCatalogName = Sptel Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$supercategories = supercategories(code, $catalogVersion)
+$baseProduct = baseProduct(code, $catalogVersion)
+$approved = approvalstatus(code)[default = 'check']
+
+INSERT_UPDATE ProductReference; source(code, $catalogVersion)[unique = true]; target(code, $catalogVersion)[unique = true]; referenceType(code); active[default = true]; preselected[default = false]
+; underworld              ; joy              ; CROSSELLING ;
+; underworld              ; the-last-journey ; CROSSELLING ;
+; underworld              ; keyon            ; CROSSELLING ;
+; underworld              ; zathora          ; CROSSELLING ;
+; underworld              ; 28-mornings      ; CROSSELLING ;
+; underworld              ; venom            ; CROSSELLING ;
+
+; trekking-towards-danger ; the-last-journey ; CROSSELLING ;
+; trekking-towards-danger ; underworld       ; CROSSELLING ;
+; trekking-towards-danger ; megadon          ; CROSSELLING ;
+; trekking-towards-danger ; 28-mornings      ; CROSSELLING ;
+; trekking-towards-danger ; covered-noise    ; CROSSELLING ;
+; trekking-towards-danger ; hunters          ; CROSSELLING ;
+
+; the-last-journey        ; keyon            ; CROSSELLING ;
+; the-last-journey        ; the-boss         ; CROSSELLING ;
+; the-last-journey        ; megadon          ; CROSSELLING ;
+; the-last-journey        ; venom            ; CROSSELLING ;
+; the-last-journey        ; joy              ; CROSSELLING ;
+; the-last-journey        ; zathora          ; CROSSELLING ;
+
+; t-shirt_bp			  ;	t-shirt_black				 ; CROSSELLING ;
+; t-shirt_bp			  ;	t-shirt_white				 ; CROSSELLING ;
+; t-shirt_bp			  ;	brother_roses_clas_tshirt	 ; CROSSELLING ;
+; t-shirt_bp			  ;	rebelion_womans_tshirt		 ; CROSSELLING ;
+; t-shirt_bp			  ;	official_clas_vneck_tshirt	 ; CROSSELLING ;
+; t-shirt_bp			  ;	underworld_iphone			 ; CROSSELLING ;

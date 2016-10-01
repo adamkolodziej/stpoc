@@ -1,0 +1,58 @@
+$productCatalog = sptelProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import/sampledata/productCatalogs/$productCatalog/../productImages
+
+
+INSERT_UPDATE BundleTemplateStatus; id[unique = true]; status(code)[default = approved]; $catalogVersion
+; BundleApproved
+
+# Insert BundleTemplates
+INSERT_UPDATE BundleTemplate; id[unique = true]; bundleComponentType(code); parentTemplate(id, version[default = 1.0], $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'BundleApproved']; $catalogVersion;
+; TriCast                  ; Other       ;
+; TriCast-TV               ; Conditional ;
+; TriCast-TV-Addons        ; AddOn       ;
+; TriCast-Phone            ; AddOn       ;
+; TriCast-Phone-Addons     ; AddOn       ;
+; TriCast-Phone-Device     ; AddOn       ;
+; TriCast-Broadband        ; AddOn       ;
+; TriCast-Broadband-Addon  ; AddOn       ;
+; TriCast-Broadband-Router ; AddOn       ;
+; TriCast-Decoders         ; AddOn       ;
+
+
+
+
+# Set the child templates again to make sure that the sequence of child templates is correct
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; childTemplates(id, version[default = 1.0], $catalogVersion); $catalogVersion
+; TriCast ; ; TriCast-TV, TriCast-TV-Addons, TriCast-Phone, TriCast-Phone-Addons, TriCast-Phone-Device, TriCast-Broadband, TriCast-Broadband-Addon, TriCast-Broadband-Router, TriCast-Decoders
+
+
+# Bundle dependencies
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; requiredBundleTemplates(id, version[default = 1.0], $catalogVersion); $catalogVersion
+; TriCast-Phone-Addons     ; ; TriCast-Phone
+; TriCast-Phone-Device     ; ; TriCast-Phone
+; TriCast-Broadband        ; ; TriCast-Phone
+; TriCast-Broadband-Addon  ; ; TriCast-Broadband
+; TriCast-Broadband-Router ; ; TriCast-Broadband
+; TriCast-TV               ; ;
+; TriCast-TV-Addons        ; ; TriCast-TV
+; TriCast-Decoders         ; ; TriCast-TV
+
+# TODO maybe we should create separate file with full data for bundle packages
+INSERT_UPDATE BundlePackage; code[unique = true]; bundleTemplate(id[default = 'TriCast'], version[default = 1.0], $catalogVersion); selectedProducts(code, $catalogVersion); $catalogVersion
+; superFibrePremium  ; ; phoneUnlimitedWeekend, superFibreUnlimited, tvPremium, fibreRouter, decoderPlus, sptelWifi
+; fibreEntertainment ; ; phoneUnlimitedWeekend, fibreBroadbandUnlimited, tvEntertainment, fibreRouter, decoderPlus, sptelWifi
+; fibreStarter       ; ; phoneUnlimitedWeekend, fibreBroadbandUnlimited, tvStarter, fibreRouter, decoderPlus, sptelWifi
+; standardStarter    ; ; phoneUnlimitedWeekend, fibreBroadbandUnlimited, tvStarter, fibreRouter
+
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; mime[default = 'image/png']; $catalogVersion; folder(qualifier)[default = images]
+; desktop ; Bundle01.png ; $siteResource/Bundle01a_thumbnail.png ; Bundle01_thumbnail.png
+; desktop ; Bundle02.png ; $siteResource/Bundle02a_thumbnail.png ; Bundle02_thumbnail.png
+; desktop ; Bundle03.png ; $siteResource/Bundle03a_thumbnail.png ; Bundle03_thumbnail.png
+; desktop ; Bundle04.png ; $siteResource/Bundle04a_thumbnail.png ; Bundle04_thumbnail.png
+
+UPDATE BundlePackage; code[unique = true]; image(code, $catalogVersion); thumbnail(code, $catalogVersion); $catalogVersion
+; superFibrePremium  ; Bundle01.png ; Bundle01.png
+; fibreEntertainment ; Bundle02.png ; Bundle02.png
+; fibreStarter       ; Bundle03.png ; Bundle03.png
+; standardStarter    ; Bundle04.png ; Bundle04.png

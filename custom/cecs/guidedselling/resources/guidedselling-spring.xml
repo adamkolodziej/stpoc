@@ -309,8 +309,8 @@
     </bean>
     
     <bean id="userOrderPostInitHook" class="com.hybris.showcase.guidedselling.setup.impl.UserOrderInitHook">
-     	<property name="site" value="tricast"/>
-     	<property name="productCatalog" value="tricastProductCatalog"/>
+     	<property name="site" value="sptel"/>
+     	<property name="productCatalog" value="sptelProductCatalog"/>
      	<property name="customer" value="brown.joe.ny@gmail.com"/>
      	<property name="packageCode" value="fibreStarter"/>
      	<property name="months" value="-6"/>

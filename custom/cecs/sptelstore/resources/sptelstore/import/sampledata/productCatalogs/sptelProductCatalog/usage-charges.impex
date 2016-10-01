@@ -1,0 +1,141 @@
+# ImpEx for Importing Usage Charges Classifications		
+#% impex.setLocale( Locale.ENGLISH );
+
+$productCatalog = sptelProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = '$productCatalog:Staged']
+
+INSERT_UPDATE VolumeUsageCharge; id[unique = true]; usageUnit(id); $catalogVersion
+; tvStarter_standard_episode_usage       ; standardEpisode
+; tvStarter_premium_episode_usage        ; premiumEpisode
+; tvStarter_standard_movie_usage         ; standardMovie
+; tvStarter_premium_movie_usage          ; premiumMovie
+; tvEntertainment_standard_episode_usage ; standardEpisode
+; tvEntertainment_premium_episode_usage  ; premiumEpisode
+; tvEntertainment_standard_movie_usage   ; standardMovie
+; tvEntertainment_premium_movie_usage    ; premiumMovie
+; tvPremium_standard_episode_usage       ; standardEpisode
+; tvPremium_premium_episode_usage        ; premiumEpisode
+; tvPremium_standard_movie_usage         ; standardMovie
+; tvPremium_premium_movie_usage          ; premiumMovie
+
+; EUR_tvStarter_standard_episode_usage       ; standardEpisode
+; EUR_tvStarter_premium_episode_usage        ; premiumEpisode
+; EUR_tvStarter_standard_movie_usage         ; standardMovie
+; EUR_tvStarter_premium_movie_usage          ; premiumMovie
+; EUR_tvEntertainment_standard_episode_usage ; standardEpisode
+; EUR_tvEntertainment_premium_episode_usage  ; premiumEpisode
+; EUR_tvEntertainment_standard_movie_usage   ; standardMovie
+; EUR_tvEntertainment_premium_movie_usage    ; premiumMovie
+; EUR_tvPremium_standard_episode_usage       ; standardEpisode
+; EUR_tvPremium_premium_episode_usage        ; premiumEpisode
+; EUR_tvPremium_standard_movie_usage         ; standardMovie
+; EUR_tvPremium_premium_movie_usage          ; premiumMovie
+
+; GBP_tvStarter_standard_episode_usage       ; standardEpisode
+; GBP_tvStarter_premium_episode_usage        ; premiumEpisode
+; GBP_tvStarter_standard_movie_usage         ; standardMovie
+; GBP_tvStarter_premium_movie_usage          ; premiumMovie
+; GBP_tvEntertainment_standard_episode_usage ; standardEpisode
+; GBP_tvEntertainment_premium_episode_usage  ; premiumEpisode
+; GBP_tvEntertainment_standard_movie_usage   ; standardMovie
+; GBP_tvEntertainment_premium_movie_usage    ; premiumMovie
+; GBP_tvPremium_standard_episode_usage       ; standardEpisode
+; GBP_tvPremium_premium_episode_usage        ; premiumEpisode
+; GBP_tvPremium_standard_movie_usage         ; standardMovie
+; GBP_tvPremium_premium_movie_usage          ; premiumMovie
+
+INSERT_UPDATE OverageUsageChargeEntry; id[unique = true]; price; $catalogVersion
+; tvStarter_standard_episode_usage_entry       ; 1.59
+; tvStarter_premium_episode_usage_entry        ; 1.99
+; tvStarter_standard_movie_usage_entry         ; 3.49
+; tvStarter_premium_movie_usage_entry          ; 5.49
+; tvEntertainment_standard_episode_usage_entry ; 0.99
+; tvEntertainment_premium_episode_usage_entry  ; 1.49
+; tvEntertainment_standard_movie_usage_entry   ; 2.99
+; tvEntertainment_premium_movie_usage_entry    ; 4.99
+; tvPremium_standard_episode_usage_entry       ; 0.99
+; tvPremium_premium_episode_usage_entry        ; 1.49
+; tvPremium_standard_movie_usage_entry         ; 2.99
+; tvPremium_premium_movie_usage_entry          ; 4.99
+
+; EUR_tvStarter_standard_episode_usage_entry       ; 1.40
+; EUR_tvStarter_premium_episode_usage_entry        ; 1.75
+; EUR_tvStarter_standard_movie_usage_entry         ; 3.10
+; EUR_tvStarter_premium_movie_usage_entry          ; 4.80
+; EUR_tvEntertainment_standard_episode_usage_entry ; 0.87
+; EUR_tvEntertainment_premium_episode_usage_entry  ; 1.30
+; EUR_tvEntertainment_standard_movie_usage_entry   ; 2.63
+; EUR_tvEntertainment_premium_movie_usage_entry    ; 4.39
+; EUR_tvPremium_standard_episode_usage_entry       ; 0.87
+; EUR_tvPremium_premium_episode_usage_entry        ; 1.30
+; EUR_tvPremium_standard_movie_usage_entry         ; 2.63
+; EUR_tvPremium_premium_movie_usage_entry          ; 4.39
+
+; GBP_tvStarter_standard_episode_usage_entry       ; 1
+; GBP_tvStarter_premium_episode_usage_entry        ; 1.26
+; GBP_tvStarter_standard_movie_usage_entry         ; 2.22
+; GBP_tvStarter_premium_movie_usage_entry          ; 3.5
+; GBP_tvEntertainment_standard_episode_usage_entry ; 0.65
+; GBP_tvEntertainment_premium_episode_usage_entry  ; 0.95
+; GBP_tvEntertainment_standard_movie_usage_entry   ; 1.90
+; GBP_tvEntertainment_premium_movie_usage_entry    ; 3.20
+; GBP_tvPremium_standard_episode_usage_entry       ; 0.65
+; GBP_tvPremium_premium_episode_usage_entry        ; 0.95
+; GBP_tvPremium_standard_movie_usage_entry         ; 1.90
+; GBP_tvPremium_premium_movie_usage_entry          ; 3.20
+
+UPDATE VolumeUsageCharge; id[unique = true]; usageChargeEntries(id, $catalogVersion); $catalogVersion
+; tvStarter_standard_episode_usage       ; tvStarter_standard_episode_usage_entry
+; tvStarter_premium_episode_usage        ; tvStarter_premium_episode_usage_entry
+; tvStarter_standard_movie_usage         ; tvStarter_standard_movie_usage_entry
+; tvStarter_premium_movie_usage          ; tvStarter_premium_movie_usage_entry
+; tvEntertainment_standard_episode_usage ; tvEntertainment_standard_episode_usage_entry
+; tvEntertainment_premium_episode_usage  ; tvEntertainment_premium_episode_usage_entry
+; tvEntertainment_standard_movie_usage   ; tvEntertainment_standard_movie_usage_entry
+; tvEntertainment_premium_movie_usage    ; tvEntertainment_premium_movie_usage_entry
+; tvPremium_standard_episode_usage       ; tvPremium_standard_episode_usage_entry
+; tvPremium_premium_episode_usage        ; tvPremium_premium_episode_usage_entry
+; tvPremium_standard_movie_usage         ; tvPremium_standard_movie_usage_entry
+; tvPremium_premium_movie_usage          ; tvPremium_premium_movie_usage_entry
+
+; EUR_tvStarter_standard_episode_usage       ; EUR_tvStarter_standard_episode_usage_entry       
+; EUR_tvStarter_premium_episode_usage        ; EUR_tvStarter_premium_episode_usage_entry        
+; EUR_tvStarter_standard_movie_usage         ; EUR_tvStarter_standard_movie_usage_entry         
+; EUR_tvStarter_premium_movie_usage          ; EUR_tvStarter_premium_movie_usage_entry          
+; EUR_tvEntertainment_standard_episode_usage ; EUR_tvEntertainment_standard_episode_usage_entry 
+; EUR_tvEntertainment_premium_episode_usage  ; EUR_tvEntertainment_premium_episode_usage_entry  
+; EUR_tvEntertainment_standard_movie_usage   ; EUR_tvEntertainment_standard_movie_usage_entry   
+; EUR_tvEntertainment_premium_movie_usage    ; EUR_tvEntertainment_premium_movie_usage_entry    
+; EUR_tvPremium_standard_episode_usage       ; EUR_tvPremium_standard_episode_usage_entry       
+; EUR_tvPremium_premium_episode_usage        ; EUR_tvPremium_premium_episode_usage_entry        
+; EUR_tvPremium_standard_movie_usage         ; EUR_tvPremium_standard_movie_usage_entry         
+; EUR_tvPremium_premium_movie_usage          ; EUR_tvPremium_premium_movie_usage_entry          
+
+; GBP_tvStarter_standard_episode_usage       ; GBP_tvStarter_standard_episode_usage_entry      
+; GBP_tvStarter_premium_episode_usage        ; GBP_tvStarter_premium_episode_usage_entry       
+; GBP_tvStarter_standard_movie_usage         ; GBP_tvStarter_standard_movie_usage_entry        
+; GBP_tvStarter_premium_movie_usage          ; GBP_tvStarter_premium_movie_usage_entry         
+; GBP_tvEntertainment_standard_episode_usage ; GBP_tvEntertainment_standard_episode_usage_entry
+; GBP_tvEntertainment_premium_episode_usage  ; GBP_tvEntertainment_premium_episode_usage_entry 
+; GBP_tvEntertainment_standard_movie_usage   ; GBP_tvEntertainment_standard_movie_usage_entry  
+; GBP_tvEntertainment_premium_movie_usage    ; GBP_tvEntertainment_premium_movie_usage_entry   
+; GBP_tvPremium_standard_episode_usage       ; GBP_tvPremium_standard_episode_usage_entry      
+; GBP_tvPremium_premium_episode_usage        ; GBP_tvPremium_premium_episode_usage_entry       
+; GBP_tvPremium_standard_movie_usage         ; GBP_tvPremium_standard_movie_usage_entry        
+; GBP_tvPremium_premium_movie_usage          ; GBP_tvPremium_premium_movie_usage_entry         
+
+UPDATE SubscriptionPricePlan; product(code, $catalogVersion)[unique = true]; usageCharges(id, $catalogVersion); currency(isocode)[default = USD, unique = true]; $catalogVersion
+; tvStarter       ; tvStarter_standard_episode_usage, tvStarter_premium_episode_usage, tvStarter_standard_movie_usage, tvStarter_premium_movie_usage
+; tvEntertainment ; tvEntertainment_standard_episode_usage, tvEntertainment_premium_episode_usage, tvEntertainment_standard_movie_usage, tvEntertainment_premium_movie_usage
+; tvPremium       ; tvPremium_standard_episode_usage, tvPremium_premium_episode_usage, tvPremium_standard_movie_usage, tvPremium_premium_movie_usage
+
+UPDATE SubscriptionPricePlan; product(code, $catalogVersion)[unique = true]; usageCharges(id, $catalogVersion); currency(isocode)[default = GBP, unique = true]; $catalogVersion
+; tvStarter       ; GBP_tvStarter_standard_episode_usage, GBP_tvStarter_premium_episode_usage, GBP_tvStarter_standard_movie_usage, GBP_tvStarter_premium_movie_usage
+; tvEntertainment ; GBP_tvEntertainment_standard_episode_usage, GBP_tvEntertainment_premium_episode_usage, GBP_tvEntertainment_standard_movie_usage, GBP_tvEntertainment_premium_movie_usage
+; tvPremium       ; GBP_tvPremium_standard_episode_usage, GBP_tvPremium_premium_episode_usage, GBP_tvPremium_standard_movie_usage, GBP_tvPremium_premium_movie_usage
+
+UPDATE SubscriptionPricePlan; product(code, $catalogVersion)[unique = true]; usageCharges(id, $catalogVersion); currency(isocode)[default = EUR, unique = true]; $catalogVersion
+; tvStarter       ; EUR_tvStarter_standard_episode_usage, EUR_tvStarter_premium_episode_usage, EUR_tvStarter_standard_movie_usage, EUR_tvStarter_premium_movie_usage
+; tvEntertainment ; EUR_tvEntertainment_standard_episode_usage, EUR_tvEntertainment_premium_episode_usage, EUR_tvEntertainment_standard_movie_usage, EUR_tvEntertainment_premium_movie_usage
+; tvPremium       ; EUR_tvPremium_standard_episode_usage, EUR_tvPremium_premium_episode_usage, EUR_tvPremium_standard_movie_usage, EUR_tvPremium_premium_movie_usage
+

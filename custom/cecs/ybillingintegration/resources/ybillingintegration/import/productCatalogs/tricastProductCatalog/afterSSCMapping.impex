@@ -1,4 +1,4 @@
-$productCatalog = tricastProductCatalog
+$productCatalog = sptelProductCatalog
 $catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
 $ruleType = ruleType(code)[default = 'ANY']
 $billingEvent = billingEvent(code)[default = 'onfirstbill']

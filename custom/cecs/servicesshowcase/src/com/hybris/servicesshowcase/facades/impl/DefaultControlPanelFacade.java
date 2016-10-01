@@ -126,14 +126,14 @@ public class DefaultControlPanelFacade implements ControlPanelFacade
 		properties.add("emailservice.send.enabled");
 		properties.add("seewhy.key");
 		properties.add("seewhy.mock.products");
-		properties.add("mobiletricast.require.entitlement");
+		properties.add("mobilesptel.require.entitlement");
 		return properties;
 	}
 
 	protected List<String> getPossibleValues(final String key)
 	{
 		if (key.equals("email.attach.images") || key.equals("emailservice.send.enabled")
-				|| key.equals("mobiletricast.require.entitlement"))
+				|| key.equals("mobilesptel.require.entitlement"))
 		{
 			return Arrays.asList("true", "false");
 		}

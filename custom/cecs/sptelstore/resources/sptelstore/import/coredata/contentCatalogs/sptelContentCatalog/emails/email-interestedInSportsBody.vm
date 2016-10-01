@@ -1,0 +1,90 @@
+## messageSource=classpath:/sptelstore/messages/email-interestedInSports_$lang.properties
+<!DOCTYPE html "-//w3c//dtd xhtml 1.0 transitional //en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-transitional.dtd">
+#macro(genHtmlLinkStartTag $url)
+<a href="$url"><font color="#666666">
+#end
+#macro(genHtmlLinkEndTag)
+</font></a>
+#end
+#macro(genHtmlLink $url $textColor $bodyContent)
+<a href="$url"><font color="$textColor">$bodyContent</font></a>
+#end
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!--[if gte mso 9]>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:AllowPNG/>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml><![endif]-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    </head>
+    <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+        <table width="800" border="0" cellpadding="0" cellspacing="0" align="center">
+            <tr bgcolor="">
+                <!--Left Margin-->
+                <td width="70" height="76" bgcolor="#36464e">&nbsp; </td>
+                <!--Start Body-->
+                <td width="660" height="76"  bgcolor="#36464e">
+                	${ctx.cmsSlotContents.SiteLogo}
+                    <img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/logo.png" alt=""/>
+                </td>
+                <!--Right Margin-->
+                <td width="70" height="76" bgcolor="#36464e">&nbsp; </td>
+            </tr>
+            <tr>
+                <td width="800" height="388" bgcolor="#eceff1" colspan="3">
+                    <a href="${ctx.baseUrl}/${ctx.interestedInSports}">
+                        <img src="${ctx.baseThemeUrl}/_ui/desktop/common/images/email/sports_banner.png" alt="Activate Sports Channel for free" />
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td width="70" height="" bgcolor="#eceff1">&nbsp; </td>
+                <!--Start Body-->
+                <td width="660" height="" bgcolor="#eceff1">
+                	${ctx.cmsSlotContents.TopContent}
+                    <h1 style="display: block;text-align: left;font-family: arial, helvetica, sans-serif;color: #78909c;font-size: 1.5em;font-weight: 100;margin-bottom: 20px;margin-top:40px;">Dear ${ctx.displayName},</h1>
+                    <p style="display: block;text-align: left;font-family: arial, helvetica, sans-serif;margin-top: 5px;margin-bottom:20px;color: #455a64">
+                        Now you can watch Sports channel one month for FREE.
+                        Just <a href="${ctx.baseUrl}/${ctx.interestedInSports}" style="text-decoration: none;color:#008acb; ">activate</a> it on your account.</p>
+                    <p style="display: block;text-align: left;font-style: italic;font-family: arial, helvetica, sans-serif;margin-top: 5px;margin-bottom:40px;color: #455a64">Your TriCast Team</p>
+                </td>
+                <!--Right Margin-->
+                <td width="70" height="" bgcolor="#eceff1">&nbsp; </td>
+            </tr>
+            <tr>
+                <!--Left Margin-->
+                <td width="70" height="100" bgcolor="#263238">&nbsp; </td>
+                <!--Start Body-->
+                <td width="660" height="100"  bgcolor="#263238" style="vertical-align: top;color:#ffffff;">
+                	${ctx.cmsSlotContents.BottomContent}
+                    <table style="text-align: center;font-family: arial, helvetica, sans-serif;width: 100%;">
+                        <tr>
+                            <td>
+                                <p style="display: inline-block;text-transform: uppercase;font-weight: 100;color:#ffffff;">
+                                    Powered by Triast &copy; 2016   |
+                                </p>
+                                <a href="#" style="display: inline-block;margin: 0 15px;font-weight: bold;text-transform: uppercase;color:#ffffff;text-decoration: none">Terms</a>
+                                <a href="#" style="display: inline-block;margin: 0 15px;font-weight: bold;text-transform: uppercase;color:#ffffff;text-decoration: none">privacy policy</a>
+                                <a href="#" style="display: inline-block;margin: 0 15px;font-weight: bold;text-transform: uppercase;color:#ffffff;text-decoration: none">help</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="font-size: 0.8em;margin-top: 5px;color:#ffffff;">If you don't want to receive updates. please <a href="#" style="text-decoration: none;color:#53b8de">unsubscribe</a></p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <!--Right Margin-->
+                <td width="70" height="100" bgcolor="#263238">&nbsp; </td>
+            </tr>
+        </table>
+    </body>
+</html>
+

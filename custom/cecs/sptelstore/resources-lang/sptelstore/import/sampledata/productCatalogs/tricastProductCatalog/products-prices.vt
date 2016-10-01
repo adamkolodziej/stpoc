@@ -1,0 +1,29 @@
+# CECS-26 include telco additions in sptelstore extension
+$header
+
+# Macros / Replacement Parameter definitions
+\$productCatalog=tricastProductCatalog
+\$productCatalogName=Tricast Product Catalog
+\$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
+
+# Language
+\$lang=$lang
+
+
+#set ( $subscriptionPricePlanRows = $query.load('products-prices', 'SubscriptionPricePlan') )
+UPDATE SubscriptionPricePlan;name;product(code, \$catalogVersion)[unique=true];\$catalogVersion;currency(isocode)[default=USD,unique=true]
+#foreach( $row in $subscriptionPricePlanRows )
+;$row.values.name;$row.key;;
+#end
+
+#set ( $oneTimeChargeEntryRows = $query.load('products-prices', 'OneTimeChargeEntry') )
+UPDATE OneTimeChargeEntry;id[unique=true];\$catalogVersion;name[lang=\$lang]
+#foreach( $row in $oneTimeChargeEntryRows )
+;$row.key;;$row.values.name;
+#end
+
+#set ( $recurringChargeEntry = $query.load('products-prices', 'RecurringChargeEntry') )
+UPDATE RecurringChargeEntry;id[unique=true];\$catalogVersion;label[lang=\$lang]
+#foreach( $row in $recurringChargeEntry )
+;$row.key;;$row.values.label;
+#end

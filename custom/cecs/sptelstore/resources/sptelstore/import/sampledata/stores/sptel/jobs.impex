@@ -1,0 +1,16 @@
+$storeUid=sptel
+$defaultCurrency=USD
+$defaultLanguage=en
+$googleHost=setthethirdpartyhost
+$googleUserName=setgoogleusername
+$googlePassword=setgooglepassword
+
+INSERT_UPDATE ServicelayerJob; code[unique = true]; springId
+; invoicingJob ; invoicingJob
+
+INSERT_UPDATE InvoicingCronJob; code[unique=true];job(code);baseStore(uid);singleExecutable;sessionLanguage(isocode)
+;invoicingCronJob;invoicingJob;$storeUid;false;en
+ 
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+; invoicingCronJob; 0 0 0 1 * ?

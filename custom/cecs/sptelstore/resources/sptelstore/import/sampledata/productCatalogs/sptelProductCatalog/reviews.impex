@@ -1,0 +1,71 @@
+# ImpEx for Importing Products into Sptel Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog = sptelProductCatalog
+$productCatalogName = Sptel Product Catalog
+$productCV = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Online'])[unique = true, default = $productCatalog:Online]
+$supercategories = supercategories(code, $catalogVersion)
+$baseProduct = baseProduct(code, $catalogVersion)
+# let's approve by default
+$approved = approvalstatus(code)[default = 'approved']
+
+$passwordEncoding=md5
+$defaultPassword=password
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+# CECS-230 Additional Videos and Channels with entitlements END
+
+INSERT_UPDATE Customer;groups(uid);uid[unique=true];name;$setPassword;customerId
+;customergroup;brown.joe.comentator1@hybris.com;"Joe Brown Lee";;brown.joe.comentator1@hybris.com;
+;customergroup;brown.joe.comentator2@hybris.com;"Joe Van Brown";;brown.joe.comentator2@hybris.com;
+;customergroup;brown.joe.comentator3@hybris.com;"Lord Joe Brown";;brown.joe.comentator3@hybris.com;
+;customergroup;brown.joe.comentator4@hybris.com;"Sir Joe Brown";;brown.joe.comentator4@hybris.com;
+;customergroup;brown.joe.comentator5@hybris.com;"Joe Brown";;brown.joe.comentator5@hybris.com;
+;customergroup;brown.joe.comentator6@hybris.com;"JJ Brown";;brown.joe.comentator6@hybris.com;
+
+INSERT_UPDATE CustomerReview; product(code, $productCV)[unique=true]; rating; user(uid)[unique=true]			; commentatorName; headline												; comment	;$approved;language(isocode)[default='en']
+							; the-boss							; 4		; brown.joe.comentator1@hybris.com		; brown.joe.comentator1	; Is this the real life, or is this just fantasy?		; Game of phones is, in my opinion, probably the best fantasy television show ever produced.<br/>The character development, the plot development, the cinematography, the acting and writing...all are top notch. They manage to juggle the massive amount of story lines with deft ease and skill, never making you feel as if they rush through things. You love, hate, or empathize with each character at a level not common with television programs. This is one of very few truly brilliant shows.
+							; the-boss							; 3		; brown.joe.comentator2@hybris.com		; brown.joe.comentator2	; Game of phones... mixed feelings.					; I liked the first season because of the great actors and casts. But when TCO killed of sean Bean I was pretty angry. As expected the level of acting took a dip and was replaced by breasts and butts scenes to make "it more appealing" to the public. That is one of the reasons why I start to get annoyed by the series. Nearly every episode there are "XXX" scenes or explicit material. That isn't good scripts, that isn't even good acting. It just shows the lack of visionary evolution of characters. Is it the fault of the screenwriters? maybe. Is it the fault of TCO for pushing the "XXX" rated material into the show to push up ratings? probably.<br/>IF you like "XXX" rated content go find it in the "XXX" rated theme. Don't get me wrong, there are really good actors in the series but the focus of the show went from "story based" in season 1 to the more "XXX" in the following seasons.<br/>Being that the storyline and some of the acting took a dip plus the way to many XXX content I give it a solid 6/10.<br/>Some might think I'm a bit harsh but if you watch it for the XXX then rent or buy XXX themed snot.
+							; the-boss							; 4		; brown.joe.comentator3@hybris.com		; brown.joe.comentator3	; great except for needless porn ever increasing sea...	; griping characters exciting plot<br/>NEEDLESS pornography<br/>TCO has other programs if that's your entertainment bent<br/>No longer suitable for teens to watch<br/>Must watch with finger on the fast forward button :(
+							; the-boss							; 5		; brown.joe.comentator4@hybris.com		; brown.joe.comentator4	; game of ** around phones								; teens with internet filter looking for vivid ** will appreciate the **... mature people prefer more plot and character development
+							; venom							; 5		; brown.joe.comentator2@hybris.com ; brown.joe.comentator2	; Best TV Ever!											; Not only acting, story line, pictures, writing, dialogue, Directing. The suspicious, the actors, I mean its all great.<br/>I really do recommend to watch this spectacular show!
+							; underworld								; 4		; brown.joe.comentator4@hybris.com ; brown.joe4	; 														; Excellent.....simply excellent.<br/>I was hooked from the first episode. Finally someone is portraying the ad industry correctly.<br/>That is how all drama should be on TV.<br/>The scripts are sharp, intelligent and the characters interesting.<br/>More importantly the show is very faithful to the period in every detail. Even the color has the quality of a Douglas Sirk movie.<br/>The direction it takes,however after Season 1 is another matter. This could be a two season show at the most, unless the quality is maintained. Certainly the main subject matter "advertising in its heyday" is rich in stories, from takeovers to breakaways let alone the weird and wonderful personalities that created the industry.
+							; underworld								; 5		; brown.joe.comentator1@hybris.com ; brown.joe1	; Way too much on the personal not enough on the bus...	; Way too much story on the personal and not enough on the business of advertising.
+							; underworld								; 2		; brown.joe.comentator2@hybris.com ; brown.joe2	; 														; For me boring story, but for genre fans it could be interesting.
+							; underworld								; 5		; brown.joe.comentator3@hybris.com ; brown.joe3	; Great show!											; I really enjoyed time when watching underworld.
+							; underworld								; 3		; brown.joe.comentator5@hybris.com ; brown.joe5	;    													; Good series!
+
+							;  t-shirt_bp								; 3		; brown.joe.comentator5@hybris.com ; brown.joe5	;    													; Good series!
+							;  t-shirt_bp								; 2		; brown.joe.comentator1@hybris.com ; brown.joe1	;    													; Good series!
+							;  t-shirt_bp								; 4		; brown.joe.comentator2@hybris.com ; brown.joe2	;    													; Good series!
+							;  t-shirt_bp								; 5		; brown.joe.comentator3@hybris.com ; brown.joe3	;    													; Good series!
+							; t-shirt_black								; 2		; brown.joe.comentator5@hybris.com ; brown.joe5	;    													; Good series!
+							; t-shirt_black								; 1		; brown.joe.comentator1@hybris.com ; brown.joe1	;    													; Good series!
+							; t-shirt_black								; 1		; brown.joe.comentator2@hybris.com ; brown.joe2	;    													; Good series!
+							; underworld_iphone							; 5		; brown.joe.comentator1@hybris.com ; brown.joe1	;    													; Good product!
+							; underworld_iphone							; 5		; brown.joe.comentator2@hybris.com ; brown.joe2	;    													; Good product!
+							; underworld_iphone							; 5		; brown.joe.comentator3@hybris.com ; brown.joe3	;    													; Good product!
+							; venom_sweater								; 5		; brown.joe.comentator1@hybris.com ; brown.joe1	;    													; Good product!
+							; venom_sweater								; 4		; brown.joe.comentator2@hybris.com ; brown.joe2	;    													; Good product!
+							; venom_sweater								; 5		; brown.joe.comentator3@hybris.com ; brown.joe3	;    													; Good product!
+							; casino_spundtrack							; 5		; brown.joe.comentator2@hybris.com ; brown.joe2	;    													; Good product!
+							; casino_spundtrack							; 5		; brown.joe.comentator3@hybris.com ; brown.joe3	;    													; Good product!
+							; casino_spundtrack							; 3		; brown.joe.comentator5@hybris.com ; brown.joe5	;    													; Good product!
+							; land_tote_bag								; 5		; brown.joe.comentator2@hybris.com ; brown.joe2	;    													; Good product!
+							; land_tote_bag								; 4		; brown.joe.comentator3@hybris.com ; brown.joe3	;    													; Good product!
+							; land_tote_bag								; 3		; brown.joe.comentator5@hybris.com ; brown.joe5	;    													; Good product!
+							; lemariage_collector						; 5		; brown.joe.comentator2@hybris.com ; brown.joe2	;    													; Good product!
+							; lemariage_collector						; 3		; brown.joe.comentator3@hybris.com ; brown.joe3	;    													; Good product!
+							; lemariage_collector						; 3		; brown.joe.comentator5@hybris.com ; brown.joe5	;    													; Good product!
+
+# CECS-230 Additional Videos and Channels with entitlements END
+# CECS-436 video for gift entitlement
+							; trekking-towards-danger				; 5		; brown.joe.comentator1@hybris.com	; Perfect composition of adventure and nature			; For sure I will return to cinema for the movie to enjoy this incradible trip again. I recommend it!!
+							; trekking-towards-danger				; 5		; brown.joe.comentator2@hybris.com	; Amazing movie!										; Perfect composition of adventure and nature
+							; trekking-towards-danger				; 5		; brown.joe.comentator3@hybris.com	; Best adventure movie for all family					; We go to cinema with all the family, and we surprised that all of us, 3 generations, was amazed by storyline and nature
+							; the-last-journey ; 4 ; brown.joe.comentator1@hybris.com ; brown.joe1 ; Good but not perfect ; I will watch this movie one more time on my TV.
+							; the-last-journey ; 5 ; brown.joe.comentator2@hybris.com ; brown.joe2 ; Amazing movie! ; I really enjoyed time when watching The Last Journey.
+							; the-last-journey ; 5 ; brown.joe.comentator3@hybris.com ; brown.joe3 ; Best  movie for all ; The Last Journey is one of the best adventure movie in years
+							; the-last-journey ; 2 ; brown.joe.comentator4@hybris.com ; brown.joe4 ; Waste of time ; This movie isn`t for everybody
+							; the-last-journey ; 3 ; brown.joe.comentator5@hybris.com ; brown.joe5 ; Medium ; It`s nothing special
+							; the-last-journey ; 4 ; brown.joe.comentator6@hybris.com ; brown.joe6 ; Good movie; Very good movie.

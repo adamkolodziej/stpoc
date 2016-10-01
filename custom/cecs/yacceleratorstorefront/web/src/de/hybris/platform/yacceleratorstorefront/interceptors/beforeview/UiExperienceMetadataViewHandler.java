@@ -56,7 +56,7 @@ public class UiExperienceMetadataViewHandler implements BeforeViewHandler
 			if (UiExperienceLevel.DESKTOP.equals(currentUiExperienceLevel))
 			{
                 // CECS-125 site doesn't react to rotate event
-                // this breaks standard responsive b2c sites - it may need some rework in future (to restrict it to tricast store only)
+                // this breaks standard responsive b2c sites - it may need some rework in future (to restrict it to sptel store only)
 //				if (!ResponsiveUtils.isResponsive())
 //				{
 //					// Provide some hints to mobile browser even though this is not the mobile site -->

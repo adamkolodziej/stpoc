@@ -69,8 +69,8 @@ public class FreeToWatchPostInitHook implements PostInitHook
 					@Override
 					public Object execute()
 					{
-						final String site = "tricast";
-						final String productCatalog = "tricastProductCatalog";
+						final String site = "sptel";
+						final String productCatalog = "sptelProductCatalog";
 						final CatalogVersionModel catalogVersion = catalogVersionService.getCatalogVersion(productCatalog, "Online");
 
 						userService.setCurrentUser(customerModel);

@@ -18,7 +18,6 @@
       <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->         
       <!--<requires-extension name="acceleratorservices"/> -->
       <requires-extension name="yacceleratorfacades"/>
-      <requires-extension name="mobiletricast"/>
       <requires-extension name="sapadtreco"/>
       <requires-extension name="showcasecommon"/>
       <requires-extension name="btgcockpit"/>

@@ -1,7 +1,7 @@
 #
-# Import the CMS content for the Tricast site
+# Import the CMS content for the SPTel site
 #
-$contentCatalog=tricastContentCatalog
+$contentCatalog=sptelContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 
 ### CECS-577 - SOAP: order details START

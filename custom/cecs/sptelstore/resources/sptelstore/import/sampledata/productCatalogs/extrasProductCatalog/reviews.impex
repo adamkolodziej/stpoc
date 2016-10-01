@@ -1,0 +1,20 @@
+# ImpEx for Importing Products into Sptel Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog = extrasProductCatalog
+$productCatalogName=Extras Product Catalog
+$productCV = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Online'])[unique = true, default = $productCatalog:Online]
+$supercategories = supercategories(code, $catalogVersion)
+$baseProduct = baseProduct(code, $catalogVersion)
+# let's approve by default
+$approved = approvalstatus(code)[default = 'approved']
+
+$passwordEncoding=md5
+$defaultPassword=password
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+# CECS-230 Additional Videos and Channels with entitlements END
+
+INSERT_UPDATE Customer;groups(uid);uid[unique=true];name;$setPassword;customerId;loginDisabled
+
+INSERT_UPDATE CustomerReview; product(code, $productCV)[unique=true]; rating; user(uid)[unique=true]			; headline												; comment	;$approved;language(isocode)[default='en']

@@ -1,0 +1,112 @@
+# ImpEx for Importing Categories into Sptel Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog = sptelProductCatalog
+$productCatalogName = Sptel Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$supercategories = source(code, $catalogVersion)[unique = true]
+$categories = target(code, $catalogVersion)[unique = true]
+
+# Insert Categories
+INSERT_UPDATE Category; code[unique = true]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion
+; 1
+# CECS-62: Add new products - START
+; tvChannelsAndTVContent
+; merchandise
+; tvSubscriptions
+; phone
+; videos
+; audio
+; movies
+; premium-movies
+; tvShows
+; premium-tv-shows
+; t-shirts
+; mugs
+; hoodies
+; pants                  
+; caps                   
+; headphones             
+; shoes                  
+; sunglasses			 
+; watches   			 
+; dresses     			 
+; handbags     
+; free			 
+# CECS-62: Add new products - END
+
+# CECS-91 improved bundle sampledata
+; devices
+; broadband
+# CECS-91: end
+
+# CECS-230 Additional Videos and Channels with entitlements START
+; tvChannels
+; freeChannels
+# CECS-230 Additional Videos and Channels with entitlements END
+; comedyShows
+; gifts
+; books					 
+; mugs				     
+; sweaters				 
+; soundtracks			
+; pillows				 
+; iphones				
+; dvds					 
+; bags
+; underworld-branded
+
+; extraHDChannels
+; foreignLanguages				 
+
+
+UPDATE Category; code[unique = true]; supercategories(code, $catalogVersion); $catalogVersion
+# CECS-62: Add new products - START
+; tvChannelsAndTVContent ; 1
+; merchandise            ; 1
+; tvSubscriptions        ; tvChannelsAndTVContent
+; phone				     ; tvChannelsAndTVContent
+; videos                 ; tvChannelsAndTVContent
+; audio                  ; tvChannelsAndTVContent
+; movies                 ; videos
+; premium-movies         ; videos
+; free                   ; videos
+; tvShows                ; videos
+; premium-tv-shows       ; videos
+; t-shirts               ; merchandise
+; mugs                   ; merchandise
+; hoodies                ; merchandise
+; pants                  ; merchandise
+; caps                   ; merchandise
+; headphones             ; merchandise
+; shoes                  ; merchandise
+; sunglasses			 ; merchandise
+; watches   			 ; merchandise
+; dresses     			 ; merchandise
+; handbags     			 ; merchandise
+# CECS-62: Add new products - END
+; books					 ; merchandise
+; mugs				     ; merchandise
+; sweaters				 ; merchandise
+; soundtracks			 ; merchandise
+; pillows				 ; merchandise
+; iphones				 ; merchandise
+; dvds					 ; merchandise
+; bags					 ; merchandise
+; underworld-branded     ; merchandise
+
+
+# CECS-91 improved bundle sampledata
+; devices                ; 1
+; broadband              ; 1
+# CECS-91: end
+
+# CECS-230 Additional Videos and Channels with entitlements START
+; tvChannels			 ; tvChannelsAndTVContent
+
+# CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie START
+; comedyShows			 ; tvShows
+
+; freeChannels          ; tvChannels
+; extraHDChannels		; tvChannels
+; foreignLanguages		; tvChannels

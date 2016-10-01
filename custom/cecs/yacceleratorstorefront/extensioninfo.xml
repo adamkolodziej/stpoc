@@ -15,7 +15,6 @@
         <requires-extension name="loyaltypointsaddon"/>
         <requires-extension name="emsextrasaddon"/>
         <requires-extension name="ticketingaddon"/>
-        <requires-extension name="mobiletricast"/>
         <requires-extension name="showcasecommonaddon"/>
         <requires-extension name="servicescore"/>
         <requires-extension name="instantcheckoutaddon"/>

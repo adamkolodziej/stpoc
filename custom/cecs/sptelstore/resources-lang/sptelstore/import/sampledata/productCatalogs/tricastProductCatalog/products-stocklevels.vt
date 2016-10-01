@@ -1,0 +1,17 @@
+# CECS-26 include telco additions in sptelstore extension
+$header
+
+# Macros / Replacement Parameter definitions
+\$productCatalog=tricastProductCatalog
+\$productCatalogName=Tricast Product Catalog
+\$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
+
+# Language
+\$lang=$lang
+
+
+#set ( $warehouseRows = $query.load('products-stocklevels', 'Warehouse') )
+UPDATE Warehouse;code[unique=true];name[lang=\$lang]
+#foreach( $row in $warehouseRows )
+;$row.key;;$row.values.name;
+#end

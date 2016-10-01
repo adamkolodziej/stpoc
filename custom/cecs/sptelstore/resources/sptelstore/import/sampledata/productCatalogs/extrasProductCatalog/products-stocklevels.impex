@@ -1,0 +1,16 @@
+# ImpEx for Importing Products stock levels into Sptel Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog = extrasProductCatalog
+$productCatalogName=Extras Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$vendor = sptel
+
+INSERT_UPDATE Vendor; code[unique = true]
+; $vendor
+
+INSERT_UPDATE Warehouse; code[unique = true]; name[lang = en]; name[lang = de]; vendor(code); default
+
+INSERT_UPDATE StockLevel; productCode[unique = true]; available[default = 100]; warehouse(code)[unique = true, default = warehouse_e]; inStockStatus(code)[default = forceInStock]; maxPreOrder[default = 0]; maxStockLevelHistoryCount[default = -1]; overSelling[default = 0]; preOrder[default = 0]; reserved[default = 0]
+
+UPDATE Product; code[unique = true]; stockLevels(productCode, warehouse(code)); vendors(code)[default = $vendor]; $catalogVersion

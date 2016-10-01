@@ -1,7 +1,7 @@
 package com.hybris.showcase.renderers.cms;
 
 import com.hybris.platform.ticketing.model.DisputeExpenseLinkActionModel;
-import com.hybris.showcase.cecs.tricaststore.model.components.AccountExpensesComponentModel;
+import com.hybris.showcase.cecs.sptelstore.model.components.AccountExpensesComponentModel;
 import com.hybris.showcase.data.CurrentExpensesData;
 import com.hybris.showcase.model.ExpenseModel;
 import com.hybris.showcase.services.ExpenseService;

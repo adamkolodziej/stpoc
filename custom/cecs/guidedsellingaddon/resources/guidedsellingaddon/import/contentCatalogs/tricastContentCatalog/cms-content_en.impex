@@ -1,6 +1,6 @@
 ##******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
 
-$contentCatalog=tricastContentCatalog
+$contentCatalog=sptelContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $picture=media(code, $contentCV);
 $siteResource=jar:com.hybris.showcase.guidedselling.constants.GuidedsellingaddonConstants&/guidedsellingaddon/import/contentCatalogs/$contentCatalog

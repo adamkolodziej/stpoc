@@ -1,0 +1,17 @@
+# CECS-26 include telco additions in sptelstore extension
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+
+# Macros / Replacement Parameter definitions
+$productCatalog=extrasProductCatalog
+$productCatalogName=Extras Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$bundleTemplateVersion=1.0
+
+# Language
+$lang=en
+
+UPDATE BundleTemplate;id[unique=true];$catalogVersion;name[lang=$lang];version[default=$bundleTemplateVersion]
+
+UPDATE BundlePackage;code[unique=true];$catalogVersion;name[lang=$lang];description[lang=$lang]
+

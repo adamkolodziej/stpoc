@@ -307,14 +307,14 @@
 
 		<!-- CECS-601 once expense disputed is started that could be reflected in UI START -->
 		<itemtype code="AccountExpensesComponent" extends="SimpleCMSComponent" generate="true" autocreate="true"
-				  jaloclass="com.hybris.showcase.cecs.tricaststore.jalo.components.AccountExpensesComponent">
+				  jaloclass="com.hybris.showcase.cecs.sptelstore.jalo.components.AccountExpensesComponent">
 			<description>Represents account expenses component</description>
 		</itemtype>
 		<!-- CECS-601 once expense disputed is started that could be reflected in UI END -->
 		
 		<!-- CECS-731 FeaturedCollectionComponent -->
 		<itemtype code="FeaturedCollectionComponent" extends="AbstractProductCollectionComponent" generate="true" autocreate="true"
-				  jaloclass="com.hybris.showcase.cecs.tricaststore.jalo.components.FeaturedCollectionComponent">
+				  jaloclass="com.hybris.showcase.cecs.sptelstore.jalo.components.FeaturedCollectionComponent">
 		   <description>Represents new components on the homepage - SPORT EVENTS and FICTION HIGHLIGHTS</description>
 		   <attributes>
 			  <attribute qualifier="bannerUrl" type="java.lang.String">

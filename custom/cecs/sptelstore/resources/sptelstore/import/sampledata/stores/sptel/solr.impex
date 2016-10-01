@@ -1,0 +1,107 @@
+#
+# Add additional sample solr index configuration
+# - indexed properties for the classification features that we want to index
+#
+$classSystemVersion=systemVersion(catalog(id[default='SptelClassification']),version[default='1.0'])
+$classCatalogVersion=catalogVersion(catalog(id[default='SptelClassification']),version[default='1.0'])
+$classAttribute=classificationAttribute(code,$classSystemVersion)
+$classClass=classificationClass(code,$classCatalogVersion)
+$classAttributeAssignment=classAttributeAssignment($classClass,$classAttribute,$classSystemVersion)
+$contentCatalogName=sptelContentCatalog
+$contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
+$productCatalog=sptelProductCatalog
+$productCatalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$solrIndexedType=sptelProductType
+
+# Range set
+INSERT_UPDATE SolrValueRangeSet ; name[unique=true] ; qualifier ; type   ; solrValueRanges(&rangeValueRefID)                                                     
+# CECS-65: Add solr config for new product types - START
+                                ; RunningTimeRange  ;           ; double ; rangeRefRunningTime1, rangeRefRunningTime2, rangeRefRunningTime3, rangeRefRunningTime4
+# CECS-65: Add solr config for new product types - END
+                                
+                                ; RatesRange  ;           		; double ; rangeRefRates1, rangeRefRates2, rangeRefRates3, rangeRefRates4, rangeRefRates5
+
+# Define ranges                 
+INSERT_UPDATE SolrValueRange ; &rangeValueRefID     ; solrValueRangeSet(name)[unique=true] ; name[unique=true] ; from ; to 
+# CECS-65: Add solr config for new product types - START
+                             ; rangeRefRunningTime1 ; RunningTimeRange                     ; less then 30 min  ; 0    ; 30 
+                             ; rangeRefRunningTime2 ; RunningTimeRange                     ; 31 - 60 min       ; 31   ; 60 
+                             ; rangeRefRunningTime3 ; RunningTimeRange                     ; 61 - 120 min      ; 61   ; 120
+                             ; rangeRefRunningTime4 ; RunningTimeRange                     ; 121 - 300 min     ; 121  ; 300
+# CECS-65: Add solr config for new product types - END
+							
+							 ; rangeRefRates1      ;  RatesRange						   ; 1				   ; 1	  ; 1.49
+							 ; rangeRefRates2      ;  RatesRange						   ; 2				   ; 1.5  ; 2.49
+							 ; rangeRefRates3      ;  RatesRange						   ; 3				   ; 2.5  ; 3.49
+							 ; rangeRefRates4      ;  RatesRange						   ; 4				   ; 3.5  ; 4.49
+							 ; rangeRefRates5      ;  RatesRange						   ; 5				   ; 4.5  ; 5							 
+							 							 
+INSERT_UPDATE SolrIndexedProperty ; solrIndexedType(identifier)[unique=true] ; name[unique=true] ; type(code) ; sortableType(code) ; currency[default=false] ; localized[default=false] ; multiValue[default=false] ; useForSpellchecking[default=false] ; useForAutocomplete[default=false] ; fieldValueProvider                          ; valueProviderParameter ; $classAttributeAssignment
+# CECS-65: Add solr config for new product types - START
+                                  ; $solrIndexedType                         ; actors            ; text       ;                    ;                         ; false                    ; true                      ; false                              ; false                             ; commerceClassificationPropertyValueProvider ;                        ; VideoClass:::starring::::
+# CECS-65: Add solr config for new product types - END
+
+# Import classification features  
+INSERT_UPDATE SolrIndexedProperty ; solrIndexedType(identifier)[unique=true] ; name[unique=true] ; type(code) ; sortableType(code) ; currency[default=false] ; localized[default=false] ; multiValue[default=false] ; facet[default=false] ; useForSpellchecking[default=false] ; useForAutocomplete[default=false] ; facetType(code) ; facetSort(code) ; priority ; visible ; fieldValueProvider                          ; customFacetSortProvider      ; rangeSet(name)   ; $classAttributeAssignment     ; facetDisplayNameProvider            ; topValuesProvider        ; displayName
+# CECS-65: Add solr config for new product types - START
+                                  ; $solrIndexedType                         ; Starring          ; string     ;                    ;                         ;                          ; true                      ; true                 ; true                               ; true                              ; MultiSelectAnd  ; Custom          ; 1000     ; true    ; commerceClassificationPropertyValueProvider ;                              ;                  ; VideoClass:::starring::::     ;                                     ; defaultTopValuesProvider ;            
+                                  ; $solrIndexedType                         ; Episod            ; double     ; double             ;                         ;                          ; false                     ; false                ; false                              ; false                             ;                 ;                 ; 0        ; true    ; commerceClassificationPropertyValueProvider ;                              ;                  ; TVClass:::episod::::          ;                                     ; defaultTopValuesProvider ;
+                                  ; $solrIndexedType                         ; Running           ; double     ; double             ;                         ;                          ; false                     ; true                 ; false                              ; false                             ; MultiSelectAnd  ; Custom          ; 0        ; false   ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc ;                  ; VideoClass:::running-time:::: ;                                     ;                          ;
+                                  ; $solrIndexedType                         ; Director          ; string     ;                    ;                         ;                          ; true                      ; true                 ; true                               ; true                              ;                 ; Custom          ; 1000     ; true    ; commerceClassificationPropertyValueProvider ;                              ;                  ; VideoClass:::director::::     ;                                     ; defaultTopValuesProvider ;            
+                                  ; $solrIndexedType                         ; HD                ; boolean    ;                    ;                         ;                          ; false                     ; true                 ; false                              ; false                             ; Refine          ; Custom          ; 0        ; false   ; commerceClassificationPropertyValueProvider ;                              ;                  ; VideoClass:::HD::::           ; hdFacetDisplayNameProvider          ; defaultTopValuesProvider ;            
+                                  ; $solrIndexedType                         ; ReleaseYear       ; double     ;                    ;                         ;                          ; true                      ; true                 ; false                              ; false                             ;                 ; Custom          ; 1000     ; true    ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc ;                  ; VideoClass:::release-year:::: ; releaseYearFacetDisplayNameProvider ; defaultTopValuesProvider ;            
+                                  ; $solrIndexedType                         ; Language          ; string     ;                    ;                         ;                          ; true                      ; true                 ; false                              ; false                             ; MultiSelectAnd  ; Custom          ; 0        ; false   ; commerceClassificationPropertyValueProvider ;                              ;                  ; MovieClass:::language::::     ;                                     ; defaultTopValuesProvider ;            
+                                  ; $solrIndexedType                         ; Genre             ; string     ;                    ;                         ;                          ; true                      ; true                 ; true                               ; true                              ; Refine          ; Custom          ; 1000     ; true    ; commerceClassificationPropertyValueProvider ;                              ;                  ; VideoClass:::genre::::        ;                                     ; defaultTopValuesProvider ; Genre
+# CECS-65: Add solr config for new product types - END
+
+                                  ; $solrIndexedType                         ; Rates             ; double     ;                    ;                         ;                          ;                       ; true                 ;                                ;                               ;  MultiSelectOr ;           ; 9000     ; true    ; ratesProductValueProvider ;                              ; RatesRange                 ;        ;                                     ; defaultTopValuesProvider ; Rating      
+
+
+# CECS-94 Latest releases solr property - START
+INSERT_UPDATE SolrIndexedProperty ; solrIndexedType(identifier)[unique=true] ; name[unique=true] ; type(code) ; sortableType(code) ; currency[default=false] ; localized[default=false] ; multiValue[default=false] ; useForSpellchecking[default=false] ; useForAutocomplete[default=false] ; fieldValueProvider             ; valueProviderParameter
+                                  ; $solrIndexedType                         ; releaseDate       ; date       ; date               ;                         ;                          ;                           ;                                    ;                                   ; modelPropertyFieldValueProvider
+
+INSERT_UPDATE SolrSort ; &sortRefID ; indexedType(identifier)[unique=true] ; code[unique=true]  ; useBoost[default=false]
+                       ; sortRef1   ; $solrIndexedType                     ; latestReleases_desc
+
+INSERT_UPDATE SolrSortField ; sort(indexedType(identifier),code)[unique=true] ; fieldName[unique=true] ; ascending[unique=true]
+                            ; $solrIndexedType:latestReleases_desc            ; releaseDate            ; false                 
+# CECS-94 Latest releases solr property - END
+
+# CECS-316 Most viewed solr property - START
+INSERT_UPDATE SolrIndexedProperty ; solrIndexedType(identifier)[unique=true] ; name[unique=true] ; type(code) ; sortableType(code) ; currency[default=false] ; localized[default=false] ; multiValue[default=false] ; useForSpellchecking[default=false] ; useForAutocomplete[default=false] ; fieldValueProvider             ; valueProviderParameter
+                                  ; $solrIndexedType                         ; viewsCount       ; int       ; int               ;                         ;                          ;                           ;                                    ;                                   ; optionalModelPropertyFieldValueProvider
+
+INSERT_UPDATE SolrSort ; &sortRefID ; indexedType(identifier)[unique=true] ; code[unique=true]  ; useBoost[default=false]
+                       ; sortRef2   ; $solrIndexedType                     ; mostViewed
+
+INSERT_UPDATE SolrSortField ; sort(indexedType(identifier),code)[unique=true] ; fieldName[unique=true] ; ascending[unique=true]
+                            ; $solrIndexedType:mostViewed            ; viewsCount            ; false                 
+# CECS-94  Most viewed solr property - END
+
+# Show the classification features in the product lister
+INSERT_UPDATE ClassAttributeAssignment ; $classClass[unique=true] ; $classAttribute[unique=true] ; $classSystemVersion[unique=true] ; listable
+
+# Redirect page URL                    
+INSERT_UPDATE SolrURIRedirect ; url[unique=true]                                
+                              ; "/cart"                                         
+                              ; "http://www.hybris.com/multichannel-accelerator"
+
+INSERT_UPDATE SolrPageRedirect ; redirectItem(uid,$contentCatalogVersion)[unique=true]
+                               ; faq                                                  
+
+INSERT_UPDATE SolrCategoryRedirect ; redirectItem(code,$productCatalogVersion)[unique=true]
+
+INSERT_UPDATE SolrProductRedirect ; redirectItem(code,$productCatalogVersion)[unique=true]
+
+INSERT_UPDATE SolrFacetReconfiguration;facet(name,solrIndexedType(identifier[default=$solrIndexedType]))[unique=true];priority;visible;solrSearchProfiles(code)[unique=true];
+;category;100000;true;videos-srch-profile
+;Rates;90000;true;videos-srch-profile
+;Genre;80000;true;videos-srch-profile
+;Director;70000;false;videos-srch-profile
+;ReleaseYear;60000;false;videos-srch-profile
+;Starring;50000;false;videos-srch-profile
+;price;40000;false;videos-srch-profile
+
+INSERT_UPDATE CategorySolrSearchProfile;categoryCode[unique=true];code;indexedType(identifier)[unique=true];
+;videos;videos-srch-profile;$solrIndexedType;

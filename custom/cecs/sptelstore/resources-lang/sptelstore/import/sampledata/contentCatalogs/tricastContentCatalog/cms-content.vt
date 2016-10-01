@@ -1,0 +1,411 @@
+#$header
+
+\$contentCatalog=tricastContentCatalog
+\$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=\$contentCatalog]),CatalogVersion.version[default=Staged])[default=\$contentCatalog:Staged]
+#set( $escContentCV=$esc.java('$contentCV[unique=true]') )
+\$picture=media(code, \$contentCV);
+#set( $escPicture=$esc.java('$picture[lang=$lang]') )
+\$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.TricaststoreConstants&/sptelstore/import/sampledata/contentCatalogs/\$contentCatalog
+
+# Language
+\$lang=$lang
+
+# Site Logo Component
+#set ( $logobannercomponent = $query.load('cms-content', 'LogoSimpleBannerComponent') )
+UPDATE SimpleBannerComponent;$escContentCV;uid[unique=true];$escPicture
+#foreach( $row in $logobannercomponent)
+;;$row.key;$row.values.picture
+#end
+
+# CMS Link Components
+#set ( $cmslinkcomponent = $query.load('cms-content', 'CMSLinkComponent') )
+UPDATE CMSLinkComponent;$escContentCV;uid[unique=true];linkName[lang=\$lang]
+#foreach( $row in $cmslinkcomponent )
+;;$row.key;"$row.values.linkName"
+#end
+
+# Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
+#set ( $media = $query.load('cms-content', 'Media') )
+INSERT_UPDATE Media;$escContentCV;code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+#foreach( $row in $media )
+;;$row.key;$row.values.media;$row.values.mime;$row.values.imageRef;;"$row.values.altText"
+#end
+
+#set ( $simplebannercomponent = $query.load('cms-content', 'SimpleBannerComponent') )
+UPDATE SimpleBannerComponent;$escContentCV;uid[unique=true];$escPicture
+#foreach( $row in $simplebannercomponent )
+;;$row.key;$row.values.picture
+#end
+
+# CMS Mini Cart Component
+#set ( $minicartcomponent = $query.load('cms-content', 'MiniCartComponent') )
+UPDATE MiniCartComponent;$escContentCV;uid[unique=true];name;title[lang=\$lang]
+#foreach( $row in $minicartcomponent )
+;;$row.key;$row.values.name;"$row.values.title"
+#end
+
+# CMS tabs components
+#set ( $cmstabparagraphcomponent = $query.load('cms-content', 'CMSTabParagraphComponent') )
+UPDATE CMSTabParagraphComponent;$escContentCV;uid[unique=true];title[lang=\$lang];content[lang=\$lang]
+#foreach( $row in $cmstabparagraphcomponent )
+;;$row.key;$row.values.title;$row.values.content
+#end
+
+# CMS Footer Component
+#set ( $footercomponent = $query.load('cms-content', 'FooterComponent') )
+UPDATE FooterComponent;$escContentCV;uid[unique=true];notice[lang=\$lang]
+#foreach( $row in $footercomponent )
+;;$row.key;"$row.values.notice"
+#end
+
+# CMS Paragraph Component (Contact information)
+#set ( $cmsparagraphcomponent = $query.load('cms-content', 'CMSParagraphComponent') )
+UPDATE CMSParagraphComponent;$escContentCV;uid[unique=true];content[lang=\$lang]
+#foreach( $row in $cmsparagraphcomponent )
+;;$row.key;"$row.values.content"
+#end
+
+# CMS ProductReferences Components
+#set ( $productreferencescomponent = $query.load('cms-content', 'CMSProductReferenceComponent') )
+UPDATE ProductReferencesComponent;$escContentCV;uid[unique=true];title[lang=\$lang]
+#foreach( $row in $productreferencescomponent )
+;;$row.key;"$row.values.title"
+#end
+
+# CMS PurchasedCategorySuggestion Components
+#set ( $purchasedcategorysuggestioncomponent = $query.load('cms-content', 'PurchasedCategorySuggestionComponent') )
+UPDATE PurchasedCategorySuggestionComponent;$escContentCV;uid[unique=true];title[lang=\$lang]
+#foreach( $row in $purchasedcategorysuggestioncomponent )
+;;$row.key;"$row.values.title"
+#end
+
+# CMS CartSuggestion Components
+#set ( $cartsuggestioncomponent = $query.load('cms-content', 'CartSuggestionComponent') )
+UPDATE CartSuggestionComponent;$escContentCV;uid[unique=true];title[lang=\$lang]
+#foreach( $row in $cartsuggestioncomponent )
+;;$row.key;"$row.values.title"
+#end
+
+# Category Pages
+#set ( $categorypage = $query.load('cms-content', 'CategoryPage') )
+UPDATE CategoryPage;$escContentCV;uid[unique=true];title[lang=\$lang]
+#foreach( $row in $categorypage )
+;;$row.key;"$row.values.title"
+#end
+
+# CMS Navigation Nodes
+#set ( $cmsnavigationnode = $query.load('cms-content', 'CMSNavigationNode') )
+UPDATE CMSNavigationNode;$escContentCV;uid[unique=true];title[lang=\$lang]
+#foreach( $row in $cmsnavigationnode )
+;;$row.key;"$row.values.title"
+#end
+
+# Tricast FAQ Page
+
+# CMS Paragraph Component (Contact information)
+#set ( $cmsparagraphcomponent = $query.load('cms-content-faq-page', 'CMSParagraphComponent') )
+UPDATE CMSParagraphComponent;$escContentCV;uid[unique=true];content[lang=\$lang];
+#foreach( $row in $cmsparagraphcomponent )
+;;$row.key;$row.values.content;
+#end
+
+# Tricast Order Expired Page
+#set ( $cmsparagraphcomponent = $query.load('cms-content-orderExpired-page', 'CMSParagraphComponent') )
+UPDATE CMSParagraphComponent;$escContentCV;uid[unique=true];content[lang=\$lang];
+#foreach( $row in $cmsparagraphcomponent )
+;;$row.key;$row.values.content;
+#end
+
+# Tricast Terms and Conditions Page
+
+# CMS Paragraph Component (Contact information)
+#set ( $cmsparagraphcomponent = $query.load('cms-content-termsAndConditions-page', 'CMSParagraphComponent') )
+UPDATE CMSParagraphComponent;$escContentCV;uid[unique=true];content[lang=\$lang];
+#foreach( $row in $cmsparagraphcomponent )
+;;$row.key;$row.values.content;
+#end
+
+# CECS-194 Packages Page - complete implementation START
+# Tricast Packages Page
+
+# CMS TabParagraph Component (Contact information)
+#set ( $cmstabparagraphcomponent = $query.load('cms-content-packages-page', 'CMSTabParagraphComponent') )
+UPDATE CMSTabParagraphComponent;$escContentCV;uid[unique=true];title[lang=\$lang];content[lang=\$lang][translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+#foreach( $row in $cmstabparagraphcomponent )
+;;$row.key;"$row.values.title";"$row.values.content"
+#end
+
+# CECS-194 Packages Page - complete implementation END
+
+#set ( $singlebannercomponent = $query.load('cms-content', 'SingleBannerComponent') )
+UPDATE SingleBannerComponent;$escContentCV;uid[unique=true];headline[lang=\$lang];$escPicture;content[lang=\$lang]
+#foreach( $row in $singlebannercomponent )
+;;$row.key;$row.values.headline;$row.values.picture;"$row.values.content"
+#end
+
+################################
+# Tricast Homepage
+################################
+
+# Media Content
+#set ( $media = $query.load('cms-content-home-page', 'Media') )
+INSERT_UPDATE Media;$escContentCV;code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+#foreach( $row in $media )
+;;$row.key;$row.values.media;$row.values.mime;$row.values.imageRef;;"$row.values.altText"
+#end
+
+#set ( $responsiveparagraphcomponent = $query.load('cms-content-home-page', 'ResponsiveParagraphComponent') )
+UPDATE ResponsiveParagraphComponent;$escContentCV;uid[unique=true];headline;content
+#foreach( $row in $responsiveparagraphcomponent )
+;;$row.key;$row.values.headline;"$row.values.content"
+#end
+
+#set ( $responsiveparagraphcomponent = $query.load('cms-content', 'ResponsiveParagraphComponent') )
+UPDATE ResponsiveParagraphComponent;$escContentCV;uid[unique=true];headline;content
+#foreach( $row in $responsiveparagraphcomponent )
+;;$row.key;$row.values.headline;"$row.values.content"
+#end
+
+#set ( $bannercomponent = $query.load('cms-content-home-page', 'BannerComponent') )
+UPDATE BannerComponent;$escContentCV;uid[unique=true];headline[lang=\$lang];$escPicture;content[lang=\$lang]
+#foreach( $row in $bannercomponent )
+;;$row.key;$row.values.headline;$row.values.picture;"$row.values.content"
+#end
+
+#set ( $singlebannercomponent = $query.load('cms-content-home-page', 'SingleBannerComponent') )
+UPDATE SingleBannerComponent;$escContentCV;uid[unique=true];headline[lang=\$lang];$escPicture;content[lang=\$lang]
+#foreach( $row in $singlebannercomponent )
+;;$row.key;$row.values.headline;$row.values.picture;"$row.values.content"
+#end
+
+#set ( $bannerwithbuttoncomponent = $query.load('cms-content-home-page', 'BannerWithButtonComponent') )
+UPDATE BannerWithButtonComponent;$escContentCV;uid[unique=true];headline[lang=\$lang];$escPicture;content[lang=\$lang];btnText[lang=\$lang]
+#foreach( $row in $bannerwithbuttoncomponent )
+;;$row.key;$row.values.headline;$row.values.picture;"$row.values.content";$row.values.btnText;
+#end
+
+#set ( $productcarouselcomponent = $query.load('cms-content-home-page', 'ProductCarouselComponent') )
+UPDATE ProductCarouselComponent;$escContentCV;uid[unique=true];title[lang=\$lang]
+#foreach( $row in $productcarouselcomponent )
+;;$row.key;$row.values.title
+#end
+
+########################################################################
+# Tricast Camera Accessories and Supplies Category Landing Page
+########################################################################
+
+#set ( $categorypage = $query.load('cms-content-category-page', 'CategoryPage') )
+UPDATE CategoryPage;$escContentCV;uid[unique=true];title[lang=\$lang]
+#foreach( $row in $categorypage )
+;;$row.key;$row.values.title
+#end
+
+# Media Content
+#set ( $media = $query.load('cms-content-category-page', 'Media') )
+INSERT_UPDATE Media;$escContentCV;code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+#foreach( $row in $media )
+;;$row.key;$row.values.media;$row.values.mime;;"$row.values.altText"
+#end
+
+#set ( $categoryfeaturecomponent = $query.load('cms-content-category-page', 'CategoryFeatureComponent') )
+UPDATE CategoryFeatureComponent;$escContentCV;uid[unique=true];title[lang=\$lang];$escPicture;description[lang=\$lang]
+#foreach( $row in $categoryfeaturecomponent )
+;;$row.key;$row.values.title;$row.values.picture;"$row.values.description"
+#end
+
+#set ( $simplebannercomponent = $query.load('cms-content-category-page', 'SimpleBannerComponent') )
+UPDATE SimpleBannerComponent;$escContentCV;uid[unique=true];$escPicture
+#foreach( $row in $simplebannercomponent )
+;;$row.key;$row.values.picture
+#end
+
+######################################
+# Tricast Search Results Page
+######################################
+
+# Media Content
+#set ( $media = $query.load('cms-content-results-page', 'Media') )
+INSERT_UPDATE Media;$escContentCV;code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+#foreach( $row in $media )
+;;$row.key;$row.values.media;$row.values.mime;;"$row.values.altText"
+#end
+
+#set ( $simplebannercomponent = $query.load('cms-content-results-page', 'SimpleBannerComponent') )
+UPDATE SimpleBannerComponent;$escContentCV;uid[unique=true];$escPicture
+#foreach( $row in $simplebannercomponent )
+;;$row.key;$row.values.picture
+#end
+
+#set ( $cmsparagraphcomponent = $query.load('cms-content-results-page', 'CMSParagraphComponent') )
+UPDATE CMSParagraphComponent;$escContentCV;uid[unique=true];content[lang=\$lang]
+#foreach( $row in $cmsparagraphcomponent )
+;;$row.key;$row.values.content
+#end
+
+####################################
+# Tricast Cart Page
+####################################
+
+# Media Content
+#set ( $media = $query.load('cms-content-cart-page', 'Media') )
+INSERT_UPDATE Media;$escContentCV;code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+#foreach( $row in $media )
+;;$row.key;$row.values.media;$row.values.mime;;"$row.values.altText"
+#end
+
+#set ( $simplebannercomponent = $query.load('cms-content-cart-page', 'SimpleBannerComponent') )
+UPDATE SimpleBannerComponent;$escContentCV;uid[unique=true];$escPicture
+#foreach( $row in $simplebannercomponent )
+;;$row.key;$row.values.picture
+#end
+
+#set ( $cmsparagraphcomponent = $query.load('cms-content-cart-page', 'CMSParagraphComponent') )
+UPDATE CMSParagraphComponent;$escContentCV;uid[unique=true];content[lang=\$lang]
+#foreach( $row in $cmsparagraphcomponent )
+;;$row.key;$row.values.content
+#end
+
+
+
+# CECS-68 responsive my-account homepage - cms START
+
+#set( $mediaFormatRows = $query.load('cms-content', 'SocialAccountBodySubComponent') )
+# MediaFormats
+UPDATE SocialAccountBodySubComponent;uid[unique=true];name;$escContentCV
+#foreach( $row in $mediaFormatRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $detailaccountbodysettingssubcomponent = $query.load('cms-content', 'DetailAccountBodySettingsSubComponent') )
+# detailaccountbodysettingssubcomponent
+UPDATE DetailAccountBodySettingsSubComponent;uid[unique=true];name;$escContentCV
+#foreach( $row in $detailaccountbodysettingssubcomponent )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $detailaccountbodybillingsubcomponent = $query.load('cms-content', 'DetailAccountBodyBillingSubComponent') )
+# detailaccountbodybillingsubcomponent
+UPDATE DetailAccountBodyBillingSubComponent;uid[unique=true];name;$escContentCV
+#foreach( $row in $detailaccountbodybillingsubcomponent )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $mediaFormatRows = $query.load('cms-content', 'HelpAccountBodySubComponent') )
+# MediaFormats
+UPDATE HelpAccountBodySubComponent;uid[unique=true];name;$escContentCV
+#foreach( $row in $mediaFormatRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $mediaFormatRows = $query.load('cms-content', 'TileAccountBodySubComponent') )
+# MediaFormats
+UPDATE TileAccountBodySubComponent;uid[unique=true];name;title;$escContentCV
+#foreach( $row in $mediaFormatRows )
+ ;$row.key;"$row.values.name";"$row.values.title"
+#end
+
+#set( $mediaFormatRows = $query.load('cms-content', 'ContractTileAccountBodySubComponent') )
+# MediaFormats
+UPDATE ContractTileAccountBodySubComponent;uid[unique=true];title;noContractMessage;$escContentCV
+#foreach( $row in $mediaFormatRows )
+;$row.key;"$row.values.title";"$row.values.noContractMessage"
+#end
+
+#set( $mediaFormatRows = $query.load('cms-content', 'ContentSlot') )
+# MediaFormats
+UPDATE ContentSlot;uid[unique=true];name;$escContentCV
+#foreach( $row in $mediaFormatRows )
+ ;$row.key;"$row.values.name"
+#end
+
+# CECS-68 responsive my-account homepage - cms END
+
+#set( $buttonLabels = $query.load('cms-content', 'InstantCheckoutComponent') )
+# InstantCheckoutComponent
+UPDATE InstantCheckoutComponent;uid[unique=true];buttonLabel[lang=\$lang];$escContentCV
+#foreach( $row in $buttonLabels )
+ ;$row.key;"$row.values.buttonLabel";
+#end
+
+# CECS-69 component to switch billing options START
+
+#set( $mediaFormatRows = $query.load('cms-content', 'AccountEditBodyComponent') )
+# MediaFormats
+UPDATE AccountEditBodyComponent;uid[unique=true];name;$escContentCV
+#foreach( $row in $mediaFormatRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $mediaFormatRows = $query.load('cms-content', 'AccountEditSideComponent') )
+# MediaFormats
+UPDATE AccountEditSideComponent;uid[unique=true];name;$escContentCV
+#foreach( $row in $mediaFormatRows )
+ ;$row.key;"$row.values.name"
+#end
+
+#set( $mediaFormatRows = $query.load('cms-content', 'BillingOptionsComponent') )
+# MediaFormats
+UPDATE BillingOptionsComponent;uid[unique=true];name;$escContentCV
+#foreach( $row in $mediaFormatRows )
+ ;$row.key;"$row.values.name"
+#end
+
+# CECS-69 component to switch billing options END
+
+# CECS-172 Product related items component - START
+#set ( $productdetailsrelatedcomponent = $query.load('cms-content', 'ProductDetailsRelatedComponent') )
+UPDATE ProductDetailsRelatedComponent;$escContentCV;uid[unique=true];headline
+#foreach( $row in $productdetailsrelatedcomponent )
+;;$row.key;$row.values.headline
+#end
+# CECS-172 Product related items component - END
+
+# CECS-173 Product reviews component - START
+#set ( $productdetailsreviewcomponent = $query.load('cms-content', 'ProductDetailsReviewComponent') )
+UPDATE ProductDetailsReviewComponent;$escContentCV;uid[unique=true];headline
+#foreach( $row in $productdetailsreviewcomponent )
+;;$row.key;$row.values.headline
+#end
+# CECS-173 Product reviews component - END
+
+# CECS-173 Product reviews component - START
+#set ( $productdetailsfeaturescomponent = $query.load('cms-content', 'ProductDetailsFeaturesComponent') )
+UPDATE ProductDetailsFeaturesComponent;$escContentCV;uid[unique=true];headline
+#foreach( $row in $productdetailsfeaturescomponent )
+;;$row.key;$row.values.headline
+#end
+# CECS-173 Product reviews component - END
+
+#set ( $blogarticle = $query.load('cms-content', 'BlogArticle') )
+UPDATE BlogArticle;$escContentCV;code[unique=true];title;summary;content;blogImage(code, \$contentCV)
+#foreach( $row in $blogarticle )
+;;$row.key;"$row.values.title";"$row.values.summary";"$row.values.content";$row.values.blogImage
+#end
+# CECS-199 Blog page - Featured component - END
+
+#set ( $slotRows = $query.load('cms-content', 'BundlePackageDescriptionSlot') )
+UPDATE BundlePackageDescriptionSlot;uid[unique=true];$escContentCV;title[lang=\$lang];content[lang=\$lang]
+#foreach( $row in $slotRows )
+;$row.key;;$row.values.name;$row.values.content
+#end
+
+# CMS FeaturedCollectionComponent Components
+#set ( $featuredcollectioncomponent = $query.load('cms-content', 'FeaturedCollectionComponent') )
+UPDATE FeaturedCollectionComponent;$escContentCV;uid[unique=true];title[lang=\$lang];subtitle[lang=\$lang]
+#foreach( $row in $featuredcollectioncomponent )
+;;$row.key;"$row.values.title";"$row.values.subtitle"
+#end
+
+# CMS FeaturedCollectionComponent Components
+#set ( $slickProductCarouselComponent = $query.load('cms-content', 'SlickProductCarouselComponent') )
+UPDATE SlickProductCarouselComponent;$escContentCV;uid[unique=true];title[lang=\$lang];subtitle[lang=\$lang]
+#foreach( $row in $slickProductCarouselComponent )
+;;$row.key;"$row.values.title";"$row.values.subtitle"
+#end
+
+# CMS TvShowReferencesComponent Components
+#set ( $tvshowreferencescomponent = $query.load('cms-content', 'TvShowReferencesComponent') )
+UPDATE TvShowReferencesComponent;$escContentCV;uid[unique=true];title[lang=\$lang]
+#foreach( $row in $tvshowreferencescomponent )
+;;$row.key;"$row.values.title"
+#end

@@ -1,9 +1,9 @@
-# ImpEx for Importing BTG configuration into Tricast Store
+# ImpEx for Importing BTG configuration into SPTel Store
 
 # Macros / Replacement Parameter definitions
-$productCatalog = tricastProductCatalog
-$contentCatalog = tricastContentCatalog
-$productCatalogName = Tricast Product Catalog
+$productCatalog = sptelProductCatalog
+$contentCatalog = sptelContentCatalog
+$productCatalogName = SPTel Product Catalog
 $productCV = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true]
 $contentCV = catalogVersion(catalog(id[default = $contentCatalog]), version[default = 'Staged'])[unique = true]
 
@@ -16,7 +16,7 @@ UPDATE Customer;uid[unique=true];sapConsumerID
 # Install on mobile
 
 INSERT_UPDATE BTGSegment; uid[unique = true]; name; sites(uid); defaultResultScope(code); defaultEvaluationMethod(code); active[default = true]; scope(code)[default = OFFLINE]; $contentCV
-; mobileAccessCampaignSegment ; Mobile Access Campaign Segment ; tricast ; PERMANENT ; FULL ;
+; mobileAccessCampaignSegment ; Mobile Access Campaign Segment ; sptel ; PERMANENT ; FULL ;
 
 INSERT_UPDATE BTGRule; uid[unique = true]; code; segment(uid, $contentCV); ruleType(code); $contentCV
 ; userBelongsToMobileAccessCampaignInitiativeRule ; User Belongs To Mobile Access Campaign Initiative ; mobileAccessCampaignSegment ; USER
@@ -45,7 +45,7 @@ INSERT_UPDATE BTGRunBusinessProcessDefinition; uid[unique = true]; code; busines
 ### CECS-293: Send an e-mail for Interested In Sports Campaign
 
 INSERT_UPDATE BTGSegment; uid[unique = true]; name; sites(uid); defaultResultScope(code); defaultEvaluationMethod(code); active[default = true]; scope(code)[default = OFFLINE]; $contentCV
-; sportsEmailCampaignSegment ; Interested In Sports Campaign Segment ; tricast ; PERMANENT ; FULL ;
+; sportsEmailCampaignSegment ; Interested In Sports Campaign Segment ; sptel ; PERMANENT ; FULL ;
 
 INSERT_UPDATE BTGRule; uid[unique = true]; code; segment(uid, $contentCV); ruleType(code); $contentCV
 ; userBelongsToSportsEmailCampaignInitiativeRule ; User Belongs To Sports Email Campaign Initiative ; sportsEmailCampaignSegment ; USER
@@ -74,7 +74,7 @@ INSERT_UPDATE BTGAssignToGroupDefinition;uid[unique=true];code;target;userGroups
 ### Interested in TCO shows
 
 INSERT_UPDATE BTGSegment;uid[unique=true];name;sites(uid);defaultResultScope(code);defaultEvaluationMethod(code);active[default=true];scope(code)[default=OFFLINE];$contentCV
-;readingReviewsOnGoTBlogPageSegment;Interested in TCO shows;tricast;PERMANENT;FULL;
+;readingReviewsOnGoTBlogPageSegment;Interested in TCO shows;sptel;PERMANENT;FULL;
 
 ### CECS-294 BTG segment - watching trailers and reading reviews ###
 # DISABLED as it doesn't get evaluated in offline mode
@@ -125,7 +125,7 @@ INSERT_UPDATE BTGRunBusinessProcessDefinition; uid[unique = true]; code; busines
 ### Fans of branded merchandise
 
 INSERT_UPDATE BTGSegment;uid[unique=true];name;sites(uid);defaultResultScope(code);defaultEvaluationMethod(code);active[default=true];scope(code)[default=OFFLINE];$contentCV
-;fansOfBrandedMerchandiseSegment;Fans Of Branded Merchandise Segment;tricast;SESSION;FULL;
+;fansOfBrandedMerchandiseSegment;Fans Of Branded Merchandise Segment;sptel;SESSION;FULL;
 
 INSERT_UPDATE BTGRule;uid[unique=true];code;segment(uid, $contentCV);ruleType(code);$contentCV
 ;fansOfBrandedMerchandiseRule;Fans Of Branded Merchandise Rule;fansOfBrandedMerchandiseSegment;USER

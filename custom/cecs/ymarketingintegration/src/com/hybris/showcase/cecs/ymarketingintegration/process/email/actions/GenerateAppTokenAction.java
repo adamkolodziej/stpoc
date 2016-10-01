@@ -16,7 +16,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.hybris.showcase.cecs.mobiletricast.facade.MobileEntitlementsFacade;
 
 
 /**
@@ -28,7 +27,6 @@ public class GenerateAppTokenAction extends AbstractSimpleDecisionAction<StoreFr
 	private static final Logger LOG = Logger.getLogger(GenerateAppTokenAction.class);
 	private static final String APP_TOKEN = "appToken";
 
-	private MobileEntitlementsFacade mobileEntitlementsFacade;
 
 	@Override
 	public Transition executeAction(final StoreFrontCustomerProcessModel businessProcessModel) throws RetryLaterException
@@ -37,7 +35,7 @@ public class GenerateAppTokenAction extends AbstractSimpleDecisionAction<StoreFr
 
 		if (customer != null)
 		{
-			final String token = getMobileEntitlementsFacade().generateToken(customer);
+			final String token = "1";
 
 			if (!StringUtils.isBlank(token))
 			{
@@ -60,16 +58,5 @@ public class GenerateAppTokenAction extends AbstractSimpleDecisionAction<StoreFr
 
 		LOG.info("Could not generate mobile application token");
 		return Transition.NOK;
-	}
-
-	public MobileEntitlementsFacade getMobileEntitlementsFacade()
-	{
-		return mobileEntitlementsFacade;
-	}
-
-	@Required
-	public void setMobileEntitlementsFacade(final MobileEntitlementsFacade mobileEntitlementsFacade)
-	{
-		this.mobileEntitlementsFacade = mobileEntitlementsFacade;
 	}
 }

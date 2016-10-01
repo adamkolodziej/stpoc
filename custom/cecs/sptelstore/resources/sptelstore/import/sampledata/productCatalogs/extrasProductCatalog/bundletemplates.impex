@@ -1,0 +1,29 @@
+$productCatalog = extrasProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import/sampledata/productCatalogs/$productCatalog/../productImages
+
+INSERT_UPDATE BundleTemplateStatus; id[unique = true]; status(code)[default = approved]; $catalogVersion
+; BundleApproved
+
+# Insert BundleTemplates
+INSERT_UPDATE BundleTemplate; id[unique = true]; bundleComponentType(code); parentTemplate(id, version[default = 1.0], $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'BundleApproved']; $catalogVersion;
+
+
+
+# Set the child templates again to make sure that the sequence of child templates is correct
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; childTemplates(id, version[default = 1.0], $catalogVersion); $catalogVersion
+
+
+# Bundle dependencies
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; requiredBundleTemplates(id, version[default = 1.0], $catalogVersion); $catalogVersion
+
+
+
+# TODO maybe we should create separate file with full data for bundle packages
+INSERT_UPDATE BundlePackage; code[unique = true]; bundleTemplate(id[default = 'TriCast'], version[default = 1.0], $catalogVersion); selectedProducts(code, $catalogVersion); $catalogVersion
+
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; mime[default = 'image/png']; $catalogVersion; folder(qualifier)[default = images]
+
+
+UPDATE BundlePackage; code[unique = true]; image(code, $catalogVersion); thumbnail(code, $catalogVersion); $catalogVersion
+

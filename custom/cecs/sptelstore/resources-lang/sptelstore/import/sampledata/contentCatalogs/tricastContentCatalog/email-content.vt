@@ -1,0 +1,30 @@
+#$header
+
+\$contentCatalog=tricastContentCatalog
+\$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=\$contentCatalog]),CatalogVersion.version[default=Staged])[default=\$contentCatalog:Staged]
+#set( $escContentCV=$esc.java('$contentCV[unique=true]') )
+\$picture=media(code, \$contentCV);
+#set( $escPicture=$esc.java('$picture[lang=$lang]') )
+\$wideContent=CMSImageComponent,BannerComponent
+\$jarResource=jar:com.hybris.showcase.cecs.sptelstore.constants.TricaststoreConstants&/sptelstore/import
+\$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.TricaststoreConstants&/sptelstore/import/sampledata/contentCatalogs/\$contentCatalog
+
+# Language
+\$lang=$lang
+
+
+# Language
+# Media
+#set ( $media = $query.load('email-content', 'Media') )
+INSERT_UPDATE Media;$escContentCV;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images']
+#foreach( $row in $media )
+;;$row.key;$row.values.realfilename;$row.values.media;$row.values.mime;
+#end
+
+# CMS Image Components
+#set ( $cmsimagecomponent = $query.load('email-content', 'CMSImageComponent') )
+UPDATE CMSImageComponent;$escContentCV;uid[unique=true];$escPicture
+#foreach( $row in $cmsimagecomponent )
+;;$row.key;$row.values.picture;
+#end
+

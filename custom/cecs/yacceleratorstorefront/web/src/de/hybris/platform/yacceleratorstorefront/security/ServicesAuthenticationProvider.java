@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.hybris.services.entitlements.api.EntitlementFacade;
 import com.hybris.services.entitlements.api.GrantData;
 import com.hybris.servicesshowcase.device.impl.ServicesSessionConstants;
-import com.hybris.showcase.cecs.mobiletricast.constants.MobiletricastConstants;
 
 
 /**
@@ -24,7 +23,7 @@ import com.hybris.showcase.cecs.mobiletricast.constants.MobiletricastConstants;
 //CECS-76 check for MobileAccess entitlement after login
 public class ServicesAuthenticationProvider extends AcceleratorAuthenticationProvider
 {
-	private final String MOBILETRICAST_REQUIRE_ENTITLEMENT = "mobiletricast.require.entitlement";
+	private final String MOBILETRICAST_REQUIRE_ENTITLEMENT = "mobilesptel.require.entitlement";
 
 	private EntitlementFacade entitlementFacade;
 	private SessionService sessionService;
@@ -47,10 +46,10 @@ public class ServicesAuthenticationProvider extends AcceleratorAuthenticationPro
 				final List<GrantData> grants = getEntitlementFacade().getGrants(details.getUsername(), null, null, null);
 				for (final GrantData grant : grants)
 				{
-					if (StringUtils.equals(grant.getEntitlementType(), MobiletricastConstants.MOBILE_ACCESS_ENTITLEMENT))
-					{
-						return;
-					}
+					//if (StringUtils.equals(grant.getEntitlementType(), MobilesptelConstants.MOBILE_ACCESS_ENTITLEMENT))
+					//{
+				//		return;
+				//	}
 				}
 				throw new NoEntitlementException("No entitlement to view a site.");
 			}

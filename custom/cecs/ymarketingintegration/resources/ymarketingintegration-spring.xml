@@ -43,7 +43,6 @@
 
 	<bean id="generateAppTokenForEmail" class="com.hybris.showcase.cecs.ymarketingintegration.process.email.actions.GenerateAppTokenAction"  parent="abstractAction">
 		<property name="modelService" ref="modelService"/>
-		<property name="mobileEntitlementsFacade" ref="mobileEntitlementsFacade"/>
 	</bean>
 	
 	<bean id="generateDownloadAppEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">

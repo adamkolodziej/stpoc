@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <solr persistent="true" sharedLib="hybris">
   <cores adminPath="/admin/cores">
-    <core name="master_tricast_Product" instanceDir="/home/developer/dev/sptel/hybris/config/solr/embedded" dataDir="/home/developer/dev/sptel/hybris/data/solrfacetsearch/MASTER/tricast_Product"/>
+    <core name="master_tricast_Product" instanceDir="D:\Projects\SPTelecom\hybris\config/solr/embedded" dataDir="D:\Projects\SPTelecom\hybris\data\solrfacetsearch\MASTER\tricast_Product_1\"/>
 
-    <core name="master_tricast_Product_1" instanceDir="/home/developer/dev/sptel/hybris/config/solr/embedded" dataDir="/home/developer/dev/sptel/hybris/data/solrfacetsearch/MASTER/tricast_Product_1"/>
+    <core name="master_tricast_Product_1" instanceDir="D:\Projects\SPTelecom\hybris\config/solr/embedded" dataDir="D:\Projects\SPTelecom\hybris\data\solrfacetsearch\MASTER\tricast_Product\"/>
 </cores>
 </solr>

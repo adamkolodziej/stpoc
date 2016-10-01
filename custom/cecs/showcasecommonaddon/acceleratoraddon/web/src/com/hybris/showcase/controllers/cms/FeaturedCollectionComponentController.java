@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hybris.showcase.cecs.tricaststore.model.components.FeaturedCollectionComponentModel;
+import com.hybris.showcase.cecs.sptelstore.model.components.FeaturedCollectionComponentModel;
 import com.hybris.showcase.controllers.ShowcasecommonaddonControllerConstants;
 import com.hybris.showcase.model.components.AbstractProductCollectionComponentModel;
 

@@ -37,7 +37,7 @@ public class ProductConfigurationSyncJob extends AbstractJobPerformable<ProductC
 {
 	private static final Logger LOG = Logger.getLogger(ProductConfigurationSyncJob.class);
 	public static final String TV_ADDONS_NAME = "TriCast-TV-Addons";
-	public static final String CONF_TRICAST_BUNDLE_TEMPLATE_ID = "ybillingintegration.bundletemplate.tricast.id";
+	public static final String CONF_TRICAST_BUNDLE_TEMPLATE_ID = "ybillingintegration.bundletemplate.sptel.id";
 
 
 	private ConfigurationMappingService configurationMappingService;
@@ -105,18 +105,18 @@ public class ProductConfigurationSyncJob extends AbstractJobPerformable<ProductC
 
 
 
-		executeImpexForTricastPack(mappedBundleTemplates);
+		executeImpexForSptelPack(mappedBundleTemplates);
 
 
 
 		return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
 	}
 
-	private void executeImpexForTricastPack(final List<BundleTemplateModel> bundleTemplates)
+	private void executeImpexForSptelPack(final List<BundleTemplateModel> bundleTemplates)
 	{
 		for (final BundleTemplateModel bundleTemplate : bundleTemplates)
 		{
-			if (getTricastBundleTemplateId().equals(bundleTemplate.getId()))
+			if (getSptelBundleTemplateId().equals(bundleTemplate.getId()))
 			{
 				LOG.info("Executing impex after SSC mapping: afterSSCMapping.impex for " + TV_ADDONS_NAME + ", "
 						+ bundleTemplate.getVersion());
@@ -125,13 +125,13 @@ public class ProductConfigurationSyncJob extends AbstractJobPerformable<ProductC
 				macroParameters.put("bundleTemplateId", TV_ADDONS_NAME);
 				macroParameters.put("bundleTemplateVersion", bundleTemplate.getVersion());
 				setupImpexAddonService.importImpexFile(
-						"/ybillingintegration/import/productCatalogs/tricastProductCatalog/afterSSCMapping.impex", macroParameters,
+						"/ybillingintegration/import/productCatalogs/sptelProductCatalog/afterSSCMapping.impex", macroParameters,
 						true);
 			}
 		}
 	}
 
-	public String getTricastBundleTemplateId()
+	public String getSptelBundleTemplateId()
 	{
 		return configurationService.getConfiguration().getString(CONF_TRICAST_BUNDLE_TEMPLATE_ID, "TRICAST_PACK");
 	}

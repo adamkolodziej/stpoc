@@ -1,0 +1,97 @@
+# ImpEx for Importing Product Classifications into Sptel Store
+
+#% impex.setLocale(Locale.ENGLISH);
+
+# Macros / Replacement Parameter definitions
+$productCatalog = sptelProductCatalog
+$productCatalogName = Sptel Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$clAttrModifiers = system = 'SptelClassification', version = '1.0', translator = de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator, lang = en
+
+$feature1 = @starring[$clAttrModifiers];
+$feature2 = @supporting-actors[$clAttrModifiers];
+$feature3 = @director[$clAttrModifiers];
+$feature4 = @release-year[$clAttrModifiers];
+$feature5 = @running-time[$clAttrModifiers];
+$feature6 = @HD[$clAttrModifiers];
+$feature7 = @genre[$clAttrModifiers];
+
+$feature8 = @writing[$clAttrModifiers];
+$feature9 = @language[$clAttrModifiers];
+$feature10 = @studio[$clAttrModifiers];
+$feature11 = @production-companies[$clAttrModifiers];
+$feature12 = @www[$clAttrModifiers];
+$feature13 = @MPAA-rating[$clAttrModifiers];
+
+$feature14 = @original-air-date[$clAttrModifiers];
+$feature15 = @network[$clAttrModifiers];
+$feature16 = @season[$clAttrModifiers];
+$feature17 = @episod[$clAttrModifiers];
+
+$sptelNetwork = TCN
+
+# Insert Product Classifications
+UPDATE Product; code[unique = true]; $feature1; $feature2; $feature3; $feature4; $feature5; $feature6; $feature7; $feature14; $feature15; $feature16; $feature17; $catalogVersion; $feature11
+# CECS-63: Include classifications for new products - START
+; joy                     ; Johnny Galecki, Jim Parsons, Kaley Cuoco, Simon Helberg, Kunal Nayyar ; Melissa Rauch, Mayim Bialik, Carol Ann Susi, Kevin Sussman, Aarti Mann, John Ross Bowie, Brian George, Alice Amter, Sara Gilbert, Ian Scott Rudolph, Wil Wheaton, Kate Micucci, Mark Harelik, Pasha D. Lychnikoff, Vernee Watson-Johnson, Laurie Metcalf, Brian Smith, Margo Harshman, Robert Clotworthy, Michael J. Massimino, Sara Rue, Brian Patrick Wade, Christine Baranski, Joshua Malina, Regina King, Casey Sander, Owen Thayer, James Hong, Erin Allin O'Reilly, Stephen Hawking, Katee Sackhoff, LeVar Burton, David Trice, Kevin Brief, Edward Lieberman, Josh Brener, Elena Campbell-Martinez, Chris Krauser, Jesse Heiman, Erin Pickett ; Mark Cendrowski ; 2007 ; ; false ; Comedy ; 24.9.2007 ; $sptelNetwork ; ; ;
+; joy-s01                 ; Johnny Galecki, Jim Parsons, Kaley Cuoco, Simon Helberg, Kunal Nayyar ; Vernee Watson-Johnson, Brian Patrick Wade, Sara Gilbert, Allen Nabors, Treisa Gary, Sherry Weston, Rachel Cannon, Erin Allin O'Reilly, Kimberly Kevon Williams, Cynthia Holloway, Brooke D'Orsay, James Hong, Sarayu Rao, Brian George, Alice Amter, Talbott Lin, Howard Chan, DJ Qualls, Carol Ann Susi, Mark Harelik, Austin Lee, Emma Degerstedt, Adam Gregor, Sandra Marquez, Sergio Enrique, Andrew W. Walker, Courtney Henggeler, James Hong, William Ngo ; Mark Cendrowski ; 2007 ; ; false ; Comedy ; 24.9.2007 ; $sptelNetwork ; 1 ; ;
+; joy-s02                 ; Johnny Galecki, Jim Parsons, Kaley Cuoco, Simon Helberg, Kunal Nayyar ; Vernee Watson-Johnson, Brian Patrick Wade, Sara Gilbert, Allen Nabors, Treisa Gary, Sherry Weston, Rachel Cannon, Erin Allin O'Reilly, Kimberly Kevon Williams, Cynthia Holloway, Brooke D'Orsay, James Hong, Sarayu Rao, Brian George, Alice Amter, Talbott Lin, Howard Chan, DJ Qualls, Carol Ann Susi, Mark Harelik, Austin Lee, Emma Degerstedt, Adam Gregor, Sandra Marquez, Sergio Enrique, Andrew W. Walker, Courtney Henggeler, James Hong, William Ngo ; Mark Cendrowski ; 2008 ; ; false ; Comedy ; 22.9.2008 ; $sptelNetwork ; 2 ; ;
+; joy-s03                 ; Johnny Galecki, Jim Parsons, Kaley Cuoco, Simon Helberg, Kunal Nayyar ; Vernee Watson-Johnson, Brian Patrick Wade, Sara Gilbert, Allen Nabors, Treisa Gary, Sherry Weston, Rachel Cannon, Erin Allin O'Reilly, Kimberly Kevon Williams, Cynthia Holloway, Brooke D'Orsay, James Hong, Sarayu Rao, Brian George, Alice Amter, Talbott Lin, Howard Chan, DJ Qualls, Carol Ann Susi, Mark Harelik, Austin Lee, Emma Degerstedt, Adam Gregor, Sandra Marquez, Sergio Enrique, Andrew W. Walker, Courtney Henggeler, James Hong, William Ngo ; Mark Cendrowski ; 2009 ; ; false ; Comedy ; 21.9.2009 ; $sptelNetwork ; 3 ; ;
+; joy-s01-e01             ; Johnny Galecki, Jim Parsons, Kaley Cuoco, Simon Helberg, Kunal Nayyar ; Vernee Watson-Johnson, Brian Patrick Wade ; Mark Cendrowski ; 2007 ; 30 ; false ; Comedy ; 24.9.2007 ; $sptelNetwork ; 1 ; 1 ;
+; joy-s01-e02             ; Johnny Galecki, Jim Parsons, Kaley Cuoco, Simon Helberg, Kunal Nayyar ; Craig Duda ; Mark Cendrowski ; 2007 ; 30 ; false ; Comedy ; 1.10.2007 ; $sptelNetwork ; 1 ; 2 ;
+; joy-s01-e03             ; Johnny Galecki, Jim Parsons, Kaley Cuoco, Simon Helberg, Kunal Nayyar ; Sara Gilbert ; Mark Cendrowski ; 2007 ; 30 ; false ; Comedy ; 22.10.2007 ; $sptelNetwork ; 1 ; 5 ;
+
+; the-boss                ; Charles Dance, Natalie Dormer, Harry Lloyd, Mark Addy, Alfie Allen, Sean Bean, Nikolaj Coster Waldau, Rory McCann, Peter Dinklage, Jack Gleeson ; ; Timothy Van Patten ; 2010 ; ; false ; Adventure, Drama, Fantasy ; 5.12.2010 ; $sptelNetwork ; ; ;
+; the-boss-s01            ; Charles Dance, Natalie Dormer, Harry Lloyd, Mark Addy, Alfie Allen, Sean Bean, Nikolaj Coster Waldau, Rory McCann, Peter Dinklage, Jack Gleeson ; ; Timothy Van Patten ; 2011 ; ; false ; Adventure, Drama, Fantasy ; 17.4.2011 ; $sptelNetwork ; 1 ; ;
+; the-boss-s02            ; Charles Dance, Natalie Dormer, Harry Lloyd, Mark Addy, Alfie Allen, Sean Bean, Nikolaj Coster Waldau, Rory McCann, Peter Dinklage, Jack Gleeson ; ; Timothy Van Patten ; 2011 ; ; false ; Adventure, Drama, Fantasy ; 1.4.2012 ; $sptelNetwork ; 2 ; ;
+; the-boss-s03            ; Charles Dance, Natalie Dormer, Harry Lloyd, Mark Addy, Alfie Allen, Sean Bean, Nikolaj Coster Waldau, Rory McCann, Peter Dinklage, Jack Gleeson ; ; Timothy Van Patten ; 2011 ; ; false ; Adventure, Drama, Fantasy ; 31.3.2013 ; $sptelNetwork ; 3 ; ;
+; the-boss-s03-e01        ; Charles Dance, Natalie Dormer, Harry Lloyd, Mark Addy, Alfie Allen, Sean Bean, Nikolaj Coster Waldau, Rory McCann, Peter Dinklage, Jack Gleeson ; Jason Momoa, Donald Sumpter, Jamie Sives, Ron Donachie, Joseph Mawle, Roger Allam, Susan Brown, Bronson Webb, John Standing, Dermot Keaney, Aimee Richardson, Kristian Nairn, Esmé Bianco, Dar Salim, Rob Ostlere, Art Parkinson, Callum Wharry, Rania Zouari, Ian Whyte, Spencer Wilding, Claire Wright, Tommy Dunne, Boyd Rankin ; Timothy Van Patten ; 2011 ; 60 ; false ; Adventure, Drama, Fantasy ; 17.4.2011 ; $sptelNetwork ; 1 ; 1 ;
+; the-boss-s03-e02        ; Charles Dance, Natalie Dormer, Harry Lloyd, Mark Addy, Alfie Allen, Sean Bean, Nikolaj Coster Waldau, Rory McCann, Peter Dinklage, Jack Gleeson ; Jason Momoa, Wilko Johnson, Donald Sumpter, Jamie Sives, Aimee Richardson, Roxanne Mckee, Joseph Mawle, Ron Donachie, Dar Salim, Amrita Acharia, Sarita Piotrowski, Rhodri Hosking, Luke McEwan, Lalor Roddy, Condor Delaney, Callum Wharry ; Timothy Van Patten ; 2011 ; 60 ; false ; Adventure, Drama, Fantasy ; 24.4.2011 ; $sptelNetwork ; 1 ; 2 ;
+; the-boss-s03-e03        ; Charles Dance, Natalie Dormer, Harry Lloyd, Mark Addy, Alfie Allen, Sean Bean, Nikolaj Coster Waldau, Rory McCann, Peter Dinklage, Jack Gleeson ; Jason Momoa, Gethin Anthony, Julian Glover, Francis Magee, Joseph Mawle, Ron Donachie, Ian McElhinney, Jamie Sives, Owen Teale, James Cosmo, Peter Vaughan, Miltos Yerolemou, Margaret John, Susan Brown, Robert Sterne, Mark Stanley, Josef Altin, Luke McEwan, Elyes Gabel, Amrita Acharia, Eugene Simon, Conleth Hill, Paul Portelli, Nickovich Sammut, Seamus Kelly ; Timothy Van Patten ; 2011 ; 60 ; false ; Adventure, Drama, Fantasy ; 1.5.2011 ; $sptelNetwork ; 1 ; 3 ;
+
+; venom                   ; Colin Farrell, Vince Vaughn, Taylor Kitsch, Kelly Reilly, Dana Michelle Gourrier, J.D. Evermore, Madison Wolfe, Matthew McConaughey, Michael Potts, Rachel McAdams ; ; Nic Pizzolatto ; 2016 ; ; false ; Science Fiction ; 12.1.2016 ; $sptelNetwork ; ; ;
+; venom-s01               ; Colin Farrell, Vince Vaughn, Taylor Kitsch, Kelly Reilly, Dana Michelle Gourrier, J.D. Evermore, Madison Wolfe, Matthew McConaughey, Michael Potts, Rachel McAdams ; ; Nic Pizzolatto ; 2016 ; ; false ; Science Fiction ; 12.1.2016 ; $sptelNetwork ; 1 ; ;
+; venom-s02               ; Colin Farrell, Vince Vaughn, Taylor Kitsch, Kelly Reilly, Dana Michelle Gourrier, J.D. Evermore, Madison Wolfe, Matthew McConaughey, Michael Potts, Rachel McAdams ; ; Nic Pizzolatto ; 2016 ; ; false ; Science Fiction ; 12.1.2016 ; $sptelNetwork ; 1 ; ;
+; venom-s03               ; Colin Farrell, Vince Vaughn, Taylor Kitsch, Kelly Reilly, Dana Michelle Gourrier, J.D. Evermore, Madison Wolfe, Matthew McConaughey, Michael Potts, Rachel McAdams ; ; Nic Pizzolatto ; 2016 ; ; false ; Science Fiction ; 12.1.2016 ; $sptelNetwork ; 1 ; ;
+; venom-s01-e01           ; Colin Farrell, Vince Vaughn, Taylor Kitsch, Kelly Reilly, Dana Michelle Gourrier, J.D. Evermore, Madison Wolfe, Matthew McConaughey, Michael Potts, Rachel McAdams ; Alexandra Daddario, Kevin Dunn, Clarke Peters, Jay O. Sanders, Christopher Berry, Brad Carter, Joe Chrest, Jennifer Dawson, J.D. Evermore, Dana Michelle Gourrier, Charleigh Harmon, Michael J. Harney, Jason Kirkpatrick, Davi Jay, Anthony Molina, Alyshia Ochse, Dane Rhodes, Ron Clinton Smith, Charley Vance, Wanetah Walmsley, Madison Wolfe, Meghan Wolfe, Don Yesso, Rex Baker, Jon Arthur, Duane Cothren, Jim Tooey, Wayne Ferrara, Will Koberg, David Stephen Mitchell, Skip Bolen ; Nic Pizzolatto ; 2016 ; 60 ; false ; Science Fiction ; 12.1.2016 ; $sptelNetwork ; 1 ; 1 ;
+; venom-s01-e02           ; Colin Farrell, Vince Vaughn, Taylor Kitsch, Kelly Reilly, Dana Michelle Gourrier, J.D. Evermore, Madison Wolfe, Matthew McConaughey, Michael Potts, Rachel McAdams ; Alexandra Daddario, Kevin Dunn, Tess Harper, Lili Simmons, Kate Adair, Jackson Beals, John Bernecker, Amy Brassette, Joe Chrest, Blayne Farlough, Andrea Frankle, Patricia French, Dana Michelle Gourrier, Regis Harrington, Jim Klock, Garrett Kruithof, Anthony Molina, Thomas Francis Murphy, Alyshia Ochse, Dane Rhodes, Madison Wolfe, Meghan Wolfe ; Nic Pizzolatto ; 2016 ; 60 ; false ; Science Fiction ; 19.1.2016 ; $sptelNetwork ; 1 ; 2 ;
+; venom-s01-e03           ; Colin Farrell, Vince Vaughn, Taylor Kitsch, Kelly Reilly, Dana Michelle Gourrier, J.D. Evermore, Madison Wolfe, Matthew McConaughey, Michael Potts, Rachel McAdams ; Alexandra Daddario, Kevin Dunn, Shea Whigham, Robert Beitzel, Joe Chrest, Jamie Elliott, J.D. Evermore, Glenn Fleshler, Dana Michelle Gourrier, Douglas M. Griffin, Charles Halford, Sharon Landry, Maryanne Marino, Ritchie Montgomery, Mark Norby, Dane Rhodes, Jo-El Sonnier, Bree Williamson, Madison Wolfe, Meghan Wolfe ; Nic Pizzolatto ; 2016 ; 60 ; false ; Science Fiction ; 26.1.2016 ; $sptelNetwork ; 1 ; 3 ;
+
+; underworld              ; Jon Hamm, Elisabeth Moss, Vincent Kartheiser, January Jones, Christina Hendricks, Jared Harris, Aaron Staton, Rich Sommer, Kiernan Shipka, Robert Morse ; ; Matthew Weiner ; 2016 ; ; false ; Drama ; 19.4.2016 ; $sptelNetwork ; ; ;
+; underworld-s01          ; Jon Hamm, Elisabeth Moss, Vincent Kartheiser, January Jones, Christina Hendricks, Jared Harris, Aaron Staton, Rich Sommer, Kiernan Shipka, Robert Morse ; ; Matthew Weiner ; 2016 ; ; false ; Drama ; 25.4.2016 ; $sptelNetwork ; 4 ; ;
+; underworld-s01-e01      ; Jon Hamm, Elisabeth Moss, Vincent Kartheiser, January Jones, Christina Hendricks, Jared Harris, Aaron Staton, Rich Sommer, Kiernan Shipka, Robert Morse ; Christopher Stanley, Matt Long, Erin Cummings, Anna Camp, Blake Bashoff, Pamela Dunlap, Jack Laufer, Chris McGarry, Ron Perkins, Paul Bartholomew, Alexa Alemanni, Jared S. Gilmore, Norma Maldonado, Veronica Taylor, Michael J. Silver, Alyson Croft, Cathy Ladman, Sean Blodgett, Aidan Miner, Jennifer Riker ; Matthew Weiner ; 2016 ; 60 ; false ; Drama ; 25.4.2016 ; $sptelNetwork ; 4 ; 1 ;
+; underworld-s01-e02      ; Jon Hamm, Elisabeth Moss, Vincent Kartheiser, January Jones, Christina Hendricks, Jared Harris, Aaron Staton, Rich Sommer, Kiernan Shipka, Robert Morse ; Matt Long, Alexa Alemanni, Alison Brie, Christopher Stanley, Joel Murray, Deborah Lacey, Blake Bashoff, Cara Buono, John Aylward, Jessica Paré, Darren Pettie, Peyton List, Laura Regan, Nora Zehetner, Jared S. Gilmore, Beth Hall, Marten Holden Weiner ; Matthew Weiner ; 2016 ; 60 ; false ; Drama ; 1.5.2016 ; $sptelNetwork ; 4 ; 2 ;
+; underworld-s01-e03      ; Jon Hamm, Elisabeth Moss, Vincent Kartheiser, January Jones, Christina Hendricks, Jared Harris, Aaron Staton, Rich Sommer, Kiernan Shipka, Robert Morse ; Sam Page, Melinda Page Hamilton, Susan Leslie, Caity Lotz, Erin Cummings, Will Janowitz, Remy Auberjonois, Bayne Gibby, Alexa Alemanni, Elaine Carroll, Gina Torrecilla, Liesl Ehardt, Brian Whelan ; Matthew Weiner ; 2016 ; 60 ; false ; Drama ; 8.5.2016 ; $sptelNetwork ; 4 ; 3 ;
+
+
+# CECS-436 video for gift entitlement
+; trekking-towards-danger ; Brady Germogen, Dirk Alimjan, Moana Chifundo ; ; Kayin Qillaq ; 2015 ; 220 ; false ; Drama, Adventure ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim, Nina Kilik, Jon Jacobsen
+# CECS-764 import some movies from SNK desings - START
+; the-last-journey        ; Jennifer Hutcherson, Liam Lawrence, Josh Hemsworth ; ; Lior Ross ; 2015 ; 220 ; false ; Science Fiction, Adventure ; 27.5.2015 ; $sptelNetwork ; ; ; ; Nina Kilik, Jon Jacobsen
+; 12-abandoned-voices     ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Horror ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; 28-mornings             ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Drama ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; a-doctor-on-board       ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Horror ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; a-perfect-circle        ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; about-a-girl            ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; battle-of-wills         ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; call-the-nanny          ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Horror ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; covered-noise           ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; croaking                ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Horror ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; emmas-chaos-effect      ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; hockey-league           ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; hunters                 ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; infinite-space          ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; jane-brennan            ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Drama ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; keyon                   ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; megadon                 ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Science Fiction ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; my-dog-benji            ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; oli                     ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; rock-on                 ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; the-dutch-girl          ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; the-earthlings-stories  ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; the-ides-of-august      ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Drama ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; the-little-temple       ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Thriller ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; the-performer           ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Drama ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; waltz-in-balzac         ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Drama ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+; zathora                 ; Eward Elric, Roy Mustang ; ; King Bradley ; 2015 ; 220 ; false ; Science Fiction ; 27.5.2015 ; $sptelNetwork ; ; ; ; Van Hohenheim
+# CECS-764 import some movies from SNK desings - END

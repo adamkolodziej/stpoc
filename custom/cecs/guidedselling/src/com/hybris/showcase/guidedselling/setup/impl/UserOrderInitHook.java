@@ -70,8 +70,8 @@ public class UserOrderInitHook implements PostInitHook
 
 	private CatalogVersionModel catalogVersion = null;
 
-	private String site = "tricast";
-	private String productCatalog = "tricastProductCatalog";
+	private String site = "sptel";
+	private String productCatalog = "sptelProductCatalog";
 	private String customer = "brown.joe.ny@gmail.com";
 	private String packageCode = "fibreStarter";
 	private String months;
@@ -81,26 +81,26 @@ public class UserOrderInitHook implements PostInitHook
 	public void performPostInitHooks(final AbstractSystemSetup systemSetup, final SystemSetupContext context,
 			final List<ImportData> importDataList)
 	{
-		boolean isTricast = false;
+		boolean isSptel = false;
 		for (final ImportData id : importDataList)
 		{
 			for (final String storeName : id.getStoreNames())
 			{
 				if (storeName.equals(site))
 				{
-					isTricast = true;
+					isSptel = true;
 					break;
 				}
 			}
-			if (isTricast)
+			if (isSptel)
 			{
 				break;
 			}
 		}
 
-		if (!isTricast)
+		if (!isSptel)
 		{
-			LOG.info("------------------------- UserOrderInitHook skip, no Tricast active.");
+			LOG.info("------------------------- UserOrderInitHook skip, no Sptel active.");
 			return;
 		}
 

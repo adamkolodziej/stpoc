@@ -133,7 +133,7 @@ public class DefaultInvoiceService implements InvoiceService
 		invoice.setAmountPaid(Double.valueOf(0d));
 		invoice.setBillingPeriodStart(getFirstDayOfMonth(year, month - 1));
 		invoice.setBillingPeriodEnd(getLastDayOfMonth(year, month - 1));
-		//invoice.setPdfUrl("/yacceleratorstorefront/tricast/en/my-account/exportInvoice?invoiceNumber="+invoice.getInvoiceNumber());
+		//invoice.setPdfUrl("/yacceleratorstorefront/sptel/en/my-account/exportInvoice?invoiceNumber="+invoice.getInvoiceNumber());
 		return invoice;
 	}
 

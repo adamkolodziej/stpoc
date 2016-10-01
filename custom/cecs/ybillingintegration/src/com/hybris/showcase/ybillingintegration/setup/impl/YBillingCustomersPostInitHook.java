@@ -30,7 +30,7 @@ import com.hybris.showcase.ybillingintegration.services.BusinessPartnerService;
  */
 public class YBillingCustomersPostInitHook implements PostInitHook
 {
-	private static final String DISABLE_YBILLING_DURING_INIT = "tricaststore_disableYBillingDuringInit";
+	private static final String DISABLE_YBILLING_DURING_INIT = "sptelstore_disableYBillingDuringInit";
 
 	private ModelService modelService;
 

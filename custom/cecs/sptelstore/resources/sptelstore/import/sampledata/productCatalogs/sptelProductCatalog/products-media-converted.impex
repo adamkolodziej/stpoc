@@ -1,0 +1,166 @@
+# CECS-28 integrate mediaconversion
+# vim:encoding=utf-8
+$productCatalog = sptelProductCatalog
+$productVersion = Staged
+$catalogVersion = catalogVersion(catalog(id[default = $productCatalog]), version[default = $productVersion])[unique = true, default = $productCatalog:$productVersion]
+$picture = picture(code, $catalogVersion)
+$thumbnail = thumbnail(code, $catalogVersion)
+$medias = medias(code, $catalogVersion)
+$galleryImages = galleryImages(qualifier, $catalogVersion)
+$videoPoster = videoPoster(code, $catalogVersion)
+
+UPDATE Product; code[unique = true]; $picture; $thumbnail; $galleryImages; $videoPoster; $catalogVersion
+# CECS-62: Add new products - START
+; TCO                            ; 06_TCOChannels.png_original_300Wx300H             ; 06_TCOChannels.png_original_96Wx96H             ; 06_TCOChannels-Container
+; 1MonthTCOAccessProduct         ; gift_TCO_access.jpg_original_300Wx300H            ; gift_TCO_access.jpg_original_96Wx96H            ; gift_TCO_access-Container
+
+; tvStarter                      ; 01_TVStarter.png_original_300Wx300H               ; 01_TVStarter.png_original_96Wx96H               ; 01_TVStarter-Container
+; tvEntertainment                ; 02_TVEntertainment.png_original_300Wx300H         ; 02_TVEntertainment.png_original_96Wx96H         ; 02_TVEntertainment-Container
+; tvPremium                      ; 03_TVPremium.png_original_300Wx300H               ; 03_TVPremium.png_original_96Wx96H               ; 03_TVPremium-Container
+; Sport                          ; 04_SportsChannels.png_original_300Wx300H          ; 04_SportsChannels.png_original_96Wx96H          ; 04_SportsChannels-Container
+; allOnDemand                    ; 07_AllOnDemand.png_original_300Wx300H             ; 07_AllOnDemand.png_original_96Wx96H             ; 07_AllOnDemand-Container
+; foreignLanguagePackage         ; 08_ForeignLangueagePackage.png_original_300Wx300H ; 08_ForeignLangueagePackage.png_original_96Wx96H ; 08_ForeignLangueagePackage-Container
+; sptelWifi                    ; 09_SptelWiFi.png_original_300Wx300H             ; 09_SptelWiFi.png_original_96Wx96H             ; 09_SptelWiFi-Container
+; standardBroadband              ; 10_StandardBroadband.png_original_300Wx300H       ; 10_StandardBroadband.png_original_96Wx96H       ; 10_StandardBroadband-Container
+; fibreBroadbandLimited          ; 11_FibreBroadbandL.png_original_300Wx300H         ; 11_FibreBroadbandL.png_original_96Wx96H         ; 11_FibreBroadbandL-Container
+; fibreBroadbandUnlimited        ; 12_FibreBroadbandU.png_original_300Wx300H         ; 12_FibreBroadbandU.png_original_96Wx96H         ; 12_FibreBroadbandU-Container
+; superFibreUnlimited            ; 13_SuperFibreBroadband.png_original_300Wx300H     ; 13_SuperFibreBroadband.png_original_96Wx96H     ; 13_SuperFibreBroadband-Container
+; phoneUnlimitedWeekend          ; 14_UnlimitedWeekend.png_original_300Wx300H        ; 14_UnlimitedWeekend.png_original_96Wx96H        ; 14_UnlimitedWeekend-Container
+; phoneUnlimitedWeekendEvening   ; 15_UnlimitedWeekendEvening.png_original_300Wx300H ; 15_UnlimitedWeekendEvening.png_original_96Wx96H ; 15_UnlimitedWeekendEvening-Container
+; phone                          ; 19_Phone.png_original_300Wx300H                   ; 19_Phone.png_original_96Wx96H                   ; 19_Phone-Container
+; standardRouter                 ; 20_StandardRouter.png_original_300Wx300H          ; 20_StandardRouter.png_original_96Wx96H          ; 20_StandardRouter-Container
+; fibreRouter                    ; 21_FibreRouter.png_original_300Wx300H             ; 21_FibreRouter.png_original_96Wx96H             ; 21_FibreRouter-Container
+; standardDecoder                ; 22_StandardDecoder.png_original_300Wx300H         ; 22_StandardDecoder.png_original_96Wx96H         ; 22_StandardDecoder-Container
+; decoderPlus                    ; 23_DecoderPlus.png_original_300Wx300H             ; 23_DecoderPlus.png_original_96Wx96H             ; 23_DecoderPlus-Container
+; Sport_trial                    ; 04_SportsChannels_trial.png_original_300Wx300H    ; 04_SportsChannels_trial.png_original_96Wx96H    ; 04_SportsChannels_trial-Container
+
+; premiumMovie1WeekRentalProduct ; gift_premium_movie.jpg_original_300Wx300H         ; gift_premium_movie.jpg_original_96Wx96H         ; gift_premium_movie-Container
+; anyComedyEpisodeProduct        ; gift_comedy_episode.jpg_original_300Wx300H        ; gift_comedy_episode.jpg_original_96Wx96H        ; gift_comedy_episode-Container
+; 2DayCinemaChannelAccessProduct ; gift_cinema_channels.jpg_original_300Wx300H       ; gift_cinema_channels.jpg_original_96Wx96H       ; gift_cinema_channels-Container
+
+
+; pants_bp                       ; hybris_1_charcoal.jpg_original_300Wx300H          ; hybris_1_charcoal.jpg_original_96Wx96H          ; hybris_1_charcoal-Container, hybris_1_charcoal_back-Container, hybris_1_maroon-Container, hybris_1_maroon_back-Container
+; t-shirt_bp                     ; hybris_2_white.jpg_original_300Wx300H             ; hybris_2_white.jpg_original_96Wx96H             ; hybris_2_white-Container, hybris_2_white_back-Container, hybris_2_black-Container, hybris_2_black_back-Container
+; hoodie                         ; hybris_3_grey.jpg_original_300Wx300H              ; hybris_3_grey.jpg_original_96Wx96H              ; hybris_3_grey-Container, hybris_3_grey_back-Container
+; cap                            ; hybris_4_maroon.jpg_original_300Wx300H            ; hybris_4_maroon.jpg_original_96Wx96H            ; hybris_4_maroon-Container
+; headphones                     ; hybris_5_grey.jpg_original_300Wx300H              ; hybris_5_grey.jpg_original_96Wx96H              ; hybris_5_grey-Container
+; shoes_man                      ; hybris_6_navy.jpg_original_300Wx300H              ; hybris_6_navy.jpg_original_96Wx96H              ; hybris_6_navy-Container, hybris_6_navy_down-Container, hybris_6_navy_up-Container
+; shoes_woman_bp                 ; hybris_9_blue.jpg_original_300Wx300H              ; hybris_9_blue.jpg_original_96Wx96H              ; hybris_9_blue-Container, hybris_9_pink-Container
+; sunglasses                     ; hybris_8_white.jpg_original_300Wx300H             ; hybris_8_white.jpg_original_96Wx96H             ; hybris_8_white-Container
+; watch                          ; hybris_11_orange.jpg_original_300Wx300H           ; hybris_11_orange.jpg_original_96Wx96H           ; hybris_11_orange-Container
+; dress                          ; hybris_7_pink.jpg_original_300Wx300H              ; hybris_7_pink.jpg_original_96Wx96H              ; hybris_7_pink-Container, hybris_7_pink_back-Container
+; handbag                        ; hybris_10_pink.jpg_original_300Wx300H             ; hybris_10_pink.jpg_original_96Wx96H             ; hybris_10_pink-Container
+; pants_charcoal                 ; hybris_1_charcoal.jpg_original_300Wx300H          ; hybris_1_charcoal.jpg_original_96Wx96H          ; hybris_1_charcoal-Container, hybris_1_charcoal_back-Container
+; pants_maroon                   ; hybris_1_maroon.jpg_original_300Wx300H            ; hybris_1_maroon.jpg_original_96Wx96H            ; hybris_1_maroon-Container, hybris_1_maroon_back-Container
+; t-shirt_black                  ; hybris_2_black.jpg_original_300Wx300H             ; hybris_2_black.jpg_original_96Wx96H             ; hybris_2_black-Container, hybris_2_black_back-Container
+; t-shirt_white                  ; hybris_2_white.jpg_original_300Wx300H             ; hybris_2_white.jpg_original_96Wx96H             ; hybris_2_white-Container, hybris_2_white_back-Container
+; t-shirt_white2                  ; hybris_2_white.jpg_original_300Wx300H             ; hybris_2_white.jpg_original_96Wx96H             ; hybris_2_white-Container, hybris_2_white_back-Container
+; shoes_woman_pink               ; hybris_9_pink.jpg_original_300Wx300H              ; hybris_9_pink.jpg_original_96Wx96H              ; hybris_9_pink-Container
+; shoes_woman_blue               ; hybris_9_blue.jpg_original_300Wx300H              ; hybris_9_blue.jpg_original_96Wx96H              ; hybris_9_blue-Container
+
+; armagdedon_book                ; armagdedon_book.jpg_original_300Wx300H            ; armagdedon_book.jpg_original_96Wx96H            ; armagdedon_book-Container
+; brother_roses_clas_tshirt      ; brother_roses_clas_tshirt.jpg_original_300Wx300H  ; brother_roses_clas_tshirt.jpg_original_96Wx96H  ; brother_roses_clas_tshirt-Container
+; hpstrs_eco_bag                 ; hpstrs_eco_bag.jpg_original_300Wx300H             ; hpstrs_eco_bag.jpg_original_96Wx96H             ; hpstrs_eco_bag-Container
+; joy_coffe_mug                  ; joy_coffe_mug.jpg_original_300Wx300H              ; joy_coffe_mug.jpg_original_96Wx96H              ; joy_coffe_mug-Container
+; rebelion_womans_tshirt         ; rebelion_womans_tshirt.jpg_original_300Wx300H     ; rebelion_womans_tshirt.jpg_original_96Wx96H     ; rebelion_womans_tshirt-Container
+; underworld_iphone              ; underworld_iphone.jpg_original_300Wx300H          ; underworld_iphone.jpg_original_96Wx96H          ; underworld_iphone-Container
+; venom_sweater                  ; venom_sweater.jpg_original_300Wx300H              ; venom_sweater.jpg_original_96Wx96H              ; venom_sweater-Container
+; casino_spundtrack              ; casino_spundtrack.jpg_original_300Wx300H          ; casino_spundtrack.jpg_original_96Wx96H          ; casino_spundtrack-Container
+; land_tote_bag                  ; land_tote_bag.jpg_original_300Wx300H              ; land_tote_bag.jpg_original_96Wx96H              ; land_tote_bag-Container
+; lemariage_collector            ; lemariage_collector.jpg_original_300Wx300H        ; lemariage_collector.jpg_original_96Wx96H        ; lemariage_collector-Container
+; plusdk_headphone               ; plusdk_headphone.jpg_original_300Wx300H           ; plusdk_headphone.jpg_original_96Wx96H           ; plusdk_headphone-Container
+; oakey_sunglas                  ; oakey_sunglas.jpg_original_300Wx300H              ; oakey_sunglas.jpg_original_96Wx96H              ; oakey_sunglas-Container
+; official_clas_vneck_tshirt     ; official_clas_vneck_tshirt.jpg_original_300Wx300H ; official_clas_vneck_tshirt.jpg_original_96Wx96H ; official_clas_vneck_tshirt-Container
+; nooka_watch                    ; nooka_watch.jpg_original_300Wx300H                ; nooka_watch.jpg_original_96Wx96H                ; nooka_watch-Container
+; king_pillow                    ; king_pillow.jpg_original_300Wx300H                ; king_pillow.jpg_original_96Wx96H                ; king_pillow-Container
+; city_slick_soundtrack          ; city_slick_soundtrack.jpg_original_300Wx300H      ; city_slick_soundtrack.jpg_original_96Wx96H      ; city_slick_soundtrack-Container
+; renaissance_hoody              ; renaissance_hoody.jpg_original_300Wx300H          ; renaissance_hoody.jpg_original_96Wx96H          ; renaissance_hoody-Container
+; hockey_league_mug              ; hockey_league_mug.jpg_original_300Wx300H          ; hockey_league_mug.jpg_original_96Wx96H          ; hockey_league_mug-Container
+; renaissance_tote_bag           ; renaissance_tote_bag.jpg_original_300Wx300H       ; renaissance_tote_bag.jpg_original_96Wx96H       ; renaissance_tote_bag-Container
+
+; joy                            ; joy-1.jpg_original_300Wx300H                      ; joy-1.jpg_original_96Wx96H                      ; joy-1-Container, joy-2-Container, joy-3-Container
+; joy-s01                        ; joy-s1-1.jpg_original_300Wx300H                   ; joy-s1-1.jpg_original_96Wx96H                   ; joy-s1-1-Container
+; joy-s02                        ; joy-s2-1.jpg_original_300Wx300H                   ; joy-s2-1.jpg_original_96Wx96H                   ; joy-s2-1-Container
+; joy-s03                        ; joy-s3-1.jpg_original_300Wx300H                   ; joy-s3-1.jpg_original_96Wx96H                   ; joy-s3-1-Container
+; joy-s01-e01                    ; joy-s01-e01.jpg_original_300Wx300H                ; joy-s01-e01.jpg_original_96Wx96H                ; joy-s01-e01-Container
+; joy-s01-e02                    ; joy-s01-e02.jpg_original_300Wx300H                ; joy-s01-e02.jpg_original_96Wx96H                ; joy-s01-e02-Container
+; joy-s01-e03                    ; joy-s01-e03.jpg_original_300Wx300H                ; joy-s01-e03.jpg_original_96Wx96H                ; joy-s01-e03-Container
+
+; the-boss                       ; the-boss-1.jpg_original_300Wx300H                 ; the-boss-1.jpg_original_96Wx96H                 ; the-boss-1-Container, the-boss-2-Container, the-boss-3-Container
+; the-boss-s01                   ; the-boss-s01-1.jpg_original_300Wx300H             ; the-boss-s01-1.jpg_original_96Wx96H             ; the-boss-s01-1-Container
+; the-boss-s02                   ; the-boss-s02-1.jpg_original_300Wx300H             ; the-boss-s02-1.jpg_original_96Wx96H             ; the-boss-s02-1-Container
+; the-boss-s03                   ; the-boss-s03-1.jpg_original_300Wx300H             ; the-boss-s03-1.jpg_original_96Wx96H             ; the-boss-s03-1-Container
+; the-boss-s03-e01               ; the-boss-s03-e01.jpg_original_300Wx300H           ; the-boss-s03-e01.jpg_original_96Wx96H           ; the-boss-s03-e01-Container
+; the-boss-s03-e02               ; the-boss-s03-e02.jpg_original_300Wx300H           ; the-boss-s03-e02.jpg_original_96Wx96H           ; the-boss-s03-e02-Container
+; the-boss-s03-e03               ; the-boss-s03-e03.jpg_original_300Wx300H           ; the-boss-s03-e03.jpg_original_96Wx96H           ; the-boss-s03-e03-Container
+
+; venom                          ; venom-1.jpg_original_300Wx300H                    ; venom-1.jpg_original_96Wx96H                    ; venom-1-Container, venom-2-Container, venom-3-Container
+; venom-s01                      ; venom-s01-1.jpg_original_300Wx300H                ; venom-s01-1.jpg_original_96Wx96H                ; venom-s01-1-Container
+; venom-s02                      ; venom-s02-1.jpg_original_300Wx300H                ; venom-s02-1.jpg_original_96Wx96H                ; venom-s02-1-Container
+; venom-s03                      ; venom-s03-1.jpg_original_300Wx300H                ; venom-s03-1.jpg_original_96Wx96H                ; venom-s03-1-Container
+; venom-s01-e01                  ; venom-s01-e01.jpg_original_300Wx300H              ; venom-s01-e01.jpg_original_96Wx96H              ; venom-s01-e01-Container
+; venom-s01-e02                  ; venom-s01-e02.jpg_original_300Wx300H              ; venom-s01-e02.jpg_original_96Wx96H              ; venom-s01-e02-Container
+; venom-s01-e03                  ; venom-s01-e03.jpg_original_300Wx300H              ; venom-s01-e03.jpg_original_96Wx96H              ; venom-s01-e03-Container
+
+; underworld                     ; underworld-1.jpg_original_300Wx300H               ; underworld-1.jpg_original_96Wx96H               ; underworld-1-Container
+; underworld-s01                 ; underworld-s01-1.jpg_original_300Wx300H           ; underworld-s01-1.jpg_original_96Wx96H           ; underworld-s01-1-Container
+; underworld-s01-e01             ; underworld-s01-e01.jpg_original_300Wx300H         ; underworld-s01-e01.jpg_original_96Wx96H         ; underworld-s01-e01-Container
+; underworld-s01-e02             ; underworld-s01-e02.jpg_original_300Wx300H         ; underworld-s01-e02.jpg_original_96Wx96H         ; underworld-s01-e02-Container
+; underworld-s01-e03             ; underworld-s01-e03.jpg_original_300Wx300H         ; underworld-s01-e03.jpg_original_96Wx96H         ; underworld-s01-e03-Container
+
+# CECS-436 video for gift entitlement
+; trekking-towards-danger        ; trekking-towards-danger-1.jpg_original_300Wx300H  ; trekking-towards-danger-1.jpg_original_96Wx96H  ; trekking-towards-danger-1-Container
+
+# CECS-764 import some movies from SNK desings - START
+; the-last-journey               ; the-last-journey-1.jpg_original_300Wx300H       ; the-last-journey-1.jpg_original_96Wx96H       ; the-last-journey-1-Container
+; 12-abandoned-voices            ; 12-abandoned-voices-1.jpg_original_300Wx300H    ; 12-abandoned-voices-1.jpg_original_96Wx96H    ; 12-abandoned-voices-1-Container
+; 28-mornings                    ; 28-mornings-1.jpg_original_300Wx300H            ; 28-mornings-1.jpg_original_96Wx96H            ; 28-mornings-1-Container
+; a-doctor-on-board              ; a-doctor-on-board-1.jpg_original_300Wx300H      ; a-doctor-on-board-1.jpg_original_96Wx96H      ; a-doctor-on-board-1-Container
+; a-perfect-circle               ; a-perfect-circle-1.jpg_original_300Wx300H       ; a-perfect-circle-1.jpg_original_96Wx96H       ; a-perfect-circle-1-Container
+; about-a-girl                   ; about-a-girl-1.jpg_original_300Wx300H           ; about-a-girl-1.jpg_original_96Wx96H           ; about-a-girl-1-Container
+; battle-of-wills                ; battle-of-wills-1.jpg_original_300Wx300H        ; battle-of-wills-1.jpg_original_96Wx96H        ; battle-of-wills-1-Container
+; call-the-nanny                 ; call-the-nanny-1.jpg_original_300Wx300H         ; call-the-nanny-1.jpg_original_96Wx96H         ; call-the-nanny-1-Container
+; covered-noise                  ; covered-noise-1.jpg_original_300Wx300H          ; covered-noise-1.jpg_original_96Wx96H          ; covered-noise-1-Container
+; croaking                       ; croaking-1.jpg_original_300Wx300H               ; croaking-1.jpg_original_96Wx96H               ; croaking-1-Container
+; emmas-chaos-effect             ; emmas-chaos-effect-1.jpg_original_300Wx300H     ; emmas-chaos-effect-1.jpg_original_96Wx96H     ; emmas-chaos-effect-1-Container
+; hockey-league                  ; hockey-league-1.jpg_original_300Wx300H          ; hockey-league-1.jpg_original_96Wx96H          ; hockey-league-1-Container
+; hunters                        ; hunters-1.jpg_original_300Wx300H                ; hunters-1.jpg_original_96Wx96H                ; hunters-1-Container
+; infinite-space                 ; infinite-space-1.jpg_original_300Wx300H         ; infinite-space-1.jpg_original_96Wx96H         ; infinite-space-1-Container
+; jane-brennan                   ; jane-brennan-1.jpg_original_300Wx300H           ; jane-brennan-1.jpg_original_96Wx96H           ; jane-brennan-1-Container
+; keyon                          ; keyon-1.jpg_original_300Wx300H                  ; keyon-1.jpg_original_96Wx96H                  ; keyon-1-Container
+; megadon                        ; megadon-1.jpg_original_300Wx300H                ; megadon-1.jpg_original_96Wx96H                ; megadon-1-Container
+; my-dog-benji                   ; my-dog-benji-1.jpg_original_300Wx300H           ; my-dog-benji-1.jpg_original_96Wx96H           ; my-dog-benji-1-Container
+; oli                            ; oli-1.jpg_original_300Wx300H                    ; oli-1.jpg_original_96Wx96H                    ; oli-1-Container
+; rock-on                        ; rock-on-1.jpg_original_300Wx300H                ; rock-on-1.jpg_original_96Wx96H                ; rock-on-1-Container
+; the-dutch-girl                 ; the-dutch-girl-1.jpg_original_300Wx300H         ; the-dutch-girl-1.jpg_original_96Wx96H         ; the-dutch-girl-1-Container
+; the-earthlings-stories         ; the-earthlings-stories-1.jpg_original_300Wx300H ; the-earthlings-stories-1.jpg_original_96Wx96H ; the-earthlings-stories-1-Container
+; the-ides-of-august             ; the-ides-of-august-1.jpg_original_300Wx300H     ; the-ides-of-august-1.jpg_original_96Wx96H     ; the-ides-of-august-1-Container
+; the-little-temple              ; the-little-temple-1.jpg_original_300Wx300H      ; the-little-temple-1.jpg_original_96Wx96H      ; the-little-temple-1-Container
+; the-performer                  ; the-performer-1.jpg_original_300Wx300H          ; the-performer-1.jpg_original_96Wx96H          ; the-performer-1-Container
+; waltz-in-balzac                ; waltz-in-balzac-1.jpg_original_300Wx300H        ; waltz-in-balzac-1.jpg_original_96Wx96H        ; waltz-in-balzac-1-Container
+; zathora                        ; zathora-1.jpg_original_300Wx300H                ; zathora-1.jpg_original_96Wx96H                ; zathora-1-Container
+# CECS-764 import some movies from SNK desings - END
+
+#CECS-755 New Channels
+; YTV                            ; YTV.png_original_300Wx300H                        ; YTV.png_original_96Wx96H                        ; YTV-Container
+; CubeChannel                    ; CubeChannel.png_original_300Wx300H                ; CubeChannel.png_original_96Wx96H                ; CubeChannel-Container
+; ANVNetworks                    ; ANVNetworks.png_original_300Wx300H                ; ANVNetworks.png_original_96Wx96H                ; ANVNetworks-Container
+; ChannelS                       ; ChannelS.png_original_300Wx300H                   ; ChannelS.png_original_96Wx96H                   ; ChannelS-Container
+; KTV                            ; KTV.png_original_300Wx300H                        ; KTV.png_original_96Wx96H                        ; KTV-Container
+; TRIChannel                     ; TRIChannel.png_original_300Wx300H                 ; TRIChannel.png_original_96Wx96H                 ; TRIChannel-Container
+; TCOChannel                     ; TCOChannel.png_original_300Wx300H                 ; TCOChannel.png_original_96Wx96H                 ; TCOChannel-Container
+; VIVOChannel                    ; VIVOChannel.png_original_300Wx300H                ; VIVOChannel.png_original_96Wx96H                ; VIVOChannel-Container
+; LightningChannel               ; LightningChannel.png_original_300Wx300H           ; LightningChannel.png_original_96Wx96H           ; LightningChannel-Container
+; SportChannel                   ; SportChannel.png_original_300Wx300H               ; SportChannel.png_original_96Wx96H               ; SportChannel-Container
+
+UPDATE Product; code[unique = true]; $videoPoster; $catalogVersion
+; YTV                            ; YTV.png_original_300Wx300H
+; CubeChannel                    ; CubeChannel.png_original_300Wx300H
+; ANVNetworks                    ; ANVNetworks.png_original_300Wx300H
+; ChannelS                       ; ChannelS.png_original_300Wx300H
+; KTV                            ; KTV.png_original_300Wx300H
+; TRIChannel                     ; TRIChannel.png_original_300Wx300H
+; TCOChannel                     ; TCOChannel.png_original_300Wx300H
+; VIVOChannel                    ; VIVOChannel.png_original_300Wx300H
+; LightningChannel               ; LightningChannel.png_original_300Wx300H
+; SportChannel                   ; SportChannel.png_original_300Wx300H

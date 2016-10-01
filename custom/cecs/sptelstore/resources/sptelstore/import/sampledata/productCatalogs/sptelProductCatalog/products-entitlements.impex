@@ -1,0 +1,136 @@
+# ImpEx for Subscription Product Entitlements
+
+# Macros / Replacement Parameter definitions
+$productCatalog = sptelProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = '$productCatalog:Staged']
+
+# example, not used
+#$NAGeo=US,Canada
+#$EuropeWest=France,Germany,UK,Spain,
+#$EuropeEast=Poland
+
+INSERT_UPDATE ProductEntitlement; id[unique = true]; entitlement(id); subscriptionProduct(code, $catalogVersion); conditionPath; $catalogVersion; timeUnit(code); timeUnitStart; timeUnitDuration; billingUsageUnit(id)
+; standardBroadband_pe_access                       ; 17mbSpeed                    ; standardBroadband            ;
+; fibreBroadbandLimited_pe_access                   ; 38mbSpeed                    ; fibreBroadbandLimited        ;
+; fibreBroadbandUnlimited_pe_access                 ; 38mbSpeed                    ; fibreBroadbandUnlimited      ;
+; fibreBroadbandUnlimited_pe_usage                  ; unlimitedBroadbandUsage      ; fibreBroadbandUnlimited      ;
+; superFibreUnlimited_pe_access                     ; 100mbSpeed                   ; superFibreUnlimited          ;
+; superFibreUnlimited_pe_usage                      ; unlimitedBroadbandUsage      ; superFibreUnlimited          ;
+; sptelWifi_pe_access                             ; sptelWifi                  ; sptelWifi                  ;
+
+; tvStarter_pe_freeview                             ; video_streaming              ; tvStarter                    ; /1/tvChannelsAndTVContent/tvChannels/freeChannels
+; tvStarter_pe_catchupTV                            ; video_streaming              ; tvStarter                    ; /1/tvChannelsAndTVContent/tvChannels/catchupTV
+; tvStarter_pe_vod_standard_tv_shows                ; video_streaming              ; tvStarter                    ; /1/tvChannelsAndTVContent/videos/tvShows          ; ;       ;   ; ; standardEpisode
+; tvStarter_pe_vod_standard_movies                  ; video_streaming              ; tvStarter                    ; /1/tvChannelsAndTVContent/videos/movies           ; ;       ;   ; ; standardMovie
+; tvStarter_pe_vod_premium_tv_shows                 ; video_streaming              ; tvStarter                    ; /1/tvChannelsAndTVContent/videos/premium-tv-shows ; ;       ;   ; ; premiumEpisode
+; tvStarter_pe_vod_premium_movies                   ; video_streaming              ; tvStarter                    ; /1/tvChannelsAndTVContent/videos/premium-movies   ; ;       ;   ; ; premiumMovie
+; tvEntertainment_pe_freeview                       ; video_streaming              ; tvEntertainment              ; /1/tvChannelsAndTVContent/tvChannels/freeChannels
+; tvEntertainment_pe_catchupTV                      ; video_streaming              ; tvEntertainment              ; /1/tvChannelsAndTVContent/tvChannels/catchupTV
+; tvEntertainment_pe_vod_standard_tv_shows          ; video_streaming              ; tvEntertainment              ; /1/tvChannelsAndTVContent/videos/tvShows          ; ;       ;   ; ; standardEpisode
+; tvEntertainment_pe_vod_standard_movies            ; video_streaming              ; tvEntertainment              ; /1/tvChannelsAndTVContent/videos/movies           ; ;       ;   ; ; standardMovie
+; tvEntertainment_pe_vod_premium_tv_shows           ; video_streaming              ; tvEntertainment              ; /1/tvChannelsAndTVContent/videos/premium-tv-shows ; ;       ;   ; ; premiumEpisode
+; tvEntertainment_pe_vod_premium_movies             ; video_streaming              ; tvEntertainment              ; /1/tvChannelsAndTVContent/videos/premium-movies   ; ;       ;   ; ; premiumMovie
+; tvEntertainment_pe_extraHDChannels                ; video_streaming              ; tvEntertainment              ; /1/tvChannelsAndTVContent/tvChannels/extraHDChannels
+; tvPremium_pe_freeview                             ; video_streaming              ; tvPremium                    ; /1/tvChannelsAndTVContent/tvChannels/freeChannels
+; tvPremium_pe_catchupTV                            ; video_streaming              ; tvPremium                    ; /1/tvChannelsAndTVContent/tvChannels/catchupTV
+; tvPremium_pe_vod_premium_tv_shows                 ; video_streaming              ; tvPremium                    ; /1/tvChannelsAndTVContent/videos/premium-tv-show  ; ;       ;   ; ; premiumEpisode
+; tvPremium_pe_vod_premium_movies                   ; video_streaming              ; tvPremium                    ; /1/tvChannelsAndTVContent/videos/premium-movies   ; ;       ;   ; ; premiumMovie
+; tvPremium_pe_vod_standard_tv_shows                ; video_streaming              ; tvPremium                    ; /1/tvChannelsAndTVContent/videos/tvShows          ; ;       ;   ; ; standardEpisode
+; tvPremium_pe_vod_standard_movies                  ; video_streaming              ; tvPremium                    ; /1/tvChannelsAndTVContent/videos/movies           ; ;       ;   ; ; standardMovie
+; tvPremium_pe_extraHDChannels                      ; video_streaming              ; tvPremium                    ; /1/tvChannelsAndTVContent/tvChannels/extraHDChannels
+; Sport_pe_sportsChannels                           ; video_streaming              ; Sport                        ; /1/tvChannelsAndTVContent/tvChannels/SportChannel
+; SportsTrial_pe_sportsChannels                     ; video_streaming              ; Sport_trial                  ; /1/tvChannelsAndTVContent/tvChannels/SportChannel ; ; month ; 1 ; 1
+; TCO_pe_tcoChannels                                ; video_streaming              ; TCO                          ; /1/tvChannelsAndTVContent/tvChannels/TCOChannel
+; foreignLanguagePackage_pe_foreignLanguageChannels ; video_streaming              ; foreignLanguagePackage       ; /1/tvChannelsAndTVContent/tvChannels/foreignLanguages
+; allOnDemand_pe_vod                                ; video_streaming              ; allOnDemand                  ; /1/tvChannelsAndTVContent/videos
+; phoneUnlimitedWeekend_pe_freeWeekend              ; unlimitedWeekendCalls        ; phoneUnlimitedWeekend        ;
+; phoneUnlimitedWeekend_pe_freeWeekendEvening       ; unlimitedWeekendEveningCalls ; phoneUnlimitedWeekendEvening ;
+
+
+; the-boss                                          ; video_streaming              ; the-boss                     ; /1/tvChannelsAndTVContent/videos/tvShows/the-boss
+; the-boss-s01                                      ; video_streaming              ; the-boss-s01                 ; /1/tvChannelsAndTVContent/videos/tvShows/the-boss/1
+; the-boss-s02                                      ; video_streaming              ; the-boss-s02                 ; /1/tvChannelsAndTVContent/videos/tvShows/the-boss/2
+; the-boss-s03                                      ; video_streaming              ; the-boss-s03                 ; /1/tvChannelsAndTVContent/videos/tvShows/the-boss/3
+; the-boss-s03-e01                                  ; video_streaming              ; the-boss-s03-e01             ; /1/tvChannelsAndTVContent/videos/tvShows/the-boss/3/1
+; the-boss-s03-e02                                  ; video_streaming              ; the-boss-s03-e02             ; /1/tvChannelsAndTVContent/videos/tvShows/the-boss/3/2
+; the-boss-s03-e03                                  ; video_streaming              ; the-boss-s03-e03             ; /1/tvChannelsAndTVContent/videos/tvShows/the-boss/3/3
+
+; joy                                               ; video_streaming              ; joy                          ; /1/tvChannelsAndTVContent/videos/tvShows/joy
+; joy-s01                                           ; video_streaming              ; joy-s01                      ; /1/tvChannelsAndTVContent/videos/tvShows/joy/1
+; joy-s02                                           ; video_streaming              ; joy-s02                      ; /1/tvChannelsAndTVContent/videos/tvShows/joy/2
+; joy-s03                                           ; video_streaming              ; joy-s03                      ; /1/tvChannelsAndTVContent/videos/tvShows/joy/3
+; joy-s01-e01                                       ; video_streaming              ; joy-s01-e01                  ; /1/tvChannelsAndTVContent/videos/tvShows/joy/1/1
+; joy-s01-e02                                       ; video_streaming              ; joy-s01-e02                  ; /1/tvChannelsAndTVContent/videos/tvShows/joy/1/2
+; joy-s01-e03                                       ; video_streaming              ; joy-s01-e03                  ; /1/tvChannelsAndTVContent/videos/tvShows/joy/1/3
+
+; venom                                             ; video_streaming              ; venom                        ; /1/tvChannelsAndTVContent/videos/premium-tv-shows/venom
+; venom-s01                                         ; video_streaming              ; venom-s01                    ; /1/tvChannelsAndTVContent/videos/premium-tv-shows/venom/1
+; venom-s02                                         ; video_streaming              ; venom-s02                    ; /1/tvChannelsAndTVContent/videos/premium-tv-shows/venom/2
+; venom-s03                                         ; video_streaming              ; venom-s03                    ; /1/tvChannelsAndTVContent/videos/premium-tv-shows/venom/3
+; venom-s01-e01                                     ; video_streaming              ; venom-s01-e01                ; /1/tvChannelsAndTVContent/videos/premium-tv-shows/venom/1/1
+; venom-s01-e02                                     ; video_streaming              ; venom-s01-e02                ; /1/tvChannelsAndTVContent/videos/premium-tv-shows/venom/1/2
+; venom-s01-e03                                     ; video_streaming              ; venom-s01-e03                ; /1/tvChannelsAndTVContent/videos/premium-tv-shows/venom/1/3
+
+; underworld                                        ; video_streaming              ; underworld                   ; /1/tvChannelsAndTVContent/videos/tvShows/underworld
+; underworld-s01                                    ; video_streaming              ; underworld-s01               ; /1/tvChannelsAndTVContent/videos/tvShows/underworld/1
+; underworld-s01-e01                                ; video_streaming              ; underworld-s01-e01           ; /1/tvChannelsAndTVContent/videos/tvShows/underworld/1/1
+; underworld-s01-e02                                ; video_streaming              ; underworld-s01-e02           ; /1/tvChannelsAndTVContent/videos/tvShows/underworld/1/2
+; underworld-s01-e03                                ; video_streaming              ; underworld-s01-e03           ; /1/tvChannelsAndTVContent/videos/tvShows/underworld/1/3
+
+# CECS-436 video for gift entitlement
+; trekking-towards-danger                           ; video_streaming              ; trekking-towards-danger      ; /1/tvChannelsAndTVContent/videos/premium-movies/trekking-towards-danger
+# CECS-764 import some movies from SNK desings - START
+; the-last-journey                                  ; video_streaming              ; the-last-journey             ; /1/tvChannelsAndTVContent/videos/movies/the-last-journey
+; 12-abandoned-voices                               ; video_streaming              ; 12-abandoned-voices          ; /1/tvChannelsAndTVContent/videos/movies/12-abandoned-voices
+; 28-mornings                                       ; video_streaming              ; 28-mornings                  ; /1/tvChannelsAndTVContent/videos/movies/28-mornings
+; a-doctor-on-board                                 ; video_streaming              ; a-doctor-on-board            ; /1/tvChannelsAndTVContent/videos/movies/a-doctor-on-board
+; a-perfect-circle                                  ; video_streaming              ; a-perfect-circle             ; /1/tvChannelsAndTVContent/videos/movies/a-perfect-circle
+; about-a-girl                                      ; video_streaming              ; about-a-girl                 ; /1/tvChannelsAndTVContent/videos/movies/about-a-girl
+; battle-of-wills                                   ; video_streaming              ; battle-of-wills              ; /1/tvChannelsAndTVContent/videos/movies/battle-of-wills
+; call-the-nanny                                    ; video_streaming              ; call-the-nanny               ; /1/tvChannelsAndTVContent/videos/movies/call-the-nanny
+; covered-noise                                     ; video_streaming              ; covered-noise                ; /1/tvChannelsAndTVContent/videos/movies/covered-noise
+; croaking                                          ; video_streaming              ; croaking                     ; /1/tvChannelsAndTVContent/videos/movies/croaking
+; emmas-chaos-effect                                ; video_streaming              ; emmas-chaos-effect           ; /1/tvChannelsAndTVContent/videos/movies/emmas-chaos-effect
+; hockey-league                                     ; video_streaming              ; hockey-league                ; /1/tvChannelsAndTVContent/videos/movies/hockey-league
+; hunters                                           ; video_streaming              ; hunters                      ; /1/tvChannelsAndTVContent/videos/movies/hunters
+; infinite-space                                    ; video_streaming              ; infinite-space               ; /1/tvChannelsAndTVContent/videos/movies/infinite-space
+; jane-brennan                                      ; video_streaming              ; jane-brennan                 ; /1/tvChannelsAndTVContent/videos/movies/jane-brennan
+; keyon                                             ; video_streaming              ; keyon                        ; /1/tvChannelsAndTVContent/videos/movies/keyon
+; megadon                                           ; video_streaming              ; megadon                      ; /1/tvChannelsAndTVContent/videos/movies/megadon
+; my-dog-benji                                      ; video_streaming              ; my-dog-benji                 ; /1/tvChannelsAndTVContent/videos/movies/my-dog-benji
+; oli                                               ; video_streaming              ; oli                          ; /1/tvChannelsAndTVContent/videos/movies/oli
+; rock-on                                           ; video_streaming              ; rock-on                      ; /1/tvChannelsAndTVContent/videos/movies/rock-on
+; the-dutch-girl                                    ; video_streaming              ; the-dutch-girl               ; /1/tvChannelsAndTVContent/videos/movies/the-dutch-girl
+; the-earthlings-stories                            ; video_streaming              ; the-earthlings-stories       ; /1/tvChannelsAndTVContent/videos/movies/the-earthlings-stories
+; the-ides-of-august                                ; video_streaming              ; the-ides-of-august           ; /1/tvChannelsAndTVContent/videos/movies/the-ides-of-august
+; the-little-temple                                 ; video_streaming              ; the-little-temple            ; /1/tvChannelsAndTVContent/videos/movies/the-little-temple
+; the-performer                                     ; video_streaming              ; the-performer                ; /1/tvChannelsAndTVContent/videos/movies/the-performer
+; waltz-in-balzac                                   ; video_streaming              ; waltz-in-balzac              ; /1/tvChannelsAndTVContent/videos/movies/waltz-in-balzac
+; zathora                                           ; video_streaming              ; zathora                      ; /1/tvChannelsAndTVContent/videos/movies/zathora
+# CECS-764 import some movies from SNK desings - END
+
+INSERT_UPDATE ProductEntitlement; id[unique = true]; quantity; entitlement(id); subscriptionProduct(code, $catalogVersion); conditionPath; $catalogVersion; timeUnit(code); timeUnitStart; timeUnitDuration
+; standardBroadband_pe_usage        ; 10  ; broadbandUsage ; standardBroadband       ;
+; standardBroadband_pe_usage        ; 40  ; broadbandUsage ; fibreBroadbandLimited   ;
+; standardBroadband_pe_cloud        ; 5   ; cloudStorage   ; standardBroadband       ;
+; fibreBroadbandLimited_pe_cloud    ; 5   ; cloudStorage   ; fibreBroadbandLimited   ;
+; fibreBroadbandUnlimited_pe_cloud  ; 5   ; cloudStorage   ; fibreBroadbandUnlimited ;
+; superFibreUnlimited_pe_cloud      ; 5   ; cloudStorage   ; superFibreUnlimited     ;
+
+; tvEntertainment_pe_recordingHours ; 300 ; recordingHours ; tvEntertainment         ;
+; tvPremium_pe_recordingHours       ; 400 ; recordingHours ; tvPremium               ;
+
+
+INSERT_UPDATE ProductEntitlement; id[unique = true]; quantity; entitlement(id); subscriptionProduct(code, $catalogVersion); $catalogVersion; timeUnit(code); timeUnitStart; timeUnitDuration
+; tco-loyalty-points ; 20 ; loyalty-points ; TCO ;
+
+# CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie START
+INSERT_UPDATE ProductEntitlement; id[unique = true]; entitlement(id); subscriptionProduct(code, $catalogVersion); conditionPath; $catalogVersion; timeUnit(code); timeUnitStart; timeUnitDuration; quantity
+; premiumMovie1WeekRental ; video_streaming ; premiumMovie1WeekRentalProduct ; /1/tvChannelsAndTVContent/videos/premium-movies/trekking-towards-danger ; ; day   ; 1 ; 7 ;
+; anyComedyEpisode        ; video_streaming ; anyComedyEpisodeProduct        ; /1/tvChannelsAndTVContent/videos/tvShows/comedyShows                    ; ;       ;   ;   ; 1
+; 2DayCinemaChannelAccess ; video_streaming ; 2DayCinemaChannelAccessProduct ; /1/tvChannelsAndTVContent/tvChannels/SportChannel                       ; ; day   ; 1 ; 2
+; 1MonthTCOAccess         ; video_streaming ; 1MonthTCOAccessProduct         ; /1/tvChannelsAndTVContent/tvChannels/TCOChannel                         ; ; month ; 1 ; 1
+# CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie END
+
+INSERT_UPDATE ProductEntitlement; id[unique = true]; entitlement(id); subscriptionProduct(code, $catalogVersion); $catalogVersion; conditionPath
+; free2watch ; video_streaming ; free2watch ; ; /1/tvChannelsAndTVContent/videos/free

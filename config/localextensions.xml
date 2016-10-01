@@ -116,8 +116,8 @@
         <extension name="instantcheckout" />
         <extension name="instantcheckoutaddon" />
 
-        <extension name="tricastextrasampledata" />
-        <extension name="tricaststore" />
+        <extension name="sptelextrasampledata" />
+        <extension name="sptelstore" />
 
         <extension name="showcasecommon" />
         <extension name="showcasecommonaddon" />
@@ -131,7 +131,7 @@
         <extension name="showcasecockpits" />
         <extension name="servicescore" />
         <extension name="servicesshowcase"/>
-        <extension name="mobiletricast"/>
+        <!--<extension name="mobiletricast"/>-->
         <extension name="seewhy"/>
 
 		<!-- CECS-226 Customer access the customer service portal and files a complaint saying complaint saying “service not working, very urgent” START -->

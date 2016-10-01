@@ -13,7 +13,7 @@
  */
 package com.hybris.showcase.controllers;
 
-import com.hybris.showcase.cecs.tricaststore.model.components.FeaturedCollectionComponentModel;
+import com.hybris.showcase.cecs.sptelstore.model.components.FeaturedCollectionComponentModel;
 import com.hybris.showcase.controllers.cms.TvShowReferencesComponentController;
 import com.hybris.showcase.model.*;
 import com.hybris.showcase.model.components.*;

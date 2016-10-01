@@ -1,6 +1,6 @@
 # CECS-28 integrate mediaconversion
 # vim:encoding=utf-8
-$productCatalog = tricastProductCatalog
+$productCatalog = sptelProductCatalog
 $productVersion = Staged
 $catalogVersion = catalogVersion(catalog(id[default = $productCatalog]), version[default = $productVersion])[unique = true, default = $productCatalog:$productVersion]
 $picture = picture(code, $catalogVersion)
@@ -9,4 +9,4 @@ $medias = medias(code, $catalogVersion)
 $galleryImages = galleryImages(qualifier, $catalogVersion)
 
 UPDATE Product; code[unique = true]; $picture; $thumbnail; $galleryImages; $catalogVersion
-; TriCast ; tri_logo.jpg_original_300Wx300H ; tri_logo.jpg_original_96Wx96H ; Tricast-Container
+; SPTel ; tri_logo.jpg_original_300Wx300H ; tri_logo.jpg_original_96Wx96H ; SPTel-Container
