@@ -2,7 +2,7 @@
 $indexedType=tricastProductType
 $solrIndexedType=solrIndexedType(identifier[default=$indexedType])[unique=true]
 $facetSearchConfigName=tricastIndex
-$contentCatalogName=tricastContentCatalog
+$contentCatalogName=sptelContentCatalog
 $contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
 $productCatalog=sptelProductCatalog
 $productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Staged])[default=$productCatalog:Staged]

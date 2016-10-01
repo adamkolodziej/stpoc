@@ -2,7 +2,7 @@
 # Import CMS content for the Tricast site
 #
 
-$contentCatalog=tricastContentCatalog
+$contentCatalog=sptelContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 
 # Language

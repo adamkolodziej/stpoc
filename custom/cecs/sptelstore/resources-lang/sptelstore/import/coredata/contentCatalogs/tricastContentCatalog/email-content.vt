@@ -1,7 +1,7 @@
 #
 # Import the CMS content for the Tricast site emails
 #
-\$contentCatalog=tricastContentCatalog
+\$contentCatalog=sptelContentCatalog
 \$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=\$contentCatalog]),CatalogVersion.version[default=Staged])[default=\$contentCatalog:Staged]
 
 # Import config properties into impex macros for modulegen

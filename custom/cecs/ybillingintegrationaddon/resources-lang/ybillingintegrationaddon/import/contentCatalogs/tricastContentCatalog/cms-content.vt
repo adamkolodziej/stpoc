@@ -1,6 +1,6 @@
 #$header
 
-\$contentCatalog=tricastContentCatalog
+\$contentCatalog=sptelContentCatalog
 \$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=\$contentCatalog]),CatalogVersion.version[default=Staged])[default=\$contentCatalog:Staged]
 #set( $escContentCV=$esc.java('$contentCV[unique=true]') )
 \$picture=media(code, \$contentCV);
