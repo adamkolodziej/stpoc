@@ -1,5 +1,5 @@
-# ImpEx for Solr for Tricast Store
-\$indexedType=tricastProductType
+# ImpEx for Solr for SPTel Store
+\$indexedType=sptelProductType
 \$solrIndexedType=solrIndexedType(identifier[default=\$indexedType])[unique=true]
 \$facetSearchConfigName=tricastIndex
 \$contentCatalogName=sptelContentCatalog

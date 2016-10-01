@@ -1,9 +1,9 @@
 #
-# Import the Solr configuration for the Tricast store
+# Import the Solr configuration for the Sptel store
 #
 
 # Index Type
-$solrIndexedType=tricastProductType
+$solrIndexedType=sptelProductType
 
 # Language
 $lang=en

@@ -1,5 +1,5 @@
 #******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
-# ImpEx template for Importing all Localisations for Products in the Tricast Store
+# ImpEx template for Importing all Localisations for Products in the Sptel Store
 
 # Macros / Replacement Parameter definitions
 $productCatalog=sptelProductCatalog

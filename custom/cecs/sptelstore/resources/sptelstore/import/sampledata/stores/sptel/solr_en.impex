@@ -1,10 +1,10 @@
-# ImpEx for Solr for Tricast Store
-$indexedType=tricastProductType
+# ImpEx for Solr for Sptel Store
+$indexedType=sptelProductType
 $solrIndexedType=solrIndexedType(identifier[default=$indexedType])[unique=true]
-$facetSearchConfigName=tricastIndex
+$facetSearchConfigName=sptelIndex
 $contentCatalogName=sptelContentCatalog
 $contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
-$productCatalog=tricastProductCatalog
+$productCatalog=sptelProductCatalog
 $productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Staged])[default=$productCatalog:Staged]
 
 # Language

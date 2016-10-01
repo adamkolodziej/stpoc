@@ -4,8 +4,8 @@ $contentCatalog=sptelContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $picture=media(code, $contentCV);
 $wideContent=CMSImageComponent,BannerComponent
-$jarResource=jar:com.hybris.showcase.cecs.sptelstore.constants.TricaststoreConstants&/sptelstore/import
-$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.TricaststoreConstants&/sptelstore/import/sampledata/contentCatalogs/$contentCatalog
+$jarResource=jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import
+$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import/sampledata/contentCatalogs/$contentCatalog
 
 # Language
 $lang=en

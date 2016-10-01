@@ -1,9 +1,9 @@
 #******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
-# ImpEx for Importing Categories into Tricast Store
+# ImpEx for Importing Categories into Sptel Store
 
 # Macros / Replacement Parameter definitions
 $productCatalog=sptelProductCatalog
-$productCatalogName=Tricast Product Catalog
+$productCatalogName=Sptel Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 
 

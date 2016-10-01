@@ -2,8 +2,8 @@
 #******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
 
 # Macros / Replacement Parameter definitions
-$productCatalog=tricastProductCatalog
-$productCatalogName=Tricast Product Catalog
+$productCatalog=sptelProductCatalog
+$productCatalogName=Sptel Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 
 # Language
