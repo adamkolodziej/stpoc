@@ -80,7 +80,7 @@
 	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
 	  -->
 	
-	<bean id="sptelExtrasSampleDataSetup" class="com.hybris.showcase.sptelextrasampledata.setup.TricastExtrasSampleDataSetup"  parent="abstractCoreSystemSetup"/>
+	<bean id="sptelExtrasSampleDataSetup" class="com.hybris.showcase.sptelextrasampledata.setup.SptelExtrasSampleDataSetup"  parent="abstractCoreSystemSetup"/>
 	
 			
 </beans>

@@ -1,0 +1,83 @@
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+# ImpEx for Importing Classification Categories into Tricast Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sptelProductCatalog
+$productCatalogName=Tricast Product Catalog
+$classCatalogVersion=catalogversion(catalog(id[default='TricastClassification']),version[default='1.0'])[unique=true,default='TricastClassification:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='TricastClassification']),version[default='1.0'])[unique=true]
+
+# Language
+$lang=en
+
+
+# Create Categories
+UPDATE ClassificationClass;code[unique=true];$classCatalogVersion;name[lang=$lang]
+ ;MovieClass;;"Movie Classification";
+ ;TVClass;;"TV Classification";
+ ;VideoClass;;"Video Classification";
+
+
+
+# Create Categories
+UPDATE ClassificationAttribute;code[unique=true];$classSystemVersion;name[lang=$lang]
+ ;HD;;"HD";
+ ;MPAA-rating;;"MPAA rating";
+ ;director;;"Director";
+ ;episod;;"Episode";
+ ;genre;;"Genre";
+ ;language;;"Language";
+ ;network;;"Network";
+ ;original-air-date;;"Original air date";
+ ;production-companies;;"Production companies";
+ ;release-year;;"Release year";
+ ;running-time;;"Running";
+ ;season;;"Season";
+ ;starring;;"Starring";
+ ;studio;;"Studio";
+ ;supporting-actors;;"Supporting actors";
+ ;writing;;"Writing";
+ ;www;;"WWW";
+
+ 
+UPDATE ClassificationAttributeValue;code[unique=true];name[lang=$lang];$classSystemVersion
+ ;Action;"Action";
+ ;Adventure;"Adventure";
+ ;Animation;"Animation";
+ ;Comedy;"Comedy";
+ ;Crime;"Crime";
+ ;Disaster;"Disaster";
+ ;Documentary;"Documentary";
+ ;Drama;"Drama";
+ ;Eastern;"Eastern";
+ ;Erotic;"Erotic";
+ ;Family;"Family";
+ ;Fan_Film;"Fan Film";
+ ;Fantasy;"Fantasy";
+ ;Film_Noir;"Film Noir";
+ ;Foreign;"Foreign";
+ ;History;"History";
+ ;Holiday;"Holiday";
+ ;Horror;"Horror";
+ ;Indie;"Indie";
+ ;Music;"Music";
+ ;Musical;"Musical";
+ ;Mystery;"Mystery";
+ ;Neo-noir;"Neo-noir";
+ ;Road_Movie;"Road Movie";
+ ;Romance;"Romance";
+ ;Science_Fiction;"Science Fiction";
+ ;Short;"Short";
+ ;Sport;"Sport";
+ ;Sporting_Event;"Sporting Event";
+ ;Sports_Film;"Sports Film";
+ ;Suspense;"Suspense";
+ ;TV_movie;"TV movie";
+ ;Thriller;"Thriller";
+ ;War;"War";
+ ;Western;"Western";
+ ;de;"German";
+ ;en;"English";
+ ;fr;"French";
+ ;it;"Italian";
+ ;ru;"Russian";

@@ -4,7 +4,7 @@
 \$facetSearchConfigName=tricastIndex
 \$contentCatalogName=tricastContentCatalog
 \$contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=\$contentCatalogName]),CatalogVersion.version[default=Staged])[default=\$contentCatalogName:Staged]
-\$productCatalog=tricastProductCatalog
+\$productCatalog=sptelProductCatalog
 \$productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=\$productCatalog]),CatalogVersion.version[default=Staged])[default=\$productCatalog:Staged]
 
 # Language

@@ -2,8 +2,8 @@ $header
 # ImpEx template for Importing all Localisations for Products in the Tricast Store
 
 # Macros / Replacement Parameter definitions
-\$productCatalog=tricastProductCatalog
-\$productCatalogName=Tricast Product Catalog
+\$productCatalog=sptelProductCatalog
+\$productCatalogName=SPTel Product Catalog
 \$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
 
 \$lang=$lang

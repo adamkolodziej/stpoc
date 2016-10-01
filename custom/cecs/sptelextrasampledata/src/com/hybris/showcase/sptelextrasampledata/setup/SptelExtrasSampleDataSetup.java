@@ -36,7 +36,8 @@ public class SptelExtrasSampleDataSetup extends AbstractSystemSetup
 	private static final String SYNC_CATALOGS = "syncCatalog";
 
 	private static final String SAMPLE_DATA = "sptelExtrasSampleData";
-	private static final String TRICAST_DATA = "TriCast Originals";
+	private static final String SPTEL_DATA = "SPTel Originals";
+
 
 	@Override
 	@SystemSetupParameterMethod
@@ -56,7 +57,7 @@ public class SptelExtrasSampleDataSetup extends AbstractSystemSetup
 		final SystemSetupParameter dataSetParameter = new SystemSetupParameter(SAMPLE_DATA);
 		dataSetParameter.setLabel("Choose sample data set");
 		dataSetParameter.setMultiSelect(false);
-		dataSetParameter.addValue(TRICAST_DATA, true);
+		dataSetParameter.addValue(SPTEL_DATA, true);
 		params.add(dataSetParameter);
 	}
 
@@ -66,7 +67,7 @@ public class SptelExtrasSampleDataSetup extends AbstractSystemSetup
 		final List<String> exts = getLoadedExtensionNames();
 
 		final String sampleDataParameter = context.getParameter(context.getExtensionName() + "_" + SAMPLE_DATA);
-		//boolean isSptelDataChecked = StringUtils.equals(sampleDataParameter, TRICAST_DATA);
+		//boolean isSptelDataChecked = StringUtils.equals(sampleDataParameter, SPTEL_DATA);
 		boolean isSynchChecked = getBooleanSystemSetupParameter(context, SYNC_CATALOGS);
 
 		if (StringUtils.isBlank(sampleDataParameter))

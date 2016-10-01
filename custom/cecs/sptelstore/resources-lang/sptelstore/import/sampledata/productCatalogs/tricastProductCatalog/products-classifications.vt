@@ -3,7 +3,7 @@
 #% impex.setLocale(Locale.ENGLISH);
 
 # Macros / Replacement Parameter definitions
-\$productCatalog=tricastProductCatalog
+\$productCatalog=sptelProductCatalog
 \$productCatalogName=Tricast Product Catalog
 \$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
 \$clAttrModifiers=system='TricastClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=$lang

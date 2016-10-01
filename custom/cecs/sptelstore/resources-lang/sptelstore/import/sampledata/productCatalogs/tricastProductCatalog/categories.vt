@@ -2,7 +2,7 @@ $header
 # ImpEx for Importing Categories into Tricast Store
 
 # Macros / Replacement Parameter definitions
-\$productCatalog=tricastProductCatalog
+\$productCatalog=sptelProductCatalog
 \$productCatalogName=Tricast Product Catalog
 \$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
 

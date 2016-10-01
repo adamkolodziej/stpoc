@@ -1,0 +1,22 @@
+# CECS-26 include telco additions in sptelstore extension
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sptelProductCatalog
+$productCatalogName=Tricast Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Language
+$lang=en
+
+UPDATE SubscriptionTerm;id[unique=true];name[lang=$lang]
+;annually_1;1 year;
+;annually_2;2 years;
+;annually_24;2 years;
+;annually_3;3 years;
+;monthly_1;1 month;
+;monthly_12;12 months;
+;monthly_18;18 months;
+;monthly_24;24 months;
+;monthly_36;36 months;
+;none;None;
