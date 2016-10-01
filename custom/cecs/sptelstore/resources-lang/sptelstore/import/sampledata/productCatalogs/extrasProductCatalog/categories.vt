@@ -1,5 +1,5 @@
 $header
-# ImpEx for Importing Categories into Tricast Store
+# ImpEx for Importing Categories into Sptel Store
 
 # Macros / Replacement Parameter definitions
 \$productCatalog=extrasProductCatalog

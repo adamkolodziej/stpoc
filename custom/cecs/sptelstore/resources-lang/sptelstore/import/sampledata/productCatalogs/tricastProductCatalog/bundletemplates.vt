@@ -3,7 +3,7 @@ $header
 
 # Macros / Replacement Parameter definitions
 \$productCatalog=sptelProductCatalog
-\$productCatalogName=Tricast Product Catalog
+\$productCatalogName=Sptel Product Catalog
 \$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
 
 \$bundleTemplateVersion=1.0

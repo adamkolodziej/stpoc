@@ -1,7 +1,7 @@
 # ImpEx for Solr for SPTel Store
 \$indexedType=sptelProductType
 \$solrIndexedType=solrIndexedType(identifier[default=\$indexedType])[unique=true]
-\$facetSearchConfigName=tricastIndex
+\$facetSearchConfigName=sptelIndex
 \$contentCatalogName=sptelContentCatalog
 \$contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=\$contentCatalogName]),CatalogVersion.version[default=Staged])[default=\$contentCatalogName:Staged]
 \$productCatalog=sptelProductCatalog

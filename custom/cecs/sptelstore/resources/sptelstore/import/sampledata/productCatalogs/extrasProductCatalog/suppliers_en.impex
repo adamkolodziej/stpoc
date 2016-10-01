@@ -1,4 +1,4 @@
-# ImpEx for Importing Suppliers into Tricast Store
+# ImpEx for Importing Suppliers into Sptel Store
 
 # Macros / Replacement Parameter definitions
 $productCatalog=extrasProductCatalog

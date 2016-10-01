@@ -6,8 +6,8 @@
 \$picture=media(code, \$contentCV);
 #set( $escPicture=$esc.java('$picture[lang=$lang]') )
 \$wideContent=CMSImageComponent,BannerComponent
-\$jarResource=jar:com.hybris.showcase.cecs.sptelstore.constants.TricaststoreConstants&/sptelstore/import
-\$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.TricaststoreConstants&/sptelstore/import/sampledata/contentCatalogs/\$contentCatalog
+\$jarResource=jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import
+\$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import/sampledata/contentCatalogs/\$contentCatalog
 
 # Language
 \$lang=$lang

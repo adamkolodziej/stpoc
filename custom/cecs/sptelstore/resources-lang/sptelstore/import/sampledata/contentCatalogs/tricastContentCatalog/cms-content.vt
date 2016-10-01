@@ -5,7 +5,7 @@
 #set( $escContentCV=$esc.java('$contentCV[unique=true]') )
 \$picture=media(code, \$contentCV);
 #set( $escPicture=$esc.java('$picture[lang=$lang]') )
-\$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.TricaststoreConstants&/sptelstore/import/sampledata/contentCatalogs/\$contentCatalog
+\$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import/sampledata/contentCatalogs/\$contentCatalog
 
 # Language
 \$lang=$lang
@@ -100,7 +100,7 @@ UPDATE CMSNavigationNode;$escContentCV;uid[unique=true];title[lang=\$lang]
 ;;$row.key;"$row.values.title"
 #end
 
-# Tricast FAQ Page
+# Sptel FAQ Page
 
 # CMS Paragraph Component (Contact information)
 #set ( $cmsparagraphcomponent = $query.load('cms-content-faq-page', 'CMSParagraphComponent') )
@@ -109,14 +109,14 @@ UPDATE CMSParagraphComponent;$escContentCV;uid[unique=true];content[lang=\$lang]
 ;;$row.key;$row.values.content;
 #end
 
-# Tricast Order Expired Page
+# Sptel Order Expired Page
 #set ( $cmsparagraphcomponent = $query.load('cms-content-orderExpired-page', 'CMSParagraphComponent') )
 UPDATE CMSParagraphComponent;$escContentCV;uid[unique=true];content[lang=\$lang];
 #foreach( $row in $cmsparagraphcomponent )
 ;;$row.key;$row.values.content;
 #end
 
-# Tricast Terms and Conditions Page
+# Sptel Terms and Conditions Page
 
 # CMS Paragraph Component (Contact information)
 #set ( $cmsparagraphcomponent = $query.load('cms-content-termsAndConditions-page', 'CMSParagraphComponent') )
@@ -126,7 +126,7 @@ UPDATE CMSParagraphComponent;$escContentCV;uid[unique=true];content[lang=\$lang]
 #end
 
 # CECS-194 Packages Page - complete implementation START
-# Tricast Packages Page
+# Sptel Packages Page
 
 # CMS TabParagraph Component (Contact information)
 #set ( $cmstabparagraphcomponent = $query.load('cms-content-packages-page', 'CMSTabParagraphComponent') )
@@ -144,7 +144,7 @@ UPDATE SingleBannerComponent;$escContentCV;uid[unique=true];headline[lang=\$lang
 #end
 
 ################################
-# Tricast Homepage
+# Sptel Homepage
 ################################
 
 # Media Content
@@ -191,7 +191,7 @@ UPDATE ProductCarouselComponent;$escContentCV;uid[unique=true];title[lang=\$lang
 #end
 
 ########################################################################
-# Tricast Camera Accessories and Supplies Category Landing Page
+# Sptel Camera Accessories and Supplies Category Landing Page
 ########################################################################
 
 #set ( $categorypage = $query.load('cms-content-category-page', 'CategoryPage') )
@@ -220,7 +220,7 @@ UPDATE SimpleBannerComponent;$escContentCV;uid[unique=true];$escPicture
 #end
 
 ######################################
-# Tricast Search Results Page
+# Sptel Search Results Page
 ######################################
 
 # Media Content
@@ -243,7 +243,7 @@ UPDATE CMSParagraphComponent;$escContentCV;uid[unique=true];content[lang=\$lang]
 #end
 
 ####################################
-# Tricast Cart Page
+# Sptel Cart Page
 ####################################
 
 # Media Content

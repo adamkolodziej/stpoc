@@ -21,6 +21,7 @@
 	           managersuperclass="de.hybris.platform.jalo.extension.Extension"
 			>
 
+
 		<requires-extension name="acceleratorservices"/>
 		<!-- CECS-68 responsive my-account homepage - cms START -->
 		<requires-extension name="showcasecommon"/>

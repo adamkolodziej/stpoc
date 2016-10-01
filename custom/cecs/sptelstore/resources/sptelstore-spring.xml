@@ -19,7 +19,7 @@
              http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<bean id="sptelStoreSystemSetup" class="com.hybris.showcase.cecs.sptelstore.setup.SptelStoreSystemSetup" parent="abstractCoreSystemSetup">
+	<bean id="sptelstoreSystemSetup" class="com.hybris.showcase.cecs.sptelstore.setup.SptelstoreSystemSetup" parent="abstractCoreSystemSetup">
 		<property name="coreDataImportService" ref="coreDataImportService"/>
 
         <!--CECS-26 include telco additions in sptelstore extension-->
