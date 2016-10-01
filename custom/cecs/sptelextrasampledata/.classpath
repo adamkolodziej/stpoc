@@ -5,7 +5,7 @@
 
 	<classpathentry exported="false" kind="src" path="/platform" />
 	<classpathentry exported="true" kind="src" path="/acceleratorservices" />
-	<classpathentry exported="true" kind="src" path="/tricaststore" />
+	<classpathentry exported="true" kind="src" path="/sptelstore" />
 	<classpathentry exported="true" kind="lib" path="resources" />
 	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
 	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />

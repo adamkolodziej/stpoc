@@ -1,5 +1,5 @@
 #
-# Import the CMS content for the Sptel site emails
+# Import the CMS content for the Tricast site emails
 #
 $contentCatalog=sptelContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
@@ -7,7 +7,7 @@ $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCata
 # Import config properties into impex macros for modulegen
 UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
 $emailResource=$config-emailResourceValue
-$servicesEmailResource=jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import/coredata/contentCatalogs/$contentCatalog/emails
+$servicesEmailResource=jar:com.hybris.showcase.cecs.sptelstore.constants.TricaststoreConstants&/sptelstore/import/coredata/contentCatalogs/$contentCatalog/emails
 
 # Language
 $lang=en

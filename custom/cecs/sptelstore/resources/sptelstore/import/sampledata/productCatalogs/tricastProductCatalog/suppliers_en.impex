@@ -1,8 +1,8 @@
-# ImpEx for Importing Suppliers into Sptel Store
+# ImpEx for Importing Suppliers into Tricast Store
 
 # Macros / Replacement Parameter definitions
 $productCatalog=sptelProductCatalog
-$productCatalogName=Sptel Product Catalog
+$productCatalogName=Tricast Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $superCategories=superCategories(code, )
 

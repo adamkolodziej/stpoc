@@ -1,5 +1,5 @@
 #
-# Import CMS content for the Sptel site
+# Import CMS content for the Tricast site
 #
 
 $contentCatalog=sptelContentCatalog

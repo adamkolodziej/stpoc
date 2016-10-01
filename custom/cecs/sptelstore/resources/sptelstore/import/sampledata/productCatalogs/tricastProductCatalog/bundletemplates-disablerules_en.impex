@@ -2,7 +2,7 @@
 
 # Macros / Replacement Parameter definitions
 $productCatalog=sptelProductCatalog
-$productCatalogName=Sptel Product Catalog
+$productCatalogName=Tricast Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 
 $bundleTemplateVersion=1.0

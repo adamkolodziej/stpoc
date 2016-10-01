@@ -1,4 +1,4 @@
-# ImpEx for Solr for Sptel Store
+# ImpEx for Solr for SPTel Store
 $indexedType=sptelProductType
 $solrIndexedType=solrIndexedType(identifier[default=$indexedType])[unique=true]
 $facetSearchConfigName=sptelIndex

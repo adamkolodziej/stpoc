@@ -1,9 +1,9 @@
-# ImpEx for Importing Product Classifications into Sptel Store
+# ImpEx for Importing Product Classifications into Tricast Store
 
 #% impex.setLocale(Locale.ENGLISH);
 
 # Macros / Replacement Parameter definitions
 $productCatalog=sptelProductCatalog
-$productCatalogName=Sptel Product Catalog
+$productCatalogName=Tricast Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$clAttrModifiers=system='SptelClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=zh
+$clAttrModifiers=system='TricastClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=zh

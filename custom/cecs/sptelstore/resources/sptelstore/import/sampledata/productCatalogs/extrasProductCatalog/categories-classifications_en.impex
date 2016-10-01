@@ -1,11 +1,11 @@
 #******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
-# ImpEx for Importing Classification Categories into Sptel Store
+# ImpEx for Importing Classification Categories into Tricast Store
 
 # Macros / Replacement Parameter definitions
 $productCatalog=extrasProductCatalog
 $productCatalogName=Extras Product Catalog
-$classCatalogVersion=catalogversion(catalog(id[default='SptelClassification']),version[default='1.0'])[unique=true,default='SptelClassification:1.0']
-$classSystemVersion=systemVersion(catalog(id[default='SptelClassification']),version[default='1.0'])[unique=true]
+$classCatalogVersion=catalogversion(catalog(id[default='TricastClassification']),version[default='1.0'])[unique=true,default='TricastClassification:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='TricastClassification']),version[default='1.0'])[unique=true]
 
 # Language
 $lang=en
