@@ -10,18 +10,13 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 
 <c:set var="priceCss" value="guidedselling-price ${priceCss}" />
-
-<li class="regular">
     <c:if test="${product.price['class'].simpleName eq 'SubscriptionPricePlanData'}">
-        <span><format:price priceData="${product.price.recurringChargeEntries[0].price}"/></span>
-        <span>${product.subscriptionTerm.billingPlan.billingTime.name}</span>
+        <format:price priceData="${product.price.recurringChargeEntries[0].price}"/>
+        &nbsp;${product.subscriptionTerm.billingPlan.billingTime.name}
     </c:if>
     <c:if test="${product.price['class'].simpleName ne 'SubscriptionPricePlanData'}">
-        <span><format:price priceData="${product.price}"/></span>
+        <format:price priceData="${product.price}"/>
     </c:if>
-</li>
-<li class="discount">
-    <c:if test="${not empty newPrice}">
-        <span><format:price priceData="${newPrice}"/></span>
-    </c:if>
-</li>
+<c:if test="${not empty newPrice}">
+        <br><format:price priceData="${newPrice}"/>
+</c:if>

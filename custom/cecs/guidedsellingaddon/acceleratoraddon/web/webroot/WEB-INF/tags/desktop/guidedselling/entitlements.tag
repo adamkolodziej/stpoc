@@ -6,10 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
-<div class="entitlements">
 	<c:if test="${not empty product.entitlements}">
-		<div class="entitlementContainer">
-			<div id="${product.code}">
 				<ul>
 					<c:forEach var="ent" items="${product.entitlements}" varStatus="loop">
 						<c:set var="liClass" value="collapse entitlement-${product.code}" />
@@ -41,18 +38,4 @@
 						</li>
 					</c:forEach>
 				</ul>
-				<c:if test="${fn:length(product.entitlements) > 3}">
-					<c:set var="showMoreHref" value=".entitlement-${product.code}" />
-					<a data-toggle="collapse" class="collapsed show-entitlements" href="${showMoreHref}" >
-						<span class="more">
-							<spring:theme code="guidedselling.label.showmore" text="show more..."/>
-						</span>
-						<span class="less">
-							<spring:theme code="guidedselling.label.showless" text="show less..."/>
-						</span>
-					</a>
-				</c:if>
-			</div>
-		</div>
 	</c:if>
-</div>

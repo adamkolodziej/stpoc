@@ -6,7 +6,7 @@
 	tagdir="/WEB-INF/tags/addons/guidedsellingaddon/desktop/guidedselling"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<c:if test="${renderComponent}">
+<c:if test="${renderComponent eq false}">
 	<div class="options">
 		<div class="row">
 			<div class="col-xs-12">

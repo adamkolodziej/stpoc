@@ -23,7 +23,7 @@
     <div id="checkoutFunnel">
         <gs:guidedsellingOrderCheckoutProgressBar/>
     </div>  
-	
+
     <div class="row text-dark configure-package">
 		<div class="col-xs-12 col-sm-9 configure-column">
 

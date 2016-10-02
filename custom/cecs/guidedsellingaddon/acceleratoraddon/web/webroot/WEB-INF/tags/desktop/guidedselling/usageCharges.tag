@@ -7,12 +7,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <c:if test="${not empty option.usageCharges}">
-    <div class="usageCharges">
-        <a data-toggle="collapse" href="#${option.product.code}_usageCharges" class="collapsed">
             <spring:theme code="guidedselling.label.usageCharges" text="Usage Charges ({0}):" arguments="${fn:length(option.usageCharges)}" />
             &nbsp;<i class="fa fa-chevron"></i>
-        </a>
-        <div id="${option.product.code}_usageCharges" class="collapse">
             <ul>
                 <c:forEach var="usageCharge" items="${option.usageCharges}">
                     <li>
@@ -20,6 +16,4 @@
                     </li>
                 </c:forEach>
             </ul>
-        </div>
-    </div>
 </c:if>
