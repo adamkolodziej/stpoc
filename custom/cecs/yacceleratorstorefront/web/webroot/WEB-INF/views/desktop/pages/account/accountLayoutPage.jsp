@@ -115,17 +115,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${searchPageData.results}" var="order">
+                                    <c:forEach items="${orders}" var="order">
                                         <tr>
                                             <th scope="row">${order.code}</th>
-                                            <td>Data Centre Interconnect</td>
-                                            <td>Greenfield Package</td>
+                                            <td>${order.entries[0].component.name}</td>
+                                            <td>${order.entries[0].rootBundleTemplate.name}</td>
                                             <td>N/D</td>
                                             <!-- Toggle for modal window -->
                                             <td>
-                                                <span data-toggle="modal" data-target="#order-modal">${order.statusDisplay}</span>
+                                                <span data-toggle="modal" data-target="#order-modal">${order.status}</span>
                                             </td>
-                                            <td><fmt:formatDate type="date" value="${order.placed}" /></td>
+                                            <td><fmt:formatDate type="date" value="${order.deliveryDate}" /></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

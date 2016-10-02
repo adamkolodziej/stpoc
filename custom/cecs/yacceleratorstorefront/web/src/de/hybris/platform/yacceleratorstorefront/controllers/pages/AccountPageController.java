@@ -48,8 +48,10 @@ import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.util.Config;
 import de.hybris.platform.yacceleratorstorefront.controllers.ControllerConstants;
 
@@ -58,10 +60,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
@@ -149,6 +153,9 @@ public class AccountPageController extends AbstractSearchPageController {
 
     @Resource(name = "addressVerificationResultHandler")
     private AddressVerificationResultHandler addressVerificationResultHandler;
+
+    @Resource(name = "userService")
+    private UserService userService;
 
     protected PasswordValidator getPasswordValidator() {
         return passwordValidator;
@@ -246,8 +253,23 @@ public class AccountPageController extends AbstractSearchPageController {
         model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs(null));
         model.addAttribute("metaRobots", "noindex,nofollow");
         // Handle paged search results
-        fillOrderModel(0, ShowMode.All, null, model);
+        fillOrdersModel(model);
         return getViewForPage(model);
+    }
+
+    private void fillOrdersModel(Model model) {
+        UserModel currentUser = userService.getCurrentUser();
+        Collection<OrderModel> orders = currentUser.getOrders();
+
+        if (CollectionUtils.isEmpty(orders)) {
+            return;
+        }
+        List<OrderData> orderData = orders
+                .stream()
+                .map(order -> orderFacade.getOrderDetailsForCode(order.getCode()))
+                .collect(Collectors.toList());
+
+        model.addAttribute("orders", orderData);
     }
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)

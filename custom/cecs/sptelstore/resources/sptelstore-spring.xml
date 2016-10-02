@@ -19,113 +19,139 @@
              http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<bean id="sptelstoreSystemSetup" class="com.hybris.showcase.cecs.sptelstore.setup.SptelstoreSystemSetup" parent="abstractCoreSystemSetup">
-		<property name="coreDataImportService" ref="coreDataImportService"/>
+    <bean id="sptelstoreSystemSetup" class="com.hybris.showcase.cecs.sptelstore.setup.SptelstoreSystemSetup"
+          parent="abstractCoreSystemSetup">
+        <property name="coreDataImportService" ref="coreDataImportService"/>
 
         <!--CECS-26 include telco additions in sptelstore extension-->
-		<property name="sampleDataImportService" ref="sptelSampleDataImportService"/>
+        <property name="sampleDataImportService" ref="sptelSampleDataImportService"/>
         <!--CECS-26: end-->
-	</bean>
+    </bean>
 
     <!--CECS-26 include telco additions in sptelstore extension-->
-    <bean  id="sptelSampleDataImportService"
-           class="com.hybris.showcase.cecs.sptelstore.setup.impl.SptelSampleDataImportService"
-           parent="defaultSampleDataImportService">
+    <bean id="sptelSampleDataImportService"
+          class="com.hybris.showcase.cecs.sptelstore.setup.impl.SptelSampleDataImportService"
+          parent="defaultSampleDataImportService">
         <property name="typeService" ref="typeService"/>
         <property name="modelService" ref="modelService"/>
         <!-- CECS-28 integrate mediaconversion -->
         <property name="cronJobService" ref="cronJobService"/>
-        <property name="postInitHooks" ref="postInitHooks" />
+        <property name="postInitHooks" ref="postInitHooks"/>
     </bean>
     <!--CECS-26: end-->
-    
-	<!-- CECS-65 Add solr config for new product types - START -->
-    <bean id="previewAvailabilityValueProvider" class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.PreviewAvailabilityValueProvider">
-		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
-	</bean>
-	
-	<bean id="hdFacetDisplayNameProvider" class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.HdFacetDisplayNameProvider" />
-	
-	<bean id="releaseYearFacetDisplayNameProvider" class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.ReleaseYearFacetDisplayNameProvider" />
 
-    <bean id="tvShowNameValueProvider" class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.TvShowNameValueProvider">
+    <!-- CECS-65 Add solr config for new product types - START -->
+    <bean id="previewAvailabilityValueProvider"
+          class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.PreviewAvailabilityValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+    </bean>
+
+    <bean id="hdFacetDisplayNameProvider"
+          class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.HdFacetDisplayNameProvider"/>
+
+    <bean id="releaseYearFacetDisplayNameProvider"
+          class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.ReleaseYearFacetDisplayNameProvider"/>
+
+    <bean id="tvShowNameValueProvider"
+          class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.TvShowNameValueProvider">
         <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
         <property name="commonI18NService" ref="commonI18NService"/>
     </bean>
-	<!-- CECS-65 Add solr config for new product types - END -->
-	
-	<bean id="ratesProductValueProvider" class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.RatesProductValueProvider"
-		parent="productReviewAverageRatingValueProvider">
+    <!-- CECS-65 Add solr config for new product types - END -->
+
+    <bean id="ratesProductValueProvider"
+          class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.RatesProductValueProvider"
+          parent="productReviewAverageRatingValueProvider">
     </bean>
 
     <!--TODO check if we need it at all-->
-    <bean id="bundlePackageProductCatalogEditSyncDescriptorsMapMergeDirective" parent="mapMergeDirective"  depends-on="productCatalogEditSyncDescriptors">
-        <property name="key" value="com.hybris.showcase.guidedselling.jalo.BundlePackage" />
+    <bean id="bundlePackageProductCatalogEditSyncDescriptorsMapMergeDirective" parent="mapMergeDirective"
+          depends-on="productCatalogEditSyncDescriptors">
+        <property name="key" value="com.hybris.showcase.guidedselling.jalo.BundlePackage"/>
         <property name="value">
             <list>
                 <!--<bean class="de.hybris.platform.commerceservices.setup.data.EditSyncAttributeDescriptorData">-->
-                    <!--<property name="qualifier" value="code"/>-->
-                    <!--<property name="includeInSync" value="true"/>-->
+                <!--<property name="qualifier" value="code"/>-->
+                <!--<property name="includeInSync" value="true"/>-->
                 <!--</bean>-->
             </list>
         </property>
     </bean>
-    
+
     <bean id="entitlementsPostInitHook" class="com.hybris.showcase.cecs.sptelstore.setup.impl.EntitlementsPostInitHook">
-    	 <property name="cronJobService" ref="cronJobService"/>
+        <property name="cronJobService" ref="cronJobService"/>
     </bean>
-    
-    <bean id="postInitHooksListMergeDirective" depends-on="postInitHooks" parent="listMergeDirective" >
-		<property name="add" ref="entitlementsPostInitHook" />
-	</bean>
-    
-    <bean id="bundlePackageProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes" parent="listMergeDirective">
-    	<property name="add" value="BundlePackage" />
+
+    <bean id="postInitHooksListMergeDirective" depends-on="postInitHooks" parent="listMergeDirective">
+        <property name="add" ref="entitlementsPostInitHook"/>
     </bean>
-    
-    <bean id="bundleTemplateStatusProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes" parent="listMergeDirective">
-    	<property name="add" value="BundleTemplateStatus" />
+
+    <bean id="bundlePackageProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes"
+          parent="listMergeDirective">
+        <property name="add" value="BundlePackage"/>
     </bean>
-    
-    <bean id="bundleTemplateProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes" parent="listMergeDirective">
-    	<property name="add" value="BundleTemplate" />
+
+    <bean id="bundleTemplateStatusProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes"
+          parent="listMergeDirective">
+        <property name="add" value="BundleTemplateStatus"/>
     </bean>
-    
-    <bean id="blogArticleProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes" parent="listMergeDirective">
-    	<property name="add" value="BlogArticle" />
+
+    <bean id="bundleTemplateProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes"
+          parent="listMergeDirective">
+        <property name="add" value="BundleTemplate"/>
     </bean>
-    
-    <bean id="faqEntryProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes" parent="listMergeDirective">
-    	<property name="add" value="FAQEntry" />
+
+    <bean id="blogArticleProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes"
+          parent="listMergeDirective">
+        <property name="add" value="BlogArticle"/>
     </bean>
-    
-    <bean id="bundleRuleRestrictionProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes" parent="listMergeDirective">
-    	<property name="add" value="AbstractBundleRuleRestriction" />
+
+    <bean id="faqEntryProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes"
+          parent="listMergeDirective">
+        <property name="add" value="FAQEntry"/>
     </bean>
-    	
-    <bean id="blogArticleContentCatalogSyncListMergeDirective" depends-on="contentCatalogSyncRootTypeCodes" parent="listMergeDirective">
-    	<property name="add" value="BlogArticle" />
+
+    <bean id="bundleRuleRestrictionProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes"
+          parent="listMergeDirective">
+        <property name="add" value="AbstractBundleRuleRestriction"/>
     </bean>
-    
-    <bean id="faqEntryContentCatalogSyncListMergeDirective" depends-on="contentCatalogSyncRootTypeCodes" parent="listMergeDirective">
-    	<property name="add" value="FAQEntry" />
+
+    <bean id="blogArticleContentCatalogSyncListMergeDirective" depends-on="contentCatalogSyncRootTypeCodes"
+          parent="listMergeDirective">
+        <property name="add" value="BlogArticle"/>
     </bean>
-    
+
+    <bean id="faqEntryContentCatalogSyncListMergeDirective" depends-on="contentCatalogSyncRootTypeCodes"
+          parent="listMergeDirective">
+        <property name="add" value="FAQEntry"/>
+    </bean>
+
     <bean id="promotionPercentageDiscountValueProvider"
-	      class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.PromotionPercentageDiscountValueProvider"
-	      parent="abstractPropertyFieldValueProvider" >
-		<property name="promotionsService" ref="promotionsService"/>
-		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
-	</bean>
-	
-	<alias name="defaultSearchResultProductPercentageDiscountPopulator" alias="searchResultProductPercentageDiscountPopulator"/>
-	<bean id="defaultSearchResultProductPercentageDiscountPopulator" class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.populator.SearchResultProductPercentageDiscountPopulator">
+          class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.provider.impl.PromotionPercentageDiscountValueProvider"
+          parent="abstractPropertyFieldValueProvider">
+        <property name="promotionsService" ref="promotionsService"/>
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+    </bean>
+
+    <alias name="defaultSearchResultProductPercentageDiscountPopulator"
+           alias="searchResultProductPercentageDiscountPopulator"/>
+    <bean id="defaultSearchResultProductPercentageDiscountPopulator"
+          class="com.hybris.showcase.cecs.sptelstore.solrfacetsearch.populator.SearchResultProductPercentageDiscountPopulator">
         <property name="priceDataFactory" ref="priceDataFactory"/>
-		<property name="commonI18NService" ref="commonI18NService"/>
-	</bean>
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
 
     <bean parent="modifyPopulatorList">
         <property name="list" ref="commerceSearchResultProductConverter"/>
         <property name="add" ref="searchResultProductPercentageDiscountPopulator"/>
+    </bean>
+
+    <bean id="spTelOrderPopulator" class="com.hybris.showcase.cecs.sptelstore.SpTelOrderPopulator"
+          parent="baseOrderPopulator">
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderConverter"/>
+        <property name="add" ref="spTelOrderPopulator"/>
     </bean>
 </beans>

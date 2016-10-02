@@ -28,7 +28,7 @@
 		<!-- CECS-68 responsive my-account homepage - cms END -->
 
 		<coremodule packageroot="com.hybris.showcase.cecs.sptelstore"
-		            manager="com.hybris.showcase.cecs.sptelstore.jalo.SptelstoreManager"
+		            manager="com.hybris.showcase.cecs.sptelstore.jalo.Sptelstoremanager"
 		            generated="true"
 				/>
 

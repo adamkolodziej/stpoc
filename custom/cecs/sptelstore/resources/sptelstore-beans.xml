@@ -11,5 +11,7 @@
  license agreement you entered into with hybris.
 -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
-
+    <bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+        <property name="deliveryDate" type="java.util.Date"/>
+    </bean>
 </beans>
