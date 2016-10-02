@@ -17,7 +17,7 @@
 	<extension name="sptelstore"
 	           abstractclassprefix="Generated"
 	           classprefix="Sptelstore"
-	           managername="SptelstoreManager"
+	           managername="Sptelstoremanager"
 	           managersuperclass="de.hybris.platform.jalo.extension.Extension"
 			>
 

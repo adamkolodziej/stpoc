@@ -7,15 +7,15 @@ import de.hybris.platform.jalo.extension.ExtensionManager;
 import org.apache.log4j.Logger;
 
 @SuppressWarnings("PMD")
-public class SptelstoreManager extends GeneratedSptelstoreManager
+public class Sptelstoremanager extends GeneratedSptelstoreManager
 {
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger( SptelstoreManager.class.getName() );
+	private static Logger log = Logger.getLogger( Sptelstoremanager.class.getName() );
 	
-	public static final SptelstoreManager getInstance()
+	public static final Sptelstoremanager getInstance()
 	{
 		ExtensionManager em = JaloSession.getCurrentSession().getExtensionManager();
-		return (SptelstoreManager) em.getExtension(SptelstoreConstants.EXTENSIONNAME);
+		return (Sptelstoremanager) em.getExtension(SptelstoreConstants.EXTENSIONNAME);
 	}
 	
 }
