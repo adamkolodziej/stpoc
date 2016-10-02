@@ -6858,13 +6858,61 @@ label {
     Created on : Sep 29, 2016, 10:44:41 AM
     Author     : Roland
 */
+img {
+  max-width: 100%;
+}
+.vertical-align-top {
+  vertical-align: top;
+}
+.vertical-align-bottom {
+  vertical-align: bottom;
+}
 .cursor-pointer {
   cursor: pointer;
+}
+.absolute-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 /* 
     Created on : Sep 25, 2016, 12:30:21 PM
     Author     : Roland
 */
+/* 
+    Created on : Sep 30, 2016, 11:07:51 AM
+    Author     : Roland
+*/
+.background-gray {
+  background-color: #f2f2f2;
+}
+.background-dark-gray {
+  background-color: #666666;
+}
+.background-blue {
+  background-color: #00a7d8;
+}
+.background-green {
+  background-color: #009843;
+}
+/* 
+    Created on : Sep 30, 2016, 11:13:22 AM
+    Author     : Roland
+*/
+.border-radius-10 {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+/*
+    Created on : Oct 2, 2016, 12:37:37 AM
+    Author     : Roland
+*/
+.box-shadow-light {
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.27);
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.27);
+}
 /* 
     Created on : Sep 25, 2016, 12:41:51 PM
     Author     : Roland
@@ -6881,14 +6929,26 @@ label {
 .font-24 {
   font-size: 24px;
 }
+.font-28 {
+  font-size: 28px;
+}
 .font-32 {
   font-size: 32px;
+}
+.font-48 {
+  font-size: 48px;
+}
+.color-white {
+  color: #fff;
 }
 .color-blue {
   color: #00a7d8;
 }
 .color-green {
   color: #007024;
+}
+.color-red {
+  color: red;
 }
 .color-white {
   color: #fff;
@@ -6901,6 +6961,9 @@ a.color-white:hover {
 }
 a.color-light-gray:hover {
   color: #00a7d8;
+}
+.color-light-gray-2 {
+  color: #C9C9C9;
 }
 .color-mid-gray {
   color: #666;
@@ -7143,6 +7206,53 @@ header .menu-section ul li a:hover {
 }
 .sub-header ul li:not(:last-of-type) {
   margin-right: 30px;
+}
+/* 
+    Created on : Sep 30, 2016, 3:46:40 PM
+    Author     : Roland
+*/
+.organisation-box {
+  min-height: 400px;
+}
+.organisation-box .table-cell {
+  display: table-cell;
+}
+/* 
+    Created on : Oct 1, 2016, 7:45:38 PM
+    Author     : Roland
+*/
+.new-quotation-blue-box,
+.new-quotation-gray-box {
+  min-height: 430px;
+  position: relative;
+  cursor: pointer;
+}
+.new-quotation-gray-box.selected {
+  background-color: #0086aa;
+}
+.new-quotation-gray-box.selected .color-mid-gray {
+  color: #fff;
+}
+.new-quotation-blue-box .new-quotation-blue-box-remove-button {
+  display: none;
+}
+.new-quotation-blue-box.selected {
+  background-color: #0086aa;
+}
+.new-quotation-blue-box.selected .new-quotation-blue-box-remove-button {
+  display: block;
+}
+.new-quotation-blue-box.selected .new-quotation-blue-box-add-button {
+  display: none;
+}
+.new-quotation-card {
+  cursor: pointer;
+}
+.new-quotation-card.background-blue.selected {
+  background-color: #0086aa;
+}
+.new-quotation-card.background-green.selected {
+  background-color: #007030;
 }
 /* 
     Created on : Sep 25, 2016, 1:53:40 PM

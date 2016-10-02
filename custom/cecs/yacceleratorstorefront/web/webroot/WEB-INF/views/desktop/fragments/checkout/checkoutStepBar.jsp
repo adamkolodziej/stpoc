@@ -8,58 +8,33 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/desktop/formElement" %>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 
-
-<div data-role="navbar" class="checkoutStep">
-	<ul data-theme="b">
+	<ul class="nav nav-tabs margin-top-20 margin-bottom-30" role="tablist">
 		<c:forEach items="${checkoutSteps}" var="checkoutStep" varStatus="status">
 			<c:url value="${checkoutStep.url}" var="stepUrl"/>
 			<c:choose>
 				<c:when test="${progressBarId eq checkoutStep.progressBarId}">
 					<c:set scope="page"  var="currentStepActive"  value="${checkoutStep.stepNumber}"/>
-					<li class="step${checkoutStep.stepNumber} current">
-						<a href="${stepUrl}">				
-							<span>
-								<spring:theme code="${checkoutStep.stepNumber}" />
-							</span>
-							<div>
-								<%--<span><spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}" /></span>--%>
-								<span><spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}.name" /></span>
-							</div>
-							<div class="arrow"></div>
-						</a>
+					<li role="presentation" class="active">
+					    <a href="${stepUrl}" aria-controls="${checkoutStep.stepNumber}" role="tab" data-toggle="tab">
+					        <spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}.name" />
+					    </a>
 					</li>
-					
 				</c:when>
 				<c:when test="${checkoutStep.stepNumber > currentStepActive }">
-					<li class="checkoutStep20 step${checkoutStep.stepNumber} disabledStep">
-						<a href="${stepUrl}">				
-							<span>
-								<spring:theme code="${checkoutStep.stepNumber}" />
-							</span>
-							<div>
-								<%--<span><spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}" /></span>--%>
-								<span><spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}.name" /></span>
-							</div>
-							<div class="arrow"></div>
-						</a>
-					</li>
+					<li role="presentation">
+                        <a href="${stepUrl}" aria-controls="${checkoutStep.stepNumber}" role="tab" data-toggle="tab">
+                    	    <spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}.name" />
+                    	</a>
+                    </li>
 				</c:when>
 				<c:otherwise>
-					<li class="checkoutStep20 step${checkoutStep.stepNumber}">
-						<a href="${stepUrl}">				
-							<span>
-								<spring:theme code="${checkoutStep.stepNumber}" />
-							</span>
-							<div>
-								<%--<span><spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}" /></span>--%>
-								<span><spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}.name" /></span>
-							</div>
-							<div class="arrow"></div>
-						</a>
-					</li>
+					<li role="presentation">
+                        <a href="${stepUrl}" aria-controls="${checkoutStep.stepNumber}" role="tab" data-toggle="tab">
+                    	    <spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}.name" />
+                    	</a>
+                    </li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 	</ul>
-</div>
 

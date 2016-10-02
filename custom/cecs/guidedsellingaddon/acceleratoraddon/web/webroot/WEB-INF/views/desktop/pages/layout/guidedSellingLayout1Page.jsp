@@ -12,11 +12,12 @@
     <div id="globalMessages">
         <common:globalMessages/>
     </div>
-    
-    <div id="checkoutFunnel">
-        <gs:guidedsellingCheckoutProgressBar/>
-    </div>  
 
+    <div id="content">
+    <div class="container">
+
+    <gs:guidedsellingCheckoutProgressBar/>
+    
     <div class="row text-dark configure-package">
         <div ng-app="guidedselling">
             <div ng-controller="GuidedSellingController">
@@ -33,6 +34,9 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    </div>
     </div>
 
     <cms:pageSlot position="Section3" var="feature" element="div" class="section3 cms_disp-img_slot">
