@@ -15,21 +15,21 @@
 				<c:when test="${progressBarId eq checkoutStep.progressBarId}">
 					<c:set scope="page"  var="currentStepActive"  value="${checkoutStep.stepNumber}"/>
 					<li role="presentation" class="active">
-					    <a href="${stepUrl}" aria-controls="${checkoutStep.stepNumber}" role="tab" data-toggle="tab">
+					    <a href="#" onclick="window.location='${stepUrl}'" aria-controls="${checkoutStep.stepNumber}" role="tab" data-toggle="tab">
 					        <spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}.name" />
 					    </a>
 					</li>
 				</c:when>
 				<c:when test="${checkoutStep.stepNumber > currentStepActive }">
 					<li role="presentation">
-                        <a href="${stepUrl}" aria-controls="${checkoutStep.stepNumber}" role="tab" data-toggle="tab">
+                        <a href="#" onclick="window.location='${stepUrl}'" aria-controls="${checkoutStep.stepNumber}" role="tab" data-toggle="tab">
                     	    <spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}.name" />
                     	</a>
                     </li>
 				</c:when>
 				<c:otherwise>
 					<li role="presentation">
-                        <a href="${stepUrl}" aria-controls="${checkoutStep.stepNumber}" role="tab" data-toggle="tab">
+                        <a href="#" onclick="window.location='${stepUrl}'" aria-controls="${checkoutStep.stepNumber}" role="tab" data-toggle="tab">
                     	    <spring:theme code="guidedselling.checkout.step${checkoutStep.stepNumber}.name" />
                     	</a>
                     </li>

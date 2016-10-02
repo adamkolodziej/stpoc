@@ -17,7 +17,7 @@
     <div class="container">
 
     <gs:guidedsellingCheckoutProgressBar/>
-    
+
     <div class="row text-dark configure-package">
         <div ng-app="guidedselling">
             <div ng-controller="GuidedSellingController">
@@ -39,7 +39,4 @@
     </div>
     </div>
 
-    <cms:pageSlot position="Section3" var="feature" element="div" class="section3 cms_disp-img_slot">
-        <cms:component component="${feature}"/>
-    </cms:pageSlot>
 </template:page>
