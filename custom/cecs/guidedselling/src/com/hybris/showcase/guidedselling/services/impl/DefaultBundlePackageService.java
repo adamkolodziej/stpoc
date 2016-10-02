@@ -4,11 +4,13 @@ import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.hybris.showcase.guidedselling.model.BundlePackageModel;
@@ -46,7 +48,17 @@ public class DefaultBundlePackageService implements BundlePackageService
 		modelService.saveAll(entries);
 	}
 
-	public ModelService getModelService()
+    @Override
+    public BundlePackageModel getFirstPackage() {
+		FlexibleSearchQuery flexibleSearchQuery = new FlexibleSearchQuery("SELECT pk FROM {BundlePackage}");
+		List<BundlePackageModel> result = flexibleSearchService.<BundlePackageModel>search(flexibleSearchQuery).getResult();
+		if (CollectionUtils.isEmpty(result)) {
+			return null;
+		}
+		return result.get(0);
+    }
+
+    public ModelService getModelService()
 	{
 		return modelService;
 	}

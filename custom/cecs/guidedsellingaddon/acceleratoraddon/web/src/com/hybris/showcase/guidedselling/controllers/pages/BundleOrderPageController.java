@@ -8,6 +8,7 @@ import de.hybris.platform.addonsupport.controllers.page.AbstractAddOnPageControl
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.ContentPageModel;
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.order.CartService;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -42,43 +43,40 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.*;
  */
 @Controller
 @RequestMapping("/guidedselling/order")
-public class BundleOrderPageController extends AbstractAddOnPageController
-{
-	private static final String ORDER_RECAP_PAGE = "order-recap";
-	private static final Logger LOG = Logger.getLogger(BundleOrderPageController.class);
+public class BundleOrderPageController extends AbstractAddOnPageController {
+    private static final String ORDER_RECAP_PAGE = "order-recap";
+    private static final Logger LOG = Logger.getLogger(BundleOrderPageController.class);
 
-	@Resource(name = "guidedSellingFacade")
-	private OnePageGuidedSellingFacade guidedSellingFacade;
+    @Resource(name = "guidedSellingFacade")
+    private OnePageGuidedSellingFacade guidedSellingFacade;
 
-	@Resource(name = "acceleratorCheckoutFacade")
-	private BundleAcceleratorCheckoutFacade checkoutFacade;
+    @Resource(name = "acceleratorCheckoutFacade")
+    private BundleAcceleratorCheckoutFacade checkoutFacade;
 
-	// CECS-220: Send product info to SBG on placing order
-	@Resource(name = "subscriptionFacade")
-	private SubscriptionFacade subscriptionFacade;
+    // CECS-220: Send product info to SBG on placing order
+    @Resource(name = "subscriptionFacade")
+    private SubscriptionFacade subscriptionFacade;
 
-	// CECS-220: Send product info to SBG on placing order
-	@Resource(name = "userService")
-	private UserService userService;
+    // CECS-220: Send product info to SBG on placing order
+    @Resource(name = "userService")
+    private UserService userService;
 
-	@Resource(name = "cartService")
-	private CartService cartService;
+    @Resource(name = "cartService")
+    private CartService cartService;
 
     @Resource(name = "creditCheckFacade")
     private CreditCheckFacade creditCheckFacade;
 
     @Resource(name = "themeSource")
     private MessageSource themeSource;
-    
- 	@Resource(name = "showOrderCheckoutStep")
- 	private CheckoutStep showOrderCheckoutStep;	
 
-	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public String placeOrder(final Model model, @ModelAttribute final BundleOrderForm bundleOrderForm,
-			final RedirectAttributes redirectAttributes)
-	{
-        if(!creditCheckFacade.checkCreditForCurrentCustomer())
-        {
+    @Resource(name = "showOrderCheckoutStep")
+    private CheckoutStep showOrderCheckoutStep;
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String placeOrder(final Model model, @ModelAttribute final BundleOrderForm bundleOrderForm,
+                             final RedirectAttributes redirectAttributes) {
+        if (!creditCheckFacade.checkCreditForCurrentCustomer()) {
             final String paymentSelectionError = themeSource.getMessage(
                     "guidedselling.creditcheck.insufficientfunds", null,
                     "Insufficient funds!", getI18nService().getCurrentLocale());
@@ -87,80 +85,74 @@ public class BundleOrderPageController extends AbstractAddOnPageController
                     + bundleOrderForm.getSourcePackageCode();
         }
 
-		String orderPlacedFlashMessageKey = "guidedselling.order.placed";
-		if (cartService.getSessionCart().getOrderChanges() != null)
-		{
-			orderPlacedFlashMessageKey = "guidedselling.order.updated";
-		}
+        String orderPlacedFlashMessageKey = "guidedselling.order.placed";
+        if (cartService.getSessionCart().getOrderChanges() != null) {
+            orderPlacedFlashMessageKey = "guidedselling.order.updated";
+        }
 
-		checkoutFacade.authorizePayment("");
-		OrderData orderData = null;
-		try
-		{
-			orderData = checkoutFacade.placeOrder();
+        checkoutFacade.authorizePayment("");
+        OrderData orderData = null;
+        try {
+            updateCartPackageInfo(bundleOrderForm);
+            orderData = checkoutFacade.placeOrder();
 
-			// CECS-220: Send product info to SBG on placing order - START
-			subscriptionFacade.createSubscriptions(orderData, new HashMap<String, String>());
-			// CECS-220: Send product info to SBG on placing order - END
+            // CECS-220: Send product info to SBG on placing order - START
+            subscriptionFacade.createSubscriptions(orderData, new HashMap<String, String>());
+            // CECS-220: Send product info to SBG on placing order - END
 
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER, orderPlacedFlashMessageKey, null);
+            GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER, orderPlacedFlashMessageKey, null);
 
-			return REDIRECT_PREFIX + "/guidedselling/order/show/" + orderData.getCode();
-		}
-		catch (final InvalidCartException e)
-		{
-			LOG.error("Unable to place bundle order", e);
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER, e.getMessage(), null);
+            return REDIRECT_PREFIX + "/guidedselling/order/show/" + orderData.getCode();
+        } catch (final InvalidCartException e) {
+            LOG.error("Unable to place bundle order", e);
+            GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER, e.getMessage(), null);
 
-			if (StringUtils.isNotBlank(bundleOrderForm.getSourcePackageCode()))
-			{
-				return REDIRECT_PREFIX + "/guidedselling/" + bundleOrderForm.getRootBundleTemplateId() + "/package/"
-						+ bundleOrderForm.getSourcePackageCode();
-			}
-			else
-			{
-				return REDIRECT_PREFIX + "/guidedselling/" + bundleOrderForm.getRootBundleTemplateId() + "/conditional/"
-						+ bundleOrderForm.getSourceProductCode();
-			}
-		}
-		catch (final SubscriptionFacadeException e)
-		{
-			// CECS-220: Send product info to SBG on placing order
-			LOG.error("Unable to create subscriptions for order", e);
+            if (StringUtils.isNotBlank(bundleOrderForm.getSourcePackageCode())) {
+                return REDIRECT_PREFIX + "/guidedselling/" + bundleOrderForm.getRootBundleTemplateId() + "/package/"
+                        + bundleOrderForm.getSourcePackageCode();
+            } else {
+                return REDIRECT_PREFIX + "/guidedselling/" + bundleOrderForm.getRootBundleTemplateId() + "/conditional/"
+                        + bundleOrderForm.getSourceProductCode();
+            }
+        } catch (final SubscriptionFacadeException e) {
+            // CECS-220: Send product info to SBG on placing order
+            LOG.error("Unable to create subscriptions for order", e);
 
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER, orderPlacedFlashMessageKey, null);
+            GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER, orderPlacedFlashMessageKey, null);
 
-			return REDIRECT_PREFIX + "/guidedselling/order/show/" + orderData.getCode();
-		}
-	}
+            return REDIRECT_PREFIX + "/guidedselling/order/show/" + orderData.getCode();
+        }
+    }
 
-	@RequestMapping(value = "/show/{orderCode}", method = RequestMethod.GET)
-	@RequireHardLogIn
-	public String orderRecap(final Model model, @PathVariable("orderCode") final String orderCode) throws CMSItemNotFoundException
-	{
-		final ContentPageModel page = getContentPageForLabelOrId(ORDER_RECAP_PAGE);
-		storeCmsPageInModel(model, page);
-		setUpMetaDataForContentPage(model, page);
+    private void updateCartPackageInfo(BundleOrderForm bundleOrderForm) {
+        CartModel sessionCart = cartService.getSessionCart();
+        sessionCart.setSourcePackageCode(bundleOrderForm.getRootBundleTemplateId());
+        sessionCart.setSourceProductCode(bundleOrderForm.getSourcePackageCode());
+        cartService.setSessionCart(sessionCart);
+    }
 
-		final BundleOfferData offer = guidedSellingFacade.getBundleOffer(orderCode, 1);
-		model.addAttribute("offer", offer);
-		
-		final Map<String, String> transitions = showOrderCheckoutStep.getTransitions();
-		final Map<String, String> transitionsNew = new HashMap<>();
-		for (final Map.Entry<String, String> entry : transitions.entrySet())
-		{
-			if (entry.getKey().toString().equals("next"))
-			{
-				transitionsNew.put(entry.getKey(), "redirect:/guidedselling/order/show/" + orderCode);
-			}
-			else
-			{
-				transitionsNew.put(entry.getKey(), entry.getValue());
-			}
-		}
-		showOrderCheckoutStep.setTransitions(transitionsNew);
+    @RequestMapping(value = "/show/{orderCode}", method = RequestMethod.GET)
+    @RequireHardLogIn
+    public String orderRecap(final Model model, @PathVariable("orderCode") final String orderCode) throws CMSItemNotFoundException {
+        final ContentPageModel page = getContentPageForLabelOrId(ORDER_RECAP_PAGE);
+        storeCmsPageInModel(model, page);
+        setUpMetaDataForContentPage(model, page);
 
-		return GuidedsellingaddonControllerConstants.Views.Pages.Order.RecapPage;
-	}
+        final BundleOfferData offer = guidedSellingFacade.getBundleOffer(orderCode, 1);
+        model.addAttribute("offer", offer);
+
+        final Map<String, String> transitions = showOrderCheckoutStep.getTransitions();
+        final Map<String, String> transitionsNew = new HashMap<>();
+        for (final Map.Entry<String, String> entry : transitions.entrySet()) {
+            if (entry.getKey().toString().equals("next")) {
+                transitionsNew.put(entry.getKey(), "redirect:/guidedselling/order/show/" + orderCode);
+            } else {
+                transitionsNew.put(entry.getKey(), entry.getValue());
+            }
+        }
+        showOrderCheckoutStep.setTransitions(transitionsNew);
+
+        return GuidedsellingaddonControllerConstants.Views.Pages.Order.RecapPage;
+    }
 
 }

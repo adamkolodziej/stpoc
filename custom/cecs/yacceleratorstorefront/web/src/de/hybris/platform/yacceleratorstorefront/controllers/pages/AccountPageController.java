@@ -266,6 +266,7 @@ public class AccountPageController extends AbstractSearchPageController {
         }
         List<OrderData> orderData = orders
                 .stream()
+                .filter(orderModel -> orderModel.getParent() == null)
                 .map(order -> orderFacade.getOrderDetailsForCode(order.getCode()))
                 .collect(Collectors.toList());
 
@@ -277,12 +278,13 @@ public class AccountPageController extends AbstractSearchPageController {
     public String orders(@RequestParam(value = "page", defaultValue = "0") final int page,
                          @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
                          @RequestParam(value = "sort", required = false) final String sortCode, final Model model) throws CMSItemNotFoundException {
-        fillOrderModel(page, showMode, sortCode, model);
+        //fillOrderModel(page, showMode, sortCode, model);
 
         storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
         setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
         model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.orderHistory"));
         model.addAttribute("metaRobots", "noindex,nofollow");
+        fillOrdersModel(model);
         return getViewForPage(model);
     }
 

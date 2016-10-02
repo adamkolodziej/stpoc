@@ -16,4 +16,6 @@ public interface BundlePackageService
 	BundlePackageModel getPackageByCode(String packageCode);
 
 	void setPackageOnCartEntries(BundlePackageModel packageModel, AbstractOrderModel order, Set<ProductModel> selectedProducts);
+
+	BundlePackageModel getFirstPackage();
 }

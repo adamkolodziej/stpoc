@@ -22,6 +22,14 @@
                     <description>Delivery Date for the Order</description>
                     <persistence type="property"/>
                 </attribute>
+                <attribute qualifier="sourcePackageCode" type="java.lang.String">
+                    <description>Source Package Name</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="sourceProductCode" type="java.lang.String">
+                    <description>Source Product Code</description>
+                    <persistence type="property"/>
+                </attribute>
             </attributes>
         </itemtype>
     </itemtypes>

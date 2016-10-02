@@ -118,8 +118,8 @@
                                     <c:forEach items="${orders}" var="order">
                                         <tr>
                                             <th scope="row">${order.code}</th>
-                                            <td>${order.entries[0].component.name}</td>
-                                            <td>${order.entries[0].rootBundleTemplate.name}</td>
+                                            <td>${order.sourceProductCode}</td>
+                                            <td>${order.sourcePackageCode}</td>
                                             <td>N/D</td>
                                             <!-- Toggle for modal window -->
                                             <td>
