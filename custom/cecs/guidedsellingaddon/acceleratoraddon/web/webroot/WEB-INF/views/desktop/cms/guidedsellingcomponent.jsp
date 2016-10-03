@@ -10,98 +10,6 @@
 <%@ taglib prefix="gs" tagdir="/WEB-INF/tags/addons/guidedsellingaddon/desktop/guidedselling"%>
 <c:set var="descriptionActive" value="false"/>
 
-<div class="${cssClass} offerComponentsHidden"
-     ng-class="{offerComponentsHidden: !isLoadFinished(), offerComponentsShown: isLoadFinished()}">
-    <c:if test="${not empty headline}">
-        <h2>${headline}</h2>
-    </c:if>
-    <div>
-        <ul>
-            <c:forEach var="msg" items="${offer.messages}">
-                <li class="alert ${msg.severity == 'ERROR' ? 'alert-danger' : ''}">
-                    <span>${msg.content}</span>
-                </li>
-            </c:forEach>
-            <li ng-repeat="msg in offer.messages" ng-class="{'alert':true, 'alert-danger':(msg.severity=='ERROR')}">
-                <span ng-bind="msg.content"></span>
-            </li>
-        </ul>
-
-        <%-- CECS-188 guidedselling: open in edit mode focused on TV Addons - TCO --%>
-        <div ng-if="offer.focusedComponentId != undefined">
-            <div class="jumbotron">
-                <p>
-                    <spring:theme code="guidedselling.toggle.hidden.label" text="Some options may be hidden."/>
-                </p>
-                <a href="" ng-click="toggleHiddenComponents()" class="btn btn-primary btn-sm">
-                    <spring:theme code="guidedselling.toggle.hidden" text="Toggle extra components"/>
-                </a>
-            </div>
-        </div>
-
-        <div class="options">
-            <c:forEach var="comp" items="${offer.components}" varStatus="st">
-                <c:if test="${not empty comp.options}">
-                    <!-- START: component #${st.index} id: ${comp.id} -->
-                    <div class="row" ng-if="isVisibleComponent(offer.components[${st.index}])"
-                         ng-hide="shouldComponentBeHidden(offer.components[${st.index}])">
-                        <div class="col-xs-12 category">
-                            <h3 id="${comp.id}" class="n-category-header">{{offer.components[${st.index}].name}}</h3>
-                            <ul>
-                                <c:forEach var="msg" items="${offer.components[st.index].messages}">
-                                    <li class="alert ${msg.severity == 'ERROR' ? 'alert-danger' : ''}">
-                                        <span>${msg.content}</span>
-                                    </li>
-                                </c:forEach>
-                                <li ng-repeat="msg in offer.components[${st.index}].messages"
-                                    ng-class="{'alert':true, 'alert-danger':(msg.severity=='ERROR')}">
-                                    <span ng-bind="msg.content"></span>
-                                </li>
-                            </ul>
-                            <div class="collapse" ng-class="{'in':offer.components[${st.index}].disabled}">
-                                <spring:theme code="guidedselling.missing.required.component" text="{0} is required"
-                                              arguments="{{offer.components[${st.index}].disabledByDependencyMessage}}"/>
-                            </div>
-                            <div class="collapse" ng-class="{'in':offer.components[${st.index}].disabled == false}">
-                                <div class="row">
-                                    <div ng-repeat="opt in offer.components[${st.index}].options" data-toggle="tooltip"
-                                         data-placement="top" title="{{opt.label}}"
-                                         class="n-category-option js-entitlement-option col-xs-12 col-sm-6 col-md-4"
-                                         ng-class="{'discounted':opt.bundleRuleChangedPrice != null}"
-                                         ng-if="!shouldBeHidden(opt)">
-                                        <div class="box no-padding">
-                                            <div class="status">
-                                                <span ng-if="opt.addedToExistingContract" class="label label-primary"><spring:theme
-                                                        code="guidedselling.added" text="Added"/></span>
-                                                <span ng-if="opt.removedFromExistingContract"
-                                                      class="label label-primary"><spring:theme
-                                                        code="guidedselling.removed" text="Removed"/></span>
-                                            </div>
-                                            <div class="details">
-                                                <gs:ngOptionHeader ngProduct="opt.product" format="zoom"/>
-                                                <!-- CECS-95 - ability to show entitlements on the products - START -->
-                                                <gs:ngEntitlements ngOption="opt"/>
-                                                <!-- CECS-95 - ability to show entitlements on the products - END -->
-                                                <gs:ngUsageCharges ngOption="opt"/>
-                                            </div>
-                                            <div class="category-footer"
-                                                 ng-class="{'selected':opt.selected,'disabled':isDisabled(opt)}">
-                                                <gs:ngSelector component="${comp}" ngOption="opt"
-                                                               ngComponent="offer.components[${st.index}]"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </c:if>
-                <!-- END: component #${st.index} id: ${comp.id} -->
-            </c:forEach>
-        </div>
-    </div>
-</div>
-
 <div class="row">
     <div class="col-xs-12">
         <p class="font-24 color-mid-gray no-margin-bottom margin-top-30">
@@ -113,7 +21,7 @@
 
 <div class="row">
 
-    <c:forEach var="comp" items="${offer.components}" varStatus="st">
+    <c:forEach var="comp" items="${offer.components}" varStatus="status">
         <c:if test="${not empty comp.options}">
             <div class="col-xs-4" style="margin-bottom:5px">
                 <!-- Box -->
@@ -144,28 +52,57 @@
                                             </c:if>
                                             ${ent.usageCharge.usageChargeEntries[0].price.formattedValue}
                                         </li>
+
                                     </c:if>
                                 </c:forEach>
 
                             </ul>
-
-
+                            <!-- Button -->
+                            <div class="absolute-bottom padding-bottom-10 padding-top-10 padding-left-10 padding-right-40">
+                                <c:choose>
+                                    <c:when test="${opt.product.itemType eq 'ServicePlan'}">
+                                        <a href="#"
+                                           class="new-quotation-blue-box-add-button btn btn-white-gray btn-block font-16" data-prodid="${opt.product.code}">
+                                            Add for
+                                            ${opt.product.price.recurringChargeEntries[0].price.formattedValue}</a>
+                                    </c:when>
+                                    <c:when test="${opt.product.itemType eq 'Product'}">
+                                        <a href="#"
+                                           class="new-quotation-blue-box-add-button btn btn-white-gray btn-block font-16" data-prodid="${opt.product.code}">
+                                           Add for
+                                           ${opt.product.price.formattedValue}</a>
+                                    </c:when>
+                                </c:choose>
+                            </div>
                         </c:forEach>
                     </div>
 
-                     <span ng-bind="${ngOption}.product.price.formattedValue"></span>
 
-                    <!-- Button -->
-                    <div class="absolute-bottom padding-bottom-10 padding-top-10 padding-left-10 padding-right-10">
-                        <a href="#!"
-                           class="new-quotation-blue-box-remove-button btn btn-primary btn-block active font-16">Remove
-                            for $ 14.03</a>
-                        <a href="#!" class="new-quotation-blue-box-add-button btn btn-white-gray btn-block font-16">Add
-                            for
-                            $11.73</a>
-                    </div>
                 </div>
             </div>
         </c:if>
     </c:forEach>
 </div>
+<script type="text/javascript" src="${commonResourcePath}/js/jquery.1.11.3.min.js"></script>
+<script>
+<c:url value="/guidedselling/option/add" var="addToCartUrl"/>
+$( document ).ready(function() {
+    $( ".new-quotation-blue-box-add-button" ).on('click', function() {
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            contentType: 'application/json',
+            url: "${addToCartUrl}",
+            data: JSON.stringify( { "productCode": $(this).attr("data-prodid"), "bundleTemplateId" : "TriCast-TV", "bundleNo" : "${offer.bundleNo}"} ),
+            processData: false,
+            success: function( data, textStatus, jQxhr ){
+            debugger;
+
+            },
+            error: function( jqXhr, textStatus, errorThrown ){
+               alert("Error: " +  errorThrown );
+            }
+        });
+    });
+});
+</script>
