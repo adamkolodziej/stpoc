@@ -2,72 +2,113 @@
 #******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
 
 # Macros / Replacement Parameter definitions
-$productCatalog=sptelProductCatalog
-$productCatalogName=Sptel Product Catalog
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$productCatalog = sptelProductCatalog
+$productCatalogName = Sptel Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
 
 # Language
-$lang=en
+$lang = en
 
 
-UPDATE SubscriptionPricePlan;name;product(code, $catalogVersion)[unique=true];$catalogVersion;currency(isocode)[default=USD,unique=true]
-;Price Plan for Sport Channels;Sport;;
-;One month free Sport Channels price plan;Sport_trial;;
-;Price Plan for TCO Channels;TCO;;
-;Price Plan for All On-Demand;allOnDemand;;
-;Price Plan for Foreign Language Pack;foreignLanguagePackage;;
-;Price Plan for Phone Unlimited Weekend;phoneUnlimitedWeekend;;
-;Price Plan for Phone Unlimited Weekend and Evening;phoneUnlimitedWeekendEvening;;
-;Price Plan for TV Entertainment;tvEntertainment;;
-;Price Plan for TV Premium;tvPremium;;
-;Price Plan for TV Starter;tvStarter;;
+UPDATE SubscriptionPricePlan; name; product(code, $catalogVersion)[unique = true]; $catalogVersion; currency(isocode)[default = USD, unique = true]
+; Price Plan for Sport Channels                      ; Sport                        ; ;
+; One month free Sport Channels price plan           ; Sport_trial                  ; ;
+; Price Plan for TCO Channels                        ; TCO                          ; ;
+; Price Plan for All On-Demand                       ; allOnDemand                  ; ;
+; Price Plan for AF1 Voice                           ; af1Voice                     ; ;
+; Price Plan for EF2 Assured Data                    ; af2AssuredData               ; ;
+; Price Plan for EF Standard                         ; efStandard                   ; ;
+; Price Plan for AF3 Assured Data                    ; af3AssuredData               ; ;
+; Price Plan for Foreign Language Pack               ; foreignLanguagePackage       ; ;
+; Price Plan for Phone Unlimited Weekend             ; phoneUnlimitedWeekend        ; ;
+; Price Plan for Phone Unlimited Weekend and Evening ; phoneUnlimitedWeekendEvening ; ;
+; Price Plan for TV Entertainment                    ; tvEntertainment              ; ;
+; Price Plan for TV Premium                          ; tvPremium                    ; ;
+; Price Plan for TV Starter                          ; tvStarter                    ; ;
+; Price Plan for 4 mbps Bandwidth                    ; bandwidth4mbps               ; ;
+; Price Plan for 64 mbps Bandwidth                   ; bandwidth64mbps              ; ;
+; Price Plan for 1gbps Bandwidth                     ; bandwidth1gbps               ; ;
+; Base Charge for Virtual Router                     ; virtualRouter                ; ;
 
-UPDATE OneTimeChargeEntry;id[unique=true];$catalogVersion;name[lang=$lang]
-;OTCE_fibreBroadbandLimited_EUR;;Installation;
-;OTCE_fibreBroadbandLimited_USD;;Installation;
-;OTCE_fibreBroadbandUnlimited_EUR;;Installation;
-;OTCE_fibreBroadbandUnlimited_USD;;Installation;
-;OTCE_phoneUnlimitedWeekend_EUR;;Installation;
-;OTCE_phoneUnlimitedWeekend_USD;;Installation;
-;OTCE_pricePlan_tvEntertainment_EUR;;Installation;
-;OTCE_pricePlan_tvEntertainment_USD;;Installation;
-;OTCE_pricePlan_tvPremium_EUR;;Installation;
-;OTCE_pricePlan_tvPremium_USD;;Installation;
-;OTCE_pricePlan_tvStarter_EUR;;Installation;
-;OTCE_pricePlan_tvStarter_USD;;Installation;
-;OTCE_standardBroadband_EUR;;Installation;
-;OTCE_standardBroadband_USD;;Installation;
-;OTCE_superFibreUnlimited_EUR;;Installation;
-;OTCE_superFibreUnlimited_USD;;Installation;
+UPDATE OneTimeChargeEntry; id[unique = true]; $catalogVersion; name[lang = $lang]
+; OTCE_fibreBroadbandLimited_EUR     ; ; Installation ;
+; OTCE_fibreBroadbandLimited_USD     ; ; Installation ;
+; OTCE_fibreBroadbandUnlimited_EUR   ; ; Installation ;
+; OTCE_fibreBroadbandUnlimited_USD   ; ; Installation ;
+; OTCE_phoneUnlimitedWeekend_EUR     ; ; Installation ;
+; OTCE_phoneUnlimitedWeekend_USD     ; ; Installation ;
+; OTCE_pricePlan_tvEntertainment_EUR ; ; Installation ;
+; OTCE_pricePlan_tvEntertainment_USD ; ; Installation ;
+; OTCE_pricePlan_tvPremium_EUR       ; ; Installation ;
+; OTCE_pricePlan_tvPremium_USD       ; ; Installation ;
+; OTCE_pricePlan_tvStarter_EUR       ; ; Installation ;
+; OTCE_pricePlan_tvStarter_USD       ; ; Installation ;
+; OTCE_standardBroadband_EUR         ; ; Installation ;
+; OTCE_standardBroadband_USD         ; ; Installation ;
+; OTCE_superFibreUnlimited_EUR       ; ; Installation ;
+; OTCE_superFibreUnlimited_USD       ; ; Installation ;
 
-UPDATE RecurringChargeEntry;id[unique=true];$catalogVersion;label[lang=$lang]
-;RCE_fibreBroadbandLimited_EUR;;<strong>{0}</strong>/mo;
-;RCE_fibreBroadbandLimited_USD;;<strong>{0}</strong>/mo;
-;RCE_fibreBroadbandUnlimited_EUR;;<strong>{0}</strong>/mo;
-;RCE_fibreBroadbandUnlimited_USD;;<strong>{0}</strong>/mo;
-;RCE_phoneUnlimitedWeekendEvening_EUR;;<strong>{0}</strong>/mo;
-;RCE_phoneUnlimitedWeekendEvening_USD;;<strong>{0}</strong>/mo;
-;RCE_phoneUnlimitedWeekend_EUR;;<strong>{0}</strong>/mo;
-;RCE_phoneUnlimitedWeekend_USD;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_Sport_EUR;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_Sport_USD;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_Sport_trial_EUR;;<strong>1 mo free</strong>;
-;RCE_pricePlan_Sport_trial_USD;;<strong>1 mo free</strong>;
-;RCE_pricePlan_TCO_EUR;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_TCO_USD;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_allOnDemand_EUR;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_allOnDemand_USD;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_foreignLanguagePackage_EUR;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_foreignLanguagePackage_USD;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_tvEntertainment_EUR;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_tvEntertainment_USD;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_tvPremium_EUR;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_tvPremium_USD;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_tvStarter_EUR;;<strong>{0}</strong>/mo;
-;RCE_pricePlan_tvStarter_USD;;<strong>{0}</strong>/mo;
-;RCE_sptelWifi_EUR;;<strong>{0}</strong>/mo;
-;RCE_sptelWifi_USD;;<strong>{0}</strong>/mo;
-;RCE_standardBroadband_EUR;;<strong>{0}</strong>/mo;
-;RCE_standardBroadband_USD;;<strong>{0}</strong>/mo;
-;RCE_superFibreUnlimited_EUR;;<strong>{0}</strong>/mo;
-;RCE_superFibreUnlimited_USD;;<strong>{0}</strong>/mo;
+UPDATE RecurringChargeEntry; id[unique = true]; $catalogVersion; label[lang = $lang]
+; RCE_fibreBroadbandLimited_EUR                  ; ; <strong>{0}</strong>/mo    ;
+; RCE_fibreBroadbandLimited_USD                  ; ; <strong>{0}</strong>/mo    ;
+; RCE_fibreBroadbandUnlimited_EUR                ; ; <strong>{0}</strong>/mo    ;
+; RCE_fibreBroadbandUnlimited_USD                ; ; <strong>{0}</strong>/mo    ;
+; RCE_phoneUnlimitedWeekendEvening_EUR           ; ; <strong>{0}</strong>/mo    ;
+; RCE_phoneUnlimitedWeekendEvening_USD           ; ; <strong>{0}</strong>/mo    ;
+; RCE_phoneUnlimitedWeekend_EUR                  ; ; <strong>{0}</strong>/mo    ;
+; RCE_phoneUnlimitedWeekend_USD                  ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_Sport_EUR                        ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_Sport_USD                        ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_Sport_trial_EUR                  ; ; <strong>1 mo free</strong> ;
+; RCE_pricePlan_Sport_trial_USD                  ; ; <strong>1 mo free</strong> ;
+; RCE_pricePlan_TCO_EUR                          ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_TCO_USD                          ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_allOnDemand_EUR                  ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_af1Voice_EUR                     ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_af2AssuredData_EUR               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_efStandard_EUR                   ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_af3AssuredData_EUR               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_af1Voice_USD                     ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_af2AssuredData_USD               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_efStandard_USD                   ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_af3AssuredData_USD               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_foreignLanguagePackage_EUR       ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_foreignLanguagePackage_USD       ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_tvEntertainment_EUR              ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_tvEntertainment_USD              ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_tvPremium_EUR                    ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_tvPremium_USD                    ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_tvStarter_EUR                    ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_tvStarter_USD                    ; ; <strong>{0}</strong>/mo    ;
+; RCE_sptelWifi_EUR                              ; ; <strong>{0}</strong>/mo    ;
+; RCE_sptelWifi_USD                              ; ; <strong>{0}</strong>/mo    ;
+; RCE_standardBroadband_EUR                      ; ; <strong>{0}</strong>/mo    ;
+; RCE_standardBroadband_USD                      ; ; <strong>{0}</strong>/mo    ;
+; RCE_superFibreUnlimited_EUR                    ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_bandwidth4mbps_USD               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_bandwidth64mbps_USD              ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_bandwidth1gbps_USD               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_bandwidth4mbps_EUR               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_bandwidth64mbps_EUR              ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_bandwidth1gbps_EUR               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_ipVpnCloudConnection_EUR         ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_metroInternetCloudConnection_EUR ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_dataCenterCloudConnection_EUR    ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_ethernetAccess_EUR               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_fibreAccess_EUR                  ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_leasedLineAccess_EUR             ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_ipVpnCloudConnection_USD         ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_metroInternetCloudConnection_USD ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_dataCenterCloudConnection_USD    ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_ethernetAccess_USD               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_fibreAccess_USD                  ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_leasedLineAccess_USD             ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_ipVpnCloudConnection_GBP         ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_metroInternetCloudConnection_GBP ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_dataCenterCloudConnection_GBP    ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_ethernetAccess_GBP               ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_fibreAccess_GBP                  ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_leasedLineAccess_GBP             ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_virtualRouter_USD                ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_virtualRouter_EUR                ; ; <strong>{0}</strong>/mo    ;
+; RCE_pricePlan_virtualRouter_GBP                ; ; <strong>{0}</strong>/mo    ;

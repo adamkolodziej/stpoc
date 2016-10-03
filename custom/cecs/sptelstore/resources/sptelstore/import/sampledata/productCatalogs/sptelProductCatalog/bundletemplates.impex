@@ -1,6 +1,6 @@
 $productCatalog = sptelProductCatalog
 $catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
-$siteResource=jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import/sampledata/productCatalogs/$productCatalog/../productImages
+$siteResource = jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import/sampledata/productCatalogs/$productCatalog/../productImages
 
 
 INSERT_UPDATE BundleTemplateStatus; id[unique = true]; status(code)[default = approved]; $catalogVersion
@@ -8,42 +8,39 @@ INSERT_UPDATE BundleTemplateStatus; id[unique = true]; status(code)[default = ap
 
 # Insert BundleTemplates
 INSERT_UPDATE BundleTemplate; id[unique = true]; bundleComponentType(code); parentTemplate(id, version[default = 1.0], $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'BundleApproved']; $catalogVersion;
-; TriCast                  ; Other       ;
-; TriCast-TV               ; Conditional ;
-; TriCast-TV-Addons        ; AddOn       ;
-; TriCast-Phone            ; AddOn       ;
-; TriCast-Phone-Addons     ; AddOn       ;
-; TriCast-Phone-Device     ; AddOn       ;
-; TriCast-Broadband        ; AddOn       ;
-; TriCast-Broadband-Addon  ; AddOn       ;
-; TriCast-Broadband-Router ; AddOn       ;
-; TriCast-Decoders         ; AddOn       ;
-
-
-
+; Connectivity    ; Other       ;
+; ClassOfService  ; Conditional ;
+; Bandwidth       ; AddOn       ;
+; VirtualRouter   ; AddOn       ;
+; CloudConnection ; AddOn       ;
+; VirtualSwitch   ; AddOn       ;
+; Access          ; AddOn       ;
+; Topology        ; AddOn       ;
+; HardwareRouter  ; AddOn       ;
+; HardwareSwitch  ; AddOn       ;
 
 # Set the child templates again to make sure that the sequence of child templates is correct
-UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; childTemplates(id, version[default = 1.0], $catalogVersion); $catalogVersion
-; TriCast ; ; TriCast-TV, TriCast-TV-Addons, TriCast-Phone, TriCast-Phone-Addons, TriCast-Phone-Device, TriCast-Broadband, TriCast-Broadband-Addon, TriCast-Broadband-Router, TriCast-Decoders
+INSERT_UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; childTemplates(id, version[default = 1.0], $catalogVersion); $catalogVersion
+; Connectivity ; ; ClassOfService, Bandwidth, VirtualRouter, CloudConnection, VirtualRouter, Access, Topology, HardwareRouter, HardwareSwitch, VirtualSwitch
 
 
 # Bundle dependencies
 UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; requiredBundleTemplates(id, version[default = 1.0], $catalogVersion); $catalogVersion
-; TriCast-Phone-Addons     ; ; TriCast-Phone
-; TriCast-Phone-Device     ; ; TriCast-Phone
-; TriCast-Broadband        ; ; TriCast-Phone
-; TriCast-Broadband-Addon  ; ; TriCast-Broadband
-; TriCast-Broadband-Router ; ; TriCast-Broadband
-; TriCast-TV               ; ;
-; TriCast-TV-Addons        ; ; TriCast-TV
-; TriCast-Decoders         ; ; TriCast-TV
+; CloudConnection ; ; VirtualRouter
+; VirtualSwitch   ; ; VirtualRouter
+; Access          ; ; VirtualRouter
+; Topology        ; ; Access
+; HardwareRouter  ; ; Access
+; ClassOfService  ; ;
+; Bandwidth       ; ; ClassOfService
+; HardwareSwitch  ; ; ClassOfService
 
 # TODO maybe we should create separate file with full data for bundle packages
 INSERT_UPDATE BundlePackage; code[unique = true]; bundleTemplate(id[default = 'TriCast'], version[default = 1.0], $catalogVersion); selectedProducts(code, $catalogVersion); $catalogVersion
-; superFibrePremium  ; ; phoneUnlimitedWeekend, superFibreUnlimited, tvPremium, fibreRouter, decoderPlus, sptelWifi
-; fibreEntertainment ; ; phoneUnlimitedWeekend, fibreBroadbandUnlimited, tvEntertainment, fibreRouter, decoderPlus, sptelWifi
-; fibreStarter       ; ; phoneUnlimitedWeekend, fibreBroadbandUnlimited, tvStarter, fibreRouter, decoderPlus, sptelWifi
-; standardStarter    ; ; phoneUnlimitedWeekend, fibreBroadbandUnlimited, tvStarter, fibreRouter
+; ipVpn                  ; Connectivity ; af1Voice, bandwidth1gbps, ipVpnCloudConnection, ethernetAccess, virtualRouter
+; metroInternet          ; Connectivity ; af1Voice, bandwidth1gbps, metroInternetCloudConnection, ethernetAccess
+; dataCenterInterconnect ; Connectivity ; bandwidth1gbps, dataCenterCloudConnection, ethernetAccess
+; darkFiber              ; Connectivity ; af1Voice
 
 INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; mime[default = 'image/png']; $catalogVersion; folder(qualifier)[default = images]
 ; desktop ; Bundle01.png ; $siteResource/Bundle01a_thumbnail.png ; Bundle01_thumbnail.png
@@ -51,8 +48,8 @@ INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[transla
 ; desktop ; Bundle03.png ; $siteResource/Bundle03a_thumbnail.png ; Bundle03_thumbnail.png
 ; desktop ; Bundle04.png ; $siteResource/Bundle04a_thumbnail.png ; Bundle04_thumbnail.png
 
-UPDATE BundlePackage; code[unique = true]; image(code, $catalogVersion); thumbnail(code, $catalogVersion); $catalogVersion
-; superFibrePremium  ; Bundle01.png ; Bundle01.png
-; fibreEntertainment ; Bundle02.png ; Bundle02.png
-; fibreStarter       ; Bundle03.png ; Bundle03.png
-; standardStarter    ; Bundle04.png ; Bundle04.png
+INSERT_UPDATE BundlePackage; code[unique = true]; image(code, $catalogVersion); thumbnail(code, $catalogVersion); $catalogVersion
+; ipVpn                  ; Bundle01.png ; Bundle01.png
+; metroInternet          ; Bundle02.png ; Bundle02.png
+; dataCenterInterconnect ; Bundle03.png ; Bundle03.png
+; darkFiber              ; Bundle04.png ; Bundle04.png

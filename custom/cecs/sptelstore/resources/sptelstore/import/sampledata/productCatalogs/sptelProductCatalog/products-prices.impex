@@ -15,7 +15,7 @@ INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[
 ; pricePlan_fibreBroadbandLimited_USD        ; fibreBroadbandLimited
 ; pricePlan_fibreBroadbandUnlimited_USD      ; fibreBroadbandUnlimited
 ; pricePlan_superFibreUnlimited_USD          ; superFibreUnlimited
-; pricePlan_sptelWifi_USD                  ; sptelWifi
+; pricePlan_sptelWifi_USD                    ; sptelWifi
 ; pricePlan_tvStarter_USD                    ; tvStarter
 ; pricePlan_tvEntertainment_USD              ; tvEntertainment
 ; pricePlan_tvPremium_USD                    ; tvPremium
@@ -24,6 +24,20 @@ INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[
 ; pricePlan_TCO_USD                          ; TCO
 ; pricePlan_foreignLanguagePackage_USD       ; foreignLanguagePackage
 ; pricePlan_allOnDemand_USD                  ; allOnDemand
+; pricePlan_af1Voice_USD                     ; af1Voice
+; pricePlan_af2AssuredData_USD               ; af2AssuredData
+; pricePlan_efStandard_USD                   ; efStandard
+; pricePlan_af3AssuredData_USD               ; af3AssuredData
+; pricePlan_bandwidth4mbps_USD               ; bandwidth4mbps
+; pricePlan_bandwidth64mbps_USD              ; bandwidth64mbps
+; pricePlan_bandwidth1gbps_USD               ; bandwidth1gbps
+; pricePlan_ipVpnCloudConnection_USD         ; ipVpnCloudConnection
+; pricePlan_metroInternetCloudConnection_USD ; metroInternetCloudConnection
+; pricePlan_dataCenterCloudConnection_USD    ; dataCenterCloudConnection
+; pricePlan_ethernetAccess_USD               ; ethernetAccess
+; pricePlan_fibreAccess_USD                  ; fibreAccess
+; pricePlan_leasedLineAccess_USD             ; leasedLineAccess
+; pricePlan_virtualRouter_USD                ; virtualRouter
 
 # CECS-99: Sptel sampledata should support en/de languages and EUR/USD/GBP currencies - START
 INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[unique = true]; $catalogVersion; currency(isocode)[default = EUR, unique = true]; unit(code)[default = pieces]
@@ -33,7 +47,7 @@ INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[
 ; pricePlan_fibreBroadbandLimited_EUR        ; fibreBroadbandLimited
 ; pricePlan_fibreBroadbandUnlimited_EUR      ; fibreBroadbandUnlimited
 ; pricePlan_superFibreUnlimited_EUR          ; superFibreUnlimited
-; pricePlan_sptelWifi_EUR                  ; sptelWifi
+; pricePlan_sptelWifi_EUR                    ; sptelWifi
 ; pricePlan_tvStarter_EUR                    ; tvStarter
 ; pricePlan_tvEntertainment_EUR              ; tvEntertainment
 ; pricePlan_tvPremium_EUR                    ; tvPremium
@@ -42,6 +56,20 @@ INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[
 ; pricePlan_TCO_EUR                          ; TCO
 ; pricePlan_foreignLanguagePackage_EUR       ; foreignLanguagePackage
 ; pricePlan_allOnDemand_EUR                  ; allOnDemand
+; pricePlan_af1Voice_EUR                     ; af1Voice
+; pricePlan_af2AssuredData_EUR               ; af2AssuredData
+; pricePlan_efStandard_EUR                   ; efStandard
+; pricePlan_af3AssuredData_EUR               ; af3AssuredData
+; pricePlan_bandwidth4mbps_EUR               ; bandwidth4mbps
+; pricePlan_bandwidth64mbps_EUR              ; bandwidth64mbps
+; pricePlan_bandwidth1gbps_EUR               ; bandwidth1gbps
+; pricePlan_ipVpnCloudConnection_EUR         ; ipVpnCloudConnection
+; pricePlan_metroInternetCloudConnection_EUR ; metroInternetCloudConnection
+; pricePlan_dataCenterCloudConnection_EUR    ; dataCenterCloudConnection
+; pricePlan_ethernetAccess_EUR               ; ethernetAccess
+; pricePlan_fibreAccess_EUR                  ; fibreAccess
+; pricePlan_leasedLineAccess_EUR             ; leasedLineAccess
+; pricePlan_virtualRouter_EUR                ; virtualRouter
 
 INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[unique = true]; $catalogVersion; currency(isocode)[default = GBP, unique = true]; unit(code)[default = pieces]
 ; pricePlan_phoneUnlimitedWeekend_GBP        ; phoneUnlimitedWeekend
@@ -50,7 +78,7 @@ INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[
 ; pricePlan_fibreBroadbandLimited_GBP        ; fibreBroadbandLimited
 ; pricePlan_fibreBroadbandUnlimited_GBP      ; fibreBroadbandUnlimited
 ; pricePlan_superFibreUnlimited_GBP          ; superFibreUnlimited
-; pricePlan_sptelWifi_GBP                  ; sptelWifi
+; pricePlan_sptelWifi_GBP                    ; sptelWifi
 ; pricePlan_tvStarter_GBP                    ; tvStarter
 ; pricePlan_tvEntertainment_GBP              ; tvEntertainment
 ; pricePlan_tvPremium_GBP                    ; tvPremium
@@ -59,6 +87,20 @@ INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[
 ; pricePlan_TCO_GBP                          ; TCO
 ; pricePlan_foreignLanguagePackage_GBP       ; foreignLanguagePackage
 ; pricePlan_allOnDemand_GBP                  ; allOnDemand
+; pricePlan_af1Voice_GBP                     ; af1Voice
+; pricePlan_af2AssuredData_GBP               ; af2AssuredData
+; pricePlan_efStandard_GBP                   ; efStandard
+; pricePlan_af3AssuredData_GBP               ; af3AssuredData
+; pricePlan_bandwidth4mbps_GBP               ; bandwidth4mbps
+; pricePlan_bandwidth64mbps_GBP              ; bandwidth64mbps
+; pricePlan_bandwidth1gbps_GBP               ; bandwidth1gbps
+; pricePlan_ipVpnCloudConnection_GBP         ; ipVpnCloudConnection
+; pricePlan_metroInternetCloudConnection_GBP ; metroInternetCloudConnection
+; pricePlan_dataCenterCloudConnection_GBP    ; dataCenterCloudConnection
+; pricePlan_ethernetAccess_GBP               ; ethernetAccess
+; pricePlan_fibreAccess_GBP                  ; fibreAccess
+; pricePlan_leasedLineAccess_GBP             ; leasedLineAccess
+; pricePlan_virtualRouter_GBP                ; virtualRouter
 
 # CECS-99: Sptel sampledata should support en/de languages and EUR/USD/GBP currencies - END
 
@@ -100,7 +142,7 @@ INSERT_UPDATE RecurringChargeEntry; id[unique = true]; subscriptionPricePlanRecu
 ; RCE_fibreBroadbandLimited_USD                  ; pricePlan_fibreBroadbandLimited_USD        ; 6.5   ; 1 ;
 ; RCE_fibreBroadbandUnlimited_USD                ; pricePlan_fibreBroadbandUnlimited_USD      ; 15    ; 1 ;
 ; RCE_superFibreUnlimited_USD                    ; pricePlan_superFibreUnlimited_USD          ; 25    ; 1 ;
-; RCE_sptelWifi_USD                            ; pricePlan_sptelWifi_USD                  ; 2     ; 1 ;
+; RCE_sptelWifi_USD                              ; pricePlan_sptelWifi_USD                    ; 2     ; 1 ;
 ; RCE_pricePlan_tvStarter_USD                    ; pricePlan_tvStarter_USD                    ; 10    ; 1
 ; RCE_pricePlan_tvEntertainment_USD              ; pricePlan_tvEntertainment_USD              ; 12    ; 1
 ; RCE_pricePlan_tvPremium_USD                    ; pricePlan_tvPremium_USD                    ; 15    ; 1
@@ -117,7 +159,7 @@ INSERT_UPDATE RecurringChargeEntry; id[unique = true]; subscriptionPricePlanRecu
 ; RCE_fibreBroadbandLimited_EUR                  ; pricePlan_fibreBroadbandLimited_EUR        ; 5.75  ; 1 ;
 ; RCE_fibreBroadbandUnlimited_EUR                ; pricePlan_fibreBroadbandUnlimited_EUR      ; 13.25 ; 1 ;
 ; RCE_superFibreUnlimited_EUR                    ; pricePlan_superFibreUnlimited_EUR          ; 22    ; 1 ;
-; RCE_sptelWifi_EUR                            ; pricePlan_sptelWifi_EUR                  ; 1.75  ; 1 ;
+; RCE_sptelWifi_EUR                              ; pricePlan_sptelWifi_EUR                    ; 1.75  ; 1 ;
 ; RCE_pricePlan_tvStarter_EUR                    ; pricePlan_tvStarter_EUR                    ; 8.85  ; 1
 ; RCE_pricePlan_tvEntertainment_EUR              ; pricePlan_tvEntertainment_EUR              ; 10.65 ; 1
 ; RCE_pricePlan_tvPremium_EUR                    ; pricePlan_tvPremium_EUR                    ; 13.32 ; 1
@@ -132,7 +174,7 @@ INSERT_UPDATE RecurringChargeEntry; id[unique = true]; subscriptionPricePlanRecu
 ; RCE_pricePlan_fibreBroadbandLimited_GBP        ; pricePlan_fibreBroadbandLimited_GBP        ; 4.1   ; 1 ;
 ; RCE_pricePlan_fibreBroadbandUnlimited_GBP      ; pricePlan_fibreBroadbandUnlimited_GBP      ; 9.5   ; 1 ;
 ; RCE_pricePlan_superFibreUnlimited_GBP          ; pricePlan_superFibreUnlimited_GBP          ; 16    ; 1 ;
-; RCE_pricePlan_sptelWifi_GBP                  ; pricePlan_sptelWifi_GBP                  ; 1.3   ; 1 ;
+; RCE_pricePlan_sptelWifi_GBP                    ; pricePlan_sptelWifi_GBP                    ; 1.3   ; 1 ;
 ; RCE_pricePlan_tvStarter_GBP                    ; pricePlan_tvStarter_GBP                    ; 6.4   ; 1 ;
 ; RCE_pricePlan_tvEntertainment_GBP              ; pricePlan_tvEntertainment_GBP              ; 7.6   ; 1 ;
 ; RCE_pricePlan_tvPremium_GBP                    ; pricePlan_tvPremium_GBP                    ; 9.5   ; 1 ;
@@ -140,116 +182,44 @@ INSERT_UPDATE RecurringChargeEntry; id[unique = true]; subscriptionPricePlanRecu
 ; RCE_pricePlan_Sport_trial_GBP                  ; pricePlan_Sport_trial_GBP                  ; 0     ; 1 ;
 ; RCE_pricePlan_TCO_GBP                          ; pricePlan_TCO_GBP                          ; 4.5   ; 1 ;
 ; RCE_pricePlan_foreignLanguagePackage_GBP       ; pricePlan_foreignLanguagePackage_GBP       ; 1.9   ; 1 ;
-; RCE_pricePlan_allOnDemand_GBP                  ; pricePlan_allOnDemand_GBP                  ; 3.2   ; 1 ;
-
-# CECS-99: Sptel sampledata should support en/de languages and EUR/USD/GBP currencies - END
-# CECS-91: end
+; RCE_pricePlan_allOnDemand_USD                  ; pricePlan_allOnDemand_GBP                  ; 3.2   ; 1 ;
+; RCE_pricePlan_af1Voice_USD                     ; pricePlan_af1Voice_USD                     ; 3.2   ; 1 ;
+; RCE_pricePlan_af2AssuredData_USD               ; pricePlan_af2AssuredData_USD               ; 3.2   ; 1 ;
+; RCE_pricePlan_efStandard_USD                   ; pricePlan_efStandard_USD                   ; 3.2   ; 1 ;
+; RCE_pricePlan_af3AssuredData_USD               ; pricePlan_af3AssuredData_USD               ; 3.2   ; 1 ;
+; RCE_pricePlan_af1Voice_EUR                     ; pricePlan_af1Voice_EUR                     ; 3.2   ; 1 ;
+; RCE_pricePlan_af2AssuredData_EUR               ; pricePlan_af2AssuredData_EUR               ; 3.2   ; 1 ;
+; RCE_pricePlan_efStandard_EUR                   ; pricePlan_efStandard_EUR                   ; 3.2   ; 1 ;
+; RCE_pricePlan_af3AssuredData_EUR               ; pricePlan_af3AssuredData_EUR               ; 3.2   ; 1 ;
+; RCE_pricePlan_bandwidth4mbps_EUR               ; pricePlan_bandwidth4mbps_EUR               ; 3.2   ; 1 ;
+; RCE_pricePlan_bandwidth64mbps_EUR              ; pricePlan_bandwidth64mbps_EUR              ; 3.2   ; 1 ;
+; RCE_pricePlan_bandwidth1gbps_EUR               ; pricePlan_bandwidth1gbps_EUR               ; 3.2   ; 1 ;
+; RCE_pricePlan_bandwidth4mbps_USD               ; pricePlan_bandwidth4mbps_USD               ; 3.2   ; 1 ;
+; RCE_pricePlan_bandwidth64mbps_USD              ; pricePlan_bandwidth64mbps_USD              ; 3.2   ; 1 ;
+; RCE_pricePlan_bandwidth1gbps_USD               ; pricePlan_bandwidth1gbps_USD               ; 3.2   ; 1 ;
+; RCE_pricePlan_bandwidth4mbps_GBP               ; pricePlan_bandwidth4mbps_GBP               ; 3.2   ; 1 ;
+; RCE_pricePlan_bandwidth64mbps_GBP              ; pricePlan_bandwidth64mbps_GBP              ; 3.2   ; 1 ;
+; RCE_pricePlan_bandwidth1gbps_GBP               ; pricePlan_bandwidth1gbps_GBP               ; 3.2   ; 1 ;
+; RCE_pricePlan_ipVpnCloudConnection_EUR         ; pricePlan_ipVpnCloudConnection_EUR         ; 3.2   ; 1 ;
+; RCE_pricePlan_metroInternetCloudConnection_EUR ; pricePlan_metroInternetCloudConnection_EUR ; 3.2   ; 1 ;
+; RCE_pricePlan_dataCenterCloudConnection_EUR    ; pricePlan_dataCenterCloudConnection_EUR    ; 3.2   ; 1 ;
+; RCE_pricePlan_ethernetAccess_EUR               ; pricePlan_ethernetAccess_EUR               ; 3.2   ; 1 ;
+; RCE_pricePlan_fibreAccess_EUR                  ; pricePlan_fibreAccess_EUR                  ; 3.2   ; 1 ;
+; RCE_pricePlan_leasedLineAccess_EUR             ; pricePlan_leasedLineAccess_EUR             ; 3.2   ; 1 ;
+; RCE_pricePlan_ipVpnCloudConnection_USD         ; pricePlan_ipVpnCloudConnection_USD         ; 3.2   ; 1 ;
+; RCE_pricePlan_metroInternetCloudConnection_USD ; pricePlan_metroInternetCloudConnection_USD ; 3.2   ; 1 ;
+; RCE_pricePlan_dataCenterCloudConnection_USD    ; pricePlan_dataCenterCloudConnection_USD    ; 3.2   ; 1 ;
+; RCE_pricePlan_ethernetAccess_USD               ; pricePlan_ethernetAccess_USD               ; 3.2   ; 1 ;
+; RCE_pricePlan_fibreAccess_USD                  ; pricePlan_fibreAccess_USD                  ; 3.2   ; 1 ;
+; RCE_pricePlan_leasedLineAccess_USD             ; pricePlan_leasedLineAccess_USD             ; 3.2   ; 1 ;
+; RCE_pricePlan_ipVpnCloudConnection_GBP         ; pricePlan_ipVpnCloudConnection_GBP         ; 3.2   ; 1 ;
+; RCE_pricePlan_metroInternetCloudConnection_GBP ; pricePlan_metroInternetCloudConnection_GBP ; 3.2   ; 1 ;
+; RCE_pricePlan_dataCenterCloudConnection_GBP    ; pricePlan_dataCenterCloudConnection_GBP    ; 3.2   ; 1 ;
+; RCE_pricePlan_ethernetAccess_GBP               ; pricePlan_ethernetAccess_GBP               ; 3.2   ; 1 ;
+; RCE_pricePlan_fibreAccess_GBP                  ; pricePlan_fibreAccess_GBP                  ; 3.2   ; 1 ;
+; RCE_pricePlan_leasedLineAccess_GBP             ; pricePlan_leasedLineAccess_GBP             ; 3.2   ; 1 ;
+; RCE_pricePlan_virtualRouter_EUR                ; pricePlan_virtualRouter_EUR                ; 5.6   ; 1 ;
+; RCE_pricePlan_virtualRouter_USD                ; pricePlan_virtualRouter_USD                ; 5.6   ; 1 ;
+; RCE_pricePlan_virtualRouter_GBP                ; pricePlan_virtualRouter_GBP                ; 5.6   ; 1 ;
 
 UPDATE Product; code[unique = true]; $prices; $taxGroup; $catalogVersion
-# CECS-62: Add new products - START
-; pants_bp                ; 15.46 USD, 13.60 EUR, 9.8 GBP
-; t-shirt_bp              ; 12 USD, 10.60 EUR, 7.6 GBP, 20 CRD
-; hoodie                  ; 34.55 USD, 34.55 EUR, 21.90 GBP
-; cap                     ; 9.99 USD, 9.99 EUR, 6.3 GBP
-; headphones              ; 51.21 USD, 45.10 EUR, 32.5 GBP
-; shoes_man               ; 34.55 USD, 34.55 EUR, 21.90 GBP
-; shoes_woman_bp          ; 34.55 USD, 34.55 EUR, 21.90 GBP
-; sunglasses              ; 15.36 USD, 13.50 EUR, 9.75 GBP
-; watch                   ; 51.21 USD, 45.10 EUR, 32.5 GBP
-; dress                   ; 34.55 USD, 34.55 EUR, 21.90 GBP
-; handbag                 ; 34.55 USD, 34.55 EUR, 21.90 GBP
-; pants_charcoal          ; 15.46 USD, 13.60 EUR, 9.8 GBP
-; pants_maroon            ; 15.46 USD, 13.60 EUR, 9.8 GBP
-; t-shirt_black           ; 12 USD, 10.60 EUR, 7.6 GBP, 20 CRD
-; t-shirt_white           ; 12 USD, 10.60 EUR, 7.6 GBP, 20 CRD
-; shoes_woman_pink        ; 34.55 USD, 34.55 EUR, 21.90 GBP
-; shoes_woman_blue        ; 34.55 USD, 34.55 EUR, 21.90 GBP
-
-; joy                     ; 51.21 USD, 45.10 EUR, 32.5 GBP
-; joy-s01                 ; 15.36 USD, 13.50 EUR, 9.75 GBP
-; joy-s02                 ; 15.36 USD, 13.50 EUR, 9.75 GBP
-; joy-s03                 ; 15.36 USD, 13.50 EUR, 9.75 GBP
-; joy-s01-e01             ; 1.5 USD, 1.33 EUR, 0.95 GBP
-; joy-s01-e02             ; 1.5 USD, 1.33 EUR, 0.95 GBP
-; joy-s01-e03             ; 1.5 USD, 1.33 EUR, 0.95 GBP
-
-; the-boss                ; 65.30 USD, 65.30 EUR, 41.50 GBP
-; the-boss-s01            ; 15.46 USD, 13.60 EUR, 9.8 GBP
-; the-boss-s02            ; 15.46 USD, 13.60 EUR, 9.8 GBP
-; the-boss-s03            ; 15.46 USD, 13.60 EUR, 9.8 GBP
-; the-boss-s03-e01        ; 1.5 USD, 1.33 EUR, 0.95 GBP
-; the-boss-s03-e02        ; 1.5 USD, 1.33 EUR, 0.95 GBP
-; the-boss-s03-e03        ; 1.5 USD, 1.33 EUR, 0.95 GBP
-
-; venom                   ; 12 USD, 10.60 EUR, 7.6 GBP
-; venom-s01               ; 12 USD, 10.60 EUR, 7.6 GBP
-; venom-s02               ; 12 USD, 10.60 EUR, 7.6 GBP
-; venom-s03               ; 12 USD, 10.60 EUR, 7.6 GBP
-; venom-s01-e01           ; 1.5 USD, 1.33 EUR, 0.95 GBP
-; venom-s01-e02           ; 1.5 USD, 1.33 EUR, 0.95 GBP
-; venom-s01-e03           ; 1.5 USD, 1.33 EUR, 0.95 GBP
-
-; underworld              ; 85.77 USD, 75.50 EUR, 54.50 GBP
-; underworld-s01          ; 15.22 USD, 13.40 EUR, 9.66 GBP
-; underworld-s01-e01      ; 1.5 USD, 1.33 EUR, 0.95 GBP
-; underworld-s01-e02      ; 1.5 USD, 1.33 EUR, 0.95 GBP
-; underworld-s01-e03      ; 1.5 USD, 1.33 EUR, 0.95 GBP
-
-# CECS-436 video for gift entitlement
-; trekking-towards-danger ; 12.10 USD, 10.30 EUR, 9.50 GBP
-
-# CECS-91 improved bundle sampledata
-; phone                   ; 34.55 USD, 34.55 EUR, 21.90 GBP
-; standardRouter          ; 9.99 USD, 9.99 EUR, 6.3 GBP
-; fibreRouter             ; 15.99 USD, 15.99 EUR, 10.1 GBP
-; standardDecoder         ; 59.99 USD, 59.99 EUR, 38.1 GBP
-; decoderPlus             ; 79.99 USD, 79.99 EUR, 50.8 GBP
-# CECS-91: end
-
-; armagdedon_book   		  	;  19.99 USD, 17.55 EUR, 15.90 GBP
-; brother_roses_clas_tshirt   	;  9.99 USD, 8.55 EUR, 7.90 GBP
-; hpstrs_eco_bag				;  4.99 USD, 4.00 EUR, 3.00 GBP
-; joy_coffe_mug					; 	21.99 USD, 18.55 EUR, 16.90 GBP			
-; rebelion_womans_tshirt		; 19.99 USD, 17.55 EUR, 15.90 GBP
-; underworld_iphone				; 	23.99 USD, 19.55 EUR, 17.90 GBP		
-; venom_sweater					; 59.99 USD, 44.50 EUR, 36.79 GBP
-; casino_spundtrack				; 27.99 USD, 22.55 EUR, 19.90 GBP
-; land_tote_bag					; 6.99 USD,  5.99 EUR, 4.99 GBP
-; lemariage_collector			; 72.99 USD, 59.55 EUR, 45.90 GBP
-; plusdk_headphone              ; 79.99 USD, 62.55 EUR, 49.90 GBP
-; oakey_sunglas              	; 120.99 USD, 90.90 EUR, 70.50 GBP
-; official_clas_vneck_tshirt    ; 8.99 USD, 7.55 EUR, 6.90 GBP
-; nooka_watch              		; 32.99 USD, 25.55 EUR, 21.90 GBP
-; king_pillow              		; 29.99 USD, 24.44 EUR, 20.50 GBP
-; city_slick_soundtrack         ; 9.99 USD, 8.55 EUR, 7.55 GBP
-; renaissance_hoody             ; 39.99 USD, 30.90 EUR, 25.90 GBP
-; hockey_league_mug             ; 101.99 USD, 80.90 EUR, 70.90 GBP
-; renaissance_tote_bag          ; 4.99 USD, 4.00 EUR, 3.60 GBP
-
-; the-last-journey       ;  29.99 USD,  27.55 EUR,  25.90 GBP
-; 12-abandoned-voices    ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; 28-mornings            ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; a-doctor-on-board      ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; a-perfect-circle       ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; about-a-girl           ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; battle-of-wills        ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; call-the-nanny         ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; covered-noise          ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; croaking               ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; emmas-chaos-effect     ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; hockey-league          ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; hunters                ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; infinite-space         ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; jane-brennan           ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; keyon                  ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; megadon                ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; my-dog-benji           ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; oli                    ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; rock-on                ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; the-dutch-girl         ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; the-earthlings-stories ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; the-ides-of-august     ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; the-little-temple      ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; the-performer          ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; waltz-in-balzac        ;  19.99 USD,  17.55 EUR,  15.90 GBP
-; zathora                ;  19.99 USD,  17.55 EUR,  15.90 GBP
