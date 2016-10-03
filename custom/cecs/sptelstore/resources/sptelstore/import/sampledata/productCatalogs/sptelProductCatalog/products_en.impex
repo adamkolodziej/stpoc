@@ -84,6 +84,12 @@ UPDATE Product; code[unique = true]; $catalogVersion; name[lang = $lang]; summar
 ; bandwidth64mbps                ; ; "Bandwidth 64 Mbps"                      ; "Bandwidth 64 Mbps"                                      ; "Bandwidth 64 Mbps"
 ; bandwidth1gbps                 ; ; "Bandwidth 1Gbps"                        ; "Bandwidth 1Gbps"                                        ; "Bandwidth 1Gbps"
 ; virtualRouter                  ; ; "Virtual Router"                         ; "Virtual Router"                                         ; "Virtual Router"
+; ipVpnCloudConnection           ; ; "IP VPN Cloud Connection"                ; "IP VPN Cloud Connection"                                ; "IP VPN Cloud Connection"
+; metroInternetCloudConnection   ; ; "Metro Internet Cloud Connection"        ; "Metro Internet Cloud Connection"                        ; "Metro Internet Cloud Connection"
+; dataCenterCloudConnection      ; ; "Data Center Cloud Connection"           ; "Data Center Cloud Connection"                           ; "Data Center Cloud Connection"
+; ethernetAccess                 ; ; "Ethernet Access"                        ; "Ethernet Access"                                        ; "Ethernet Access"
+; fibreAccess                    ; ; "Fibre Access"                           ; "Fibre Access"                                           ; "Fibre Access"
+; leasedLineAccess               ; ; "Leased Access"                          ; "Leased Access"                                          ; "Leased Access"
 
 # Update MerchandiseVariantProducts with localisations
 UPDATE MerchandiseVariantProduct; code[unique = true]; $catalogVersion; name[lang = $lang]; summary[lang = $lang]; description[lang = $lang]
