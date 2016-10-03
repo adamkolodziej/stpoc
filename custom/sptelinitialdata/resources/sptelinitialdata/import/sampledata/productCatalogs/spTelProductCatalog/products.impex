@@ -12,7 +12,7 @@ $baseProduct=baseProduct(code,catalogVersion(catalog(id[default=$productCatalog]
 $unit=unit(code)[default='pieces']
 $termOfServiceRenewal=termOfServiceRenewal(code)[default='auto_renewing']
 $ruleType=ruleType(code)[default='ANY']
-
+$billingEvent=billingEvent(code)[default='onfirstbill']
 
 #Insert Devices
 INSERT_UPDATE Device;code[unique=true];name[lang=en];description[lang=en];$supercategories;$prices;$catalogVersion;$approved;$unit
@@ -139,11 +139,11 @@ INSERT_UPDATE SubscriptionTerm;id[unique=true];name[lang=en];termOfServiceFreque
 ;annually_3;3 Years contract - monthly billing;annually;3;;MonthlyPlan;false
 ;yearly_2;2 Years contract - yearly billing;annually;2;;AnnuallyPlan;false
 
-INSERT_UPDATE ServicePlan;code[unique=true];name[lang=en];description[lang=en];$prices;$supercategories;$catalogVersion;$approved;$unit;subscriptionTerm(id)
+INSERT_UPDATE ServicePlan;code[unique = true];name[lang = en];description[lang = en];$prices;$supercategories;$catalogVersion;$approved;$unit;subscriptionTerm(id)
 #Connectivity
-;BasicInternetPlan1Gbps;Basic Internet Plan - 1 gbps;Basic Internet Plan - 1 gbps;10,00 USD;Internet;;;;annually_1
-;Internet100MbpsPlan;Internet 100 mbps plan;Internet 100 mbps plan;5,00 USD;Internet;;;;annually_1
-;BasicInternetPlan10Gbps;Basic Internet Plan - 10 gbps;Basic Internet Plan - 10 gbps;20,00 USD;Internet;;;;annually_1
+;BasicInternetPlan1Gbps;Basic Internet Plan - 1 gbps 1 year;Basic Internet Plan - 1 gbps;10,00 USD;Internet;;;;annually_1
+;Internet100MbpsPlan;Internet 100 mbps plan 1 year; Internet 100 mbps plan;5,00 USD;Internet;;;;annually_1
+;BasicInternetPlan10Gbps;Basic Internet Plan - 10 gbps 1 year  ; Basic Internet Plan - 10 gbps 1 year;20,00 USD;Internet;;;;annually_1
 
 #Engineering
 ;A001;Essential Services;Essential Services;2,00 USD;Assistance;;;;annually_1
@@ -153,11 +153,93 @@ INSERT_UPDATE ServicePlan;code[unique=true];name[lang=en];description[lang=en];$
 ;TT001;Cloud recording 7 days;Cloud recording 7 days;2,00 USD;VideoRecording;;;;annually_1
 ;TT002;Cloud recording 1 month;Cloud recording 1 month;3,00 USD;VideoRecording;;;;annually_1
 
+# Insert Subscription Price Plan
+INSERT_UPDATE SubscriptionPricePlan;name;&pricePlan;product(code, $catalogVersion)[unique = true];$catalogVersion;currency(isocode)[default = USD, unique = true];$unit
+;Internet 1Gbps 1 year;BasicInternetPlan1Gbps_1y_spp;BasicInternetPlan1Gbps_1y;;;
+;I100mb 1 year;Internet100MbpsPlan_1y_spp;Internet100MbpsPlan;;;
+;Internet 10Gbps 1 year;BasicInternetPlan10Gbps_1y_spp;BasicInternetPlan10Gbps;;;
+;Secured VPN plan;SecuredVPN_1y_spp;SecuredVPN;;;
+;Static IP option plan;StaticIPOption_1y_spp;StaticIPOption;;;
+
+;Network coverage survey plan;NetworkCoverageSuvey_1y_spp;NetworkCoverageSuvey;;;
+;Automation compatibility survey plan;AutomationCompatibilitySurvey_1y_spp;AutomationCompatibilitySurvey;;;
+;Energy audit plan;EnergyAudit_1y_spp;EnergyAudit;;;
+;Full Survey plan;FullSurveyNetwork_1y_spp;FullSurveyNetwork;;;
+;Essential Services plan;A001_1y_spp;A001;;;
+;Home services plan;A002_1y_spp;A002;;;
+;Contractor site visit for networking issue plan;A003_1y_spp;A003;;;
+;Contractor site visit for electrical issue plan;A004_1y_spp;A004;;;
+;Installation service in a residential unit plan;Residential_U1_1y_spp;Residential_U1;;;
+;Installation service in a office unit plan;Office_U1_1y_spp;Office_U1;;;
+;Installation service in a residential estate plan;Residential_E1_1y_spp;Residential_E1;;;
+;Installation service in a office estate plan;Office_E1_1y_spp;Office_E1;;;
+
+;Video Recorder - 6 months plan;VCR001_1y_spp;VCR001;;;
+;Video Recorder - 1 month plan;VCR002_1y_spp;VCR002;;
+;Video Recorder - 12 months plan;VCR003_1y_spp;VCR003;;
+;Cloud recording 7 days plan;TT001_1y_spp;TT001;;;
+;Cloud recording 1 month plan;TT002_1y_spp;TT002;;;
+;Service Activation & Account Creation plan;TT003_1y_spp;TT003;;;
+
+#INSERT_UPDATE StockLevel;productCode[unique = true];available[default = 10];warehouse(code)[unique = true, default = warehouse_telco];inStockStatus(code)[default = forceInStock];maxPreOrder[default = 0]; maxStockLevelHistoryCount[default = -1]; overSelling[default = 0]; preOrder[default = 0]; reserved[default = 0]
+#;BasicInternetPlan1Gbps_1y;;;;;;;;
+#;BasicInternetPlan1Gbps_2y;;;;;;;;
+#;BasicInternetPlan1Gbps_3y;;;;;;;;
+#
+#;Internet100MbpsPlan_1y;;;;;;;;
+#;Internet100MbpsPlan_2y;;;;;;;;
+#;Internet100MbpsPlan_3y;;;;;;;;
+#
+#;BasicInternetPlan10Gbps_1y;;;;;;;;
+#;BasicInternetPlan10Gbps_2y;;;;;;;;
+#;BasicInternetPlan10Gbps_3y;;;;;;;;
+#
+#;A001;;;;;;;;
+#;A002;;;;;;;;
+#
+#;TT001;;;;;;;;
+#;TT002;;;;;;;;
+
+INSERT_UPDATE BillingEvent;code[unique=true];order;cartAware[default=true]
+;paynow;1
+;onfirstbill;2
+;oncancellation;0;false
+
+INSERT_UPDATE RecurringChargeEntry; id[unique = true]; subscriptionPricePlanRecurring(&pricePlan);price;cycleStart;cycleEnd;$catalogVersion
+;BasicInternetPlan1Gbps_1y_re;BasicInternetPlan1Gbps_1y_spp;10;1;;
+;Internet100MbpsPlan_1y_re;Internet100MbpsPlan_1y_spp;5;1;;
+;SecuredVPN_1y_re;SecuredVPN_1y_spp;5;1;;
+
+;A001_1y_re;A001_1y_spp;2;1;;
+;A002_1m_re;A001_1y_spp;5;1;;
+
+;TT001_1y_re;TT001_1y_spp;2;1;;
+;TT002_1y_re;TT001_1y_spp;3;1;;
+
+# Insert Onetime Charge Entries
+INSERT_UPDATE OneTimeChargeEntry;id[unique=true];subscriptionPricePlanOneTime(&pricePlan);price;$billingEvent;$catalogVersion
+;StaticIPOption_1y_oe;StaticIPOption_1y_spp;5;onfirstbill;
+
+;NetworkCoverageSuvey_1y_oe;NetworkCoverageSuvey_1y_spp;100;paynow;
+;AutomationCompatibilitySurvey_1y_oe;AutomationCompatibilitySurvey_1y_spp;100;paynow;
+;EnergyAudit_1y_oe;EnergyAudit_1y_spp;100;paynow;
+;FullSurveyNetwork_1y_oe;FullSurveyNetwork_1y_spp;150;paynow;
+;A003_1y_oe;A003_1y_spp;60;paynow;
+;A004_1y_oe;A004_1y_spp;100;paynow;
+;Residential_U1_1y_oe;Residential_U1_1y_spp;0;paynow;
+;Office_U1_1y_oe;Office_U1_1y_spp;0;paynow;
+;Residential_E1_1y_oe;Residential_E1_1y_spp;0;paynow;
+;Office_E1_1y_oe;Office_E1_1y_spp;0;paynow;
+
+;VCR001_1y_oe;VCR001_1y_spp;4000;paynow;
+;VCR002_1y_oe;VCR002_1y_spp;700;paynow;
+;VCR003_1y_oe;VCR003_1y_spp;5000;paynow;
+;TT003_1y_oe;TT003_1y_spp;5;onfirstbill;
+
 INSERT_UPDATE ServiceAddOn;code[unique=true];name[lang=en];description[lang=en];$prices;$supercategories;$catalogVersion;$approved;$unit;subscriptionTerm(id)
 #Internet
 ;SecuredVPN;Secured VPN;Secured VPN;5,00 USD;Internet;;;;annually_1
 ;StaticIPOption;Static IP option;Static IP option;0 USD;Internet;;;;none
-;TT003;Service Activation & Account Creation;Service Activation & Account Creation;5,00 USD;VideoRecording;;;;none
 
 #Engineering
 ;NetworkCoverageSuvey;Network coverage suvey;Network coverage suvey;100,00 USD;Survey;;;;none
@@ -172,6 +254,10 @@ INSERT_UPDATE ServiceAddOn;code[unique=true];name[lang=en];description[lang=en];
 ;Office_U1;Installation service in a office unit by contractor;Installation service in a office unit by contractor;;Office_U;;;;
 ;Residential_E1;Installation service in a residential estate by contractor;Installation service in a residential estate by contractor;;Residential_E;;;;
 ;Office_E1;Installation service in a office estate by contractor;Installation service in a office estate by contractor;;Office_E;;;;
+
+#Security & Monitoring
+;TT003;Service Activation & Account Creation;Service Activation & Account Creation;5,00 USD;VideoRecording;;;;none
+
 
 #Packages and main bundles
 INSERT_UPDATE BundleTemplate;id[unique=true];name[lang=en];version[default=1.0][unique=true];$catalogVersion;parentTemplate(id)
