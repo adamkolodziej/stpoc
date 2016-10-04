@@ -31,6 +31,7 @@ INSERT_UPDATE ServicePlan; code[unique = true]; $supercategories; manufacturerAI
 ; tvEntertainment              ; tvSubscriptions ; ; annually_1
 ; tvPremium                    ; tvSubscriptions ; ; annually_1
 ; Sport                        ; tvSubscriptions ; ; annually_1
+; Sport_trial                  ; tvSubscriptions ; ; annually_1
 ; TCO                          ; tvSubscriptions ; ; annually_1
 ; foreignLanguagePackage       ; tvSubscriptions ; ; annually_1
 ; allOnDemand                  ; tvSubscriptions ; ; annually_1
