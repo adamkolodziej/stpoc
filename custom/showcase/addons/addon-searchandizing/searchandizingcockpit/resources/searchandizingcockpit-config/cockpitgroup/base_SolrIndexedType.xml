@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base  xsi:noNamespaceSchemaLocation="base.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <search>
+                <search-properties>
+                        <property qualifier="SolrIndexedType.identifier" />
+                        <property qualifier="SolrIndexedType.type" />
+                        <property qualifier="SolrIndexedType.indexName" />
+                </search-properties>
+                <sort-properties>
+                        <property qualifier="SolrIndexedType.identifier" />
+                        <property qualifier="SolrIndexedType.type" />
+                        <property qualifier="SolrIndexedType.indexName" />
+                </sort-properties>
+        </search>
+        <label>
+                <property qualifier="SolrIndexedType.identifier" />
+        </label>
+</base>

@@ -1,0 +1,47 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * addonExtensionName - extension name of the ui addon 
+#######
+$contentCatalogVersion = Staged
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$contentCatalogVersion])[default=$contentCatalog:$contentCatalogVersion]
+$jarResponsiveResourceCms=jar:com.hybris.searchandizing.constants.SearchandizingConstants&/searchandizing/import/cockpit/cmscockpit
+
+
+# New hero template 
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;ResponsiveHeroProductGridPageTemplate;Responsive Hero Product Grid Page Template;addon:/responsivecms/pages/b2c/heroProductGridPage;CategoryPage
+
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;ResponsiveHeroProductGridPageTemplate   ;$jarResponsiveResourceCms/structure-view/structure_responsiveHeroProductGridPageTemplate.vm
+
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ResponsiveHeroProductGridPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-HeroProductGridPage;SiteLogo;;SiteLogoSlot;true
+;;HeaderLinks-HeroProductGridPage;HeaderLinks;;HeaderLinksSlot;true
+;;HeaderFunctionGroup-HeroProductGridPage;HeaderFunctionGroup;;HeaderFunctionGroupSlot;true
+"#% if: ""$channel"".equals(""b2b"")"
+;;XSHeaderLinks-HeroProductGridPage;XSHeaderLinks;;XSHeaderLinksSlot;true
+;;XSHeaderFunctionGroup-HeroProductGridPage;XSHeaderFunctionGroup;;XSHeaderFunctionGroupSlot;true
+#% endif:
+;;NavigationBar-HeroProductGridPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-HeroProductGridPage;Footer;;FooterSlot;true
+
+
+# Product Grid Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ResponsiveHeroProductGridPageTemplate'];compTypeGroup(code)
+;SiteLogo;;responsiveLogo
+;HeaderLinks;;responsiveHeaderlinks
+;HeaderFunctionGroup;;responsiveHeaderFunctionGroup
+"#% if: ""$channel"".equals(""b2b"")"
+;XSHeaderLinks;;responsiveHeaderlinks
+;XSHeaderFunctionGroup;;responsiveHeaderFunctionGroup
+#% endif:
+;NavigationBar;;responsiveNavigation
+;Section1;;responsiveWide
+;Section2;;responsiveWide
+;Footer;;responsiveFooter
+
+
+

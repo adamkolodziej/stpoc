@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2011 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+
+<!-- 
+  WARNING: This is the Spring WEB configuration file. If you want to replace
+  items or managers you have to do this from the extensions core configuration 
+  file (promotioncockpit/resources/promotioncockpit-spring.xml) 
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+							xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+						http://www.springframework.org/schema/util
+           			http://www.springframework.org/schema/util/spring-util-3.1.xsd"
+	default-autowire="byName">
+	
+	<!-- 
+		Promotioncockpit perspective.
+	 -->
+	<bean id="PromotioncockpitPerspective" class="de.hybris.platform.promotioncockpit.session.impl.PromotioncockpitPerspective" scope="session" parent="BasePerspective">
+		<property name="uid" value="promotioncockpit.perspective.promotioncockpit" />  <!-- unique ID of the perspective -->
+		<property name="label" value="perspective.promotioncockpit" />  <!-- localization key for the label of the perspective -->
+		<!-- <property name="customCsaURI" value="/promotioncockpit/promotioncockpitCSA.zul" />  - file with optional custom client side actions -->
+
+		<property name="navigationArea">
+			<ref bean="PromotioncockpitNavigationArea" />
+		</property>
+		<property name="browserArea">
+			<bean class="de.hybris.platform.promotioncockpit.session.impl.PromotioncockpitBrowserArea">
+				<property name="rootSearchTypeCode" value="AbstractPromotion"/>
+				<property name="viewURI" value="/cockpit/baseSearchBrowserArea.zul"/>
+			</bean>
+		</property>
+		<property name="editorArea">
+			<bean id="PromotioncockpitEditorAreaModel" parent="BaseEditorAreaModel">
+			<property name="editorAreaController">
+					<ref bean="PromotioncockpitEditorAreaController"/>
+				</property>
+			</bean>	
+		</property>
+		<property name="popupEditorArea">		
+			<bean id="PromotioncockpitPopupEditor" parent="BasePopupEditor">
+				<property name="editorAreaController">
+					<ref bean="PromotioncockpitPopupEditorAreaController"/>
+				</property>
+			</bean>
+		</property>
+		<property name="cockpitTypeService" ref="cockpitTypeService"/>		
+	</bean>
+	
+	<bean id="PromotioncockpitNavigationArea" class="de.hybris.platform.promotioncockpit.session.impl.PromotioncockpitNavigationArea" scope="session" parent="BaseNavigationArea">
+		<property name="sectionModel">
+			<ref bean="PromotioncockpitNavigationAreaModel"/>	
+		</property>
+		<property name="infoSlotRenderer">
+			<bean class="de.hybris.platform.cockpit.components.navigationarea.renderer.InfoBoxRenderer"/>
+		</property>
+		<property name="sections">
+			<list>
+				<ref bean="PromotioncockpitUndoSection" />
+				<ref bean="PromotionWorkflowSection" />
+			</list>
+		</property>
+		<property name="cockpitTypeService" ref="cockpitTypeService"/>
+		<property name="infoSlotAttachmentTypes">
+			<ref bean="PromotioncockpitWorkflowAttachmentData" />
+		</property>
+	</bean>
+	
+	<bean id="PromotioncockpitWorkflowAttachmentData" class="java.util.LinkedList">
+		<constructor-arg>
+			<list value-type="java.lang.String">
+				<value>de.hybris.platform.promotions.model.AbstractPromotionModel</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="PromotionWorkflowSection" class="de.hybris.platform.cockpit.components.navigationarea.NavigationPanelSection"
+		scope="prototype"> 
+		<property name="localizedLabel" value="navigationarea.workflow" />
+		<property name="visible" value="true" />
+		<property name="renderer">
+			<bean class="de.hybris.platform.cockpit.components.navigationarea.renderer.WorkflowSectionRenderer">
+
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="PromotioncockpitNavigationAreaModel" class="de.hybris.platform.promotioncockpit.components.navigationarea.PromotioncockpitNavigationAreaModel" scope="session">
+		<property name="specialCollectionTypes">
+			<list>
+				<value>blacklist</value>
+				<value>quickcollection</value>
+			</list>
+		</property>						
+	</bean>
+	
+	<bean id="PromotioncockpitUndoSection" class="de.hybris.platform.cockpit.components.navigationarea.NavigationPanelSection" scope="prototype">
+		<property name="localizedLabel" value="navigationarea.history" />
+		<property name="visible" value="true" />
+		<property name="renderer">
+			<bean class="de.hybris.platform.cockpit.components.navigationarea.renderer.UndoSectionRenderer" />
+		</property>
+	</bean>
+	
+	<bean id="PromotioncockpitEditorAreaController" class="de.hybris.platform.cockpit.session.impl.DefaultEditorAreaController" scope="session">
+		<property name="sectionRowRenderer">
+			<bean id="PromotioncockpitEditorSectionRowRenderer" parent="EditorSectionRowRenderer"/>
+		</property>
+		<property name="editorFactory">
+			<ref bean="EditorFactory"/>
+		</property>
+	</bean>
+	
+	<bean id="PromotioncockpitPopupEditorAreaController" class="de.hybris.platform.promotioncockpit.session.impl.PromotioncockpitPopupEditorAreaControllerImpl" scope="prototype">
+		<property name="sectionRowRenderer">
+			<bean id="PromotioncockpitPopupEditorSectionRowRenderer" parent="EditorSectionRowRenderer"/>
+		</property>
+		<property name="editorFactory">
+			<ref bean="EditorFactory"/>
+		</property>
+	</bean>
+	
+	<util:list id="historicalSnapshotPromotionBrowserFilter" value-type="de.hybris.platform.promotioncockpit.filters.HistoricalSnapshotPromotionBrowserFilter">
+		<bean class="de.hybris.platform.promotioncockpit.filters.ExcludeHistoricalSnapshotPromotionBrowserFilter"/>
+		<bean class="de.hybris.platform.promotioncockpit.filters.IncludeHistoricalSnapshotPromotionBrowserFilter"/>
+	</util:list>
+
+	<bean id="promotionGroupPromotioncockpitToolbarRightAddition" class="de.hybris.platform.promotioncockpit.session.impl.ComboboxPromotionGroupPromotioncockpitToolbarRightAddition"/>
+
+	<bean id="promotioncockpitToolbarRightSnapshotPromotionFilter" class="de.hybris.platform.promotioncockpit.session.impl.ComboboxPromotioncockpitToolbarRightAddition">
+		<property name="values" ref="historicalSnapshotPromotionBrowserFilter"/>
+		<property name="firstDefault" value="true"/>
+		<property name="tooltipLabelKey" value="promotioncockpit.snapshot.promotion.filter.tooltip"/>
+	</bean>
+	
+	<alias name="defaultNewPromotionToolbarRightAddition" alias="newPromotionToolbarRightAddition"/>
+	<bean id="defaultNewPromotionToolbarRightAddition" class="de.hybris.platform.promotioncockpit.session.impl.NewPromotionToolbarRightAddition" />
+
+	<util:list id="promotioncockpitToolbarRightAddition" value-type="com.hybris.addon.cockpits.components.toolbar.ToolbarRightAddition">
+		<ref bean="newPromotionToolbarRightAddition" />
+		<ref bean="promotioncockpitToolbarRightSnapshotPromotionFilter"/>
+		<ref bean="promotionGroupPromotioncockpitToolbarRightAddition"/>
+	</util:list>
+	
+	<alias name="defaultPromotionParameterQuerySearchProvider" alias="promotionParameterQuerySearchProvider"/>
+	<bean id="defaultPromotionParameterQuerySearchProvider" class="de.hybris.platform.promotioncockpit.session.impl.ParameterQuerySearchProvider">
+		<property name="conditionAppenders" ref="historicalSnapshotPromotionBrowserFilter"/>
+	</bean>
+	
+</beans>
+	

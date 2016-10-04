@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base  xsi:noNamespaceSchemaLocation="base.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <search>
+                <search-properties>
+                        <property qualifier="SolrSortField.fieldName" />
+                        <property qualifier="SolrSortField.sort" />
+                </search-properties>
+                <sort-properties>
+                        <property qualifier="SolrSortField.fieldName" />
+                        <property qualifier="SolrSortField.ascending" />
+                </sort-properties>
+        </search>
+        <label>
+             <property qualifier="SolrSortField.fieldName" />
+             <property qualifier="SolrSortField.ascending" />
+        </label>
+        <initial-properties source-object-template="SolrSort">
+			<property-mapping source="src" target="SolrSortField.sort"/>
+		</initial-properties>
+</base>

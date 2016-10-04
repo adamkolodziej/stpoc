@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+	<content-element type="FacebookLikeComponent" name="type.facebooklikecomponent.name"
+							description="type.facebooklikecomponent.description"
+							image="cmscockpit/images/facebook_icon_34x34.gif"
+							refImage="cmscockpit/images/facebook_icon_34x34.gif"
+							imageSmall="cmscockpit/images/facebook_icon_20x20.gif"/>
+							
+	<content-element type="FacebookLikeBoxComponent" name="type.facebooklikeboxcomponent.name"
+							description="type.facebooklikeboxcomponent.description"
+							image="cmscockpit/images/facebook_icon_34x34.gif"
+							refImage="cmscockpit/images/facebook_icon_34x34.gif"
+							imageSmall="cmscockpit/images/facebook_icon_20x20.gif"/>
+	
+	<content-element type="FacebookSendComponent" name="type.facebooksendcomponent.name"
+							description="type.facebooksendcomponent.description"
+							image="cmscockpit/images/facebook_icon_34x34.gif"
+							refImage="cmscockpit/images/facebook_icon_34x34.gif"
+							imageSmall="cmscockpit/images/facebook_icon_20x20.gif"/>
+												
+	<content-element type="FacebookFacepileComponent" name="type.facebookfacepilecomponent.name"
+							description="type.facebookfacepilecomponent.description"
+							image="cmscockpit/images/facebook_icon_34x34.gif"
+							refImage="cmscockpit/images/facebook_icon_34x34.gif"
+							imageSmall="cmscockpit/images/facebook_icon_20x20.gif"/>			
+							
+	<content-element type="FacebookRecommendationsBoxComponent" name="type.facebookrecommendationsboxcomponent.name"
+							description="type.facebookrecommendationsboxcomponent.description"
+							image="cmscockpit/images/facebook_icon_34x34.gif"
+							refImage="cmscockpit/images/facebook_icon_34x34.gif"
+							imageSmall="cmscockpit/images/facebook_icon_20x20.gif"/>
+							
+	<content-element type="FacebookRecommendationsBarComponent" name="type.facebookrecommendationsbarcomponent.name"
+							description="type.facebookrecommendationsbarcomponent.description"
+							image="cmscockpit/images/facebook_icon_34x34.gif"
+							refImage="cmscockpit/images/facebook_icon_34x34.gif"
+							imageSmall="cmscockpit/images/facebook_icon_20x20.gif"/>						
+							
+	<content-element type="FacebookCommentsComponent" name="type.facebookcommentscomponent.name"
+							description="type.facebookcommentscomponent.description"
+							image="cmscockpit/images/facebook_icon_34x34.gif"
+							refImage="cmscockpit/images/facebook_icon_34x34.gif"
+							imageSmall="cmscockpit/images/facebook_icon_20x20.gif"/>	
+							
+	<content-element type="FacebookCommentsTabComponent" name="type.facebookcommentstabcomponent.name"
+							description="type.facebookcommentstabcomponent.description"
+							image="cmscockpit/images/facebook_icon_34x34.gif"
+							refImage="cmscockpit/images/facebook_icon_34x34.gif"
+							imageSmall="cmscockpit/images/facebook_icon_20x20.gif"/>
+							
+</content-elements>	

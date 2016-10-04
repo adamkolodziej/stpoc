@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		
+		<property qualifier="FacebookReference.name" />
+		<property qualifier="FacebookPage.category" />
+		<property qualifier="FacebookPage.link" />
+		<property qualifier="FacebookPage.websiteLink" />
+		<property qualifier="FacebookPage.description" editor="wysiwyg" />
+		<property qualifier="FacebookPage.location" />
+	</group>
+	
+	<group qualifier="Multimedia" visible="true" initially-opened="true">
+		<label key="config.general.multimedia" />
+		<property qualifier="FacebookPage.picture" editor="simpleMediaReferenceSelector" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="FacebookPage.coverPhoto" editor="simpleMediaReferenceSelector" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>
+	</group>
+	
+	<group qualifier="References" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.References" />
+		<property qualifier="FacebookReference.linkedCategories" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="FacebookReference.linkedProducts" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="FacebookPage.usersWholike" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="FacebookPage.linkedSite" />
+	</group>
+	
+	<group qualifier="Metrics" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.Metrics" />
+		<property qualifier="FacebookPage.likes" />
+		<property qualifier="FacebookPage.checkins" />
+		<property qualifier="FacebookPage.talkingAboutCount" />
+	</group>
+	
+	<custom-group 
+		spring-bean="FacebookCommentsSection"
+		qualifier="comments"
+		initially-opened="false"
+		visible="true">
+		<label key="config.general.comments" />
+	</custom-group>
+	
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label key="config.general.administration" />
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+		<property qualifier="FacebookReference.id" />
+	</group>
+</editor>

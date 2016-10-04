@@ -1,0 +1,29 @@
+INSERT_UPDATE ComponentTypeGroup;code[unique=true]
+;productImages
+;productDetailPanelSection
+;socialButtons
+;socialWidgets
+
+#RESPONSIVE COMPONENT TYPE GROUPS
+;responsiveProductImages
+;responsiveDetailPanelSection
+;responsiveProductTab
+;responsiveSocial
+
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;productDetailPanelSection;SimpleProductReviewSummaryComponent
+;productDetailPanelSection;SimpleProductPromotionSummaryComponent
+;productDetailPanelSection;ProductVariantSelectorComponent
+;productDetailPanelSection;ProductAddToCartComponent
+;productImages;SimpleProductImageComponent
+
+
+#RESPONSIVE COMPONENT TYPE GROUP RELATIONS
+;responsiveProductImages;SimpleProductImageComponent
+;responsiveDetailPanelSection;ProductVariantSelectorComponent
+;responsiveDetailPanelSection;SimpleProductVariantSelectorComponent
+;responsiveDetailPanelSection;SimpleProductReviewSummaryComponent
+;responsiveDetailPanelSection;SimpleProductPromotionSummaryComponent
+;responsiveDetailPanelSection;ProductAddToCartComponent
+;responsiveProductTab;SimpleProductPageTabsComponent

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+
+		<style src="/promotioncockpit/css/promotioncockpit.css" />
+
+		<zscript><![CDATA[
+			void setActivity(String param, org.zkoss.zul.impl.XulElement element, boolean active) {
+				setAttr(param, active);
+				element.setSclass("active_"+active);
+				element.setVisible(active);
+			}
+			void restoreCheckState(org.zkoss.zul.impl.XulElement element, String param) {
+				element.setChecked(Boolean.TRUE.equals(getAttr(param)));
+			}
+			void restoreActivity(org.zkoss.zul.impl.XulElement element, String param) {
+				boolean active = getAttr(param) != null ? getAttr(param) : false;
+				element.setSclass("active_"+active);
+				element.setVisible(active);
+			}
+		]]></zscript>
+
+		<div style="text-align: left; height:263px">
+			<div>
+			<attribute name="onCreate">
+				self.appendChild(pageBean.getErrorContainer());		
+			</attribute>
+			</div>	
+			<div height="15px"></div>
+			
+			
+			<div style="margin: 30px; margin-top: 10px;" >
+				<checkbox id="dateRangesEnabled" 
+					label="${c:l('campaigns.wizard.resitrictByDateRange')}"
+					onCheck='setActivity("restrictByDates", dateRangeSection, event.isChecked())'
+					onCreate='restoreCheckState(self, "restrictByDates")' 
+				/>
+				<div id="dateRangeSection" onCreate='restoreActivity(self, "restrictByDates")'>
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('general.from')}:"/>
+						
+						<div id="startDateEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.startDate" editorCode="single"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+						</div>
+					</div>
+					<div height="35px"></div>
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('general.to')}:"/>
+						
+						<div id="endDateEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.endDate" editorCode="single"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div style="margin: 30px; margin-top: 10px;" >
+				<checkbox 
+					id="daysOfWeekEnabled" 
+					label="${c:l('campaigns.wizard.resitrictByDaysOfWeek')}" 
+					onCheck='setActivity("restrictByDaysOfWeek", weekDaysSection, event.isChecked())'
+					onCreate='restoreCheckState(self, "restrictByDaysOfWeek")' 
+					/>
+				<div id="weekDaysSection" onCreate='restoreActivity(self, "restrictByDaysOfWeek")'>
+					<div id="weekDaysEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+						 propertyQualifier="PublicationPeriod.daysOfWeek" editorCode="multi"
+						 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+					</div>
+				</div>
+			</div>
+			
+			<div style="margin: 30px; margin-top: 10px;" >
+				<checkbox 
+					id="timeInDayEnabled" 
+					label="${c:l('campaigns.wizard.restrictToTimeInDay')}"
+					onCheck='setActivity("restrictToTimeInDay", hoursSection, event.isChecked())'
+					onCreate='restoreCheckState(self, "restrictToTimeInDay")' 
+				/>
+				<div id="hoursSection" onCreate='restoreActivity(self, "restrictToTimeInDay")'>
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('general.from')}:"/>
+						
+						<div id="fromHourEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.fromHour" editorCode="single"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+						</div>
+					</div>
+					<div height="35px"></div>
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('general.to')}:"/>
+						
+						<div id="toHourEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.toHour" editorCode="single"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+						</div>
+					</div>
+					
+					<div height="35px"></div>
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('campaings.page.publicationperiod.timezone')}:"/>
+						
+						<div id="timeZoneEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.timezone" editorCode="timezone"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+</zk>

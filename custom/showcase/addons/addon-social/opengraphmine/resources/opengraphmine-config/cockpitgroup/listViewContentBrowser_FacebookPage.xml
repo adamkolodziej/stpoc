@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="false" selectable="true" width="70px"/>
+		<property qualifier="FacebookPage.picture.URL" editor="simpleMediaReferenceSelector" visible="true">
+			<renderer class="de.hybris.platform.cockpit.model.listview.impl.ImageCellRenderer"/>	
+		</property>	
+		<property qualifier="FacebookPage.id" visible="true" editable="false"/>
+		<property qualifier="FacebookPage.name" visible="true" editable="false" />
+		<property qualifier="FacebookPage.link" visible="true" editable="true" />
+		<property qualifier="FacebookPage.category" visible="true" editable="false" />
+		<property qualifier="FacebookPage.likes" visible="true" editable="false" />
+		<property qualifier="FacebookPage.linkedSite" visible="true" editable="false" />
+		<custom spring-bean="ItemContentBrowserActionColumn" name="Actions"
+			visible="true" selectable="true">
+			<label key="config.general.actions" />
+		</custom>
+	</group>
+</list-view>

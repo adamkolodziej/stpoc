@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="editor.xsd">
+        <group qualifier="General" visible="true" initially-opened="true">
+                <label key="cockpit.config.label.General" />
+                <property qualifier="SolrFacetSearchConfig.name" />
+                <property qualifier="SolrFacetSearchConfig.description" />
+                <property qualifier="SolrFacetSearchConfig.catalogVersions" >
+                	<parameter>
+                		<name>allowCreate</name>
+                		<value>false</value>
+                	</parameter>
+                </property>
+                <property qualifier="SolrFacetSearchConfig.currencies" >
+                	<parameter>
+                		<name>allowCreate</name>
+                		<value>false</value>
+                	</parameter>
+                </property>
+                <property qualifier="SolrFacetSearchConfig.languages"  >
+                	<parameter>
+                		<name>allowCreate</name>
+                		<value>false</value>
+                	</parameter>
+                </property>
+                <property qualifier="SolrFacetSearchConfig.solrValueRangeSets" />
+                <property qualifier="SolrFacetSearchConfig.indexNamePrefix" />
+        </group>
+        
+        <group qualifier="CronJobs" visible="true" initially-opened="true">
+        	 <label key="cockpit.config.label.indexingcronjobs" />
+        	 <property qualifier="SolrFacetSearchConfig.solrIndexerCronJob" editor="browserContextEditor" />
+        </group>
+        
+        <group qualifier="IndexedTypes" visible="true" initially-opened="true">
+        	 <label key="cockpit.config.label.indexedtypes" />
+        	 <property qualifier="SolrFacetSearchConfig.solrIndexedTypes" editor="browserContextEditor" />
+        </group>
+        
+         <group qualifier="SearchConfiguration" visible="true" initially-opened="false">
+        	 <label key="cockpit.config.label.searchconfiguration" />
+        	 <property qualifier="SolrFacetSearchConfig.solrSearchConfig.description" />
+        	 <property qualifier="SolrFacetSearchConfig.solrSearchConfig.pageSize" />
+        	 <property qualifier="SolrFacetSearchConfig.solrSearchConfig.defaultSortOrder" />
+        	 <property qualifier="SolrFacetSearchConfig.solrSearchConfig.groupingProperty" editor="groupingPropertyEditor" />
+        </group>
+        
+         <group qualifier="KeywordRedirects" visible="true" initially-opened="false">
+        	 <label key="cockpit.config.label.keywordredirects" />
+        	 <property qualifier="SolrFacetSearchConfig.languageKeywordRedirectMapping" editor="browserContextEditor" />
+        </group>
+        
+        <group qualifier="Synonyms" visible="true" initially-opened="false">
+        	 <label key="cockpit.config.label.synonyms" />
+        	 <property qualifier="SolrFacetSearchConfig.languageSynonymMapping" />
+        	 <property qualifier="SolrFacetSearchConfig.solrUpdateSynonymsCronJobs" editor="browserContextEditor" />
+        	 
+        </group>
+        
+         <group qualifier="Stopwords" visible="true" initially-opened="false">
+        	 <label key="cockpit.config.label.stopwords" />
+        	 <property qualifier="SolrFacetSearchConfig.languageStopWordMapping" />
+        	 <property qualifier="SolrFacetSearchConfig.solrUpdateStopWordsCronJobs" editor="browserContextEditor" />
+        </group>
+        
+         <group qualifier="SOLRServerConfig" visible="true" initially-opened="false">
+        	 <label key="cockpit.config.label.solrserverconfig" />
+        	 <property qualifier="SolrFacetSearchConfig.solrServerConfig.name" />
+        	 <property qualifier="SolrFacetSearchConfig.solrServerConfig.mode" />
+        	 <property qualifier="SolrFacetSearchConfig.solrServerConfig.embeddedMaster" />
+        	 <property qualifier="SolrFacetSearchConfig.solrServerConfig.aliveCheckInterval" />
+        	 <property qualifier="SolrFacetSearchConfig.solrServerConfig.connectionTimeout" />
+        	 <property qualifier="SolrFacetSearchConfig.solrServerConfig.readTimeout" />
+        	 <property qualifier="SolrFacetSearchConfig.solrServerConfig.solrEndpointUrls" />
+        </group>
+        
+        <group qualifier="SOLRIndexerConfig" visible="true" initially-opened="false">
+        	 <label key="cockpit.config.label.solrindexerconfig" />
+        	 <property qualifier="SolrFacetSearchConfig.solrIndexConfig.name" />
+        	 <property qualifier="SolrFacetSearchConfig.solrIndexConfig.batchSize" />
+        	 <property qualifier="SolrFacetSearchConfig.solrIndexConfig.exportPath" />
+        	 <property qualifier="SolrFacetSearchConfig.solrIndexConfig.numberOfThreads" />
+        	 <property qualifier="SolrFacetSearchConfig.solrIndexConfig.indexMode" />
+        	 
+       	</group>
+       	
+       	<group qualifier="admin" visible="true" initially-opened="false">
+                <label key="config.general.administration" />
+                <property qualifier="Item.pk" />
+                <property qualifier="Item.creationTime" />
+                <property qualifier="Item.modifiedtime" />
+        </group>
+        
+        <custom-group 
+                class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+                qualifier="unassigned"
+                initially-opened="false">
+                <label key="cockpit.config.label.Other" />
+        </custom-group>
+</editor>

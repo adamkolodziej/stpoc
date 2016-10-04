@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advanced-search>
+	
+	<group name="root" type="facebookpage">
+		<label key="config.general.searchfor" />
+		<group name="general">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="FacebookReference.id" visible="true"/>
+			<property qualifier="FacebookReference.name" sort-enabled="true" visible="true" />
+			<property qualifier="FacebookPage.category" sort-enabled="true" visible="true"/>
+			<property qualifier="FacebookReference.linkedCategories" visible="true"/>
+			<property qualifier="FacebookReference.linkedProducts" visible="true" />
+			<property qualifier="FacebookPage.linkedSite" visible="true"/>	
+			<property qualifier="FacebookPage.usersWhoLike" visible="true"/>	
+		</group>
+		<group name="other">
+			<label key="cockpit.config.label.Other" />
+			<property qualifier="item.pk" sort-enabled="true" visible="false"/>			
+		</group>		
+	</group>
+	
+</advanced-search>

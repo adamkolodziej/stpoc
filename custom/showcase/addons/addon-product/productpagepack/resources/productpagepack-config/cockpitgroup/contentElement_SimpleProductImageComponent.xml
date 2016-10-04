@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+
+<content-element type="SimpleProductImageComponent" name="type.simpleproductimagecomponent.name"
+							description="type.simpleproductimagecomponent.description"
+							image="cmscockpit/images/ContentElementPicture.gif"
+							refImage="cmscockpit/images/ContentElementPictureReference.gif"
+							imageSmall="cmscockpit/images/ContentElementPictureSmall.gif"/>							
+																
+	
+							
+</content-elements>	

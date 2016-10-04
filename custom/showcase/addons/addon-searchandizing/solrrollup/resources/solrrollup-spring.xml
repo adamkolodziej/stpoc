@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+           
+           
+     <bean id="solrrollupAddOnSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
+		<property name="extensionName" value="solrrollup" />
+	</bean> 
+
+	<bean id="baseProductCodeProvider" class="com.hybris.solrrollup.solr.providers.BaseProductCodeProvider" parent="abstractPropertyFieldValueProvider">
+		<property name="solrRollupService" ref="solrRollupService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>	
+	</bean>
+	<bean id="baseProductNameProvider" class="com.hybris.solrrollup.solr.providers.BaseProductNameProvider"  parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>	
+	</bean>
+	<bean id="rootProductCodeProvider" class="com.hybris.solrrollup.solr.providers.RootProductCodeProvider"  parent="abstractPropertyFieldValueProvider">
+		<property name="solrRollupService" ref="solrRollupService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>	
+	</bean>
+	<bean id="rollupProductCodeProvider" class="com.hybris.solrrollup.solr.providers.RollupProductCodeProvider"  parent="abstractPropertyFieldValueProvider">
+		<property name="solrRollupService" ref="solrRollupService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>	
+	</bean>
+	
+	<bean id="solrRollupService" class="com.hybris.solrrollup.services.impl.DefaultSolrRollupService">
+		<property name="typeService" ref="typeService" />
+	</bean>
+	
+	<!-- 	original populator is buggy -->
+	<alias name="defaultSearchGroupResultProductPopulator" alias="commerceSearchResponseResultsPopulator" />
+	<bean id="defaultSearchGroupResultProductPopulator" class="com.hybris.solrrollup.solr.populators.SearchResponseGroupedResultsPopulator"
+		>
+		<property name="searchResultConverter" ref="solrDocumentSearchResultConverter" />
+	</bean>
+	
+	<bean id="searchGroupResultProductPopulator" class="com.hybris.solrrollup.solr.populators.SearchGroupResultProductPopulator">
+		<property name="productService" ref="productService" />
+	</bean>
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add" ref="searchGroupResultProductPopulator"/>
+	</bean>
+	
+	
+	<bean id="facetGroupSolrSearchRequestResponsePopulator" class="com.hybris.solrrollup.solr.populators.FacetGroupSolrSearchRequestResponsePopulator" />
+	
+    <bean id="facetGroupSolrSearchRequestResponsePopulatorListMergeDirective" depends-on="commerceSolrSearchRequestConverter" parent="listMergeDirective" >
+		<property name="add" ref="facetGroupSolrSearchRequestResponsePopulator" />
+		<property name="beforeClasses">
+			<list value-type="java.lang.Class">
+				<value>de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SolrSearchRequestResponsePopulator</value>
+			</list>
+		</property>
+		<property name="listPropertyDescriptor" value="populators" />
+	</bean>
+	
+</beans>

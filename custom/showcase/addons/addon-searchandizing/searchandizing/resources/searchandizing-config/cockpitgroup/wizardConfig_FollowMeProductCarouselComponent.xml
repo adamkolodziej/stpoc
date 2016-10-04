@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" displaySubtypes="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="true">
+			<label lang="en">General</label><label lang="fr">Général</label><label lang="ja">通常</label>
+			<label lang="de">General</label>
+			<property qualifier="CMSItem.name"/>
+		</group>
+		<group qualifier="Properties" visible="true" initially-opened="true">
+			<label lang="en">Properties</label><label lang="fr">Propriétés</label><label lang="ja">プロパティ</label>
+			<label lang="de">Eigenschaften</label>			
+			<property qualifier="FollowMeProductCarouselComponent.title"/>
+			<property qualifier="FollowMeProductCarouselComponent.sort" editorCode="shortListEditor">
+				<parameter name="allowedValuesList" value="solrSortAvailableValuesProvider" />
+			</property>
+			<property qualifier="FollowMeProductCarouselComponent.maxNumberOfResults" />
+			<property qualifier="FollowMeProductCarouselComponent.stickyCategory"  />			
+		</group>
+	</displayed-properties>
+</wizard-config>

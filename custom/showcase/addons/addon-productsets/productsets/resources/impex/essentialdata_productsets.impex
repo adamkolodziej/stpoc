@@ -1,0 +1,9 @@
+INSERT_UPDATE SearchRestriction;code[unique=true];name[lang=en];principal(UID);restrictedType(code);active;generate;query
+;ProductSetApprovalStatusRestriction;Product Set Approval Status Restriction;customergroup;ProductSet;true;true;{approvalStatus} = ({{select {s.pk} from {ProductSetApprovalStatus as s} where {s.code} = 'approved'}})
+;ProductSetCatalogVersionRestriction;Product Set Catalog Version Restriction;customergroup;ProductSet;true;true;{catalogVersion} in (?session.catalogversions)
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;wide;ProductSetCarouselComponent
+;narrow;ProductSetCarouselComponent
+;wide;BuyTheSetComponent
+;narrow;BuyTheSetComponent

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+
+    <collectiontypes>
+        <collectiontype code="LockerzShareServiceList" elementtype="LockerzShareServiceEnum" autocreate="true" generate="true" type="list" />
+    </collectiontypes>
+
+    <enumtypes>
+        <enumtype code="LockerzShareServiceEnum" autocreate="true" generate="true" dynamic="true">
+            <value code="aim" />
+            <value code="allvoices" />
+            <value code="amazon_wish_list" />
+            <value code="aol_mail" />
+            <value code="arto" />
+            <value code="ask_com_mystuff" />
+            <value code="backflip" />
+            <value code="bebo" />
+            <value code="bibsonomy" />
+            <value code="bitty_browser" />
+            <value code="blinklist" />
+            <value code="blogger_post" />
+            <value code="blogmarks" />
+            <value code="bookmarks_fr" />
+            <value code="box_net" />
+            <value code="buddymarks" />
+            <value code="buffer" />
+            <value code="business_exchange" />
+            <value code="care2_news" />
+            <value code="citeulike" />
+            <value code="connotea" />
+            <value code="current" />
+            <value code="delicious" />
+            <value code="digg" />
+            <value code="diglog" />
+            <value code="diigo" />
+            <value code="dzone" />
+            <value code="email" />
+            <value code="evernote" />
+            <value code="facebook" />
+            <value code="fark" />
+            <value code="faves" />
+            <value code="folkd" />
+            <value code="friendfeed" />
+            <value code="funp" />
+            <value code="gabbr" />
+            <value code="google_bookmarks" />
+            <value code="google_gmail" />
+            <value code="google_plus" />
+            <value code="google_reader" />
+            <value code="hellotxt" />
+            <value code="hemidemi" />
+            <value code="hotmail" />
+            <value code="hugg" />
+            <value code="hyves" />
+            <value code="identi_ca" />
+            <value code="imera_brazil" />
+            <value code="instapaper" />
+            <value code="jamespot" />
+            <value code="jumptags" />
+            <value code="khabbr" />
+            <value code="kindle_it" />
+            <value code="kledy" />
+            <value code="linkagogo" />
+            <value code="linkatopia" />
+            <value code="linkedin" />
+            <value code="live" />
+            <value code="livejournal" />
+            <value code="maple" />
+            <value code="meneame" />
+            <value code="mister_wong" />
+            <value code="mozillaca" />
+            <value code="multiply" />
+            <value code="mylinkvault" />
+            <value code="myspace" />
+            <value code="netlog" />
+            <value code="netvibes_share" />
+            <value code="netvouz" />
+            <value code="newstrust" />
+            <value code="newsvine" />
+            <value code="nowpublic" />
+            <value code="oneview" />
+            <value code="orkut" />
+            <value code="phonefavs" />
+            <value code="ping" />
+            <value code="plaxo_pulse" />
+            <value code="plurk" />
+            <value code="posterous" />
+            <value code="printfriendly" />
+            <value code="protopage_bookmarks" />
+            <value code="pusha" />
+            <value code="read_it_later" />
+            <value code="reddit" />
+            <value code="rediff" />
+            <value code="segnalo" />
+            <value code="simpy" />
+            <value code="sitejot" />
+            <value code="slashdot" />
+            <value code="smaknews" />
+            <value code="sphere" />
+            <value code="sphinn" />
+            <value code="spurl" />
+            <value code="squidoo" />
+            <value code="startaid" />
+            <value code="strands" />
+            <value code="stumbleupon" />
+            <value code="symbaloo_feeds" />
+            <value code="tagza" />
+            <value code="tailrank" />
+            <value code="technorati_favorites" />
+            <value code="technotizie" />
+            <value code="tipd" />
+            <value code="tuenti" />
+            <value code="tumblr" />
+            <value code="twiddla" />
+            <value code="twitter" />
+            <value code="typepad_post" />
+            <value code="unalog" />
+            <value code="viadeo" />
+            <value code="vodpod" />
+            <value code="webnews" />
+            <value code="wink" />
+            <value code="wists" />
+            <value code="wordpress" />
+            <value code="xerpi" />
+            <value code="xing" />
+            <value code="yahoo_bookmarks" />
+            <value code="yahoo_mail" />
+            <value code="yahoo_messenger" />
+            <value code="yample" />
+            <value code="yigg" />
+            <value code="yoolink" />
+            <value code="youmob" />
+        </enumtype>
+
+        <enumtype code="LockerzShareLayoutStyle" autocreate="true" generate="true" dynamic="true">
+            <value code="minimal" />
+            <value code="small" />
+            <value code="medium" />
+            <value code="standard" />
+            <value code="large" />
+            <value code="link" />
+        </enumtype>
+    </enumtypes>
+
+    <itemtypes>
+        <typegroup name="lockerz">
+
+            <itemtype code="LockerzShareComponent" jaloclass="com.hybris.social.lockerzshare.jalo.LockerzShareComponent" extends="SimpleCMSComponent" generate="true" autocreate="true">
+                <attributes>
+                    <attribute qualifier="lockerzShareServiceList" type="LockerzShareServiceList">
+                        <persistence type="property" />
+                        <modifiers optional="true" />
+                    </attribute>
+                    <attribute qualifier="lockerzShareLayoutStyle" type="LockerzShareLayoutStyle">
+                        <persistence type="property" />
+                        <modifiers optional="false"  />
+                        <defaultvalue>em().getEnumerationValue("LockerzShareLayoutStyle","medium")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="lockerzShareLinkText" type="java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers optional="true"/>
+                        <description>Link Text which will appear as a link text or alternate text for image link.</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+    </itemtypes>
+</items>

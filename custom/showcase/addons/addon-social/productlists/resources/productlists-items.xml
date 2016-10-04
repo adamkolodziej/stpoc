@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+ 
+	<enumtypes>
+		<enumtype generate="true" code="ProductListType" autocreate="true"
+			jaloclass="de.hybris.platform.jalo.enumeration.EnumerationValue">
+			<value code="WISHLIST" />
+		</enumtype>
+		<enumtype generate="true" code="ProductListPrivacy"
+			autocreate="true" jaloclass="de.hybris.platform.jalo.enumeration.EnumerationValue">
+			<value code="PUBLIC" />
+			<value code="PASSWORD" />
+			<value code="ENCODED_LINK" />
+			<value code="PRIVATE" />
+		</enumtype>
+	</enumtypes>
+
+	<relations>
+		<relation generate="true" localized="false"
+			code="ProductList2ProductListEntry" autocreate="true">
+			<sourceElement type="ProductList" cardinality="one"
+				qualifier="productList">
+				<modifiers initial="true" optional="false" />
+			</sourceElement>
+			<targetElement type="ProductListEntry" cardinality="many"
+				qualifier="productListEntries" collectiontype="list" ordered="true">
+				<modifiers initial="true" optional="true" partof="true" />
+			</targetElement>
+		</relation>
+
+		<relation generate="true" localized="false"
+			code="ProductList2ProductListOwner" autocreate="true">
+			<deployment table="ProdList2ProdListOwner" typecode="20314" />
+			<sourceElement type="ProductList" cardinality="many"
+				qualifier="lists" collectiontype="collection">
+			</sourceElement>
+			<targetElement type="ProductListOwner" cardinality="many"
+				qualifier="listOwners" collectiontype="collection">
+				<modifiers initial="true" optional="true" />
+			</targetElement>
+		</relation>
+	
+	</relations>
+
+	<itemtypes>
+
+		<itemtype generate="true" code="ProductList"
+			jaloclass="com.hybris.productlists.jalo.ProductList" extends="GenericItem"
+			autocreate="true">
+			<deployment table="ProductList" typecode="20311" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+				    <modifiers unique="true" optional="false" initial="true"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="guid" type="java.lang.String">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="description" type="java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="password" type="java.lang.String">
+					<modifiers search="false" optional="true" encrypted="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="type" generate="true" autocreate="true"
+					type="ProductListType">
+					<defaultvalue>
+						em().getEnumerationValue("ProductListType","WISHLIST")
+					</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="privacy" generate="true" autocreate="true"
+					type="ProductListPrivacy">
+					<defaultvalue>
+						em().getEnumerationValue("ProductListPrivacy","PUBLIC")
+					</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="store" type="BaseStore">
+					<modifiers initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="site" type="BaseSite">
+					<modifiers initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="Guid">
+					<key attribute="guid" />
+				</index>
+				<index name="Code">
+					<key attribute="code" />
+				</index>
+			</indexes>
+		</itemtype>
+
+		<itemtype generate="true" code="ProductListEntry"
+			jaloclass="com.hybris.productlists.jalo.ProductListEntry">
+			<deployment table="ProductListEntry" typecode="20312" />
+			<attributes>
+				<attribute qualifier="desired" type="java.lang.Integer">
+					<persistence type="property" />
+					<modifiers optional="false" />
+				</attribute>
+				<attribute qualifier="received" type="java.lang.Integer">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="priority" type="java.lang.Integer">
+					<modifiers optional="false" />
+					<defaultvalue>Integer.valueOf(0)</defaultvalue>
+					<persistence type="property" />
+				</attribute>				
+				<attribute qualifier="comment" type="java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="product" type="Product">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="ProductListOwner"
+			jaloclass="com.hybris.productlists.jalo.ProductListOwner"
+			abstract = "true">
+		</itemtype>
+
+		<itemtype generate="true" code="AnonymousListOwner"
+			jaloclass="com.hybris.productlists.jalo.AnonymousListOwner" extends="ProductListOwner">
+			<deployment table="AnonymousListOwner" typecode="20313" />
+			<attributes>
+				<attribute qualifier="name" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="emailAddress" type="java.lang.String">
+					<modifiers optional="true" />			
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="editPassword" type="java.lang.String">
+					<modifiers search="false" optional="false" encrypted="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="editGuid" type="java.lang.String">
+				    <modifiers unique="true" optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="contact" type="Address">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="EditGuid">
+					<key attribute="editGuid" />
+				</index>
+				<index name="EmailAddress">
+					<key attribute="emailAddress" />
+				</index>
+			</indexes>
+		</itemtype>
+
+		<itemtype generate="true" code="PrincipalListOwner"
+			jaloclass="com.hybris.productlists.jalo.PrincipalListOwner" extends="ProductListOwner">
+			<deployment table="PrincipalListOwner" typecode="20315" />
+			<attributes>
+				<attribute qualifier="principal" type = "Principal">
+					<modifiers unique="true" optional="false" />			
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="Principal">
+						<key attribute="principal" />
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype code="AddProductToProductListComponent" generate="true"
+					jaloclass="com.hybris.cms.productlists.jalo.AddProductToProductListComponent" extends="SimpleCMSComponent"
+					autocreate="true">
+			<attributes>
+				<attribute qualifier="productListType" generate="true" autocreate="true"
+					type="ProductListType">
+					<defaultvalue>
+						em().getEnumerationValue("ProductListType","WISHLIST")
+					</defaultvalue>
+					<persistence type="property" />
+					<description>Type of Product List - e.g. a Wish List</description>
+				</attribute>
+				<attribute qualifier="buttonLabel" generate="true" autocreate="true" type="localized:java.lang.String">					
+					<persistence type="property" />
+					<modifiers optional="true"  />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="MiniCartAndProductListComponent" generate="true" extends="MiniCartComponent" autocreate="true"
+			jaloclass="com.hybris.cms.productlists.jalo.components.MiniCartAndProductListComponent">
+			<description>Represents mini product list component that can be configured to show some information about product list content.</description>
+			
+		</itemtype>
+		
+		<itemtype code="ProductListsNavigationComponent" extends="SimpleCMSComponent" generate="true" autocreate="true" 
+			jaloclass="com.hybris.cms.productlists.jalo.components.ProductListsNavigationComponent">
+			<description>Represents product lists navigation component</description>
+		</itemtype>
+			
+	</itemtypes>
+</items>

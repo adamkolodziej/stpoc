@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="customerReview.headline"/>
+		<property qualifier="customerReview.comment"/>
+		<property qualifier="customerReview.rating"/>
+		<property qualifier="customerReview.blocked"/>
+		<property qualifier="customerReview.alias"/>
+		<property qualifier="customerReview.approvalStatus"/>
+		<property qualifier="customerReview.language"/>
+	</group>
+
+	<group qualifier="Additional" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.Additional" />
+		<property qualifier="customerReview.product"/>
+		<property qualifier="customerReview.user"/>
+	</group>
+
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label key="config.general.administration" />
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+	</group>
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+		qualifier="unassigned"
+		initially-opened="false">
+		<label key="cockpit.config.label.Other" />
+	</custom-group>
+</editor>

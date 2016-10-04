@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-editor hideEmpty="true" hideReadOnly="true" groupCollections="true">
+	<template>
+    <![CDATA[
+    	<table style="width: 100%; margin: 0px; padding: 0px;">
+			<tbody>
+				<tr>
+					<td colspan="2"><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div class="contentEditorHeader" style="background-color:#C3C3C3;font-size:11px;padding:3px;"><strong>$label</strong></div></td>
+				</tr>
+				<tr>
+					<td><cockpit code="property" value="FollowMeProductCarouselComponent.title"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td><div class="solrSortMode"><cockpit code="property" value="FollowMeProductCarouselComponent.sort"/></div></td>
+					<td><div style="height:6px"/></td>
+				</tr>	
+				<tr>
+					<td><cockpit code="property" value="FollowMeProductCarouselComponent.maxNumberOfResults"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td><cockpit code="property" value="FollowMeProductCarouselComponent.stickyCategory"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>	
+			</tbody>
+		</table>
+    ]]>
+	</template>
+	<custom-editors>
+		<property qualifier="AbstractCMSComponent.restrictions" visible="false" editorCode="default" />
+		<property qualifier="FollowMeProductCarouselComponent.sort" visible="true" editorCode="shortListEditor" >
+			<parameter>
+				<name>allowedValuesList</name>
+				<value>solrSortAvailableValuesProvider</value>
+			</parameter>		
+		</property>
+	</custom-editors>
+</content-editor>

@@ -1,0 +1,25 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * importMobile - whether mobile templates should be imported
+#######
+
+
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+
+
+#% if: $importMobile ;
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];assignedCockpitItemTemplates(code)
+;;MobileProductDetailsPageTemplate;MobileProductDetailsPageTemplate;
+;;MobileProductListPageTemplate;MobileProductListPageTemplate;
+;;MobileProductGridPageTemplate;MobileProductGridPageTemplate;
+;;MobileSearchResultsListPageTemplate;MobileSearchResultsListPageTemplate;
+;;MobileSearchResultsGridPageTemplate;MobileSearchResultsGridPageTemplate;
+;;MobileSearchResultsEmptyPageTemplate;MobileSearchResultsEmptyPageTemplate;
+;;MobileCategoryPageTemplate;MobileCategoryPageTemplate;
+;;MobileContentPage1Template;MobileContentPage1Template;
+;;MobileLandingPageTemplate;MobileLandingPageTemplate;
+#% endif:

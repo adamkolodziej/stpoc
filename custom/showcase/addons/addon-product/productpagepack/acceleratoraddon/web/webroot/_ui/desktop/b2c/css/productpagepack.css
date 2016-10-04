@@ -1,0 +1,80 @@
+.productImage .productImagePrimary.gallery_right {
+	margin: 0 11px 0 0;
+	float: left;
+}
+
+.productImage .productImagePrimary {
+	position: relative;
+}
+
+.productImage .productImagePrimary.gallery_right a.productImageZoomLink {
+	right: 0;
+}
+
+.gallery_right {
+	margin-right: 0px;
+}
+
+.gallery_right .scroller {
+	margin-left: 0px !important;
+	margin-right: 10px !important;
+	border-left: 0 !important;		
+	
+	border-right:2px solid #bacad5 !important;	
+	-webkit-border-top-right-radius: 4px !important;
+	-moz-border-radius-topright: 4px !important;
+	border-top-right-radius: 4px !important;
+	-webkit-border-bottom-right-radius: 4px !important;
+	-moz-border-radius-bottomright: 4px !important;
+	border-bottom-right-radius: 4px !important;
+	
+	-webkit-border-top-left-radius: 0px !important;
+	-moz-border-radius-topleft: 0px !important;
+	border-top-left-radius: 0px !important;
+	-webkit-border-bottom-left-radius: 0px !important;
+	-moz-border-radius-bottomleft: 0px !important;
+	border-bottom-left-radius: 0px !important;
+}
+
+.gallery_right .prod_image_main {
+	-webkit-border-bottom-left-radius: 4px !important;
+	-moz-border-radius-bottomleft: 4px !important;
+	border-bottom-left-radius: 4px !important;
+	-webkit-border-top-left-radius: 4px !important;
+	-moz-border-radius-topleft: 4px !important;
+	border-top-left-radius: 4px !important;
+
+	-webkit-border-bottom-right-radius: 0px !important;
+	-moz-border-radius-bottomright: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	-webkit-border-top-right-radius: 0px !important;
+	-moz-border-radius-topright: 0px !important;
+	border-top-right-radius: 0px !important;
+}
+
+.gallery_right .scroller ul li span {
+	padding : 0px !important;
+}
+
+
+.no_gallery .prod_image_main  {
+	-webkit-border-bottom-left-radius: 4px !important;
+	-moz-border-radius-bottomleft: 4px !important;
+	border-bottom-left-radius: 4px !important;
+	-webkit-border-top-left-radius: 4px !important;
+	-moz-border-radius-topleft: 4px !important;
+	border-top-left-radius: 4px !important;
+}
+
+.productImage .productImagePrimary.no_gallery {
+	margin: 0;
+	border: 2px solid #315f8e;
+}
+
+.productImage .productImagePrimary.no_gallery a.productImageZoomLink {
+	right: 0;
+}
+
+.productImage .productImagePrimary.no_gallery a.productImagePrimaryLink {
+	margin: 0 auto;
+}

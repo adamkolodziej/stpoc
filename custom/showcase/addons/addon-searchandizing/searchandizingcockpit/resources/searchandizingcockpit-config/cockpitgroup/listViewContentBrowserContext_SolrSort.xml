@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view allow-create-inline-items="true"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="list-view.xsd">
+        <group name="General">
+        		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="true" selectable="true"/>
+                <property qualifier="SolrSort.indexedType" editable="false" visible="false" />
+                <property qualifier="SolrSort.code" editable="true" visible="true" />
+                <property qualifier="SolrSort.name" editable="true" visible="true" />
+                <property qualifier="SolrSort.visible" editable="true" visible="true" />
+                <property qualifier="SolrSort.fields" editable="true" visible="true"  />
+        </group>
+</list-view>

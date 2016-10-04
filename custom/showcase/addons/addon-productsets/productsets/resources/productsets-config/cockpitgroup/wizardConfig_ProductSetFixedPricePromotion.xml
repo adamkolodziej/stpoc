@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="wizard-config.xsd"
+               showPrefilledValues="true" selectMode="true" createMode="true" displaySubtypes="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="AbstractPromotion.code"/>
+			<property qualifier="AbstractPromotion.title"/>
+			<property qualifier="AbstractPromotion.name"/>		
+			<property qualifier="AbstractPromotion.enabled"/>
+			<property qualifier="AbstractPromotion.priority"/>
+			<property qualifier="AbstractPromotion.promotionGroup" visible="true"/>
+			<property qualifier="ProductSetFixedPricePromotion.productSetPrice">
+				<parameter name="allowCreate" value="true"/>
+			</property>
+		</group>
+		<group qualifier="ProductsSets" visible="true" initially-opened="true">
+			<label lang="de">Produkte Sets</label>
+			<label lang="en">Product Sets</label>
+			
+			<property qualifier="ProductSetPromotion.productSets"/>
+		</group>
+		<group qualifier="Messages" visible="true" initially-opened="true">
+			<label lang="de">Nachrichten</label>
+			<label lang="en">Messages</label>
+			<label lang="ja">メッセージ</label>
+			<property qualifier="AbstractPromotion.description">
+				<parameter name="rows" value="3"/>
+			</property>
+			<property qualifier="ProductSetFixedPricePromotion.messageFired" >
+				<parameter name="rows" value="3"/>
+			</property>
+			<property qualifier="ProductSetFixedPricePromotion.messageCouldHaveFired" >
+				<parameter name="rows" value="3"/>
+			</property>
+		</group>
+	</displayed-properties>
+</wizard-config>

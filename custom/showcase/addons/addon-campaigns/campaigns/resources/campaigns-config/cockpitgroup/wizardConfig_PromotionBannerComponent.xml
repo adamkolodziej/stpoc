@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="false">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="CMSItem.name"/>
+		<property qualifier="CMSItem.catalogVersion" editorCode="shortListEditor"/>
+		<property qualifier="AbstractCMSComponent.visible"/>
+	</group>
+
+	<group qualifier="editorial" visible="true" initially-opened="true">
+		<label key="config.general.editorial" />
+		<property qualifier="PromotionBannerComponent.promotion" />
+		<property qualifier="PromotionBannerComponent.evaluateRestrictions" />
+		<property qualifier="PromotionBannerComponent.link" >
+			<parameter name="predefinedValuesStrategy" value="cmsItemPredefinedValuesStrategy" />
+		</property>		
+	</group>
+	
+	<group qualifier="Multimedia" visible="true" initially-opened="true">
+		<label key="config.general.multimedia" />
+		<property qualifier="PromotionBannerComponent.defaultBanner" editorCode="simpleMediaReferenceSelector">
+			<parameter name="allowCreate" value="true"/>
+			<parameter name="mimeTypes" value="image/jpeg;image/gif;image/png"/>
+			<parameter name="restrictToCreateTypes" value="Media,CelumAsset" />
+			<parameter name="predefinedValuesStrategy" value="cmsMediaPredefinedValuesStrategy"/>			
+		</property>
+		<property qualifier="PromotionBannerComponent.appliedBanner" editorCode="simpleMediaReferenceSelector">
+			<parameter name="allowCreate" value="true"/>
+			<parameter name="mimeTypes" value="image/jpeg;image/gif;image/png"/>
+			<parameter name="restrictToCreateTypes" value="Media,CelumAsset" />
+			<parameter name="predefinedValuesStrategy" value="cmsMediaPredefinedValuesStrategy"/>				
+		</property>
+		<property qualifier="PromotionBannerComponent.advanceNotificationBanner" editorCode="simpleMediaReferenceSelector">
+			<parameter name="allowCreate" value="true"/>
+			<parameter name="mimeTypes" value="image/jpeg;image/gif;image/png"/>
+			<parameter name="restrictToCreateTypes" value="Media,CelumAsset" />
+			<parameter name="predefinedValuesStrategy" value="cmsMediaPredefinedValuesStrategy"/>					
+		</property>
+	</group>
+
+	<group qualifier="visibility" visible="true" initially-opened="false">
+		<label key="config.general.contextvisibility" />
+		<property qualifier="AbstractCMSComponent.restrictions">
+			<parameter name="allowCreate" value="true" />
+
+		</property>
+		<property qualifier="AbstractCMSComponent.onlyOneRestrictionMustApply"/>
+	</group>
+	<!-- Hide Mandatory Attributes added by prefilled values -->
+		<property qualifier="PromotionBannerComponent.promotion" visible="false"/>
+		<property qualifier="PromotionBannerComponent.evaluateRestrictions" visible="false" >
+			<parameter name="predefinedValuesStrategy" value="cmsItemPredefinedValuesStrategy"/>
+		</property>
+		<property qualifier="PromotionBannerComponent.defaultBanner" editorCode="simpleMediaReferenceSelector" visible="false">
+			<parameter name="allowCreate" value="true"/>
+			<parameter name="mimeTypes" value="image/jpeg;image/gif;image/png"/>
+			<parameter name="restrictToCreateTypes" value="Media;CelumAsset" />
+			<parameter name="predefinedValuesStrategy" value="cmsMediaPredefinedValuesStrategy"/>			
+		</property>
+		<property qualifier="CMSItem.name" visible="false"/>
+		<property qualifier="CMSItem.catalogVersion" visible="false"/>
+	</displayed-properties>
+	
+</wizard-config>
+
+

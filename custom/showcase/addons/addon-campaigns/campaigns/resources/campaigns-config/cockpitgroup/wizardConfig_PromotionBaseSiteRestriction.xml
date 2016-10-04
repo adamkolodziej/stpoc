@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+	<group qualifier="General" visible="true" initially-opened="true">
+			<label lang="de">Stammdaten</label>
+			<label lang="en">General</label>
+			<label lang="fr">Propriétés</label>
+			<label lang="ja">プロパティ</label>
+			<property qualifier="PromotionBaseSiteRestriction.restrictedToSites">
+				<parameter name="allowCreate" value="false"/>
+			</property>
+		</group>
+
+
+	<group qualifier="Messages" visible="true" initially-opened="true">
+		<label lang="de">Nachrichten</label>
+		<label lang="en">Messages</label>
+		<label lang="ja">メッセージ</label>
+		<property qualifier="AbstractPromotionRestriction.descriptionPattern" editorCode="default">
+			<parameter name="rows" value="3"/>
+		</property>
+	</group>
+	</displayed-properties>
+</wizard-config>

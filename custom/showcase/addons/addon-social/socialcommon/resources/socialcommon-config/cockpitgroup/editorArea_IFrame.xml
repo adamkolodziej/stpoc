@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+
+	<group qualifier="editorial" visible="true" initially-opened="true">
+			<label key="config.general.editorial" />
+			<property qualifier="IFrame.url" visible="true" />
+			<property qualifier="IFrame.title" />	
+		</group>
+		
+		<group qualifier="layout" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.Layout" />
+			<property qualifier="IFrame.width" />	
+			<property qualifier="IFrame.height" />	
+			<property qualifier="IFrame.marginWidth" />	
+			<property qualifier="IFrame.marginHeight" />	
+			<property qualifier="IFrame.cssClass" />	
+			<property qualifier="IFrame.cssStyle" />	
+			<property qualifier="IFrame.border" visible="true" />
+			<property qualifier="IFrame.scrollbars" />
+		</group>
+
+</editor>

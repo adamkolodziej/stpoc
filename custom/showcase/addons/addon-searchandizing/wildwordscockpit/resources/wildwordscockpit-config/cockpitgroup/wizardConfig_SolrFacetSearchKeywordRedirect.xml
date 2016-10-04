@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="wizard-config.xsd" showPrefilledValues="false" selectMode="true" createMode="true" displaySubtypes="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.General" />
+			 <property qualifier="SolrFacetSearchKeywordRedirect.language" editorCode="shortListEditor" />        
+      	     <property qualifier="SolrFacetSearchKeywordRedirect.keyword" />
+      	     <property qualifier="SolrFacetSearchKeywordRedirect.ignoreCase"  />
+      	     <property qualifier="SolrFacetSearchKeywordRedirect.matchType"  />
+      	     <property qualifier="SolrFacetSearchKeywordRedirect.redirect"  />
+		</group>
+		<group qualifier="Admin" visible="true" initially-opened="true">
+             <label key="config.general.administration" />
+             <property qualifier="SolrFacetSearchKeywordRedirect.facetSearchConfig" />
+			
+		</group>
+	</displayed-properties>
+</wizard-config>

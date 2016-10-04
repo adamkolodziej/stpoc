@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="ProductSet.code"/>
+			<property qualifier="ProductSet.name"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="ProductSet.code"/>
+			<property qualifier="ProductSet.name"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="ProductSet.name"/>
+		<property qualifier="ProductSet.catalogVersion.mnemonic"/>
+		
+	</label>
+	<initial-properties source-object-template="Product">
+		<property-mapping source="src" target="ProductSet.products"/>
+	</initial-properties>
+</base>

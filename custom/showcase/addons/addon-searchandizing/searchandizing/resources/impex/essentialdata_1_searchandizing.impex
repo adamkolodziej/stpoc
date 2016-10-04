@@ -1,0 +1,8 @@
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;wide;FollowMeProductSpotlightComponent
+;wide;FollowMeProductCarouselComponent
+;narrow;FollowMeProductCarouselComponent
+;narrow;FollowMeCategoryFeatureComponent
+
+INSERT_UPDATE CockpitItemTemplate;code[unique=true];relatedType(code);
+;HeroProductListPageTemplate;PageTemplate;

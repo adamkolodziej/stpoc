@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (cmscockpit/resources/cmscockpit-application-context.xml) -->
+
+<!-- WARNING: This file is imported in cmscockpit-web-spring.xml therefore you don't need
+	to list it in your deployment descriptor -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/util 
+						http://www.springframework.org/schema/util/spring-util-3.1.xsd"
+	default-autowire="byName">
+	
+	
+	<bean id="defaultLiveEditUrlChangeCallbackScript" class="de.hybris.platform.cmscockpit.session.script.config.impl.SimpleScriptFragment">
+		<property name="group" value="LIVEEDIT" />
+		<property name="script">
+		<value>
+		 <![CDATA[
+
+			function notifyIframeAboutUrlChange(url, pagePk, userPk, jaloSessionId, searchStateUrl, searchStateQuery){
+				var iframeCollection = document.getElementsByTagName('iframe');
+				var id="";
+		      for(index in iframeCollection){
+		      	if(iframeCollection[index].className!=null&&iframeCollection[index].className=='liveEditBrowser'&&iframeCollection[index].offsetHeight!=0){
+		      		id=iframeCollection[index].id;
+		      		break;
+		          }
+		      }
+		      comm.sendUser(id,'urlChange',url,pagePk,userPk, jaloSessionId, searchStateUrl, searchStateQuery)
+		   }
+		   ]]>
+		  </value> 
+		  </property> 
+	</bean>
+	
+	<bean id="makeLandingPageLiveEditCaptionButtonHandlerListMergeDirective" depends-on="liveEditCaptionButtonHandlers" parent="listMergeDirective" >
+		<property name="add" ref="makeLandingPageLiveEditCaptionButtonHandler" />
+		<property name="beforeBeanNames" value="liveEditCaptionButtonHandler" />
+	</bean> 
+	
+	<alias name="defaultMakeLandingPageLiveEditCaptionButtonHandler" alias="makeLandingPageLiveEditCaptionButtonHandler" />
+	<bean id="defaultMakeLandingPageLiveEditCaptionButtonHandler" class="com.hybris.cms.turbocmspages.cockpit.liveedit.captionhandler.MakeLandingPageLiveEditCaptionButtonHandler" >
+		<property name="turboCmsPagesLiveEditWorkflowService" ref="turboCmsPagesLiveEditWorkflowService" />
+		<property name="liveEditCategoryLandingPageWizardInvoker" ref="liveEditCategoryLandingPageWizardInvoker" />
+	</bean> 
+	
+	<alias name="defaultLiveEditCategoryLandingPageWizardInvoker" alias="liveEditCategoryLandingPageWizardInvoker" />
+	<bean id="defaultLiveEditCategoryLandingPageWizardInvoker" class="com.hybris.cms.turbocmspages.cockpit.liveedit.wizards.DefaultLiveEditCategoryLandingPageWizardInvoker"/>
+	
+	<bean id="switchToLiveEditOnPageCreateEventHandlerListMergeDirective" depends-on="liveEditBrowserCockpitEventHandlers" parent="listMergeDirective" >
+		<property name="add" ref="switchToLiveEditOnPageCreateEventHandler" />
+	</bean>
+	
+	<alias name="defaultSwitchToLiveEditOnPageCreateEventHandler" alias="switchToLiveEditOnPageCreateEventHandler"/>
+	<bean id="defaultSwitchToLiveEditOnPageCreateEventHandler" class="com.hybris.cms.turbocmspages.cockpit.liveedit.events.SwitchToLiveEditOnPageCreateEventHandler">
+		<property name="turboCmsPagesLiveEditWorkflowService" ref="turboCmsPagesLiveEditWorkflowService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+</beans>

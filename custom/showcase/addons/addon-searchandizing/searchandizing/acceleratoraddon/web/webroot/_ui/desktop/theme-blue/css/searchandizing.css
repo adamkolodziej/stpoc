@@ -1,0 +1,69 @@
+.spotlight_holder {
+	border: 2px solid #bacad5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+/* BA */
+.spotlight {
+	/*border: 2px solid #bacad5;*/
+	/*-webkit-border-radius: 4px;*/
+	/*-moz-border-radius: 4px;*/
+	/*border-radius: 4px;*/
+	margin-top: 10px;
+	/*margin-bottom: 20px;*/
+	/*margin-left: 7px;*/
+	/*margin-right: 7px;*/
+}
+
+.spotlight .title_holder h2 {
+	background-image: url(../../../../../desktop/theme-blue/images/bg-gradient-title-component.png);
+	background-repeat: repeat-x;
+	background-position: center top;
+	background-color: #0b547c;
+	-webkit-border-bottom-right-radius: 4px;
+	-webkit-border-bottom-left-radius: 4px;
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-webkit-border-top-left-radius: 4px;
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-topleft: 4px;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;	
+	font-size: 1.7em;
+	font-weight: bold;
+	text-shadow: 0 -1px 1px #333;
+	color: #ffffff;
+	margin: 0 7px 0 8px;
+	position: relative;
+	top: -9px;
+	padding: 4px 6px;
+	text-align: center;
+}
+
+.spotlight .title_holder {
+	margin-bottom: 2px;
+}
+
+.spotlight .details .cart .add_to_basket {
+	margin-top : 0px;
+	padding-top : 0px;
+	padding : 0;
+	
+}
+
+.spotlight .details .cart .collect_from_store {
+	margin-top : 0px;
+	padding-top : 0px;
+	padding : 0;
+}
+
+.click_pickupInStore_Button {
+	margin-bottom: 12px !important;
+}
+
+
+

@@ -1,0 +1,19 @@
+#$header
+
+
+# Language
+\$lang=$lang
+
+
+########################################################################
+# Localize The Item Templates
+########################################################################
+
+#set ( $cockpititemtemplate = $query.load('cockpit-item-template', 'CockpitItemTemplate') )
+UPDATE CockpitItemTemplate;code[unique=true];name[lang=\$lang];description[lang=\$lang]
+#foreach( $row in $cockpititemtemplate )
+;$row.key;$row.values.name;$row.values.description;
+#end
+
+
+

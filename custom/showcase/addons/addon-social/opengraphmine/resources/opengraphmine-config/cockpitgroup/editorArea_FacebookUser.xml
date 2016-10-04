@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="FacebookUser.name" />
+		<property qualifier="FacebookUser.firstname" />
+		<property qualifier="FacebookUser.lastname" />
+		<property qualifier="FacebookUser.gender" />
+		<property qualifier="FacebookUser.email" />
+		<property qualifier="FacebookUser.birthday" />
+		<property qualifier="FacebookUser.currentCity" />
+		<property qualifier="FacebookUser.homeTown" />
+	</group>
+	
+	<group qualifier="Facebook" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.Facebook" />
+		<property qualifier="FacebookUser.profileLink" />
+		<property qualifier="FacebookUser.locale" />
+	</group>
+	
+	<group qualifier="Multimedia" visible="true" initially-opened="true">
+		<label key="config.general.multimedia" />
+		<property qualifier="FacebookUser.profilePicture" editor="simpleMediaReferenceSelector" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="FacebookUser.smallProfilePicture" editor="simpleMediaReferenceSelector" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>
+	</group>	
+
+	<group qualifier="References" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.References" />
+		<property qualifier="Principal.groups" />
+		<property qualifier="FacebookUser.linkedCustomer" />
+		<property qualifier="FacebookUser.friends" />
+		<property qualifier="FacebookUser.likes" />
+	</group>
+
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label key="config.general.administration" />
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+		<property qualifier="FacebookUser.facebookUpdatedTime" />
+		<property qualifier="Principal.uid" />
+	</group>
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+		qualifier="unassigned"
+		initially-opened="false"
+		visible="false">
+		<label key="cockpit.config.label.Other" />
+
+	</custom-group>
+</editor>

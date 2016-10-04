@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+		<style src="/promotioncockpit/css/promotioncockpit.css" />
+
+		<zscript><![CDATA[
+			void setActivity(String param, org.zkoss.zul.impl.XulElement element, boolean active) {
+				setAttr(param, active);
+				element.setSclass("active_"+active);
+				element.setVisible(active);
+			}
+			void restoreCheckState(org.zkoss.zul.impl.XulElement element, String param, boolean invert) {
+				boolean checked = Boolean.TRUE.equals(getAttr(param));
+				if( invert ) checked = !checked;
+				element.setChecked(invert);
+			}
+			void restoreActivity(org.zkoss.zul.impl.XulElement element, String param) {
+				boolean active = getAttr(param) != null ? getAttr(param) : false;
+				element.setSclass("active_"+active);
+				element.setVisible(active);
+			}
+		]]></zscript>
+		
+		<div style="text-align: left; height:263px; margin: 30px; margin-top: 10px;">
+			<div>
+			<attribute name="onCreate">
+				self.appendChild(pageBean.getErrorContainer());		
+			</attribute>
+			</div>	
+			<div height="15px"></div>
+			
+			<checkbox 
+				id="everyoneCheck" 
+				label="${c:l('campaigns.wizard.everyone')}" 
+				onCheck='setActivity("restrictByUsers", usersSection, !event.isChecked())'
+				onCreate='restoreCheckState(self, "restrictByUsers", true)' 
+			/>
+			
+			<div id="usersSection" onCreate='restoreActivity(self, "restrictByUsers")'>
+				<div>
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('campaigns.wizard.userGroups')}:"/>
+						<div id="userGroupsEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.userGroups" editorCode="multi"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+							<custom-attributes allowCreate="false" displaySubtypes="true" allowActivate="false" />
+						</div>
+					</div>
+					<div height="35px"></div>
+				</div>
+			</div>
+		</div>
+</zk>

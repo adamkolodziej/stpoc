@@ -1,0 +1,32 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2013 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+
+campaignsliveedit.key=value
+
+# Specifies the location of the spring context file putted automatically to the global platform application context.
+campaignsliveedit.application-context=campaignsliveedit-spring.xml
+
+
+
+campaignsliveedit.liveedit.javascript.paths.desktop=/shared/common/js/campaignsliveedit.js
+campaignsliveedit.liveedit.javascript.paths.mobile=/shared/common/js/campaignsliveedit.js
+
+campaignsliveedit.liveedit.css.paths.desktop=/shared/common/css/campaignsliveedit.css
+campaignsliveedit.liveedit.css.paths.mobile=/shared/common/css/campaignsliveedit.css
+
+liveeditaddon.additionalWebSpringConfigs.campaignsliveedit=classpath:/campaignsliveedit/cmscockpit/spring/import.xml

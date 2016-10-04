@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="items.xsd">
+    <collectiontypes>
+        <collectiontype code="AddThisServiceList" elementtype="AddThisServiceEnum" autocreate="true" generate="true" type="list" />
+    </collectiontypes>
+    <enumtypes>
+        <enumtype code="AddThisOrientation" autocreate="true" generate="true">
+            <value code="horizontal"/>
+            <value code="vertical"/>
+        </enumtype>
+        <enumtype code="AddThisSize" autocreate="true" generate="true">
+            <value code="small"/>
+            <value code="big"/>
+        </enumtype>
+
+        <enumtype code="AddThisServiceEnum" autocreate="true" generate="true" dynamic="true">
+            <value code="_preferedservice" />
+            <value code="_100zakladok" />
+            <value code="_2tag" />
+            <value code="_2linkme" />
+            <value code="a97abi" />
+            <value code="addressbar" />
+            <value code="adfty" />
+            <value code="adifni" />
+            <value code="advqr" />
+            <value code="amazonwishlist" />
+            <value code="amenme" />
+            <value code="aim" />
+            <value code="aolmail" />
+            <value code="apsense" />
+            <value code="armenix" />
+            <value code="arto" />
+            <value code="aviary" />
+            <value code="azadegi" />
+            <value code="baang" />
+            <value code="baidu" />
+            <value code="balltribe" />
+            <value code="beat100" />
+            <value code="bebo" />
+            <value code="bentio" />
+            <value code="biggerpockets" />
+            <value code="bitly" />
+            <value code="bizsugar" />
+            <value code="bland" />
+            <value code="blinklist" />
+            <value code="blip" />
+            <value code="blogger" />
+            <value code="bloggy" />
+            <value code="blogkeen" />
+            <value code="blogmarks" />
+            <value code="blogtrottr" />
+            <value code="blurpalicious" />
+            <value code="bolt" />
+            <value code="bobrdobr" />
+            <value code="bonzobox" />
+            <value code="socialbookmarkingnet" />
+            <value code="bookmarkycz" />
+            <value code="bookmerkende" />
+            <value code="box" />
+            <value code="brainify" />
+            <value code="bryderi" />
+            <value code="buddymarks" />
+            <value code="buffer" />
+            <value code="buzzzy" />
+            <value code="camyoo" />
+            <value code="cardthis" />
+            <value code="care2" />
+            <value code="chimein" />
+            <value code="chiq" />
+            <value code="cirip" />
+            <value code="citeulike" />
+            <value code="classicalplace" />
+            <value code="cleanprint" />
+            <value code="cleansave" />
+            <value code="clipdo" />
+            <value code="cndig" />
+            <value code="colivia" />
+            <value code="technerd" />
+            <value code="connotea" />
+            <value code="cootopia" />
+            <value code="cosmiq" />
+            <value code="cssbased" />
+            <value code="curateus" />
+            <value code="delicious" />
+            <value code="designbump" />
+            <value code="digthiswebhost" />
+            <value code="digaculturanet" />
+            <value code="digg" />
+            <value code="diggita" />
+            <value code="digo" />
+            <value code="digzign" />
+            <value code="diigo" />
+            <value code="dipdive" />
+            <value code="domelhor" />
+            <value code="dosti" />
+            <value code="dotnetkicks" />
+            <value code="dotnetshoutout" />
+            <value code="douban" />
+            <value code="draugiem" />
+            <value code="drimio" />
+            <value code="dropjack" />
+            <value code="dudu" />
+            <value code="dzone" />
+            <value code="edelight" />
+            <value code="efactor" />
+            <value code="ekudos" />
+            <value code="elefantapl" />
+            <value code="email" />
+            <value code="mailto" />
+            <value code="embarkons" />
+            <value code="eucliquei" />
+            <value code="evernote" />
+            <value code="extraplay" />
+            <value code="ezyspot" />
+            <value code="stylishhome" />
+            <value code="fabulously40" />
+            <value code="facebook" />
+            <value code="informazione" />
+            <value code="thefancy" />
+            <value code="fark" />
+            <value code="farkinda" />
+            <value code="fashiolista" />
+            <value code="favable" />
+            <value code="faves" />
+            <value code="favlogde" />
+            <value code="favoritende" />
+            <value code="favorites" />
+            <value code="favoritus" />
+            <value code="flaker" />
+            <value code="flosspro" />
+            <value code="folkd" />
+            <value code="formspring" />
+            <value code="thefreedictionary" />
+            <value code="fresqui" />
+            <value code="friendfeed" />
+            <value code="funp" />
+            <value code="fwisp" />
+            <value code="gabbr" />
+            <value code="gamekicker" />
+            <value code="gg" />
+            <value code="giftery" />
+            <value code="gigbasket" />
+            <value code="givealink" />
+            <value code="globalgrind" />
+            <value code="gmail" />
+            <value code="govn" />
+            <value code="goodnoows" />
+            <value code="google" />
+            <value code="googletranslate" />
+            <value code="google_plusone_share" />
+            <value code="greaterdebater" />
+            <value code="grono" />
+            <value code="habergentr" />
+            <value code="hackernews" />
+            <value code="hadashhot" />
+            <value code="hatena" />
+            <value code="gluvsnap" />
+            <value code="hedgehogs" />
+            <value code="hellotxt" />
+            <value code="historious" />
+            <value code="hotbookmark" />
+            <value code="hotklix" />
+            <value code="hotmail" />
+            <value code="w3validator" />
+            <value code="hyves" />
+            <value code="identica" />
+            <value code="idibbit" />
+            <value code="igoogle" />
+            <value code="ihavegot" />
+            <value code="index4" />
+            <value code="indexor" />
+            <value code="instapaper" />
+            <value code="investorlinks" />
+            <value code="iorbix" />
+            <value code="irepeater" />
+            <value code="isociety" />
+            <value code="iwiw" />
+            <value code="jamespot" />
+            <value code="jappy" />
+            <value code="joliprint" />
+            <value code="jolly" />
+            <value code="jumptags" />
+            <value code="kaboodle" />
+            <value code="kaevur" />
+            <value code="kaixin" />
+            <value code="ketnooi" />
+            <value code="kindleit" />
+            <value code="kipup" />
+            <value code="kledy" />
+            <value code="kommenting" />
+            <value code="latafaneracat" />
+            <value code="librerio" />
+            <value code="lidar" />
+            <value code="linkninja" />
+            <value code="linkedin" />
+            <value code="linksgutter" />
+            <value code="linkshares" />
+            <value code="linkuj" />
+            <value code="livejournal" />
+            <value code="lockerblogger" />
+            <value code="logger24" />
+            <value code="mymailru" />
+            <value code="markme" />
+            <value code="mashant" />
+            <value code="mashbord" />
+            <value code="me2day" />
+            <value code="meinvz" />
+            <value code="mekusharim" />
+            <value code="memonic" />
+            <value code="memori" />
+            <value code="mendeley" />
+            <value code="meneame" />
+            <value code="live" />
+            <value code="mindbodygreen" />
+            <value code="misterwong" />
+            <value code="misterwong_de" />
+            <value code="moemesto" />
+            <value code="moikrug" />
+            <value code="mototagz" />
+            <value code="mrcnetworkit" />
+            <value code="multiply" />
+            <value code="myaol" />
+            <value code="myhayastan" />
+            <value code="mylinkvault" />
+            <value code="myspace" />
+            <value code="n4g" />
+            <value code="naszaklasa" />
+            <value code="netlog" />
+            <value code="netvibes" />
+            <value code="netvouz" />
+            <value code="newsmeback" />
+            <value code="newstrust" />
+            <value code="newsvine" />
+            <value code="nujij" />
+            <value code="odnoklassniki_ru" />
+            <value code="oknotizie" />
+            <value code="oneview" />
+            <value code="orkut" />
+            <value code="dashboard" />
+            <value code="oyyla" />
+            <value code="packg" />
+            <value code="pafnetde" />
+            <value code="pdfonline" />
+            <value code="pdfmyurl" />
+            <value code="phonefavs" />
+            <value code="pingfm" />
+            <value code="planypus" />
+            <value code="plaxo" />
+            <value code="plurk" />
+            <value code="pochvalcz" />
+            <value code="pocket" />
+            <value code="politicnote" />
+            <value code="posteezy" />
+            <value code="posterous" />
+            <value code="pratiba" />
+            <value code="print" />
+            <value code="printfriendly" />
+            <value code="pusha" />
+            <value code="qrfin" />
+            <value code="qrsrc" />
+            <value code="quantcast" />
+            <value code="qzone" />
+            <value code="reddit" />
+            <value code="rediff" />
+            <value code="redkum" />
+            <value code="researchgate" />
+            <value code="ridefix" />
+            <value code="safelinking" />
+            <value code="scoopat" />
+            <value code="scoopit" />
+            <value code="sekoman" />
+            <value code="select2gether" />
+            <value code="sharer" />
+            <value code="shaveh" />
+            <value code="shetoldme" />
+            <value code="sinaweibo" />
+            <value code="skyrock" />
+            <value code="smiru" />
+            <value code="snipit" />
+            <value code="sodahead" />
+            <value code="sonico" />
+            <value code="speedtile" />
+            <value code="spinsnap" />
+            <value code="spokentoyou" />
+            <value code="yiid" />
+            <value code="springpad" />
+            <value code="squidoo" />
+            <value code="startaid" />
+            <value code="startlap" />
+            <value code="storyfollower" />
+            <value code="studivz" />
+            <value code="stuffpit" />
+            <value code="stumbleupon" />
+            <value code="stumpedia" />
+            <value code="sunlize" />
+            <value code="supbro" />
+            <value code="surfingbird" />
+            <value code="svejo" />
+            <value code="symbaloo" />
+            <value code="taaza" />
+            <value code="tagza" />
+            <value code="taringa" />
+            <value code="tarpipe" />
+            <value code="textme" />
+            <value code="thewebblend" />
+            <value code="thinkfinity" />
+            <value code="thisnext" />
+            <value code="throwpile" />
+            <value code="toly" />
+            <value code="topsitelernet" />
+            <value code="transferr" />
+            <value code="tuenti" />
+            <value code="tulinq" />
+            <value code="tumblr" />
+            <value code="tvinx" />
+            <value code="twitter" />
+            <value code="twitthis" />
+            <value code="typepad" />
+            <value code="upnews" />
+            <value code="urlaubswerkde" />
+            <value code="urlcapt" />
+            <value code="viadeo" />
+            <value code="virb" />
+            <value code="visitezmonsite" />
+            <value code="vk" />
+            <value code="vkrugudruzei" />
+            <value code="voxopolis" />
+            <value code="vybralisme" />
+            <value code="vyoom" />
+            <value code="webnews" />
+            <value code="webshare" />
+            <value code="werkenntwen" />
+            <value code="domaintoolswhois" />
+            <value code="windows" />
+            <value code="windycitizen" />
+            <value code="wirefan" />
+            <value code="wordpress" />
+            <value code="worio" />
+            <value code="wowbored" />
+            <value code="raiseyourvoice" />
+            <value code="wykop" />
+            <value code="xanga" />
+            <value code="xing" />
+            <value code="yahoobkm" />
+            <value code="yahoomail" />
+            <value code="yammer" />
+            <value code="yardbarker" />
+            <value code="yemle" />
+            <value code="yigg" />
+            <value code="yookos" />
+            <value code="yoolink" />
+            <value code="yorumcuyum" />
+            <value code="youblr" />
+            <value code="youbookmarks" />
+            <value code="youmob" />
+            <value code="yuuby" />
+            <value code="zakladoknet" />
+            <value code="ziczac" />
+            <value code="zingme" />
+        </enumtype>
+
+    </enumtypes>
+    <itemtypes>
+        <typegroup name="addthis">
+
+            <itemtype code="AddThisComponent" jaloclass="com.hybris.social.addthis.jalo.AddThisComponent" extends="SimpleCMSComponent" generate="true" autocreate="true">
+                <attributes>
+                    <attribute qualifier="altAnalyticsUser" type="java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers optional="true"/>
+                        <description>Your AddThis Google Analytics username. If blank the system uses the one in properties file or a public one.</description>
+                    </attribute>
+                    <attribute qualifier="servicesExclude" type="AddThisServiceList">
+                        <persistence type="property"/>
+                        <modifiers optional="true"/>
+                        <description>Services to exclude from all menus. For example, setting this to 'facebook,myspace' would hide Facebook and MySpace on all our menus.</description>
+                    </attribute>
+                    <attribute qualifier="servicesCompact" type="AddThisServiceList">
+                        <persistence type="property"/>
+                        <modifiers optional="true"/>
+                        <description>Services to use in the compact menu. For example, setting this to 'print,email,favorites' would result in only those three services appearing.</description>
+                    </attribute>
+                    <attribute qualifier="servicesExpanded" type="AddThisServiceList">
+                        <persistence type="property"/>
+                        <modifiers optional="true"/>
+                        <description>Services to use in the expanded menu. Useful if very few services are desired -- specifying a long list via services_exclude could be tiresome, and wouldn't catch a new service added later. For example, setting this to 'bebo,misterwong,netvibes' would result in only those three services appearing in the expanded menu.</description>
+                    </attribute>
+                    <attribute qualifier="visibleServiceButtons" type="AddThisServiceList">
+                        <persistence type="property"/>
+                        <modifiers optional="true"/>
+                        <description>Service button which will appear next to the menu button.</description>
+                    </attribute>
+                    <attribute qualifier="showCounter" type="java.lang.Boolean">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                        <description>If true, it will add a counter at the end.</description>
+                    </attribute>
+                    <attribute qualifier="uiClick" type="java.lang.Boolean">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                        <description>If true, the compact menu will never appear upon mousing over the regular button. Instead, it will be revealed upon clicking the button.</description>
+                    </attribute>
+                    <attribute qualifier="orientation" type="AddThisOrientation">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>em().getEnumerationValue("AddThisOrientation","horizontal")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="size" type="AddThisSize">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>em().getEnumerationValue("AddThisSize","big")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+    </itemtypes>
+
+</items>

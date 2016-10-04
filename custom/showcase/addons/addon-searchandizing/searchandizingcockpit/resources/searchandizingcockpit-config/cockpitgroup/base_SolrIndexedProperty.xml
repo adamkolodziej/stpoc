@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base  xsi:noNamespaceSchemaLocation="base.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <search>
+                <search-properties>
+                        <property qualifier="SolrIndexedProperty.name" />
+                        <property qualifier="SolrIndexedProperty.type" />
+                        <property qualifier="SolrIndexedProperty.facet" />
+                        <property qualifier="SolrIndexedProperty.exportId" />
+                </search-properties>
+                <sort-properties>
+                        <property qualifier="SolrIndexedProperty.name" />
+                        <property qualifier="SolrIndexedProperty.type" />
+                        <property qualifier="SolrIndexedProperty.facet" />
+                        <property qualifier="SolrIndexedProperty.exportId" />
+                </sort-properties>
+        </search>
+        <label>
+                <property qualifier="SolrIndexedProperty.name" />
+        </label>
+        <initial-properties source-object-template="SolrIndexedType">
+			<property-mapping source="src" target="SolrIndexedProperty.solrIndexedType"/>
+		</initial-properties>
+</base>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base  xsi:noNamespaceSchemaLocation="base.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <search>
+                <search-properties>
+                        <property qualifier="Keyword.keyword" />
+                        <property qualifier="Keyword.language" />
+                        <property qualifier="Keyword.products" />
+                        <property qualifier="Keyword.categories" />
+                        <property qualifier="Keyword.catalogVersion" />
+                        
+                </search-properties>
+                <sort-properties>
+                        <property qualifier="Keyword.keyword" />
+                        <property qualifier="Keyword.language" />
+                </sort-properties>
+        </search>
+        <label>
+			<property qualifier="Keyword.keyword" /> 
+	        <property qualifier="Keyword.language.isocode" />
+		</label>
+		<initial-properties source-object-template="Product">
+			<property-mapping source="src.catalogVersion" target="Keyword.catalogVersion"/>
+		</initial-properties>
+		<initial-properties source-object-template="Category">
+			<property-mapping source="src.catalogVersion" target="Keyword.catalogVersion"/>
+		</initial-properties>
+</base>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (cmscockpit/resources/cmscockpit-application-context.xml) -->
+
+<!-- WARNING: This file is imported in cmscockpit-web-spring.xml therefore you don't need
+	to list it in your deployment descriptor -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util-3.1.xsd"
+           default-autowire="byName">
+	
+	<bean id="editProductSetsCallbackScript" class="de.hybris.platform.cmscockpit.session.script.config.impl.SimpleScriptFragment">
+		<property name="group" value="LIVEEDIT" />
+		<property name="script">
+		<value>
+		 <![CDATA[
+			function notifyIframeEditProductSets(){
+				var iframeCollection = document.getElementsByTagName('iframe');
+				var id="";
+		      for(index in iframeCollection){
+		      	if(iframeCollection[index].className!=null&&iframeCollection[index].className=='liveEditBrowser'&&iframeCollection[index].offsetHeight!=0){
+		      		id=iframeCollection[index].id;
+		      		break;
+		          }
+		      }
+		      comm.sendUser(id,'editProductSets')
+		   }
+		   ]]>
+		  </value> 
+		  </property>   
+	</bean>	
+	<bean id="editProductSetsCallbackEventHandler" class="com.hybris.productsets.cockpit.callbackevent.EditProductSetsCallbackEventHandler" >
+		<property name="productFrontendUrlDecoder" ref="productCatalogVersionFrontendUrlDecoder" />
+		<property name="productSetService" ref="productSetService" />
+	</bean>
+
+    <bean id="editProductSetLiveEditCaptionButtonHandlerListMergeDirective" depends-on="liveEditCaptionButtonHandlers" parent="listMergeDirective" >
+        <property name="add" ref="editProductSetLiveEditCaptionButtonHandler" />
+        <property name="beforeBeanNames" value="liveEditCaptionButtonHandler" />
+    </bean>
+
+    <alias name="defaultEditProductSetLiveEditCaptionButtonHandler" alias="editProductSetLiveEditCaptionButtonHandler" />
+    <bean id="defaultEditProductSetLiveEditCaptionButtonHandler" class="com.hybris.productsets.cockpit.captionhandler.EditProductSetLiveEditCaptionButtonHandler" >
+        <property name="productSetFrontendUrlDecoder" ref="productSetCatalogVersionFrontendUrlDecoder" />
+    </bean>
+
+
+
+</beans>

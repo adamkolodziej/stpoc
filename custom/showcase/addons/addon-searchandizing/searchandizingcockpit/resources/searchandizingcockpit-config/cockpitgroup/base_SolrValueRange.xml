@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base  xsi:noNamespaceSchemaLocation="base.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<search>
+		<search-properties>
+		     <property qualifier="SolrValueRange.name" />
+		     <property qualifier="SolrValueRange.from"/>
+		     <property qualifier="SolrValueRange.solrValueRangeSet" />
+		
+		</search-properties>
+		 <sort-properties>
+             <property qualifier="SolrValueRange.name" />
+		     <property qualifier="SolrValueRange.from"/>
+		     <property qualifier="SolrValueRange.solrValueRangeSet" />
+        </sort-properties>
+		
+	</search>
+
+	<label>
+		<property qualifier="SolrValueRange.name"/>
+	</label>
+	
+	
+	
+	<initial-properties source-object-template="SolrValueRangeSet">
+		<property-mapping source="src" target="SolrValueRange.solrValueRangeSet"/>
+	</initial-properties>
+</base>

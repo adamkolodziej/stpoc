@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+
+<content-element type="PromotionBannerComponent" name="type.promotionbannercomponent.name" 
+							description="type.promotionbannercomponent.description" 
+							image="cmscockpit/images/component-icon-simplebanner.gif"
+							refImage="cmscockpit/images/component-icon-simplebanner-reference.gif"
+							imageSmall="cmscockpit/images/component-icon-simplebanner-small.gif"/>	
+							
+</content-elements>	

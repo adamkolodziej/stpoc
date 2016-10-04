@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="FacebookComment.id"/>
+			<property qualifier="Comment.text"/>
+			<property qualifier="comment.author"/>
+			<property qualifier="comment.relateditems"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="FacebookComment.id"/>
+			<property qualifier="comment.author" />
+			<property qualifier="comment.relateditems" />
+			<property qualifier="FacebookComment.facebookCreatedTime" />
+			<property qualifier="FacebookComment.likes" />
+		</sort-properties>
+	</search>
+	<label spring-bean="commentLabelProvider" />
+</base>

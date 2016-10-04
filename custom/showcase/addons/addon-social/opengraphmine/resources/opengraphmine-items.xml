@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+-->
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+				
+	<enumtypes>
+		<enumtype code="FacebookOpenGraphPermission" generate="true" autocreate="true">
+			<value code="publish_actions" />
+		</enumtype>
+		
+		<enumtype code="SocialContentPopulationRule" generate="true" autocreate="true">
+			<value code="LoggedUserOnly" />
+			<value code="FriendsOnly" />
+			<value code="LoggedUserAndFriends" />
+		</enumtype>
+		
+		<enumtype code="ButtonSize" generate="true" autocreate="true">
+   			<value code="TINY" />
+   			<value code="SMALL" />
+			<value code="MEDIUM" />
+			<value code="LARGE" />
+			<value code="XL" />
+		</enumtype>
+
+				<enumtype code="BTGRuleType" autocreate="false" generate="true">
+			<value code="FACEBOOK"/>
+		</enumtype>
+		
+<!-- 		FACEBOOK PERMISSIONS -->
+		<enumtype code="FacebookUserPermission" generate="true" autocreate="true" dynamic="true">
+			<value code="user_about_me" />
+			<value code="user_activities" />
+			<value code="user_birthday" />
+			<value code="user_checkins" />
+			<value code="user_education_history" />
+			<value code="user_events" />
+			<value code="user_groups" />
+			<value code="user_hometown" />
+			<value code="user_interests" />
+			<value code="user_likes" />
+			<value code="user_location" />
+			<value code="user_notes" />
+			<value code="user_photos" />
+			<value code="user_questions" />
+			<value code="user_relationships" />
+			<value code="user_relationship_details" />
+			<value code="user_religion_politics" />
+			<value code="user_subscriptions" />
+			<value code="user_status" />
+			<value code="user_videos" />
+			<value code="user_website" />
+			<value code="user_work_history" />
+			<value code="email" />
+		</enumtype>
+
+		<enumtype code="FacebookFriendsPermission" generate="true" autocreate="true" dynamic="true">
+			<value code="friends_about_me" />
+			<value code="friends_activities" />
+			<value code="friends_birthday" />
+			<value code="friends_checkins" />
+			<value code="friends_education_history" />
+			<value code="friends_events" />
+			<value code="friends_groups" />
+			<value code="friends_hometown" />
+			<value code="friends_interests" />
+			<value code="friends_likes" />
+			<value code="friends_location" /> 
+			<value code="friends_notes" />
+			<value code="friends_photos" />
+			<value code="friends_questions" />
+			<value code="friends_relationships" />
+			<value code="friends_relationship_details" />
+			<value code="friends_religion_politics" />
+			<value code="friends_subscriptions" />
+			<value code="friends_status" />
+			<value code="friends_videos" />	
+			<value code="friends_website" />
+			<value code="friends_work_history" />
+		</enumtype>
+		
+		<enumtype code="FacebookExtendedPermission" generate="true" autocreate="true" dynamic="true">
+			<value code="read_friendlists" />
+			<value code="read_insights" />
+			<value code="read_mailbox" />
+			<value code="read_requests" />
+			<value code="read_stream" />
+			<value code="xmpp_login" />
+			<value code="ads_management" />
+			<value code="create_event" />
+			<value code="manage_friendlists" />
+			<value code="manage_notifications" />
+			<value code="user_online_presence" />
+			<value code="friends_online_presence" />
+			<value code="publish_stream" />
+			<value code="rsvp_event" />
+		</enumtype>
+	
+		
+		<enumtype code="FacebookPagePermission" generate="true" autocreate="true" dynamic="true">
+			<value code="manage_pages" />
+		</enumtype>
+		
+		<enumtype code="CategoriesOperator" autocreate="true" generate="true">
+			<value code="AND" />
+			<value code="OR" />
+		</enumtype>
+	</enumtypes>	
+	
+	<relations>
+		<relation generate="true" localized="false" code="FacebookOAuth2LoginComponent2FacebookOpenGraphPermission" autocreate="true">
+			<deployment table="fblogin2ogpermission" typecode="20115"/>
+			<sourceElement type="FacebookOAuth2LoginComponent" cardinality="many" navigable="false" >
+				<modifiers private="true" read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="openGraphPermissions" type="FacebookOpenGraphPermission"  cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		
+		<relation generate="true" localized="false" code="FacebookUser2Likes" autocreate="true">
+			<deployment table="fbuser2likes" typecode="20105"/>
+			<sourceElement type="FacebookUser" cardinality="many" qualifier="usersWhoLike" >
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="likes" type="FacebookPage" cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		
+		<relation generate="true" localized="false" code="FacebookUser2UrlLikes" autocreate="true">
+			<deployment table="fbuser2urllikes" typecode="20120"/>
+			<sourceElement type="FacebookUser" cardinality="many" qualifier="usersWhoLike" >
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="urlLikes" type="FacebookUrlLike" cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		
+		<relation generate="true" localized="false" code="FacebookFriends" autocreate="true">
+			<deployment table="fbfriends" typecode="20119"/>
+			<sourceElement type="FacebookUser" cardinality="many" navigable="false" >
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="friends" type="FacebookUser" cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		
+		<relation generate="true" localized="false" code="FacebookReference2Categories" autocreate="true">
+			<deployment table="fbreference2categories" typecode="20106"/>
+			<sourceElement type="FacebookReference" cardinality="many" qualifier="facebookReferences" >
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="linkedCategories" type="Category" cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		
+		<relation generate="true" localized="false" code="FacebookReference2Products" autocreate="true">
+			<deployment table="fbreference2products" typecode="20107"/>
+			<sourceElement type="FacebookReference" cardinality="many" qualifier="facebookReferences" >
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="linkedProducts" type="Product" cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>	
+		
+		
+<!-- 		FACEBOOK LOGIN BUTTON RELATIONS -->
+		<relation generate="true" localized="false" code="FacebookOAuth2LoginComponent2FacebookUserPermission" autocreate="true">
+			<deployment table="fblogin2userpermission" typecode="20100"/>
+			<sourceElement type="FacebookOAuth2LoginComponent" cardinality="many" navigable="false" >
+				<modifiers private="true" read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="userPermissions" type="FacebookUserPermission"  cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		<relation generate="true" localized="false" code="FacebookOAuth2LoginComponent2FacebookFriendsPermission" autocreate="true">
+			<deployment table="fblogin2friendpermission" typecode="20101"/>
+			<sourceElement type="FacebookOAuth2LoginComponent" cardinality="many" navigable="false" >
+				<modifiers private="true"  read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="friendsPermissions" type="FacebookFriendsPermission"  cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		<relation generate="true" localized="false" code="FacebookOAuth2LoginComponent2FacebookExtendedPermission" autocreate="true">
+			<deployment table="fblogin2extpermission" typecode="20102"/>
+			<sourceElement type="FacebookOAuth2LoginComponent" cardinality="many" navigable="false" >
+				<modifiers private="true" read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="extendedPermissions" type="FacebookExtendedPermission"  cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		<relation generate="true" localized="false" code="FacebookOAuth2LoginComponent2FacebookPagePermission" autocreate="true">
+			<deployment table="fblogin2pagepermission" typecode="20103"/>
+			<sourceElement type="FacebookOAuth2LoginComponent" cardinality="many" navigable="false" >
+				<modifiers private="true" read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="pagePermissions" type="FacebookPagePermission"  cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>	
+
+	<itemtypes>	
+		<typegroup name="facebook">
+			
+			<itemtype code="FacebookComment" autocreate="true" generate="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.FacebookComment" extends="Comment" >
+				<attributes>
+					<attribute qualifier="id" type="java.lang.String">
+						<persistence type="property"/>
+						<modifiers initial="true"  optional="false" unique="true" />
+					</attribute>				
+					<attribute qualifier="facebookCreatedTime" type="java.util.Date" >
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="likes" type="java.lang.Integer" >
+						<persistence type="property" />
+					</attribute>
+				</attributes>					
+			</itemtype>	
+			
+			<itemtype code="FacebookLocation" generate="true" autocreate="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.FacebookLocation" extends="GenericItem">
+				<deployment table="facebooklocation" typecode="20108"/>
+				<attributes>
+					<attribute qualifier="longitude" type="java.lang.Double">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="latitude" type="java.lang.Double">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="address" type="Address">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="longlatIdx">
+						<key attribute="longitude"/>
+						<key attribute="latitude"/>
+					</index>
+					<index name="addressIdx">
+						<key attribute="address" />
+					</index>
+				</indexes>
+			</itemtype>
+		
+		
+			<itemtype code="FacebookUser" generate="true" autocreate="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.FacebookUser" extends="User">
+				<attributes>
+					<attribute qualifier="email" type="java.lang.String">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="firstname" type="java.lang.String">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="lastname" type="java.lang.String">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="locale" type="java.lang.String">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="gender" type="Gender">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="profileLink" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="facebookUpdatedTime" type="java.util.Date">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="smallProfilePicture" type="Media">
+						<persistence type="property"/>
+					</attribute>
+                    <attribute qualifier="profilePictureUrl" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+					<attribute qualifier="linkedCustomer" type="Customer">
+						<persistence type="property"/>
+					</attribute>					
+					<attribute qualifier="currentCity" type="java.lang.String">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="homeTown" type="java.lang.String">
+						<persistence type="property"/>
+					</attribute>					
+					<attribute qualifier="birthday" type="java.util.Date">
+						<persistence type="property"/>
+					</attribute>
+                    <attribute qualifier="prolongedAccessToken" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+				</attributes>			
+				<indexes>
+					<index name="linkedCustomerIndex" unique="false" >
+						<key attribute="linkedCustomer"/>
+					</index>
+				</indexes>
+			</itemtype>
+			
+			<itemtype code="FacebookReference" generate="true" autocreate="true" abstract="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.FacebookReference" extends="GenericItem">
+				<deployment table="facebookreference" typecode="20104"/>
+				<attributes>
+					<attribute qualifier="id" type="java.lang.String">
+						<persistence type="property"/>
+						<modifiers initial="true"  optional="false" unique="true" />
+					</attribute>
+					<attribute qualifier="name" type="java.lang.String">
+						<persistence type="property"/>
+						<modifiers initial="true"  optional="false"  />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="idIdx" unique="true">
+						<key attribute="id"/>
+					</index>
+					<index name="nameLowerIdx" >
+						<key attribute="name" lower="true"/>
+					</index>
+				</indexes>
+			</itemtype>
+			
+			<itemtype code="FacebookPage" generate="true" autocreate="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.FacebookPage" extends="FacebookReference">
+				<attributes>
+					<attribute qualifier="category" type="java.lang.String">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="description" type="java.lang.String">
+						<persistence type="property">
+							<columntype>
+								<value>HYBRIS.LONG_STRING</value>
+							</columntype>
+						</persistence>
+					</attribute>
+					<attribute qualifier="link" type="java.lang.String">
+						<persistence type="property">
+							<columntype>
+								<value>HYBRIS.LONG_STRING</value>
+							</columntype>
+						</persistence>
+					</attribute>
+					<attribute qualifier="websiteLink" type="java.lang.String">
+						<persistence type="property">
+							<columntype>
+								<value>HYBRIS.LONG_STRING</value>
+							</columntype>
+						</persistence>
+					</attribute>							
+					<attribute qualifier="picture" type="Media">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="coverPhoto" type="Media">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="likes" type="java.lang.Integer">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="checkins" type="java.lang.Integer">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="talkingAboutCount" type="java.lang.Integer">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="location" type="FacebookLocation">
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="linkedSite" type="BaseSite">
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="categoryIdx" >
+						<key attribute="category"/>
+					</index>
+					<index name="linkedSiteIdx">
+						<key attribute="linkedSite" />
+					</index>
+				</indexes>
+			</itemtype> 
+			
+			<itemtype code="FacebookUrlLike" generate="true" autocreate="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.FacebookUrlLike" extends="GenericItem">
+				<deployment table="fburllike" typecode="20130" />
+				<attributes>
+					<attribute qualifier="url" type="java.lang.String">
+						<persistence type="property">
+							<columntype database="oracle">
+               					<value>varchar2(512)</value>
+               				</columntype>
+               				<columntype database="mysql">
+               					<value>VARCHAR(255)</value> <!-- see http://dev.mysql.com/doc/refman/5.6/en/innodb-restrictions.html -->
+               				</columntype>
+               				<columntype database="sqlserver">
+               					<value>nvarchar(512)</value>
+               				</columntype>
+							<columntype database="hsqldb">
+								<value>VARCHAR(512)</value>
+							</columntype>
+						</persistence>
+						<modifiers optional="false"/>
+					</attribute>
+					<attribute type="Product" qualifier="linkedProduct">
+						<persistence type="property"/>
+						<modifiers optional="true"/>
+					</attribute>
+					<attribute type="Category" qualifier="linkedCategory">
+						<persistence type="property"/>
+						<modifiers optional="true"/>
+					</attribute>
+					<attribute qualifier="linkedSite" type="BaseSite">
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="urlIdx" unique="true">
+						<key attribute="url"/>
+					</index>
+					<index name="categoryIdx" >
+						<key attribute="linkedCategory"/>
+					</index>
+					<index name="linkedSiteIdx">
+						<key attribute="linkedSite" />
+					</index>
+					<index name="productIdx" >
+						<key attribute="linkedProduct"/>
+					</index>
+				</indexes>
+			</itemtype>
+	
+			<itemtype code="FacebookConnection" generate="true" autocreate="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.FacebookConnection" extends="GenericItem">
+				<deployment table="facebookconnection" typecode="20180"/>
+				<attributes>
+					<attribute qualifier="providerId" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="providerUserId" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="displayName" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="profileUrl" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="imageUrl" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="accessToken" type="java.lang.String">
+						<persistence type="property">
+							<columntype database="oracle">
+								<value>varchar2(4000)</value>
+							</columntype>
+							<columntype database="mysql">
+								<value>text</value>
+							</columntype>
+							<columntype database="sqlserver">
+								<value>nvarchar(max)</value>
+							</columntype>
+							<columntype database="hsqldb">
+								<value>LONGVARCHAR</value>
+							</columntype>
+						</persistence>
+					</attribute>
+					<attribute qualifier="secret" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="refreshToken" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="expireTime" type="java.lang.Long">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="FacebookSynchronizationProcess" extends="BusinessProcess"
+				autocreate="true" generate="true"
+				jaloclass="com.hybris.social.facebook.opengraphmine.jalo.process.FacebookSynchronizationProcess">
+				<description>Synchronisation Process for a user account details</description>
+				<deployment table="facebooksyncprocess" typecode="20176"/>
+				<attributes>
+					<attribute qualifier="connection" type="FacebookConnection">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="user" type="FacebookUser" redeclare="true"><!-- CECS-56 -->
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="applicationId" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="applicationSecret" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>			
+		</typegroup>
+
+		<typegroup name="btg">
+			<itemtype code="BTGAbstractFacebookOperand" extends="BTGGenericOperand" autocreate="true" generate="true" abstract="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.BTGAbstractFacebookOperand" />
+			<itemtype code="BTGFacebookLikesOperand" extends="BTGAbstractFacebookOperand" autocreate="true" generate="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.BTGFacebookLikesOperand"/>
+			<itemtype code="BTGFacebookGenderOperand" extends="BTGAbstractFacebookOperand" autocreate="true" generate="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.BTGFacebookGenderOperand"/>
+			<itemtype code="BTGFacebookBirthdayOperand" extends="BTGAbstractFacebookOperand" autocreate="true" generate="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.BTGFacebookBirthdayOperand"/>
+			
+		</typegroup>
+		
+		<typegroup name="cms">
+			<itemtype code="FacebookSuggestedProductCarouselComponent" generate="true" autocreate="true" jaloclass="com.hybris.social.facebook.opengraphmine.jalo.facebook.FacebookSuggestedProductCarouselComponent" extends="AbstractFacebookComponent">
+				<attributes>
+					<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
+						<persistence type="property" />
+						<description>title for the carousel</description>
+					</attribute>
+					<attribute qualifier="socialContentPopulationRule" generate="true" autocreate="true" type="SocialContentPopulationRule">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>em().getEnumerationValue("SocialContentPopulationRule","LoggedUserAndFriends")</defaultvalue>
+					</attribute>
+					<attribute qualifier="categories" generate="true" autocreate="true" type="CategoryCollection">
+						<persistence type="property"/>
+						<description>Filter by categories.</description>
+						<modifiers optional="true" search="false" />
+					</attribute>
+					<attribute qualifier="categoriesOperator" generate="true" autocreate="true" type="CategoriesOperator">
+						<persistence type="property"/>
+						<description>Operator used to filter by category, to decide if all must match, or only one from the list.</description>
+						<modifiers optional="true" />
+					</attribute>
+					<attribute qualifier="fullCategoryPath" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="true" />
+						<description>Used as an option of filtering, to check all product categories (from bottom to top) or only the first level of supercateogories.</description>
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="FacebookOAuth2LoginComponent" generate="true" autocreate="true"
+				jaloclass="com.hybris.social.facebook.opengraphmine.jalo.FacebookOAuth2LoginComponent" extends="AbstractFacebookComponent">
+				<deployment table="fblogincomponent" typecode="20187"/>
+				<attributes>
+					<attribute qualifier="showImage" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>Specifies whether to show user image underneath the Login button.</description>
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>
+					<attribute qualifier="showName" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>Specifies whether to show user name underneath the Login button.</description>
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					</attribute>
+					<attribute qualifier="labelLogin" generate="true" autocreate="true" type="localized:java.lang.String">
+						<persistence type="property" />
+						<description>Optional alternative label for the login button</description>
+					</attribute>
+					<attribute qualifier="labelLogout" generate="true" autocreate="true" type="localized:java.lang.String">
+						<persistence type="property" />
+						<description>Optional alternative label for the logout button</description>
+					</attribute>
+					<attribute qualifier="size" generate="true" autocreate="true" type="ButtonSize">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>Defines presented button component size.</description>
+						<defaultvalue>em().getEnumerationValue("ButtonSize", "SMALL")</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>		
+	</itemtypes>
+</items>

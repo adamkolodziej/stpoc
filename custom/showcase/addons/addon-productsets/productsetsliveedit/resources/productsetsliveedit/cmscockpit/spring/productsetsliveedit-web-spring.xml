@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<!--  Set Carousel -->
+	
+	<alias name="defaultEditProductSetAdminMenuActionConverter" alias="editProductSetAdminMenuActionConverter" />
+	<bean id="defaultEditProductSetAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="editProductSetAdminMenuActionPopulator" />
+				<ref bean="setPkAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<alias name="defaultSetPkAdminMenuActionPopulator" alias="setPkAdminMenuActionPopulator" />
+	<bean id="defaultSetPkAdminMenuActionPopulator" class="com.hybris.productsets.liveedit.admin.converters.populator.ProductSetPkPopulator">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+	</bean>
+	
+	<alias alias="editProductSetAdminMenuActionPopulator" name="defaultProductSetAdminMenuActionPopulator" />
+	<bean id="defaultProductSetAdminMenuActionPopulator" parent="simpleComponentAdminMenuActionPopulator" >
+		<property name="type" value="EDIT_SET" />
+		<property name="addOn" value="productsetsliveedit" />		
+ 		<property name="adminActionEnabledStrategy" ref="editProductSetEnabledStrategy" />	
+	</bean>
+	
+	<bean id="editProductSetRootComponentListMergeDirective" depends-on="rootComponentAdminMenuGroupPopulator" parent="listMergeDirective" >
+		<property name="add" ref="editProductSetAdminMenuActionConverter" />
+		<property name="listPropertyDescriptor" value="menuItemConverters" />
+	</bean>
+	
+
+	<util:list id="editProductSetCmsComponentList" >
+		<value>ProductSetCarouselComponent</value>
+	</util:list>	
+	<alias alias="editProductSetEnabledStrategy" name="defaultEditProductSetEnabledStrategy" />
+	<bean id="defaultEditProductSetEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.RestrictedTypeCodeActionEnabledStrategy">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+		<property name="typeService" ref="typeService" />
+		<property name="typeCodes" ref="editProductSetCmsComponentList" />
+	</bean>	
+	
+	
+	<!--  Buy The Set -->
+	<alias name="defaultEditProductSetsAdminMenuActionConverter" alias="editProductSetsAdminMenuActionConverter" />
+	<bean id="defaultEditProductSetsAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="editProductSetsAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="editProductSetsRootComponentListMergeDirective" depends-on="xsellComponentAdminMenuGroupPopulator" parent="listMergeDirective" >
+		<property name="add" ref="editProductSetsAdminMenuActionConverter" />
+		<property name="listPropertyDescriptor" value="menuItemConverters" />
+	</bean>
+	<alias alias="editProductSetsAdminMenuActionPopulator" name="defaultProductSetsAdminMenuActionPopulator" />
+	<bean id="defaultProductSetsAdminMenuActionPopulator" parent="simpleComponentAdminMenuActionPopulator" >
+		<property name="type" value="EDIT_PRODUCT_SETS" />
+		<property name="addOn" value="productsetsliveedit" />		
+ 		<property name="adminActionEnabledStrategy" ref="editProductSetsEnabledStrategy" />	
+	</bean>
+	<util:list id="editProductSetsCmsComponentList" >
+		<value>BuyTheSetComponent</value>
+        <value>ProductSetCarouselComponent</value>
+	</util:list>
+	<alias alias="editProductSetsEnabledStrategy" name="defaultEditProductSetsEnabledStrategy" />
+	<bean id="defaultEditProductSetsEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.RestrictedTypeCodeActionEnabledStrategy">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+		<property name="typeService" ref="typeService" />
+		<property name="typeCodes" ref="editProductSetsCmsComponentList" />
+	</bean>	
+			
+</beans>

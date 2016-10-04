@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="list-view.xsd">
+        <group name="General">
+                <property qualifier="SolrIndexedType.identifier" editable="false" visible="true" />
+                <property qualifier="SolrIndexedType.type" editable="false" visible="true" />
+                <property qualifier="SolrIndexedType.solrFacetSearchConfig.name" editable="false" visible="true" />
+        </group>
+</list-view>

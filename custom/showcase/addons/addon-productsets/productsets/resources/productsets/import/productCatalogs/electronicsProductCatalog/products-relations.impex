@@ -1,0 +1,14 @@
+# ImpEx for Related Products into Electronics Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+
+
+
+INSERT_UPDATE ProductSet;code[unique=true];$catalogVersion;name;approvalStatus(code);products(code,$catalogVersion)
+;EOS-500StarterPack;;EOS 500D Starter Pack;approved;2053266,784343,4205436,
+;EOS-500ProfessionalPack;;EOS 500D Professional Pack;approved;2053266,784343,4205436,832382,832386
+

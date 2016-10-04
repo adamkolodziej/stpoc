@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+	<content-element type="VideoComponent" name="type.videocomponent.name"
+							description="type.videocomponent.description"
+							image="cmscockpit/images/socialcommon_icon_video-component-34x34.png"
+							refImage="cmscockpit/images/socialcommon_icon_video-component-34x34.png"
+							imageSmall="cmscockpit/images/socialcommon_icon_video-component-20x20.png"/>
+
+</content-elements>

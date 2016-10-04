@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="VideoComponent.title" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="VideoComponent.title" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="VideoComponent.title" />
+	</label>
+</base>

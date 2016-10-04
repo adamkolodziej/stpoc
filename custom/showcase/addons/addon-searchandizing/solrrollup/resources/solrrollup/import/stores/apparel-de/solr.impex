@@ -1,0 +1,18 @@
+#
+# Import the Solr configuration for the Apparel DE store
+#
+$solrIndexedType=apparel-deProductType
+$searchConfigName=apparel-dePageSize
+
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter
+;$solrIndexedType; baseProductCode        ;string;            ;    ;    ;    ;    ;    ;baseProductCodeProvider
+;$solrIndexedType; rootProductCode        ;string;            ;    ;    ;    ;    ;    ;rootProductCodeProvider
+;$solrIndexedType; rollupProductCode      ;string;            ;    ;    ;    ;    ;    ;rollupProductCodeProvider
+;$solrIndexedType; baseProductName        ;string;            ;    ;true;    ;    ;    ;baseProductNameProvider
+
+
+# Create the faceted search configuration
+UPDATE SolrSearchConfig;description[unique=true];groupingProperty(solrIndexedType(identifier),name)
+;$searchConfigName;$solrIndexedType:rollupProductCode

@@ -1,0 +1,10 @@
+##******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+
+$productCatalog=apparelProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Language
+$lang=en
+
+UPDATE ProductSet;code[unique=true];$catalogVersion[unique=true];title[lang=$lang];
+;EclipseTeeOneOfEach;;Get All The Styles!;

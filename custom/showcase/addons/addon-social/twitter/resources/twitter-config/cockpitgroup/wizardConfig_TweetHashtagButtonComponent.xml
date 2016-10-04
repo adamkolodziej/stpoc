@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="false">
+			<label key="cockpit.config.label.General" />
+
+			<property qualifier="CMSItem.name"/>
+			<property qualifier="CMSItem.catalogVersion"/>
+			<property qualifier="AbstractCMSComponent.visible"/>
+		</group>
+		
+		<group qualifier="editorial" visible="true" initially-opened="true">
+			<label key="config.general.editorial" />
+			
+			<property qualifier="TweetHashtagButtonComponent.hashtag" />
+			<property qualifier="AbstractShareTweetButtonComponent.urlToShare" />
+			<property qualifier="AbstractShareTweetButtonComponent.shortUrlToShare" />
+			<property qualifier="AbstractShareTweetButtonComponent.autoShortenUrl" />
+			<property qualifier="AbstractShareTweetButtonComponent.urlShorteningProvider" />
+			<property qualifier="AbstractTweetButtonComponent.tweetText" >
+				<parameter name="rows" value="3" />
+			</property>
+		</group>
+		
+		<group qualifier="layout" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.Layout" />
+		
+			<property qualifier="AbstractTweetButtonComponent.buttonSize" />		
+		</group>
+	
+		<group qualifier="community" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.Community" />
+			<property qualifier="AbstractTweetButtonComponent.recommended" />
+		</group>
+		
+	</displayed-properties>
+</wizard-config>

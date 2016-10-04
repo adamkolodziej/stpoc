@@ -1,0 +1,298 @@
+#addToProdListButton {
+	background-image: url('../images/bg-button-cart-wishlists.jpg');
+	background-color: #CF7A01;
+	padding: 0 10px 0 35px;
+}
+.view_prodlist button.positive {
+	float: left;
+	clear: both;
+}
+.view_prodlist table.your_cart tr td.product_details {
+	min-width: 120px;
+}
+
+/*
+
+	Mini Cart Wishlist Cart Header
+*****************/
+.cart_header_panel.wishlists {
+
+}
+.cart_header_panel.wishlists #cart_header dl dt {
+	min-width: inherit;
+}
+.cart_header_panel.wishlists #cart_header dl dd {
+	float:left;
+	margin-left:3px;
+	color: #CF7A01;
+}
+.cart_header_panel.wishlists #cart_header ul li {
+	float: left;
+	width: 50%;
+}
+.cart_header_panel.wishlists #cart_header ul li a {
+	padding: 7px 10px;
+}
+.cart_header_panel.wishlists #cart_header ul li.wishlist a img {
+	float: left;
+	margin-right: 2px;
+}
+/*
+
+	addToWishlist_Button
+*****************/
+
+.prod_add_to_prodlist button img {
+	margin-right: 0;
+} 
+#addToProdListButton {
+	margin-left: 0;
+	height: 32px;
+	margin: 10px 0 10px 0;
+	font-size: 1em;
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+#addToProdListButton:hover {
+	background-position: left -35px;
+}
+.view_prodlist button.out-of-stock {
+	height: auto;
+}
+.view_prodlist button.out-of-stock span.icon-cart {
+	display: none;
+}
+/*
+
+	Wish Lists
+*****************/
+.prodlist_header {
+	position: relative;
+	overflow: hidden;
+}
+.prodlist_header h1 {
+	color: #000000;
+	font-size: 2em;
+}
+.prodlist_header ul.nav {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	right: 0;
+}
+.prodlist_header ul.nav li:first-child {
+	margin-left: 0;
+	border-left: 0;
+	padding: 0;
+}
+.prodlist_header ul.nav li {
+	float: left;
+	margin-left: 5px;
+	padding: 0 0 0 5px;
+	color: #000000;
+	border-left: 1px solid #FFFFFF;
+}
+.prodlist_header ul.nav li a {
+	color: #000000;
+}
+.prodlist_header ul.nav a {
+	text-decoration: underline;
+}
+.prodlist_header ul.nav a:hover {
+	text-decoration: none;
+}
+.view_prodlist .prod_refine {
+	border-bottom: 0;
+}
+.view_prodlist .prod_refine label {
+	padding: 3px 0;
+}
+.view_prodlist .prod_refine .sortOptions {
+	margin-left: 0;
+}
+
+
+.view_prodlist table tr td.product_image {
+	
+}
+.view_prodlist .form_field-input textarea {
+	width: 121px;
+	height: 60px;
+	margin-bottom: 0;
+}
+.view_prodlist table.your_cart thead th {
+	padding-left: 9px;
+}
+.view_prodlist table.your_cart form input.qty {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin: 0 5px 10px 0;
+	-moz-box-shadow: inset 0 0 5px #cccccc;
+	-webkit-box-shadow: inset 0 0 5px #cccccc;
+	box-shadow: inset 0 0 5px #cccccc;
+	border: 1px solid #BBBBBB;
+	text-align: center;
+	float: left;	
+	padding: 2px 5px;
+}
+.view_prodlist .your_cart td.quantity {
+	min-width: 122px;
+}
+
+.view_prodlist .your_cart p {
+	margin-right: 0;
+	padding-left: 0;
+
+}
+.view_prodlist table.your_cart tr td {
+	border-left: none;
+}
+.view_prodlist table.your_cart tr td.product_image {
+	min-width: 96px;
+}
+.view_prodlist table.your_cart tr td.product_details h2 {
+	font-size: 1.4em;
+}
+.view_prodlist .dragndrop a {
+	background: url('../../common/images/productlists-drag-n-drop.png') no-repeat 0 0 transparent;
+	display: block;
+	width: 32px;
+	height: 32px;
+	cursor: move;
+}
+.view_prodlist .dragndrop a:hover,
+.view_prodlist .dragndrop a:visited,
+.view_prodlist .dragndrop a:active {
+	background: url('../../common/images/productlists-drag-n-drop_h.png') no-repeat 0 0 transparent;
+}
+.dragndrop-placeholder { 
+	height: 200px; 
+	background-color: buttonface;
+}
+
+.my_prodlists a.positive {
+	margin-bottom: 12px;
+}
+
+
+.add_new_prodlist h3,
+.share_prodlist h3 {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.share_prodlist h3 {
+	margin-top: 1em;
+}
+table.prodlist_friends {
+	border: 1px solid #cccccc;
+}
+table.prodlist_friends thead {
+	background: #cccccc;
+}
+table.prodlist_friends thead th {
+	height: 30px;
+}
+table.prodlist_friends thead th span.social_fb {
+	background: url('../images/FB-f-Logo__blue_29.png') no-repeat 0 0 transparent;
+	display: block;
+	width:29px;
+	height: 29px;
+	margin-right: 10px;
+	float: left;
+}
+table.prodlist_friends tbody {
+	height:150px; 
+	width: 100%;
+	overflow-y: scroll;
+	float: left;
+	
+}
+table.prodlist_friends tbody tr {
+	width: 100%;
+}
+table.prodlist_friends tbody tr td.name {
+	width: 100%;
+}
+table.prodlist_friends tbody tr td.name a {
+	width: 118px;
+}
+table.prodlist_friends .form_field-input input[type=checkbox] {
+	float: none;
+}
+
+
+
+
+
+/******* Date Picker fieldset *********/
+.datePicker_left_col_start {
+	width: 50%;
+	float: left;
+}
+.datePicker_left_col_end {
+	width: 50%;
+	float: left;
+}
+fieldset.datePicker a.calendar {
+	width: 20px;
+	height: 20px;
+	background: url('../images/productlists-calendar.png') no-repeat 0 0 transparent;
+	display: block;
+	float: left;
+}
+fieldset.datePicker a.calendar:hover {
+
+}
+fieldset.datePicker {
+	margin:0;
+	border:0;
+	padding:0;	
+	display:inline;
+	width:100%;	
+}
+fieldset.datePicker .form_field-label{
+	/*position:absolute;
+	left:-999999em;*/
+	clear: none;	
+}
+fieldset.datePicker .form_field-input{
+	/*float:left;*/
+}
+fieldset.datePicker select,
+fieldset.datePicker input.text{
+	width: 117px;
+	float: left;
+}
+fieldset.datePicker .form_field_error .form_field-label{
+	position:static;	
+}
+fieldset.datePicker .form_field_error .form_field-input{
+	float:none;
+}
+fieldset.datePicker .form_field_error select,
+fieldset.datePicker .form_field_error input.text{
+	width: 234px;
+}
+
+#cart_header ul li.wishlist {
+	background: inherit;
+		-o-transition:.5s;
+  	-ms-transition:.5s;
+  	-moz-transition:.5s;
+  	-webkit-transition:.5s;
+  	/* ...and now for the proper property */
+  	transition:.5s;
+}
+#cart_header ul li.wishlist.miniCartWishlistActive {
+	background: #ff4248;
+	/*background-position: 7px 10px;*/
+}
+.nav_column .item ul li a.activeList {
+	font-weight: bold;
+	color: #007174;
+}
+
+.pageType-CategoryPage .productList .productListItem {
+    margin: 20px 0px;
+}

@@ -1,0 +1,15 @@
+INSERT_UPDATE ComponentTypeGroup;code[unique=true]
+;socialButtons
+;socialWidgets
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;footer;FacebookRecommendationsBarComponent
+;wide;FacebookRecommendationsBoxComponent
+;wide;FacebookLikeBoxComponent
+;wide;FacebookCommentsComponent
+;socialButtons;FacebookLikeComponent
+;socialButtons;FacebookSendComponent
+;socialWidgets;FacebookFacepileComponent
+;socialWidgets;FacebookLikeComponent
+;socialWidgets;FacebookRecommendationsBoxComponent
+;socialWidgets;FacebookCommentsComponent

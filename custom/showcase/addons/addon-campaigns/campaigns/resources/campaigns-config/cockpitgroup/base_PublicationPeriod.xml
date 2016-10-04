@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="PublicationPeriod.code"/>
+			<property qualifier="PublicationPeriod.name"/>
+			<property qualifier="PublicationPeriod.catalogVersion"/>
+			<property qualifier="PublicationPeriod.promotions"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="Item.pk"/>
+			<property qualifier="Item.modifiedtime"/>
+			<property qualifier="PublicationPeriod.code"/>
+			<property qualifier="PublicationPeriod.name"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="PublicationPeriod.code"/>
+		<property qualifier="PublicationPeriod.name"/>
+		<property qualifier="PublicationPeriod.catalogVersion.mnemonic"/>
+		
+	</label>
+</base>

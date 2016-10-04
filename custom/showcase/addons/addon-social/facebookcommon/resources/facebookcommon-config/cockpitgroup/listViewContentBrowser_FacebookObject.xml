@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="false" selectable="true" width="70px"/>
+		<property qualifier="FacebookObject.namespace" visible="true" editable="false"/>
+		<property qualifier="FacebookObject.name" visible="true" editable="false" />
+		<custom spring-bean="ItemContentBrowserActionColumn" name="Actions"
+			visible="true" selectable="true">
+			<label key="config.general.actions" />
+		</custom>
+	</group>
+</list-view>

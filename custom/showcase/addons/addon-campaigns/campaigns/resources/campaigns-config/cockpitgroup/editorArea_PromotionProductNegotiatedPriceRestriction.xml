@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+	<group qualifier="Messages" visible="true" initially-opened="true">
+		<label lang="de">Nachrichten</label>
+		<label lang="en">Messages</label>
+		<label lang="ja">メッセージ</label>
+		<property qualifier="AbstractPromotionRestriction.descriptionPattern" >
+			<parameter>
+				<name>rows</name>
+				<value>3</value>
+			</parameter>
+		</property>
+	</group>
+		
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label lang="de">Administration</label>
+		<label lang="en">Administration</label>
+		<label lang="ja">管理</label>
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+	</group>
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+		qualifier="unassigned"
+		initially-opened="false"
+		visible="false">
+		<label lang="de">Andere</label>
+		<label lang="en">Other</label>
+		<label lang="fr">Autre</label>			
+		<label lang="ja">他</label>
+	</custom-group>
+</editor>

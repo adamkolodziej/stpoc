@@ -1,0 +1,21 @@
+INSERT_UPDATE ComponentTypeGroup;code[unique=true]
+;socialButtons
+;socialWidgets
+
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;socialButtons;TwitterFollowButtonComponent
+;socialButtons;TweetHashtagButtonComponent
+;socialButtons;TweetLinkButtonComponent
+;socialButtons;TweetMentionButtonComponent
+;narrow;TwitterProfileWidgetComponent
+;narrow;TwitterFavesWidgetComponent
+;narrow;TwitterListWidgetComponent
+;socialWidgets;TwitterProfileWidgetComponent
+;socialWidgets;TwitterFavesWidgetComponent
+;socialWidgets;TwitterListWidgetComponent
+;mobile;TwitterProfileWidgetComponent
+;mobile;TwitterFavesWidgetComponent
+;mobile;TwitterListWidgetComponent
+
+

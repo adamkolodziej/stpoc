@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="editor.xsd">
+        
+        <group qualifier="IndexedTypes" visible="true" initially-opened="true" >
+                <label key="cockpit.config.label.indexedtypes" />
+                <property qualifier="SolrIndexedType.identifier" />
+                <property qualifier="SolrIndexedType.type" />
+                <property qualifier="SolrIndexedType.indexName" />
+                <property qualifier="SolrIndexedType.solrIndexedProperties"  editor="collectionContextAreaEditor" />
+                <property qualifier="SolrIndexedType.solrIndexerQueries" editor="browserContextEditor" />
+        </group>
+        
+        
+         <group qualifier="Sorts" visible="true" initially-opened="true">
+                <label key="cockpit.config.label.sorts" />
+                
+        	<property qualifier="SolrIndexedType.sorts"  editor="collectionContextAreaEditor" />
+
+        </group>
+        
+         <group qualifier="ApplicationConfiguration" visible="true" initially-opened="false">
+                <label key="cockpit.config.label.applicationconfiguration" />
+                
+                <property qualifier="SolrIndexedType.identityProvider" editor="beanNameEditor" >
+                	<parameter>
+              		 <name>beanClass</name>
+              	 	<value>de.hybris.platform.solrfacetsearch.provider.IdentityProvider</value>
+              		</parameter>
+                </property>
+                <property qualifier="SolrIndexedType.modelLoader" editor="beanNameEditor" >
+                	<parameter>
+                		<name>beanClass</name>
+                		<value>de.hybris.platform.solrfacetsearch.loader.ModelLoader</value>
+                	</parameter>
+                </property>
+                <property qualifier="SolrIndexedType.valuesProvider" editor="beanNameEditor" >
+                	<parameter>
+                		<name>beanClass</name>
+                		<value>de.hybris.platform.solrfacetsearch.provider.IndexedTypeFieldsValuesProvider</value>
+                	</parameter>
+                </property>
+                <property qualifier="SolrIndexedType.solrResultConverter" editor="beanNameEditor" >
+                	<parameter>
+                		<name>beanClass</name>
+                		<value>de.hybris.platform.solrfacetsearch.search.AbstractSolrConverter</value>
+                	</parameter>
+                	
+                </property>
+        </group>
+ 
+        <group qualifier="admin" visible="true" initially-opened="false">
+                <label key="config.general.administration" />
+                <property qualifier="Item.pk" />
+                <property qualifier="Item.creationTime" />
+                <property qualifier="Item.modifiedtime" />
+        </group>
+        
+        <custom-group 
+                class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+                qualifier="unassigned"
+                initially-opened="false">
+                <label key="cockpit.config.label.Other" />
+        </custom-group>
+        
+</editor>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="list-view.xsd">
+        <group name="General">
+                <property qualifier="SolrStopWord.facetSearchConfig.name" editable="false" visible="true" width="200px" />
+                 <property qualifier="SolrStopWord.StopWord" editable="false" visible="true" width="350px" />
+        </group>
+</list-view>

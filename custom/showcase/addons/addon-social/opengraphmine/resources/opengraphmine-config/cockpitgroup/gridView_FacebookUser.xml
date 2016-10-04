@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid-view>
+	<imageslot>
+		<property qualifier="FacebookUser.profilePicture.URL"/>
+	</imageslot>
+	<labelslot>
+		<property qualifier="FacebookUser.name" />
+	</labelslot>
+	<descriptionslot>
+		<property qualifier="FacebookUser.email"  />
+	</descriptionslot>
+	<shortinfoslot>
+		<property qualifier="Principal.uid"/>
+	</shortinfoslot>
+	<actionslot spring-bean="ItemContentBrowserActionColumn"/>
+	
+
+</grid-view>

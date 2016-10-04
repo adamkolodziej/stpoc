@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="AbstractPromotion.title"/>
+			<property qualifier="AbstractPromotion.code"/>
+			<property qualifier="AbstractPromotion.enabled"/>
+			<property qualifier="AbstractPromotion.priority"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="AbstractPromotion.title"/>
+			<property qualifier="AbstractPromotion.code"/>
+			<property qualifier="AbstractPromotion.enabled"/>
+			<property qualifier="AbstractPromotion.priority"/>
+		</sort-properties>
+	</search>
+	<label>
+			<property qualifier="AbstractPromotion.title"/>		
+			<property qualifier="AbstractPromotion.code"/>
+			<property qualifier="AbstractPromotion.promotionType"/>			
+	</label>
+</base>

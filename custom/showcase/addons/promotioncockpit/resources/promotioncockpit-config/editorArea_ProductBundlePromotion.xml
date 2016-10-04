@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label lang="de">Stammdaten</label>
+		<label lang="en">General</label>
+		<label lang="fr">Propriétés</label>
+		<label lang="ja">プロパティ</label>
+		<property qualifier="AbstractPromotion.promotionType"/>
+		<property qualifier="AbstractPromotion.code"/>
+		<property qualifier="AbstractPromotion.title"/>
+		<property qualifier="AbstractPromotion.name"/>		
+		<property qualifier="AbstractPromotion.enabled"/>
+		<property qualifier="AbstractPromotion.priority"/>
+		<property qualifier="AbstractPromotion.promotionGroup" visible="true"/>
+		<property qualifier="ProductBundlePromotion.bundlePrices">
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>
+	</group>
+	
+	<group qualifier="Dates" visible="true" initially-opened="true">
+		<label lang="de">Termine</label>
+		<label lang="en">Dates</label>
+		<label lang="fr">Dates</label>
+		<label lang="ja">日付</label>
+		
+		<property qualifier="AbstractPromotion.startDate"/>
+		<property qualifier="AbstractPromotion.endDate"/>
+	</group>	
+	
+		<group qualifier="Products" visible="true" initially-opened="true">
+		<label lang="de">Produkte</label>
+		<label lang="en">Products</label>
+		<label lang="fr">Produits</label>
+		<label lang="ja">製品</label>
+		
+		<property qualifier="ProductPromotion.products"/>
+	</group>	
+	
+	
+	<group qualifier="Categories" visible="true" initially-opened="true">
+		<label lang="de">Kategorien</label>
+		<label lang="en">Categories</label>
+		<label lang="fr">Catégories</label>
+		<label lang="ja">カテゴリー</label>
+		
+		<property qualifier="ProductPromotion.categories"/>
+	</group>	
+	
+	
+	<group qualifier="Restriction" visible="true" initially-opened="true">
+		<label lang="de">Einschränkungen</label>
+		<label lang="en">Restrictions</label>
+		<label lang="fr">Restrictions</label>
+		<label lang="ja">制限</label>
+		
+		<property qualifier="AbstractPromotion.restrictions">
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AbstractPromotion.publicationPeriods" />
+		
+	</group>
+	
+	
+	<group qualifier="Messages" visible="true" initially-opened="true">
+		<label lang="de">Nachrichten</label>
+		<label lang="en">Messages</label>
+		<label lang="ja">メッセージ</label>
+		<property qualifier="AbstractPromotion.description" >
+			<parameter>
+				<name>rows</name>
+				<value>3</value>
+			</parameter>
+		</property>
+		<property qualifier="ProductBundlePromotion.messageFired" >
+			<parameter>
+				<name>rows</name>
+				<value>3</value>
+			</parameter>
+		</property>
+		<property qualifier="ProductBundlePromotion.messageCouldHaveFired"  >
+			<parameter>
+				<name>rows</name>
+				<value>3</value>
+			</parameter>	
+		</property>
+	</group>
+	
+	<group qualifier="Banners" visible="true" initially-opened="true">
+		<label lang="de">Banner</label>
+		<label lang="en">Banners</label>
+		<label lang="ja">バナー</label>
+		<property qualifier="AbstractPromotion.promotionBanners"/>
+	</group>
+	
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label lang="de">Administration</label>
+		<label lang="en">Administration</label>
+		<label lang="ja">管理</label>
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+	</group>
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+		qualifier="unassigned"
+		initially-opened="false"
+		visible="false">
+		<label lang="de">Andere</label>
+		<label lang="en">Other</label>
+		<label lang="fr">Autre</label>			
+		<label lang="ja">他</label>
+	</custom-group>
+</editor>

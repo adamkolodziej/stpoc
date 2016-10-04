@@ -1,0 +1,17 @@
+.z-checkbox > input:not(:checked) + label {
+	color: #aaa !important;
+}
+
+.z-checkbox > input {
+	position: relative;
+	top: 2px;
+}
+
+div.active_true {
+	padding-top: 15px;
+}
+
+.confirmMessage {
+	padding: 3px 0 0 5px;
+	display: block;
+}

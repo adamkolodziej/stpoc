@@ -1,0 +1,16 @@
+$START_USERRIGHTS;
+
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;cockpitgroup;;;;;;;;
+;;;;AbstractPromotion;+;+;+;+;-
+;;;;AbstractPromotionRestriction;+;+;+;+;-
+;;;;PromotionPriceRow;+;+;+;+;-
+;;;;DeliveryMode;+;+;+;+;+;
+;;;;ABTest;+;+;+;+;+;
+;;;;ConversionTest;+;+;+;+;+;
+;;;;PromotionGroup;+;+;+;+;-;
+
+$END_USERRIGHTS;
+
+
+

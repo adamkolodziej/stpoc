@@ -1,0 +1,11 @@
+#Thu, 23 May 2013 05:19:56 +0200
+#Ant properties
+#Thu May 23 05:19:56 CEST 2013
+builddate=20130523 0519
+description=searchandizingcockpit
+name=searchandizingcockpit
+vendor=hybris
+version=5.0.1.0-SNAPSHOT
+
+revision=69090
+svnurl=https\://svn.hybris.com/ebusiness/trunk/bin/ext-template/searchandizingcockpit

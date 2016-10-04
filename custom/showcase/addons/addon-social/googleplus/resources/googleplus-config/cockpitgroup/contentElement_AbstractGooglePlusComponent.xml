@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+
+	<content-element type="PlusOneComponent" name="type.plusonecomponent.name"
+							description="type.plusonecomponent.description"
+							image="cmscockpit/images/google_icon_34x34.gif"
+							refImage="cmscockpit/images/google_icon_34x34.gif"
+							imageSmall="cmscockpit/images/google_icon_20x20.gif"/>
+							
+	
+							
+</content-elements>	

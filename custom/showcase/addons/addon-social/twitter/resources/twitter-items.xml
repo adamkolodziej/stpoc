@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<collectiontypes>
+		<collectiontype elementtype="TwitterWidgetChrome" code="TwitterWidgetChromeSet" type="set"/>
+	</collectiontypes>
+
+	<enumtypes>
+		<enumtype code="TwitterCountBoxPosition" generate="true" autocreate="true">
+			<value code="none" />
+			<value code="horizontal" />
+			<value code="vertical" />
+		</enumtype>
+		
+		<enumtype code="TwitterButtonSize" generate="true" autocreate="true">
+			<value code="medium" />
+			<value code="large" />
+		</enumtype>
+		
+		<enumtype code="TwitterWidgetBehavior" generate="true" autocreate="true">
+			<value code="default" />
+			<value code="all" />
+		</enumtype>	
+		
+		<enumtype code="TwitterWidgetTheme" generate="true" autocreate="true">
+			<value code="light" />
+			<value code="dark" />
+		</enumtype>	
+		
+		<enumtype code="TwitterWidgetChrome" generate="true" autocreate="true">
+			<value code="noheader" />
+			<value code="nofooter" />
+			<value code="noborders" />
+			<value code="noscrollbar" />
+			<value code="transparent" />
+		</enumtype>	
+		
+
+	</enumtypes>
+	
+	<relations>
+		<relation generate="true" localized="false" code="TweetButton2Recommended" autocreate="true">
+			<deployment table="tweetbutton2recommend" typecode="20109" />
+			<sourceElement type="AbstractTweetButtonComponent" cardinality="many" qualifier="tweetButtons" >
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="recommended" type="TwitterAccount" cardinality="many" collectiontype="set" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		<relation generate="true" localized="false" code="TweetWidget2Related" autocreate="true">
+			<deployment table="tweetwidget2related" typecode="20125" />
+			<sourceElement type="AbstractTwitterWidgetComponent" cardinality="many" navigable="false"  >
+				<modifiers read="true" write="true" search="true" private="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="relatedAccounts" type="TwitterAccount" cardinality="many" collectiontype="set" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+
+	<itemtypes>
+		<typegroup name="twitter">
+		
+			<itemtype code="Product" generate="false" autocreate="false">
+				<attributes>
+					<attribute qualifier="twitterSearchTerm"  type="localized:java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		
+			<itemtype code="Category" generate="false" autocreate="false">
+				<attributes>
+					<attribute qualifier="twitterSearchTerm"  type="localized:java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="PointOfService" generate="false" autocreate="false">
+				<attributes>
+					<attribute qualifier="twitterSearchTerm"  type="localized:java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		
+			<itemtype code="TwitterAccount" generate="true" autocreate="true" jaloclass="com.hybris.social.twitter.jalo.TwitterAccount" extends="GenericItem">
+				<deployment table="twitteraccount" typecode="20122" />
+				<attributes>
+					<attribute qualifier="screenName" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers optional="false" initial="true"/>
+					</attribute>
+					<attribute qualifier="summary" generate="true" autocreate="true" type="localized:java.lang.String">
+						<persistence type="property" />
+						<modifiers optional="true" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="screenNameIdx" unique="true">
+						<key attribute="screenName"/>
+					</index>
+				</indexes>
+			</itemtype>
+		
+		
+			<itemtype code="AbstractTwitterComponent" generate="true" jaloclass="com.hybris.social.twitter.jalo.AbstractTwitterComponent" extends="SimpleCMSComponent" />
+			
+			
+			
+			<itemtype code="AbstractTwitterButtonComponent" generate="true" jaloclass="com.hybris.social.twitter.jalo.AbstractTwitterButtonComponent" extends="AbstractTwitterComponent" autocreate="true" abstract="true" >
+				<attributes>
+					<attribute qualifier="buttonSize" generate="true" autocreate="true" type="TwitterButtonSize">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>em().getEnumerationValue("TwitterButtonSize", "medium")</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="TwitterFollowButtonComponent" generate="true" jaloclass="com.hybris.social.twitter.jalo.TwitterFollowButtonComponent" extends="AbstractTwitterButtonComponent" autocreate="true" abstract="false" >
+				<attributes>
+					<attribute qualifier="account" generate="true" autocreate="true" type="TwitterAccount">
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+					<attribute qualifier="showUsername" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false"/>
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>
+					<attribute qualifier="showCount" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false"/>
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="AbstractTweetButtonComponent" generate="true" jaloclass="com.hybris.social.twitter.jalo.AbstractTweetButtonComponent" extends="AbstractTwitterButtonComponent" autocreate="true" abstract="true" >
+				<attributes>
+					<attribute qualifier="tweetText" generate="true" autocreate="true" type="localized:java.lang.String">
+						<persistence type="property" />
+						<description>text to tweet otherwise the page title</description>
+					</attribute>
+					
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="AbstractShareTweetButtonComponent" generate="true" jaloclass="com.hybris.social.twitter.jalo.AbstractShareTweetButtonComponent" extends="AbstractTweetButtonComponent" autocreate="true" abstract="true" >
+				<attributes>
+					<attribute qualifier="urlToShare" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<description>Url to share</description>
+					</attribute>
+					<attribute qualifier="shortUrlToShare" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<description>If this is set, this will be used instead of the standard url.</description>
+					</attribute>
+					<attribute qualifier="autoShortenUrl" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>If this is set, and the shortUrlToShare the urlToShare </description>
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					</attribute>
+					<attribute qualifier="urlShorteningProvider" generate="true" autocreate="true" type="UrlShorteningProvider">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>em().getEnumerationValue("UrlShorteningProvider","bitly")</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="TweetLinkButtonComponent" generate="true"
+				jaloclass="com.hybris.social.twitter.jalo.TweetLinkButtonComponent" extends="AbstractShareTweetButtonComponent"
+				autocreate="true">
+				<attributes>
+					<attribute qualifier="hashtags" generate="true" autocreate="true" type="CMSStringList">
+						<persistence type="property" />
+						<modifiers optional="true" />
+					</attribute>
+					<attribute qualifier="countBoxPosition" generate="true" autocreate="true" type="TwitterCountBoxPosition">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>em().getEnumerationValue("TwitterCountBoxPosition", "none")</defaultvalue>
+					</attribute>
+					<attribute qualifier="via" generate="true" autocreate="true" type="TwitterAccount">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="TweetHashtagButtonComponent" generate="true"
+				jaloclass="com.hybris.social.twitter.jalo.TweetHashtagButtonComponent" extends="AbstractShareTweetButtonComponent"
+				autocreate="true">
+				<attributes>
+					<attribute qualifier="hashtag" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="TweetMentionButtonComponent" generate="true"
+				jaloclass="com.hybris.social.twitter.jalo.TweetMentionButtonComponent" extends="AbstractTweetButtonComponent"
+				autocreate="true">
+				<attributes>
+					<attribute qualifier="tweetTo" generate="true" autocreate="true" type="TwitterAccount">
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="AbstractTwitterWidgetComponent" abstract="true" generate="true" autocreate="true" jaloclass="com.hybris.social.twitter.jalo.AbstractTwitterWidgetComponent" extends="AbstractTwitterComponent">
+				<attributes>
+					<attribute qualifier="theme" type="TwitterWidgetTheme">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="chrome" type="TwitterWidgetChromeSet">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="linksColor" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="borderColor" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="width" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers optional="true"/>
+					</attribute>
+					<attribute qualifier="height" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers optional="true"/>
+					</attribute>
+					
+					<attribute qualifier="numberOfTweets" type="java.lang.Integer">
+						<persistence type="property"/>
+						<modifiers optional="false"/>
+					</attribute>
+					
+					<attribute qualifier="ariaPolite" type="java.lang.Boolean">
+						<persistence type="property"/>
+						<modifiers optional="false"/>
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>
+					<attribute qualifier="widgetId" type="java.lang.String" >
+						<persistence type="property" />
+						<modifiers optional="true" />
+					</attribute> 
+					
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="TwitterProfileWidgetComponent" generate="true" autocreate="true" jaloclass="com.hybris.social.twitter.jalo.TwitterProfileWidgetComponent" extends="AbstractTwitterWidgetComponent">
+				<attributes>
+					<attribute qualifier="account" type="TwitterAccount">
+						<persistence type="property" />
+						<modifiers optional="false"/>
+					</attribute>					
+				    <attribute qualifier="numberOfTweets" type="java.lang.Integer" redeclare="true">
+						<persistence type="property"/>
+						<modifiers optional="false"/>
+						<defaultvalue>new Integer(4)</defaultvalue>
+					</attribute>
+					<attribute qualifier="excludeReplies" type="java.lang.Boolean" >
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute> 
+				</attributes>
+			</itemtype>
+					
+			<itemtype code="TwitterListWidgetComponent" generate="true" autocreate="true" jaloclass="com.hybris.social.twitter.jalo.TwitterListWidgetComponent" extends="TwitterProfileWidgetComponent">
+				<attributes>
+					<attribute qualifier="numberOfTweets" type="java.lang.Integer" redeclare="true">
+						<persistence type="property"/>
+						<modifiers optional="false"/>
+						<defaultvalue>new Integer(30)</defaultvalue>
+					</attribute>
+					<attribute qualifier="listName" type="java.lang.String" >
+						<persistence type="property"/>
+						<modifiers optional="false"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="TwitterFavesWidgetComponent" generate="true" autocreate="true" jaloclass="com.hybris.social.twitter.jalo.TwitterFavesWidgetComponent" extends="TwitterProfileWidgetComponent">
+				<attributes>
+					<attribute qualifier="numberOfTweets" type="java.lang.Integer" redeclare="true">
+						<persistence type="property"/>
+						<modifiers optional="false"/>
+						<defaultvalue>new Integer(10)</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype> 
+		</typegroup>
+	</itemtypes>
+</items>

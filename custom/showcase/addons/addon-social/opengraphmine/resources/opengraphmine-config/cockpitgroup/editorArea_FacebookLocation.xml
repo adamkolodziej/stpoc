@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		
+		<property qualifier="FacebookLocation.longitude" />
+		<property qualifier="FacebookLocation.latitude" />
+		<property qualifier="FacebookLocation.address.streetname" />
+		<property qualifier="FacebookLocation.address.town" />
+		<property qualifier="FacebookLocation.address.district" />
+		<property qualifier="FacebookLocation.address.region" />
+		<property qualifier="FacebookLocation.address.postalCode" />
+		<property qualifier="FacebookLocation.address.country" />
+	</group>
+	
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label key="config.general.administration" />
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+		<property qualifier="FacebookLocation.owner" />
+		<property qualifier="FacebookLocation.address.remarks" />
+	</group>
+</editor>

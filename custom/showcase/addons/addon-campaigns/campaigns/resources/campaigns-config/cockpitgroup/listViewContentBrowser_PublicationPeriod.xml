@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other" allow-create-inline-items="true">
+	<group name="General">
+		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="false" selectable="true" width="70px"/>
+		<property qualifier="PublicationPeriod.code" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.catalogVersion" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.name" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.startDate" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.endDate" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.daysOfWeek" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.fromHour" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.toHour" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.baseSite" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.products" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.userGroups" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.promotions" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.cmsitems" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.productSets" visible="true" editable="true"/>
+		<property qualifier="PublicationPeriod.mediaTags" editable="true" visible="true"/>
+		<property qualifier="PublicationPeriod.enabled" editable="true" visible="true"/>
+		<property qualifier="PublicationPeriod.timezone" editable="true" visible="true"/>
+	</group>
+</list-view>

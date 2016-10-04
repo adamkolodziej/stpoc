@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2011 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd" default-autowire="byName">
+
+
+	<alias name="defaultSolrPerspectiveAdminService" alias="solrPerspectiveAdminService" />      
+    <bean id="defaultSolrPerspectiveAdminService"  class="com.hybris.commercesearch.searchandizing.cockpit.service.impl.DefaultSolrPerspectiveAdminService" >
+    	<property name="sessionService" ref="sessionService" />
+    	<property name="facetSearchConfigDao" ref="facetSearchConfigDao" />
+    </bean>   
+       
+      	 <alias alias="solrExportCronJobActionColumn" name="defaultSolrExportCronJobActionColumn"/>
+    <bean id="defaultSolrExportCronJobActionColumn" class="de.hybris.platform.cockpit.components.listview.impl.DefaultActionColumnConfiguration" scope="prototype">
+        <constructor-arg value="Actions"/>
+		<property name="actions">
+			<list>
+				<ref bean="solrExportJobStartStopAction" />
+			</list>
+		</property>
+    </bean>
+    
+    <alias alias="solrExportJobStartStopAction" name="defaultSolrExportJobStartStopAction"/>
+	<bean id="defaultSolrExportJobStartStopAction" class="com.hybris.commercesearch.searchandizing.cockpit.component.listview.impl.SolrIndexerJobStartStopAction" scope="prototype">
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+	
+	<alias alias="solrFacetSearchIndexActionColumn" name="defaultSolrFacetSearchIndexActionColumn"/>
+	<bean id="defaultSolrFacetSearchIndexActionColumn" class="de.hybris.platform.cockpit.components.listview.impl.DefaultActionColumnConfiguration"
+		scope="prototype">
+		<constructor-arg value="Actions" />
+		<property name="actions">
+			<list>
+				<ref bean="solrFacetSearchFullIndexJobAction" />
+				<ref bean="solrFacetSearchPartialIndexJobAction" />
+				 <ref bean="solrFacetSynonymsExportJobAction" />
+				<ref bean="solrFacetStopWordsExportJobAction" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias alias="solrFacetSynonymsExportJobAction" name="defaultSolrFacetSynonymsExportJobAction"/>
+	<bean id="defaultSolrFacetSynonymsExportJobAction" class="com.hybris.commercesearch.searchandizing.cockpit.component.listview.impl.SolrFacetSynonymsExportJobAction" scope="prototype"></bean>
+	
+	<alias alias="solrFacetStopWordsExportJobAction" name="defaultSolrFacetStopWordsExportJobAction"/>
+	<bean id="defaultSolrFacetStopWordsExportJobAction" class="com.hybris.commercesearch.searchandizing.cockpit.component.listview.impl.SolrFacetStopWordsExportJobAction" scope="prototype"></bean>
+	
+	<alias alias="solrFacetSearchFullIndexJobAction" name="defaultSolrFacetSearchFullIndexJobAction"/>
+	<bean id="defaultSolrFacetSearchFullIndexJobAction" class="com.hybris.commercesearch.searchandizing.cockpit.component.listview.impl.SolrFacetSearchFullIndexJobAction" scope="prototype"></bean>
+	
+	<alias alias="solrFacetSearchPartialIndexJobAction" name="defaultSolrFacetSearchPartialIndexJobAction"/>
+	<bean id="defaultSolrFacetSearchPartialIndexJobAction" class="com.hybris.commercesearch.searchandizing.cockpit.component.listview.impl.SolrFacetSearchPartialIndexJobAction" scope="prototype"></bean>
+	
+	<alias alias="abstractFacetIndexJobListAction" name="abstractFacetIndexJobListAction"/>
+	<bean id="abstractFacetIndexJobListAction" class="com.hybris.commercesearch.searchandizing.cockpit.component.listview.impl.AbstractFacetIndexJobListAction" scope="prototype">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	<alias alias="abstractSynonymsExportJobAction" name="abstractSynonymsExportJobAction"/>
+	<bean id="abstractSynonymsExportJobAction" class="com.hybris.commercesearch.searchandizing.cockpit.component.listview.impl.AbstractSynonymsExportJobAction" scope="prototype">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="solrSynonymService" ref="solrSynonymService"/>
+	</bean>
+	<alias alias="abstractStopWordsExportJobAction" name="abstractStopWordsExportJobAction"/>
+	<bean id="abstractStopWordsExportJobAction" class="com.hybris.commercesearch.searchandizing.cockpit.component.listview.impl.AbstractStopWordsExportJobAction" scope="prototype">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="solrStopWordsService" ref="solrStopWordsService"/>
+	</bean>
+	
+	<alias alias="productCatalogVersionDeterminationStrategy" name="defaultProductCatalogVersionDeterminationStrategy"/>
+	<bean id="defaultProductCatalogVersionDeterminationStrategy" class="com.hybris.commercesearch.searchandizing.cockpit.wizard.stategies.DefaultProductCatalogVersionDeterminationStrategy">
+		<property name="solrPerspectiveAdminService" ref="solrPerspectiveAdminService"/>
+	</bean>	
+	
+	<alias alias="contentCatalogVersionDeterminationStrategy" name="defaultContentCatalogVersionDeterminationStrategy"/>
+	<bean id="defaultContentCatalogVersionDeterminationStrategy" class="com.hybris.commercesearch.searchandizing.cockpit.wizard.stategies.DefaultContentCatalogVersionDeterminationStrategy">
+		<property name="solrPerspectiveAdminService" ref="solrPerspectiveAdminService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>	 
+	
+	<bean id="groupingPropertyAvailableValuesProvider" class="com.hybris.commercesearch.searchandizing.cockpit.config.GroupingPropertyAvailableValuesProvider" >
+		<property name="solrPerspectiveAdminService" ref="solrPerspectiveAdminService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+       
+</beans>

@@ -1,0 +1,3 @@
+
+UPDATE PromotionGroup;Identifier[unique=true];name
+;electronicsPromoGrp;Electronics

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="editor.xsd">
+	
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="videoComponent.title" />
+		<property qualifier="videoComponent.videoUrl" />
+		<property qualifier="videoComponent.videoMedia" editor="mediaReferenceCollectionSelector"/>
+		<property qualifier="videoComponent.startingPictureMedia" editor="simpleMediaReferenceSelector">
+			<parameter>
+				<name>celumMediaFormat</name>
+				<value>picture</value>
+			</parameter>
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>imageMediaPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="VideoComponent.autoplay" visible="true" />
+	</group>	
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+		qualifier="unassigned"
+		initially-opened="false">
+		<label key="cockpit.config.label.Other" />
+	</custom-group>
+	
+	
+</editor>

@@ -1,0 +1,37 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2013 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+opengraphmine.key=value
+
+# Specifies the location of the spring context file putted automatically to the global platform application context.
+opengraphmine.application-context=opengraphmine-spring.xml
+
+
+yacceleratorstorefront.additionalWebSpringConfigs.opengraphmine=classpath:/opengraphmine/web/spring/opengraphmine-web-spring.xml
+yb2bacceleratorstorefront.additionalWebSpringConfigs.opengraphmine=classpath:/opengraphmine/web/spring/opengraphmine-web-spring.xml
+admincockpit.additionalWebSpringConfigs.opengraphmine=classpath:/opengraphmine/admincockpit/spring/admincockpit-web.xml
+btgcockpit.additionalWebSpringConfigs.opengraphmine=classpath:/opengraphmine/btgcockpit/spring/btgcockpit-web-spring.xml
+
+# Add JS
+opengraphmine.javascript.paths.desktop=/desktop/common/js/opengraphmine.js
+
+# Add CSS
+opengraphmine.css.paths.desktop=/desktop/common/css/opengraphmine.css;/desktop/common/css/facebookSuggestedProducts.css
+opengraphmine.css.paths.desktop.blue=/desktop/common/css/b2c.opengraphmine.css
+opengraphmine.css.paths.desktop.black=/desktop/common/css/b2c.opengraphmine.css
+
+admincockpit.default.comments.enabled=true

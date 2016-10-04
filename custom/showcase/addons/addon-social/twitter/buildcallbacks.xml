@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+ All hybris buildcallbacks.xml macrodefinitions:
+ 
+ Build/Documentation
+ 
+	 before/after ant macro "clean"
+		 <macrodef name="twitter_before_clean"/>
+		 <macrodef name="twitter_after_clean"/>
+	 
+	 before/after ant macro "build"
+		 <macrodef name="twitter_before_build"/>
+		 <macrodef name="twitter_after_build"/>
+		 
+	 before/after ant macro "compile_core" - the core module of the extension
+		 <macrodef name="twitter_before_compile_core">
+		 <macrodef name="twitter_after_compile_core">
+	 
+	 before/after ant macro "compile_web" - the web module of the extension
+		 <macrodef name="twitter_before_compile_web" />
+		 <macrodef name="twitter_after_compile_web" />
+	 
+	 before/after ant macro "compile_hmc" - the hmc module of the extension
+		 <macrodef name="twitter_before_compile_hmc" />
+		 <macrodef name="twitter_after_compile_hmc" />
+ 
+ Preparing extension
+ 
+	 will be called in the beginning of the ant call and only once (also when using multiple 
+	 ant targets e.g. ant build yunittest)	
+		 <macrodef name="twitter_only_once_prepare"/>
+ 
+ Creating ear module/production
+ 
+	 before/after ant macro "ear"
+		 <macrodef name="twitter_before_ear"/>
+		 <macrodef name="twitter_after_ear"/>
+
+	 before/after ant macro "production" - for hybris server only
+		 <macrodef name="twitter_before_production" />
+		 <macrodef name="twitter_after_production" />
+ 
+ JUnit Test
+ 
+	 before/after ant macro "yunitinit" 
+		 <macrodef name="twitter_before_yunitinit" />
+		 <macrodef name="twitter_after_yunitinit" />
+	 
+	 before/after ant macro "yunit"
+		 <macrodef name="twitter_before_yunit" />
+		 <macrodef name="twitter_after_yunit" /> 
+		 
+ Distribution package
+ 
+ 	 before/after ant macro "dist" - internal target; only for use when platform is available in source code
+		 <macrodef name="twitter_after_dist"/>
+		 <macrodef name="twitter_before_dist"/>
+	 
+	 before/after ant macro "dist_copy" - internal target; only for use when platform is available in source code
+		 <macrodef name="twitter_before_dist_copy"/>
+		 <macrodef name="twitter_after_dist_copy"/>
+ 
+-->
+
+<project name="twitter_buildcallbacks" >
+	
+	<macrodef name="twitter_before_build">
+					<sequential>
+						<twitter_delete_web_dir />
+						
+						<if>
+										<isset property="ext.cmscockpit.path"/>
+										<then>
+						<echo level="info" message="Start copying custom twitter cmscockpit images to cmscockpit..."/>
+								<copy todir="${ext.cmscockpit.path}/web/webroot/cmscockpit/images">
+									<fileset dir="${ext.twitter.path}/resources/twitter/cmscockpit/images">
+										<include name="**/**.*" />
+									</fileset>
+								</copy>
+								
+										</then>
+										</if>
+						<if>
+																<isset property="ext.btgcockpit.path"/>
+																<then>
+												<echo level="info" message="Start copying custom twitter cmscockpit images to btgcockpit..."/>
+														<copy todir="${ext.btgcockpit.path}/web/webroot/cmscockpit/images">
+															<fileset dir="${ext.twitter.path}/resources/twitter/cmscockpit/images">
+																<include name="**/**.*" />
+															</fileset>
+														</copy>
+														
+																</then>
+																</if>
+					</sequential>
+				</macrodef>
+			
+			<macrodef name="twitter_after_build">
+				<sequential>
+					<twitter_delete_web_dir />
+				</sequential>
+			</macrodef>
+			
+			<macrodef name="twitter_after_clean">
+					<sequential>
+						<twitter_delete_web_dir />
+					</sequential>
+				</macrodef>
+			
+			<macrodef name="twitter_delete_web_dir">
+					<sequential>
+						<!-- This is required until PLA-10893 is fixed -->
+						<echo level="info" message="Removing web directory for extension twitter"/>
+						<delete quiet="true" dir="${ext.twitter.path}/web"/>
+					</sequential>
+				</macrodef>
+		
+</project>

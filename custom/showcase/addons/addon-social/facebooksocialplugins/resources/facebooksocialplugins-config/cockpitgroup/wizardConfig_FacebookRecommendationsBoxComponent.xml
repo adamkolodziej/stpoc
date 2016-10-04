@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="false">
+			<label key="cockpit.config.label.General" />
+
+			<property qualifier="CMSItem.name"/>
+			<property qualifier="CMSItem.catalogVersion"/>
+			<property qualifier="AbstractCMSComponent.visible"/>
+		</group>
+		
+		<group qualifier="editorial" visible="true" initially-opened="true">
+			<label key="config.general.editorial" />
+
+			<property qualifier="FacebookRecommendationsBoxComponent.domains" />
+			<property qualifier="FacebookRecommendationsBoxComponent.linkTarget" />
+			<property qualifier="FacebookRecommendationsBoxComponent.maxAge" />		
+		</group>
+	
+		<group qualifier="layout" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.Layout" />
+
+			<property qualifier="FacebookRecommendationsBoxComponent.width" />
+			<property qualifier="FacebookRecommendationsBoxComponent.height" />
+			<property qualifier="FacebookRecommendationsBoxComponent.showHeader" />
+			<property qualifier="FacebookRecommendationsBoxComponent.colorScheme" />
+			<property qualifier="FacebookRecommendationsBoxComponent.borderColor" />
+			<property qualifier="FacebookRecommendationsBoxComponent.font" />
+		</group>
+	
+		<group qualifier="tracking" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.Tracking" />
+			
+			<property qualifier="FacebookRecommendationsBoxComponent.ref" />
+		</group>
+		
+	</displayed-properties>
+</wizard-config>

@@ -1,0 +1,8 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+## solrIndexedType - name of the solr indexed type
+#####
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
+;$solrIndexedType; allCategories 	;string;;;Refine		;Alpha;-9999;;categoryCodeValueProvider;categoryFacetDisplayNameProvider

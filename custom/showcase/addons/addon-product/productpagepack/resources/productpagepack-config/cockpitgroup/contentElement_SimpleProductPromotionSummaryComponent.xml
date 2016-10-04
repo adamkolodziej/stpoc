@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+
+<content-element type="SimpleProductPromotionSummaryComponent" name="type.simpleproductpromotionsummarycomponent.name"
+							description="type.simpleproductpromotionsummarycomponent.description"
+							image="cmscockpit/images/ContentElementPromotion.gif"
+							refImage="cmscockpit/images/ContentElementPromotionReference.gif"
+							imageSmall="cmscockpit/images/ContentElementPromotionSmall.gif"/>						
+																
+							
+</content-elements>	

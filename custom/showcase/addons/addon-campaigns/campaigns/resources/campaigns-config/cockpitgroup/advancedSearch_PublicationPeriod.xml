@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advanced-search>
+	<group name="root" type="comment">
+		<label key="config.general.searchfor" />
+		<group name="general">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="PublicationPeriod.code" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.catalogVersion" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.name" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.startDate" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.endDate" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.daysOfWeek" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.fromHour" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.toHour" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.baseSite" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.products" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.userGroups" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.promotions" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.cmsitems" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.productSets" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.mediaTags" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.enabled" sort-enabled="true" visible="true"/>
+			<property qualifier="PublicationPeriod.timezone" sort-enabled="true" visible="true"/>
+		</group>
+	</group>
+</advanced-search>

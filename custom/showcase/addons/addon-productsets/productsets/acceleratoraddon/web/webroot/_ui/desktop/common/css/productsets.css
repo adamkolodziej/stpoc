@@ -1,0 +1,421 @@
+/*
+
+	Product Set Carousel
+*****************/
+.scroller.product_set {
+	position: relative;
+}
+
+.scroller.product_set div.title {
+    margin: 0 0 10px 0;
+}
+
+.scroller.product_set span {
+	clear: both;
+}
+.scroller.product_set ul {
+	clear: both;
+	overflow: hidden;
+}
+.scroller.product_set ul.product_set_list > li {
+	float: left;
+    width: auto;
+}
+.scroller.product_set ul li span {
+	margin: 0 auto;
+}
+.scroller.product_set .controls {
+	clear: both;
+	overflow: hidden;
+}
+.scroller.product_set .navigation {
+	overflow: hidden;
+	margin: 12px 0 0 0;
+	width: 100%;
+	float: left;
+}
+.scroller.product_set .navigation .pagination {
+	float: left;
+	text-align: center;
+}
+
+.span-4 .scroller.product_set .navigation .pagination {
+	width: 60px;
+}
+
+.scroller.product_set .next {
+	cursor: pointer;
+	background-color: transparent;
+	background-image: url(../images/icon-scroller-next-horizontal.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	float: left;
+	width: 20px;
+	height: 36px;
+}
+.scroller.product_set .prev {
+	cursor: pointer;
+	background-color: transparent;
+	background-image: url(../images/icon-scroller-prev-horizontal.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	float: left;
+	width: 20px;
+	height: 36px;
+}
+
+.productset-elem-wide {
+	width: 150px;
+}
+
+.productSetWideContainer {
+	border: solid 1px #000000;
+	border-right: none;
+	padding: 5px;
+}
+
+.productSetArrowsArea {
+	margin-top: 5px; 
+	margin-left: 5px;
+}
+
+.buytheset {
+	/*margin: 10px; BA 19.09.13 causing internal padding issue */
+}
+
+.productset-carousel-button {
+	float: left;
+	width: 30px;
+	height: 25px;
+	text-indent: -9999px;	
+}
+
+.productSetWideContainer-last {
+	border-right: solid 1px #000000;;
+}
+
+.productset-left-arrow.inactive {
+	background: url("../images/left_arrow_inactive.png") no-repeat;
+}
+
+.productset-left-arrow.active {
+	background: url("../images/left_arrow_active.png") no-repeat;
+}
+
+.productset-right-arrow.inactive {
+	background: url("../images/rigth_arrow_inactive.png") no-repeat;
+}
+
+.productset-right-arrow.active {
+	background: url("../images/rigth_arrow_active.png") no-repeat;
+}
+
+.productset-elem-popup {
+	width: 150px;
+	max-width: 150px;
+	padding: 10px;
+}
+
+.product_set_container {
+	overflow: hidden;
+}
+
+.product_set_element h3 {
+	margin: 5px 0px;
+  	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+
+.scroller.product_set .positive {
+	text-decoration: none;
+}
+.scroller.product_set a.positive, .scroller.product_set a:visited.positive, .scroller.product_set a:hover.positive {
+	text-decoration: none;
+}
+
+/*
+
+	Edit Product Set
+*****************/
+.edit_product_set {
+	overflow: hidden;
+	padding: 10px;
+}
+.edit_product_set h1 {
+	font-size: 1.7em;
+	margin-bottom: 0.25em;
+	margin-right: 10px;	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+.edit_product_set .prod_add_to_cart {
+	border: 0 none;
+}
+.edit_product_set .product_set_main {
+	overflow: hidden;
+	float: left;
+	width: 308px;
+	padding: 0 10px;
+}
+.edit_product_set .product_set_main .product-image-container {
+	min-height: 0;
+	background: #ffffff;
+	padding: 0;
+	display: block;
+	overflow: visible;
+	position: relative;
+	text-align: center;
+	padding: 10px;
+	margin-bottom: 25px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	border: 2px solid #666666;
+}
+.edit_product_set .product_set_additional {
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-top: 30px;
+}
+.edit_product_set .product_set_additional ul {
+	overflow: hidden;
+	margin: 10px 0 0 0;
+	padding: 0;
+}
+
+.edit_product_set .product_set_additional ul:first-child {
+    margin: 0px;
+}
+
+.edit_product_set .product_set_additional ul li  {
+	overflow: hidden;
+	float: left;
+	width: 47%;
+	margin-right: 3%;
+	/*min-height: 341px;*/
+	/*min-height: 306px;*/
+}
+.edit_product_set .product_set_additional ul li .summary {
+	max-height: 36px;
+	margin-bottom: 10px;
+	overflow-y: scroll;
+}
+.edit_product_set .product_set_additional ul li .summary p {
+	margin-bottom: 0;
+}
+.edit_product_set .big-price {
+	color: #000000;
+	margin-bottom: 12px;
+	font-size: 2em;
+	line-height: 1.2;
+	margin-top: 0;
+}
+.edit_product_set .product_set_additional ul li span {
+	display: block;
+	border: 1px solid #CCCECF;
+	background-color: #FFFFFF;
+	width: 96px;
+	height: 96px;
+	padding: 5px;
+	margin-bottom: 5px;
+	margin-top: 0;
+	text-align: center;
+	float: left;
+}
+.edit_product_set .product_set_additional .item_details{
+	/*float: left;*/
+	float: right;
+	margin-left: 10px;
+	width: 55%;
+}
+.edit_product_set div.scroller  {
+	text-align: center;
+	padding: 1.4em;
+	margin: 1.5em 0;
+	border:1px solid #ccc;
+}
+.edit_product_set div.scroller button {
+	margin-bottom: 0;
+}
+.edit_product_set fieldset select {
+	clear: both;
+	width: 100%;
+}
+
+.edit_product_set .qty {
+	width: 38px;
+}
+
+/*
+	BUY THE SET
+*****************/
+
+.productset-error-message-list {
+	list-style: square;
+	padding: 0px;
+	margin: 5px 0;	
+}
+
+.productset-error-message-list li {
+	width: 100%;
+	float: none;
+}
+
+
+.hideButton {
+	display: hidden;	
+}
+
+/*
+	PREALODER
+*****************/
+.preloader_container {
+	position: relative;
+}
+
+.data-preloader {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	z-index: 100000;
+	background: url(../images/spinner.gif) #FFFFFF no-repeat center center;
+}
+
+/*
+	BUTTON
+*****************/
+button:disabled {
+	background: #d2d2d2 !important;
+	color: #a6a6a6 !important;
+	text-shadow: 1px 0px 0px #f0f0f0 !important;
+    filter: dropshadow(color=#f0f0f0, offx=1, offy=0) !important;
+}
+
+#buySetContainer button:disabled {
+	background: #d2d2d2 !important;
+	color: #a6a6a6 !important;
+	text-shadow: 1px 0px 0px #f0f0f0 !important;
+    filter: dropshadow(color=#f0f0f0, offx=1, offy=0) !important;
+    border: 1px solid #d2d2d2;
+}
+
+#buySetContainer button, .preloader_container button {
+    float: none;
+}
+
+#buySetContainer button {
+    margin: 0 auto;
+    width: auto;
+}
+
+/*
+    GRID CONDITIONS
+****************/
+/* SPAN-4 CONFIGURATION */
+
+.span-4 .scroller.product_set {
+    text-align: center;
+    padding: 0 0 5px 0;
+}
+
+.span-4 .scroller.product_set ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.span-4 .scroller.product_set .next {
+    float: right;
+}
+
+.span-4 .scroller.product_set .controls {
+    margin: 0 auto 10px auto;
+    padding: 0 12px;
+}
+
+/* SPAN-10 CONFIGURATION */
+
+.span-10 .product_set_container ul.product_set_list > li {
+    width: 370px;
+}
+
+.span-10 .scroller.product_set {
+    text-align: center;
+    padding: 0 0 10px 0;
+}
+
+.span-10 .product_set_element {
+    float: left;
+    width: 100px;
+    text-align: left;
+    padding: 0 0 0 18px;
+}
+
+.span-10 .scroller.product_set .buyTheSetButton {
+    float: left;
+}
+
+.span-10 .scroller.product_set .navigation {
+    width: auto;
+    float: left;
+    margin: 0 0 0 18px;
+}
+
+.span-10 .scroller.product_set .controls {
+    margin: 0 0 18px 0;
+}
+
+.pagination .scroll-step {
+    margin: 0 5px 0 0;
+}
+
+.pagination .scroll-size {
+    margin: 0 0 0 5px;
+}
+
+/* SPAN-24 CONFIGURATION */
+
+.span-24 .product_set_element {
+    float: left;
+    width: 130px;
+    text-align: left;
+    padding: 0 0 0 18px;
+}
+
+.span-24 .scroller.product_set ul.product_set_list > li {
+    float: left;
+    width: 950px;
+}
+
+.span-24 .scroller.product_set .controls .button.positive {
+    float: right;
+}
+
+.span-24 .scroller.product_set .controls .navigation {
+    margin: 0px;
+    width: auto;
+    float: right;
+}
+
+/*
+Product Sets Message
+************************************/
+#buySetContainer p {
+ font-size: 1.4em;
+ background: orange;
+ color: white;
+ padding: 0 5px;
+ font-family: courier;
+}
+button.addToCartButtonSet{
+	height:40px;
+	background:#000;
+	color:#fff;
+	border:2px solid #000;
+	padding:0;
+	width:100%;
+	font-size:1em;
+}

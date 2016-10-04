@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="FacebookUrlLike.url" />
+			<property qualifier="FacebookUrlLike.linkedCategory" />
+			<property qualifier="FacebookUrlLike.linkedProduct"  />
+			<property qualifier="FacebookUrlLike.linkedSite" />	
+			<property qualifier="FacebookUrlLike.usersWhoLike"/>	
+		</search-properties>
+		<sort-properties>
+			<property qualifier="FacebookUrlLike.url" />
+			<property qualifier="FacebookUrlLike.linkedCategory" />
+			<property qualifier="FacebookUrlLike.linkedProduct"  />
+			<property qualifier="FacebookUrlLike.linkedSite" />	
+			<property qualifier="FacebookUrlLike.usersWhoLike"/>
+		</sort-properties>
+	</search>
+	
+	<label>
+		<property qualifier="FacebookUrlLike.url" />
+	</label>
+</base>

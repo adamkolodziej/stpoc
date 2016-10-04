@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<custom
+			class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn"
+			name="Line nr" visible="true" selectable="true">
+			<label lang="de">Zeilennr</label>
+			<label lang="en">Line nr</label>
+			<label lang="ja">行番号</label>
+		</custom>
+		<property qualifier="AbstractPromotion.promotionType" visible="true"/>
+		<property qualifier="AbstractPromotion.code" visible="true"/>
+		<property qualifier="AbstractPromotion.name" visible="true"/>		
+		<property qualifier="AbstractPromotion.enabled" visible="true"/>
+		<property qualifier="AbstractPromotion.priority" visible="true"/>
+		<property qualifier="AbstractPromotion.promotionGroup" visible="true"/>
+		<property qualifier="AbstractPromotion.restrictions" visible="true"/>
+	</group>
+</list-view>

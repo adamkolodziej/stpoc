@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+	<content-element type="TweetHashtagButtonComponent" name="type.tweethashtagbuttoncomponent.name"
+							description="type.tweethashtagbuttoncomponent.description"
+							image="cmscockpit/images/tweet_icon_34x34.gif"
+							refImage="cmscockpit/images/tweet_icon_34x34.gif"
+							imageSmall="cmscockpit/images/tweet_icon_20x20.gif"/>	
+							
+	<content-element type="TweetLinkButtonComponent" name="type.tweetlinkbuttoncomponent.name"
+							description="type.tweetlinkbuttoncomponent.description"
+							image="cmscockpit/images/tweet_icon_34x34.gif"
+							refImage="cmscockpit/images/tweet_icon_34x34.gif"
+							imageSmall="cmscockpit/images/tweet_icon_20x20.gif"/>		
+							
+	<content-element type="TwitterFollowButtonComponent" name="type.twitterfollowbuttoncomponent.name"
+							description="type.twitterfollowbuttoncomponent.description"
+							image="cmscockpit/images/tweet_icon_34x34.gif"
+							refImage="cmscockpit/images/tweet_icon_34x34.gif"
+							imageSmall="cmscockpit/images/tweet_icon_20x20.gif"/>																
+	
+	<content-element type="TweetMentionButtonComponent" name="type.tweetmentionbuttoncomponent.name"
+							description="type.tweetmentionbuttoncomponent.description"
+							image="cmscockpit/images/tweet_icon_34x34.gif"
+							refImage="cmscockpit/images/tweet_icon_34x34.gif"
+							imageSmall="cmscockpit/images/tweet_icon_20x20.gif"/>	
+
+</content-elements>

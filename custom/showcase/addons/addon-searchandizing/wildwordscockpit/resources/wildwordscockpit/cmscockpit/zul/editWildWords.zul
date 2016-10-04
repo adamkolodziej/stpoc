@@ -1,0 +1,93 @@
+<zk>
+	<window xmlns="http://www.zkoss.org/2005/zul"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:h="http://www.w3.org/1999/xhtml"
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd "
+		id="wildWordsWindow" 
+		sclass="wildWords_Window"
+		title="${c:l('general.WildWordsEdit.title')}" 
+		width="800px"
+		height="600px"
+		closable="true" 
+		mode="popup"
+		apply="com.hybris.searchandizing.wildwords.cockpit.wizards.EditWildWordsWindowComposer">
+		<style src="/cmscockpit/css/wildwords.css" />
+	    <borderlayout>
+	    	<center>
+			    <tabbox height="100%" sclass="search-wizard">
+			        <tabs>
+			            <tab id="tabKeywordRedirect" label="${c:l('cockpit.config.label.keywordredirects')}" />
+			            <tab id="tabSynonym" label="${c:l('cockpit.config.label.synonyms')}" />
+			            <tab id="tabStopWord" label="${c:l('cockpit.config.label.stopwords')}" />
+			        </tabs>
+			        <tabpanels>
+			            <tabpanel style="overflow: auto" id="redirectPanel" apply="com.hybris.searchandizing.wildwords.cockpit.wizards.KeywordRedirectPanelComposer">
+			            	<grid id="redirectGrid" mold="paging" pageSize="13">
+			            		<columns>
+			            			<column label="" width="8px"></column>
+			            			<column label="Keyword"></column>
+			            			<column label="Match type"></column>
+			            			<column label="Ignore case" width="85px" align="center"></column>
+			            			<column label="Redirect" width="350px"></column>
+			            			<column label="Actions" width="50px" align="center"></column>
+			            		</columns>
+			            		<foot>
+			            			<footer><label/></footer>
+			            			<footer><textbox id="newKeyword"></textbox></footer>
+			            			<footer><combobox id="newMatchType"></combobox></footer>
+			            			<footer><checkbox id="newIgnoreCase" checked="true"></checkbox></footer>
+			            			<footer id="newRedirectFooter"></footer>
+			            			<footer><button id="newKeywordButton" label="${c:l('general.add')}"></button></footer>
+			            		</foot>
+			            	</grid>
+			            </tabpanel>
+			            <tabpanel style="overflow: auto" id="synonymPanel" apply="com.hybris.searchandizing.wildwords.cockpit.wizards.SynonymPanelComposer">
+				            <grid id="synonymGrid" mold="paging" pageSize="15">
+				            	<columns>
+				            		<column label="" width="8px"></column>
+				            		<column label="From"></column>
+				            		<column label="To"></column>
+				            		<column label="Actions" width="50px" align="center"></column>
+				            	</columns>
+				            	<foot>
+				            		<footer><label/></footer>
+				            		<footer><textbox id="newSynonymFrom"></textbox></footer>
+				            		<footer><textbox id="newSynonymTo"></textbox></footer>
+				            		<footer><button id="newSynonymButton" label="${c:l('general.add')}"></button></footer>
+				            	</foot>
+				            </grid>		
+			            </tabpanel>
+			            <tabpanel style="overflow: auto" id="stopWordPanel" apply="com.hybris.searchandizing.wildwords.cockpit.wizards.StopWordPanelComposer">
+			            	<grid id="stopWordGrid" mold="paging" pageSize="15">
+			            		<columns>
+			            			<column label="" width="8px"></column>
+			            			<column label="Stop Word"></column>
+			            			<column label="Actions" width="50px" align="center"></column>
+			            		</columns>
+			            		<foot>
+			            			<footer><label/></footer>
+			            			<footer><textbox id="newStopWord"></textbox></footer>
+			            			<footer><button id="newStopWordButton" label="${c:l('general.add')}"></button></footer>
+			            		</foot>
+			            	</grid>
+			            </tabpanel>
+			        </tabpanels>
+			    </tabbox>
+			</center>
+			<south>
+				<div sclass="wizardButtonFrame">
+					<hbox width="100%">
+						<div align="left">
+							<button id="btnReset" sclass="btnred" label="${c:l('general.reset')}" tooltiptext="${c:l('general.reset')}" />
+						</div>
+						<div align="right">
+							<button id="btnPublish" visible="false" label="${c:l('general.WildWordsEdit.publish')}" tooltiptext="${c:l('general.WildWordsEdit.publish')}" />
+							<button id="btnDone" label="${c:l('general.done')}" tooltiptext="${c:l('general.done')}" />
+						</div>
+					</hbox>
+				</div>
+			</south>
+		</borderlayout>
+</window>
+</zk>

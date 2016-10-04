@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="false" selectable="true" width="70px"/>
+		<property qualifier="FacebookUser.smallProfilePicture.URL" editor="simpleMediaReferenceSelector" visible="true">
+			<renderer class="de.hybris.platform.cockpit.model.listview.impl.ImageCellRenderer"/>	
+		</property>	
+		<property qualifier="Principal.uid" visible="true" editable="false"/>
+		<property qualifier="Principal.name" visible="true" editable="false" />
+		<property qualifier="FacebookUser.email" visible="true" editable="false" />
+		<property qualifier="FacebookUser.gender" visible="true" editable="false" />
+		<property qualifier="FacebookUser.locale" visible="true" />
+		<property qualifier="Principal.groups" visible="true"  editor="shortListEditor" />
+		<property qualifier="FacebookUser.linkedCustomer" visible="true" />
+		<custom spring-bean="ItemContentBrowserActionColumn" name="Actions"
+			visible="true" selectable="true">
+			<label key="config.general.actions" />
+		</custom>
+	</group>
+</list-view>

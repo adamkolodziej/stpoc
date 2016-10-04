@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+				
+	<collectiontypes>
+		<collectiontype code="productSetCollection" elementtype="ProductSet" autocreate="true" generate="true"
+			type="list" />
+	</collectiontypes>
+	
+	<enumtypes>
+		<enumtype code="ProductSetApprovalStatus" autocreate="true" generate="true">
+			<value code="draft"/>
+			<value code="check"/>
+			<value code="rejected"/>
+			<value code="approved"/>
+		</enumtype>
+		
+		<enumtype code="ProductSetType" autocreate="true" generate="true" dynamic="true">
+			<value code="default" />
+		</enumtype>
+		
+		<enumtype code="BuyTheSetClickBehaviour">
+			<value code="showQuickView" />
+			<value code="showProductPage" />
+		</enumtype>
+	</enumtypes>
+	
+	<relations>
+		<relation code="ProductSetRelation" generate="true" localized="false" autocreate="true">
+			<deployment table="productset2product" typecode="20301"/>
+			<sourceElement qualifier="productSets" type="ProductSet" cardinality="many">
+				<modifiers read="true" write="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="products" type="Product" cardinality="many" ordered="true" collectiontype="set">
+				<modifiers read="true" write="true" optional="false" />
+			</targetElement>
+		</relation>
+		
+		<relation code="ProductSetPromotionRelation"
+			autocreate="true"
+			generate="true"
+			localized="false">
+			<deployment table="ProductSet2Promo" typecode="20302"/>
+			<sourceElement qualifier="productSets" type="ProductSet" cardinality="many">
+				<description>Product Sets</description>
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</sourceElement>
+			<targetElement qualifier="promotions" type="ProductSetPromotion" cardinality="many">
+				<description>Promotions</description>
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</targetElement>
+		</relation>
+		
+		<relation code="ProductSet2PublicationPeriodRelation" autocreate="true" generate="true" localized="false">
+				<deployment table="prodset2pubperiod" typecode="20303"/>
+			<sourceElement qualifier="productSets" type="ProductSet" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true"  />
+			</sourceElement>
+			<targetElement qualifier="publicationPeriods" type="PublicationPeriod" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+	
+
+	<itemtypes>
+		<itemtype code="ProductSet" autocreate="true" generate="true" jaloclass="com.hybris.productsets.jalo.ProductSet">
+			<description>Represents the product sets - product references without any directional relationship.</description>
+			<deployment table="ProductSet" typecode="20300"/>
+			<custom-properties>
+				<property name="catalogItemType"><value>java.lang.Boolean.TRUE</value></property>
+				<property name="catalogVersionAttributeQualifier"><value>"catalogVersion"</value></property>
+				<property name="uniqueKeyAttributeQualifier"><value>"code"</value></property>
+			</custom-properties>
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="false" unique="true"/> 
+				</attribute>
+				<attribute qualifier="catalogVersion" type="CatalogVersion">
+					<modifiers optional="false" unique="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="false"/> 
+				</attribute>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="approvalStatus" type="ProductSetApprovalStatus">
+					<persistence type="property" />
+					<modifiers optional="false"/>
+					<defaultvalue>em().getEnumerationValue("ProductSetApprovalStatus","draft")</defaultvalue>					
+				</attribute>
+				<attribute qualifier="productSetType" type="ProductSetType" >
+					<persistence type="property" />
+					<modifiers optional="false"/>
+					<defaultvalue>em().getEnumerationValue("ProductSetType","default")</defaultvalue>
+				</attribute>
+				<attribute qualifier="triggerFor" type="Product" >
+					<persistence type="property" />
+					<modifiers optional="true"  />
+				</attribute>
+				<attribute type="MediaContainer" qualifier="medias">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="ProductSetCodeIDX">
+					<key attribute="code"/>
+				</index>
+				<index name="ProductSetIDX">
+					<key attribute="code"/>
+					<key attribute="catalogVersion"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype code="ProductSetCarouselComponent" extends="SimpleCMSComponent" generate="true" autocreate="true" jaloclass="com.hybris.productsets.jalo.components.ProductSetCarouselComponent">
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+					<description>Title of the component.</description>
+				</attribute>
+				<attribute qualifier="productSet" type="ProductSet">
+					<persistence type="property" />
+					<description>Product set displayed in this component.</description>
+				</attribute>
+				<attribute qualifier="displayProductTitles" type="boolean">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>Boolean.TRUE</defaultvalue>
+					<description>Determines if product titles are shown.</description>
+				</attribute>
+				<attribute qualifier="displayProductPrices" type="boolean">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>Boolean.TRUE</defaultvalue>
+					<description>Determines if product prices are shown.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="BuyTheSetComponent" extends="SimpleCMSComponent" generate="true" autocreate="true" jaloclass="com.hybris.productsets.jalo.components.BuyTheSetComponent">
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+					<description>Title of the component.</description>
+				</attribute> 
+				<attribute qualifier="productSetType" type="ProductSetType" >
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<description>Product set type displayed by the component.</description>
+					<defaultvalue>em().getEnumerationValue("ProductSetType","default")</defaultvalue>					
+				</attribute>
+				<attribute qualifier="buyButtonText" type="localized:java.lang.String">
+					<persistence type="property" />
+					<description>Text displayed on the button.</description>
+				</attribute>
+				<attribute qualifier="clickAction" type="BuyTheSetClickBehaviour">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>em().getEnumerationValue("BuyTheSetClickBehaviour", "SHOWQUICKVIEW")</defaultvalue>
+					<description>Action after clicking the image.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="ProductSetCollectionCarouselComponent" extends="SimpleCMSComponent" jaloclass="com.hybris.productsets.jalo.components.ProductSetCollectionCarouselComponent">
+			<attributes>
+				<attribute qualifier="productSets" type="productSetCollection">
+					<persistence type="property" />
+					<description>Product sets contained in this carousel.</description>
+				</attribute>
+				<attribute qualifier="mediaFormat" type="MediaFormat">
+					<persistence type="property" />
+					<description>Format of media product sets in this carousel should use.</description>
+				</attribute>
+                <attribute qualifier="perRow" type="java.lang.Integer">
+                    <defaultvalue>new Integer( 5 )</defaultvalue>
+                    <persistence type="property" />
+                    <description>Defines number of items displaied per row</description>
+                </attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="ProductSetPromotion"
+			extends="AbstractPromotion"
+			jaloclass="de.hybris.platform.promotions.jalo.ProductSetPromotion"
+			autocreate="true"
+			generate="true"
+			abstract="true">
+		</itemtype>
+		
+		<itemtype code="ProductSetFixedPricePromotion" extends="ProductSetPromotion" autocreate="true" generate="true" abstract="false" jaloclass="de.hybris.platform.promotions.jalo.ProductSetFixedPricePromotion" >
+			<attributes>
+				<attribute
+					qualifier="productSetPrice"
+					autocreate="true"
+					type="PromotionPriceRowCollectionType">
+					<description>The price for buying the entire set</description>
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="false" initial="false" optional="true" partof="true"/>
+				</attribute>
+				<attribute qualifier="messageFired" type="localized:java.lang.String">
+					<description>The message to show when the promotion has fired.</description>
+					<modifiers read="true" write="true" optional="true" />
+					<persistence type="property">
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				<attribute qualifier="messageCouldHaveFired" type="localized:java.lang.String">
+					<description>The message to show when the promotion could have potentially fire.</description>
+					<modifiers read="true" write="true" optional="true" />
+					<persistence type="property">
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="ProductSetPage" jaloclass="com.hybris.productsets.jalo.pages.ProductSetPage" extends="AbstractPage"
+			autocreate="true" generate="true">
+		</itemtype>
+		
+		<itemtype code="CMSProductSetRestriction" jaloclass="com.hybris.productsets.jalo.ProductSetRestriction" extends="AbstractRestriction"
+				autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="productSet" generate="true" autocreate="true" type="ProductSet">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+	</itemtypes>
+</items>

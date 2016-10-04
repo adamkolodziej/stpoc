@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/mvc
+	       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+           http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+		   
+    <context:component-scan base-package="com.hybris.social.twitter.controllers" />
+		   
+	<bean id="tweetButtonComponentRenderer"  class="com.hybris.social.twitter.component.renderer.TweetButtonComponentRenderer">
+		<property name="urlShorteningService" ref="urlShorteningService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+		<property name="sharedPageUrlStrategy" ref="sharedPageUrlStrategy" />
+	</bean>
+	
+	<bean id="twitterFollowComponentRenderer"  class="com.hybris.social.twitter.component.renderer.TwitterFollowComponentRenderer">
+		<property name="urlShorteningService" ref="urlShorteningService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+	</bean>
+	
+	<bean id="twitterFollowButtonComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="TwitterFollowButtonComponent" />
+		<property name="renderer" ref="twitterFollowComponentRenderer" />	
+	</bean>	
+	
+	<bean id="tweetHashtagButtonComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="TweetHashtagButtonComponent" />
+		<property name="renderer" ref="tweetButtonComponentRenderer" />	
+	</bean>		   
+	
+	<bean id="tweetLinkButtonComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="TweetLinkButtonComponent" />
+		<property name="renderer" ref="tweetButtonComponentRenderer" />	
+	</bean>			
+	
+	<bean id="tweetMentionButtonComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="TweetMentionButtonComponent" />
+		<property name="renderer" ref="tweetButtonComponentRenderer" />	
+	</bean>
+	
+	<bean id="twitterProfileWidgetComponentRenderer"  class="com.hybris.social.twitter.component.renderer.TwitterProfileWidgetComponentRenderer" />
+	
+	<bean id="twitterProfileWidgetComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="TwitterProfileWidgetComponent" />
+		<property name="renderer" ref="twitterProfileWidgetComponentRenderer" />	
+	</bean>		
+
+	<bean id="twitterListWidgetComponentRenderer"  class="com.hybris.social.twitter.component.renderer.TwitterListWidgetComponentRenderer" />
+	
+	<bean id="twitterListWidgetComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="TwitterListWidgetComponent" />
+		<property name="renderer" ref="twitterListWidgetComponentRenderer" />	
+	</bean>
+	
+	<bean id="twitterFavesWidgetComponentRenderer"  class="com.hybris.social.twitter.component.renderer.TwitterFavesWidgetComponentRenderer" />
+	
+	<bean id="twitterFavesWidgetComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="TwitterFavesWidgetComponent" />
+		<property name="renderer" ref="twitterFavesWidgetComponentRenderer" />	
+	</bean>
+	   
+</beans>

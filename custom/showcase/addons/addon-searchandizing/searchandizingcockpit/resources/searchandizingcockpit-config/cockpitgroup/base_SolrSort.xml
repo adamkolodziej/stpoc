@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="SolrSort.code"/>
+			<property qualifier="SolrSort.name"/>
+			<property qualifier="SolrSort.visible"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="SolrSort.code"/>
+			<property qualifier="SolrSort.name"/>
+			<property qualifier="SolrSort.visible"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="SolrSort.code"/>
+		<property qualifier="SolrSort.name"/>
+		<property qualifier="SolrSort.visible" />
+	</label>
+	<initial-properties source-object-template="SolrIndexedType">
+		<property-mapping source="src" target="SolrSort.indexedType"/>
+	</initial-properties>
+</base>

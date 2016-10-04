@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="false" selectable="true" width="70px"/>
+		<property qualifier="FacebookComment.author" visible="true" editable="false" />
+		<property qualifier="FacebookComment.text" visible="true" editable="false" />
+		<property qualifier="FacebookComment.relatedItems" visible="true" editable="false" />
+		<property qualifier="FacebookComment.facebookCreatedTime" visible="true" editable="false" />
+		<property qualifier="FacebookComment.likes" visible="true" editable="false" />
+		<property qualifier="FacebookComment.id" visible="true" editable="false"/>
+		<custom spring-bean="ItemContentBrowserActionColumn" name="Actions"
+			visible="true" selectable="true">
+			<label key="config.general.actions" />
+		</custom>
+	</group>
+</list-view>

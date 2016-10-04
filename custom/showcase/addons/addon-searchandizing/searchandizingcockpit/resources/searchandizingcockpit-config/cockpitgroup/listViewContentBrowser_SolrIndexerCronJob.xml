@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<property qualifier="CronJob.code" visible="true" editable="false"/>
+		<property qualifier="SolrIndexerCronJob.indexerOperation" visible="true" editable="false" />
+		<property qualifier="CronJob.timeTable" visible="true" editable="false" />
+		<property qualifier="CronJob.status" visible="true" editable="false"/>
+		<property qualifier="CronJob.result" visible="true" editable="false" >
+			<renderer class="com.hybris.commercesearch.searchandizing.cockpit.component.listview.impl.CronJobDetailsTextCellRenderer" />		
+		</property>
+		<property qualifier="SolrIndexerCronJob.facetSearchConfig" visible="true" editable="false" />		
+		<custom spring-bean="solrExportCronJobActionColumn" name="Actions" visible="true" selectable="true">
+			<label key="config.general.actions" />
+		</custom>
+	</group>
+</list-view>

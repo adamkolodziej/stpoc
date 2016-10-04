@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="FacebookApplication.applicationId"/>
+			<property qualifier="FacebookApplication.namespace"/>
+			<property qualifier="FacebookApplication.domains"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="FacebookApplication.applicationId"/>
+			<property qualifier="FacebookApplication.default"/>
+		</sort-properties>
+	</search>
+	
+	<label>
+		<property qualifier="FacebookApplication.applicationId"/>
+	</label>
+</base>

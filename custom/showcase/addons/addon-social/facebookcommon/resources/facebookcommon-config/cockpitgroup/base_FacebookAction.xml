@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="FacebookAction.name"/>
+			<property qualifier="FacebookAction.namespace"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="FacebookAction.name"/>
+			<property qualifier="FacebookAction.namespace"/>
+		</sort-properties>
+	</search>
+	
+	<label>
+		<property qualifier="FacebookAction.namespace"/>
+		<property qualifier="FacebookAction.name"/>
+	</label>
+</base>

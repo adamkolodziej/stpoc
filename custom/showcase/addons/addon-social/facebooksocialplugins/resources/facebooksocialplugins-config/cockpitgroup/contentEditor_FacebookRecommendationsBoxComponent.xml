@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-editor hideEmpty="true" hideReadOnly="true" groupCollections="false">
+  <template>
+    <![CDATA[
+    	<table width="100%" style="margin: 0; padding: 0">
+    		<tbody>
+				<tr>
+					<td colspan="2"><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div class="contentEditorHeader" style="background-color: #C3C3C3; font-size: 11px; padding:3px;"><b>$label</b></div></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookRecommendationsBoxComponent.domains"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookRecommendationsBoxComponent.linkTarget"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookRecommendationsBoxComponent.maxAge"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"/>
+					<td><div style="height:20px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookRecommendationsBoxComponent.width"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookRecommendationsBoxComponent.height"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookRecommendationsBoxComponent.showHeader"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookRecommendationsBoxComponent.colorScheme"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookRecommendationsBoxComponent.borderColor"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookRecommendationsBoxComponent.font"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"/>
+					<td><div style="height:20px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookRecommendationsBoxComponent.ref"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+    		</tbody>
+    	</table>
+    ]]>
+  </template>
+</content-editor>

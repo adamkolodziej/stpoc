@@ -1,0 +1,6 @@
+INSERT_UPDATE ComponentTypeGroup;code[unique=true]
+;productDetailPanelSection
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;productDetailPanelSection;AddProductToProductListComponent
+;minicart;MiniCartAndProductListComponent

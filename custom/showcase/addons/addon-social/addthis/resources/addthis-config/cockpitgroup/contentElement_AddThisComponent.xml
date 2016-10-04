@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+
+	<content-element type="AddThisComponent" name="type.addthiscomponent.name"
+							description="type.addthiscomponent.description"
+							image="cmscockpit/images/addthis_34x34.jpg"
+							refImage="cmscockpit/images/addthis_34x34.jpg"
+							imageSmall="cmscockpit/images/addthis_20x20.jpg"/>
+							
+	
+							
+</content-elements>	

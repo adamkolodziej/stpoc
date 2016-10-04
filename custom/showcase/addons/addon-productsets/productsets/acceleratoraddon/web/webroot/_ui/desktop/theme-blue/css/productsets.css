@@ -1,0 +1,88 @@
+/*
+
+	Product Set Carousel
+*****************/
+
+.span-4 .product_set_container ul.product_set_list > li {
+	width: 126px;
+}
+
+.scroller.product_set {
+	margin-top: 7px;
+	overflow: visible;
+}
+.scroller.product_set .next {
+	background-image: url(../images/icon-scroller-next-horizontal.png);
+	background-position: -10px top;
+	width: 20px;
+	height: 9px;
+	margin-top: 3px;
+}
+.scroller.product_set .prev {
+	background-image: url(../images/icon-scroller-prev-horizontal.png);
+	background-position: 0 top;
+	width: 20px;
+	height: 9px;
+	margin-top: 3px;
+}
+.scroller.product_set .next:hover,
+.scroller.product_set .next:active {
+	background-position: -42px top;
+}
+.scroller.product_set .prev:hover,
+.scroller.product_set .prev:active {
+	background-position: -32px top;
+}
+.scroller.product_set a.positive {
+	clear: both;
+	margin: 0 0 0 18px;
+}
+
+.span-4 .product_set_container ul.product_set_list > li {
+	width: 106px;
+	padding: 0 20px;
+}
+
+
+/*
+
+	Edit Product Set
+*****************/
+.edit_product_set h1 {
+	color: #00679f;
+	text-transform: uppercase;	
+}
+.edit_product_set button.positive {
+	height: 32px;
+	padding: 0 10px 0 35px;
+	font-size: 1em;
+	background-image: url(../images/bg-button-cart.jpg);
+	background-position: left top;
+	background-repeat: no-repeat;
+	background-color: #CF7A01;
+}
+.edit_product_set button.positive:hover,
+.edit_product_set button.positive:focus, 
+.edit_product_set button.positive:active {
+	background-position: left -35px;
+}
+.edit_product_set button.positive.out-of-stock {
+	background-color: transparent;
+	background-image: none;
+	padding: 0;
+	margin-top: 3px;
+	color: #000;
+	text-shadow: none;
+	border: none;
+}
+.edit_product_set button.positive.out-of-stock:hover {
+	background-position: left 0;
+}
+.edit_product_set fieldset.scroller {
+	background: #bacad5;
+}
+
+button.addToCartButtonSet {
+    background-color:#1a618b;
+    border-color: #1a618b;
+}

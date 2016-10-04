@@ -1,0 +1,8 @@
+# Language
+$lang=en
+
+
+# Localize The Item Templates
+
+UPDATE CockpitItemTemplate;code[unique=true];name[lang=$lang];description[lang=$lang]
+;HeroProductListPageTemplate;Desktop - Hero Product List Page;Same as Product List Page but ensures Hero Products are positioned above banners;

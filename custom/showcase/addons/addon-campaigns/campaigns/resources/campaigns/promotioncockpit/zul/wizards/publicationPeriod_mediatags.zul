@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+
+		<div style="text-align: left; height:263px">
+			<div>
+			<attribute name="onCreate">
+				self.appendChild(pageBean.getErrorContainer());		
+			</attribute>
+			</div>	
+			<div height="15px"></div>
+			<div style="margin: 30px; margin-top: 10px;" >
+				<div>
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('campaigns.wizard.mediaTags')}:"/>
+						<div id="cmsItemsEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.mediaTags" editorCode="multi"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+							<custom-attributes allowCreate="true" displaySubtypes="true" allowActivate="false" />
+						</div>
+					</div>
+					<div height="35px"></div>
+				</div>
+			</div>
+		</div>
+</zk>
