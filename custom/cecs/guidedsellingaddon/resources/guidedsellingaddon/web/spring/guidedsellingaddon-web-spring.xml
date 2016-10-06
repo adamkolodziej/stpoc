@@ -251,7 +251,7 @@
     </bean>
 
     <bean id="REDIRECT_TO_GUIDEDSELLING_MULTI_STEP_CHECKOUT" class="java.lang.String">
-        <constructor-arg value="redirect:/packages/TriCast"/>
+        <constructor-arg value="redirect:/packages/Connectivity"/>
     </bean>
 
     <bean id="REDIRECT_TO_CONFIGURE_PACKAGES" class="java.lang.String" scope="prototype">

@@ -8,35 +8,35 @@ INSERT_UPDATE BundleTemplateStatus; id[unique = true]; status(code)[default = ap
 
 # Insert BundleTemplates
 INSERT_UPDATE BundleTemplate; id[unique = true]; bundleComponentType(code); parentTemplate(id, version[default = 1.0], $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'BundleApproved']; $catalogVersion;
-; Connectivity    ; Other       ;
-; ClassOfService  ; Conditional ;
-; Bandwidth       ; AddOn       ;
-; VirtualRouter   ; AddOn       ;
-; CloudConnection ; AddOn       ;
-; VirtualSwitch   ; AddOn       ;
-; Access          ; AddOn       ;
-; Topology        ; AddOn       ;
-; HardwareRouter  ; AddOn       ;
-; HardwareSwitch  ; AddOn       ;
+; Connectivity                 ; Other       ;
+; Connectivity-ClassOfService  ; Conditional ;
+; Connectivity-Bandwidth       ; AddOn       ;
+; Connectivity-VirtualRouter   ; AddOn       ;
+; Connectivity-CloudConnection ; AddOn       ;
+; Connectivity-VirtualSwitch   ; AddOn       ;
+; Connectivity-Access          ; AddOn       ;
+; Connectivity-Topology        ; AddOn       ;
+; Connectivity-HardwareRouter  ; AddOn       ;
+; Connectivity-HardwareSwitch  ; AddOn       ;
 
 # Set the child templates again to make sure that the sequence of child templates is correct
 INSERT_UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; childTemplates(id, version[default = 1.0], $catalogVersion); $catalogVersion
-; Connectivity ; ; ClassOfService, Bandwidth, VirtualRouter, CloudConnection, VirtualRouter, Access, Topology, HardwareRouter, HardwareSwitch, VirtualSwitch
+; Connectivity ; ; Connectivity-ClassOfService, Connectivity-Bandwidth, Connectivity-VirtualRouter, Connectivity-CloudConnection, Connectivity-VirtualRouter, Connectivity-Access, Connectivity-Topology, Connectivity-HardwareRouter, Connectivity-HardwareSwitch, Connectivity-VirtualSwitch
 
 
 # Bundle dependencies
 UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; requiredBundleTemplates(id, version[default = 1.0], $catalogVersion); $catalogVersion
-; CloudConnection ; ; VirtualRouter
-; VirtualSwitch   ; ; VirtualRouter
-; Access          ; ; VirtualRouter
-; Topology        ; ; Access
-; HardwareRouter  ; ; Access
-; ClassOfService  ; ;
-; Bandwidth       ; ; ClassOfService
-; HardwareSwitch  ; ; ClassOfService
+; Connectivity-CloudConnection ; ; Connectivity-VirtualRouter
+; Connectivity-VirtualSwitch   ; ; Connectivity-VirtualRouter
+; Connectivity-Access          ; ; Connectivity-VirtualRouter
+; Connectivity-Topology        ; ; Connectivity-Access
+; Connectivity-HardwareRouter  ; ; Connectivity-Access
+; Connectivity-ClassOfService  ; ;
+; Connectivity-Bandwidth       ; ; Connectivity-ClassOfService
+; Connectivity-HardwareSwitch  ; ; Connectivity-ClassOfService
 
 # TODO maybe we should create separate file with full data for bundle packages
-INSERT_UPDATE BundlePackage; code[unique = true]; bundleTemplate(id[default = 'TriCast'], version[default = 1.0], $catalogVersion); selectedProducts(code, $catalogVersion); $catalogVersion
+INSERT_UPDATE BundlePackage; code[unique = true]; bundleTemplate(id[default = 'Connectivity'], version[default = 1.0], $catalogVersion); selectedProducts(code, $catalogVersion); $catalogVersion
 ; ipVpn                  ; Connectivity ; af1Voice, bandwidth1gbps, ipVpnCloudConnection, ethernetAccess, virtualRouter
 ; metroInternet          ; Connectivity ; af1Voice, bandwidth1gbps, metroInternetCloudConnection, ethernetAccess
 ; dataCenterInterconnect ; Connectivity ; bandwidth1gbps, dataCenterCloudConnection, ethernetAccess
