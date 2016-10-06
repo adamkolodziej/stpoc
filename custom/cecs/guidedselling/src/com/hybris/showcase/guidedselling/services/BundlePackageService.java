@@ -1,5 +1,6 @@
 package com.hybris.showcase.guidedselling.services;
 
+import de.hybris.platform.configurablebundleservices.model.BundleTemplateModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
 
@@ -18,4 +19,5 @@ public interface BundlePackageService
 	void setPackageOnCartEntries(BundlePackageModel packageModel, AbstractOrderModel order, Set<ProductModel> selectedProducts);
 
 	BundlePackageModel getFirstPackage();
+	BundleTemplateModel getFirstTemplate();
 }

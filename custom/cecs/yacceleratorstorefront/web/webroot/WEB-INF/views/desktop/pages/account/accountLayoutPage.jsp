@@ -96,7 +96,7 @@
                             </ul>
                         </div>
                         <div class="col-xs-4 text-right">
-                            <a href="#!" class="btn btn-primary">Start new order</a>
+                            <a href="packages/" class="btn btn-primary">Start new order</a>
                         </div>
                     </div>
 
