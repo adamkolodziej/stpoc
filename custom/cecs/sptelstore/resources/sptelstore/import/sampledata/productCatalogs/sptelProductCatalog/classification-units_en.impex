@@ -2,17 +2,17 @@
 #******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
 
 # Macros / Replacement Parameter definitions
-$productCatalog=sptelProductCatalog
-$productCatalogName=Sptel Product Catalog
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$productCatalog = sptelProductCatalog
+$productCatalogName = Sptel Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
 
-$systemName=SptelClassification;
-$systemVersion=1.0;
-$classficationCatalog=catalogVersion(catalog(id[default=$systemName]),version[default=$systemVersion]);
-$sysVer=systemVersion(catalog(id[default=$systemName]),version[default=$systemVersion])[virtual=true,unique=true];
+$systemName = SptelClassification;
+$systemVersion = 1.0;
+$classficationCatalog = catalogVersion(catalog(id[default = $systemName]), version[default = $systemVersion]);
+$sysVer = systemVersion(catalog(id[default = $systemName]), version[default = $systemVersion])[virtual = true, unique = true];
 
 # Language
-$lang=en
+$lang = en
 
-UPDATE ClassificationAttributeUnit;code[unique=true];name[lang=$lang];$sysVer
-;minute;minute(s);
+UPDATE ClassificationAttributeUnit; code[unique = true]; name[lang = $lang]; $sysVer
+; minute ; minute(s) ;

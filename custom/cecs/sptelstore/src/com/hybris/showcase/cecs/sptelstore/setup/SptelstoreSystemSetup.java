@@ -36,7 +36,6 @@ import org.springframework.beans.factory.annotation.Required;
 public class SptelstoreSystemSetup extends AbstractSystemSetup
 {
 	public static final String SPTEL = "sptel";
-	public static final String EXTRAS = "extras";
 
 	private static final String IMPORT_CORE_DATA = "importCoreData";
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";
@@ -76,12 +75,6 @@ public class SptelstoreSystemSetup extends AbstractSystemSetup
 		sptelImportData.setContentCatalogNames(Arrays.asList(SPTEL));
 		sptelImportData.setStoreNames(Arrays.asList(SPTEL));
 		importData.add(sptelImportData);
-
-//		final ImportData extrasImportData = new ImportData();
-//		extrasImportData.setProductCatalogName(EXTRAS);
-//		extrasImportData.setContentCatalogNames(Collections.EMPTY_LIST);
-//		extrasImportData.setStoreNames(Collections.EMPTY_LIST);
-//		importData.add(extrasImportData);
 
 		getCoreDataImportService().execute(this, context, importData);
 		getEventService().publishEvent(new CoreDataImportedEvent(context, importData));

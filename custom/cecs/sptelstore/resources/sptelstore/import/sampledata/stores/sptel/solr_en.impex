@@ -28,6 +28,4 @@ INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true
 
 # Define the available sorts
 UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang];useBoost
- ;$indexedType;latestReleases_desc;"Latest Releases (descending)";"false";
- ;$indexedType;mostViewed;"Most Viewed";"false";
 

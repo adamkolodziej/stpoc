@@ -43,13 +43,5 @@ INSERT_UPDATE BundlePackage; code[unique = true]; bundleTemplate(id[default = 'C
 ; darkFiber              ; Connectivity ; af1Voice
 
 INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; mime[default = 'image/png']; $catalogVersion; folder(qualifier)[default = images]
-; desktop ; Bundle01.png ; $siteResource/Bundle01a_thumbnail.png ; Bundle01_thumbnail.png
-; desktop ; Bundle02.png ; $siteResource/Bundle02a_thumbnail.png ; Bundle02_thumbnail.png
-; desktop ; Bundle03.png ; $siteResource/Bundle03a_thumbnail.png ; Bundle03_thumbnail.png
-; desktop ; Bundle04.png ; $siteResource/Bundle04a_thumbnail.png ; Bundle04_thumbnail.png
 
 INSERT_UPDATE BundlePackage; code[unique = true]; image(code, $catalogVersion); thumbnail(code, $catalogVersion); $catalogVersion
-; ipVpn                  ; Bundle01.png ; Bundle01.png
-; metroInternet          ; Bundle02.png ; Bundle02.png
-; dataCenterInterconnect ; Bundle03.png ; Bundle03.png
-; darkFiber              ; Bundle04.png ; Bundle04.png

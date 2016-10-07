@@ -2,37 +2,18 @@
 #******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
 
 # Macros / Replacement Parameter definitions
-$productCatalog=sptelProductCatalog
-$productCatalogName=Sptel Product Catalog
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$productCatalog = sptelProductCatalog
+$productCatalogName = Sptel Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
 
 # Language
-$lang=en
+$lang = en
 
-UPDATE UsageUnit;id[unique=true];name[lang=$lang];namePlural[lang=$lang]
-;Credit;Credit;Credits
-;Device;Device;Devices
-;GBCloudStorage;GB;GB
-;GBperMonth;GB/month;GB/month
-;Hour;h;h
-;premiumEpisode;Each Premium Episode;Premium Episodes
-;premiumMovie;Each Premium Movie;Premium Movies
-;standardEpisode;Each Standard Episode;Standard Episodes
-;standardMovie;Each Standard Movie;Standard Movie
+UPDATE UsageUnit; id[unique = true]; name[lang = $lang]; namePlural[lang = $lang]
+; Credit          ; Credit                ; Credits
+; Device          ; Device                ; Devices
+; GBCloudStorage  ; GB                    ; GB
+; GBperMonth      ; GB/month              ; GB/month
+; Hour            ; h                     ; h
 
-UPDATE Entitlement;id[unique=true];name[lang=$lang];description[lang=$lang]
-;100mbSpeed;Access to 100 Mb/s speed;Access to 100 Mb/s speed
-;17mbSpeed;Access to 17 Mb/s speed;Access to 17 Mb/s speed
-;38mbSpeed;Access to 38 Mb/s speed;Access to 38 Mb/s speed
-;broadbandUsage;Usage;Usage
-;cloudStorage;Cloud Storage;Cloud Storage
-;concurrentMobileDevices;Concurrent mobile devices;Concurrent mobile devices
-;loyalty-points;Loyalty points;Loyalty points awarded for certain purchase
-;recordingHours;Recording hours;Recording hours
-;sptelWifi;Unlimited Access to TriCast Wi-fi;Unlimited Access to TriCast Wi-fi
-;unlimitedBroadbandUsage;Unlimited Usage;Unlimited Usage
-;unlimitedWeekendCalls;Unlimited Weekend calls;Unlimited Weekend calls
-;unlimitedWeekendEveningCalls;Unlimited Weekend and Evening calls;Unlimited Weekend and Evening calls
-;video_downloads;Video downloads;Entitlement giving specific number of video downloads to customers
-;video_rental;Video rental;
-;video_streaming;Video streaming;Entitlement giving unlimited video streaming to customers
+UPDATE Entitlement; id[unique = true]; name[lang = $lang]; description[lang = $lang]

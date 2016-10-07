@@ -1,18 +1,13 @@
 #******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
 
 # Macros / Replacement Parameter definitions
-$productCatalog=sptelProductCatalog
-$productCatalogName=Sptel Product Catalog
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$productCatalog = sptelProductCatalog
+$productCatalogName = Sptel Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
 
-$bundleTemplateVersion=1.0
+$bundleTemplateVersion = 1.0
 
 # Language
-$lang=en
+$lang = en
 
-UPDATE DisableProductBundleRule;id[unique=true];$catalogVersion;label[lang=$lang]
-;DisableFirbreRouterRule;;"No firbre router with standard broadband"
-;DisableStandardDecoderRule;;"No standard decoder with TV Entertainment or TV Premium"
-;DisableStandardRouterRule;;"No standard router with fiber broadband or super fiber"
-;NoWifiWithStandardBroadbandDisableRule;;"No WiFi with standard broadband"
-;SportsTrialDisableRule;;"Sports Channels - One month free is a custom offer and cannot be bought twice"
+UPDATE DisableProductBundleRule; id[unique = true]; $catalogVersion; label[lang = $lang]
