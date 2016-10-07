@@ -1,9 +1,13 @@
 package com.hybris.showcase.guidedselling.controllers.pages;
 
 import com.hybris.showcase.facades.CreditCheckFacade;
-
 import com.hybris.showcase.guidedselling.facades.QuoteFacade;
 import com.hybris.showcase.guidedselling.services.QuoteService;
+import com.hybris.showcase.guidedselling.controllers.GuidedsellingaddonControllerConstants;
+import com.hybris.showcase.guidedselling.data.BundleOfferData;
+import com.hybris.showcase.guidedselling.facades.OnePageGuidedSellingFacade;
+import com.hybris.showcase.guidedselling.facades.impl.BundleAcceleratorCheckoutFacade;
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.addonsupport.controllers.page.AbstractAddOnPageController;
@@ -16,12 +20,6 @@ import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.subscriptionfacades.SubscriptionFacade;
 import de.hybris.platform.subscriptionfacades.exceptions.SubscriptionFacadeException;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
@@ -33,11 +31,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hybris.showcase.guidedselling.controllers.GuidedsellingaddonControllerConstants;
-import com.hybris.showcase.guidedselling.data.BundleOfferData;
-import com.hybris.showcase.guidedselling.facades.OnePageGuidedSellingFacade;
-import com.hybris.showcase.guidedselling.facades.impl.BundleAcceleratorCheckoutFacade;
-import de.hybris.platform.acceleratorstorefrontcommons.annotations.*;
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -91,9 +87,11 @@ public class BundleOrderPageController extends AbstractAddOnPageController {
         }
 
         String orderPlacedFlashMessageKey = "guidedselling.order.placed";
-        if (cartService.getSessionCart().getOrderChanges() != null) {
+        CartModel sessionCart = cartService.getSessionCart();
+        if (sessionCart.getOrderChanges() != null) {
             orderPlacedFlashMessageKey = "guidedselling.order.updated";
         }
+        setAddressesForCart(sessionCart);
 
         checkoutFacade.authorizePayment("");
         OrderData orderData = null;
@@ -127,6 +125,11 @@ public class BundleOrderPageController extends AbstractAddOnPageController {
 
             return REDIRECT_PREFIX + "/guidedselling/order/show/" + orderData.getCode();
         }
+    }
+
+    private void setAddressesForCart(CartModel sessionCart) {
+        sessionCart.setDeliveryAddress(sessionCart.getUser().getDefaultShipmentAddress());
+        sessionCart.setPaymentAddress(sessionCart.getUser().getDefaultPaymentAddress());
     }
 
     private void updateCartPackageInfo(BundleOrderForm bundleOrderForm) {

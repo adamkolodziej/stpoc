@@ -127,7 +127,7 @@ public class DefaultC4CTicketService extends C4CWebService implements C4CTicketS
 		}
 		catch (final ClassCastException e)
 		{
-			throw new ClassCastException("Order's user is not a Tricast Customer");
+			throw new ClassCastException("Order's user is not a SpTel Customer");
 		}
 
 		return request;

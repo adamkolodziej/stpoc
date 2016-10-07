@@ -168,7 +168,7 @@ public class GuidedsellingPagesController extends AbstractAddOnPageController
 		{
 			if (entry.getKey().toString().equals("next"))
 			{
-				multiTransitionsNew.put(entry.getKey(), "redirect:/guidedselling/TriCast/package/" + packageCode);
+				multiTransitionsNew.put(entry.getKey(), "redirect:/guidedselling/Connectivity/package/" + packageCode);
 			}
 			else
 			{
@@ -184,7 +184,7 @@ public class GuidedsellingPagesController extends AbstractAddOnPageController
 		{
 			if (entry.getKey().toString().equals("current"))
 			{
-				confTransitionsNew.put(entry.getKey(), "redirect:/guidedselling/TriCast/package/" + packageCode);
+				confTransitionsNew.put(entry.getKey(), "redirect:/guidedselling/Connectivity/package/" + packageCode);
 			}
 			else
 			{
@@ -201,7 +201,7 @@ public class GuidedsellingPagesController extends AbstractAddOnPageController
 		{
 			if (entry.getKey().toString().equals("previous"))
 			{
-				summaryTransitionsNew.put(entry.getKey(), "redirect:/guidedselling/TriCast/package/" + packageCode);
+				summaryTransitionsNew.put(entry.getKey(), "redirect:/guidedselling/Connectivity/package/" + packageCode);
 			}
 			else
 			{

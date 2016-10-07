@@ -1,9 +1,0 @@
-# ImpEx for Importing Product Classifications into Sptel Store
-
-#% impex.setLocale(Locale.ENGLISH);
-
-# Macros / Replacement Parameter definitions
-$productCatalog=extrasProductCatalog
-$productCatalogName=Extras Product Catalog
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$clAttrModifiers=system='SptelClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en

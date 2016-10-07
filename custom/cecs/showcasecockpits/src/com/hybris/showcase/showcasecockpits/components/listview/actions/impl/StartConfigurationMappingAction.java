@@ -76,7 +76,7 @@ public class StartConfigurationMappingAction extends AbstractProductAction
 							cronJob.setJob(jobModel);
 							cronJob.setRemoveOnExit(Boolean.TRUE);
 							modelService.setAttributeValue(cronJob, "template", product);
-							modelService.setAttributeValue(cronJob, "site", baseSiteService.getBaseSiteForUID("tricast"));
+							modelService.setAttributeValue(cronJob, "site", baseSiteService.getBaseSiteForUID("sptel"));
 							modelService.save(cronJob);
 
 							cronJobService.performCronJob(cronJob, true);

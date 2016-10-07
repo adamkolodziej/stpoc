@@ -9,6 +9,7 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script type="text/javascript" src="${commonResourcePath}/js/jquery.1.11.3.min.js"></script>
 
 <template:page pageTitle="${pageTitle}">
 <div id="globalMessages">
@@ -119,8 +120,9 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach items="${orders}" var="order">
+                                    <c:url value="my-account/order/${order.code}" var="orderCodeUrl" />
                                         <tr>
-                                            <th scope="row">${order.code}</th>
+                                            <th scope="row"><a href="${orderCodeUrl}">${order.code}</a></th>
                                             <td>${order.sourceProductCode}</td>
                                             <td>${order.sourcePackageCode}</td>
                                             <c:if test="${!isEmployee}">

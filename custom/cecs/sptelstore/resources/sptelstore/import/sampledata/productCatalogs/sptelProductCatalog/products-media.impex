@@ -28,7 +28,7 @@ INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[transla
 ; desktop ; 04_SportsChannels_trial.png    ; $defaultProductsFolder/04_SportsChannels_trial.png    ; 04_SportsChannels_trial.png    ; image/png
 ; desktop ; 07_AllOnDemand.png             ; $defaultProductsFolder/07_AllOnDemand.png             ; 07_AllOnDemand.png             ; image/png
 ; desktop ; 08_ForeignLangueagePackage.png ; $defaultProductsFolder/08_ForeignLangueagePackage.png ; 08_ForeignLangueagePackage.png ; image/png
-; desktop ; 09_SptelWiFi.png             ; $defaultProductsFolder/09_SptelWiFi.png             ; 09_SptelWiFi.png             ; image/png
+; desktop ; 09_SptelWiFi.png               ; $defaultProductsFolder/09_SptelWiFi.png               ; 09_SptelWiFi.png               ; image/png
 ; desktop ; 10_StandardBroadband.png       ; $defaultProductsFolder/10_StandardBroadband.png       ; 10_StandardBroadband.png       ; image/png
 ; desktop ; 11_FibreBroadbandL.png         ; $defaultProductsFolder/11_FibreBroadbandL.png         ; 11_FibreBroadbandL.png         ; image/png
 ; desktop ; 12_FibreBroadbandU.png         ; $defaultProductsFolder/12_FibreBroadbandU.png         ; 12_FibreBroadbandU.png         ; image/png
@@ -178,7 +178,7 @@ INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias[mode = append]; 
 ; 17_TCO-Container                     ; 17_TCO.png                     ;
 ; 06_TCOChannels-Container             ; 06_TCOChannels.png             ;
 ; gift_TCO_access-Container            ; gift_TCO_access.jpg            ;
-; Sptel-Container                    ; tri_logo.jpg                   ;
+; Sptel-Container                      ; tri_logo.jpg                   ;
 ; 01_TVStarter-Container               ; 01_TVStarter.png               ;
 ; 02_TVEntertainment-Container         ; 02_TVEntertainment.png         ;
 ; 03_TVPremium-Container               ; 03_TVPremium.png               ;
@@ -186,7 +186,7 @@ INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias[mode = append]; 
 ; 04_SportsChannels_trial-Container    ; 04_SportsChannels_trial.png    ;
 ; 07_AllOnDemand-Container             ; 07_AllOnDemand.png             ;
 ; 08_ForeignLangueagePackage-Container ; 08_ForeignLangueagePackage.png ;
-; 09_SptelWiFi-Container             ; 09_SptelWiFi.png             ;
+; 09_SptelWiFi-Container               ; 09_SptelWiFi.png               ;
 ; 10_StandardBroadband-Container       ; 10_StandardBroadband.png       ;
 ; 11_FibreBroadbandL-Container         ; 11_FibreBroadbandL.png         ;
 ; 12_FibreBroadbandU-Container         ; 12_FibreBroadbandU.png         ;
@@ -353,10 +353,10 @@ UPDATE Product; code[unique = true]; freePreviewMedia(code, $catalogVersion)[def
 ; underworld-s01-e03 ; ; ;
 
 UPDATE Product; code[unique = true]; backgroundImage(code, $catalogVersion); $catalogVersion
-; underworld       ; top-bg.jpg ;
-; underworld-s01   ; top-bg.jpg ;
-; the-last-journey ; the-last-journey-bg.jpg ;
-; trekking-towards-danger ; trekking-bg.png ;
+; underworld              ; top-bg.jpg              ;
+; underworld-s01          ; top-bg.jpg              ;
+; the-last-journey        ; the-last-journey-bg.jpg ;
+; trekking-towards-danger ; trekking-bg.png         ;
 
 
 INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; mime[default = 'image/jpeg']; $catalogVersion; folder(qualifier)[default = images]

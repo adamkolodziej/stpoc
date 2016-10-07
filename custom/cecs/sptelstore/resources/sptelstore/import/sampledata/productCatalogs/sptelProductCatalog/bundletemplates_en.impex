@@ -8,16 +8,16 @@ $bundleTemplateVersion = 1.0
 $lang = en
 
 UPDATE BundleTemplate; id[unique = true]; $catalogVersion; name[lang = $lang]; version[default = $bundleTemplateVersion]
-; Connectivity    ; ; Connectivity     ;
-; ClassOfService  ; ; Class of Service ;
-; Bandwidth       ; ; Bandwidth        ;
-; VirtualRouter   ; ; Virtual Router   ;
-; CloudConnection ; ; Cloud Connection ;
-; VirtualSwitch   ; ; Virtual Switch   ;
-; Access          ; ; Access           ;
-; Topology        ; ; Topology         ;
-; HardwareRouter  ; ; Hardware Router  ;
-; HardwareSwitch  ; ; Hardware Switch  ;
+; Connectivity                 ; ; Connectivity     ;
+; Connectivity-ClassOfService  ; ; Class of Service ;
+; Connectivity-Bandwidth       ; ; Bandwidth        ;
+; Connectivity-VirtualRouter   ; ; Virtual Router   ;
+; Connectivity-CloudConnection ; ; Cloud Connection ;
+; Connectivity-VirtualSwitch   ; ; Virtual Switch   ;
+; Connectivity-Access          ; ; Access           ;
+; Connectivity-Topology        ; ; Topology         ;
+; Connectivity-HardwareRouter  ; ; Hardware Router  ;
+; Connectivity-HardwareSwitch  ; ; Hardware Switch  ;
 
 UPDATE BundlePackage; code[unique = true]; $catalogVersion; name[lang = $lang]; description[lang = $lang]
 ; ipVpn                  ; ; IP VPN                   ; <li>IP VPN  </li>

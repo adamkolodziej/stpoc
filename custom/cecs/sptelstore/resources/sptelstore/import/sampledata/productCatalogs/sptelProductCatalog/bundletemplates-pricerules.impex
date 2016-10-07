@@ -6,36 +6,14 @@ $ruleType = ruleType(code)[default = 'ANY']
 $billingEvent = billingEvent(code)[default = 'onfirstbill']
 
 INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; $catalogVersion; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); name; $ruleType; price; currency(isocode)[default = USD, unique = true]
-; FreeWifiWithFibreAndSuperFibre       ; ; TriCast-Broadband-Addon  ; fibreBroadbandLimited, fibreBroadbandUnlimited, superFibreUnlimited ; sptelWifi            ; Free Wi-fi with Fibre and Super Fibre        ; ; 0
-; CheaperFibreRouterWithFibreUnlimited ; ; TriCast-Broadband-Router ; fibreBroadbandUnlimited                                             ; fibreRouter            ; Cheaper Fibre Router with Fibre Unlimited    ; ; 9.99
-; FreeFibreRouterWithSuperFibre        ; ; TriCast-Broadband-Router ; superFibreUnlimited                                                 ; fibreRouter            ; Free Fibre Router with Super Fibre Unlimited ; ; 0
-; ReducedAllOnDemandWithTVPremium      ; ; TriCast-TV-Addons        ; tvPremium                                                           ; allOnDemand            ; Reduced All On Demand with TV Premium        ; ; 2
-; ReducedForeignPackageWithTVPremium   ; ; TriCast-TV-Addons        ; tvPremium                                                           ; foreignLanguagePackage ; Reduced Foreign Package with TV Premium      ; ; 2
-; ReducedTCOWithTVPremium              ; ; TriCast-TV-Addons        ; tvPremium                                                           ; TCO                    ; Reduced TCO with TV Premium                  ; ; 5
-; ReducedSportsWithTVPremium           ; ; TriCast-TV-Addons        ; tvPremium                                                           ; Sport                  ; Reduced Sports with TV Premium               ; ; 3
-#; ReducedDecoderPlusWithTVPremium      ; ; TriCast-Decoders         ; tvPremium                                                           ; decoderPlus            ; Reduced Decoder Plus with TV Premium         ; ; 49
 
 INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; $catalogVersion; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); name; $ruleType; price; currency(isocode)[default = USD, unique = true]; $billingEvent
-; ReducedBroadbandInstallationWithPhone                 ; ; TriCast-Broadband ; phoneUnlimitedWeekend                          ; standardBroadband, fibreBroadbandLimited, fibreBroadbandUnlimited, superFibreUnlimited ; Reduced Broadband Installation With Phone                     ;     ; 10
-; ReducedTVInstallationWithPhone                        ; ; TriCast-TV        ; phoneUnlimitedWeekend                          ; tvStarter, tvEntertainment, tvPremium                                                  ; Reduced TV Installation With Phone                            ;     ; 10
-; FreeTVInstallationWithPhoneAndStandardBroadband       ; ; TriCast-TV        ; phoneUnlimitedWeekend, standardBroadband       ; tvStarter, tvEntertainment, tvPremium                                                  ; Free TV Installation With Phone and Standard Broadband        ; ALL ; 0
-; FreeTVInstallationWithPhoneAndFibredBroadbandLimited  ; ; TriCast-TV        ; phoneUnlimitedWeekend, fibreBroadbandLimited   ; tvStarter, tvEntertainment, tvPremium                                                  ; Free TV Installation With Phone and Fibre Broadband Limited   ; ALL ; 0
-; FreeTVInstallationWithPhoneAndFibreBroadbandUnlimited ; ; TriCast-TV        ; phoneUnlimitedWeekend, fibreBroadbandUnlimited ; tvStarter, tvEntertainment, tvPremium                                                  ; Free TV Installation With Phone and Fibre Broadband Unlimited ; ALL ; 0
-; FreeTVInstallationWithPhoneAndSuperFibreBroadband     ; ; TriCast-TV        ; phoneUnlimitedWeekend, superFibreUnlimited     ; tvStarter, tvEntertainment, tvPremium                                                  ; Free TV Installation With Phone and Super Fibre Broadband     ; ALL ; 0
 
-#CECS-817
 INSERT_UPDATE ChangeProductPercentPriceBundleRule; id[unique = true]; $catalogVersion; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); name; $ruleType; percentageDiscount
-; ReducedDecoderPlusWithTVPremium                  ; ; TriCast-Decoders ; tvPremium                ; decoderPlus ; Reduced Decoder Plus with TV Premium ; ; 50 
 
 
-# CECS-129: Guidedselling - change price - TCO promotion(3 months free) - START
 INSERT_UPDATE BundlePrincipalRestriction; id[unique = true]; $catalogVersion; name; principals(UID)
-; interestedInTcoBundleRuleRestriction ; ; Interested in TCO Bundle Rule Restriction ; interested-in-tco
 
 INSERT_UPDATE RecurringChargeRestriction; id[unique = true]; $catalogVersion; name; cycleStart; cycleEnd
-; first3monthsrestriction ; ; First 3 months restriction ; 1 ; 3
 
 INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; $catalogVersion; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); name; $ruleType; price; currency(isocode)[default = USD, unique = true]; bundleRuleRestrictions(id, $catalogVersion)
-; TCOaddonPromotion    ; ; TriCast-TV-Addons ; ; TCO         ; TCO addon Promotion Change Rule ; ; 0 ; ; interestedInTcoBundleRuleRestriction, first3monthsrestriction
-; SportsAddonPromotion ; ; TriCast-TV-Addons ; ; Sport_trial ; Dummy sports trial Change Rule  ; ; 0 ; ;
-# CECS-129: Guidedselling - change price - TCO promotion(3 months free) - END

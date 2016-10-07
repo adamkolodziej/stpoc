@@ -1,30 +1,15 @@
 #******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
 
 # Macros / Replacement Parameter definitions
-$productCatalog=sptelProductCatalog
-$productCatalogName=Sptel Product Catalog
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$productCatalog = sptelProductCatalog
+$productCatalogName = Sptel Product Catalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
 
-$bundleTemplateVersion=1.0
+$bundleTemplateVersion = 1.0
 
 # Language
-$lang=en
+$lang = en
 
-UPDATE ChangeProductPriceBundleRule;id[unique=true];$catalogVersion;label[lang=$lang];currency(isocode)[default=USD,unique=true]
-;CheaperFibreRouterWithFibreUnlimited;;"Cheaper Fiber Router with Fiber Unlimited";
-;FreeFibreRouterWithSuperFibre;;"Free Fiber Router with Super Fiber Unlimited";
-;FreeTVInstallationWithPhoneAndFibreBroadbandUnlimited;;"Free TV Installation With Phone and Fiber Broadband Unlimited";
-;FreeTVInstallationWithPhoneAndFibredBroadbandLimited;;"Free TV Installation With Phone and Fiber Broadband Limited";
-;FreeTVInstallationWithPhoneAndStandardBroadband;;"Free TV Installation With Phone and Standard Broadband";
-;FreeTVInstallationWithPhoneAndSuperFibreBroadband;;"Free TV Installation With Phone and Super Fiber Broadband";
-;FreeWifiWithFibreAndSuperFibre;;"Free Wi-fi with Fiber and Super Fiber";
-;ReducedAllOnDemandWithTVPremium;;"Cheaper All On Demand with TV Premium";
-;ReducedBroadbandInstallationWithPhone;;"Cheaper Broadband Installation With Phone";
-;ReducedForeignPackageWithTVPremium;;"Cheaper Foreign Package with TV Premium";
-;ReducedSportsWithTVPremium;;"Cheaper Sports with TV Premium";
-;ReducedTCOWithTVPremium;;"Cheaper TCO with TV Premium";
-;ReducedTVInstallationWithPhone;;"Cheaper TV Installation With Phone";
-;TCOaddonPromotion;;"First 3 months for free, next months without discount";
+UPDATE ChangeProductPriceBundleRule; id[unique = true]; $catalogVersion; label[lang = $lang]; currency(isocode)[default = USD, unique = true]
 
-UPDATE ChangeProductPercentPriceBundleRule;id[unique=true];$catalogVersion;label[lang=$lang]
-;ReducedDecoderPlusWithTVPremium;;"Cheaper Decoder Plus with TV Premium"
+UPDATE ChangeProductPercentPriceBundleRule; id[unique = true]; $catalogVersion; label[lang = $lang]
