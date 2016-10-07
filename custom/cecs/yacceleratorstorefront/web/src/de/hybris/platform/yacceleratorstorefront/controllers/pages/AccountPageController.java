@@ -13,6 +13,7 @@
  */
 package de.hybris.platform.yacceleratorstorefront.controllers.pages;
 
+import com.hybris.showcase.guidedselling.facades.ApprovalFacade;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.Breadcrumb;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
@@ -49,7 +50,9 @@ import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.util.Config;
@@ -157,6 +160,9 @@ public class AccountPageController extends AbstractSearchPageController {
     @Resource(name = "userService")
     private UserService userService;
 
+    @Resource(name = "userService")
+    private ApprovalFacade approvalFacade;
+
     protected PasswordValidator getPasswordValidator() {
         return passwordValidator;
     }
@@ -202,6 +208,14 @@ public class AccountPageController extends AbstractSearchPageController {
             countryDataMap.put(countryData.getIsocode(), countryData);
         }
         return countryDataMap;
+    }
+
+
+    @RequestMapping(value = "/order/approve/{orderCode}" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+    @RequireHardLogIn
+    public String approveOrder(@PathVariable("orderCode") final String orderCode, final Model model) throws CMSItemNotFoundException, InvalidCartException {
+        approvalFacade.approveOrder(orderCode);
+        return REDIRECT_MY_ACCOUNT;
     }
 
 
@@ -251,10 +265,17 @@ public class AccountPageController extends AbstractSearchPageController {
         storeCmsPageInModel(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
         setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
         model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs(null));
+        model.addAttribute("isEmployee", isEmployee());
         model.addAttribute("metaRobots", "noindex,nofollow");
         // Handle paged search results
         fillOrdersModel(model);
         return getViewForPage(model);
+    }
+
+    private boolean isEmployee() {
+        UserModel currentUser = userService.getCurrentUser();
+        Set<PrincipalGroupModel> groups = currentUser.getGroups();
+        return groups.stream().anyMatch(g -> g.getUid().equals("employeegroup"));
     }
 
     private void fillOrdersModel(Model model) {

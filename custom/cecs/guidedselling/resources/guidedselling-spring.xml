@@ -368,6 +368,36 @@
     <alias alias="bundleTemplateDao" name="guidedSellingBundleTemplateDao"/>
 	<bean id="guidedSellingBundleTemplateDao" class="com.hybris.showcase.guidedselling.daos.impl.GuidedSellingBundleTemplateDao" parent="defaultBundleTemplateDao" />
     <!-- CECS-837 Percentage Product Price Rule - labels in the storefront - END -->
-    
+
+    <alias alias="quoteService" name="defaultQuoteService"/>
+    <bean id="defaultQuoteService" class="com.hybris.showcase.guidedselling.services.impl.DefaultQuoteService" >
+        <property name="modelService" ref="modelService" />
+        <property name="orderService" ref="orderService" />
+    </bean>
+
+    <alias alias="approvalService" name="defaultApprovalService"/>
+    <bean id="defaultApprovalService" class="com.hybris.showcase.guidedselling.services.impl.DefaultApprovalService" >
+        <property name="modelService" ref="modelService" />
+        <property name="orderService" ref="orderService" />
+        <property name="userService" ref="userService" />
+        <property name="baseStoreService" ref="baseStoreService" />
+        <property name="customerAccountService" ref="customerAccountService" />
+    </bean>
+
+    <alias alias="quoteFacade" name="defaultQuoteFacade"/>
+    <bean id="defaultQuoteFacade" class="com.hybris.showcase.guidedselling.facades.impl.DefaultQuoteFacade" >
+        <property name="quoteService" ref="quoteService" />
+        <property name="orderConverter" ref="orderConverter" />
+        <property name="cartFacade" ref="commerceCheckoutCartFacade"/>
+        <property name="checkoutCustomerStrategy" ref="checkoutCustomerStrategy"/>
+        <property name="cartService" ref="cartService"/>
+        <property name="orderService" ref="orderService"/>
+    </bean>
+
+    <alias alias="approvalFacade" name="defaultApprovalFacade"/>
+    <bean id="defaultApprovalFacade" class="com.hybris.showcase.guidedselling.facades.impl.DefaultApprovalFacade" >
+        <property name="approvalService" ref="approvalService" />
+        <property name="orderService" ref="orderService"/>
+    </bean>
 
 </beans>

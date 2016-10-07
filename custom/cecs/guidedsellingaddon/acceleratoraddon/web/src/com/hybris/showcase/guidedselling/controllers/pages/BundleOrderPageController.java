@@ -2,6 +2,8 @@ package com.hybris.showcase.guidedselling.controllers.pages;
 
 import com.hybris.showcase.facades.CreditCheckFacade;
 
+import com.hybris.showcase.guidedselling.facades.QuoteFacade;
+import com.hybris.showcase.guidedselling.services.QuoteService;
 import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.addonsupport.controllers.page.AbstractAddOnPageController;
@@ -73,6 +75,9 @@ public class BundleOrderPageController extends AbstractAddOnPageController {
     @Resource(name = "showOrderCheckoutStep")
     private CheckoutStep showOrderCheckoutStep;
 
+    @Resource(name = "quoteFacade")
+    private QuoteFacade quoteFacade;
+
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String placeOrder(final Model model, @ModelAttribute final BundleOrderForm bundleOrderForm,
                              final RedirectAttributes redirectAttributes) {
@@ -94,8 +99,8 @@ public class BundleOrderPageController extends AbstractAddOnPageController {
         OrderData orderData = null;
         try {
             updateCartPackageInfo(bundleOrderForm);
-            orderData = checkoutFacade.placeOrder();
-
+//            orderData = checkoutFacade.placeOrder();
+            orderData = quoteFacade.createQuote();
             // CECS-220: Send product info to SBG on placing order - START
             subscriptionFacade.createSubscriptions(orderData, new HashMap<String, String>());
             // CECS-220: Send product info to SBG on placing order - END

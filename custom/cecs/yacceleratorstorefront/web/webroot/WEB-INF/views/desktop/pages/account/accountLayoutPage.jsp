@@ -109,6 +109,9 @@
                                         <th>Reference number</th>
                                         <th>Product Type</th>
                                         <th>Package</th>
+                                        <c:if test="${!isEmployee}">
+                                            <th>Approve</th>
+                                        </c:if>
                                         <th>SLA</th>
                                         <th>Status</th>
                                         <th>Delivery date</th>
@@ -120,6 +123,9 @@
                                             <th scope="row">${order.code}</th>
                                             <td>${order.sourceProductCode}</td>
                                             <td>${order.sourcePackageCode}</td>
+                                            <c:if test="${!isEmployee}">
+                                                <td>Approve</td>
+                                            </c:if>
                                             <td>N/D</td>
                                             <!-- Toggle for modal window -->
                                             <td>
