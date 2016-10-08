@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view allow-create-inline-items="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="list-view.xsd">
+        <group name="General">
+                <property qualifier="SolrIndexedProperty.name" editable="false" visible="true" />
+                <property qualifier="SolrIndexedProperty.exportId" editable="true" visible="false" />
+                <property qualifier="SolrIndexedProperty.type" editable="true" visible="true" />
+                <property qualifier="SolrIndexedProperty.facet" editable="true" visible="true" />
+                <property qualifier="SolrIndexedProperty.priority" editable="true" visible="true" />
+                <property qualifier="SolrIndexedProperty.facetType" editable="true" visible="true" />
+                
+                <property qualifier="SolrIndexedProperty.multiValue" editable="true" visible="true" />
+                <property qualifier="SolrIndexedProperty.useForSpellChecking" editable="true" visible="true" />
+                <property qualifier="SolrIndexedProperty.useForAutoComplete" editable="true" visible="true" />
+                <property qualifier="SolrIndexedProperty.localized" editable="true" visible="true" />
+     
+        </group>
+</list-view>

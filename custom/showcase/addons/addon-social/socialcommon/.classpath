@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="eclipsebin/classes" path="gensrc"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry kind="src" path="acceleratoraddon/web/src"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/platform"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/addoncommon"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/addoncockpits"/>
+	<classpathentry exported="true" kind="lib" path="lib/spring-social-core-1.0.3.RELEASE.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/spring-social-test-1.0.3.RELEASE.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/spring-social-web-1.0.3.RELEASE.jar"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

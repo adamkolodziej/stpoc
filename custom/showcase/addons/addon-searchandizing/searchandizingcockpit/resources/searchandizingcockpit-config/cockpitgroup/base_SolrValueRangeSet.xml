@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base  xsi:noNamespaceSchemaLocation="base.xsd"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<search>
+		<search-properties>
+		     <property qualifier="SolrValueRangeSet.name" />
+		     <property qualifier="SolrValueRangeSet.type"/>
+		     <property qualifier="SolrValueRangeSet.facetSearchConfigs" />
+		
+		</search-properties>
+		 <sort-properties>
+             <property qualifier="SolrValueRangeSet.name" />
+		     <property qualifier="SolrValueRangeSet.type" />
+        </sort-properties>
+		
+	</search>
+	<label>
+		 <property qualifier="SolrValueRangeSet.name" />
+	</label>
+	
+	<initial-properties source-object-template="SolrFacetSearchConfig">
+		<property-mapping source="src" target="SolrValueRangeSet.facetSearchConfigs"/>
+	</initial-properties>
+	
+
+</base>

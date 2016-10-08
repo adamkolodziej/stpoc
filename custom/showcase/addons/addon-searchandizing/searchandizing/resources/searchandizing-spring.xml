@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<import resource="classpath:searchandizing-services-spring.xml" />
+	<import resource="classpath:searchandizing-facades-spring.xml" />			
+
+	<!-- <bean id="converterTargetClassMapForSearchandizingMapMergeDirective" depends-on="converterTargetClassMap" parent="mapMergeDirective">
+		<property name="sourceMap">
+			<map merge="true">
+				<entry key="leafCategorySelectedSolrFacetVisibilityRule" value="de.hybris.platform.solrfacetsearch.config.LeafCategorySelectedFacetVisibilityRuleData"/>
+			</map>
+		</property>
+	</bean> -->
+	
+	<bean id="searchandizingCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener"  >
+		<property name="supportedChannels">
+			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+				<value>B2C</value>
+				<value>B2B</value>
+			</list>
+		</property>
+		<property name="addonExtensionMetadata">
+			<bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+				<property name="baseExtensionName" value="searchandizing" />
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="optionalLocalizedEnumValueProvider"
+	      class="com.hybris.searchandizing.solrfacetsearch.provider.impl.OptionalLocalisedEnumValueProvider"
+	      parent="optionalModelPropertyFieldValueProvider">
+		<property name="enumerationService" ref="enumerationService"/>
+	</bean>
+	
+	
+	<bean id="leafCategorySelectedFacetVisibilityRulePlugin"  class="com.hybris.commercesearch.searchandizing.facet.visibilityrules.plugin.LeafCategorySelectedFacetVisibilityRulePlugin"  >
+		<property name="evaluator" ref="leafCategorySelectedFacetVisibilityRuleEvaluator" />
+	</bean>
+	<bean id="leafCategorySelectedFacetVisibilityRuleEvaluator"  class="com.hybris.commercesearch.searchandizing.facet.visibilityrules.evaluators.impl.LeafCategorySelectedFacetVisibilityRuleEvaluator">
+		<property name="commerceCategoryService" ref="commerceCategoryService"/>
+	</bean>
+	
+	<bean id="leafCategorySelectedSolrFacetVisibilityRuleConverter" parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="leafCategorySelectedSolrFacetVisibilityRule"/> -->
+		<property name="targetClass" value="de.hybris.platform.solrfacetsearch.config.LeafCategorySelectedFacetVisibilityRuleData"/>
+		<property name="populators">
+			<list>
+				<ref bean="leafCategorySelectedSolrFacetVisibilityRulePopulator"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="leafCategorySelectedSolrFacetVisibilityRulePopulator" class="com.hybris.commercesearch.searchandizing.facet.visibilityrules.populators.LeafCategorySelectedSolrFacetVisibilityRulePopulator"  parent="abstractVisibilityRulePopulator"/>
+	
+	
+	<bean id="leafCategoryFacetVisibilityRuleMapMergeDirective" depends-on="indexedPropertyFacetVisibilityRulesPopulator" parent="mapMergeDirective">
+		<property name="key" value="LeafCategorySelectedSolrFacetVisibilityRule" />
+		<property name="value" ref="leafCategorySelectedSolrFacetVisibilityRuleConverter" /> 
+		<property name="fieldName" value="converters" />
+	</bean>
+			
+			
+	<bean id="leafCategorySelectedSolrFacetVisibilityRule" class="de.hybris.platform.solrfacetsearch.config.LeafCategorySelectedFacetVisibilityRuleData" scope="prototype"/>
+	
+	<bean id="heroProductPopulator" parent="baseProductPopulator" class="com.hybris.searchandizing.services.populator.HeroProductPopulator" />
+	
+	<bean id="searchandizingProductConfiguredPopulator" parent="defaultProductConfiguredPopulator">
+		<property name="populators">
+			<map key-type="de.hybris.platform.commercefacades.product.ProductOption" merge="true">
+				<entry key="HERO_PRODUCT" value-ref="heroProductPopulator"/>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="searchandizingProductFacade" parent="defaultProductFacade" >
+		<property name="referenceProductConfiguredPopulator" ref="searchandizingProductConfiguredPopulator"/>
+	</bean>	
+
+ 	<bean id="heroProductSearchResultProductPopulator" class="com.hybris.searchandizing.services.populator.SearchandizingSearchResultProductPopulator">
+        <property name="productService" ref="productService"/>
+    </bean>
+
+	<bean parent="modifyPopulatorList">
+  		<property name="list" ref="commerceSearchResultProductConverter"/>
+  		<property name="add" ref="heroProductSearchResultProductPopulator"/>
+ 	</bean>
+ 	
+ 	<bean id="heroProductSearchResultProductPopulatorComponentListMergeDirective" depends-on="commerceSearchResultProductConverter"
+		parent="listMergeDirective">
+	<property name="add" ref="heroProductSearchResultProductPopulator" />
+		<property name="listPropertyDescriptor" value="populators" />
+	</bean>
+	
+	<bean id="removeSolrHeroProductDefinitionOnCategoryRemoveInterceptor"
+			class="com.hybris.searchandizing.interceptors.impl.RemoveSolrHeroProductDefinitionOnCategoryRemoveInterceptor">
+		<property name="heroProductDefinitionService" ref="heroProductDefinitionService"/>
+	</bean>
+	
+    <bean id="removeSolrHeroProductDefinitionOnCategoryRemoveMapping"
+			class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="removeSolrHeroProductDefinitionOnCategoryRemoveInterceptor"/>
+		<property name="typeCode" value="Category"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="editor.xsd">
+        
+       <group qualifier="Synonyms" visible="true" initially-opened="true">
+        	 <label key="cockpit.config.label.synonyms" />
+        	 <property qualifier="SolrSynonymConfig.synonymFrom" />
+        	 <property qualifier="SolrSynonymConfig.synonymTo" />
+        	 <property qualifier="SolrSynonymConfig.language" />
+        	 
+        </group>
+       	
+       	<group qualifier="admin" visible="true" initially-opened="false">
+                <label key="config.general.administration" />
+                <property qualifier="SolrSynonymConfig.facetSearchConfig" />
+                <property qualifier="Item.pk" />
+                <property qualifier="Item.creationTime" />
+                <property qualifier="Item.modifiedtime" />
+                
+        </group>
+       
+</editor>

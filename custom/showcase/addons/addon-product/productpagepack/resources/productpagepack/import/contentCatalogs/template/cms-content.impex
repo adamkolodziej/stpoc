@@ -1,0 +1,92 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * addonExtensionName - extension name of the ui addon
+##   * channel - b2c/b2b
+#######
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCmsCockpit=jar:com.hybris.cms.productpages.constants.ProductpagepackConstants&/productpagepack/import/cockpit/cmscockpit
+
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;DynamicProductPageLayoutTemplate;Dynamic Product Page Layout;addon:/$addonExtensionName/pages/$channel/dynamicProductLayoutPage;ProductPage
+
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;DynamicProductPageLayoutTemplate;$jarResourceCmsCockpit/structure-view/$channel/structure_dynamicProductPageLayoutTemplate.vm
+
+# Dynamic Product Details Page Template
+# The CrossSelling and UpSelling slots are designed for related products, cross-sells and up-sells.
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='DynamicProductPageLayoutTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;SearchBox;;;searchbox
+;Section1;;;wide
+;Section2;;;wide
+;Section3;;;wide
+;Section4;;;wide
+;ProductImages;;;productImages
+;ProductDetailPanelSection;;;productDetailPanelSection
+;SocialButtons;;;socialButtons
+;SocialWidgets;;;socialWidgets
+;CrossSelling;;ProductReferencesComponent;narrow
+;UpSelling;;ProductReferencesComponent;narrow
+;Footer;;;footer
+;Tabs;;CMSTabParagraphContainer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+
+## Create some default components
+INSERT_UPDATE SimpleProductReviewSummaryComponent;$contentCV[unique=true];uid[unique=true];name;
+;;DefaultSimpleProductReviewSummaryComponent;Default Product Review Summary
+
+INSERT_UPDATE SimpleProductPromotionSummaryComponent;$contentCV[unique=true];uid[unique=true];name;
+;;DefaultSimpleProductPromotionSummaryComponent;Default Product Promotion Summary
+
+INSERT_UPDATE SimpleProductImageComponent;$contentCV[unique=true];uid[unique=true];name;
+;;DefaultSimpleProductImageComponent;Default Product Images
+
+INSERT_UPDATE SimpleProductSummaryComponent;$contentCV[unique=true];uid[unique=true];name;
+;;DefaultSimpleProductSummaryComponent;Product Summary
+
+INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;
+;;VariantSelector;Product Variant Selector;
+
+INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;
+;;AddToCart;Product Add To Cart;
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
+;;ProductImagesSlot;Product Images;true;DefaultSimpleProductImageComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
+;;ProductDetailPanelSlot;Product Details;true;DefaultSimpleProductSummaryComponent,DefaultSimpleProductPromotionSummaryComponent,DefaultSimpleProductReviewSummaryComponent,VariantSelector,AddToCart
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;ProductSocialButtonsSlot;Social Buttons;true
+;;ProductSocialWidgetsSlot;Social Widgets;true
+
+
+# Bind Content Slots to Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='DynamicProductPageLayoutTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-DynamicProductDetails;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-DynamicProductDetails;HomepageNavLink;;HomepageNavLinkSlot;true
+;;MiniCart-DynamicProductDetails;MiniCart;;MiniCartSlot;true
+;;SearchBox-DynamicProductDetails;SearchBox;;SearchBoxSlot;true
+;;NavigationBar-DynamicProductDetails;NavigationBar;;NavigationBarSlot;true
+;;ProductImages-DynamicProductDetails;ProductImages;;ProductImagesSlot;true
+;;ProductDetailPanel-DynamicProductDetails;ProductDetailPanelSection;;ProductDetailPanelSlot;true
+;;ProductSocialButtons-DynamicProductDetails;SocialButtons;;ProductSocialButtonsSlot;true
+;;ProductSocialWidgets-DynamicProductDetails;SocialWidgets;;ProductSocialWidgetsSlot;true
+;;Tabs-DynamicProductDetails;Tabs;;TabsSlot;true
+;;Footer-DynamicProductDetails;Footer;;FooterSlot;true
+;;HeaderLinks-DynamicProductDetails;HeaderLinks;;HeaderLinksSlot;true
+;;UpSelling-DynamicProductDetails;UpSelling;;UpSellingSlot;true
+;;CrossSelling-DynamicProductDetails;CrossSelling;;CrossSellingSlot;true
+;;TopHeaderSlot-DynamicProductDetails;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-DynamicProductDetails;BottomHeaderSlot;;BottomHeaderSlot;true
+
+

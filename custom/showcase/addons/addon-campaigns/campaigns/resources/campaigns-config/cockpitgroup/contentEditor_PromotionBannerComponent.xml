@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-editor hideEmpty="true" hideReadOnly="true" groupCollections="true">
+	<template>
+    <![CDATA[
+    	<table width="100%" style="margin:0px;padding:0px">
+			<tbody>
+				<tr>
+					<td colspan="2"><cockpit code="description" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div class="contentEditorHeader" style="background-color:#C3C3C3;font-size:11px;padding:3px;"><b>$label</b></div></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="PromotionBannerComponent.promotion"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="PromotionBannerComponent.evaluateRestrictions"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="PromotionBannerComponent.defaultBanner"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="PromotionBannerComponent.appliedBanner"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="PromotionBannerComponent.advanceNotificationBanner"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="list" value="PromotionBannerComponent.link"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="list" value="CMSItem.publicationPeriods"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>				
+			</tbody>
+		</table>
+    ]]>
+	</template>
+	<custom-editors>
+		<property qualifier="PromotionBannerComponent.defaultBanner" editorCode="simpleCelumReferenceSelector">
+			<parameter>
+				<name>mimeTypes</name>
+				<value>
+					image/jpeg;image/gif;image/png
+			</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>restrictToCreateTypes</name>
+				<value>Media,CelumAsset</value>
+			</parameter>
+			<parameter>
+				<name>imageHeight</name>
+				<value>80px</value>
+			</parameter>
+			<parameter>
+				<name>celumMediaFormat</name>
+				<value>picture</value>
+			</parameter>
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsMediaPredefinedValuesStrategy</value>
+			</parameter>	
+		</property>
+		<property qualifier="PromotionBannerComponent.appliedBanner" editorCode="simpleCelumReferenceSelector">
+			<parameter>
+				<name>mimeTypes</name>
+				<value>
+					image/jpeg;image/gif;image/png
+			</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>restrictToCreateTypes</name>
+				<value>Media,CelumAsset</value>
+			</parameter>
+			<parameter>
+				<name>imageHeight</name>
+				<value>80px</value>
+			</parameter>
+			<parameter>
+				<name>celumMediaFormat</name>
+				<value>picture</value>
+			</parameter>
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsMediaPredefinedValuesStrategy</value>
+			</parameter>	
+		</property>
+		<property qualifier="PromotionBannerComponent.advanceNotificationBanner" editorCode="simpleCelumReferenceSelector">
+			<parameter>
+				<name>mimeTypes</name>
+				<value>
+					image/jpeg;image/gif;image/png
+			</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>restrictToCreateTypes</name>
+				<value>Media,CelumAsset</value>
+			</parameter>
+			<parameter>
+				<name>imageHeight</name>
+				<value>80px</value>
+			</parameter>
+			<parameter>
+				<name>celumMediaFormat</name>
+				<value>picture</value>
+			</parameter>
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsMediaPredefinedValuesStrategy</value>
+			</parameter>	
+		</property>
+		<property qualifier="PromotionBannerComponent.link" editorCode="default">
+    	<parameter>
+    		<name>predefinedValuesStrategy</name>
+    		<value>cmsItemPredefinedValuesStrategy</value>
+    	</parameter>
+    </property>
+	</custom-editors>
+</content-editor>

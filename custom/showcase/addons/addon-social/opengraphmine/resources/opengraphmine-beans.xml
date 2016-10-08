@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="com.hybris.social.facebook.opengraphmine.facade.data.FacebookUserData">
+		<property name="firstname" type="String"/>
+		<property name="lastname" type="String"/>
+		<property name="smallProfilePictureURL" type="String"/>
+		<property name="profileLink" type="String"/>
+	</bean>
+
+	<bean class="com.hybris.social.facebook.opengraphmine.facade.data.AbstractFacebookSuggestedData">
+		<property name="loggedUser" type="FacebookUserData"/>
+		<property name="bestCandidate" type="FacebookUserData"/>
+		<property name="usersThatLikeIt" type="java.util.Set&lt;FacebookUserData&gt;"/>
+		<property name="usersThatPurchasedIt" type="java.util.Set&lt;FacebookUserData&gt;"/>
+		<property name="usersThatCommentedIt" type="java.util.Set&lt;FacebookUserData&gt;"/>
+		
+		<property name="likedByBestCandidate" type="boolean"/>
+		<property name="commentedByBestCandidate" type="boolean"/>
+		<property name="purchasedByBestCandidate" type="boolean"/>
+	</bean>
+
+	<bean class="com.hybris.social.facebook.opengraphmine.facade.data.FacebookSuggestedProductData" extends="AbstractFacebookSuggestedData">
+		<property name="product" type="de.hybris.platform.commercefacades.product.data.ProductData"/>
+	</bean>
+
+</beans>

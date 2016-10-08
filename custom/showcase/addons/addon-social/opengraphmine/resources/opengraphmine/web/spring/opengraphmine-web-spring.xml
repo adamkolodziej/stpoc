@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:facebook="http://www.springframework.org/schema/social/facebook" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/social http://www.springframework.org/schema/social/spring-social.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/social/facebook http://www.springframework.org/schema/social/spring-social-facebook.xsd">
+
+
+	<context:component-scan base-package="com.hybris.social.facebook.opengraphmine.controllers" />
+	
+	<bean id="facebookOAuth2LoginComponentRenderer" parent="abstractFacebookComponentRenderer" class="com.hybris.social.facebook.opengraphmine.component.renderer.FacebookOAuth2LoginComponentRenderer">
+		<property name="facebookAuthenticationService" ref="facebookAuthenticationService" />
+	</bean>
+	
+	<bean id="facebookOAuth2LoginComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="FacebookOAuth2LoginComponent" />
+		<property name="renderer" ref="facebookOAuth2LoginComponentRenderer" />	
+	</bean>
+	
+</beans>

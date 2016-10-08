@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	 	<!--  Services -->
+   
+   	<alias name="defaultUrlShorteningService" alias="urlShorteningService" />
+	<bean id="defaultUrlShorteningService" class="com.hybris.social.urlshortening.service.impl.DefaultUrlShorteningService" scope="tenant">
+		<property name="urlShorteningProviderRegistry">
+			<map key-type="com.hybris.social.urlshortening.enums.UrlShorteningProvider">
+				<entry key="BITLY" value-ref="bitlyUrlShorteningProviderService"/>
+				<entry key="TINYURL" value-ref="tinyUrlShorteningProviderService" />
+			</map>
+		</property>
+		<property name="shortUrlCacheDao" ref="shortUrlCacheDao" />
+	</bean>
+	
+	<alias name="defaultBitlyUrlShorteningProviderService" alias="bitlyUrlShorteningProviderService" />
+	<bean id="defaultBitlyUrlShorteningProviderService" scope="tenant" class="com.hybris.social.urlshortening.service.provider.impl.BitlyUrlShorteningProviderService">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+	
+	<alias name="defaultTinyUrlShorteningProviderService" alias="tinyUrlShorteningProviderService" />
+	<bean id="defaultTinyUrlShorteningProviderService" scope="tenant" class="com.hybris.social.urlshortening.service.provider.impl.TinyUrlShorteningProviderService"/>
+	
+	
+	<!--  DAO -->
+	
+	<alias name="defaultShortUrlCacheDao" alias="shortUrlCacheDao" />
+	<bean id="defaultShortUrlCacheDao" class="com.hybris.social.urlshortening.service.dao.impl.DefaultShortUrlCacheDao" parent="abstractItemDao" />        
+			
+			
+</beans>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base  xsi:noNamespaceSchemaLocation="base.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<search>
+		<search-properties>
+			<property qualifier="SolrStopWord.StopWord" />
+			<property qualifier="SolrStopWord.language" />
+			<property qualifier="SolrStopWord.facetSearchConfig" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="SolrStopWord.StopWord" />
+			<property qualifier="SolrStopWord.language" />
+			<property qualifier="SolrStopWord.facetSearchConfig" />
+		</sort-properties>
+	</search>
+
+	<label>
+		<property qualifier="SolrStopWord.StopWord"/>
+	</label>
+	
+	<initial-properties source-object-template="SolrFacetSearchConfig">
+		<property-mapping source="src" target="SolrStopWord.facetSearchConfig"/>
+	</initial-properties>
+	
+	
+</base>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="PromotionPriceRow.price"/>
+			<property qualifier="PromotionPriceRow.currency.name"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="PromotionPriceRow.price"/>
+			<property qualifier="PromotionPriceRow.currency.name"/>
+			<property qualifier="Item.pk"/>
+		</sort-properties>
+	</search>
+	<label>
+			<property qualifier="PromotionPriceRow.price"/>
+			<property qualifier="PromotionPriceRow.currency.name"/>
+	</label>
+</base>

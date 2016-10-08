@@ -1,0 +1,16 @@
+.yContentSlotMenu .ycsm-button-MANAGE_PROMOTION_BANNER_IMAGE,
+.yContentSlotMenu .ycsm-button-MANAGE_PROMOTION_BANNER_IMAGE:hover {
+	background: url(../../../shared/common/images/contextmenu_icons/MANAGE_PROMOTION_BANNER_IMAGE.png) no-repeat !important;
+	background-color: none !important;
+}
+.yContentSlotMenu .ycsm-button-EDIT_CAMPAIGN,
+.yContentSlotMenu .ycsm-button-EDIT_CAMPAIGN:hover {
+	background: url(../../../shared/common/images/contextmenu_icons/EDIT_CAMPAIGN.png) no-repeat !important;
+	background-color: none !important;
+}
+.yContentSlotMenu .ycsm-button-ADD_COMPONENT_TO_CAMPAIGN,
+.yContentSlotMenu .ycsm-button-ADD_COMPONENT_TO_CAMPAIGN:hover {
+	background: url(../../../shared/common/images/contextmenu_icons/ADDTO_CAMPAIGN.png) no-repeat !important;
+	background-color: none !important;
+}
+

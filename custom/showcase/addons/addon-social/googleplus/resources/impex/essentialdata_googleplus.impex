@@ -1,0 +1,5 @@
+INSERT_UPDATE ComponentTypeGroup;code[unique=true]
+;socialButtons
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;socialButtons;PlusOneComponent

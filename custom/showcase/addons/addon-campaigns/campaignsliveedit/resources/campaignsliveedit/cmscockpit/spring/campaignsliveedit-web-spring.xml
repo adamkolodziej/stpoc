@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!-- add beans here -->
+	<alias name="defaultManagePromotionBannerImageMenuActionConverter" alias="managePromotionBannerImageMenuActionConverter" />
+	<bean id="defaultManagePromotionBannerImageMenuActionConverter" parent="componentAdminMenuActionConverter">
+		<property name="populators">
+			<list>
+				<ref bean="managePromotionBannerImageMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<alias name="defaultEditCampaignMenuActionConverter" alias="editCampaignMenuActionConverter" />
+	<bean id="defaultEditCampaignMenuActionConverter" parent="componentAdminMenuActionConverter">
+		<property name="populators">
+			<list>
+				<ref bean="editCampaignMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultAddToCampaignMenuActionConverter" alias="addToCampaignMenuActionConverter" />
+	<bean id="defaultAddToCampaignMenuActionConverter" parent="componentAdminMenuActionConverter">
+		<property name="populators">
+			<list>
+				<ref bean="addToCampaignMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultAddContainerToCampaignMenuActionConverter" alias="addContainerToCampaignMenuActionConverter" />
+	<bean id="defaultAddContainerToCampaignMenuActionConverter" parent="componentAdminMenuActionConverter">
+		<property name="populators">
+			<list>
+				<ref bean="addContainerToCampaignMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="managePromotionBannerImageComponentListMergeDirective" depends-on="editingComponentAdminMenuGroupPopulator" parent="listMergeDirective" >
+		<property name="add" ref="managePromotionBannerImageMenuActionConverter" />
+		<property name="listPropertyDescriptor" value="menuItemConverters" />
+	</bean>
+	
+	<bean id="editCampaignComponentListMergeDirective" depends-on="publicationComponentAdminMenuGroupPopulator" parent="listMergeDirective" >
+		<property name="add" ref="editCampaignMenuActionConverter" />
+		<property name="listPropertyDescriptor" value="menuItemConverters" />
+	</bean>
+	
+	<bean id="addToCampaignComponentListMergeDirective" depends-on="publicationComponentAdminMenuGroupPopulator" parent="listMergeDirective" >
+		<property name="add" ref="addToCampaignMenuActionConverter" />
+		<property name="listPropertyDescriptor" value="menuItemConverters" />
+	</bean>
+	
+	<bean id="addContainerToCampaignListMergeDirective" depends-on="publicationComponentAdminMenuGroupPopulator" parent="listMergeDirective" >
+		<property name="add" ref="addContainerToCampaignMenuActionConverter" />
+		<property name="listPropertyDescriptor" value="menuItemConverters" />
+	</bean>
+	
+	<alias alias="managePromotionBannerImageMenuActionPopulator" name="defaultManagePromotionBannerImageMenuActionPopulator" />
+	<bean id="defaultManagePromotionBannerImageMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator">
+		<property name="type" value="MANAGE_PROMOTION_BANNER_IMAGE" />
+		<property name="addOn" value="campaignsliveedit" />
+		<property name="adminActionEnabledStrategy" ref="managePromotionBannerImageEnabledStrategy" />
+	</bean>
+	
+	<alias alias="editCampaignMenuActionPopulator" name="defaultEditCampaignMenuActionPopulator" />
+	<bean id="defaultEditCampaignMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator">
+		<property name="type" value="EDIT_CAMPAIGN" />
+		<property name="addOn" value="campaignsliveedit" />
+		<property name="adminActionEnabledStrategy" ref="editCampaignActionComponentEnabledStrategy" />
+	</bean>
+
+	<alias alias="addToCampaignMenuActionPopulator" name="defaultAddToCampaignMenuActionPopulator" />
+	<bean id="defaultAddToCampaignMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator">
+		<property name="type" value="ADDTO_CAMPAIGN" />
+		<property name="addOn" value="campaignsliveedit" />
+		<!-- <property name="adminActionEnabledStrategy" ref="editCampaignActionComponentEnabledStrategy" /> -->
+	</bean>
+	
+	<alias alias="addContainerToCampaignMenuActionPopulator" name="defaultAddContainerToCampaignMenuActionPopulator" />
+	<bean id="defaultAddContainerToCampaignMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator">
+		<property name="type" value="ADD_CONTAINER_TO_CAMPAIGN" />
+		<property name="addOn" value="campaignsliveedit" />
+		<property name="adminActionEnabledStrategy" ref="isContainerEnabledStrategy" />
+	</bean>
+
+	<util:list id="managePromotionBannerImageCmsComponentList">
+		<value>PromotionBannerComponent</value> <!-- Warning Weak reference to productpagepack AddOn -->
+	</util:list>
+	<alias alias="managePromotionBannerImageEnabledStrategy" name="defaultManagePromotionBannerImageEnabledStrategy" />
+	<bean id="defaultManagePromotionBannerImageEnabledStrategy"
+		class="de.hybris.liveeditaddon.admin.strategies.impl.RestrictedTypeCodeActionEnabledStrategy">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+		<property name="typeService" ref="typeService" />
+		<property name="typeCodes" ref="managePromotionBannerImageCmsComponentList" />
+	</bean>
+	
+    <alias name="defaultEditCampaignActionComponentEnabledStrategy" alias="editCampaignActionComponentEnabledStrategy" />
+    <bean id="defaultEditCampaignActionComponentEnabledStrategy" class="com.hybris.campaigns.liveedit.admin.strategies.impl.EditCampaignActionComponentEnabledStrategy">
+        <property name="cmsComponentService" ref="cmsComponentService" />
+    </bean>
+</beans>

@@ -1,0 +1,50 @@
+/*
+
+	Product Set Carousel
+*****************/
+
+.scroller.product_set {
+	margin-top: 7px;
+	overflow: visible;
+}
+.scroller.product_set .next {
+	background-image: url(../images/icon-scroller-next-horizontal.png);
+	background-position: -10px center;
+	height: 30px;
+	cursor: pointer;
+}
+.scroller.product_set .prev {
+	background-image: url(../images/icon-scroller-prev-horizontal.png);
+	background-position: 0 center;
+	height: 30px;
+}
+.scroller.product_set .next:hover,
+.scroller.product_set .next:active {
+	background-position: -42px center;
+}
+.scroller.product_set .prev:hover,
+.scroller.product_set .prev:active {
+	background-position: -32px center;
+}
+.scroller.product_set a.positive {
+	clear: both;
+	margin: 0 0 0 18px;
+}
+
+.scroller.product_set .pagination {
+	padding: 5px 0 0 0;
+}
+
+.span-4 .product_set_container ul.product_set_list > li {
+	width: 106px;
+	padding: 0 12px;
+}
+
+/*
+
+	Edit Product Set
+*****************/
+.edit_product_set h1 {
+	color: #007174;
+	font-size: 1.7em;	
+}

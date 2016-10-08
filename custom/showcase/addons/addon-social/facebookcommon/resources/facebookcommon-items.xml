@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>
+		<relation generate="true" localized="false" code="FacebookApplication2Domain" autocreate="true">
+			<deployment table="facebookapp2domain" typecode="20112" />
+			<sourceElement type="FacebookApplication" cardinality="many" qualifier="applications">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="domains" type="FacebookApplicationDomain" cardinality="many" collectiontype="set" >
+				<modifiers read="true" write="true" search="true" optional="false" initial="true" />
+			</targetElement>
+		</relation>
+	</relations>
+
+	<itemtypes>
+		<itemtype code="FacebookApplication" generate="true" autocreate="true" jaloclass="com.hybris.social.facebook.common.jalo.FacebookApplication" extends="GenericItem">
+				<deployment table="facebookapplication" typecode="20110"/>
+				<attributes>
+					<attribute qualifier="applicationId" type="java.lang.Long">
+						<persistence type="property" />
+						<modifiers optional="false" initial="true" />
+					</attribute>
+					<attribute qualifier="applicationSecret" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers optional="false" initial="true" encrypted="true" />
+					</attribute>
+					<attribute qualifier="namespace" type="java.lang.String">
+						<persistence type="property" />					
+					</attribute>
+					<attribute qualifier="default" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false" initial="true"  />
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="appIdIdx" unique="true">
+						<key attribute="applicationId"/>
+					</index>
+				</indexes>
+			</itemtype>
+			
+			<itemtype code="FacebookApplicationDomain" generate="true" autocreate="true" jaloclass="com.hybris.social.facebook.common.jalo.FacebookApplicationDomain" extends="GenericItem">
+				<deployment table="facebookappdomain" typecode="20111"/>
+				<attributes>
+					<attribute qualifier="domain" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers optional="false" initial="true"/>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="domainIdx" unique="true">
+						<key attribute="domain"/>
+					</index>
+				</indexes>
+			</itemtype>
+			
+			
+			<itemtype code="FacebookAction" extends="GenericItem" autocreate="true" generate="true" jaloclass="com.hybris.social.facebook.common.jalo.FacebookAction">
+				<deployment table="facebookaction" typecode="20113"/>
+				<attributes>
+					<attribute qualifier="namespace" type="java.lang.String" >
+						<persistence type="property"/>
+						<modifiers initial="true" optional="false"/>
+						<defaultvalue>"og"</defaultvalue>
+					</attribute>
+					<attribute qualifier="name" type="java.lang.String" >
+						<persistence type="property"/>
+						<modifiers initial="true" optional="false"/>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="fbactionIdx" unique="true">
+						<key attribute="namespace"/>
+						<key attribute="name"/>
+					</index>
+				</indexes>
+			</itemtype>
+			
+			<itemtype code="FacebookObject" extends="GenericItem" autocreate="true" generate="true" jaloclass="com.hybris.social.facebook.common.jalo.FacebookObject">
+				<deployment table="facebookobject" typecode="20114"/>
+				<attributes>
+					<attribute qualifier="namespace" type="java.lang.String" >
+						<persistence type="property"/>
+						<modifiers initial="true" optional="false"/>
+						<defaultvalue>"og"</defaultvalue>
+					</attribute>
+					<attribute qualifier="name" type="java.lang.String" >
+						<persistence type="property"/>
+						<modifiers initial="true" optional="false"/>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="fbobjectIdx" unique="true">
+						<key attribute="namespace"/>
+						<key attribute="name"/>
+					</index>
+				</indexes>
+			</itemtype>
+			
+	</itemtypes>
+</items>

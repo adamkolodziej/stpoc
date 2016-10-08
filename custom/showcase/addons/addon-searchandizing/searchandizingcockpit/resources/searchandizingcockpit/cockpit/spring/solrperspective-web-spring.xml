@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2011 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+
+<!-- 
+  WARNING: This is the CUSTOM Spring WEB configuration file used for admincockpit web application. 
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd "
+	default-autowire="byName">
+	
+	 <bean id="solrPerspectiveThemeConfigListMergeDirective" depends-on="themeConfig" parent="listMergeDirective" >
+		<property name="add" value="/cockpit/css/solrperspective.css" />
+		<property name="listPropertyDescriptor" value="uris" />
+	</bean>
+	
+	<bean id="SolrAdminPerspective" parent="DefaultAdminPerspective" class="com.hybris.commercesearch.searchandizing.cockpit.session.impl.SolrAdminPerspective">
+		<property name="uid" value="cockpit.perspective.solr" />
+		<property name="label" value="cockpit.perspective.solr" />
+		<property name="navigationArea">
+			<bean parent="BaseNavigationArea">
+				<property name="sections">
+					<list>
+						<ref bean="SolrTypeSelectorSection" />
+						
+						<!-- UNDO section -->
+						<bean
+							class="de.hybris.platform.cockpit.components.navigationarea.NavigationPanelSection">
+							<property name="localizedLabel" value="navigationarea.history" />
+							<property name="visible" value="true" />
+							<property name="renderer">
+								<bean
+									class="de.hybris.platform.cockpit.components.navigationarea.renderer.UndoSectionRenderer" />
+							</property>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="browserArea">
+			<ref local="SolrBrowserArea"/>
+		</property>
+		<property name="itemActivationHandler" >
+			<bean class="com.hybris.commercesearch.searchandizing.cockpit.session.impl.SolrAdminSetupItemActivationHandler">
+				<property name="solrPerspectiveAdminService" ref="solrPerspectiveAdminService" />
+			</bean>
+		</property>
+			<property name="editorArea">
+			<bean id="SolrFacetSearchEditorAreaModel" parent="BaseEditorAreaModel">
+				<property name="editorAreaController">
+					<ref bean="SolrEditorAreaController" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<alias alias="SolrBrowserArea" name="DefaultSolrBrowserArea"/>
+	<bean id="DefaultSolrBrowserArea" class="de.hybris.platform.cockpit.session.impl.DefaultSearchBrowserArea" scope="session">
+		<property name="rootSearchTypeCode" value="SolrFacetSearchConfig"/>
+		<property name="viewURI" value="/cockpit/baseSearchBrowserArea.zul"/>
+		<property name="extendedSearchBrowser" value="true"/>
+	</bean>
+	
+	<bean id="SolrTypeSelectorSection" parent="DefaultAdminTypeSelectorSection">
+		<property name="localizedLabel" value="navigationarea.types.general" />
+		<property name="visible" value="true" />
+		<property name="renderer" ref="SolrTypeSelectorSectionRenderer" />
+	</bean>
+
+	<bean id="SolrTypeSelectorSectionRenderer" parent="DefaultAdminTypeSelectorSectionRenderer">
+		<property name="typeCodes" value="SolrFacetSearchConfig,SolrIndexedType,SolrValueRangeSet,SolrFacetSearchKeywordRedirect,SolrSynonymConfig,SolrStopWord,SolrBoostRule,GlobalSolrSearchProfile,CategorySolrSearchProfile,SolrIndexerCronJob" />
+		<property name="includeSubtypes" value="true" />
+		<property name="displayType" value="TREE" />
+	</bean>
+	<bean id="ItemContentBrowserActionColumn" class="de.hybris.platform.cockpit.components.listview.impl.DefaultActionColumnConfiguration"
+		scope="prototype">
+		<constructor-arg value="Actions" />
+		<property name="actions">
+			<list>
+				<ref bean="DeleteAction"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="SolrEditorAreaController"
+		class="com.hybris.commercesearch.searchandizing.cockpit.session.impl.SolrEditorAreaController"
+		scope="session">
+		<property name="sectionRowRenderer">
+			<bean id="SolrEditorSectionRowRenderer" parent="EditorSectionRowRenderer" />
+		</property>
+		<property name="editorFactory">
+			<ref bean="EditorFactory" />
+		</property>
+		<property name="imageMap">
+			<map key-type="java.lang.Object" value-type="java.lang.String">
+
+				<entry key="SolrIndexedType" value="cockpit/images/01-solr-index-icon.png" />
+				<entry key="SolrFacetSearchKeywordRedirect" value="cockpit/images/02-keyword-redirect-icon.png" />
+				<entry key="SolrSynonymConfig" value="cockpit/images/03-synonym-icon.png" />
+				<entry key="SolrStopWord" value="cockpit/images/05-stop-word-icon.png" />
+
+
+				<entry key="AbstractSolrSearchProfile" value="cockpit/images/07-solr-guided-nav-config-icon.png" />
+				<entry key="CategorySolrSearchProfile" value="cockpit/images/07-solr-guided-nav-config-icon.png" />
+				<entry key="GlobalSolrSearchProfile" value="cockpit/images/07-solr-guided-nav-config-icon.png" />
+
+
+				<entry key="SolrIndexerHotUpdateCronJob" value="cockpit/images/08a-cron-job-manual-icon.png" />
+				<entry key="SolrIndexerCronJob" value="cockpit/images/08b-cron-job-sched-icon.png" />
+				<entry key="SolrIndexedProperty" value="cockpit/images/09-index-attribute-icon.png" />
+				
+				<entry key="SolrSort" value="cockpit/images/10a-sort-icon .png" />
+				<entry key="SolrSortField" value="cockpit/images/10b-sorted-icon.png" />
+				
+				<entry key="SolrIndexerQuery" value="cockpit/images/11-query-icon.png" />
+				<entry key="ValueCoverageSolrFacetVisibilityRule" value="cockpit/images/12a-visibility-cat-select-icon.png" />
+				<entry key="FacetValueCountSolrFacetVisibilityRule" value="cockpit/images/12b-visibility-facet-value-icon.png" />
+				<entry key="CategorySelectedSolrFacetVisibilityRule" value="cockpit/images/12c-visibility-facet-reliance-icon.png" />
+				<entry key="OtherFacetValueCountSolrFacetVisibilityRule" value="cockpit/images/12d-visibility-value-coverage-icon.png" />	
+
+				<entry key="SolrFacetSearchConfig" value="cockpit/images/01-solr-index-icon.png" />
+				<entry key="SolrValueRangeSet" value="cockpit/images/06-boost-bury-icon.png" />
+				<entry key="SolrBoostRule" value="cockpit/images/06-boost-bury-icon.png" />
+
+			</map>
+		</property>
+	</bean>
+</beans>

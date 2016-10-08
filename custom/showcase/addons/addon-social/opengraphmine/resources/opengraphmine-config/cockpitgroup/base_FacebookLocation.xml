@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="FacebookLocation.longitude"/>
+			<property qualifier="FacebookLocation.latitude"/>
+			<property qualifier="FacebookLocation.address"/>
+			<property qualifier="FacebookLocation.address.postalCode"/>
+			<property qualifier="FacebookLocation.address.town"/>
+			<property qualifier="FacebookLocation.address.country"/>			
+			<property qualifier="FacebookLocation.address.remarks"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="FacebookLocation.address.country"/>
+			<property qualifier="FacebookLocation.address.town"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="FacebookLocation.longitude"/>
+		<property qualifier="FacebookLocation.latitude"/>
+		<property qualifier="FacebookLocation.address.streetname"/>
+		<property qualifier="FacebookLocation.address.town"/>
+	</label>
+</base>

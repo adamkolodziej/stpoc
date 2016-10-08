@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+	<group qualifier="General" visible="true" initially-opened="false">
+		<label lang="de">Stammdaten</label>
+		<label lang="en">General</label><label lang="fr">Général</label><label lang="ja">通常</label>
+		<property qualifier="CMSItem.name"/>
+		<property qualifier="CMSItem.catalogVersion" editor="shortListEditor"/>
+		<property qualifier="AbstractCMSComponent.visible"/>
+	</group>
+
+	<group qualifier="editorial" visible="true" initially-opened="true">
+		<label lang="de">Redaktionell</label>
+		<label lang="en">Editorial</label><label lang="fr">Editorial</label><label lang="ja">編集</label>
+		<property qualifier="FollowMeProductCarouselComponent.title"/>
+		<property qualifier="FollowMeProductCarouselComponent.sort" editor="shortListEditor">
+			<parameter>
+				<name>allowedValuesList</name>
+				<value>facetSortProviderAvailableValuesProvider</value>
+			</parameter> 
+		</property>
+		<property qualifier="FollowMeProductCarouselComponent.maxNumberOfResults" />
+		<property qualifier="FollowMeProductCarouselComponent.stickyCategory"  />			
+	</group>
+
+	<group qualifier="visibility" visible="true" initially-opened="false">
+		<label lang="de">Context Visibility</label>
+		<label lang="en">Context Visibility</label><label lang="fr">Visibilité du contexte</label><label lang="ja">コンテキスト可視性</label>
+		<property qualifier="AbstractCMSComponent.restrictions">
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AbstractCMSComponent.onlyOneRestrictionMustApply"/>
+	</group>
+
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label lang="de">Administration</label>
+		<label lang="en">Administration</label><label lang="ja">管理</label>
+		<property qualifier="CMSItem.uid"/>
+		<property qualifier="AbstractCMSComponent.slots"/>
+		<property qualifier="AbstractCMSComponent.container"/>
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+	</group>
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+		qualifier="unassigned"
+		initially-opened="false"
+		visible="false">
+		<label lang="de">Andere</label>
+		<label lang="en">Other</label><label lang="fr">Autre</label><label lang="ja">他</label>
+	</custom-group>
+</editor>

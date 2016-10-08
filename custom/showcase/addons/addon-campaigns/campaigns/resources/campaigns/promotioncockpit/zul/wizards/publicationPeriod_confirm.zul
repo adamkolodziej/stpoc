@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+
+		<style src="/promotioncockpit/css/promotioncockpit.css" />
+
+		<div style="text-align: left; height:263px">
+			<div>
+			<attribute name="onCreate">
+				self.appendChild(pageBean.getErrorContainer());		
+			</attribute>
+			</div>	
+			
+			<div class="confirmMessage">
+				${c:l('campaings.page.publicationperiod.confirm_message')}
+			</div>
+			
+			<div height="15px"></div>
+			<div style="margin: 30px; margin-top: 10px;" >
+				<div>
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('campaigns.page.publicationperiod.code')}:"/>
+						<div id="campaignCodeEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.code"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+						</div>
+					</div>
+					<div height="35px"></div>
+					
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('campaigns.page.publicationperiod.name')}:"/>
+						<div id="campaignNameEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer"
+							 localized="true"
+							 propertyQualifier="PublicationPeriod.name"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+						</div>
+					</div>
+					<div height="35px"></div>
+					
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('campaigns.page.publicationperiod.baseSite')}:"/>
+						<div id="baseSiteEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.baseSite" editorCode="shortListEditor"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}"
+							 onValueChange='catalogVersionEditor.setEditorValue(null);catalogVersionEditor.update();'>
+						</div>
+					</div>
+					<div height="35px"></div>
+					
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('campaigns.page.publicationperiod.catalogVersion')}:"/>
+						<div id="catalogVersionEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.catalogVersion" editorCode="shortListEditor"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+							 <custom-attributes allowedValuesList="${wizardBean.catalogVersionsForSelectedSiteProvider}"/>
+						</div>
+					</div>
+					<div height="35px"></div>
+					
+					<div style="clear:both; vertical-align:middle">
+						<label style="float:left; margin-right:10px; margin-top:3px; width: 150px;" value="${c:l('campaigns.page.publicationperiod.enabled')}:"/>
+						<div id="enabledFlagEditor" use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+							 propertyQualifier="PublicationPeriod.enabled"
+							 valueContainer="${wizardBean.publicationPeriodObjectValueContainer}">
+						</div>
+					</div>
+					<div height="35px"></div>
+				</div>
+			</div>
+		</div>
+</zk>

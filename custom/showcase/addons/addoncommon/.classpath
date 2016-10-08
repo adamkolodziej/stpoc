@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gensrc"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/platform"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/acceleratorservices"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/addonsupport"/>
+	<classpathentry excluding="WEB-INF/tags/|WEB-INF/tags/" kind="src" path="patch"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

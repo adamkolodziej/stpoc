@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (cmscockpit/resources/cmscockpit-application-context.xml) -->
+
+<!-- WARNING: This file is imported in cmscockpit-web-spring.xml therefore you don't need
+	to list it in your deployment descriptor -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util-3.1.xsd"
+           default-autowire="byName">
+	
+	<bean id="managePromotionBannerImageCallbackScript" class="de.hybris.platform.cmscockpit.session.script.config.impl.SimpleScriptFragment">
+		<property name="group" value="LIVEEDIT" />
+		<property name="script">
+            <value>
+                <![CDATA[
+                function managePromotionBannerImage(item_uid,position,serverPath){
+					var iframeCollection = document.getElementsByTagName('iframe');
+					var id="";
+		      		for(index in iframeCollection){
+		      			if(iframeCollection[index].className!=null&&iframeCollection[index].className=='liveEditBrowser'&&iframeCollection[index].offsetHeight!=0){
+		      				id=iframeCollection[index].id;
+		      				break;
+		          		}
+		      		}
+		            comm.sendUser(id, 'managePromotionBannerImage', item_uid, position, serverPath)
+		        }
+		        
+		        function editCampaign(item_uid,position,serverPath){
+					var iframeCollection = document.getElementsByTagName('iframe');
+					var id="";
+		      		for(index in iframeCollection){
+		      			if(iframeCollection[index].className!=null&&iframeCollection[index].className=='liveEditBrowser'&&iframeCollection[index].offsetHeight!=0){
+		      				id=iframeCollection[index].id;
+		      				break;
+		          		}
+		      		}
+		            comm.sendUser(id, 'editCampaign', item_uid, position, serverPath)
+		        }
+		        
+		        function addToCampaign(item_uid,position,serverPath){
+					var iframeCollection = document.getElementsByTagName('iframe');
+					var id="";
+		      		for(index in iframeCollection){
+		      			if(iframeCollection[index].className!=null&&iframeCollection[index].className=='liveEditBrowser'&&iframeCollection[index].offsetHeight!=0){
+		      				id=iframeCollection[index].id;
+		      				break;
+		          		}
+		      		}
+		            comm.sendUser(id, 'addToCampaign', item_uid, position, serverPath)
+		        }
+		        
+		        function addContainerToCampaign(item_uid,position,serverPath){
+					var iframeCollection = document.getElementsByTagName('iframe');
+					var id="";
+		      		for(index in iframeCollection){
+		      			if(iframeCollection[index].className!=null&&iframeCollection[index].className=='liveEditBrowser'&&iframeCollection[index].offsetHeight!=0){
+		      				id=iframeCollection[index].id;
+		      				break;
+		          		}
+		      		}
+		            comm.sendUser(id, 'addContainerToCampaign', item_uid, position, serverPath)
+		        }
+		    ]]>
+            </value>
+        </property>
+	</bean>	
+	<bean id="managePromotionBannerImageCallbackEventHandler" class="com.hybris.campaigns.cockpit.callbackevent.ManagePromotionBannerImageCallbackEventHandler" >
+		<!-- <property name="productFrontendUrlDecoder" ref="productCatalogVersionFrontendUrlDecoder" />
+		<property name="productSetService" ref="productSetService" /> -->
+	</bean>
+	<bean id="editCampaignCallbackEventHandler" class="com.hybris.campaigns.cockpit.callbackevent.EditCampaignCallbackEventHandler" >
+		<!-- <property name="productFrontendUrlDecoder" ref="productCatalogVersionFrontendUrlDecoder" />
+		<property name="productSetService" ref="productSetService" /> -->
+	</bean>
+	
+	<bean id="addToCampaignCallbackEventHandler" class="com.hybris.campaigns.cockpit.callbackevent.AddToCampaignCallbackEventHandler" >
+	</bean>
+	
+	<bean id="addContainerToCampaignCallbackEventHandler" class="com.hybris.campaigns.cockpit.callbackevent.AddContainerToCampaignCallbackEventHandler" >
+	</bean>
+	
+</beans>

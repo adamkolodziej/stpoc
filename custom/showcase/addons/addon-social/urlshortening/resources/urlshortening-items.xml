@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+
+	<enumtypes>
+		<enumtype code="UrlShorteningProvider" autocreate="true" generate="true">
+			<value code="bitly" />
+			<value code="TinyURL" />
+		</enumtype>
+	</enumtypes>
+	
+
+	<itemtypes>
+		<typegroup name="urlshortening" >
+			<itemtype code="ShortUrlCache" jaloclass="com.hybris.social.jalo.urlshorterning.ShortUrlCache"  extends="GenericItem" generate="true" autocreate="true">
+				<deployment table="shorturlcache" typecode="20121" />
+				<attributes>
+					<attribute qualifier="provider" generate="true" autocreate="true" type="UrlShorteningProvider" >
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+					<attribute qualifier="originalUrl" generate="true" autocreate="true" type="java.lang.String" >
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+					<attribute qualifier="shortenedUrl" generate="true" autocreate="true" type="java.lang.String" >
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="providerUrlIdx" unique="true">
+						<key attribute="provider" />
+						<key attribute="originalUrl"/>
+					</index>
+				</indexes>	
+			</itemtype>
+		</typegroup>
+	</itemtypes>
+</items>

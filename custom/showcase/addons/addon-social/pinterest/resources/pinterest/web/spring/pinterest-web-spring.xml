@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+        
+    <bean id="pinItButtonComponentRenderer" class="com.hybris.social.pinterest.component.renderer.PinItComponentRenderer">
+    	<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+    	<property name="sharedPageUrlStrategy" ref="sharedPageUrlStrategy" />
+    	<property name="mediaAbsoluteUrlResolver" ref="mediaAbsoluteUrlResolver" />
+    </bean>
+    <bean id="pinterestFollowButtonComponentRenderer" class="com.hybris.social.pinterest.component.renderer.PinterestFollowButtonComponentRenderer" />   
+    
+    <bean id="pinItButtonComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="PinItButtonComponent" />
+		<property name="renderer" ref="pinItButtonComponentRenderer" />	
+	</bean>
+	
+	<bean id="pinterestFollowButtonComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="PinterestFollowButtonComponent" />
+		<property name="renderer" ref="pinterestFollowButtonComponentRenderer" />	
+	</bean> 
+           
+</beans>

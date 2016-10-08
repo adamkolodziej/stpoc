@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+        
+        <group qualifier="General" visible="true" initially-opened="true">
+                <label key="cockpit.config.label.General" />
+                <property qualifier="SolrIndexedProperty.name" />
+                <property qualifier="SolrIndexedProperty.exportId" />
+                <property qualifier="SolrIndexedProperty.type" />
+                <property qualifier="SolrIndexedProperty.sortableType" />
+                <property qualifier="SolrIndexedProperty.localized" />
+                <property qualifier="SolrIndexedProperty.currency" />
+                <property qualifier="SolrIndexedProperty.multiValue" />
+                <property qualifier="SolrIndexedProperty.useForSpellchecking" />
+                <property qualifier="SolrIndexedProperty.useForAutocomplete" />
+                <property qualifier="SolrIndexedProperty.categoryField" />
+                <property qualifier="SolrIndexedProperty.classAttributeAssignment" />
+        </group>
+        
+        <group qualifier="FacetSettings" visible="true" initially-opened="true">
+        	  <label key="cockpit.config.label.facetsettings" />
+        	  <property qualifier="SolrIndexedProperty.facet" />   
+              <property qualifier="SolrIndexedProperty.facetType" /> 
+              <property qualifier="SolrIndexedProperty.displayName" /> 	  
+              <property qualifier="SolrIndexedProperty.priority" />
+              <property qualifier="SolrIndexedProperty.customFacetSortProvider"  editor="beanNameEditor">
+              	<parameter>
+              	 <name>beanClass</name>
+              	 <value>de.hybris.platform.solrfacetsearch.config.FacetSortProvider</value>
+              	</parameter>
+              </property>
+              <property qualifier="SolrIndexedProperty.boostRules" editor="collectionContextAreaEditor" />
+              <property qualifier="SolrIndexedProperty.facetVisibilityRules" editor="collectionContextAreaEditor" />
+              <property qualifier="SolrIndexedProperty.solrFacetReconfigurations" editor="collectionContextAreaEditor" />
+         </group>
+         
+          <group qualifier="FacetApplicationConfiguration" visible="true" initially-opened="false">
+        	  <label key="cockpit.config.label.facetapplicationconfiguration" />
+              <property qualifier="SolrIndexedProperty.facetDisplayNameProvider" editor="beanNameEditor">
+              	<parameter>
+              		<name>beanClass</name>
+              		<value>de.hybris.platform.solrfacetsearch.provider.FacetDisplayNameProvider</value>
+              	</parameter>
+              </property>
+         </group>
+        
+         <group qualifier="RangeSettings" visible="true" initially-opened="true">
+        	  <label key="cockpit.config.label.rangesettings" />
+        	  <property qualifier="SolrIndexedProperty.rangeSet" />
+        	  <property qualifier="SolrIndexedProperty.rangeSets" editor="browserContextEditor"/>
+         </group>
+         
+         <group qualifier="ExportApplicationConfiguration" visible="true" initially-opened="false">
+          	    <label key="cockpit.config.label.exportapplicationconfiguration" />
+          		<property qualifier="SolrIndexedProperty.fieldValueProvider" editor="beanNameEditor">
+          			<parameter>
+						<name>beanClass</name>
+						<value>de.hybris.platform.solrfacetsearch.provider.FieldValueProvider</value>
+					</parameter>
+          		</property>
+                <property qualifier="SolrIndexedProperty.valueProviderParameter" />
+       	 </group>
+ 
+        <group qualifier="admin" visible="true" initially-opened="false">
+                <label key="config.general.administration" />
+                <property qualifier="Item.pk" />
+                <property qualifier="Item.creationTime" />
+                <property qualifier="Item.modifiedtime" />
+                <property qualifier="SolrIndexedProperty.solrIndexedType" editor="browserContextEditor" />
+        </group>
+        
+        <custom-group 
+                class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+                qualifier="unassigned"
+                initially-opened="false">
+                <label key="cockpit.config.label.Other" />
+        </custom-group>
+        
+</editor>

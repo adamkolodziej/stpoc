@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+							
+	<content-element type="ProductSetCollectionCarouselComponent" name="type.ProductSetCollectionCarouselComponent.name"
+							description="type.ProductSetCollectionCarouselComponent.description"
+							image="cmscockpit/images/productsetcarousel_icon_34x34.gif"
+							refImage="cmscockpit/images/productsetcarousel_icon_34x34.gif"
+							imageSmall="cmscockpit/images/productsetcarousel_icon_20x20.gif"/>
+							
+</content-elements>	

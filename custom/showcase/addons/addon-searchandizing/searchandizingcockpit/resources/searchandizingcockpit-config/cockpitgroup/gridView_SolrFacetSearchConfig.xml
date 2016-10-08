@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid-view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="grid-view.xsd">
+     <imageslot>
+		<property qualifier=""/>
+	</imageslot>
+	<labelslot>
+	 <property qualifier="SolrFacetSearchConfig.name" />
+	</labelslot>
+	<descriptionslot>
+		<property qualifier=""  />
+	</descriptionslot>
+	<shortinfoslot>
+		<property qualifier=""/>
+	</shortinfoslot>
+	<actionslot spring-bean="solrFacetSearchIndexActionColumn"/>
+</grid-view>

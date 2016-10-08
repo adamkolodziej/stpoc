@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+	<content-element type="TwitterProfileWidgetComponent" name="type.twitterprofilewidgetcomponent.name"
+							description="type.twitterprofilewidgetcomponent.description"
+							image="cmscockpit/images/tweet_icon_34x34.gif"
+							refImage="cmscockpit/images/tweet_icon_34x34.gif"
+							imageSmall="cmscockpit/images/tweet_icon_20x20.gif"/>	
+							
+	<content-element type="TwitterFavesWidgetComponent" name="type.twitterfaveswidgetcomponent.name"
+							description="type.twitterfaveswidgetcomponent.description"
+							image="cmscockpit/images/tweet_icon_34x34.gif"
+							refImage="cmscockpit/images/tweet_icon_34x34.gif"
+							imageSmall="cmscockpit/images/tweet_icon_20x20.gif"/>	
+
+	<content-element type="TwitterListWidgetComponent" name="type.twitterlistwidgetcomponent.name"
+							description="type.twitterlistwidgetcomponent.description"
+							image="cmscockpit/images/tweet_icon_34x34.gif"
+							refImage="cmscockpit/images/tweet_icon_34x34.gif"
+							imageSmall="cmscockpit/images/tweet_icon_20x20.gif"/>	
+</content-elements>

@@ -1,0 +1,46 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2013 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+searchandizing.key=value
+
+# Specifies the location of the spring context file putted automatically to the global platform application context.
+searchandizing.application-context=searchandizing-spring.xml
+
+
+cmscockpit.additionalWebSpringConfigs.searchandizing=classpath:/searchandizing/cmscockpit/spring/import.xml
+btgcockpit.additionalWebSpringConfigs.searchandizing=classpath:/searchandizing/cmscockpit/spring/import.xml
+
+searchandizing.javascript.paths.desktop=/desktop/common/js/searchandizing.js
+
+searchandizing.css.paths.desktop=/desktop/common/css/searchandizing.css
+searchandizing.css.paths.desktop.blue=/desktop/theme-blue/css/searchandizing.css
+searchandizing.css.paths.desktop.black=/desktop/theme-black/css/searchandizing.css
+searchandizing.css.paths.desktop.green=/desktop/theme-green/css/searchandizing.css
+
+searchandizing.css.paths.mobile=/mobile/common/css/searchandizing.css
+searchandizing.css.paths.mobile.blue=/mobile/theme-blue/css/searchandizing.css
+searchandizing.css.paths.mobile.black=/mobile/theme-black/css/searchandizing.css
+
+# Js additional files for mobile
+searchandizing.javascript.paths.mobile=/mobile/common/js/jquery.jcarousel-0.2.8.min.js;/mobile/common/js/searchandizingb2c.js
+
+
+
+
+yacceleratorstorefront.additionalWebSpringConfigs.searchandizing=classpath:/searchandizing/web/spring/searchandizing-b2c-web-spring.xml
+yb2bacceleratorstorefront.additionalWebSpringConfigs.searchandizing=classpath:/searchandizing/web/spring/searchandizing-b2b-web-spring.xml
+yb2bportalstorefront.additionalWebSpringConfigs.searchandizing=classpath:/searchandizing/web/spring/searchandizing-web-spring.xml

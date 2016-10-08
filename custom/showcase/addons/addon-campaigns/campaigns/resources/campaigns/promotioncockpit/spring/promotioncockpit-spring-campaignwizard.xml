@@ -1,0 +1,165 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-autowire="byName">
+
+	<!-- SHOW-1549 New Campaign Wizard -->
+	<alias name="defaultCampaignPageController" alias="campaignPageController" />
+	<bean id="defaultCampaignPageController" class="com.hybris.campaigns.wizard.DefaultCampaignPageController">
+		<property name="typeService" ref="cockpitTypeService"/>
+		<property name="postWizardStrategy" ref="postWizardStrategy"/>
+		<property name="itemSyncStrategy" ref="publicationPeriodSyncStrategy"/>
+	</bean>
+	
+	<alias name="defaultPostWizardStrategy" alias="postWizardStrategy" />
+	<bean id="defaultPostWizardStrategy" class="com.hybris.campaigns.wizard.DefaultPostWizardStrategy">
+		<property name="workflowFacade" ref="workflowFacade"/>
+		<property name="workflowCode" value="promotionCampaignWorkflow"/>
+		<property name="workflowTemplateService" ref="workflowTemplateService"/>
+		<property name="workflowProcessingService" ref="workflowProcessingService"/>
+		<property name="workflowActionService" ref="workflowActionService"/>
+		<property name="workflowService" ref="newestWorkflowService"/>
+		<property name="itemSyncStrategy" ref="publicationPeriodSyncStrategy"/>
+	</bean>
+
+	<alias name="defaultPromotionDecisionPageController" alias="promotionDecisionPageController" />
+	<bean id="defaultPromotionDecisionPageController" class="com.hybris.campaigns.wizard.PromotionDecisionPageController" />
+
+	<alias name="defaultPromotionAdvancedSearchPageController" alias="promotionAdvancedSearchPageController" />
+	<bean id="defaultPromotionAdvancedSearchPageController" class="com.hybris.campaigns.wizard.PromotionAdvancedSearchPageController">
+		<property name="fireSearch" value="true"/>
+	</bean>
+	
+	<alias name="defaultPublicationPeriodAdvancedSearchPageController" alias="publicationPeriodAdvancedSearchPageController" />
+	<bean id="defaultPublicationPeriodAdvancedSearchPageController" class="com.hybris.campaigns.wizard.PublicationPeriodAdvancedSearchPageController">
+		<property name="fireSearch" value="true"/>
+	</bean>
+
+	<alias name="defaultPromotionPropertiesPageController" alias="promotionPropertiesPageController"/>
+	<bean id="defaultPromotionPropertiesPageController" class="com.hybris.campaigns.wizard.PromotionPropertiesPageController" />
+
+	<alias name="defaultCampaignWizard" alias="campaignWizard" />
+	<bean id="defaultCampaignWizard" class="com.hybris.campaigns.wizard.CampaignWizard" scope="prototype">
+		<property name="title" value="campaigns.wizard.newcampaign" />
+		<property name="defaultController" ref="campaignPageController" />
+		<property name="pageRoot" value="/promotioncockpit/wizards/" />
+		<property name="pages">
+			<list>
+				<ref bean="campaign_DecisionPage"/>
+				<ref bean="campaign_Promotion_TypeSelector"/>
+				<ref bean="campaign_Promotion_SearchPage"/>
+				<ref bean="campaign_Promotion_Properties"/>
+				<ref bean="campaign_PublicationPeriod_RestrictToUsers"/>
+				<ref bean="campaign_PublicationPeriod_RestrictByDates"/>
+				<ref bean="campaign_PublicationPeriod_MediaTags"/>
+				<ref bean="campaign_PublicationPeriod_CMSItems"/><!-- TODO this may be removed -->
+				<ref bean="campaign_ConfirmPage"/>
+			</list> 
+		</property>
+	</bean>
+	
+	<alias name="defaultCampaignEditWizard" alias="campaignEditWizard" />
+	<bean id="defaultCampaignEditWizard" class="com.hybris.campaigns.wizard.CampaignWizard" scope="prototype">
+		<property name="title" value="campaigns.wizard.newcampaign" />
+		<property name="defaultController" ref="campaignPageController" />
+		<property name="pageRoot" value="/promotioncockpit/wizards/" />
+		<property name="pages">
+			<list>
+				<ref bean="campaign_PublicationPeriod_SearchPage"/>
+				<ref bean="campaign_PublicationPeriod_RestrictToUsers"/>
+				<ref bean="campaign_PublicationPeriod_RestrictByDates"/>
+				<ref bean="campaign_PublicationPeriod_MediaTags"/>
+				<ref bean="campaign_PublicationPeriod_CMSItems"/>
+				<ref bean="campaign_ConfirmPage"/>
+			</list> 
+		</property>
+	</bean>
+
+	<alias name="defaultCampaign_DecisionPage" alias="campaign_DecisionPage"/>
+	<bean id="defaultCampaign_DecisionPage" class="com.hybris.campaigns.wizard.page.CampaignDecisionPage" scope="prototype">
+		<property name="id" value="campaings.page.promotion.createorselect" />
+		<property name="title" value="campaings.page.promotion.createorselect" />
+		<property name="controller" ref="promotionDecisionPageController" />
+		<property name="decisionsMap">
+			<map>
+				<entry key="wizard.page.decision.select" value="campaings.page.promotion.select" />
+				<entry key="wizard.page.decision.create" value="campaings.page.promotion.typeselection" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultCampaign_Promotion_SearchPage" alias="campaign_Promotion_SearchPage"/>
+	<bean id="defaultCampaign_Promotion_SearchPage" class="com.hybris.campaigns.wizard.page.CampaignAdvancedSearchPage" scope="prototype">
+		<property name="id" value="campaings.page.promotion.select" />
+		<property name="title" value="campaings.page.promotion.select" />
+		<property name="rootSearchStringType" value="AbstractPromotion" />
+		<property name="nextPageWizardId" value="campaings.page.promotion.properties" />
+		<property name="controller" ref="promotionAdvancedSearchPageController" />
+	</bean>
+	
+	<alias name="defaultCampaign_PublicationPeriod_SearchPage" alias="campaign_PublicationPeriod_SearchPage"/>
+	<bean id="defaultCampaign_PublicationPeriod_SearchPage" class="com.hybris.campaigns.wizard.page.CampaignAdvancedSearchPage" scope="prototype">
+		<property name="id" value="campaings.page.publicationperiod.select" />
+		<property name="title" value="campaings.page.publicationperiod.select" />
+		<property name="rootSearchStringType" value="PublicationPeriod" />
+		<!-- <property name="nextPageWizardId" value="campaings.page.publicationperiod.restrictToUsers" /> -->
+		<property name="controller" ref="publicationPeriodAdvancedSearchPageController" />
+	</bean>
+	
+	<alias name="defaultCampaign_Promotion_TypeSelector" alias="campaign_Promotion_TypeSelector"/>
+	<bean id="defaultCampaign_Promotion_TypeSelector" class="com.hybris.campaigns.wizard.page.CampaignTypeSelectorPage" scope="prototype">
+		<property name="id" value="campaings.page.promotion.typeselection" />
+		<property name="title" value="campaings.page.promotion.typeselection" />
+		<property name="currentTypeString" value="AbstractPromotion" />
+		<property name="nextPageWizardId" value="campaings.page.promotion.properties" />
+	</bean>
+
+	<alias name="defaultCampaign_Promotion_Properties" alias="campaign_Promotion_Properties"/>
+	<bean id="defaultCampaign_Promotion_Properties" class="com.hybris.campaigns.wizard.page.GenericItemPropertiesPage" scope="prototype">
+		<property name="id" value="campaings.page.promotion.properties" />
+		<property name="title" value="campaings.page.promotion.properties" />
+		<property name="nextPageWizardId" value="campaings.page.publicationperiod.restrictTo" />
+		<property name="controller" ref="promotionPropertiesPageController" />
+		<property name="parameters">
+			<map>
+				<entry key="forceCreateInWizard" value="true" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultCampaign_PublicationPeriod_RestrictToUsers" alias="campaign_PublicationPeriod_RestrictToUsers"/>
+	<bean id="defaultCampaign_PublicationPeriod_RestrictToUsers" class="com.hybris.campaigns.wizard.page.ComponentItemPage" scope="prototype">
+		<property name="id"	value="campaings.page.publicationperiod.restrictToUsers" />
+		<property name="title" value="campaings.page.publicationperiod.restrictToUsers" />
+		<property name="componentURI" value="publicationPeriod_restrict_to_users.zul" />
+	</bean>
+
+	<alias name="defaultCampaign_PublicationPeriod_RestrictByDates" alias="campaign_PublicationPeriod_RestrictByDates"/>
+	<bean id="defaultCampaign_PublicationPeriod_RestrictByDates" class="com.hybris.campaigns.wizard.page.ComponentItemPage" scope="prototype">
+		<property name="id"	value="campaings.page.publicationperiod.restrictByDates" />
+		<property name="title" value="campaings.page.publicationperiod.restrictByDates" />
+		<property name="componentURI" value="publicationPeriod_restrict_by_dates.zul" />
+	</bean>
+
+	<alias name="defaultCampaign_PublicationPeriod_MediaTags" alias="campaign_PublicationPeriod_MediaTags"/>
+	<bean id="defaultCampaign_PublicationPeriod_MediaTags" class="com.hybris.campaigns.wizard.page.ComponentItemPage" scope="prototype">
+		<property name="id" value="campaings.page.publicationperiod.mediatags" />
+		<property name="title" value="campaings.page.publicationperiod.mediatags" />
+		<property name="componentURI" value="publicationPeriod_mediatags.zul" />
+	</bean>
+
+	<alias name="defaultCampaign_PublicationPeriod_CMSItems" alias="campaign_PublicationPeriod_CMSItems"/>
+	<bean id="defaultCampaign_PublicationPeriod_CMSItems" class="com.hybris.campaigns.wizard.page.ComponentItemPage" scope="prototype">
+		<property name="id" value="campaings.page.publicationperiod.cmsitems" />
+		<property name="title" value="campaings.page.publicationperiod.cmsitems" />
+		<property name="componentURI" value="publicationPeriod_cmsitems.zul" />
+	</bean>
+
+	<alias name="defaultCampaign_ConfirmPage" alias="campaign_ConfirmPage"/>
+	<bean id="defaultCampaign_ConfirmPage" class="com.hybris.campaigns.wizard.page.ComponentItemPage" scope="prototype">
+		<property name="id"	value="campaings.page.publicationperiod.confirm" />
+		<property name="title" value="campaings.page.publicationperiod.confirm" />
+		<property name="componentURI" value="publicationPeriod_confirm.zul" />
+	</bean>
+
+</beans>

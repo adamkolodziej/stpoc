@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+	<content-element type="BuyTheSetComponent" name="type.BuyTheSetComponent.name"
+							description="type.BuyTheSetComponent.description"
+							image="cmscockpit/images/buytheset_icon_34x34.gif"
+							refImage="cmscockpit/images/buytheset_icon_34x34.gif"
+							imageSmall="cmscockpit/images/buytheset_icon_20x20.gif"/>
+							
+</content-elements>	

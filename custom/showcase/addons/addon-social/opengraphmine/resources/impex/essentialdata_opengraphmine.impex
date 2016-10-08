@@ -1,0 +1,14 @@
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;headerlinks;FacebookOAuth2LoginComponent
+;wide;FacebookSuggestedProductCarouselComponent
+;narrow; FacebookSuggestedProductCarouselComponent
+
+# Facebook comments configuration
+INSERT_UPDATE Domain;code[unique=true];name;
+;facebookDomain;Facebook Domain;
+
+INSERT_UPDATE Component;code[unique=true];name;domain[unique=true](code);
+;facebookComponent;Facebook component;facebookDomain;
+
+INSERT_UPDATE CommentType;code[unique=true];name;domain[unique=true](code);
+;facebookCommentType;Facebook Comment Type;facebookDomain;

@@ -1,0 +1,28 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * importDesktop - whether desktop templates should be imported
+#######
+
+
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+
+#% if: $importDesktop ;
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];assignedCockpitItemTemplates(code)
+;;ProductListPageTemplate;ProductListPageTemplate;
+;;ProductGridPageTemplate;ProductGridPageTemplate;
+;;CategoryPageTemplate;CategoryPageTemplate;
+;;LandingPage1Template;LandingPage1Template
+;;LandingPage2Template;LandingPage2Template
+;;LandingPage3Template;LandingPage3Template
+;;LandingPage4Template;LandingPage4Template
+;;LandingPage5Template;LandingPage5Template
+;;LandingPage6Template;LandingPage6Template
+;;SearchResultsListPageTemplate;SearchResultsListPageTemplate
+;;SearchResultsGridPageTemplate;SearchResultsGridPageTemplate
+;;SearchResultsEmptyPageTemplate;SearchResultsEmptyPageTemplate
+#% endif:
+

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<collectiontypes>
+	
+		<collectiontype code="IFrameCollection" elementtype="IFrame" autocreate="true" generate="true"
+			type="list"/>
+			
+	</collectiontypes>
+
+
+	<itemtypes>
+		<itemtype code="IFrame" generate="true" jaloclass="com.hybris.social.common.jalo.IFrame" extends="GenericItem" autocreate="true">
+			<deployment table="iframe" typecode="30120" />
+			<attributes>
+				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String" >
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="url" generate="true" autocreate="true" type="java.lang.String">
+					<persistence type="property" >
+					<columntype>
+						<value>HYBRIS.LONG_STRING</value>
+					</columntype>
+					</persistence>
+					<modifiers optional="false" />
+					
+				</attribute>
+				<attribute qualifier="width" generate="true" autocreate="true" type="java.lang.Integer">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="height" generate="true" autocreate="true" type="java.lang.Integer">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="marginWidth" generate="true" autocreate="true" type="java.lang.Integer">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="marginHeight" generate="true" autocreate="true" type="java.lang.Integer">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="border" generate="true" autocreate="true" type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute qualifier="scrollbars" generate="true" autocreate="true" type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="cssStyle" generate="true" autocreate="true" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="cssClass" generate="true" autocreate="true" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="IFrameListComponent" generate="true" jaloclass="com.hybris.social.common.jalo.IFrameListComponent"
+			extends="SimpleCMSComponent" autocreate="true">
+			<description>IFrame list component</description>
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+					<description>Title of IFrame list components list</description>
+				</attribute>
+				<attribute qualifier="items" type="IFrameCollection">
+					<persistence type="property" />
+					<description>IFrame items</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="IFrameComponent" jaloclass="com.hybris.social.common.jalo.IFrameComponent" autocreate="true" generate="true" extends="SimpleCMSComponent">
+			<attributes>
+				<attribute qualifier="iframe" generate="true" autocreate="true" type="IFrame">
+					<persistence type="property"  />
+					<modifiers optional="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="VideoComponent" extends="SimpleCMSComponent" autocreate="true" generate="true" jaloclass="com.hybris.social.common.jalo.VideoComponent">
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+					<modifiers />
+					<description>Localized title of the component.</description>
+				</attribute>
+				<attribute qualifier="videoMedia" type="localized:Media">
+   					<persistence type="property" />
+   					<modifiers read="true" write="true" search="true" optional="true"/>
+					<description>Media for video which this component will display.</description>
+   				</attribute>
+   				<attribute qualifier="videoUrl" type="localized:java.lang.String">
+   					<persistence type="property" />
+   					<modifiers read="true" write="true" search="true" optional="true"/>
+					<description>Url for video which this component will display. It will be used if video media is not defined.</description>
+   				</attribute>
+				<attribute qualifier="startingPictureMedia" type="localized:Media">
+   					<persistence type="property" />
+   					<modifiers read="true" write="true" search="true" optional="true"/>
+					<description>Starting image which will be displayed before the video is played. If not displayed it will be generated using a frame from the middle of the video.</description>
+   				</attribute>
+				<attribute qualifier="autoplay" type="java.lang.Boolean">
+   					<persistence type="property" />
+   					<modifiers read="true" write="true" search="true" optional="true"/>
+   					<defaultvalue>Boolean.FALSE</defaultvalue>
+					<description>Property used to determine weather the video should autostart or not.</description>
+   				</attribute>
+			</attributes>
+		</itemtype>
+		
+	</itemtypes>			
+
+</items>

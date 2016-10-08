@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="validate" name="fbLikeSyncProcess"
+		processClass="com.hybris.social.facebook.opengraphmine.model.process.FacebookSynchronizationProcessModel" onError="error">
+
+	<action id="validate" bean="validateConnection">
+		<transition name="OK" to="syncFacebookUrlLikes"/>
+		<transition name="NOK" to="authenticationfailed"/>
+	</action>
+	
+	<action id="syncFacebookUrlLikes" bean="syncFacebookUrlLikes">
+		<transition name="OK" to="evaluateBtgSegments"/>
+		<transition name="NOK" to="error"/>
+	</action>
+		
+	
+ 	<action id="evaluateBtgSegments" bean="evaluateFacebookBtgSegments"> 
+ 		<transition name="OK" to="success"/> 
+ 		<transition name="NOK" to="error"/>
+ 	</action> 
+	
+
+	<end id="error" state="ERROR">Something went wrong.</end>
+	<end id="authenticationfailed" state="FAILED">Failed to authenticate with the supplied auth token</end>
+	<end id="success" state="SUCCEEDED">Profile updated</end>
+
+</process>

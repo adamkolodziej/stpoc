@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="TwitterAccount.screenName"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="TwitterAccount.screenName"/>
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="TwitterAccount.screenName"/>
+	</label>
+</base>

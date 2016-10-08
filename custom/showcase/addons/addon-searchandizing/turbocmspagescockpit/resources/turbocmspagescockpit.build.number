@@ -1,0 +1,11 @@
+#Wed, 29 May 2013 16:16:02 -0400
+#Ant properties
+#Wed May 29 16:16:02 EDT 2013
+builddate=20130529 1615
+description=turbocmspagescockpit
+name=turbocmspagescockpit
+vendor=hybris
+version=5.0.1.0-SNAPSHOT
+
+revision=69184
+svnurl=https\://svn.hybris.com/ebusiness/trunk/bin/ext-template/turbocmspagescockpit

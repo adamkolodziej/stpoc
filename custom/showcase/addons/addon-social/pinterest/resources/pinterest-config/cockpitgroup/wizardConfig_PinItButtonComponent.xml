@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="false">
+			<label key="cockpit.config.label.General" />
+
+			<property qualifier="CMSItem.name"/>
+			<property qualifier="CMSItem.catalogVersion"/>
+			<property qualifier="AbstractCMSComponent.visible"/>
+		</group>
+		
+		<group qualifier="editorial" visible="true" initially-opened="true">
+			<label key="config.general.editorial" />
+
+			<property qualifier="PinItButtonComponent.urlToPin" />
+			
+			<property qualifier="PinItButtonComponent.imageToPin" editorCode="simpleCelumReferenceSelector">
+				<parameter name="allowCreate" value="true"/>
+				<parameter name="mimeTypes" value="image/jpeg;image/gif;image/png"/>
+				<parameter name="imageHeight" value="80px" />
+				<parameter name="celumMediaFormat" value="picture" />
+				<parameter name="restrictToCreateTypes" value="Media;CelumAsset+" />
+			</property>
+			
+			<property qualifier="PinItButtonComponent.description" editorCode="default">
+				<parameter name="rows" value="5"/>
+			</property>			
+		</group>
+	
+		<group qualifier="layout" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.Layout" />
+			<property qualifier="PinItButtonComponent.pinCountLayout" />
+		</group>
+	
+	</displayed-properties>
+</wizard-config>

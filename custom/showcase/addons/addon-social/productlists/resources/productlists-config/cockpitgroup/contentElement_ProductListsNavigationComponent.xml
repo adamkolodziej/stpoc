@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+
+<content-element type="ProductListsNavigationComponent" name="type.productlistsnavigationcomponent.name"
+							description="type.productlistsnavigationcomponent.description"
+							image="cmscockpit/images/nav-productlists-menu-icon-34x34.png"
+							refImage="cmscockpit/images/nav-productlists-menu-icon-20x20.png"
+							imageSmall="cmscockpit/images/nav-productlists-menu-icon-20x20.png"/>
+</content-elements>

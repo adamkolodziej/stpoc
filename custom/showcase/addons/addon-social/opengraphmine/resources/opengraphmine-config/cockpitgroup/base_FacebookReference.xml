@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="FacebookReference.id"/>
+			<property qualifier="FacebookReference.name"/>
+			<property qualifier="FacebookReference.linkedCategories"/>
+			<property qualifier="FacebookReference.linkedProducts"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="FacebookReference.name"/>
+		</sort-properties>
+	</search>
+	
+	<label>
+		<property qualifier="FacebookReference.id"/>
+		<property qualifier="FacebookReference.name"/>
+	</label>
+</base>

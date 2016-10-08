@@ -1,0 +1,104 @@
+<div>
+	<table width="100%" cellspacing="0" style="margin:0;padding:0;table-layout:auto;border:1px solid #1E4EBF;">
+		<tbody>
+			<tr>
+				<td colspan="24" class="structureViewSection">
+					<cockpit code="TopHeaderSlot"/>
+				</td>
+			</tr>
+			<tr>
+				<td height="125px" colspan="6" class="structureViewSection">
+					<cockpit code="SiteLogo" />
+				</td>
+				<td  colspan="18" class="structureViewSection">
+					<cockpit code="MiniCart" />
+                    <cockpit code="SearchBox" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="24" class="structureViewSection">
+					<cockpit code="NavigationBar" />
+				</td>
+			</tr>
+            <tr>
+                <td colspan="24" class="structureViewSection">
+                    <cockpit code="BottomHeaderSlot"/>
+                </td>
+            </tr>
+			<tr>
+				<td colspan="24" height="58px" style="vertical-align:middle;" class="structureViewSection">
+					<div>Breadcrumb</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="24" class="structureViewSection">
+					<cockpit code="Section1" />
+				</td>
+			</tr>
+			<tr>
+				<td height="600px" rowspan="4" colspan="14" class="structureViewSection" style="vertical-align:top;">
+					<cockpit code="ProductImages" />
+				</td>
+				<td  height="300px" rowspan="1" colspan="10" class="structureViewSection" style="vertical-align:top;">
+					<cockpit code="ProductDetailPanelSection" />
+				</td>
+			</tr>
+			<tr>
+				<td height="75px" rowspan="1" colspan="10" class="structureViewSection" style="vertical-top;">
+					<cockpit code="SocialButtons" />
+				</td>
+				
+			</tr>
+			<tr>
+				<td height="75px" rowspan="1" colspan="8" class="structureViewSection" style="vertical-top;">
+					<cockpit code="SocialWidgets" />
+				</td>
+				
+			</tr>
+			<tr>
+				<td height="150px" rowspan="1"  colspan="8" class="structureViewSection">
+					<cockpit code="Section2" />
+				</td>
+			</tr>
+
+            <tr>
+                <td colspan="24" class="structureViewSection">
+                    <cockpit code="CrossSelling" />
+                </td>
+            </tr>
+
+			<tr>
+				<td colspan="24" class="structureViewSection">
+					<cockpit code="Section3" />
+				</td>
+			</tr>
+
+            <tr>
+                <td colspan="24" class="structureViewSection">
+                    <cockpit code="UpSelling" />
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="24" class="structureViewSection">
+                    <cockpit code="Tabs" />
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="24" class="structureViewSection">
+                    <cockpit code="Section4" />
+                </td>
+            </tr>
+
+			<tr>
+				<td height="270px" colspan="24" class="structureViewSection">
+					<cockpit code="Footer" />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div style="width:100%; border-top: 2px solid #bbb" class="cmsContentEditor">
+		<cockpit code="editor" />
+	</div>
+</div>

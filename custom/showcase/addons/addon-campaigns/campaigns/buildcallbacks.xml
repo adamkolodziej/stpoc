@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+--><!--
+ All hybris buildcallbacks.xml macrodefinitions:
+ 
+ Build/Documentation
+ 
+	 before/after ant macro "clean"
+		 <macrodef name="campaigns_before_clean"/>
+		 <macrodef name="campaigns_after_clean"/>
+	 
+	 before/after ant macro "build"
+		 <macrodef name="campaigns_before_build"/>
+		 <macrodef name="campaigns_after_build"/>
+		 
+	 before/after ant macro "compile_core" - the core module of the extension
+		 <macrodef name="campaigns_before_compile_core">
+		 <macrodef name="campaigns_after_compile_core">
+	 
+	 before/after ant macro "compile_web" - the web module of the extension
+		 <macrodef name="campaigns_before_compile_web" />
+		 <macrodef name="campaigns_after_compile_web" />
+	 
+	 before/after ant macro "compile_hmc" - the hmc module of the extension
+		 <macrodef name="campaigns_before_compile_hmc" />
+		 <macrodef name="campaigns_after_compile_hmc" />
+ 
+ Preparing extension
+ 
+	 will be called in the beginning of the ant call and only once (also when using multiple 
+	 ant targets e.g. ant build yunittest)	
+		 <macrodef name="campaigns_only_once_prepare"/>
+ 
+ Creating ear module/production
+ 
+	 before/after ant macro "ear"
+		 <macrodef name="campaigns_before_ear"/>
+		 <macrodef name="campaigns_after_ear"/>
+
+	 before/after ant macro "production" - for hybris server only
+		 <macrodef name="campaigns_before_production" />
+		 <macrodef name="campaigns_after_production" />
+ 
+ JUnit Test
+ 
+	 before/after ant macro "yunitinit" 
+		 <macrodef name="campaigns_before_yunitinit" />
+		 <macrodef name="campaigns_after_yunitinit" />
+	 
+	 before/after ant macro "yunit"
+		 <macrodef name="campaigns_before_yunit" />
+		 <macrodef name="campaigns_after_yunit" /> 
+		 
+ Distribution package
+ 
+ 	 before/after ant macro "dist" - internal target; only for use when platform is available in source code
+		 <macrodef name="campaigns_after_dist"/>
+		 <macrodef name="campaigns_before_dist"/>
+	 
+	 before/after ant macro "dist_copy" - internal target; only for use when platform is available in source code
+		 <macrodef name="campaigns_before_dist_copy"/>
+		 <macrodef name="campaigns_after_dist_copy"/>
+ 
+--><project name="campaigns_buildcallbacks">
+	
+	<!-- 
+	    Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+	
+	     ${ear.path}: 			path to ear
+	 -->
+	<macrodef name="campaigns_before_ear">
+		<sequential>
+
+			<!-- you can do anything before the EAR file is being packed -->
+			
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="campaigns_after_build">
+			<sequential>
+
+				<if>
+					<isset property="ext.cmscockpit.path"/>
+					<then>
+						<echo level="info" message="campaigns - Copying custom files to cmscockpit..."/>
+						 <copy todir="${ext.cmscockpit.path}/web/webroot/promotioncockpit">
+							<fileset dir="${ext.campaigns.path}/resources/campaigns/promotioncockpit/zul">
+								<include name="**/**.*" />
+							</fileset>
+						</copy>
+						<echo level="info" message="campaigns - Copying custom css files to cmscockpit..."/>
+						<copy todir="${ext.cmscockpit.path}/web/webroot/promotioncockpit/css">
+							<fileset dir="${ext.campaigns.path}/resources/campaigns/promotioncockpit/css">
+								<include name="**/**.*" />
+							</fileset>
+						</copy>
+						<copy todir="${ext.cmscockpit.path}/web/webroot/promotioncockpit/images">
+							<fileset dir="${ext.campaigns.path}/resources/campaigns/promotioncockpit/images">
+								<include name="**/**.*" />
+							</fileset>
+						</copy>
+					</then>
+				</if>
+
+				<if>
+					<isset property="ext.btgcockpit.path"/>
+					<then>
+						<echo level="info" message="campaigns - Copying custom files to btgcockpit..."/>
+						<copy todir="${ext.btgcockpit.path}/web/webroot/promotioncockpit">
+							<fileset dir="${ext.campaigns.path}/resources/campaigns/promotioncockpit/zul">
+								<include name="**/**.*" />
+							</fileset>
+						</copy>
+						<copy todir="${ext.btgcockpit.path}/web/webroot/promotioncockpit/css">
+							<fileset dir="${ext.campaigns.path}/resources/campaigns/promotioncockpit/css">
+								<include name="**/**.*" />
+							</fileset>
+						</copy>
+						<copy todir="${ext.btgcockpit.path}/web/webroot/promotioncockpit/images">
+							<fileset dir="${ext.campaigns.path}/resources/campaigns/promotioncockpit/images">
+								<include name="**/**.*" />
+							</fileset>
+						</copy>
+					</then>
+				</if>
+				
+				<if>
+					<isset property="ext.productcockpit.path"/>
+					<then>
+						<echo level="info" message="campaigns - Copying custom files to productcockpit..."/>
+						<copy todir="${ext.productcockpit.path}/web/webroot/promotioncockpit">
+							<fileset dir="${ext.campaigns.path}/resources/campaigns/promotioncockpit/zul">
+								<include name="**/**.*" />
+							</fileset>
+						</copy>
+						<copy todir="${ext.productcockpit.path}/web/webroot/promotioncockpit/css">
+							<fileset dir="${ext.campaigns.path}/resources/campaigns/promotioncockpit/css">
+								<include name="**/**.*" />
+							</fileset>
+						</copy>
+						<copy todir="${ext.productcockpit.path}/web/webroot/promotioncockpit/images">
+							<fileset dir="${ext.campaigns.path}/resources/campaigns/promotioncockpit/images">
+								<include name="**/**.*" />
+							</fileset>
+						</copy>
+					</then>
+				</if>
+			</sequential>
+		</macrodef>
+		
+</project>

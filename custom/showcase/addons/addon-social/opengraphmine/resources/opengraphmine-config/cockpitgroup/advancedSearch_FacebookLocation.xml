@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advanced-search>
+	
+	<group name="root" type="facebooklocation">
+		<label key="config.general.searchfor" />
+		<group name="general">
+			<label key="cockpit.config.label.General" />
+			
+			<property qualifier="FacebookLocation.longitude" visible="true"/>
+			<property qualifier="FacebookLocation.latitude" visible="true"/>
+			<property qualifier="FacebookLocation.address" visible="true"/>
+			<property qualifier="FacebookLocation.address.postalCode" visible="true"/>
+			<property qualifier="FacebookLocation.address.town" sort-enabled="true" visible="true"/>
+			<property qualifier="FacebookLocation.address.country" sort-enabled="true" visible="true"/>			
+			<property qualifier="FacebookLocation.address.remarks" visible="true"/>
+		</group>
+		<group name="other">
+			<label key="cockpit.config.label.Other" />
+			<property qualifier="item.pk" sort-enabled="true" visible="false"/>			
+		</group>		
+	</group>
+	
+</advanced-search>

@@ -2,13 +2,8 @@ $productCatalog = sptelProductCatalog
 $catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
 
 UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; products(code, $catalogVersion); $catalogVersion
-#; TriCast-Phone            ; ; phoneUnlimitedWeekend
-; VirtualRouter            ; ; virtualRouter
-; CloudConnection          ; ; ipVpnCloudConnection, metroInternetCloudConnection, dataCenterCloudConnection
-; TriCast-Phone-Device     ; ; phone
-; Access                   ; ; ethernetAccess, fibreAccess, leasedLineAccess
-; TriCast-Broadband-Addon  ; ; sptelWifi
-; TriCast-Broadband-Router ; ; standardRouter, fibreRouter
-; ClassOfService           ; ; af1Voice, af2AssuredData, efStandard, af3AssuredData, af4AssuredData
-; Bandwidth                ; ; bandwidth4mbps, bandwidth64mbps, bandwidth1gbps
-; TriCast-Decoders         ; ; standardDecoder, decoderPlus
+; Connectivity-VirtualRouter   ; ; virtualRouter
+; Connectivity-CloudConnection ; ; ipVpnCloudConnection, metroInternetCloudConnection, dataCenterCloudConnection
+; Connectivity-Access          ; ; ethernetAccess, fibreAccess, leasedLineAccess
+; Connectivity-ClassOfService  ; ; af1Voice, af2AssuredData, efStandard, af3AssuredData, af4AssuredData
+; Connectivity-Bandwidth       ; ; bandwidth4mbps, bandwidth64mbps, bandwidth1gbps

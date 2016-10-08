@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (feedbackaddon/resources/feedbackaddon-spring.xml) -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/mvc
+	       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+           http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+		   
+ 	<!--  Adds to the servlet filter chain a filter the determines the Facebook Application thats configured to support the current site -->
+	<bean id="facebookApplicationFilterListMergeDirective" depends-on="storefrontTenantDefaultFilterChainList" parent="listMergeDirective" >
+		<property name="add" ref="facebookApplicationFilter" />
+		<property name="afterBeanNames">
+			<list value-type="java.lang.String" >
+				<value>cmsSiteFilter</value>
+			</list>
+		</property>
+		<property name="beforeBeanNames">
+			<list value-type="java.lang.String" >
+				<value>springSecurityFilterChain</value>
+			</list>
+		</property>
+	</bean>
+  	
+  	<bean id="facebookApplicationFilter" class="com.hybris.social.facebook.common.service.web.filters.FacebookApplicationFilter" >
+  		<property name="facebookApplicationService" ref="facebookApplicationService" />
+  	</bean>
+  	
+  	
+  	<!-- Adds a Before View Handler that configures on the view model the current Facebook Application as well as additional global js variables -->
+  	<bean id="facebookConfigurationBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective" >
+		<property name="add" ref="facebookConfigurationBeforeViewHandler" />
+		<property name="beforeBeanNames" value="facebookOpenGraphMetadataBeforeViewHandler" />
+	</bean> 	 
+	
+	<bean id="facebookConfigurationBeforeViewHandler" parent="beforeViewHandlerAdapter"  >
+		<property name="adaptee">
+			<bean class="com.hybris.social.facebook.common.web.interceptors.FacebookConfigurationBeforeViewHandler">
+				<property name="facebookApplicationService" ref="facebookApplicationService" />
+				<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+			</bean>  
+		</property>
+	</bean>
+  	
+  	<!-- Adds a Before View Handler that sets Open Graph metadata -->
+  	<bean id="facebookOpenGraphMetadataBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective" >
+		<property name="add" ref="facebookOpenGraphMetadataBeforeViewHandler" />
+	</bean> 	 
+	
+	<bean id="facebookOpenGraphMetadataBeforeViewHandler" parent="beforeViewHandlerAdapter"  >
+		<property name="adaptee">
+			<bean class="com.hybris.social.facebook.common.interceptors.beforeview.FacebookOpenGraphMetadataViewHandler">
+				<property name="sharedPageUrlStrategy" ref="sharedPageUrlStrategy"/>
+				<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+				<property name="openGraphPageImageStrategy" ref="openGraphPageImageStrategy" />
+			</bean>
+		</property>
+	</bean>
+	
+	<alias name="defaultOpenGraphPageImageStrategy" alias="openGraphPageImageStrategy"/>
+	<bean id="defaultOpenGraphPageImageStrategy" class="com.hybris.social.facebook.common.url.impl.DefaultOpenGraphPageImageStrategy">
+    	<property name="mediaAbsoluteUrlResolver" ref="mediaAbsoluteUrlResolver" />
+	</bean>
+
+</beans>

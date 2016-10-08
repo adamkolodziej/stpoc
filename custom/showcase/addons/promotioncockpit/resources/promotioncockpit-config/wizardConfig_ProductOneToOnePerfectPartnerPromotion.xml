@@ -1,0 +1,86 @@
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true"  displaySubtypes="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="true">
+			<label lang="de">Stammdaten</label>
+			<label lang="en">General</label>
+			<label lang="fr">Propriétés</label>
+			<label lang="ja">プロパティ</label>
+			<property qualifier="AbstractPromotion.code"/>
+			<property qualifier="AbstractPromotion.title"/>
+			<property qualifier="AbstractPromotion.name"/>		
+			<property qualifier="AbstractPromotion.enabled"/>
+			<property qualifier="AbstractPromotion.priority"/>
+			<property qualifier="AbstractPromotion.promotionGroup" visible="true"/>
+			<property qualifier="ProductOneToOnePerfectPartnerPromotion.baseProduct"/>
+			<property qualifier="ProductOneToOnePerfectPartnerPromotion.partnerProduct"/>
+			<property qualifier="ProductOneToOnePerfectPartnerPromotion.bundlePrices">
+				<parameter name="allowCreate" value="true" />
+			</property>
+		</group>
+		
+		<group qualifier="Dates" visible="true" initially-opened="true">
+			<label lang="de">Termine</label>
+			<label lang="en">Dates</label>
+			<label lang="fr">Dates</label>
+			<label lang="ja">日付</label>
+			
+			<property qualifier="AbstractPromotion.startDate"/>
+			<property qualifier="AbstractPromotion.endDate"/>
+		</group>	
+		
+		<group qualifier="Products" visible="true" initially-opened="true">
+			<label lang="de">Produkte</label>
+			<label lang="en">Products</label>
+			<label lang="fr">Produits</label>
+			<label lang="ja">製品</label>
+			
+			<property qualifier="ProductPromotion.products"/>
+		</group>	
+		
+		
+		<group qualifier="Categories" visible="true" initially-opened="true">
+			<label lang="de">Kategorien</label>
+			<label lang="en">Categories</label>
+			<label lang="fr">Catégories</label>
+			<label lang="ja">カテゴリー</label>
+			
+			<property qualifier="ProductPromotion.categories"/>
+		</group>	
+		
+		
+		<group qualifier="Restriction" visible="true" initially-opened="true">
+			<label lang="de">Einschränkungen</label>
+			<label lang="en">Restrictions</label>
+			<label lang="fr">Restrictions</label>
+			<label lang="ja">制限</label>
+			
+			<property qualifier="AbstractPromotion.restrictions">
+				<parameter name="allowCreate" value="true" />
+			</property>
+		</group>
+		
+		
+		<group qualifier="Messages" visible="true" initially-opened="true">
+			<label lang="de">Nachrichten</label>
+			<label lang="en">Messages</label>
+			<label lang="ja">メッセージ</label>
+			<property qualifier="AbstractPromotion.description" >
+				<parameter name="rows" value="3" />
+			</property>
+			<property qualifier="ProductOneToOnePerfectPartnerPromotion.messageFired" >
+				<parameter name="rows" value="3" />
+			</property>
+			<property qualifier="ProductOneToOnePerfectPartnerPromotion.messageCouldHaveFired" >
+				<parameter name="rows" value="3" />
+			</property>
+		</group>	
+		
+		<group qualifier="Banners" visible="true" initially-opened="true">
+			<label lang="de">Banner</label>
+			<label lang="en">Banners</label>
+			<label lang="ja">バナー</label>
+			<property qualifier="AbstractPromotion.promotionBanners"/>
+		</group>
+		
+	</displayed-properties>
+</wizard-config>

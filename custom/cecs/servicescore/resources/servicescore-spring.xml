@@ -12,73 +12,20 @@
 -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd
-           http://www.springframework.org/schema/aop
-           http://www.springframework.org/schema/aop/spring-aop.xsd
-           http://www.springframework.org/schema/util
-		   http://www.springframework.org/schema/util/spring-util.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!--
-	<bean id="servicescoreCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
-		<property name="supportedChannels">
-			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
-				<value>B2C</value>
-			</list>
-		</property>
-		<property name="addonExtensionMetadata">
-			<bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
-				<property name="suffixChannel" value="false"/>
-				<property name="baseExtensionName" value="servicescore"/>
-			</bean>
-		</property>
-	</bean>
+    <alias name="defaultEmbededImgEmailService" alias="emailService"/>
+    <bean id="defaultEmbededImgEmailService"
+          class="com.hybris.showcase.servicescore.services.impl.DefaultEmbededImgEmailService"
+          parent="defaultEmailService"/>
 
-	<bean id="servicescoreSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
-		<property name="extensionName" value="servicescore" />
-	</bean>
-	-->
-
-	
-	<alias name="defaultEmbededImgEmailService" alias="emailService"/>
-	<bean id="defaultEmbededImgEmailService" class="com.hybris.showcase.servicescore.services.impl.DefaultEmbededImgEmailService" parent="defaultEmailService"/>
-	
-	 <bean id="createInvoicesPostInitHook" class="com.hybris.showcase.servicescore.setup.impl.CreateInvoicesPostInitHook" >
-        <property name="cronJobService" ref="cronJobService" />
-        <property name="modelService" ref="modelService" />
-        <property name="baseStoreService" ref="baseStoreService" />
-        <property name="invoiceService" ref="invoiceService" />
-        <property name="contractService" ref="contractService" />
-        <property name="customerService" ref="customerService" />
+    <bean id="addGrantAfterRegistrationEventListener"
+          class="com.hybris.showcase.servicescore.listeners.AddGrantAfterRegistrationEventListener"
+          parent="abstractSiteEventListener">
+        <property name="grantingEntitlementsFacade" ref="grantingEntitlementsFacade"/>
+        <property name="productCode" value="free2watch"/>
     </bean>
-
-    <bean id="createInvoicesPostInitHookMergeDirective" depends-on="postInitHooks"  parent="listMergeDirective">
-        <property name="add" ref="createInvoicesPostInitHook" />
-        <property name="afterBeanNames">
-            <list value-type="java.lang.String" >
-                <value>userOrderPostInitHook</value>
-            </list>
-        </property>
-    </bean>
-
-	<bean id="addGrantAfterRegistrationEventListener" class="com.hybris.showcase.servicescore.listeners.AddGrantAfterRegistrationEventListener" parent="abstractSiteEventListener">
-		<property name="grantingEntitlementsFacade" ref="grantingEntitlementsFacade"/>
-		<property name="productCode" value="free2watch"/>
-	</bean>
-	
-		
-	 <bean id="freeToWatchPostInitHook" class="com.hybris.showcase.servicescore.setup.impl.FreeToWatchPostInitHook">
-    	 <property name="grantingEntitlementsFacade" ref="grantingEntitlementsFacade"/>
-		 <property name="customerService" ref="customerService"/>
-		 <property name="productCode" value="free2watch"/>
-	 </bean>
-
-	<bean id="freeToWatchpostInitHooksListMergeDirective" depends-on="postInitHooks" parent="listMergeDirective" >
-		<property name="add" ref="freeToWatchPostInitHook" />
-	</bean>
-	
 
 </beans>

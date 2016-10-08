@@ -1,0 +1,9 @@
+# ImpEx for Related Products into Apparel
+
+# Macros / Replacement Parameter definitions
+$productCatalog=apparelProductCatalog 
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+
+INSERT_UPDATE ProductSet;code[unique=true];$catalogVersion;name;approvalStatus(code);products(code,$catalogVersion)
+;EclipseTeeOneOfEach;;Eclipse Tee Set;approved;122320_white,122320_royal_blue,122320_kelly,122320_grey_heather,122320_black

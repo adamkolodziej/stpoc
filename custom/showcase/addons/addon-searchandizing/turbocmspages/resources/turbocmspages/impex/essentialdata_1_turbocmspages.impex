@@ -1,0 +1,24 @@
+INSERT_UPDATE CockpitItemTemplate;code[unique=true];relatedType(code);
+;ProductListPageTemplate;PageTemplate;
+;ProductGridPageTemplate;PageTemplate;
+;CategoryPageTemplate;PageTemplate;
+;LandingPage1Template;PageTemplate;
+;LandingPage2Template;PageTemplate;
+;LandingPage3Template;PageTemplate;
+;LandingPage4Template;PageTemplate;
+;LandingPage5Template;PageTemplate;
+;LandingPage6Template;PageTemplate;
+;SearchResultsListPageTemplate;PageTemplate;
+;SearchResultsGridPageTemplate;PageTemplate;
+;SearchResultsEmptyPageTemplate;PageTemplate;
+;ProductDetailsPageTemplate;PageTemplate;Desktop - Product Page - Details;
+;ContentPage1Template;PageTemplate;Desktop - Contend Page - Layout 1;
+;MobileProductDetailsPageTemplate;PageTemplate
+;MobileProductListPageTemplate;PageTemplate
+;MobileProductGridPageTemplate;PageTemplate
+;MobileSearchResultsListPageTemplate;PageTemplate
+;MobileSearchResultsGridPageTemplate;PageTemplate
+;MobileSearchResultsEmptyPageTemplate;PageTemplate
+;MobileCategoryPageTemplate;PageTemplate
+;MobileContentPage1Template;PageTemplate
+;MobileLandingPageTemplate;PageTemplate

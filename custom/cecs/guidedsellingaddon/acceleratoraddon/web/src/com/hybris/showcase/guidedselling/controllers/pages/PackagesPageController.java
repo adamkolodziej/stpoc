@@ -10,6 +10,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.ContentPageModel;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.configurablebundleservices.model.BundleTemplateModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,11 +44,11 @@ public class PackagesPageController extends AbstractAddOnPageController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String packages(final Model model) throws CMSItemNotFoundException {
-        BundlePackageModel firstPackage = bundlePackageService.getFirstPackage();
+        BundleTemplateModel firstPackage = bundlePackageService.getFirstTemplate();
         if (firstPackage == null) {
             return REDIRECT_PREFIX + "pages/error/errorNotFoundPage";
         }
-        return packagesPage(firstPackage.getCode(), model);
+        return packagesPage(firstPackage.getId(), model);
     }
 
     @RequestMapping(value = "/{bundleTemplateId}", method = RequestMethod.GET)

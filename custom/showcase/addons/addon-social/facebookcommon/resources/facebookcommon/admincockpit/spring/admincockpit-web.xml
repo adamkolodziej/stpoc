@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2011 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the CUSTOM Spring WEB configuration file used for admincockpit 
+	web application. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util-3.1.xsd
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
+	default-autowire="byName">
+
+
+	<bean id="facebookSocialSelectorSectionListMergeDirective" depends-on="adminSocialSelectorSections"
+		parent="listMergeDirective">
+		<property name="add" ref="SocialFacebookAdminTypeSelectorSection" />
+		<property name="afterBeanNames">
+			<list value-type="java.lang.String">
+				<value>SocialGeneralAdminTypeSelectorSection</value>
+			</list>
+		</property>
+		<property name="beforeBeanNames">
+			<list value-type="java.lang.String">
+				<value>adminSocialUndoSection</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="SocialFacebookAdminTypeSelectorSection" parent="DefaultAdminTypeSelectorSection">
+		<property name="localizedLabel" value="navigationarea.types.facebook" />
+		<property name="visible" value="true" />
+		<property name="renderer"
+			ref="SocialFacebookAdminTypeSelectorSectionRenderer" />
+		<property name="open" value="false" />
+	</bean>
+	
+
+	<alias name="defaultSocialFacebookAdminTypeSelectorSectionRenderer" alias="SocialFacebookAdminTypeSelectorSectionRenderer" />
+	<bean id="defaultSocialFacebookAdminTypeSelectorSectionRenderer" parent="DefaultAdminTypeSelectorSectionRenderer">
+		<property name="typeCodes" value="FacebookApplication,FacebookApplicationDomain,FacebookObject,FacebookAction" />
+		<property name="includeSubtypes" value="true" />
+		<property name="displayType" value="TREE" />
+		<property name="searchable" value="false" />
+	</bean>
+
+</beans>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2011 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the CUSTOM Spring WEB configuration file used for admincockpit 
+	web application. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util-3.1.xsd
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
+	default-autowire="byName">
+
+	<alias name="opengraphmineSocialFacebookAdminTypeSelectorSectionRenderer" alias="SocialFacebookAdminTypeSelectorSectionRenderer" />
+	<bean id="opengraphmineSocialFacebookAdminTypeSelectorSectionRenderer" parent="defaultSocialFacebookAdminTypeSelectorSectionRenderer">
+		<property name="typeCodes" value="FacebookApplication,FacebookApplicationDomain,FacebookUser,FacebookPage,FacebookUrlLike,FacebookComment,FacebookObject,FacebookAction" />
+	</bean>
+
+	<bean id="FacebookCommentsSection"
+		class="de.hybris.platform.cockpit.services.config.impl.CommentsSectionConfiguration"
+		scope="session">
+		<property name="sectionRenderer">
+			<ref bean="FacebookCommentsSectionRenderer" />
+		</property>
+	</bean>
+
+	<bean id="FacebookCommentsSectionRenderer"
+		class="com.hybris.social.common.admincockpit.components.editorarea.renderer.FacebookCommentsSectionRenderer"
+		parent="CommentsSectionRenderer" scope="session">
+		<property name="tooltipRenderer" ref="commentTooltipRenderer" />
+		<property name="domainCode" value="facebookDomain" />
+		<property name="componentCode" value="facebookComponent" />
+		<property name="commentTypeCode" value="facebookCommentType" />
+	</bean>
+
+</beans>

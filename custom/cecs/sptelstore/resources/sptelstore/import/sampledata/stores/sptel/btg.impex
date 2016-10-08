@@ -37,25 +37,17 @@ $productCatalogName = Sptel Product Catalog
 $productCV = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
 
 INSERT_UPDATE BTGSegment;uid[unique=true];name;sites(uid);defaultResultScope(code);defaultEvaluationMethod(code);active[default=true];scope(code)[default=ONLINE];$contentCV
-;userGroupCustomOfferSegment;Customers with Sports trial;sptel;SESSION;FULL;
 
 INSERT_UPDATE BTGRule;uid[unique=true];code;segment(uid, $contentCV);ruleType(code);$contentCV
-;userGroupCustomOfferRule;User Group Custom Offer Rule;userGroupCustomOfferSegment;ORDER
 
 INSERT_UPDATE BTGOperator;uid[unique=true];code;$contentCV
-;userBoughtCustomOfferOperator;contains
 
 INSERT_UPDATE BTGProductsInOrdersOperand;uid[unique=true];lastOrders;$contentCV
-;userBoughtCustomOfferPinO;1;
 
 INSERT_UPDATE BTGReferenceProductsOperand;uid[unique=true];products(code,$productCV);$contentCV
-;sportTrialReferenceProductsOperand;Sport_trial;
 
 INSERT_UPDATE BTGExpression;uid[unique=true];leftOperand(uid, $contentCV);rightOperand(uid, $contentCV);operator(uid, $contentCV);rule(uid, $contentCV);$contentCV
-;userGroupCustomOfferExpression;userBoughtCustomOfferPinO;sportTrialReferenceProductsOperand;userBoughtCustomOfferOperator;userGroupCustomOfferRule
 
 INSERT_UPDATE BTGRemoveFromGroupDefinition;uid[unique=true];code;target;userGroups(uid);segment(uid, $contentCV);$contentCV
-#;removeFromUserGroupBTGAction;Remove From User Group BTG Action;removeFromGroup;interested-in-sports;userGroupCustomOfferSegment
 
 INSERT_UPDATE BTGAssignToGroupDefinition;uid[unique=true];code;target;userGroups(uid);segment(uid, $contentCV);$contentCV
-;assignToUserGroupBTGAction;Assign to customers-with-sports-channel-trial User Group BTG Action;assignToGroup;customers-with-sports-channel-trial;userGroupCustomOfferSegment

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base xsi:noNamespaceSchemaLocation="base.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<search>
+		<search-properties>
+			<property qualifier="SolrSynonymConfig.synonymFrom" />
+			<property qualifier="SolrSynonymConfig.synonymTo" />
+			<property qualifier="SolrSynonymConfig.language" />
+			<property qualifier="SolrSynonymConfig.facetSearchConfig" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="SolrSynonymConfig.synonymFrom" />
+			<property qualifier="SolrSynonymConfig.synonymTo" />
+			<property qualifier="SolrSynonymConfig.language" />
+			<property qualifier="SolrSynonymConfig.facetSearchConfig" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="SolrSynonymConfig.synonymFrom" />
+		<property qualifier="SolrSynonymConfig.synonymTo" />
+	</label>
+	
+	
+	<initial-properties source-object-template="SolrFacetSearchConfig">
+		<property-mapping source="src" target="SolrSynonymConfig.facetSearchConfig"/>
+	</initial-properties>
+</base>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<alias name="defaultEditSearchAdminMenuActionConverter" alias="editSearchAdminMenuActionConverter" />
+	<bean id="defaultEditSearchAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="editSearchAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias alias="editSearchAdminMenuActionPopulator" name="defaultEditSearchAdminMenuActionPopulator" />
+	<bean id="defaultEditSearchAdminMenuActionPopulator" parent="simpleComponentAdminMenuActionPopulator" >
+		<property name="type" value="EDIT_SEARCH" />
+		<property name="addOn" value="wildwords" />		
+ 		<property name="adminActionEnabledStrategy" ref="editSearchEnabledStrategy" />	
+	</bean>
+
+	<bean id="wildwordsRootComponentListMergeDirective" depends-on="editingComponentAdminMenuGroupPopulator" parent="listMergeDirective" >
+		<property name="add" ref="editSearchAdminMenuActionConverter" />
+		<property name="listPropertyDescriptor" value="menuItemConverters" />
+	</bean>
+
+	<util:list id="editSearchCmsComponentList" >
+		<value>SearchBoxComponent</value>
+	</util:list>	
+	<alias alias="editSearchEnabledStrategy" name="defaultEditSearchEnabledStrategy" />
+	<bean id="defaultEditSearchEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.RestrictedTypeCodeActionEnabledStrategy">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+		<property name="typeService" ref="typeService" />
+		<property name="typeCodes" ref="editSearchCmsComponentList" />
+	</bean>	
+</beans>

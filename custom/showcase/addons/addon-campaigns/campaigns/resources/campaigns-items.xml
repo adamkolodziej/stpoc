@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+			
+	<collectiontypes>
+		<collectiontype code="DayOfWeekCollection" elementtype="WeekDay"
+			autocreate="true" generate="true" />
+	</collectiontypes>
+	
+	<enumtypes>
+				
+		<enumtype generate="true" code="Timezone" autocreate="true" dynamic="false">
+			<value code="System" />		 
+			<value code="UTC_min_12_00" />
+			<value code="UTC_min_11_00" />
+			<value code="UTC_min_10_00" />
+			<value code="UTC_min_09_30" />
+			<value code="UTC_min_09_00" />
+			<value code="UTC_min_08_00" />
+			<value code="UTC_min_07_00" />
+			<value code="UTC_min_06_00" />
+			<value code="UTC_min_05_00" />
+			<value code="UTC_min_04_30" />
+			<value code="UTC_min_04_00" />
+			<value code="UTC_min_03_30" />
+			<value code="UTC_min_03_00" />
+			<value code="UTC_min_02_00" />
+			<value code="UTC_min_01_00" />
+			<value code="UTC_00_00" />
+			<value code="UTC_plus_01_00" />
+			<value code="UTC_plus_02_00" />
+			<value code="UTC_plus_03_00" />
+			<value code="UTC_plus_03_30" />
+			<value code="UTC_plus_04_00" />
+			<value code="UTC_plus_04_30" />
+			<value code="UTC_plus_05_00" />
+			<value code="UTC_plus_05_30" />
+			<value code="UTC_plus_05_45" />
+			<value code="UTC_plus_06_00" />
+			<value code="UTC_plus_06_30" />
+			<value code="UTC_plus_07_00" />
+			<value code="UTC_plus_08_00" />
+			<value code="UTC_plus_09_00" />
+			<value code="UTC_plus_09_30" />
+			<value code="UTC_plus_10_00" />
+			<value code="UTC_plus_10_30" />
+			<value code="UTC_plus_11_00" />
+			<value code="UTC_plus_11_30" />
+			<value code="UTC_plus_12_00" />
+			<value code="UTC_plus_12_45" />
+			<value code="UTC_plus_13_00" />
+			<value code="UTC_plus_14_00" />						
+		</enumtype>
+	</enumtypes>
+	
+	<relations>
+		<relation code="PromoBaseSiteRestriction2BaseSite" autocreate="true" generate="true" localized="false">
+				<deployment table="promositeres2site" typecode="5073"/>
+			<sourceElement qualifier="promoBaseSiteRestrictions" type="PromotionBaseSiteRestriction" cardinality="many">
+				<modifiers read="true" write="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="restrictedToSites" type="BaseSite" cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" initial="true" optional="false"  />
+			</targetElement>
+		</relation>
+		
+		<relation code="PublicationPeriod2UserGroupRelation" autocreate="true" generate="true" localized="false">
+				<deployment table="pubperiod2usergroup" typecode="5077"/>
+			<sourceElement qualifier="publicationPeriods" type="PublicationPeriod" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="userGroups" type="UserGroup" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true"/>
+			</targetElement>
+		</relation>
+		
+		<relation code="PublicationPeriod2ProductRelation" autocreate="true" generate="true" localized="false">
+				<deployment table="pubperiod2product" typecode="5074"/>
+			<sourceElement qualifier="publicationPeriods" type="PublicationPeriod" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="products" type="Product" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true"  />
+			</targetElement>
+		</relation>
+		
+		<relation code="PublicationPeriod2PromotionRelation" autocreate="true" generate="true" localized="false">
+				<deployment table="pubperiod2promotion" typecode="5075"/>
+			<sourceElement qualifier="publicationPeriods" type="PublicationPeriod" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="promotions" type="AbstractPromotion" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true"  />
+			</targetElement>
+		</relation>
+		
+		<relation code="PublicationPeriod2CMSItemRelation" autocreate="true" generate="true" localized="false">
+				<deployment table="pubperiod2cmsitem" typecode="5076"/>
+			<sourceElement qualifier="publicationPeriods" type="PublicationPeriod" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="cmsitems" type="CMSItem" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true"  />
+			</targetElement>
+		</relation>
+		
+		<relation code="PublicationPeriod2MediaTag" autocreate="true" generate="true" localized="false">
+				<deployment table="pubperiod2mediatag" typecode="5078"/>
+			<sourceElement qualifier="publicationPeriods" type="PublicationPeriod" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="mediaTags" type="MediaTag" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" optional="true"  />
+			</targetElement>
+		</relation>
+	</relations>
+	
+	<itemtypes>
+		<itemtype code="TimezonePromotionRestriction"
+				extends="AbstractPromotionRestriction"
+				jaloclass="com.hybris.campaigns.jalo.TimezonePromotionRestriction"
+				autocreate="true"
+				generate="true">
+
+				<attributes>
+					<attribute
+						qualifier="descriptionPattern"
+						redeclare="true"
+						type="localized:java.lang.String">
+						<description>The description of the restriction (supports message pattern).</description>
+						<modifiers read="true" write="true" search="false" optional="true"/>
+						<persistence type="property">
+							<columntype database="oracle">
+								<value>varchar2(4000)</value>
+							</columntype>
+							<columntype database="mysql">
+								<value>text</value>
+							</columntype>
+							<columntype database="sqlserver">
+								<value>nvarchar(max)</value>
+							</columntype>
+							<columntype database="hsqldb">
+								<value>LONGVARCHAR</value>
+							</columntype>
+							<columntype>
+								<value>varchar</value>
+							</columntype>
+						</persistence>
+					</attribute>
+					<attribute qualifier="activationDate" generate="true" autocreate="true" type="java.util.Date">
+						<persistence type="property" />
+						<modifiers initial="true" />
+					</attribute>
+					<attribute qualifier="activeFrom" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="activeUntil" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="timezone" type="Timezone">
+						<modifiers optional="false" />
+						<defaultvalue>em().getEnumerationValue("Timezone","System")</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="days" type="DayOfWeekCollection">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		
+		<itemtype code="PromotionProductNegotiatedPriceRestriction"
+			extends="AbstractPromotionRestriction"
+			jaloclass="com.hybris.campaigns.jalo.PromotionProductNegotiatedPriceRestriction"
+			autocreate="true"
+			generate="true" />
+			
+		<itemtype code="PromotionBaseSiteRestriction"
+			extends="AbstractPromotionRestriction"
+			jaloclass="com.hybris.campaigns.jalo.PromotionBaseSiteRestriction"
+			autocreate="true"
+			generate="true" />
+			
+		<itemtype code="AbstractPromotion" autocreate="false" abstract="true" generate="false">
+				<attributes>
+					<attribute autocreate="true" qualifier="promotionBanners" generate="true" type="MediaContainer">
+						<persistence type="property"/>
+						<modifiers optional="true"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+		<itemtype code="PublicationPeriod" 
+			jaloclass="com.hybris.campaigns.jalo.PublicationPeriod"
+			autocreate="true"
+			generate="true">
+			<deployment table="PublicationPeriod" typecode="20350"/>
+			
+			<custom-properties>
+				<property name="catalogItemType"><value>java.lang.Boolean.TRUE</value></property>
+				<property name="catalogVersionAttributeQualifier"><value>"catalogVersion"</value></property>
+				<property name="uniqueKeyAttributeQualifier"><value>"code"</value></property>
+			</custom-properties>
+			<attributes>
+				<attribute qualifier="code" autocreate="true" generate="true" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute qualifier="catalogVersion" autocreate="true" generate="true" type="CatalogVersion">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute qualifier="name" autocreate="true" generate="true" type="localized:java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="startDate" autocreate="true" generate="true" type="java.util.Date">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="endDate" autocreate="true" generate="true" type="java.util.Date">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="daysOfWeek" autocreate="true" generate="true" type="DayOfWeekCollection">
+					<description>Days of the week when publication is active, empty means every day of the week.</description>
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="fromHour" autocreate="true" generate="true" type="java.lang.Integer">
+					<description>Null means no time of day restriction.</description>
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="toHour" autocreate="true" generate="true" type="java.lang.Integer">
+					<description>Null means no time of day restriction.</description>
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="baseSite" autocreate="true" generate="true" type="BaseSite">
+					<description>Null means all sites.</description>
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="enabled">
+					<persistence type="property" />
+					<modifiers optional="false"/>
+					<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+				</attribute>
+				<attribute qualifier="timezone" type="Timezone">
+					<persistence type="property" />
+					<modifiers optional="true"/>
+					<defaultvalue>em().getEnumerationValue("Timezone","System")</defaultvalue>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="codeVersionIDX" unique="false">
+					<key attribute="code"/>
+					<key attribute="catalogVersion"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<typegroup name="CMS">
+			<itemtype code="PromotionBannerComponent"  jaloclass="com.hybris.campaigns.jalo.cms.PromotionBannerComponent"
+			autocreate="true" generate="true" extends="SimpleCMSComponent">
+				<attributes>
+					<attribute type="AbstractPromotion" qualifier="promotion">
+						<persistence type="property" />
+						<modifiers initial="true" optional="false"/>
+					</attribute>
+					<attribute type="Media" qualifier="defaultBanner">
+						<persistence type="property" />
+						<modifiers initial="true" optional="false"/>
+					</attribute>
+					<attribute type="Media" qualifier="advanceNotificationBanner">
+						<persistence type="property" />
+						<modifiers initial="true" optional="true"/>
+					</attribute>
+					<attribute type="Media" qualifier="appliedBanner">
+						<persistence type="property" />
+						<modifiers initial="true" optional="true"/>
+					</attribute>
+					<attribute type="java.lang.Boolean" qualifier="evaluateRestrictions">
+						<persistence type="property" />
+						<modifiers initial="true" optional="false"/>
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>
+					<attribute type="CMSLinkComponent" qualifier="link">
+						<persistence type="property" />
+						<modifiers initial="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="CMSVariantProductRestriction" jaloclass="com.hybris.campaigns.jalo.CMSVariantProductRestriction" extends="CMSProductRestriction"
+				autocreate="true" generate="true"/>
+				
+		</typegroup>
+		
+		<typegroup name="timerestriction">
+			
+			
+			<itemtype code="CMSTimeOfDayRestriction" jaloclass="com.hybris.campaigns.jalo.TimeOfDayRestriction" extends="AbstractRestriction"
+				autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="activeFrom" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="activeUntil" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="timezone" type="Timezone">
+						<persistence type="property" />
+						<defaultvalue>em().getEnumerationValue("Timezone","System")</defaultvalue>
+					</attribute>
+					<attribute qualifier="days" type="DayOfWeekCollection">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="description" redeclare="true" type="java.lang.String">
+						<persistence type="dynamic" attributeHandler="timeOfDayRestrictionDynamicDescription" />
+						<modifiers write="false" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			
+			<itemtype code="PreviewData" generate="false" autocreate="false">
+				<attributes>
+					<attribute qualifier="timezone" type="Timezone">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="publicationPeriod" type="PublicationPeriod">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+		</typegroup>
+	</itemtypes>
+</items>

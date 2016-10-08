@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="FacebookUser.uid"/>
+			<property qualifier="FacebookUser.email"/>
+			<property qualifier="FacebookUser.name"/>
+			<property qualifier="FacebookUser.linkedCustomer"/>
+			<property qualifier="FacebookUser.lastname"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="FacebookUser.lastname"/>
+			<property qualifier="FacebookUser.name"/>
+			<property qualifier="FacebookUser.gender"/>
+			<property qualifier="FacebookUser.facebookUpdatedTime"/>
+		</sort-properties>
+	</search>
+	
+	<label>
+		<property qualifier="FacebookUser.name"/>
+		<property qualifier="FacebookUser.email"/>
+		<property qualifier="FacebookUser.gender"/>
+	</label>
+</base>

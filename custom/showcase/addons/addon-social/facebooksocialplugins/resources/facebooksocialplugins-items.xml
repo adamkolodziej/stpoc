@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="FacebookColorScheme" generate="true" autocreate="true" dynamic="true">
+			<value code="light" />
+			<value code="dark" />
+		</enumtype>
+		
+		<enumtype code="FacebookLikeVerbToDisplay" generate="true" autocreate="true" dynamic="true">
+			<value code="like" />
+			<value code="recommend" />
+		</enumtype>
+		
+		<enumtype code="FacebookLayoutStyle" generate="true" autocreate="true" dynamic="true">
+			<value code="standard" />
+			<value code="button_count" />
+			<value code="box_count" />
+		</enumtype>
+		
+		<enumtype code="FacebookLinkTarget" generate="true" autocreate="true" dynamic="true">
+			<value code="_blank"/>
+			<value code="_top" />
+			<value code="_parent" />
+		</enumtype>
+		
+		<enumtype code="FacebookRecommendationsBarSide" generate="true" autocreate="true" dynamic="true">
+			<value code="left"/>
+			<value code="right" />
+		</enumtype>
+
+		<enumtype code="FacebookFont" generate="true" autocreate="true" dynamic="true">
+			<value code="ARIAL" />
+			<value code="LUCIDA_GRANDE" />
+			<value code="SEGOE_UI" />
+			<value code="TAHOMA" />
+			<value code="TREBUCHET_MS" />
+			<value code="VERDANA" />
+		</enumtype>
+
+		<enumtype code="FacebookLoginButtonSize" generate="true" autocreate="true" dynamic="true">
+			<value code="small" />
+			<value code="medium" />
+			<value code="large" />
+			<value code="xlarge" />
+		</enumtype>
+		
+		
+		<enumtype code="FacebookFacepilePictureSize" generate="true" autocreate="true" dynamic="true">
+			<value code="small" />
+			<value code="large" />
+		</enumtype>
+	</enumtypes>
+	
+	<itemtypes>
+			<itemtype code="AbstractFacebookComponent" generate="true" jaloclass="com.hybris.social.facebook.socialplugins.jalo.AbstractFacebookComponent" extends="SimpleCMSComponent" autocreate="true" abstract="true" />
+				
+		
+			<itemtype code="FacebookRecommendationsBoxComponent" generate="true"
+				jaloclass="com.hybris.social.facebook.socialplugins.jalo.FacebookRecommendationsBoxComponent" extends="AbstractFacebookComponent"
+				autocreate="true">
+				<attributes>
+					<attribute qualifier="font" generate="true" autocreate="true" type="FacebookFont">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="colorScheme" generate="true" autocreate="true" type="FacebookColorScheme">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="domains" generate="true" autocreate="true" type="CMSStringList">
+						<persistence type="property" />
+						<description>a list of domains to show recommendations for. Defaults to the current domain. </description>
+					</attribute>
+					<attribute qualifier="width" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<description>Default 300px</description>
+						<defaultvalue>new Integer(300)</defaultvalue>
+					</attribute>
+					<attribute qualifier="height" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<description>Default 300px</description>
+						<defaultvalue>new Integer(300)</defaultvalue>
+					</attribute>
+					<attribute qualifier="showHeader" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+							<modifiers optional="false" />
+							<description>Show the facebook header for the plugin</description>
+							<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+						</attribute>
+						<attribute qualifier="borderColor" generate="true" autocreate="true" type="java.lang.String">
+							<persistence type="property" />
+						</attribute>
+						<attribute qualifier="linkTarget" generate="true" autocreate="true" type="FacebookLinkTarget">
+							<persistence type="property" />
+							<description>This specifies the context in which content links are opened. By default all links within the plugin will open a new window. If you want the content links to open in the same window, you can set this parameter to _top or _parent. Links to Facebook URLs will always open in a new window. </description>
+							<defaultvalue>em().getEnumerationValue("FacebookLinkTarget","_blank")</defaultvalue>
+						</attribute>
+						<attribute qualifier="ref" generate="true" autocreate="true" type="java.lang.String">
+							<persistence type="property" />
+							<description>Ref parameter</description>
+						</attribute>
+						<attribute qualifier="maxAge" generate="true" autocreate="true" type="java.lang.Integer">
+							<persistence type="property" />
+							<description>the maximum age of a URL to show in the plugin. The default is 0 (we don‚Äôt take age into account). Otherwise the valid values are 1-180, which specifies the number of days.</description>
+							<defaultvalue>new Integer(0)</defaultvalue>
+						</attribute>
+					</attributes>
+			</itemtype>
+			
+			<itemtype code="FacebookRecommendationsBarComponent" generate="true"
+				jaloclass="com.hybris.social.facebook.socialplugins.jalo.FacebookRecommendationsBarComponent" extends="AbstractFacebookComponent"
+				autocreate="true">
+				<attributes>
+					
+					<attribute qualifier="url" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<description>Url</description>
+					</attribute>
+					<attribute qualifier="domains" generate="true" autocreate="true" type="CMSStringList">
+						<persistence type="property" />
+						<description>a list of domains to show recommendations for. Defaults to the current domain. </description>
+					</attribute>
+					<attribute qualifier="pageScrollPercentage" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<description>any positive integer less than or equal to 100. Indicates % of page scrolled past before read is triggered </description>
+					</attribute>
+					<attribute qualifier="readTime" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<defaultvalue>new Integer(30)</defaultvalue>
+					</attribute>
+					<attribute qualifier="verbToDisplay" generate="true" autocreate="true" type="FacebookLikeVerbToDisplay">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="side" generate="true" autocreate="true" type="FacebookRecommendationsBarSide">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>em().getEnumerationValue("FacebookRecommendationsBarSide","right")</defaultvalue>
+					</attribute>
+					<attribute qualifier="ref" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<description>Ref parameter</description>
+					</attribute>
+					<attribute qualifier="maxAge" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<description>the maximum age of a URL to show in the plugin. The default is 0 (we don't take age into account). Otherwise the valid values are 1-180, which specifies the number of days.</description>
+						<defaultvalue>new Integer(0)</defaultvalue>
+					</attribute>
+					<attribute qualifier="numRecommendations" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<defaultvalue>new Integer(2)</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+	
+	<itemtype code="FacebookLikeComponent" generate="true"
+				jaloclass="com.hybris.social.facebook.socialplugins.jalo.FacebookLikeComponent" extends="AbstractFacebookComponent"
+				autocreate="true">
+				<attributes>		
+					<attribute qualifier="urlToLike" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<description>Url to like</description>
+					</attribute>	
+					<attribute qualifier="sendButton" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>Specifies whether to show send button.</description>
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>				
+					<attribute qualifier="layoutStyle" generate="true" autocreate="true" type="FacebookLayoutStyle">
+						<persistence type="property" />
+					</attribute>					
+					<attribute qualifier="width" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<description>The width of the plugin in pixels. Default width: 450px.</description>
+						<defaultvalue>new Integer(450)</defaultvalue>
+					</attribute>					
+					<attribute qualifier="showFaces" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>Specifies whether to show faces underneath the Login button.</description>
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>					
+					<attribute qualifier="verbToDisplay" generate="true" autocreate="true" type="FacebookLikeVerbToDisplay">
+						<persistence type="property" />
+					</attribute>				
+					<attribute qualifier="colorScheme" generate="true" autocreate="true" type="FacebookColorScheme">
+						<persistence type="property" />
+					</attribute>					
+					<attribute qualifier="font" generate="true" autocreate="true" type="FacebookFont">
+						<persistence type="property" />
+					</attribute>					
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="FacebookLikeBoxComponent" generate="true"
+				jaloclass="com.hybris.social.facebook.socialplugins.jalo.FacebookLikeBoxComponent" extends="AbstractFacebookComponent"
+				autocreate="true">
+				<attributes>
+					<attribute qualifier="facebookPageUrl" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>	
+					<attribute qualifier="width" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>The width of the plugin in pixels. Default width: 300px.</description>
+						<defaultvalue>new Integer(300)</defaultvalue>
+					</attribute>
+					<attribute qualifier="height" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<description>the height of the plugin in pixels. The default height varies based on number of faces to display, and whether the stream is displayed. With the stream displayed, and 10 faces the default height is 556px. With no faces, and no stream the default height is 63px.</description>
+					</attribute>
+					<attribute qualifier="colorScheme" generate="true" autocreate="true" type="FacebookColorScheme">
+						<persistence type="property" />
+					</attribute>	
+					<attribute qualifier="showFaces" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>Specifies whether or not to display profile photos in the plugin. Default value: true.</description>
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>
+					<attribute qualifier="showStream" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>Specifies whether to display a stream of the latest posts from the Page's wall</description>
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>
+					<attribute qualifier="showHeader" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>Specifies whether to display the Facebook header at the top of the plugin.</description>
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>
+					<attribute qualifier="borderColor" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<description>The border color of the plugin.</description>
+					</attribute>
+					<attribute qualifier="forceWall" generate="true" autocreate="true" type="java.lang.Boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>For Places, specifies whether the stream contains posts from the Place's wall or just checkins from friends. Default value: false.</description>
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					</attribute>
+				</attributes>
+				
+			</itemtype>
+			
+			<itemtype code="FacebookSendComponent" generate="true"
+				jaloclass="com.hybris.social.facebook.socialplugins.jalo.FacebookSendComponent" extends="AbstractFacebookComponent"
+				autocreate="true">
+				<attributes>		
+					<attribute qualifier="urlToSend" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<description>Url to send</description>
+					</attribute>			
+					<attribute qualifier="colorScheme" generate="true" autocreate="true" type="FacebookColorScheme">
+						<persistence type="property" />
+					</attribute>					
+					<attribute qualifier="font" generate="true" autocreate="true" type="FacebookFont">
+						<persistence type="property" />
+					</attribute>					
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="FacebookFacepileComponent" generate="true"  jaloclass="com.hybris.social.facebook.socialplugins.jalo.FacebookFacepileComponent" extends="AbstractFacebookComponent"
+				autocreate="true">
+				<attributes>
+					<attribute qualifier="url"  type="java.lang.String">
+						<persistence type="property" />
+						<description>Url</description>
+					</attribute>
+					<attribute qualifier="pictureSize" type="FacebookFacepilePictureSize">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>em().getEnumerationValue("FacebookFacepilePictureSize","small")</defaultvalue>
+					</attribute>
+					<attribute qualifier="width" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<description>The width of the plugin in pixels. Default width: 300px.</description>
+						<defaultvalue>new Integer(300)</defaultvalue>
+					</attribute>
+					<attribute qualifier="colorScheme" generate="true" autocreate="true" type="FacebookColorScheme">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="maxRows" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>The maximum number of rows of profile pictures to display. Default value: 1.</description>
+						<defaultvalue>new Integer(1)</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="FacebookCommentsComponent" generate="true" jaloclass="com.hybris.social.facebook.socialplugins.jalo.FacebookCommentsComponent" extends="AbstractFacebookComponent"
+				autocreate="true">
+				<attributes>
+					<attribute qualifier="urlToCommentOn" generate="true" autocreate="true" type="java.lang.String">
+						<persistence type="property" />
+						<description>Url to comment on</description>
+					</attribute>
+					<attribute qualifier="width" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<description>The width of the plugin in pixels. Default width: 400px.</description>
+						<defaultvalue>new Integer(400)</defaultvalue>
+					</attribute>
+					<attribute qualifier="colorScheme" generate="true" autocreate="true" type="FacebookColorScheme">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>em().getEnumerationValue("FacebookColorScheme","light")</defaultvalue>
+					</attribute>
+					<attribute qualifier="numberOfPosts" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<defaultvalue>new Integer(10)</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="FacebookCommentsTabComponent" generate="true" jaloclass="com.hybris.social.facebook.socialplugins.jalo.FacebookCommentsTabComponent" extends="FacebookCommentsComponent"
+				autocreate="true">
+				<attributes>
+					<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
+						<persistence type="property"  />
+						<modifiers optional="true" />
+						<description>Tab Title</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+	
+		
+	</itemtypes>
+</items>

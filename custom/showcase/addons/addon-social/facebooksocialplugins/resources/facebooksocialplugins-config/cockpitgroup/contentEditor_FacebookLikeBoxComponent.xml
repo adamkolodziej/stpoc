@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-editor hideEmpty="true" hideReadOnly="true" groupCollections="false">
+  <template>
+    <![CDATA[
+    	<table width="100%" style="margin: 0; padding: 0">
+    		<tbody>
+				<tr>
+					<td colspan="2"><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div class="contentEditorHeader" style="background-color: #C3C3C3; font-size: 11px; padding:3px;"><b>$label</b></div></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookLikeBoxComponent.facebookPageUrl"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"/>
+					<td><div style="height:20px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookLikeBoxComponent.width"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookLikeBoxComponent.height"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookLikeBoxComponent.showFaces"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookLikeBoxComponent.showHeader"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookLikeBoxComponent.showStream"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookLikeBoxComponent.forceWall"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"/>
+					<td><div style="height:20px"/></td>
+				</tr>
+				
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookLikeBoxComponent.colorScheme"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="FacebookLikeBoxComponent.borderColor"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+    		</tbody>
+    	</table>
+    ]]>
+  </template>
+</content-editor>

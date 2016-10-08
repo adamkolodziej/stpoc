@@ -1,0 +1,79 @@
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true"  displaySubtypes="true">
+	<displayed-properties>
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label lang="de">Stammdaten</label>
+		<label lang="en">General</label>
+		<label lang="fr">Propriétés</label>
+		<label lang="ja">プロパティ</label>
+		<property qualifier="AbstractPromotion.code"/>
+		<property qualifier="AbstractPromotion.title"/>
+		<property qualifier="AbstractPromotion.name"/>		
+		<property qualifier="AbstractPromotion.enabled"/>
+		<property qualifier="AbstractPromotion.priority"/>
+		<property qualifier="AbstractPromotion.promotionGroup" visible="true"/>
+	</group>
+
+
+	<group qualifier="Threshold" visible="true" initially-opened="true">
+		<label lang="de">Schwelle</label>
+		<label lang="en">Threshold</label>
+		<label lang="fr">Seuil</label>
+		<label lang="ja">しきい値</label>
+		
+		<property qualifier="OrderThresholdPerfectPartnerPromotion.thresholdTotals">
+			<parameter name="allowCreate" value="true"/>
+		</property>
+		<property qualifier="OrderThresholdPerfectPartnerPromotion.discountProduct">
+		</property>
+		<property qualifier="OrderThresholdPerfectPartnerPromotion.productPrices">
+			<parameter name="allowCreate" value="true"/>
+		</property>
+		<property qualifier="OrderThresholdPerfectPartnerPromotion.includeDiscountedPriceInThreshold"/>
+	</group>
+	
+	
+	<group qualifier="Dates" visible="true" initially-opened="true">
+		<label lang="de">Termine</label>
+		<label lang="en">Dates</label>
+		<label lang="fr">Dates</label>
+		<label lang="ja">日付</label>
+		
+		<property qualifier="AbstractPromotion.startDate"/>
+		<property qualifier="AbstractPromotion.endDate"/>
+	</group>	
+	
+	<group qualifier="Restriction" visible="true" initially-opened="true">
+		<label lang="de">Einschränkungen</label>
+		<label lang="en">Restrictions</label>
+		<label lang="fr">Restrictions</label>
+		<label lang="ja">制限</label>
+		
+		<property qualifier="AbstractPromotion.restrictions">
+			<parameter name="allowCreate" value="true"/>
+		</property>
+	</group>
+	
+	
+	<group qualifier="Messages" visible="true" initially-opened="true">
+		<label lang="de">Nachrichten</label>
+		<label lang="en">Messages</label>
+		<label lang="ja">メッセージ</label>
+		<property qualifier="AbstractPromotion.description" >
+			<parameter name="rows" value="3"/>
+		</property>
+		<property qualifier="OrderThresholdPerfectPartnerPromotion.messageFired" >
+			<parameter name="rows" value="3"/>
+		</property>
+		<property qualifier="OrderThresholdPerfectPartnerPromotion.messageCouldHaveFired"  >
+			<parameter name="rows" value="3"/>
+		</property>
+		<property qualifier="OrderThresholdPerfectPartnerPromotion.messageProductNoThreshold"  >
+			<parameter name="rows" value="3"/>
+		</property>
+		<property qualifier="OrderThresholdPerfectPartnerPromotion.messageThresholdNoProduct"  >
+			<parameter name="rows" value="3"/>
+		</property>
+	</group>
+	
+	</displayed-properties>
+</wizard-config>

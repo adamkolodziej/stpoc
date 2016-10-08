@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="false">
+			<label key="cockpit.config.label.General" />
+
+			<property qualifier="CMSItem.name"/>
+			<property qualifier="CMSItem.catalogVersion"/>
+			<property qualifier="AbstractCMSComponent.visible"/>
+			<property qualifier="AddThisComponent.altAnalyticsUser" />
+		</group>	
+		<group qualifier="UILayout" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.Layout" />
+            <property qualifier="AddThisComponent.orientation" />
+            <property qualifier="AddThisComponent.size" />
+            <property qualifier="AddThisComponent.uiClick" />
+            <property qualifier="AddThisComponent.showCounter" />
+            <property qualifier="AddThisComponent.visibleServiceButtons" editorCode="iconCollectionUIEditor"/>
+		</group>
+        <group qualifier="UIMenu" visible="true" initially-opened="true">
+            <label key="cockpit.config.label.Menu" />
+            <property qualifier="AddThisComponent.servicesCompact" editorCode="iconCollectionUIEditor" />
+            <property qualifier="AddThisComponent.servicesExpanded" editorCode="iconCollectionUIEditor" />
+            <property qualifier="AddThisComponent.servicesExclude" editorCode="iconCollectionUIEditor" />
+        </group>
+
+	</displayed-properties>
+
+</wizard-config>

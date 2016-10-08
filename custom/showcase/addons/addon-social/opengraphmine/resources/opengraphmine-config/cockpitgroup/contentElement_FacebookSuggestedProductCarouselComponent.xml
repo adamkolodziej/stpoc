@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>
+	<content-element type="FacebookSuggestedProductCarouselComponent" name="type.FacebookSuggestedProductCarouselComponent.name"
+			description="type.FacebookSuggestedProductCarouselComponent.description"
+			image="cmscockpit/images/facebook_icon_34x34.gif"
+			refImage="cmscockpit/images/facebook_icon_34x34.gif"
+			imageSmall="cmscockpit/images/facebook_icon_20x20.gif"/>
+</content-elements>

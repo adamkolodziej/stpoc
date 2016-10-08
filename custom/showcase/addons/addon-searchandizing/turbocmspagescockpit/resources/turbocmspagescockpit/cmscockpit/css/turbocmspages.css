@@ -1,0 +1,10 @@
+table.btnliveeditcontent_makelandingpage{
+	background-image: url("../../cockpit/css/images/BUTTON_GRAY_LIGHT_back.gif") !important;
+	color: #364458 !important;
+	height: 20px !important;
+}
+
+.btnliveeditcontent_makelandingpage .z-button-cm{
+	background: url(../images/icon_func_makelandingpage_i.png) no-repeat scroll 2px top transparent !important;
+	padding-left: 23px !important;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="wizard-config.xsd" showPrefilledValues="false" selectMode="true" createMode="true" displaySubtypes="true">
+	<displayed-properties>
+		
+		 <group qualifier="General" visible="true" initially-opened="true">
+                <label key="cockpit.config.label.General" />
+                <property qualifier="SolrSort.code" />
+                <property qualifier="SolrSort.name" />
+                <property qualifier="SolrSort.fields" />
+                <property qualifier="SolrSort.visible" />
+        </group>
+        
+        
+        <group qualifier="Conditions" visible="true" initially-opened="true">
+                <label key="cockpit.config.label.conditions" />
+                <property qualifier="ConditionalSolrSort.conditions" />
+        </group>
+ 
+        <group qualifier="admin" visible="true" initially-opened="false">
+                <label key="config.general.administration" />
+                <property qualifier="Item.pk" />
+                <property qualifier="Item.creationTime" />
+                <property qualifier="Item.modifiedtime" />
+                <property qualifier="SolrSort.indexedType" />
+        </group>
+           
+	</displayed-properties>
+</wizard-config>

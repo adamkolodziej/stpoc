@@ -9,20 +9,6 @@ $billingEvent = billingEvent(code)[default = 'onfirstbill']
 
 # CECS-91 improved bundle sampledata
 INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[unique = true]; $catalogVersion; currency(isocode)[default = USD, unique = true]; unit(code)[default = pieces]
-; pricePlan_phoneUnlimitedWeekend_USD        ; phoneUnlimitedWeekend
-; pricePlan_phoneUnlimitedWeekendEvening_USD ; phoneUnlimitedWeekendEvening
-; pricePlan_standardBroadband_USD            ; standardBroadband
-; pricePlan_fibreBroadbandLimited_USD        ; fibreBroadbandLimited
-; pricePlan_fibreBroadbandUnlimited_USD      ; fibreBroadbandUnlimited
-; pricePlan_superFibreUnlimited_USD          ; superFibreUnlimited
-; pricePlan_sptelWifi_USD                    ; sptelWifi
-; pricePlan_tvStarter_USD                    ; tvStarter
-; pricePlan_tvEntertainment_USD              ; tvEntertainment
-; pricePlan_tvPremium_USD                    ; tvPremium
-; pricePlan_Sport_USD                        ; Sport
-; pricePlan_Sport_trial_USD                  ; Sport_trial
-; pricePlan_TCO_USD                          ; TCO
-; pricePlan_foreignLanguagePackage_USD       ; foreignLanguagePackage
 ; pricePlan_allOnDemand_USD                  ; allOnDemand
 ; pricePlan_af1Voice_USD                     ; af1Voice
 ; pricePlan_af2AssuredData_USD               ; af2AssuredData
@@ -41,20 +27,6 @@ INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[
 
 # CECS-99: Sptel sampledata should support en/de languages and EUR/USD/GBP currencies - START
 INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[unique = true]; $catalogVersion; currency(isocode)[default = EUR, unique = true]; unit(code)[default = pieces]
-; pricePlan_phoneUnlimitedWeekend_EUR        ; phoneUnlimitedWeekend
-; pricePlan_phoneUnlimitedWeekendEvening_EUR ; phoneUnlimitedWeekendEvening
-; pricePlan_standardBroadband_EUR            ; standardBroadband
-; pricePlan_fibreBroadbandLimited_EUR        ; fibreBroadbandLimited
-; pricePlan_fibreBroadbandUnlimited_EUR      ; fibreBroadbandUnlimited
-; pricePlan_superFibreUnlimited_EUR          ; superFibreUnlimited
-; pricePlan_sptelWifi_EUR                    ; sptelWifi
-; pricePlan_tvStarter_EUR                    ; tvStarter
-; pricePlan_tvEntertainment_EUR              ; tvEntertainment
-; pricePlan_tvPremium_EUR                    ; tvPremium
-; pricePlan_Sport_EUR                        ; Sport
-; pricePlan_Sport_trial_EUR                  ; Sport_trial
-; pricePlan_TCO_EUR                          ; TCO
-; pricePlan_foreignLanguagePackage_EUR       ; foreignLanguagePackage
 ; pricePlan_allOnDemand_EUR                  ; allOnDemand
 ; pricePlan_af1Voice_EUR                     ; af1Voice
 ; pricePlan_af2AssuredData_EUR               ; af2AssuredData
@@ -72,20 +44,6 @@ INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[
 ; pricePlan_virtualRouter_EUR                ; virtualRouter
 
 INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[unique = true]; $catalogVersion; currency(isocode)[default = GBP, unique = true]; unit(code)[default = pieces]
-; pricePlan_phoneUnlimitedWeekend_GBP        ; phoneUnlimitedWeekend
-; pricePlan_phoneUnlimitedWeekendEvening_GBP ; phoneUnlimitedWeekendEvening
-; pricePlan_standardBroadband_GBP            ; standardBroadband
-; pricePlan_fibreBroadbandLimited_GBP        ; fibreBroadbandLimited
-; pricePlan_fibreBroadbandUnlimited_GBP      ; fibreBroadbandUnlimited
-; pricePlan_superFibreUnlimited_GBP          ; superFibreUnlimited
-; pricePlan_sptelWifi_GBP                    ; sptelWifi
-; pricePlan_tvStarter_GBP                    ; tvStarter
-; pricePlan_tvEntertainment_GBP              ; tvEntertainment
-; pricePlan_tvPremium_GBP                    ; tvPremium
-; pricePlan_Sport_GBP                        ; Sport
-; pricePlan_Sport_trial_GBP                  ; Sport_trial
-; pricePlan_TCO_GBP                          ; TCO
-; pricePlan_foreignLanguagePackage_GBP       ; foreignLanguagePackage
 ; pricePlan_allOnDemand_GBP                  ; allOnDemand
 ; pricePlan_af1Voice_GBP                     ; af1Voice
 ; pricePlan_af2AssuredData_GBP               ; af2AssuredData
@@ -102,124 +60,45 @@ INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[
 ; pricePlan_leasedLineAccess_GBP             ; leasedLineAccess
 ; pricePlan_virtualRouter_GBP                ; virtualRouter
 
-# CECS-99: Sptel sampledata should support en/de languages and EUR/USD/GBP currencies - END
-
-INSERT_UPDATE SubscriptionPricePlan; &pricePlan; product(code, $catalogVersion)[unique = true]; $catalogVersion; currency(isocode)[default = CRD, unique = true]; unit(code)[default = pieces]
-; pricePlan_Sport_CRD ; Sport
-
 INSERT_UPDATE OneTimeChargeEntry; id[unique = true]; subscriptionPricePlanOneTime(&pricePlan); price; $catalogVersion; $billingEvent
-; OTCE_phoneUnlimitedWeekend_USD             ; pricePlan_phoneUnlimitedWeekend_USD   ; 50
-; OTCE_standardBroadband_USD                 ; pricePlan_standardBroadband_USD       ; 50
-; OTCE_fibreBroadbandLimited_USD             ; pricePlan_fibreBroadbandLimited_USD   ; 50
-; OTCE_fibreBroadbandUnlimited_USD           ; pricePlan_fibreBroadbandUnlimited_USD ; 50
-; OTCE_superFibreUnlimited_USD               ; pricePlan_superFibreUnlimited_USD     ; 50
-; OTCE_pricePlan_tvStarter_USD               ; pricePlan_tvStarter_USD               ; 50
-; OTCE_pricePlan_tvEntertainment_USD         ; pricePlan_tvEntertainment_USD         ; 50
-; OTCE_pricePlan_tvPremium_USD               ; pricePlan_tvPremium_USD               ; 50
-# CECS-99: Sptel sampledata should support en/de languages and EUR/USD/GBP currencies - START
-; OTCE_phoneUnlimitedWeekend_EUR             ; pricePlan_phoneUnlimitedWeekend_EUR   ; 44
-; OTCE_standardBroadband_EUR                 ; pricePlan_standardBroadband_EUR       ; 44
-; OTCE_fibreBroadbandLimited_EUR             ; pricePlan_fibreBroadbandLimited_EUR   ; 44
-; OTCE_fibreBroadbandUnlimited_EUR           ; pricePlan_fibreBroadbandUnlimited_EUR ; 44
-; OTCE_superFibreUnlimited_EUR               ; pricePlan_superFibreUnlimited_EUR     ; 44
-; OTCE_pricePlan_tvStarter_EUR               ; pricePlan_tvStarter_EUR               ; 44
-; OTCE_pricePlan_tvEntertainment_EUR         ; pricePlan_tvEntertainment_EUR         ; 44
-; OTCE_pricePlan_tvPremium_EUR               ; pricePlan_tvPremium_EUR               ; 44
-; OTCE_pricePlan_phoneUnlimitedWeekend_GBP   ; pricePlan_phoneUnlimitedWeekend_GBP   ; 32
-; OTCE_pricePlan_standardBroadband_GBP       ; pricePlan_standardBroadband_GBP       ; 32
-; OTCE_pricePlan_fibreBroadbandLimited_GBP   ; pricePlan_fibreBroadbandLimited_GBP   ; 32
-; OTCE_pricePlan_fibreBroadbandUnlimited_GBP ; pricePlan_fibreBroadbandUnlimited_GBP ; 32
-; OTCE_pricePlan_superFibreUnlimited_GBP     ; pricePlan_superFibreUnlimited_GBP     ; 32
-; OTCE_pricePlan_tvStarter_GBP               ; pricePlan_tvStarter_GBP               ; 32
-; OTCE_pricePlan_tvEntertainment_GBP         ; pricePlan_tvEntertainment_GBP         ; 32
-; OTCE_pricePlan_tvPremium_GBP               ; pricePlan_tvPremium_GBP               ; 32
-#CECS-99: Sptel sampledata should support en/de languages and EUR/USD/GBP currencies - END
 
 INSERT_UPDATE RecurringChargeEntry; id[unique = true]; subscriptionPricePlanRecurring(&pricePlan); price; cycleStart; cycleEnd; $catalogVersion
-; RCE_phoneUnlimitedWeekend_USD                  ; pricePlan_phoneUnlimitedWeekend_USD        ; 16.99 ; 1 ;
-; RCE_phoneUnlimitedWeekendEvening_USD           ; pricePlan_phoneUnlimitedWeekendEvening_USD ; 3     ; 1 ;
-; RCE_standardBroadband_USD                      ; pricePlan_standardBroadband_USD            ; 4.75  ; 1 ;
-; RCE_fibreBroadbandLimited_USD                  ; pricePlan_fibreBroadbandLimited_USD        ; 6.5   ; 1 ;
-; RCE_fibreBroadbandUnlimited_USD                ; pricePlan_fibreBroadbandUnlimited_USD      ; 15    ; 1 ;
-; RCE_superFibreUnlimited_USD                    ; pricePlan_superFibreUnlimited_USD          ; 25    ; 1 ;
-; RCE_sptelWifi_USD                              ; pricePlan_sptelWifi_USD                    ; 2     ; 1 ;
-; RCE_pricePlan_tvStarter_USD                    ; pricePlan_tvStarter_USD                    ; 10    ; 1
-; RCE_pricePlan_tvEntertainment_USD              ; pricePlan_tvEntertainment_USD              ; 12    ; 1
-; RCE_pricePlan_tvPremium_USD                    ; pricePlan_tvPremium_USD                    ; 15    ; 1
-; RCE_pricePlan_Sport_USD                        ; pricePlan_Sport_USD                        ; 5     ; 1
-; RCE_pricePlan_Sport_CRD                        ; pricePlan_Sport_CRD                        ; 5     ; 1 ; 3
-; RCE_pricePlan_Sport_trial_USD                  ; pricePlan_Sport_trial_USD                  ; 5     ; 1 ; 1
-; RCE_pricePlan_TCO_USD                          ; pricePlan_TCO_USD                          ; 7     ; 1
-; RCE_pricePlan_foreignLanguagePackage_USD       ; pricePlan_foreignLanguagePackage_USD       ; 3     ; 1
-; RCE_pricePlan_allOnDemand_USD                  ; pricePlan_allOnDemand_USD                  ; 5     ; 1
-# CECS-99: Sptel sampledata should support en/de languages and EUR/USD/GBP currencies - START
-; RCE_phoneUnlimitedWeekend_EUR                  ; pricePlan_phoneUnlimitedWeekend_EUR        ; 15    ; 1 ;
-; RCE_phoneUnlimitedWeekendEvening_EUR           ; pricePlan_phoneUnlimitedWeekendEvening_EUR ; 2.65  ; 1 ;
-; RCE_standardBroadband_EUR                      ; pricePlan_standardBroadband_EUR            ; 4.2   ; 1 ;
-; RCE_fibreBroadbandLimited_EUR                  ; pricePlan_fibreBroadbandLimited_EUR        ; 5.75  ; 1 ;
-; RCE_fibreBroadbandUnlimited_EUR                ; pricePlan_fibreBroadbandUnlimited_EUR      ; 13.25 ; 1 ;
-; RCE_superFibreUnlimited_EUR                    ; pricePlan_superFibreUnlimited_EUR          ; 22    ; 1 ;
-; RCE_sptelWifi_EUR                              ; pricePlan_sptelWifi_EUR                    ; 1.75  ; 1 ;
-; RCE_pricePlan_tvStarter_EUR                    ; pricePlan_tvStarter_EUR                    ; 8.85  ; 1
-; RCE_pricePlan_tvEntertainment_EUR              ; pricePlan_tvEntertainment_EUR              ; 10.65 ; 1
-; RCE_pricePlan_tvPremium_EUR                    ; pricePlan_tvPremium_EUR                    ; 13.32 ; 1
-; RCE_pricePlan_Sport_EUR                        ; pricePlan_Sport_EUR                        ; 4.45  ; 1
-; RCE_pricePlan_Sport_trial_EUR                  ; pricePlan_Sport_trial_EUR                  ; 5     ; 1 ; 1
-; RCE_pricePlan_TCO_EUR                          ; pricePlan_TCO_EUR                          ; 6.2   ; 1
-; RCE_pricePlan_foreignLanguagePackage_EUR       ; pricePlan_foreignLanguagePackage_EUR       ; 2.65  ; 1
-; RCE_pricePlan_allOnDemand_EUR                  ; pricePlan_allOnDemand_EUR                  ; 4.45  ; 1
-; RCE_pricePlan_phoneUnlimitedWeekend_GBP        ; pricePlan_phoneUnlimitedWeekend_GBP        ; 11    ; 1 ;
-; RCE_pricePlan_phoneUnlimitedWeekendEvening_GBP ; pricePlan_phoneUnlimitedWeekendEvening_GBP ; 1.9   ; 1 ;
-; RCE_pricePlan_standardBroadband_GBP            ; pricePlan_standardBroadband_GBP            ; 3     ; 1 ;
-; RCE_pricePlan_fibreBroadbandLimited_GBP        ; pricePlan_fibreBroadbandLimited_GBP        ; 4.1   ; 1 ;
-; RCE_pricePlan_fibreBroadbandUnlimited_GBP      ; pricePlan_fibreBroadbandUnlimited_GBP      ; 9.5   ; 1 ;
-; RCE_pricePlan_superFibreUnlimited_GBP          ; pricePlan_superFibreUnlimited_GBP          ; 16    ; 1 ;
-; RCE_pricePlan_sptelWifi_GBP                    ; pricePlan_sptelWifi_GBP                    ; 1.3   ; 1 ;
-; RCE_pricePlan_tvStarter_GBP                    ; pricePlan_tvStarter_GBP                    ; 6.4   ; 1 ;
-; RCE_pricePlan_tvEntertainment_GBP              ; pricePlan_tvEntertainment_GBP              ; 7.6   ; 1 ;
-; RCE_pricePlan_tvPremium_GBP                    ; pricePlan_tvPremium_GBP                    ; 9.5   ; 1 ;
-; RCE_pricePlan_Sport_GBP                        ; pricePlan_Sport_GBP                        ; 3.2   ; 1 ;
-; RCE_pricePlan_Sport_trial_GBP                  ; pricePlan_Sport_trial_GBP                  ; 0     ; 1 ;
-; RCE_pricePlan_TCO_GBP                          ; pricePlan_TCO_GBP                          ; 4.5   ; 1 ;
-; RCE_pricePlan_foreignLanguagePackage_GBP       ; pricePlan_foreignLanguagePackage_GBP       ; 1.9   ; 1 ;
-; RCE_pricePlan_allOnDemand_USD                  ; pricePlan_allOnDemand_GBP                  ; 3.2   ; 1 ;
-; RCE_pricePlan_af1Voice_USD                     ; pricePlan_af1Voice_USD                     ; 3.2   ; 1 ;
-; RCE_pricePlan_af2AssuredData_USD               ; pricePlan_af2AssuredData_USD               ; 3.2   ; 1 ;
-; RCE_pricePlan_efStandard_USD                   ; pricePlan_efStandard_USD                   ; 3.2   ; 1 ;
-; RCE_pricePlan_af3AssuredData_USD               ; pricePlan_af3AssuredData_USD               ; 3.2   ; 1 ;
-; RCE_pricePlan_af1Voice_EUR                     ; pricePlan_af1Voice_EUR                     ; 3.2   ; 1 ;
-; RCE_pricePlan_af2AssuredData_EUR               ; pricePlan_af2AssuredData_EUR               ; 3.2   ; 1 ;
-; RCE_pricePlan_efStandard_EUR                   ; pricePlan_efStandard_EUR                   ; 3.2   ; 1 ;
-; RCE_pricePlan_af3AssuredData_EUR               ; pricePlan_af3AssuredData_EUR               ; 3.2   ; 1 ;
-; RCE_pricePlan_bandwidth4mbps_EUR               ; pricePlan_bandwidth4mbps_EUR               ; 3.2   ; 1 ;
-; RCE_pricePlan_bandwidth64mbps_EUR              ; pricePlan_bandwidth64mbps_EUR              ; 3.2   ; 1 ;
-; RCE_pricePlan_bandwidth1gbps_EUR               ; pricePlan_bandwidth1gbps_EUR               ; 3.2   ; 1 ;
-; RCE_pricePlan_bandwidth4mbps_USD               ; pricePlan_bandwidth4mbps_USD               ; 3.2   ; 1 ;
-; RCE_pricePlan_bandwidth64mbps_USD              ; pricePlan_bandwidth64mbps_USD              ; 3.2   ; 1 ;
-; RCE_pricePlan_bandwidth1gbps_USD               ; pricePlan_bandwidth1gbps_USD               ; 3.2   ; 1 ;
-; RCE_pricePlan_bandwidth4mbps_GBP               ; pricePlan_bandwidth4mbps_GBP               ; 3.2   ; 1 ;
-; RCE_pricePlan_bandwidth64mbps_GBP              ; pricePlan_bandwidth64mbps_GBP              ; 3.2   ; 1 ;
-; RCE_pricePlan_bandwidth1gbps_GBP               ; pricePlan_bandwidth1gbps_GBP               ; 3.2   ; 1 ;
-; RCE_pricePlan_ipVpnCloudConnection_EUR         ; pricePlan_ipVpnCloudConnection_EUR         ; 3.2   ; 1 ;
-; RCE_pricePlan_metroInternetCloudConnection_EUR ; pricePlan_metroInternetCloudConnection_EUR ; 3.2   ; 1 ;
-; RCE_pricePlan_dataCenterCloudConnection_EUR    ; pricePlan_dataCenterCloudConnection_EUR    ; 3.2   ; 1 ;
-; RCE_pricePlan_ethernetAccess_EUR               ; pricePlan_ethernetAccess_EUR               ; 3.2   ; 1 ;
-; RCE_pricePlan_fibreAccess_EUR                  ; pricePlan_fibreAccess_EUR                  ; 3.2   ; 1 ;
-; RCE_pricePlan_leasedLineAccess_EUR             ; pricePlan_leasedLineAccess_EUR             ; 3.2   ; 1 ;
-; RCE_pricePlan_ipVpnCloudConnection_USD         ; pricePlan_ipVpnCloudConnection_USD         ; 3.2   ; 1 ;
-; RCE_pricePlan_metroInternetCloudConnection_USD ; pricePlan_metroInternetCloudConnection_USD ; 3.2   ; 1 ;
-; RCE_pricePlan_dataCenterCloudConnection_USD    ; pricePlan_dataCenterCloudConnection_USD    ; 3.2   ; 1 ;
-; RCE_pricePlan_ethernetAccess_USD               ; pricePlan_ethernetAccess_USD               ; 3.2   ; 1 ;
-; RCE_pricePlan_fibreAccess_USD                  ; pricePlan_fibreAccess_USD                  ; 3.2   ; 1 ;
-; RCE_pricePlan_leasedLineAccess_USD             ; pricePlan_leasedLineAccess_USD             ; 3.2   ; 1 ;
-; RCE_pricePlan_ipVpnCloudConnection_GBP         ; pricePlan_ipVpnCloudConnection_GBP         ; 3.2   ; 1 ;
-; RCE_pricePlan_metroInternetCloudConnection_GBP ; pricePlan_metroInternetCloudConnection_GBP ; 3.2   ; 1 ;
-; RCE_pricePlan_dataCenterCloudConnection_GBP    ; pricePlan_dataCenterCloudConnection_GBP    ; 3.2   ; 1 ;
-; RCE_pricePlan_ethernetAccess_GBP               ; pricePlan_ethernetAccess_GBP               ; 3.2   ; 1 ;
-; RCE_pricePlan_fibreAccess_GBP                  ; pricePlan_fibreAccess_GBP                  ; 3.2   ; 1 ;
-; RCE_pricePlan_leasedLineAccess_GBP             ; pricePlan_leasedLineAccess_GBP             ; 3.2   ; 1 ;
-; RCE_pricePlan_virtualRouter_EUR                ; pricePlan_virtualRouter_EUR                ; 5.6   ; 1 ;
-; RCE_pricePlan_virtualRouter_USD                ; pricePlan_virtualRouter_USD                ; 5.6   ; 1 ;
-; RCE_pricePlan_virtualRouter_GBP                ; pricePlan_virtualRouter_GBP                ; 5.6   ; 1 ;
-
-UPDATE Product; code[unique = true]; $prices; $taxGroup; $catalogVersion
+; RCE_pricePlan_allOnDemand_USD                  ; pricePlan_allOnDemand_GBP                  ; 3.2 ; 1 ;
+; RCE_pricePlan_af1Voice_USD                     ; pricePlan_af1Voice_USD                     ; 3.2 ; 1 ;
+; RCE_pricePlan_af2AssuredData_USD               ; pricePlan_af2AssuredData_USD               ; 3.2 ; 1 ;
+; RCE_pricePlan_efStandard_USD                   ; pricePlan_efStandard_USD                   ; 3.2 ; 1 ;
+; RCE_pricePlan_af3AssuredData_USD               ; pricePlan_af3AssuredData_USD               ; 3.2 ; 1 ;
+; RCE_pricePlan_af1Voice_EUR                     ; pricePlan_af1Voice_EUR                     ; 3.2 ; 1 ;
+; RCE_pricePlan_af2AssuredData_EUR               ; pricePlan_af2AssuredData_EUR               ; 3.2 ; 1 ;
+; RCE_pricePlan_efStandard_EUR                   ; pricePlan_efStandard_EUR                   ; 3.2 ; 1 ;
+; RCE_pricePlan_af3AssuredData_EUR               ; pricePlan_af3AssuredData_EUR               ; 3.2 ; 1 ;
+; RCE_pricePlan_bandwidth4mbps_EUR               ; pricePlan_bandwidth4mbps_EUR               ; 3.2 ; 1 ;
+; RCE_pricePlan_bandwidth64mbps_EUR              ; pricePlan_bandwidth64mbps_EUR              ; 3.2 ; 1 ;
+; RCE_pricePlan_bandwidth1gbps_EUR               ; pricePlan_bandwidth1gbps_EUR               ; 3.2 ; 1 ;
+; RCE_pricePlan_bandwidth4mbps_USD               ; pricePlan_bandwidth4mbps_USD               ; 3.2 ; 1 ;
+; RCE_pricePlan_bandwidth64mbps_USD              ; pricePlan_bandwidth64mbps_USD              ; 3.2 ; 1 ;
+; RCE_pricePlan_bandwidth1gbps_USD               ; pricePlan_bandwidth1gbps_USD               ; 3.2 ; 1 ;
+; RCE_pricePlan_bandwidth4mbps_GBP               ; pricePlan_bandwidth4mbps_GBP               ; 3.2 ; 1 ;
+; RCE_pricePlan_bandwidth64mbps_GBP              ; pricePlan_bandwidth64mbps_GBP              ; 3.2 ; 1 ;
+; RCE_pricePlan_bandwidth1gbps_GBP               ; pricePlan_bandwidth1gbps_GBP               ; 3.2 ; 1 ;
+; RCE_pricePlan_ipVpnCloudConnection_EUR         ; pricePlan_ipVpnCloudConnection_EUR         ; 3.2 ; 1 ;
+; RCE_pricePlan_metroInternetCloudConnection_EUR ; pricePlan_metroInternetCloudConnection_EUR ; 3.2 ; 1 ;
+; RCE_pricePlan_dataCenterCloudConnection_EUR    ; pricePlan_dataCenterCloudConnection_EUR    ; 3.2 ; 1 ;
+; RCE_pricePlan_ethernetAccess_EUR               ; pricePlan_ethernetAccess_EUR               ; 3.2 ; 1 ;
+; RCE_pricePlan_fibreAccess_EUR                  ; pricePlan_fibreAccess_EUR                  ; 3.2 ; 1 ;
+; RCE_pricePlan_leasedLineAccess_EUR             ; pricePlan_leasedLineAccess_EUR             ; 3.2 ; 1 ;
+; RCE_pricePlan_ipVpnCloudConnection_USD         ; pricePlan_ipVpnCloudConnection_USD         ; 3.2 ; 1 ;
+; RCE_pricePlan_metroInternetCloudConnection_USD ; pricePlan_metroInternetCloudConnection_USD ; 3.2 ; 1 ;
+; RCE_pricePlan_dataCenterCloudConnection_USD    ; pricePlan_dataCenterCloudConnection_USD    ; 3.2 ; 1 ;
+; RCE_pricePlan_ethernetAccess_USD               ; pricePlan_ethernetAccess_USD               ; 3.2 ; 1 ;
+; RCE_pricePlan_fibreAccess_USD                  ; pricePlan_fibreAccess_USD                  ; 3.2 ; 1 ;
+; RCE_pricePlan_leasedLineAccess_USD             ; pricePlan_leasedLineAccess_USD             ; 3.2 ; 1 ;
+; RCE_pricePlan_ipVpnCloudConnection_GBP         ; pricePlan_ipVpnCloudConnection_GBP         ; 3.2 ; 1 ;
+; RCE_pricePlan_metroInternetCloudConnection_GBP ; pricePlan_metroInternetCloudConnection_GBP ; 3.2 ; 1 ;
+; RCE_pricePlan_dataCenterCloudConnection_GBP    ; pricePlan_dataCenterCloudConnection_GBP    ; 3.2 ; 1 ;
+; RCE_pricePlan_ethernetAccess_GBP               ; pricePlan_ethernetAccess_GBP               ; 3.2 ; 1 ;
+; RCE_pricePlan_fibreAccess_GBP                  ; pricePlan_fibreAccess_GBP                  ; 3.2 ; 1 ;
+; RCE_pricePlan_leasedLineAccess_GBP             ; pricePlan_leasedLineAccess_GBP             ; 3.2 ; 1 ;
+; RCE_pricePlan_virtualRouter_EUR                ; pricePlan_virtualRouter_EUR                ; 5.6 ; 1 ;
+; RCE_pricePlan_virtualRouter_USD                ; pricePlan_virtualRouter_USD                ; 5.6 ; 1 ;
+; RCE_pricePlan_virtualRouter_GBP                ; pricePlan_virtualRouter_GBP                ; 5.6 ; 1 ;

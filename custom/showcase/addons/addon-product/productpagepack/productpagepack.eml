@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="messages" scope="COMPILE">
+		<relative-module-cls project-related="file://$PROJECT_DIR$/custom/showcase/addons/addon-product/productpagepack/acceleratoraddon/web/webroot/WEB-INF/messages"/>
+	</lib>
+	<lib name="resources" scope="COMPILE">
+		<relative-module-cls project-related="file://$PROJECT_DIR$/custom/showcase/addons/addon-product/productpagepack/resources"/>
+	</lib>
+</component>

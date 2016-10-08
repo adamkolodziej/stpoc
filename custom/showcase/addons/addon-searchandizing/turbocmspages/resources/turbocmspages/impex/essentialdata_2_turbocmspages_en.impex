@@ -1,0 +1,36 @@
+##******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+
+
+# Language
+$lang=en
+
+
+# Localize The Item Templates
+
+UPDATE CockpitItemTemplate;code[unique=true];name[lang=$lang];description[lang=$lang]
+;CategoryPageTemplate;Desktop - Category Page;The Category Page has a limited Guided Navigation on the left, a single full width slot at the top, followed by a 3/4 width slot and a 3x2 slot on the right. There is a small space under the guided navigation for merchandising also.;
+;ContentPage1Template;Desktop - Contend Page - Layout 1;;
+;LandingPage1Template;Desktop - Landing Page - Layout 1;Landing Page with 3 full width slots separated by first a left aligned large hero slot and 2 narrow sections and further down a 4x2 grid section.;
+;LandingPage2Template;Desktop - Landing Page - Layout 2;Landing Page with 3 full width slots separated by first a right aligned large hero slot and 2 narrow sections and further down a 4x2 grid section.;
+;LandingPage3Template;Desktop - Landing Page - Layout 3;Landing Page with 3 full width slots separated by first a left aligned large hero slot and 2 narrow sections and further down a 3x2 grid section.;
+;LandingPage4Template;Desktop - Landing Page - Layout 4;Landing Page with 3 full width slots separated by first a right aligned large hero slot and 2 narrow sections and further down a 3x2 grid section.;
+;LandingPage5Template;Desktop - Landing Page - Layout 5;Landing Page with a single full width slot at the top followed by a narrow side panel slot and bank of 3/4 width slots and a 4x2 grid section.;
+;LandingPage6Template;Desktop - Landing Page - Layout 6;Landing Page with a single full width slot at the top followed by a narrow side panel slot and bank of 3/4 width slots and a 3x2 grid section.;
+;MobileCategoryPageTemplate;Mobile - Category Page;;
+;MobileContentPage1Template;Mobile - Contend Page - Layout 1;;
+;MobileLandingPageTemplate;Mobile - Landing Page - Layout 1;;
+;MobileProductDetailsPageTemplate;Mobile - Product Page - Details;;
+;MobileProductGridPageTemplate;Mobile - Product Lister Page - Grid;;
+;MobileProductListPageTemplate;Mobile - Product Lister Page - List;;
+;MobileSearchResultsEmptyPageTemplate;Mobile - Search Results Page - Not Found;;
+;MobileSearchResultsGridPageTemplate;Mobile - Search Results Page - Grid;;
+;MobileSearchResultsListPageTemplate;Mobile - Search Results Page - List;;
+;ProductDetailsPageTemplate;Desktop - Product Page - Details;;
+;ProductGridPageTemplate;Desktop - Product Lister Page - Grid;Products arranged in a grid of 4 per row. Space for merchandising above to the top and bottom of the results, guided navigation on the left.;
+;ProductListPageTemplate;Desktop - Product Lister Page - List;Products vertically listed, some space for merchandising above to the right and bottom of the results, guided navigation on the left.;
+;SearchResultsEmptyPageTemplate;Desktop - Search Results Page - Not Found;Page to display when Free text search yields no results.;
+;SearchResultsGridPageTemplate;Desktop - Search Results Page - Grid;Free text search results with products arranged in a grid of 4 per row. Space for merchandising above to the top and bottom of the results, guided navigation on the left.;
+;SearchResultsListPageTemplate;Desktop - Search Results Page - List;Free text search results with products vertically listed, some space for merchandising above to the right and bottom of the results, guided navigation on the left.;
+
+
+

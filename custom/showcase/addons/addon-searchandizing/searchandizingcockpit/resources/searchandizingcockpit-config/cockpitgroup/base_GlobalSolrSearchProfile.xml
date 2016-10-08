@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base  xsi:noNamespaceSchemaLocation="base.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <search>
+                <search-properties>
+                	<property qualifier="AbstractSolrSearchProfile.code"/>
+					<property qualifier="AbstractSolrSearchProfile.indexedType" />
+					<property qualifier="AbstractSolrSearchProfile.solrFacetReconfigurations" />
+					<property qualifier="AbstractSolrSearchProfile.boostRules" />
+                </search-properties>
+                <sort-properties>
+					<property qualifier="AbstractSolrSearchProfile.indexedType" />
+				</sort-properties>
+        </search>
+        <label>
+			<property qualifier="AbstractSolrSearchProfile.description"/>			
+		</label>
+</base>

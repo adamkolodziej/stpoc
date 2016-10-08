@@ -10,30 +10,7 @@ $baseProduct = baseProduct(code, $catalogVersion)
 $approved = approvalstatus(code)[default = 'approved']
 $prices = Europe1prices[translator = de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
 
-INSERT_UPDATE Product; code[unique = true]; $supercategories; soldIndividually; manufacturerAID; unit(code)[default = pieces]; $approved; $catalogVersion
-; phone           ; ; true
-; standardRouter  ; ; false
-; fibreRouter     ; ; false
-; standardDecoder ; ; false
-; decoderPlus     ; ; false
-
 INSERT_UPDATE ServicePlan; code[unique = true]; $supercategories; manufacturerAID; subscriptionTerm(id); soldIndividually[default = false]; customOffer[default = false]; unit(code)[default = pieces]; $approved; $catalogVersion
-; phoneUnlimitedWeekend        ; phone           ; ; annually_1 ; true
-; phoneUnlimitedWeekendEvening ; phone           ; ; annually_2
-
-; standardBroadband            ; broadband       ; ; annually_1
-; fibreBroadbandLimited        ; broadband       ; ; annually_1
-; fibreBroadbandUnlimited      ; broadband       ; ; annually_1
-; superFibreUnlimited          ; broadband       ; ; annually_1
-; sptelWifi                    ; broadband       ; ; annually_1
-
-; tvStarter                    ; tvSubscriptions ; ; annually_1
-; tvEntertainment              ; tvSubscriptions ; ; annually_1
-; tvPremium                    ; tvSubscriptions ; ; annually_1
-; Sport                        ; tvSubscriptions ; ; annually_1
-; TCO                          ; tvSubscriptions ; ; annually_1
-; foreignLanguagePackage       ; tvSubscriptions ; ; annually_1
-; allOnDemand                  ; tvSubscriptions ; ; annually_1
 #IP VPN
 ; af1Voice                     ; tvSubscriptions ; ; annually_1
 ; af2AssuredData               ; tvSubscriptions ; ; annually_1
@@ -51,39 +28,3 @@ INSERT_UPDATE ServicePlan; code[unique = true]; $supercategories; manufacturerAI
 ; fibreAccess                  ; tvSubscriptions ; ; annually_1
 ; leasedLineAccess             ; tvSubscriptions ; ; annually_1
 ; virtualRouter                ; tvSubscriptions ; ; annually_1
-
-INSERT_UPDATE ServicePlan; code[unique = true]; $supercategories; manufacturerAID; subscriptionTerm(id); soldIndividually[default = false]; customOffer[default = false]; eligibleUserGroups(uid); unit(code)[default = pieces]; $approved; $catalogVersion
-
-INSERT_UPDATE MerchandiseProduct; code[unique = true]; $supercategories; varianttype(code); manufacturerAID; unit(code)[default = pieces]; $approved; $catalogVersion
-
-INSERT_UPDATE MerchandiseVariantProduct; code[unique = true]; $supercategories; $baseProduct; colour(code); size(code); manufacturerAID; unit(code)[default = pieces]; $approved; $catalogVersion;
-
-INSERT_UPDATE TVShowProduct; code[unique = true]; $supercategories; viewsCount; unit(code)[default = pieces]; $approved; $catalogVersion; deliveryModes(code)[default = digital-delivery]
-
-$siteResource = jar:com.hybris.showcase.cecs.sptelstore.constants.SptelstoreConstants&/sptelstore/import/sampledata/productCatalogs/$productCatalog
-$schedule = schedule[translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
-INSERT_UPDATE ChannelProduct; code[unique = true]; $supercategories; $schedule; unit(code)[default = pieces]; $approved; $catalogVersion; deliveryModes(code)[default = digital-delivery]
-
-INSERT_UPDATE TVSeasonProduct; code[unique = true]; $supercategories; season; tvShow(code, $catalogVersion); unit(code)[default = pieces]; $approved; $catalogVersion; deliveryModes(code)[default = digital-delivery]
-
-#
-# CECS-918 pilots are free to watch - add it to *free* category (Free To Watch entitlement)
-#
-INSERT_UPDATE TVEpisodeProduct; code[unique = true]; $supercategories; season; episode; tvSeason(code, $catalogVersion); viewsCount; unit(code)[default = pieces]; $approved; $catalogVersion; deliveryModes(code)[default = digital-delivery]
-
-UPDATE TVShowProduct; code[unique = true]; seasons(code, $catalogVersion); $approved; $catalogVersion
-
-UPDATE TVSeasonProduct; code[unique = true]; episodes(code, $catalogVersion); $approved; $catalogVersion
-
-
-# CECS-94 Latest releases solr property
-UPDATE Product; code[unique = true]; releaseDate[dateformat = 'dd.MM.yyyy']; $catalogVersion
-
-
-# CECS-338 Implement a Mashup for C4C allowing to grant entitlement for specific movie
-INSERT_UPDATE Product; code[unique = true]; $catalogVersion; unit(code); $prices; approvalStatus(code); startLineNumber; $supercategories[default = 'gifts']; customOffer[default = true]; eligibleUserGroups(uid)[default = 'customergroup']
-
-# CECS-436 video for gift entitlement
-INSERT_UPDATE MovieProduct; code[unique = true]; $supercategories; releaseDate[dateformat = 'dd.MM.yyyy']; viewsCount; unit(code)[default = pieces]; $approved; $catalogVersion; deliveryModes(code)[default = digital-delivery]
-
-UPDATE Product; code[unique = true]; viewsCount; $catalogVersion

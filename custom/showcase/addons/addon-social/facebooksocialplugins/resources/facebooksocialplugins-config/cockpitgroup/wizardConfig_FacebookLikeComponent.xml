@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="false">
+			<label key="cockpit.config.label.General" />
+
+			<property qualifier="CMSItem.name"/>
+			<property qualifier="CMSItem.catalogVersion"/>
+			<property qualifier="AbstractCMSComponent.visible"/>
+		</group>
+		
+		<group qualifier="editorial" visible="true" initially-opened="true">
+			<label key="config.general.editorial" />
+
+			<property qualifier="FacebookLikeComponent.urlToLike" />
+		</group>
+	
+		<group qualifier="layout" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.Layout" />
+
+			<property qualifier="FacebookLikeComponent.sendButton" />
+			<property qualifier="FacebookLikeComponent.layoutStyle" />
+			<property qualifier="FacebookLikeComponent.width" />
+			<property qualifier="FacebookLikeComponent.showFaces" />
+			<property qualifier="FacebookLikeComponent.verbToDisplay" />
+			<property qualifier="FacebookLikeComponent.colorScheme" />
+			<property qualifier="FacebookLikeComponent.font" />
+		</group>
+		
+	</displayed-properties>
+</wizard-config>

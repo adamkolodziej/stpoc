@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+			
+	<enumtypes>
+		<enumtype code="PlusOneButtonSize" autocreate="true" generate="true" dynamic="true">
+			<value code="small" />
+			<value code="medium" />
+			<value code="standard" />
+			<value code="tall" />
+		</enumtype>
+		
+		<enumtype code="PlusOneCountLayoutStyle" autocreate="true" generate="true">
+			<value code="inline" />
+			<value code="bubble" />
+			<value code="none" />
+		</enumtype>
+	</enumtypes>		
+
+	<itemtypes>
+		<typegroup name="google">
+			<itemtype code="AbstractGooglePlusComponent" generate="true" jaloclass="com.hybris.social.googleplus.jalo.AbstractGooglePlusComponent" extends="SimpleCMSComponent" autocreate="true" abstract="true" />
+				
+			
+			<itemtype code="PlusOneComponent" jaloclass="com.hybris.social.googleplus.jalo.PlusOneComponent" extends="AbstractGooglePlusComponent" generate="true" autocreate="true">
+				<attributes>
+					<attribute type="PlusOneButtonSize" qualifier="buttonSize">
+						<persistence type="property" />
+						<modifiers optional="false"  />
+						<defaultvalue>em().getEnumerationValue("PlusOneButtonSize","standard")</defaultvalue>
+					</attribute>
+					<attribute type="PlusOneCountLayoutStyle" qualifier="annotation">
+						<persistence type="property" />
+						<modifiers optional="false"  />
+						<defaultvalue>em().getEnumerationValue("PlusOneCountLayoutStyle","inline")</defaultvalue>	
+					</attribute>
+					<attribute qualifier="width" generate="true" autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<description>The width of the plugin in pixels. Default width: 300px.</description>
+						<defaultvalue>new Integer(300)</defaultvalue>
+					</attribute>
+					<attribute qualifier="urlToPlusOne" type="java.lang.String">
+						<persistence type="property" /> 
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+	</itemtypes>
+</items>

@@ -1,0 +1,20 @@
+.lockerzshare_minimal {
+    background: url(../images/lockerzshare_minimal.jpg) no-repeat;
+    width: 16px; height: 16px;
+}
+.lockerzshare_small {
+    background: url(../images/lockerzshare_small.jpg) no-repeat;
+    width: 106px; height: 16px;
+}
+.lockerzshare_medium {
+    background: url(../images/lockerzshare_medium.jpg) no-repeat;
+    width: 120px; height: 16px;
+}
+.lockerzshare_standard {
+    background: url(../images/lockerzshare_standard.jpg) no-repeat;
+    width: 171px; height: 16px;
+}
+.lockerzshare_large {
+    background: url(../images/lockerzshare_large.jpg) no-repeat;
+    width: 256px; height: 24px;
+}

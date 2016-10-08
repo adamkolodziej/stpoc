@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="false" selectable="true" width="70px"/>
+		<property qualifier="FacebookLocation.longitude" visible="true" editable="true" />
+		<property qualifier="FacebookLocation.latitude" visible="true" editable="true" />
+		<property qualifier="FacebookLocation.address.streetname" visible="true" editable="true" />
+		<property qualifier="FacebookLocation.address.town" visible="true" editable="true" />
+		<property qualifier="FacebookLocation.address.district" visible="true" editable="true" />
+		<property qualifier="FacebookLocation.address.postalCode" visible="true" editable="true" />
+		<property qualifier="FacebookLocation.address.remarks" visible="true" editable="true" />
+		<property qualifier="FacebookLocation.address.region" visible="true" editable="true" />
+		<property qualifier="FacebookLocation.address.country" visible="true" editable="true" />
+	</group>
+</list-view>

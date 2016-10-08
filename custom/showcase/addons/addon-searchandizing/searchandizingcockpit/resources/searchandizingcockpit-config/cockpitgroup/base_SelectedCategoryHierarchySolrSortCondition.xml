@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base  xsi:noNamespaceSchemaLocation="base.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<label>
+		<property qualifier="AbstractSolrSortCondition.description"/>
+	</label>
+</base>

@@ -1,0 +1,91 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * addonExtensionName - extension name of the ui addon 
+#######
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCmsCockpit=jar:com.hybris.cms.productpages.constants.ProductpagepackConstants&/productpagepack/import/cockpit/cmscockpit
+
+# Create Page template: ResponsiveProductPage1Template
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;ResponsiveProductPage1Template;Product Details Page Template 1;addon:/$addonExtensionName/pages/responsiveProductLayout1Page;ProductPage
+
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;ResponsiveProductPage1Template;$jarResourceCmsCockpit/structure-view/structure_ResponsiveProductPage1Template.vm
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ResponsiveProductPage1Template'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;responsiveLogo
+;HeaderLinks;;;responsiveHeaderlinks
+;HeaderFunctionGroup;;;responsiveHeaderFunctionGroup
+"#% if: ""$channel"".equals(""b2b"")"
+;XSHeaderLinks;;;responsiveHeaderlinks
+;XSHeaderFunctionGroup;;;responsiveHeaderFunctionGroup
+#% endif:
+;NavigationBar;;;responsiveNavigation
+;Section1;;;responsiveWide
+;Section2;;;responsiveWide
+;ProductImagesSection;;;responsiveProductImages
+;ProductDetailsPanelSection;;;responsiveDetailPanelSection
+;ProductOrderSection;;;responsiveDetailPanelSection
+;ProductTabSection;;;responsiveProductTab
+;SocialSection;;;responsiveSocial
+;Footer;;;responsiveFooter
+
+# Create Default Responsvie Components
+INSERT_UPDATE SimpleProductVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;selectorType(code)
+;;ApparelProductVariantSelectorComponent;Apparel Product Variant Selector;apparel
+
+INSERT_UPDATE SimpleProductReviewSummaryComponent;$contentCV[unique=true];uid[unique=true];name;
+;;DefaultSimpleProductReviewSummaryComponent;Default Product Review Summary
+
+INSERT_UPDATE SimpleProductPromotionSummaryComponent;$contentCV[unique=true];uid[unique=true];name;
+;;DefaultSimpleProductPromotionSummaryComponent;Default Product Promotion Summary
+
+INSERT_UPDATE SimpleProductImageComponent;$contentCV[unique=true];uid[unique=true];name;
+;;DefaultSimpleProductImageComponent;Default Product Images
+
+INSERT_UPDATE SimpleProductSummaryComponent;$contentCV[unique=true];uid[unique=true];name;
+;;DefaultSimpleProductSummaryComponent;Product Summary
+
+INSERT_UPDATE SimpleProductPageTabsComponent;$contentCV[unique=true];uid[unique=true];name;
+;;DefaultSimpleProductPageTabsComponent;Product Page Tabs Component
+
+INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;
+;;VariantSelector;Product Variant Selector;
+
+INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;
+;;AddToCart;Product Add To Cart;
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
+;;ProductImagesSlot;Product Images;true;DefaultSimpleProductImageComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;ResponsiveProductImagesSlot;Responsive Product Images;true
+;;ProductDetailsPanelSlot;Product Details Panel;true
+;;ProductOrderSlot;Product Order Slot;true
+;;ProductTabSectionSlot;Section Slot For Product Tabs;true
+
+# Create Content Slots for Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ResponsiveProductPage1Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ResonsiveProductDetails;SiteLogo;;SiteLogoSlot;true
+;;HeaderLinks-ResonsiveProductDetails;HeaderLinks;;HeaderLinksSlot;true
+;;HeaderFunctionGroup-ResonsiveProductDetails;HeaderFunctionGroup;;HeaderFunctionGroupSlot;true
+"#% if: ""$channel"".equals(""b2b"")"
+;;XSHeaderLinks-ResonsiveProductDetails;XSHeaderLinks;;XSHeaderLinksSlot;true
+;;XSHeaderFunctionGroup-ResonsiveProductDetails;XSHeaderFunctionGroup;;XSHeaderFunctionGroupSlot;true
+#% endif:
+;;NavigationBar-ResonsiveProductDetails;NavigationBar;;NavigationBarSlot;true
+;;ProductDetailsPanel-ResonsiveProductDetails;ProductDetailsPanelSection;;ProductDetailsPanelSlot;true
+;;ProductOrder-ResonsiveProductDetails;ProductOrderSection;;ProductOrderSlot;true
+;;ProductImages-ResonsiveProductDetails;ProductImagesSection;;ResponsiveProductImagesSlot;true
+;;Footer-ResonsiveProductDetails;Footer;;FooterSlot;true
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='productDetails'];contentSlot(uid,$contentCV)
+;;ProductTabSection-ResonsiveProductDetails;ProductTabSection;;ProductTabSectionSlot
+
+# Product Details Page
+INSERT_UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;productDetails;Product Details;ResponsiveProductPage1Template;true;

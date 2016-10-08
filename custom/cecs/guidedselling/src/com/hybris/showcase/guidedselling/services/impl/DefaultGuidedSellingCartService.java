@@ -23,6 +23,8 @@ public class DefaultGuidedSellingCartService extends DefaultBundleCommerceCartSe
 	private List<CommerceAddToCartMethodHook> bundleAddToCartMethodHooks;
 	private OrderChangesUnitOfWork orderChangesUnitOfWork;
 
+
+
 	@Override
 	protected void checkAndRemoveDependentComponents(final CartModel masterCartModel, final int bundleNo,
 			final BundleTemplateModel bundleTemplate)

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/mvc
+	       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+           http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+		   
+	<bean id="abstractFacebookComponentRenderer" parent="addOnJspIncludeCMSComponentRenderer">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="facebookFacepileComponentRenderer" parent="abstractFacebookComponentRenderer" class="com.hybris.social.facebook.socialplugins.component.renderer.FacebookFacepileComponentRenderer">
+		<property name="sharedPageUrlStrategy" ref="sharedPageUrlStrategy"/>
+	</bean>
+	<bean id="facebookLikeComponentRenderer" parent="abstractFacebookComponentRenderer" class="com.hybris.social.facebook.socialplugins.component.renderer.FacebookLikeComponentRenderer">
+		<property name="sharedPageUrlStrategy" ref="sharedPageUrlStrategy"/>
+	</bean>
+	<bean id="facebookSendComponentRenderer" parent="abstractFacebookComponentRenderer" class="com.hybris.social.facebook.socialplugins.component.renderer.FacebookSendComponentRenderer">
+		<property name="sharedPageUrlStrategy" ref="sharedPageUrlStrategy"/>
+	</bean>
+	<bean id="facebookLikeBoxComponentRenderer" parent="abstractFacebookComponentRenderer" class="com.hybris.social.facebook.socialplugins.component.renderer.FacebookLikeBoxComponentRenderer"/>
+	<bean id="facebookCommentsComponentRenderer" parent="abstractFacebookComponentRenderer" class="com.hybris.social.facebook.socialplugins.component.renderer.FacebookCommentsComponentRenderer">
+		<property name="sharedPageUrlStrategy" ref="sharedPageUrlStrategy"/>
+	</bean>
+	
+	<bean id="facebookRecommendationsBoxComponentRenderer" parent="abstractFacebookComponentRenderer" class="com.hybris.social.facebook.socialplugins.component.renderer.FacebookRecommendationsBoxComponentRenderer"/>
+	<bean id="facebookRecommendationsBarComponentRenderer" parent="abstractFacebookComponentRenderer" class="com.hybris.social.facebook.socialplugins.component.renderer.FacebookRecommendationsBarComponentRenderer"/>
+	
+	<bean id="facebookFacepileComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="FacebookFacepileComponent" />
+		<property name="renderer" ref="facebookFacepileComponentRenderer" />	
+	</bean>
+	
+	<bean id="facebookLikeComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="FacebookLikeComponent" />
+		<property name="renderer" ref="facebookLikeComponentRenderer" />	
+	</bean>
+	
+	<bean id="facebookLikeBoxComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="FacebookLikeBoxComponent" />
+		<property name="renderer" ref="facebookLikeBoxComponentRenderer" />	
+	</bean>
+	
+	<bean id="facebookSendComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="FacebookSendComponent" />
+		<property name="renderer" ref="facebookSendComponentRenderer" />	
+	</bean>
+	
+	<bean id="facebookCommentsComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="FacebookCommentsComponent" />
+		<property name="renderer" ref="facebookCommentsComponentRenderer" />	
+	</bean>
+	
+	<bean id="facebookCommentsTabComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="FacebookCommentsTabComponent" />
+		<property name="renderer" ref="facebookCommentsTabComponentRenderer" />	
+	</bean>
+	
+	<bean id="facebookRecommendationsBoxComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="FacebookRecommendationsBoxComponent" />
+		<property name="renderer" ref="facebookRecommendationsBoxComponentRenderer" />	
+	</bean>
+	
+	<bean id="facebookRecommendationsBarComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+		<property name="typeCode" value="FacebookRecommendationsBarComponent" />
+		<property name="renderer" ref="facebookRecommendationsBarComponentRenderer" />	
+	</bean>
+ 	 
+</beans>

@@ -1,0 +1,14 @@
+INSERT_UPDATE ComponentTypeGroup;code[unique=true]
+;productDetailPanelSection
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;wide;PromotionBannerComponent
+;narrow;PromotionBannerComponent
+;productDetailPanelSection;PromotionBannerComponent
+
+INSERT_UPDATE SearchRestriction;code[unique=true];name[lang=de];name[lang=en];query;principal(UID);restrictedType(code);active;generate
+;Frontend_PublicationPeriod;Publication Period;Publication Period;{item:catalogVersion} IN (?session.catalogversions);customergroup;PublicationPeriod;true;true
+
+INSERT_UPDATE MediaFormat;qualifier[unique=true];name[lang=en];
+ ;iphone;"iphone"
+ 

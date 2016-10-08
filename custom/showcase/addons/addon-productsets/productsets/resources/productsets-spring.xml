@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<!-- Load Sample Data -->
+	<bean id="productsetsAddOnSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener">
+		<property name="extensionName" value="productsets" />
+	</bean>
+
+	<!-- DAO -->
+	<alias name="defaultProductSetDao" alias="productSetDao" />
+	<bean id="defaultProductSetDao"
+		class="com.hybris.productsets.services.dao.impl.DefaultProductSetDao"
+		parent="abstractItemDao" />
+
+	<!-- SERVICES -->
+	<alias name="defaultProductSetService" alias="productSetService" />
+	<bean id="defaultProductSetService"
+		class="com.hybris.productsets.services.impl.DefaultProductSetService">
+		<property name="productSetDao" ref="productSetDao" />
+	</bean>
+	<bean id="cmsProductSetService"
+		class="com.hybris.productsets.services.impl.DefaultCMSProductSetPageService">
+		<property name="cmsRestrictionService" ref="cmsRestrictionService" />
+		<property name="catalogService" ref="catalogService" />
+		<property name="typeService" ref="typeService" />
+		<property name="cmsPageDao" ref="cmsPageDao" />
+		<property name="cmsDataFactory" ref="cmsDataFactory" />
+		<property name="productSetService" ref="productSetService" />
+	</bean>
+
+	<alias name="defaultProductSetPromotionService" alias="productSetPromotionService" />
+	<bean id="defaultProductSetPromotionService"
+		class="com.hybris.productsets.services.impl.DefaultProductSetPromotionService">
+		<property name="modelService" ref="modelService" />
+		<property name="productSetDao" ref="productSetDao" />
+	</bean>
+
+	<!-- FACADES -->
+	<alias name="defaultProductSetFacade" alias="productSetFacade" />
+	<bean id="defaultProductSetFacade"
+		class="com.hybris.productsets.facades.impl.DefaultProductSetFacade">
+		<property name="productSetService" ref="productSetService" />
+		<property name="productService" ref="productService" />
+		<property name="productSetConverter" ref="productSetConverter" />
+		<property name="cartFacade" ref="cartFacade" />
+		<property name="productConverter" ref="productConverter" />
+		<property name="productConfiguredPopulator" ref="productConfiguredPopulator" />
+		<property name="productSetCartItemConverter" ref="productSetCartItemConverter" />
+		<property name="variantSelectOptionConverter" ref="variantSelectOptionConverter" />
+		<property name="threadContextService" ref="threadContextService" />
+	</bean>
+
+	<!-- CONVERTERS -->
+	<alias name="defaultProductSetConverter" alias="productSetConverter" />
+	<bean id="defaultProductSetConverter" parent="abstractConfigurablePopulatingConverter">
+		<lookup-method name="createTarget" bean="productSetData" />
+		<!-- <property name="targetClass" value="#{converterTargetClassMap['productSetData']}"/> -->
+		<property name="populators">
+			<list>
+				<ref bean="productSetPropertiesPopulator" />
+				<ref bean="productSetProductsPopulator" />
+				<ref bean="productSetPromotionsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultProductSetPropertiesPopulator" alias="productSetPropertiesPopulator" />
+	<bean id="defaultProductSetPropertiesPopulator"
+		class="com.hybris.productsets.converters.populator.DefaultProductSetPropertiesPopulator">
+		<property name="imageConverter" ref="imageConverter" />
+	</bean>
+
+	<alias name="defaultProductSetProductsPopulator" alias="productSetProductsPopulator" />
+	<bean id="defaultProductSetProductsPopulator"
+		class="com.hybris.productsets.converters.populator.DefaultProductSetProductsPopulator">
+		<property name="productConverter" ref="productConverter" />
+		<property name="productConfiguredPopulator" ref="productConfiguredPopulator" />
+		<property name="threadContextService" ref="threadContextService" />
+		<property name="productSetService" ref="productSetService" />
+	</bean>
+
+	<alias name="defaultProductSetPromotionsPopulator" alias="productSetPromotionsPopulator" />
+	<bean id="defaultProductSetPromotionsPopulator"
+		class="com.hybris.productsets.converters.populator.DefaultProductSetPromotionsPopulator">
+		<property name="promotionsConverter" ref="promotionsProductSetConverter" />
+		<property name="promotionGroupsStrategy" ref="promotionGroupsStrategy" />
+		<property name="timeService" ref="timeService" />
+		<property name="productSetPromotionService" ref="productSetPromotionService" />
+	</bean>
+
+	<alias name="defaultPromotionsProductSetConverter" alias="promotionsProductSetConverter" />
+	<bean id="defaultPromotionsProductSetConverter" parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="promotionData"/> -->
+		<property name="targetClass"
+			value="de.hybris.platform.commercefacades.product.data.PromotionData" />
+		<property name="populators">
+			<list>
+				<ref bean="productSetPromotionsPropertiesPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultProductSetPromotionsPropertiesPopulator"
+		alias="productSetPromotionsPropertiesPopulator" />
+	<bean id="defaultProductSetPromotionsPropertiesPopulator"
+		class="com.hybris.productsets.converters.populator.DefaultProductSetPromotionsPropertiesPopulator">
+		<property name="cartService" ref="cartService" />
+		<property name="modelService" ref="modelService" />
+		<property name="promotionService" ref="promotionsService" />
+	</bean>
+
+	<alias name="defaultProductSetCartItemConverter" alias="productSetCartItemConverter" />
+	<bean id="defaultProductSetCartItemConverter" parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="productSetCartItemData"/> -->
+		<property name="targetClass"
+			value="com.hybris.productsets.facades.data.ProductSetCartItemData" />
+		<property name="populators">
+			<list>
+				<ref bean="productSetCartItemPopulator" />
+				<ref bean="productSetCartItemErrorPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultProductSetCartItemPopulator" alias="productSetCartItemPopulator" />
+	<bean id="defaultProductSetCartItemPopulator"
+		class="com.hybris.productsets.converters.populator.DefaultProductSetCartItemPopulator" />
+
+	<alias name="defaultProductSetCartItemErrorPopulator" alias="productSetCartItemErrorPopulator" />
+	<bean id="defaultProductSetCartItemErrorPopulator"
+		class="com.hybris.productsets.converters.populator.DefaultProductSetCartItemErrorPopulator" />
+
+	<alias name="defaultVariantSelectOptionConverter" alias="variantSelectOptionConverter" />
+	<bean id="defaultVariantSelectOptionConverter" parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="variantSelectOptionDataSet"/> -->
+		<property name="targetClass" value="java.util.LinkedHashSet" />
+		<property name="populators">
+			<list>
+				<ref bean="variantSelectOptionPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultVariantSelectOptionPopulator" alias="variantSelectOptionPopulator" />
+	<bean id="defaultVariantSelectOptionPopulator"
+		class="com.hybris.productsets.converters.populator.DefaultVariantSelectOptionPopulator" />
+
+	<bean id="productSetData" class="com.hybris.productsets.facades.data.ProductSetData"
+		scope="prototype" />
+	<bean id="productSetCartItemData"
+		class="com.hybris.productsets.facades.data.ProductSetCartItemData"
+		scope="prototype" />
+	<util:set id="variantSelectOptionDataSet"
+		value-type="com.hybris.productsets.facades.data.VariantSelectOptionData"
+		scope="prototype" />
+
+	<!-- Add Product Sets as a Sync Root Type -->
+	<bean id="ProductSetContentCatalogSyncListMergeDirective"
+		depends-on="contentCatalogSyncRootTypeCodes" parent="listMergeDirective">
+		<property name="add" value="ProductSet" />
+	</bean>
+	<bean id="ProductSetProductCatalogSyncListMergeDirective"
+		depends-on="productCatalogSyncRootTypeCodes" parent="listMergeDirective">
+		<property name="add" value="ProductSet" />
+	</bean>
+
+	<!-- Restriction evaluators -->
+	<bean id="cmsProductSetRestrictionEvaluator"
+		class="com.hybris.productsets.evaluator.CMSProductSetRestrictionEvaluator" />
+	<bean id="cmsProductSetRestrictionEvaluatorMapping"
+		class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping">
+		<property name="restrictionTypeCode" value="CMSProductSetRestriction" />
+		<property name="restrictionEvaluator" ref="cmsProductSetRestrictionEvaluator" />
+	</bean>
+
+	<!-- Promotions Plugin -->
+	<bean id="ProductSetPromotionQueryPluginListMergeDirective"
+		depends-on="promotions.manager" parent="listMergeDirective">
+		<property name="add" ref="productSetPromotionQueryPlugin" />
+		<property name="listPropertyDescriptor" value="promotionQueryPlugins" />
+	</bean>
+	<bean id="productSetPromotionQueryPlugin"
+		class="com.hybris.productsets.promotions.queryplugin.ProductSetPromotionQueryPlugin" />
+
+	<!-- SOLR FIELD VALUE PROVIDERS -->
+	<bean id="productSetValueProvider"
+		class="com.hybris.productsets.valueprovider.ProductSetValueProvider"
+		scope="tenant">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<!-- SOLR FREE TEXT QB -->
+	<bean id="setsNamesQueryBuilderListMergeDirective" depends-on="defaultCommerceSearchTextPopulator"
+		parent="listMergeDirective">
+		<property name="add">
+			<bean
+				class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+				<property name="propertyName" value="set-title" />
+				<property name="boost" value="10" />
+			</bean>
+		</property>
+		<property name="fieldName" value="freeTextQueryBuilders" />
+	</bean>
+
+	<!-- <bean id="converterTargetClassMapForProductsetsMapMergeDirective" depends-on="converterTargetClassMap" 
+		parent="mapMergeDirective"> <property name="sourceMap"> <map merge="true"> 
+		<entry key="variantSelectOptionDataSet" value="java.util.LinkedHashSet"/> 
+		<entry key="productSetCartItemData" value="com.hybris.productsets.facades.data.ProductSetCartItemData"/> 
+		<entry key="promotionData" value="de.hybris.platform.commercefacades.product.data.PromotionData"/> 
+		<entry key="productSetData" value="com.hybris.productsets.facades.data.ProductSetData"/> 
+		</map> </property> </bean> -->
+
+</beans>

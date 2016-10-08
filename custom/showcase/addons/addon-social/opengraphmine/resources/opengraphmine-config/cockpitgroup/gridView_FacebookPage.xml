@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid-view>
+	<imageslot>
+		<property qualifier="FacebookPage.picture.URL"/>
+	</imageslot>
+	<labelslot>
+		<property qualifier="FacebookPage.name" />
+	</labelslot>
+	<descriptionslot>
+		<property qualifier="FacebookPage.category"  />
+	</descriptionslot>
+	<shortinfoslot>
+		<property qualifier="FacebookPage.id"/>
+	</shortinfoslot>
+	<actionslot spring-bean="ItemContentBrowserActionColumn"/>
+
+</grid-view>

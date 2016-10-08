@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="false" selectable="true" width="70px"/>
+
+		<property qualifier="customerReview.headline" visible="true" editable="false"/>
+		<property qualifier="customerReview.product" visible="true" editable="false"/>
+		<property qualifier="customerReview.user" visible="true" editable="false"/>
+		<property qualifier="customerReview.rating" visible="true" editable="false"/>
+		<property qualifier="customerReview.blocked" visible="true" editable="false"/>
+		<property qualifier="customerReview.alias" visible="true" editable="false"/>
+		<property qualifier="customerReview.approvalStatus" visible="true" editable="false"/>
+		<property qualifier="customerReview.language" visible="true" editable="false"/>
+
+
+		<custom spring-bean="ItemContentBrowserActionColumn" name="Actions" visible="true" selectable="true">
+			<label key="config.general.actions" />
+		</custom>
+	</group>
+</list-view>

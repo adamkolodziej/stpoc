@@ -1,0 +1,40 @@
+.spotlight_holder {
+	border: 1px solid #C5C5C5;
+}
+/* BA */
+.spotlight {
+	/*border: 1px solid #C5C5C5;/*
+	/*margin-bottom: 30px;*/
+}
+
+.spotlight .title_holder h2 {
+	background-image: url(../../../../../desktop/theme-black/images/icon-arrow-title.png);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	background-color: #007174;
+	font-size: 1.5em;
+	font-weight: bold;
+	text-shadow: 0 2px 2px #474747;
+	color: #FFFFFF;
+	padding: 11px 20px 11px 20px;
+	text-align: center;
+}
+
+.spotlight .details .cart .add_to_basket {
+	margin-top : 0px;
+	padding-top : 0px;
+	padding : 0;
+	
+}
+
+.spotlight .details .cart .collect_from_store {
+	margin-top : 0px;
+	padding-top : 0px;
+	padding : 0;
+}
+
+.click_pickupInStore_Button {
+	margin-bottom: 12px !important;
+}
+
+

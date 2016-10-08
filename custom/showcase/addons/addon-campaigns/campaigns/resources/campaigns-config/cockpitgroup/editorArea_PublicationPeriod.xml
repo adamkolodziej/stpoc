@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	<group qualifier="General" visible="true" initially-opened="false">
+		<label key="cockpit.config.label.General"/>
+		<property qualifier="PublicationPeriod.code"/>
+		<property qualifier="PublicationPeriod.name"/>
+		<property qualifier="PublicationPeriod.catalogVersion" editor="shortListEditor"/>
+		<property qualifier="PublicationPeriod.enabled"/>
+	</group>
+	<group qualifier="editorial" visible="true" initially-opened="true">
+		<label key="config.general.editorial"/>
+		<property qualifier="PublicationPeriod.baseSite"/>
+		<property qualifier="PublicationPeriod.startDate"/>
+		<property qualifier="PublicationPeriod.endDate"/>
+		<property qualifier="PublicationPeriod.daysOfWeek"/>
+		<property qualifier="PublicationPeriod.fromHour"/>
+		<property qualifier="PublicationPeriod.toHour"/>
+		<property qualifier="PublicationPeriod.timezone"/>
+		<property qualifier="PublicationPeriod.products"/>
+		<property qualifier="PublicationPeriod.userGroups"/>
+		<property qualifier="PublicationPeriod.promotions"/>
+		<property qualifier="PublicationPeriod.cmsitems"/>
+		<property qualifier="PublicationPeriod.productSets"/>
+		<property qualifier="PublicationPeriod.mediaTags"/>
+	</group>
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label key="config.general.administration"/>
+		<property qualifier="Item.pk"/>
+		<property qualifier="Item.creationTime"/>
+		<property qualifier="Item.modifiedtime"/>
+	</group>
+</editor>

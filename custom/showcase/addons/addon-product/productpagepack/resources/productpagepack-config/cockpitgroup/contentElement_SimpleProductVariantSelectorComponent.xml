@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+
+<content-element type="SimpleProductVariantSelectorComponent" name="type.simpleproductvariantselectorcomponent.name"
+							description="type.simpleproductvariantselectorcomponent.description"
+							image="cmscockpit/images/ContentElementProductlist.gif" 
+							refImage="cmscockpit/images/ContentElementProductlistReference.gif"
+							imageSmall="cmscockpit/images/ContentElementProductlistSmall.gif"/>				
+																
+	
+							
+</content-elements>	

@@ -1,0 +1,44 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * addonExtensionName - extension name of the ui addon
+##   * channel - site channel
+#######
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCmsCockpit=jar:com.hybris.searchandizing.constants.SearchandizingConstants&/searchandizing/import/cockpit/cmscockpit
+
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;HeroProductListPageTemplate;Hero Product List Page Template;addon:/$addonExtensionName/pages/$channel/heroProductListPage;CategoryPage
+
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];assignedCockpitItemTemplates(code)
+;;HeroProductListPageTemplate;$jarResourceCmsCockpit/structure-view/structure_heroProductListPageTemplate.vm;HeroProductListPageTemplate
+
+# Hero Product List Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='HeroProductListPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2;;;wide
+;Section3;;;narrow
+;Section4;;;narrow
+;Section5;;;narrow
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='HeroProductListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-HeroProductListPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-HeroProductListPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderLinks-HeroProductListPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-HeroProductListPage;SearchBox;;SearchBoxSlot;true
+;;MiniCart-HeroProductListPage;MiniCart;;MiniCartSlot;true
+;;NavigationBar-HeroProductListPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-HeroProductListPage;Footer;;FooterSlot;true
+;;TopHeaderSlot-HeroProductListPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-HeroProductListPage;BottomHeaderSlot;;BottomHeaderSlot;true
+

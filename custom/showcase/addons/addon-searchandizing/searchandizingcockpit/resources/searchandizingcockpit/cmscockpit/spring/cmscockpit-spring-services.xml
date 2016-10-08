@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util-3.1.xsd"
+    default-autowire="byName">
+    
+    <!--  Temporary solution for 2163: the acceleratorservices regex is not loaded correctly -->
+    <bean id="searchandizingCategoryFrontendUrlRegexPattern" class="java.lang.String">
+		<constructor-arg>
+			<value><![CDATA[(?<=/c/)[\.\:\,\*\(\!\'\)\/\\\$\%\+\-\_\#\’A-z0-9]{0,}[^(\?|\&|\;|$)]]]></value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="searchandizingCategoryFrontendDecoder"
+	      class="de.hybris.platform.acceleratorservices.urldecoder.impl.CategoryFrontendRegexUrlDecoder">
+		<property name="categoryService" ref="categoryService"/>
+		<property name="regex" ref="searchandizingCategoryFrontendUrlRegexPattern"/>
+	</bean>
+    <!--  Temporary solution for 2163: the acceleratorservices regex is not loaded correctly -->      
+  
+	<alias name="solrLiveEditFacetSearchService" alias="searchandizingLiveEditFacetSearchService" />
+	<bean id="solrLiveEditFacetSearchService" class="com.hybris.commercesearch.searchandizing.cockpit.service.impl.DefaultSearchandizingLiveEditFacetSearchService" >
+		<property name="solrSearchQueryDecoder" ref="solrSearchQueryDecoder" />
+		<property name="categoryUrlDecoder" ref="searchandizingCategoryFrontendDecoder" />
+		<property name="searchQueryPageableConverter" ref="commerceSearchQueryPageableConverter"/>
+		<property name="searchRequestConverter" ref="commerceSolrSearchRequestConverter"/>
+		<property name="searchResponseConverter" ref="commerceSolrSearchResponseConverter"/>
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="cronJobService" ref="cronJobService" />
+		<property name="modelService" ref="modelService" />
+		<property name="typeService" ref="typeService" />
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+  
+	
+
+</beans>

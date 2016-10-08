@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advanced-search>
+	
+	<group name="root" type="facebookuser">
+		<label key="config.general.searchfor" />
+		<group name="general">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="FacebookUser.uid" visible="true"/>
+			<property qualifier="FacebookUser.name" sort-enabled="true" visible="true" />
+			<property qualifier="FacebookUser.firstName"  visible="true" />
+			<property qualifier="FacebookUser.lastName" sort-enabled="true" visible="true" />
+			<property qualifier="FacebookUser.email" sort-enabled="true" visible="true" />
+			<property qualifier="FacebookUser.linkedCustomer" visible="true" />			
+		</group>
+		<group name="other">
+			<label key="cockpit.config.label.Other" />
+			<property qualifier="item.pk" sort-enabled="true" visible="false"/>			
+		</group>		
+	</group>
+	
+</advanced-search>

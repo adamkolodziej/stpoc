@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+	<group qualifier="General" visible="true" initially-opened="false">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="CMSItem.name"/>
+		<property qualifier="CMSItem.catalogVersion"/>
+		<property qualifier="AbstractCMSComponent.visible"/>
+	</group>
+	
+	<group qualifier="editorial" visible="true" initially-opened="true">
+		<label key="config.general.editorial" />
+		
+		<property qualifier="TwitterFollowButtonComponent.account" />	
+	</group>
+	
+	<group qualifier="layout" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.Layout" />
+		
+		<property qualifier="TwitterFollowButtonComponent.showUsername" />
+		<property qualifier="TwitterFollowButtonComponent.showCount" />
+		<property qualifier="TwitterFollowButtonComponent.buttonSize" />
+	</group>
+	
+	<group qualifier="visibility" visible="true" initially-opened="false">
+		<label key="config.general.contextvisibility" />
+		<property qualifier="AbstractCMSComponent.restrictions">
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AbstractCMSComponent.onlyOneRestrictionMustApply" />				
+	</group>
+	
+</editor>

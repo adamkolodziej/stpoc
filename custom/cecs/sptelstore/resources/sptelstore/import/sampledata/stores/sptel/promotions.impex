@@ -11,10 +11,8 @@ $lang=en
 
 #### Order Discount ####
 INSERT_UPDATE ProductPercentageDiscountPromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true][unique=true];code[unique=true];title;description;messageFired[lang=en];percentageDiscount;priority;products(code,$catalogVersion);productBanner(code,$catalogVersion)
-;;;20PercentageForUnderworldTshirt;20% off on product;20% off on product;20% off on product;20;1000;t-shirt_bp,t-shirt_white,t-shirt_black;BannerPromotionPercent
- 
+
 INSERT_UPDATE PromotionUserRestriction;positive;promotion(code)[unique=true];users(uid)
-;TRUE;20PercentageForUnderworldTshirt; fansOfBrandedMerchandise
 
 INSERT PromotionPriceRow ; &tresholdId ; Currency(isocode) ; price
 

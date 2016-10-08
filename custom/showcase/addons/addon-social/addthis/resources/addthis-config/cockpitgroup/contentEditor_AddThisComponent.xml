@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-editor hideEmpty="true" hideReadOnly="true" groupCollections="false">
+  <template>
+    <![CDATA[
+    	<table width="100%" style="margin: 0; padding: 0">
+    		<tbody>
+				<tr>
+					<td colspan="2"><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><div class="contentEditorHeader" style="background-color: #C3C3C3; font-size: 11px; padding:3px;"><b>$label</b></div></td>
+				</tr>
+				<tr>
+					<td style="width:900px"/>
+					<td><div style="height:20px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="AddThisComponent.altAnalyticsUser"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="AddThisComponent.visibleServiceButtons"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="AddThisComponent.servicesCompact"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="AddThisComponent.servicesExpanded"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="AddThisComponent.servicesExclude"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="AddThisComponent.orientation"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="AddThisComponent.size"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="AddThisComponent.uiClick"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+				<tr>
+					<td style="width:900px"><cockpit code="property" value="AddThisComponent.showCounter"/></td>
+					<td><div style="height:6px"/></td>
+				</tr>
+			</tbody>
+    	</table>
+    ]]>
+  </template>
+    <custom-editors>
+        <property qualifier="AddThisComponent.visibleServiceButtons" editorCode="iconCollectionUIEditor"/>
+        <property qualifier="AddThisComponent.servicesCompact" editorCode="iconCollectionUIEditor"/>
+        <property qualifier="AddThisComponent.servicesExpanded" editorCode="iconCollectionUIEditor"/>
+        <property qualifier="AddThisComponent.servicesExclude" editorCode="iconCollectionUIEditor"/>
+    </custom-editors>
+</content-editor>

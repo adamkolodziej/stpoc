@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="customerReview.headline"/>
+			<property qualifier="customerReview.comment"/>
+			<property qualifier="customerReview.rating"/>
+			<property qualifier="customerReview.blocked"/>
+			<property qualifier="customerReview.alias"/>
+			<property qualifier="customerReview.approvalStatus"/>
+			<property qualifier="customerReview.language"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="customerReview.headline"/>
+			<property qualifier="customerReview.comment"/>
+			<property qualifier="customerReview.rating"/>
+			<property qualifier="customerReview.blocked"/>
+			<property qualifier="customerReview.alias"/>
+			<property qualifier="customerReview.approvalStatus"/>
+			<property qualifier="customerReview.language"/>
+		</sort-properties>
+	</search>
+	
+	<label>
+		<property qualifier="customerReview.pk" />
+	</label>
+</base>

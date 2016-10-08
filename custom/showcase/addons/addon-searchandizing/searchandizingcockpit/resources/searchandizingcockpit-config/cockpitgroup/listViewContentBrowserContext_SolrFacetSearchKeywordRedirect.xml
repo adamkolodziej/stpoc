@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view allow-create-inline-items="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="list-view.xsd">
+        <group name="General">
+        	 <property qualifier="SolrFacetSearchKeywordRedirect.language"  editable="true" visible="true"/>        
+      	     <property qualifier="SolrFacetSearchKeywordRedirect.keyword"  sortable="true" editable="true" visible="true" />
+      	     <property qualifier="SolrFacetSearchKeywordRedirect.ignoreCase" editable="true"  visible="true"/>
+      	     <property qualifier="SolrFacetSearchKeywordRedirect.matchType"  editable="true" visible="true"/>
+      	     <property qualifier="SolrFacetSearchKeywordRedirect.redirect" width="150px" editable="true" visible="true" />
+        </group>
+</list-view>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/mvc
+	       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+           http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+		   
+    <context:component-scan base-package="com.hybris.productsets.controllers" />
+
+	<alias alias="productSetOptionsList" name="defaultProductSetOptionsList" />
+	<util:list id="defaultProductSetOptionsList" value-type="de.hybris.platform.commercefacades.product.ProductOption">
+		<value>BASIC</value>
+		<value>PRICE</value>
+	</util:list>
+	
+	<alias alias="productSetCarouselOptionsList" name="defaultProductSetCarouselOptionsList" />
+	<util:list id="defaultProductSetCarouselOptionsList" value-type="de.hybris.platform.commercefacades.product.ProductOption">
+		<value>BASIC</value>
+		<value>PRICE</value>
+	</util:list>
+	
+	<alias alias="productBuySetOptionsList" name="defaultProductBuySetOptionsList" />
+	<util:list id="defaultProductBuySetOptionsList" value-type="de.hybris.platform.commercefacades.product.ProductOption">
+		<value>BASIC</value>
+		<value>SUMMARY</value>
+		<value>PRICE</value>
+		<value>STOCK</value>
+		<value>VARIANT_FULL</value>
+		<value>PROMOTIONS</value>
+	</util:list>
+	
+	<bean id="productSetCollectionCarouselComponentRenderer" parent="addOnJspIncludeCMSComponentRenderer"
+		class="com.hybris.productsets.renderers.ProductSetCollectionCarouselComponentRenderer">
+		<property name="productSetConverter" ref="productSetConverter"/>
+	</bean>
+	
+	<bean id="productSetCollectionCarouselComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+		<property name="typeCode" value="ProductSetCollectionCarouselComponent" />
+		<property name="renderer" ref="productSetCollectionCarouselComponentRenderer" />
+	</bean>
+	   
+	<bean id="productSetContextInformationLoaderStrategy" class="com.hybris.productsets.addons.site.ProductSetsContextInformationLoaderStrategy">
+		<property name="searchRestrictionService" ref="searchRestrictionService"/>
+		<property name="typeService" ref="typeService"/>
+	</bean>
+	
+    <bean id="productSetSiteContextLoadStrategiesListMergeDirective" depends-on="siteContextLoadStrategies" parent="listMergeDirective">
+        <property name="add" ref="productSetContextInformationLoaderStrategy"/>
+    </bean>
+    
+   	<bean id="productSetContextLoadStrategiesListMergeDirective" depends-on="contextLoadStrategiesList" parent="listMergeDirective">
+	    <property name="add" ref="productSetContextInformationLoaderStrategy" />
+	</bean>
+</beans>

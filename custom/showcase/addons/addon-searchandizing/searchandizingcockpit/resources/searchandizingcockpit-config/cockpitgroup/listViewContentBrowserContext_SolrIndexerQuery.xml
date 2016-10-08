@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view allow-create-inline-items="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="list-view.xsd">
+        <group name="General">
+                <property qualifier="SolrIndexerQuery.identifier" editable="false" visible="true" />
+                <property qualifier="SolrIndexerQuery.type" editable="false" visible="true" />
+                <property qualifier="SolrIndexerQuery.user" editable="true" visible="true" />
+                <property qualifier="SolrIndexerQuery.query" editable="true" visible="true" />
+                <property qualifier="SolrIndexerQuery.injectLastIndexTime" editable="true" visible="true" />
+                <property qualifier="SolrIndexerQuery.injectCurrentDate" editable="true" visible="true" />
+                <property qualifier="SolrIndexerQuery.injectCurrentTime" editable="true" visible="true" />
+        </group>
+</list-view>

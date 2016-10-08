@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="src" path="/hmc"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="acceleratoraddon/web/webroot"/>
+	<classpathentry kind="src" path="gensrc"/>
+	<classpathentry kind="src" path="acceleratoraddon/web/src"/>
+	<classpathentry kind="src" path="/cockpit"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry kind="src" path="/promotions"/>
+	<classpathentry kind="src" path="/basecommerce"/>
+	<classpathentry kind="src" path="/cms2"/>
+	<classpathentry kind="src" path="/commercefacades"/>
+	<classpathentry kind="src" path="/addoncommon"/>
+	<classpathentry kind="src" path="/yacceleratorstorefront"/>
+	<classpathentry kind="src" path="/addoncockpits"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mediatags"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

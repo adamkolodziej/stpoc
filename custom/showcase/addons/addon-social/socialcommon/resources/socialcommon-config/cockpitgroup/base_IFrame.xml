@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="IFrame.title" />
+			<property qualifier="IFrame.url" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="IFrame.title" />
+			<property qualifier="IFrame.url" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="IFrame.url" />
+	</label>
+</base>

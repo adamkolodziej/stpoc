@@ -1,0 +1,20 @@
+#$header
+
+\$productCatalog=electronicsProductCatalog
+\$catalogVersion=catalogversion(catalog(id[default=\$productCatalog]),version[default='Staged'])[unique=true,default=\$productCatalog:Staged]
+#set( $escCatalogVersion=$esc.java('$catalogVersion[unique=true]') )
+
+
+# Language
+\$lang=$lang
+
+
+#set ( $productset = $query.load('product-relations', 'ProductSet') )
+UPDATE ProductSet;code[unique=true];$escCatalogVersion;title[lang=\$lang];
+#foreach( $row in $productset )
+;$row.key;;$row.values.title;
+#end
+
+
+
+

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+	
+	<typegroup name="followme">
+		<itemtype code="FollowMeProductCarouselComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+					jaloclass="com.hybris.searchandizing.cms.jalo.FollowMeProductCarouselComponent" >
+				<attributes>
+					<attribute qualifier="sort" type="SolrSort">
+						<modifiers initial="true" optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="maxNumberOfResults" type="java.lang.Integer">
+						<modifiers initial="true" optional="false" />
+						<persistence type="property"/>
+						<defaultvalue>Integer.valueOf(10)</defaultvalue>
+					</attribute>
+					<attribute type="Category" qualifier="stickyCategory">
+						<persistence type="property" />
+						<modifiers optional="true" />
+						<description>replace all category selections with the following sticky category selection</description>
+					</attribute>
+					<attribute qualifier="popup" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<description>If true shows a popup else redirects to products page</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="FollowMeProductSpotlightComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+					jaloclass="com.hybris.searchandizing.cms.jalo.FollowMeProductSpotlightComponent" >
+				<attributes>
+					<attribute qualifier="primarySort" type="SolrSort">
+						<modifiers initial="true" optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="secondarySort" type="SolrSort">
+						<modifiers optional="true" />
+						<description>If set, the second spotlight slot will be based off a different sort criteria</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute type="Category" qualifier="stickyCategory">
+						<persistence type="property" />
+						<modifiers optional="true" />
+						<description>replace all category selections with the following sticky category selection</description>
+					</attribute>
+				</attributes>	
+			</itemtype>
+			
+			<itemtype code="FollowMeCategoryFeatureComponent" extends="CategoryFeatureComponent" generate="true" autocreate="true" jaloclass="com.hybris.searchandizing.cms.jalo.FollowMeCategoryFeatureComponent" />  
+				
+		</typegroup>
+		
+		
+		<typegroup name="commercesearch">
+			<itemtype code="LeafCategorySelectedSolrFacetVisibilityRule"  autocreate="true" generate="true" extends="AbstractSolrFacetVisibilityRule" jaloclass="de.hybris.platform.commercesearch.jalo.solr.LeafCategorySelectedSolrFacetVisibilityRule">
+			</itemtype>
+		</typegroup>
+	</itemtypes>
+</items>

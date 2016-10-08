@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2011 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!--  DAO -->
+	<alias name="defaultFacebookUserDao" alias="facebookUserDao" />
+	<bean id="defaultFacebookUserDao" class="com.hybris.social.facebook.opengraphmine.service.dao.impl.DefaultFacebookUserDao" parent="abstractItemDao" />
+	
+	<alias name="defaultFacebookReferenceDao" alias="facebookReferenceDao" />
+	<bean id="defaultFacebookReferenceDao" class="com.hybris.social.facebook.opengraphmine.service.dao.impl.DefaultFacebookReferenceDao" parent="abstractItemDao" />
+		
+	<alias name="defaultFacebookSuggestionDao" alias="facebookSuggestionDao" />
+	<bean id="defaultFacebookSuggestionDao" class="com.hybris.social.facebook.opengraphmine.service.dao.impl.DefaultFacebookSuggestionDao" parent="abstractItemDao"/>
+	
+	<alias name="defaultFacebookUrlLikeDao" alias="facebookUrlLikeDao" />	
+	<bean id="defaultFacebookUrlLikeDao" class="com.hybris.social.facebook.opengraphmine.service.dao.impl.DefaultFacebookUrlLikeDao" parent="abstractItemDao"/>
+	
+	<alias name="defaultFacebookSynchronizationProcessDao" alias="facebookSynchronizationProcessDao" />
+ 	<bean id="defaultFacebookSynchronizationProcessDao" class="com.hybris.social.facebook.opengraphmine.process.event.dao.impl.DefaultFacebookSynchronizationProcessDao" parent="abstractItemDao" />
+ 	
+ 	
+ 	
+ 	<!--  Populators -->
+	<alias name="defaultFacebookBasicProfilePopulator"  alias="facebookBasicProfilePopulator" />
+	<bean id="defaultFacebookBasicProfilePopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookBasicProfilePopulator"/>
+	
+	<alias name="defaultFacebookMediaPopulator"  alias="facebookTemplateMediaPopulator" />
+	<bean id="defaultFacebookMediaPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookMediaPopulator">
+		<property name="mediaService" ref="mediaService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+	
+	<alias name="defaultLazyFacebookTemplateMediaPopulator" alias="lazyFacebookTemplateMediaPopulator" />
+	<bean id="defaultLazyFacebookTemplateMediaPopulator" parent="facebookTemplateMediaPopulator">
+		<property name="updateOnlyWhenNull" value="true" />
+	</bean>
+	
+	<alias name="defaultFacebookTemplateLikesPopulator" alias="facebookTemplateLikesPopulator" />
+	<bean id="defaultFacebookTemplateLikesPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookLikesPopulator" >
+		<property name="modelService" ref="modelService" />
+		<property name="referenceDao" ref="facebookReferenceDao" />
+	</bean>
+	
+	<alias name="defaultFacebookTemplatePagePopulator" alias="facebookTemplatePagePopulator" />
+	<bean id="defaultFacebookTemplatePagePopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookPagePopulator" >
+		<property name="pagePopulators">
+			<list>
+				<ref bean="facebookPageLinkedSitePopulator" />
+				<ref bean="facebookPageProductPopulator" />
+				<ref bean="facebookPageCategoryPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultFacebookTemplatePageMediaPopulator" alias="facebookTemplatePageMediaPopulator" />
+	<bean id="defaultFacebookTemplatePageMediaPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookPageMediaPopulator" >
+		<property name="modelService" ref="modelService" />
+		<property name="mediaService" ref="mediaService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+	
+	<alias name="defaultFacebookTemplateUserPagesPopulator" alias="facebookTemplateUserPagesPopulator" />
+	<bean id="defaultFacebookTemplateUserPagesPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookUserPagesPopulator" >
+		<property name="modelService" ref="modelService" />
+		<property name="facebookPagePopulator" ref="facebookTemplatePagePopulator" />
+		<property name="userService" ref="userService" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+	
+	<alias name="defaultFacebookTemplateUrlLikesPopulator" alias="facebookTemplateUrlLikesPopulator" />
+	<bean id="defaultFacebookTemplateUrlLikesPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookUrlLikesPopulator" >
+		<property name="modelService" ref="modelService" />
+		<property name="userService" ref="userService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="productUrlDecoder" ref="productFrontendPathMatcherUrlDecoder" />
+		<property name="categoryUrlDecoder" ref="categoryFrontendPathMatcherUrlDecoder" />
+		<property name="urlLikeDao" ref="facebookUrlLikeDao" />
+	</bean>
+	
+	<alias name="defaultFacebookTemplateUserPagesPicturePopulator" alias="facebookTemplateUserPagesPicturePopulator" />
+	<bean id="defaultFacebookTemplateUserPagesPicturePopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookUserPagesPopulator" >
+		<property name="modelService" ref="modelService" />
+	    <property name="facebookPagePopulator" ref="facebookTemplatePageMediaPopulator" />
+		<property name="userService" ref="userService" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+	
+	<alias name="defaultFacebookPageLinkedSitePopulator" alias="facebookPageLinkedSitePopulator" />
+	<bean id="defaultFacebookPageLinkedSitePopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookPageLinkedSitePopulator" >
+		<property name="cmsSiteService" ref="cmsSiteService" />
+	</bean>
+	
+	<alias name="defaultFacebookPageProductPopulator" alias="facebookPageProductPopulator" />
+	<bean id="defaultFacebookPageProductPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookPageProductPopulator" >
+		<property name="pathMatcher" >
+			<bean class="org.springframework.util.AntPathMatcher"/>
+		</property>
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="productService" ref="productService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<alias name="defaultFacebookPageCategoryPopulator" alias="facebookPageCategoryPopulator" />
+	<bean id="defaultFacebookPageCategoryPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookPageCategoryPopulator" >
+		<property name="pathMatcher" >
+			<bean class="org.springframework.util.AntPathMatcher"/>
+		</property>
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<alias name="defaultFacebookFriendsPopulator" alias="facebookFriendsPopulator" />
+	<bean id="defaultFacebookFriendsPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookFriendsPopulator" >
+		<property name="facebookUserDao" ref="facebookUserDao" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+	
+	<alias name="defaultFacebookCommentsPopulator" alias="facebookCommentsPopulator" />
+	<bean id="defaultFacebookCommentsPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookCommentsPopulator" >
+		<property name="facebookUserDao" ref="facebookUserDao" />
+		<property name="modelService" ref="modelService" />
+		<property name="pathMatcher" >
+			<bean class="org.springframework.util.AntPathMatcher"/>
+		</property>
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="productService" ref="productService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />		
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="commentService" ref="commentService" />
+	</bean>	
+
+
+	<alias name="defaultFacebookUserConverter" alias="facebookUserConverter" />
+	<bean id="defaultFacebookUserConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.social.facebook.opengraphmine.model.FacebookUserModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="facebookBasicProfilePopulator" />
+				<ref bean="lazyFacebookTemplateMediaPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultFacebookTemplateLikesGroupsConverter"  alias="facebookTemplateLikesGroupsConverter" />
+	<bean id="defaultFacebookTemplateLikesGroupsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.social.facebook.opengraphmine.model.FacebookUserModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="facebookTemplateLikesPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultFacebookTemplateUserPagesConverter"  alias="facebookTemplateUserPagesConverter" />
+	<bean id="defaultFacebookTemplateUserPagesConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.social.facebook.opengraphmine.model.FacebookUserModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="facebookTemplateUserPagesPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultFacebookTemplateUserUrlLikesConverter"  alias="facebookTemplateUserUrlLikesConverter" />
+	<bean id="defaultFacebookTemplateUserUrlLikesConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.social.facebook.opengraphmine.model.FacebookUserModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="facebookTemplateUrlLikesPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultFacebookTemplateUserFriendsConverter"  alias="facebookTemplateUserFriendsConverter" />
+	<bean id="defaultFacebookTemplateUserFriendsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.social.facebook.opengraphmine.model.FacebookUserModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="facebookFriendsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultFacebookTemplateCommentsConverter"  alias="facebookTemplateCommentsConverter" />
+	<bean id="defaultFacebookTemplateCommentsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.social.facebook.opengraphmine.model.FacebookUserModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="facebookCommentsPopulator" />
+			</list>
+		</property>
+	</bean>	
+	
+	<alias name="defaultFacebookUserPagesMediaConverter"  alias="facebookUserPagesMediaConverter" />
+	<bean id="defaultFacebookUserPagesMediaConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.social.facebook.opengraphmine.model.FacebookUserModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="facebookTemplateUserPagesPicturePopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<!--<alias name="defaultFacebookTemplateLocationConverter" alias="facebookTemplateLocationConverter" />-->
+	<!--<bean id="defaultFacebookTemplateLocationConverter" class="com.hybris.social.facebook.opengraphmine.service.converter.FacebookLocationConverter" >-->
+		<!--<property name="modelService" ref="modelService" />-->
+	<!--</bean>-->
+	
+	<alias name="defaultFacebookConnectionConverter" alias="facebookConnectionConverter" />
+	<bean id="defaultFacebookConnectionConverter" class="com.hybris.social.facebook.opengraphmine.service.converter.FacebookConnectionConverter">
+		<!-- <lookup-method name="createTarget" bean="connectionData"/> -->
+	</bean>
+
+	<bean id="facebookUserDataPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookUserDataPopulator"/>
+	<bean id="facebookSuggestedProductDataPopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookSuggestedProductDataPopulator"/>
+	<bean id="facebookBestCandidatePopulator" class="com.hybris.social.facebook.opengraphmine.service.converter.populator.FacebookBestCandidatePopulator"/>
+
+	<bean id="facebookUserDataConverter"  parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="facebookUserData"/> -->
+		<property name="targetClass" value="com.hybris.social.facebook.opengraphmine.facade.data.FacebookUserData"/>
+		<property name="populators">
+			<list>
+				<ref bean="facebookUserDataPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="facebookSuggestedProductDataConverter"  parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="facebookSuggestedProductData"/> -->
+		<property name="targetClass" value="com.hybris.social.facebook.opengraphmine.facade.data.FacebookSuggestedProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="facebookSuggestedProductDataPopulator"/>
+			</list>
+		</property>
+	</bean>
+         
+</beans>

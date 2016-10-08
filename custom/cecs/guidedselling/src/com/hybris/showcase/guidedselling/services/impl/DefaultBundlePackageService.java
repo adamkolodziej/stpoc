@@ -1,5 +1,6 @@
 package com.hybris.showcase.guidedselling.services.impl;
 
+import de.hybris.platform.configurablebundleservices.model.BundleTemplateModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -57,6 +58,16 @@ public class DefaultBundlePackageService implements BundlePackageService
 		}
 		return result.get(0);
     }
+
+	@Override
+	public BundleTemplateModel getFirstTemplate() {
+		FlexibleSearchQuery flexibleSearchQuery = new FlexibleSearchQuery("SELECT pk FROM {BundleTemplate}");
+		List<BundleTemplateModel> result = flexibleSearchService.<BundleTemplateModel>search(flexibleSearchQuery).getResult();
+		if (CollectionUtils.isEmpty(result)) {
+			return null;
+		}
+		return result.get(0);
+	}
 
     public ModelService getModelService()
 	{

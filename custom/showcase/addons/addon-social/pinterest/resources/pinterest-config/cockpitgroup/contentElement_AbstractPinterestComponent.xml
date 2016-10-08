@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+
+<content-element type="PinterestFollowButtonComponent" name="type.pinterestfollowbuttoncomponent.name"
+							description="type.pinterestfollowbuttoncomponent.description"
+							image="cmscockpit/images/pinterest_icon_34x34.gif"
+							refImage="cmscockpit/images/pinterest_icon_34x34.gif"
+							imageSmall="cmscockpit/images/pinterest_icon_20x20.gif"/>							
+																
+	<content-element type="PinItButtonComponent" name="type.pinitbuttoncomponent.name"
+							description="type.pinitbuttoncomponent.description"
+							image="cmscockpit/images/pinterest_icon_34x34.gif"
+							refImage="cmscockpit/images/pinterest_icon_34x34.gif"
+							imageSmall="cmscockpit/images/pinterest_icon_20x20.gif"/>
+							
+</content-elements>	

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true">
+	<displayed-properties>
+		<group qualifier="editorial" visible="true" initially-opened="true">
+			<label key="config.general.editorial" />
+			<property qualifier="VideoComponent.title" visible="true" />
+			<property qualifier="VideoComponent.videoMedia" visible="true" />
+			<property qualifier="VideoComponent.videoUrl" visible="true" />
+			<property qualifier="VideoComponent.startingPictureMedia" visible="true" />
+			<property qualifier="VideoComponent.autoplay" visible="true" />
+		</group>
+	</displayed-properties>
+</wizard-config>

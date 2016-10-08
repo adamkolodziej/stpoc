@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+       default-autowire="byName">
+
+	<bean id="newCampaignToolbarRightAddition" class="com.hybris.campaigns.cockpit.components.toolbar.NewCampaingToolbarRightAddition"/>
+	
+    <bean id="newCampaingToolbarListMergeDirective" depends-on="promotioncockpitToolbarRightAddition" parent="listMergeDirective">
+		<property name="add" ref="newCampaignToolbarRightAddition" />
+		<property name="beforeBeanNames">
+			<list value-type="java.lang.String" >
+				<value>promotioncockpitToolbarRightSnapshotPromotionFilter</value>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultPublicationPeriodSyncStrategy" alias="publicationPeriodSyncStrategy"/>
+	<bean id="defaultPublicationPeriodSyncStrategy" class="com.hybris.campaigns.services.impl.PublicationPeriodSyncStrategy">
+		<property name="synchronizationService" ref="synchronizationService"/>
+		<property name="typeService" ref="cockpitTypeService" />
+	</bean>
+</beans>

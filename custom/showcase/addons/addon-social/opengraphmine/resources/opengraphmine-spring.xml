@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+           
+           
+	<import resource="opengraphmine-converter-spring.xml" /> 
+	<import resource="opengraphmine-syncfacebook-spring.xml" /> 
+
+	<bean id="opengraphmineSystemSetup" class="com.hybris.social.facebook.opengraphmine.setup.OpenGraphMineSystemSetup">
+		<property name="btgConfigurationService" ref="btgConfigurationService" />
+		<property name="typeService" ref="typeService" />
+		<property name="modelService" ref="modelService" />
+	</bean>	
+		
+	<bean id="opengraphmineCockpitLabelLocator" class="de.hybris.platform.cockpit.util.ConfigurableCockpitLabelLocator" lazy-init="false">
+		<property name="resourceFolder" value="/opengraphmine/cockpits/localization/"/>
+	</bean>  
+  	
+	<alias name="defaultFacebookAuthenticationService"  alias="facebookAuthenticationService" />
+  	<bean id="defaultFacebookAuthenticationService" class="com.hybris.social.facebook.opengraphmine.service.impl.DefaultFacebookAuthenticationService"  parent="abstractBusinessService">
+  		<property name="facebookUserDao" ref="facebookUserDao" />
+		<property name="facebookEventService" ref="facebookEventService" />
+		<property name="userService" ref="userService" />
+		<property name="facebookApplicationService" ref="facebookApplicationService" />
+		<property name="facebookUserConverter" ref="facebookUserConverter" />
+  	</bean>	
+  	
+  	<alias name="defaultFacebookEventService" alias="facebookEventService" />
+  	<bean id="defaultFacebookEventService" class="com.hybris.social.facebook.opengraphmine.service.impl.DefaultFacebookEventService">
+  		<property name="eventService" ref="eventService" />
+  	</bean>
+	
+	<!--  CMS2 -->
+ 	<bean id="facebookCmsUserGroupRestrictionEvaluator" class="com.hybris.social.facebook.opengraphmine.cms.evaluator.impl.CMSFacebookUserAwareUserGroupRestrictionEvaluator"> 
+		<property name="userService" ref="userService" />		 
+		<property name="facebookAuthenticationService" ref="facebookAuthenticationService" />		
+ 	</bean> 
+ 	
+ 	<bean id="cmsUserGroupRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping">
+		<property name="restrictionTypeCode" value="CMSUserGroupRestriction" />
+		<property name="restrictionEvaluator" ref="facebookCmsUserGroupRestrictionEvaluator" />
+	</bean>
+	
+	
+	<!--  BTG -->
+	<bean id="opengraphmineExpressionEvalutorInitializingBean" class="com.hybris.social.facebook.opengraphmine.btg.condition.ExpressionEvalutorInitializingBean">
+		<property name="registry" ref="expressionEvaluatorRegistry" />
+		<property name="expressionEvaluators">
+			<list>
+				<ref bean="facebookLikesExpressionEvaluator" />
+				<ref bean="genderExpressionEvaluator" />
+			</list>
+		</property>
+	</bean>
+
+	
+	
+ 	<bean id="facebookLikesExpressionEvaluator" class="com.hybris.social.facebook.opengraphmine.btg.condition.impl.FacebookLikesExpressionEvaluator" /> 
+	<bean id="facebookLikesMatchValueProvider " class="com.hybris.social.facebook.opengraphmine.btg.operand.valueproviders.FacebookLikesMatchValueProvider" > 
+ 		<property name="facebookAuthenticationService" ref="facebookAuthenticationService"/> 
+ 	</bean> 
+ 	
+ 	<bean id="genderExpressionEvaluator" class="com.hybris.social.facebook.opengraphmine.btg.condition.impl.GenderExpressionEvaluator" /> 
+	<bean id="facebookGenderOperandValueProvider" class="com.hybris.social.facebook.opengraphmine.btg.operand.valueproviders.FacebookUserGenderOperandValueProvider">
+	 	<property name="facebookAuthenticationService" ref="facebookAuthenticationService"/> 
+	</bean>
+	<bean id="facebookBirthdayOperandValueProvider" class="com.hybris.social.facebook.opengraphmine.btg.operand.valueproviders.FacebookUserBirthdayOperandValueProvider">
+	 	<property name="facebookAuthenticationService" ref="facebookAuthenticationService"/> 
+	</bean>
+
+	<alias name="defaultFacebookSuggestionFacade" alias="facebookSuggestionFacade" />
+	<bean id="defaultFacebookSuggestionFacade" class="com.hybris.social.facebook.opengraphmine.facade.impl.DefaultFacebookSuggestionFacade" scope="tenant">
+		<property name="facebookSuggestionService" ref="facebookSuggestionService" />
+		<property name="facebookAuthenticationService" ref="facebookAuthenticationService" />
+		<property name="productFacade" ref="productFacade" />
+		<property name="productService" ref="productService" />
+		<!-- if needed use map of product priority comparators in the future. Now there is only one comparator -->
+		<property name="productPriorityComparator">
+			<bean class="com.hybris.social.facebook.opengraphmine.facade.data.FacebookSuggestedProductPriorityComparator"/>
+		</property>
+	</bean>
+
+	<alias name="defaultFacebookSuggestionService" alias="facebookSuggestionService" />
+	<bean id="defaultFacebookSuggestionService" class="com.hybris.social.facebook.opengraphmine.service.impl.DefaultFacebookSuggestionService" scope="tenant">		
+		<property name="facebookAuthenticationService" ref="facebookAuthenticationService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="commentService" ref="commentService" />		
+		<property name="baseStoreSelectorStrategy" ref="baseStoreSelectorStrategy" />
+		<property name="facebookSuggestionDao" ref="facebookSuggestionDao" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+
+
+	<bean id="facebookUserData" class="com.hybris.social.facebook.opengraphmine.facade.data.FacebookUserData" scope="prototype"/>
+	<bean id="facebookSuggestedProductData" class="com.hybris.social.facebook.opengraphmine.facade.data.FacebookSuggestedProductData" scope="prototype"/>
+
+</beans>

@@ -1,0 +1,5 @@
+.yContentSlotMenu .ycsm-button-EDIT_SET,
+.yContentSlotMenu .ycsm-button-EDIT_SET:hover {
+	background: url(../../../shared/common/images/contextmenu_icons/EDIT_SET.png) no-repeat !important;
+	background-color: none !important;
+}

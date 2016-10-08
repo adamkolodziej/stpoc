@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+	<group qualifier="General" visible="true" initially-opened="false">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="CMSItem.name"/>
+		<property qualifier="CMSItem.catalogVersion"/>
+		<property qualifier="AbstractCMSComponent.visible"/>
+	</group>
+	
+	<group qualifier="editorial" visible="true" initially-opened="true">
+		<label key="config.general.editorial" />
+		
+		<property qualifier="AbstractShareTweetButtonComponent.urlToShare" />
+		<property qualifier="AbstractShareTweetButtonComponent.shortUrlToShare" />
+		<property qualifier="AbstractShareTweetButtonComponent.autoShortenUrl" />
+		<property qualifier="AbstractShareTweetButtonComponent.urlShorteningProvider" />		
+		<property qualifier="AbstractTweetButtonComponent.tweetText" >
+			<parameter>
+				<name>rows</name>
+				<value>3</value>
+			</parameter>
+		</property>
+		
+	</group>
+	
+	<group qualifier="layout" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.Layout" />
+		
+		<property qualifier="AbstractTweetButtonComponent.buttonSize" />
+		<property qualifier="TweetLinkButtonComponent.countBoxPosition" />
+		
+	</group>
+	
+	<group qualifier="community" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.Community" />
+		
+		<property qualifier="AbstractTweetButtonComponent.recommended" />
+		<property qualifier="TweetLinkButtonComponent.via" />
+		<property qualifier="TweetLinkButtonComponent.hashtags" />
+	</group>
+	
+	<group qualifier="visibility" visible="true" initially-opened="false">
+		<label key="config.general.contextvisibility" />
+		<property qualifier="AbstractCMSComponent.restrictions">
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AbstractCMSComponent.onlyOneRestrictionMustApply" />				
+	</group>
+	
+	
+</editor>

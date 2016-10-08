@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util-3.1.xsd">	
+
+	 <!-- Replace the Promotions Manager with more flexible campaigns version -->
+      
+    <bean id="promotions.manager" class="de.hybris.platform.promotions.jalo.CampaignsPromotionsManager" init-method="init" destroy-method="destroy" scope="tenant" >
+		<property name="promotionQueryPlugins">
+			<list>
+				<ref bean="productPromotionQueryBuilderPlugin" />
+				<ref bean="orderPromotionQueryBuilderPlugin" />
+			</list>
+		</property>   
+    </bean>
+ 	<bean id="productPromotionQueryBuilderPlugin" class="com.hybris.campaigns.promotion.queryplugin.impl.ProductPromotionQueryBuilderPlugin" />
+ 	<bean id="orderPromotionQueryBuilderPlugin" class="com.hybris.campaigns.promotion.queryplugin.impl.OrderPromotionQueryBuilderPlugin" />
+
+	  
+	<alias name="defaultCmsTimeZoneService" alias="cmsTimeZoneService" />
+	 <bean id="defaultCmsTimeZoneService" class="com.hybris.campaigns.cms.timezone.impl.DefaultCmsTimeZoneService" >
+	 	<property name="sessionService" ref="sessionService" />
+	 </bean>
+	 
+	 <alias name="defaultPromotionGroupsStrategy" alias="promotionGroupsStrategy" />
+	<bean name="defaultPromotionGroupsStrategy" class="com.hybris.campaigns.order.impl.DefaultGetPromotionGroupsStrategy" >
+	 	<property name="baseSiteService" ref="baseSiteService" /> 
+	 </bean>
+	   
+	<alias alias="baseSitePromotionRestrictionStrategy" name="defaultBaseSitePromotionRestrictionStrategy" />
+	<bean id="defaultBaseSitePromotionRestrictionStrategy"  class="com.hybris.campaigns.impl.BaseSitePromotionRestrictionStrategy" >
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />	
+	</bean>
+	
+	<bean id="promotionBaseSiteRestrictionAdapter"  class="com.hybris.campaigns.impl.DefaultPromotionRestriction2StrategyAdapter">
+		<property name="modelService" ref="modelService" />
+		<property name="strategy" ref="baseSitePromotionRestrictionStrategy" />
+	</bean>
+	
+	<alias alias="promotionMerchandizingService" name="defaultPromotionMerchandizingService" />
+	<bean id="defaultPromotionMerchandizingService"  class="com.hybris.campaigns.impl.DefaultPromotionMerchandizingService" >
+		<property name="modelService" ref="modelService" />
+		<property name="cartService" ref="cartService" />
+		<property name="promotionsService" ref="promotionsService" />
+		<property name="timeService" ref="timeService" />
+		<property name="promotionGroupsStrategy" ref="promotionGroupsStrategy" />
+	</bean>
+	
+	<bean id="timeOfDayRestrictionDynamicDescription" class="com.hybris.campaigns.TimeOfDayRestrictionDescription"/>
+	
+	<bean id="cmsTimeOfDayRestrictionEvaluator" class="com.hybris.campaigns.evaluator.impl.CMSTimeOfDayRestrictionEvaluator" >
+		<property name="cmsTimeZoneService"  ref="cmsTimeZoneService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+	
+	<bean id="cmsTimeOfDayRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping" >
+		<property name="restrictionTypeCode" value="CMSTimeOfDayRestriction" />
+		<property name="restrictionEvaluator" ref="cmsTimeOfDayRestrictionEvaluator" />
+	</bean>
+	
+	<bean id="cmsVariantProductRestrictionEvaluator" class="com.hybris.campaigns.evaluator.impl.CMSVariantProductRestrictionEvaluator"/>
+	<bean id="cmsVariantProductRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping" >
+		<property name="restrictionTypeCode" value="CMSVariantProductRestriction" />
+		<property name="restrictionEvaluator" ref="cmsVariantProductRestrictionEvaluator" />
+	</bean>
+	
+	<bean id="campaignsLabelLocator" class="de.hybris.platform.cockpit.util.ConfigurableCockpitLabelLocator" scope="singleton" lazy-init="false">
+		<property name="resourceFolder" value="/campaigns/cockpits/localization/"/>
+	</bean>
+	
+	<alias name="promotionFormatMapping" alias="promotionBannerFormatMapping"/>
+	<bean id="promotionFormatMapping" parent="defaultImageFormatMapping">
+		<property name="mapping">
+			<map merge="true">
+				<entry key="iphone" value="iphone"/>
+			</map>
+		</property>
+	</bean>
+		 
+	<bean id="promotionBannerPopulator" class="com.hybris.campaigns.search.converters.populators.PromotionBannersPopulator">
+		<property name="mediaContainerService" ref="mediaContainerService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="imageConverter" ref="imageConverter"/>
+		<property name="imageFormatMapping" ref="promotionBannerFormatMapping"/>
+		<property name="imageFormats">
+		    <list>
+		    	<value>iphone</value>
+		    </list>
+		</property>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="promotionsConverter"/>
+		<property name="add" ref="promotionBannerPopulator"/>
+	</bean>	
+	
+	<bean id="promotionTypeValueProvider"
+	      class="com.hybris.campaigns.search.solrfacetsearch.provider.impl.PromotionTypeValueProvider"
+	      parent="abstractPropertyFieldValueProvider" >
+		<property name="promotionsService" ref="promotionsService"/>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>	
+	
+	<bean id="publicationPeriodPrepareInterceptor" class="com.hybris.campaigns.interceptors.PublicationPeriodPrepareInterceptor">
+		<property name="userService" ref="userService"/>
+	</bean>
+	
+	<bean id="publicationPeriodPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="publicationPeriodPrepareInterceptor"/>
+		<property name="typeCode" value="PublicationPeriod"/>
+	</bean>
+	
+	<!--  Add PublicationPeriod as a Sync Root Type -->
+	<bean id="PublicationPeriodContentCatalogSyncListMergeDirective" depends-on="contentCatalogSyncRootTypeCodes" parent="listMergeDirective" >
+		<property name="add" value="PublicationPeriod"/>
+	</bean>	
+	<bean id="PublicationPeriodProductCatalogSyncListMergeDirective" depends-on="productCatalogSyncRootTypeCodes" parent="listMergeDirective" >
+		<property name="add" value="PublicationPeriod"/>
+	</bean>
+	
+	<bean id="publicationPeriodsDao" class="com.hybris.campaigns.daos.impl.DefaultPublicationPeriodsDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+	
+	<bean id="publicationPeriodsService" class="com.hybris.campaigns.services.impl.DefaultPublicationPeriodsService">
+		<property name="userService" ref="userService"/>
+		<property name="cmsTimeZoneService"  ref="cmsTimeZoneService" />
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="publicationPeriodsDao" ref="publicationPeriodsDao"/>
+	</bean>
+	
+	
+	<util:list id="promotionBannerComponentEditedSyncDescriptorsList">
+      
+         <bean class="de.hybris.platform.commerceservices.setup.data.EditSyncAttributeDescriptorData" >
+             <property name="copyByValue" value="TRUE" />
+             <property name="qualifier" value="link" />
+      	 </bean>
+            
+   </util:list>
+
+
+	<bean id="promotionBannerComponentLinkMapMergeDirective" depends-on="contentCatalogEditSyncDescriptors" parent="mapMergeDirective">
+		<property name="key" >
+			<value type="java.lang.Class">com.hybris.campaigns.jalo.cms.PromotionBannerComponent</value>
+		</property>
+		<property name="value" >
+		    <ref bean="promotionBannerComponentEditedSyncDescriptorsList" />
+ 		</property> 
+	</bean>
+	
+</beans>
