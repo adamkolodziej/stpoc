@@ -1,8 +1,10 @@
 
 INSERT_UPDATE UserGroup;uid[unique=true];locname[lang=en];groups(uid)
 ;approvergroup;Approver Group;customergroup
-;seniorapprovergroup;Senior Approver Group;approvergroup
-;juniorapprovergroup;Junior Approver Group;approvergroup
+
+INSERT_UPDATE ApprovalUserGroup;uid[unique=true];locname[lang=en];groups(uid);rangeFrom;rangeTo
+;seniorapprovergroup;Senior Approver Group;approvergroup;100;
+;juniorapprovergroup;Junior Approver Group;approvergroup;0;100
 
 $passwordEncoding = md5
 $defaultPassword = 1234

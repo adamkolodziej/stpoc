@@ -1,21 +1,11 @@
 package com.hybris.showcase.guidedselling.services.impl;
 
-import com.hybris.showcase.guidedselling.model.BundlePackageModel;
+import com.hybris.showcase.guidedselling.model.ApprovalUserGroupModel;
 import com.hybris.showcase.guidedselling.services.ApprovalService;
-import de.hybris.platform.commercefacades.order.OrderFacade;
 import de.hybris.platform.commerceservices.customer.CustomerAccountService;
-import de.hybris.platform.commerceservices.enums.SalesApplication;
-import de.hybris.platform.commerceservices.order.CommerceCheckoutService;
-import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
-import de.hybris.platform.commerceservices.service.data.CommerceOrderResult;
 import de.hybris.platform.core.enums.OrderStatus;
-import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.order.OrderModel;
-import de.hybris.platform.core.model.security.PrincipalGroupModel;
-import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.core.model.user.UserGroupModel;
 import de.hybris.platform.core.model.user.UserModel;
-import de.hybris.platform.jalo.order.Order;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.order.OrderService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -23,7 +13,6 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
@@ -32,7 +21,6 @@ import org.springframework.util.Assert;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by admin on 05.10.2016.
@@ -61,25 +49,26 @@ public class DefaultApprovalService implements ApprovalService {
     @Override
     public List<OrderModel> getOrdersToApprove() {
         UserModel currentUser = userService.getCurrentUser();
-        boolean isApprover = isCurrentUserApprover();
-        if (!(currentUser instanceof CustomerModel) || !isApprover) {
-            throw new IllegalArgumentException("Current user must be a customer and belong to the approvers group");
+        Set<ApprovalUserGroupModel> approvalGroups = userService.getAllUserGroupsForUser(currentUser, ApprovalUserGroupModel.class);
+        if (CollectionUtils.isNotEmpty(approvalGroups)) {
+            ApprovalUserGroupModel approvalGroup = approvalGroups.iterator().next();
+            final Double rangeFrom = approvalGroup.getRangeFrom();
+            final Double rangeTo = approvalGroup.getRangeTo();
+            List<OrderModel> orders = getAllOrders();
+            return orders.stream().filter(orderModel ->orderModel.getParent() == null &&
+                    orderModel.getStatus().equals(OrderStatus.PENDING_QUOTE) &&
+                    (rangeFrom == null || rangeFrom <= orderModel.getTotalPrice()) &&
+                    (rangeTo == null || rangeTo > orderModel.getTotalPrice()))
+                            .collect(Collectors.toList());
         }
-        List<OrderModel> orders = getAllOrders();
-        boolean isJuniorApprover = userService.isMemberOfGroup(currentUser, userService.getUserGroupForUID("juniorapprovergroup"));
-        boolean isSeniorApprover = userService.isMemberOfGroup(currentUser, userService.getUserGroupForUID("seniorapprovergroup"));
-                return orders.stream()
-                .filter(orderModel -> orderModel.getParent() == null && orderModel.getStatus().equals(OrderStatus.PENDING_QUOTE) &&
-                        ((isJuniorApprover && orderModel.getTotalPrice() < 100D) ||
-                                (isSeniorApprover && orderModel.getTotalPrice() >= 100D)))
-                .collect(Collectors.toList());
+        return null;
     }
 
     @Override
     public boolean isCurrentUserApprover() {
         UserModel currentUser = userService.getCurrentUser();
-        UserGroupModel approvergroup = userService.getUserGroupForUID("approvergroup");
-        return userService.isMemberOfGroup(currentUser, approvergroup);
+        Set<ApprovalUserGroupModel> approvalGroups = userService.getAllUserGroupsForUser(currentUser, ApprovalUserGroupModel.class);
+        return CollectionUtils.isNotEmpty(approvalGroups);
     }
 
     protected List<OrderModel> getAllOrders() {

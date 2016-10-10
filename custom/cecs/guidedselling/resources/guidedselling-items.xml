@@ -389,5 +389,17 @@
             </attributes>
         </itemtype>
 
+        <itemtype code="ApprovalUserGroup" autocreate="true" generate="true" extends="UserGroup">
+            <deployment table="ApprovalUserGroup" typecode="25005"/>
+            <attributes>
+                <attribute qualifier="rangeFrom" type="java.lang.Double">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="rangeTo" type="java.lang.Double">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
     </itemtypes>
 </items>
