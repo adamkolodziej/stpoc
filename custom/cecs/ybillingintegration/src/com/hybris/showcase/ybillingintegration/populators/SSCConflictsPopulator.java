@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.NullValueInNestedPathException;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.hybris.showcase.guidedselling.data.*;
@@ -51,6 +52,10 @@ public class SSCConflictsPopulator implements Populator<BundleOfferPopulatorPara
 		{
 			final ConfigModel configModel = sscConfigurationManager.retrieveConfiguration(bundleEntries.get(0));
 
+			if (configModel == null){
+				return;
+			}
+
 			final List<CsticModel> conflictedCstics = configModel.getRootInstance().getCstics().stream() //
 					.filter(cs -> cs.hasConflicts()) //
 					.collect(Collectors.toList());
@@ -67,6 +72,10 @@ public class SSCConflictsPopulator implements Populator<BundleOfferPopulatorPara
 		catch (IllegalStateException e)
 		{
 			LOG.fatal("Unable to check SSC conflicts for order: " + order.getCode(), e);
+		}
+		catch (Exception e){
+			LOG.fatal("Exception caught while getting configuration");
+			return;
 		}
 	}
 
