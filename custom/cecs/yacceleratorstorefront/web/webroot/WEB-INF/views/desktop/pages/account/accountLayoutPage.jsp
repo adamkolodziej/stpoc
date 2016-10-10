@@ -9,6 +9,8 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec"
+ uri="http://www.springframework.org/security/tags"%>
 <script type="text/javascript" src="${commonResourcePath}/js/jquery.1.11.3.min.js"></script>
 
 <template:page pageTitle="${pageTitle}">
@@ -76,27 +78,38 @@
                     <div class="row margin-bottom-20">
                         <div class="col-xs-8">
                             <ul class="nav nav-tabs nav-custom" role="tablist">
-                                <li role="presentation" class="active">
-                                    <a href="#new-orders" aria-controls="new-quotations" role="tab" data-toggle="tab">
-                                        New orders
-                                    </a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#sla-close-by" aria-controls="sla-close-by" role="tab" data-toggle="tab">
-                                        SLA close by
-                                    </a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#closed" aria-controls="closed" role="tab" data-toggle="tab">Closed</a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#show-all" aria-controls="show-all" role="tab" data-toggle="tab">Show all
-                                    </a>
-                                </li>
+                                <c:if test="${isApprover}">
+                                     <li role="presentation" class="active">
+                                        <a href="#new-orders" aria-controls="new-quotations" role="tab" data-toggle="tab">
+                                            Orders to approve
+                                        </a>
+                                      </li>
+                                </c:if>
+                                <c:if test="${!isApprover}">
+                                    <li role="presentation" class="active">
+                                        <a href="#new-orders" aria-controls="new-quotations" role="tab" data-toggle="tab">
+                                            New orders
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#sla-close-by" aria-controls="sla-close-by" role="tab" data-toggle="tab">
+                                            SLA close by
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#closed" aria-controls="closed" role="tab" data-toggle="tab">Closed</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#show-all" aria-controls="show-all" role="tab" data-toggle="tab">Show all
+                                        </a>
+                                    </li>
+                                </c:if>
                             </ul>
                         </div>
                         <div class="col-xs-4 text-right">
-                            <a href="packages/" class="btn btn-primary">Start new order</a>
+                            <c:if test="${!isApprover}">
+                                <a href="packages/" class="btn btn-primary">Create a new quote</a>
+                            </c:if>
                         </div>
                     </div>
 
@@ -110,7 +123,7 @@
                                         <th>Reference number</th>
                                         <th>Product Type</th>
                                         <th>Package</th>
-                                        <c:if test="${!isEmployee}">
+                                        <c:if test="${isApprover}">
                                             <th>Approve</th>
                                         </c:if>
                                         <th>SLA</th>
@@ -125,8 +138,11 @@
                                             <th scope="row"><a href="${orderCodeUrl}">${order.code}</a></th>
                                             <td>${order.sourceProductCode}</td>
                                             <td>${order.sourcePackageCode}</td>
-                                            <c:if test="${!isEmployee}">
-                                                <td>Approve</td>
+                                            <c:if test="${isApprover}">
+                                                <td>
+                                                    <c:url value="my-account/order/approve/${order.code}" var="approveOrderCodeUrl" />
+                                                    <a href="${approveOrderCodeUrl}">Approve ${order.code}</a>
+                                                </td>
                                             </c:if>
                                             <td>N/D</td>
                                             <!-- Toggle for modal window -->

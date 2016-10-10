@@ -160,7 +160,7 @@ public class AccountPageController extends AbstractSearchPageController {
     @Resource(name = "userService")
     private UserService userService;
 
-    @Resource(name = "userService")
+    @Resource(name = "approvalFacade")
     private ApprovalFacade approvalFacade;
 
     protected PasswordValidator getPasswordValidator() {
@@ -211,7 +211,7 @@ public class AccountPageController extends AbstractSearchPageController {
     }
 
 
-    @RequestMapping(value = "/order/approve/{orderCode}" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+    @RequestMapping(value = "/order/approve/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
     @RequireHardLogIn
     public String approveOrder(@PathVariable("orderCode") final String orderCode, final Model model) throws CMSItemNotFoundException, InvalidCartException {
         approvalFacade.approveOrder(orderCode);
@@ -265,20 +265,19 @@ public class AccountPageController extends AbstractSearchPageController {
         storeCmsPageInModel(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
         setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
         model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs(null));
-        model.addAttribute("isEmployee", isEmployee());
         model.addAttribute("metaRobots", "noindex,nofollow");
         // Handle paged search results
         fillOrdersModel(model);
         return getViewForPage(model);
     }
 
-    private boolean isEmployee() {
-        UserModel currentUser = userService.getCurrentUser();
-        Set<PrincipalGroupModel> groups = currentUser.getGroups();
-        return groups.stream().anyMatch(g -> g.getUid().equals("employeegroup"));
-    }
-
     private void fillOrdersModel(Model model) {
+        boolean isApprover = approvalFacade.isCurrentUserApprover();
+        model.addAttribute("isApprover", isApprover);
+        if (isApprover) {
+            model.addAttribute("orders", approvalFacade.getOrdersToApprove());
+            return;
+        }
         UserModel currentUser = userService.getCurrentUser();
         Collection<OrderModel> orders = currentUser.getOrders();
 

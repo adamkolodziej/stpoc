@@ -382,6 +382,7 @@
         <property name="userService" ref="userService" />
         <property name="baseStoreService" ref="baseStoreService" />
         <property name="customerAccountService" ref="customerAccountService" />
+        <property name="flexibleSearchService" ref="flexibleSearchService" />
     </bean>
 
     <alias alias="quoteFacade" name="defaultQuoteFacade"/>
@@ -391,13 +392,13 @@
         <property name="cartFacade" ref="commerceCheckoutCartFacade"/>
         <property name="checkoutCustomerStrategy" ref="checkoutCustomerStrategy"/>
         <property name="cartService" ref="cartService"/>
-        <property name="orderService" ref="orderService"/>
     </bean>
 
     <alias alias="approvalFacade" name="defaultApprovalFacade"/>
     <bean id="defaultApprovalFacade" class="com.hybris.showcase.guidedselling.facades.impl.DefaultApprovalFacade" >
         <property name="approvalService" ref="approvalService" />
         <property name="orderService" ref="orderService"/>
+        <property name="orderConverter" ref="orderConverter" />
     </bean>
 
 </beans>

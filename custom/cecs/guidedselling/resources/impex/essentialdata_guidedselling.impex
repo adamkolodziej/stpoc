@@ -1,4 +1,17 @@
 
+INSERT_UPDATE UserGroup;uid[unique=true];locname[lang=en];groups(uid)
+;approvergroup;Approver Group;customergroup
+;seniorapprovergroup;Senior Approver Group;approvergroup
+;juniorapprovergroup;Junior Approver Group;approvergroup
+
+$passwordEncoding = md5
+$defaultPassword = 1234
+$setPassword = @password[translator = de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default = '$passwordEncoding:$defaultPassword']
+
+INSERT_UPDATE Customer;UID[unique=true];$setPassword;description;name;groups(uid);sessionLanguage(isocode);sessionCurrency(isocode);loginDisabled[default=false]
+;seniorapprover;;Senior Approver;Senior Approver;seniorapprovergroup;en;USD;
+;juniorapprover;;Junior Approver;Junior Approver;juniorapprovergroup;en;USD;
+
 # CECS-149 Load up preselection on guidedselling
 INSERT_UPDATE SearchRestriction;code[unique=true];name[lang=en];query;principal(UID);restrictedType(code)[unique=true];active;generate
 ;frontend_BundlePackage;BundlePackage on site;"{item:catalogVersion} IN (?session.catalogversions)";customergroup;BundlePackage;true;true
