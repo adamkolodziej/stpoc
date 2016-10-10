@@ -11,7 +11,8 @@
 <%@ taglib prefix="gs" tagdir="/WEB-INF/tags/addons/guidedsellingaddon/desktop/guidedselling" %>
 
 <template:page pageTitle="${pageTitle}">
-
+<div id="content">
+<div class="container">
     <c:if test="${not empty message}">
         <spring:theme code="${message}"/>
     </c:if>
@@ -175,5 +176,6 @@
 			</div>
 		</c:if>
 	</div>
-
+</div>
+</div>
 </template:page>
