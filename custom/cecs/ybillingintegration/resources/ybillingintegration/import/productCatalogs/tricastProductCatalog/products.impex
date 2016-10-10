@@ -99,7 +99,7 @@ UPDATE Product; code[unique = true]; yBillingId; yBillingIdOnRemove;csticName; $
 # Y is not mapped!
 
 INSERT_UPDATE ProductConfigurationTemplate; &ref; code; yBillingId; approvalStatus(code); mappedBundleTemplates(id, version, $catalogVersion); $catalogVersion; unitCode; numberOfUnits; salesOrganization; distributionChannel; contractDuration; periodUnit; configurable;
-; SPTel ; SPTel ; SPTEL_PACK ; approved ; SPTel:1.0 ; ; EA ; 1 ; O 50000608 ; 10 ; 012 ; MONTH ; true ;
+; SPTel ; SPTel ; SPTEL_PACK ; approved ; Connectivity:1.0 ; ; EA ; 1 ; O 50000608 ; 10 ; 012 ; MONTH ; true ;
 
 INSERT_UPDATE TechnicalAttribute; version[unique = true]; guid; dataId[unique = true]; dataDesc; dataType; configurationTemplate(&ref); $catalogVersion;
 ; 0001 ; 0050568502431ED5A5A1941EE45F7292 ; PHONE ; Phone Number ; PN ; SPTel ;
