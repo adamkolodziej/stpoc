@@ -13,7 +13,8 @@
 <%@ taglib prefix="ts" tagdir="/WEB-INF/tags/addons/showcasecommonaddon/desktop"  %>
 
 <template:page pageTitle="${pageTitle}">
-
+<div id="content">
+<div class="container">
 	<div ng-app="payment-selection">
 	<div ng-controller="PaymentSelectionController">
 
@@ -222,5 +223,7 @@
 				</c:if>
 			</div>
 		</div>
+	</div>
+	</div>
 	</div>
 </template:page>
