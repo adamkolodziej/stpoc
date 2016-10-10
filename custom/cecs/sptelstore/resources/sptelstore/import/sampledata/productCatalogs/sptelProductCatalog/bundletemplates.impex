@@ -7,17 +7,17 @@ INSERT_UPDATE BundleTemplateStatus; id[unique = true]; status(code)[default = ap
 ; BundleApproved
 
 # Insert BundleTemplates
-INSERT_UPDATE BundleTemplate; id[unique = true]; bundleComponentType(code); parentTemplate(id, version[default = 1.0], $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'BundleApproved']; $catalogVersion;
-; Connectivity                 ; Other       ;
-; Connectivity-ClassOfService  ; Conditional ;
-; Connectivity-Bandwidth       ; AddOn       ;
-; Connectivity-VirtualRouter   ; AddOn       ;
-; Connectivity-CloudConnection ; AddOn       ;
-; Connectivity-VirtualSwitch   ; AddOn       ;
-; Connectivity-Access          ; AddOn       ;
-; Connectivity-Topology        ; AddOn       ;
-; Connectivity-HardwareRouter  ; AddOn       ;
-; Connectivity-HardwareSwitch  ; AddOn       ;
+INSERT_UPDATE BundleTemplate; id[unique = true]; yBillingId; bundleComponentType(code); parentTemplate(id, version[default = 1.0], $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'BundleApproved']; $catalogVersion;
+; Connectivity                 ;                 ; Other       ;
+; Connectivity-ClassOfService  ; ClassOfService  ; Conditional ;
+; Connectivity-Bandwidth       ; Bandwidth       ; AddOn       ;
+; Connectivity-VirtualRouter   ; VirtualRouter   ; AddOn       ;
+; Connectivity-CloudConnection ; CloudConnection ; AddOn       ;
+; Connectivity-VirtualSwitch   ; VirtualSwitch   ; AddOn       ;
+; Connectivity-Access          ; Access          ; AddOn       ;
+; Connectivity-Topology        ; Topology        ; AddOn       ;
+; Connectivity-HardwareRouter  ; HardwareRouter  ; AddOn       ;
+; Connectivity-HardwareSwitch  ; HardwareSwitch  ; AddOn       ;
 
 # Set the child templates again to make sure that the sequence of child templates is correct
 INSERT_UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; childTemplates(id, version[default = 1.0], $catalogVersion); $catalogVersion

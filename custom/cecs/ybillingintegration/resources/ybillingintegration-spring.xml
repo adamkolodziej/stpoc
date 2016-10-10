@@ -458,9 +458,9 @@
         <property name="sscConfigurationManager" ref="sscConfigurationManager"/>
     </bean>
 
-    <bean parent="modifyPopulatorList">
+    <!--<bean parent="modifyPopulatorList">
         <property name="list" ref="bundleOfferConverter"/>
         <property name="add" ref="sscConflictsPopulator"/>
-    </bean>
+    </bean>-->
 
 </beans>
